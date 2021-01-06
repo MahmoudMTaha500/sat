@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// message2
+
+
 Route::get('/', function () {
     return view('welcome');
 });
