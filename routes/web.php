@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+<<<<<<< HEAD
+=======
+// message2
+// message3
+// message4
+
+
+
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
 Route::get('/', function () {
     return view('welcome');
 });
@@ -41,6 +50,15 @@ Route::group(['prefix' => 'dashboard'], function() {
         $page_name='add-institute';
         return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
     })->name('dashboard.add-institute');
+<<<<<<< HEAD
+=======
+
+    Route::get('/institutes-comments', function () {
+        $department_name='institutes';
+        $page_name='add-institute';
+        return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
+    })->name('dashboard.add-institute');
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
 });
 
 

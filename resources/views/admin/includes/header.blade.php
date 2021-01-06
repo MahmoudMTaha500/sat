@@ -25,8 +25,11 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/charts/chartist-plugin-tooltip.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/raty/jquery.raty.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/switchery.min.css">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/selects/selectize.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/selects/selectize.default.css">
+=======
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
     <!-- END VENDOR CSS-->
    
     <!-- BEGIN MODERN CSS-->
@@ -41,7 +44,10 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/pages/timeline.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/pages/dashboard-ecommerce.css">
+<<<<<<< HEAD
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/plugins/forms/selectize/selectize.css">
+=======
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/assets/css/style-rtl.css">

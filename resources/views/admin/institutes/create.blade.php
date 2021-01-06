@@ -1,4 +1,8 @@
 @extends('admin.app') @section('admin.content')
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -114,7 +118,11 @@
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-3">
+<<<<<<< HEAD
                                                         <img class="w-100" src="../adminTheme-master/html/rtl/vertical-content-menu-template/../../../app-assets/images/crop-pic.jpg" alt="" />
+=======
+                                                        <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="" />
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,7 +134,11 @@
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-3">
+<<<<<<< HEAD
                                                         <img class="w-100" src="../adminTheme-master/html/rtl/vertical-content-menu-template/../../../app-assets/images/crop-pic.jpg" alt="" />
+=======
+                                                        <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="" />
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
                                                     </div>
                                                 </div>
                                             </div>
@@ -145,4 +157,8 @@
         </div>
     </div>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 07813f2c31e649ad38d82a4eafa8bac26cf6052e
 @endsection
