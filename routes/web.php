@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // test message
+// test 2
 
 Route::get('/', function () {
     return view('welcome');
