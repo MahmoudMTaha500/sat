@@ -68,23 +68,78 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">المدينة </label>
-                                                    <select class="select2 form-control">
-                                                        <option value="">حدد المدينة</option>
-                                                        <option value="1">أستراليا</option>
-                                                        <option value="3">كندا</option>
-                                                        <option value="6">فرنسا</option>
-                                                        <option value="7">ألمانيا</option>
-                                                        <option value="9">أيرلندا</option>
-                                                        <option value="10">ماليزيا</option>
-                                                        <option value="11">مالطا</option>
-                                                        <option value="12">نيوزيلاندا</option>
-                                                        <option value="13">الفلبين</option>
-                                                        <option value="16">روسيا</option>
-                                                        <option value="17">جنوب أفريقيا</option>
-                                                        <option value="18">سويسرا</option>
-                                                        <option value="21">المملكة المتحدة</option>
-                                                        <option value="22">الولايات المتحدة الأمريكية</option>
-                                                    </select>
+                                                    <div class="d-flex input-group">
+                                                        
+                                                        <span class="input-group-append w-100" id="button-addon2">
+                                                            <select class="select2 form-control">
+                                                                <option value="">حدد المدينة</option>
+                                                                <option value="1">أستراليا</option>
+                                                                <option value="3">كندا</option>
+                                                                <option value="6">فرنسا</option>
+                                                                <option value="7">ألمانيا</option>
+                                                                <option value="9">أيرلندا</option>
+                                                                <option value="10">ماليزيا</option>
+                                                                <option value="11">مالطا</option>
+                                                                <option value="12">نيوزيلاندا</option>
+                                                                <option value="13">الفلبين</option>
+                                                                <option value="16">روسيا</option>
+                                                                <option value="17">جنوب أفريقيا</option>
+                                                                <option value="18">سويسرا</option>
+                                                                <option value="21">المملكة المتحدة</option>
+                                                                <option value="22">الولايات المتحدة الأمريكية</option>
+                                                            </select>
+                                                            <button type="button" data-toggle="modal" data-target="#create-new-city" class="btn btn-primary btn-sm"><i class="ft-plus"></i></button>
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    <!-- Create New City Form -->
+                                                    <div class="modal fade" id="create-new-city" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">انشاء مدينة جديدة</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="row">
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="projectinput2">اختر الدولة</label>
+                                                                            <select class="select2 form-control text-left">
+                                                                                <option value="">حدد الدولة</option>
+                                                                                <option value="1">أستراليا</option>
+                                                                                <option value="3">كندا</option>
+                                                                                <option value="6">فرنسا</option>
+                                                                                <option value="7">ألمانيا</option>
+                                                                                <option value="9">أيرلندا</option>
+                                                                                <option value="10">ماليزيا</option>
+                                                                                <option value="11">مالطا</option>
+                                                                                <option value="12">نيوزيلاندا</option>
+                                                                                <option value="13">الفلبين</option>
+                                                                                <option value="16">روسيا</option>
+                                                                                <option value="17">جنوب أفريقيا</option>
+                                                                                <option value="18">سويسرا</option>
+                                                                                <option value="21">المملكة المتحدة</option>
+                                                                                <option value="22">الولايات المتحدة الأمريكية</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-12">
+                                                                        <div class="form-group">
+                                                                            <label for="projectinput2">المدينة</label>
+                                                                            <input class="form-control" type="text" placeholder="ادخل اسم المدينة">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary w-100">انشاء</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +169,7 @@
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-3">
-
+                                                        <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -126,6 +181,7 @@
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-3">
+                                                        <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,6 +190,10 @@
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
                                         </div>
+
+                                        
+
+
                                     </div>
                                 </form>
                             </div>
@@ -144,5 +204,8 @@
         </div>
     </div>
 </div>
+
+
+
 
 @endsection
