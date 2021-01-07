@@ -8,7 +8,6 @@
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a></li>
-
                             <li class="breadcrumb-item"><a href="{{route('dashboard.institutes')}}"> المعاهد</a></li>
                             <li class="breadcrumb-item active">اضافة معهد</li>
                         </ol>
@@ -31,22 +30,22 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput1">اسم المعهد</label>
-                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل اسم المعهد" name="fullname" />
+                                                    <label for="institute-name">اسم المعهد</label>
+                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput3">نبذة عن المعهد</label>
-                                                    <textarea type="text" id="projectinput3" class="form-control" placeholder="نبذة عن المعهد" name="desc"></textarea>
+                                                    <label for="institute-about">نبذة عن المعهد</label>
+                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput2">الدولة</label>
-                                                    <select class="select2 form-control text-left">
+                                                    <label for="country">الدولة</label>
+                                                    <select id="country" class="select2 form-control text-left">
                                                         <option value="">حدد الدولة</option>
                                                         <option value="1">أستراليا</option>
                                                         <option value="3">كندا</option>
@@ -67,11 +66,11 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput1">المدينة </label>
+                                                    <label for="city">المدينة </label>
                                                     <div class="d-flex input-group">
                                                         
                                                         <span class="input-group-append w-100" id="button-addon2">
-                                                            <select class="select2 form-control">
+                                                            <select id="city" class="select2 form-control">
                                                                 <option value="">حدد المدينة</option>
                                                                 <option value="1">أستراليا</option>
                                                                 <option value="3">كندا</option>
@@ -88,16 +87,16 @@
                                                                 <option value="21">المملكة المتحدة</option>
                                                                 <option value="22">الولايات المتحدة الأمريكية</option>
                                                             </select>
-                                                            <button type="button" data-toggle="modal" data-target="#create-new-city" class="btn btn-primary btn-sm"><i class="ft-plus"></i></button>
+                                                            <button type="button" data-toggle="modal" data-target="#create-new-city" class="btn btn-success btn-sm"><i class="ft-plus"></i></button>
                                                         </span>
                                                     </div>
                                                     
                                                     <!-- Create New City Form -->
-                                                    <div class="modal fade" id="create-new-city" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal fade" id="create-new-city" tabindex="-1" role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">انشاء مدينة جديدة</h5>
+                                                            <h5 class="modal-title" id="create-new-city-modal">انشاء مدينة جديدة</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
@@ -106,7 +105,7 @@
                                                                 <div class="row">
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label for="projectinput2">اختر الدولة</label>
+                                                                            <label>اختر الدولة</label>
                                                                             <select class="select2 form-control text-left">
                                                                                 <option value="">حدد الدولة</option>
                                                                                 <option value="1">أستراليا</option>
@@ -128,14 +127,14 @@
                                                                     </div>
                                                                     <div class="col-12">
                                                                         <div class="form-group">
-                                                                            <label for="projectinput2">المدينة</label>
+                                                                            <label>المدينة</label>
                                                                             <input class="form-control" type="text" placeholder="ادخل اسم المدينة">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                            <button type="button" class="btn btn-primary w-100">انشاء</button>
+                                                            <button type="button" class="btn btn-success w-100">انشاء</button>
                                                             </div>
                                                         </div>
                                                         </div>
@@ -146,17 +145,17 @@
 
                                         <div class="row">
                                             <div class="form-group col-12 mb-2 contact-repeater">
-                                                <label for="projectinput3">الاسئلة الخاصة بالمعهد</label>
+                                                <label>الاسئلة الخاصة بالمعهد</label>
                                                 <div data-repeater-list="repeater-group">
                                                     <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="السؤال" class="form-control" id="example-tel-input" />
-                                                        <input type="tel" placeholder="الاجابة" class="form-control" id="example-tel-input" />
+                                                        <input type="tel" placeholder="السؤال" class="form-control"/>
+                                                        <input type="tel" placeholder="الاجابة" class="form-control"/>
                                                         <span class="input-group-append" id="button-addon2">
                                                             <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سؤال جديد</button>
+                                                <button type="button" data-repeater-create class="btn btn-success btn-sm"><i class="ft-plus"></i> اضافة سؤال جديد</button>
                                             </div>
                                         </div>
 
@@ -168,19 +167,19 @@
                                                         <input type="file" class="custom-file-input" id="inputGroupFile01" />
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
-                                                    <div class="mt-3">
+                                                    <div class="mt-1">
                                                         <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group">
+                                                <div class="form-group image-box-input">
                                                     <label for="projectinput4">صورة المعهد</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" />
+                                                        <input type="file" class="custom-file-input image-input" id="inputGroupFile01" />
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
-                                                    <div class="mt-3">
+                                                    <div class="mt-1 image-box">
                                                         <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="">
                                                     </div>
                                                 </div>
@@ -191,7 +190,9 @@
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
                                         </div>
 
-                                        
+                                        <div id="app">
+                                            <test-component></test-component>
+                                        </div>
 
 
                                     </div>

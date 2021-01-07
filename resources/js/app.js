@@ -10,10 +10,12 @@ window.Vue = require('vue');
 
 
 import TestComponent from './components/TestComponent';
+import CitiesComponent from './components/CitiesComponent';
 
 const app = new Vue({
     el: '#app',
     components:{
         TestComponent,
+        CitiesComponent,
     }
 });

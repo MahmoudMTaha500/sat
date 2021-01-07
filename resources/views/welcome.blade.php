@@ -14,6 +14,7 @@
     <body>
         <div id="app">
             <test-component></test-component>
+            <cities-component></cities-component>
         </div>
 
         <script src="{{asset('js/app.js')}}"></script>
