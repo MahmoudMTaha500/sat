@@ -1,14 +1,5 @@
 <template>
     <div>
-        citieswsdsdwsd
+        this is a test cities
     </div>
 </template>
-
-<script>
-export default {
-    components: {
-        "city-component": CitiesComponent
-    },
-    // ...
-}
-</script>

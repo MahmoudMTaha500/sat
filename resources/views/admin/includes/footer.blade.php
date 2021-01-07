@@ -32,6 +32,7 @@
 <script src="{{url('/admin')}}/app-assets/js/scripts/forms/form-repeater.js" type="text/javascript"></script>
 <script src="{{url('/admin')}}/app-assets/js/scripts/editors/editor-ckeditor.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
-{{-- this is Vue components  --}}
+
+<!-- Costum Scripts -->
 <script src="{{asset('js/app.js')}}"></script>
-{{-- End Vue components  --}}
+<script src="{{url('/admin')}}/assets/js/scripts.js" type="text/javascript"></script>
