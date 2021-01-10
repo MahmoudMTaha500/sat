@@ -10,7 +10,7 @@ window.Vue = require('vue');
 
 
 import TestComponent from './components/TestComponent';
-import CitiesComponent from './components/CitiesComponent';
+import CitiesComponent from './components/city/CitiesComponent';
 
 const app = new Vue({
     el: '#app',
@@ -20,9 +20,9 @@ const app = new Vue({
     }
 });
 
-export default {
-    components: {
-        "city-component": CitiesComponent
-    },
-    // ...
-}
+// export default {
+//     components: {
+//         "city-component": CitiesComponent
+//     },
+//     // ...
+// }
