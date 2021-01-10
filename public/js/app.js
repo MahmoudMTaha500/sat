@@ -49903,7 +49903,7 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no exports provided */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -49926,12 +49926,13 @@ var app = new Vue({
     TestComponent: _components_TestComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     CitiesComponent: _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
-}); // export default {
-//     components: {
-//         "city-component": CitiesComponent
-//     },
-//     // ...
-// }
+});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    "city-component": _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+  } // ...
+
+});
 
 /***/ }),
 

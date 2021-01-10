@@ -6,8 +6,7 @@
         @include('admin.includes.menu')
         @include('admin.includes.sidebar')
         @yield('admin.content')
-        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-        @yield('admin.custom-vue-scripts')
+     
         @include('admin.includes.footer')  
         @yield('admin.custom-js-scripts')
     </body>

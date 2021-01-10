@@ -1,4 +1,6 @@
-
+{{-- <script src="{{asset('js/app.js')}}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+@yield('admin.custom-vue-scripts')
 <!-- BEGIN VENDOR JS-->
 <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->

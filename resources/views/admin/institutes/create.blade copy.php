@@ -107,12 +107,11 @@
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>اختر الدولة</label>
-                                                                            {{-- <countries-component  v-for=" country in items" :name_ar="country.name_ar"></countries-component> --}}
 
                                                                             <h2 v-text="message"></h2>
                                                                             <select class=" select2 form-control text-left" > 
                                                                                     
-                                                                                {{-- <option  v-for="country in countries"  :key="country.id"  :value="country.id"> {{country.name_ar}} </option> --}}
+                                                                            <option  v-for="country in countries"  :key="country.id"  :value="country.id" :text=""> @{{country.name_ar}} </option>
                                                                             </select>
                                                                         </div>
                                                                     </div>

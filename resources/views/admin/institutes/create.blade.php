@@ -97,17 +97,8 @@
                                                                                 <option value="1">أستراليا</option>
                                                                                 <option value="3">كندا</option>
                                                                                 <option value="6">فرنسا</option>
-                                                                                <option value="7">ألمانيا</option>
-                                                                                <option value="9">أيرلندا</option>
-                                                                                <option value="10">ماليزيا</option>
-                                                                                <option value="11">مالطا</option>
-                                                                                <option value="12">نيوزيلاندا</option>
-                                                                                <option value="13">الفلبين</option>
-                                                                                <option value="16">روسيا</option>
-                                                                                <option value="17">جنوب أفريقيا</option>
-                                                                                <option value="18">سويسرا</option>
-                                                                                <option value="21">المملكة المتحدة</option>
-                                                                                <option value="22">الولايات المتحدة الأمريكية</option>
+                                                                            {{-- <option  v-for="country in countries"  :key="country.id"  :value="country.id" :text=""> @{{country.name_ar}} </option> --}}
+                                                                                
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -187,12 +178,41 @@
 @endsection
 
 @section('admin.custom-vue-scripts')
-    <script>
-        var app2 = new Vue({
-            el: '.vue-app',
-            data: {
-                names:['mahmoud' , 'samy' , 'hussin' , 'ali']
-            },
-        })
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+
+<script>
+
+    Vue.component("countries-component",{
+    data: function(){
+      return {
+  
+}
+    },
+    props:["name_ar"],
+    template:'<p>@{{name_ar}} </p> '
+    });
+
+var app = new Vue({
+el: '#app',
+data: {
+message: 'Hello Vue!',
+countries :{},
+items:['a','b','q','a']
+
+},
+methods: {
+getCountry(){
+    axios.get("country").then( response => this.countries = response.data.country);
+return this.countries;
+     }
+},
+created() {
+
+this.getCountry()  
+console.log(this.getCountry());
+},
+})
+
+
+</script>
 @endsection

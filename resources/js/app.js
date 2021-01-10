@@ -20,9 +20,9 @@ const app = new Vue({
     }
 });
 
-// export default {
-//     components: {
-//         "city-component": CitiesComponent
-//     },
-//     // ...
-// }
+export default {
+    components: {
+        "city-component": CitiesComponent
+    },
+    // ...
+}
