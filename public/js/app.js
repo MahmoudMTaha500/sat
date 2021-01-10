@@ -50291,7 +50291,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 var app = new Vue({
-  el: '#app',
+  el: '#sat_app_vue',
   components: {
     CountryCityComponent: _components_CountryCityComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     CitiesComponent: _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__["default"]

@@ -13,7 +13,7 @@ import CountryCityComponent from './components/CountryCityComponent';
 import CitiesComponent from './components/city/CitiesComponent';
 
 const app = new Vue({
-    el: '#app',
+    el: '#sat_app_vue',
     components: {
         CountryCityComponent,
         CitiesComponent,
