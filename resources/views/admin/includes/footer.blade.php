@@ -1,4 +1,4 @@
-
+<script src="{{asset('js/app.js')}}"></script>
 <!-- BEGIN VENDOR JS-->
 <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
@@ -34,5 +34,4 @@
 <!-- END PAGE LEVEL JS-->
 
 <!-- Costum Scripts -->
-<script src="{{asset('js/app.js')}}"></script>
 <script src="{{url('/admin')}}/assets/js/scripts.js" type="text/javascript"></script>

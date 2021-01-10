@@ -13,7 +13,6 @@
     </head>
     <body>
         <div id="app">
-            <test-component></test-component>
             <cities-component></cities-component>
         </div>
 
