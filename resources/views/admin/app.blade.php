@@ -5,8 +5,9 @@
       <div id="app">  <!-- this dev  for vue app   -->
         @include('admin.includes.menu')
         @include('admin.includes.sidebar')
-        @yield('admin.content')
-     
+        <div id="sat_app_vue">
+            @yield('admin.content')                        
+        </div>
         @include('admin.includes.footer')  
         @yield('admin.custom-js-scripts')
     </body>

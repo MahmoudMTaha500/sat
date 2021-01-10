@@ -19,10 +19,3 @@ const app = new Vue({
         CitiesComponent,
     }
 });
-
-export default {
-    components: {
-        "city-component": CitiesComponent
-    },
-    // ...
-}
