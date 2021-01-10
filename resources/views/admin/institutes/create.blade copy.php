@@ -1,5 +1,5 @@
 @extends('admin.app') @section('admin.content')
-<div class="app-content content vue-app">
+<div class="app-content content">
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
@@ -68,17 +68,32 @@
                                                 <div class="form-group">
                                                     <label for="city">المدينة </label>
                                                     <div class="d-flex input-group">
+                                                        
                                                         <span class="input-group-append w-100" id="button-addon2">
-                                                            <select id="city" class="select2 form-control vue-app">
+                                                            <select id="city" class="select2 form-control">
                                                                 <option value="">حدد المدينة</option>
-                                                                <option v-for="name in names" v-text="name"></option>
+                                                                <option value="1">أستراليا</option>
+                                                                <option value="3">كندا</option>
+                                                                <option value="6">فرنسا</option>
+                                                                <option value="7">ألمانيا</option>
+                                                                <option value="9">أيرلندا</option>
+                                                                <option value="10">ماليزيا</option>
+                                                                <option value="11">مالطا</option>
+                                                                <option value="12">نيوزيلاندا</option>
+                                                                <option value="13">الفلبين</option>
+                                                                <option value="16">روسيا</option>
+                                                                <option value="17">جنوب أفريقيا</option>
+                                                                <option value="18">سويسرا</option>
+                                                                <option value="21">المملكة المتحدة</option>
+                                                                <option value="22">الولايات المتحدة الأمريكية</option>
                                                             </select>
                                                             <button type="button" data-toggle="modal" data-target="#create-new-city" class="btn btn-success btn-sm"><i class="ft-plus"></i></button>
                                                         </span>
                                                     </div>
                                                     
-                                                    <!-- Create New City Form -->
-                                                    <div class="modal fade myModal" id="create-new-city" role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
+                                                    <!-- Create New City Form -->   
+                                                    
+                                                    <div class="modal fade" id="create-new-city"  role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -92,22 +107,12 @@
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>اختر الدولة</label>
-                                                                            <select class="select2 form-control text-left">
-                                                                                <option value="">حدد الدولة</option>
-                                                                                <option value="1">أستراليا</option>
-                                                                                <option value="3">كندا</option>
-                                                                                <option value="6">فرنسا</option>
-                                                                                <option value="7">ألمانيا</option>
-                                                                                <option value="9">أيرلندا</option>
-                                                                                <option value="10">ماليزيا</option>
-                                                                                <option value="11">مالطا</option>
-                                                                                <option value="12">نيوزيلاندا</option>
-                                                                                <option value="13">الفلبين</option>
-                                                                                <option value="16">روسيا</option>
-                                                                                <option value="17">جنوب أفريقيا</option>
-                                                                                <option value="18">سويسرا</option>
-                                                                                <option value="21">المملكة المتحدة</option>
-                                                                                <option value="22">الولايات المتحدة الأمريكية</option>
+                                                                            {{-- <countries-component  v-for=" country in items" :name_ar="country.name_ar"></countries-component> --}}
+
+                                                                            <h2 v-text="message"></h2>
+                                                                            <select class=" select2 form-control text-left" > 
+                                                                                    
+                                                                                {{-- <option  v-for="country in countries"  :key="country.id"  :value="country.id"> {{country.name_ar}} </option> --}}
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -121,10 +126,19 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button type="button" class="btn btn-success w-100">انشاء</button>
+                                                           
                                                             </div>
                                                         </div>
                                                         </div>
                                                     </div>
+
+                                                    
+                                           
+                                           
+                                                    {{-- <cities-component></cities-component> --}}
+
+
+                                                  
                                                 </div>
                                             </div>
                                         </div>
@@ -171,9 +185,14 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
                                         </div>
+
+                                      
+
+
                                     </div>
                                 </form>
                             </div>
@@ -184,16 +203,43 @@
         </div>
     </div>
 </div>
-@endsection
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+<script>
 
-@section('admin.custom-vue-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-    <script>
-        var app2 = new Vue({
-            el: '.vue-app',
-            data: {
-                names:['mahmoud' , 'samy' , 'hussin' , 'ali']
-            },
-        })
-    </script>
+        Vue.component("countries-component",{
+        data: function(){
+          return {
+      
+    }
+        },
+        props:["name_ar"],
+        template:'<p>@{{name_ar}} </p> '
+        });
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    countries :{},
+    items:['a','b','q','a']
+
+  },
+  methods: {
+    getCountry(){
+        axios.get("country").then( response => this.countries = response.data.country);
+return this.countries;
+         }
+},
+created() {
+
+  this.getCountry()  
+  console.log(this.getCountry());
+  },
+})
+// alert(1111)
+
+</script>
+
+
 @endsection
