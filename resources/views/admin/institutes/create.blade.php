@@ -78,7 +78,7 @@
                                                     </div>
                                                     
                                                     <!-- Create New City Form -->
-                                                    <div class="modal fade" id="create-new-city" tabindex="-1" role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
+                                                    <div class="modal fade myModal" id="create-new-city" role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -184,14 +184,9 @@
         </div>
     </div>
 </div>
-
-
-
-
 @endsection
 
-@section('admin.custom-scripts')
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+@section('admin.custom-vue-scripts')
     <script>
         var app2 = new Vue({
             el: '.vue-app',
