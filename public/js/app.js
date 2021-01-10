@@ -37636,7 +37636,6 @@ var render = function() {
       staticClass: "modal fade",
       attrs: {
         id: "create-new-city",
-        tabindex: "-1",
         role: "dialog",
         "aria-labelledby": "create-new-city-modal",
         "aria-hidden": "true"

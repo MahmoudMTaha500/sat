@@ -93,7 +93,7 @@
                                                     
                                                     <!-- Create New City Form -->   
                                                     
-                                                    <div class="modal fade" id="create-new-city" tabindex="-1" role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
+                                                    <div class="modal fade" id="create-new-city"  role="dialog" aria-labelledby="create-new-city-modal" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -107,7 +107,7 @@
                                                                     <div class="col-12">
                                                                         <div class="form-group">
                                                                             <label>اختر الدولة</label>
-                                                                            <countries-component  v-for=" country in items" :name_ar="country.name_ar"></countries-component>
+                                                                            {{-- <countries-component  v-for=" country in items" :name_ar="country.name_ar"></countries-component> --}}
 
                                                                             <h2 v-text="message"></h2>
                                                                             <select class=" select2 form-control text-left" > 
@@ -131,6 +131,8 @@
                                                         </div>
                                                         </div>
                                                     </div>
+
+                                                    
                                            
                                            
                                                     {{-- <cities-component></cities-component> --}}

@@ -6,7 +6,7 @@
         @include('admin.includes.menu')
         @include('admin.includes.sidebar')
         @yield('admin.content')
-      </div>
+        @yield('admin.custom-scripts')
         @include('admin.includes.footer')  
     </body>
 </html>
