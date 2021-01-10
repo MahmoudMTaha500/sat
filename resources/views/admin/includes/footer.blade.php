@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-{{-- <script src="{{asset('js/app.js')}}"></script> --}}
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-@yield('admin.custom-vue-scripts')
-=======
 <script src="{{asset('js/app.js')}}"></script>
->>>>>>> 2e9ccf5e23217153bf35ee6893bf849c824946e1
 <!-- BEGIN VENDOR JS-->
 <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
@@ -40,8 +34,4 @@
 <!-- END PAGE LEVEL JS-->
 
 <!-- Costum Scripts -->
-<<<<<<< HEAD
 <script src="{{url('/admin')}}/assets/js/scripts.js" type="text/javascript"></script>
-=======
-<script src="{{url('/admin')}}/assets/js/scripts.js" type="text/javascript"></script>
->>>>>>> 2e9ccf5e23217153bf35ee6893bf849c824946e1

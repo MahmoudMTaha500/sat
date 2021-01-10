@@ -1946,6 +1946,116 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountryCityComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CountryCityComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/city/CitiesComponent.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/city/CitiesComponent.vue?vue&type=script&lang=js& ***!
@@ -37591,6 +37701,290 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountryCityComponent.vue?vue&type=template&id=21a58ac7&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CountryCityComponent.vue?vue&type=template&id=21a58ac7& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "country" } }, [_vm._v("الدولة")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "select2 form-control text-left",
+              attrs: { id: "country" }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("حدد الدولة")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("أستراليا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("كندا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "6" } }, [_vm._v("فرنسا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "7" } }, [_vm._v("ألمانيا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "9" } }, [_vm._v("أيرلندا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "10" } }, [_vm._v("ماليزيا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "11" } }, [_vm._v("مالطا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "12" } }, [_vm._v("نيوزيلاندا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "13" } }, [_vm._v("الفلبين")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "16" } }, [_vm._v("روسيا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "17" } }, [
+                _vm._v("جنوب أفريقيا")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "18" } }, [_vm._v("سويسرا")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "21" } }, [
+                _vm._v("المملكة المتحدة")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "22" } }, [
+                _vm._v("الولايات المتحدة الأمريكية")
+              ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "city" } }, [_vm._v("المدينة ")]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex input-group" }, [
+            _c(
+              "span",
+              {
+                staticClass: "input-group-append w-100",
+                attrs: { id: "button-addon2" }
+              },
+              [
+                _c(
+                  "select",
+                  {
+                    staticClass: "select2 form-control vue-app",
+                    attrs: { id: "city" }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("حدد المدينة")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success btn-sm",
+                    attrs: {
+                      type: "button",
+                      "data-toggle": "modal",
+                      "data-target": "#create-new-city"
+                    }
+                  },
+                  [_c("i", { staticClass: "ft-plus" })]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "modal fade myModal",
+              attrs: {
+                id: "create-new-city",
+                role: "dialog",
+                "aria-labelledby": "create-new-city-modal",
+                "aria-hidden": "true"
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "modal-dialog", attrs: { role: "document" } },
+                [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _c("div", { staticClass: "modal-header" }, [
+                      _c(
+                        "h5",
+                        {
+                          staticClass: "modal-title",
+                          attrs: { id: "create-new-city-modal" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                انشاء مدينة جديدة\n                            "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "close",
+                          attrs: {
+                            type: "button",
+                            "data-dismiss": "modal",
+                            "aria-label": "Close"
+                          }
+                        },
+                        [
+                          _c("span", { attrs: { "aria-hidden": "true" } }, [
+                            _vm._v("×")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("اختر الدولة")]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              { staticClass: "select2 form-control text-left" },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("حدد الدولة")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "1" } }, [
+                                  _vm._v("أستراليا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "3" } }, [
+                                  _vm._v("كندا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "6" } }, [
+                                  _vm._v("فرنسا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "7" } }, [
+                                  _vm._v("ألمانيا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "9" } }, [
+                                  _vm._v("أيرلندا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "10" } }, [
+                                  _vm._v("ماليزيا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "11" } }, [
+                                  _vm._v("مالطا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "12" } }, [
+                                  _vm._v("نيوزيلاندا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "13" } }, [
+                                  _vm._v("الفلبين")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "16" } }, [
+                                  _vm._v("روسيا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "17" } }, [
+                                  _vm._v("جنوب أفريقيا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "18" } }, [
+                                  _vm._v("سويسرا")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "21" } }, [
+                                  _vm._v("المملكة المتحدة")
+                                ]),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "22" } }, [
+                                  _vm._v("الولايات المتحدة الأمريكية")
+                                ])
+                              ]
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("المدينة")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "ادخل اسم المدينة"
+                              }
+                            })
+                          ])
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success w-100",
+                          attrs: { type: "button" }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                انشاء\n                            "
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/city/CitiesComponent.vue?vue&type=template&id=502b4fbb&":
 /*!***********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/city/CitiesComponent.vue?vue&type=template&id=502b4fbb& ***!
@@ -49884,7 +50278,7 @@ module.exports = function(module) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_TestComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/TestComponent */ "./resources/js/components/TestComponent.vue");
+/* harmony import */ var _components_CountryCityComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CountryCityComponent */ "./resources/js/components/CountryCityComponent.vue");
 /* harmony import */ var _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/city/CitiesComponent */ "./resources/js/components/city/CitiesComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -49899,7 +50293,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 var app = new Vue({
   el: '#app',
   components: {
-    TestComponent: _components_TestComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CountryCityComponent: _components_CountryCityComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
     CitiesComponent: _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 });
@@ -49951,14 +50345,72 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/TestComponent.vue":
-/*!***************************************************!*\
-  !*** ./resources/js/components/TestComponent.vue ***!
-  \***************************************************/
+/***/ "./resources/js/components/CountryCityComponent.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/CountryCityComponent.vue ***!
+  \**********************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\xampp\\htdocs\\sat-laravel\\resources\\js\\components\\TestComponent.vue'");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CountryCityComponent_vue_vue_type_template_id_21a58ac7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CountryCityComponent.vue?vue&type=template&id=21a58ac7& */ "./resources/js/components/CountryCityComponent.vue?vue&type=template&id=21a58ac7&");
+/* harmony import */ var _CountryCityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CountryCityComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/CountryCityComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CountryCityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CountryCityComponent_vue_vue_type_template_id_21a58ac7___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CountryCityComponent_vue_vue_type_template_id_21a58ac7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CountryCityComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CountryCityComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/CountryCityComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryCityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CountryCityComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountryCityComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryCityComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CountryCityComponent.vue?vue&type=template&id=21a58ac7&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/CountryCityComponent.vue?vue&type=template&id=21a58ac7& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryCityComponent_vue_vue_type_template_id_21a58ac7___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CountryCityComponent.vue?vue&type=template&id=21a58ac7& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CountryCityComponent.vue?vue&type=template&id=21a58ac7&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryCityComponent_vue_vue_type_template_id_21a58ac7___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryCityComponent_vue_vue_type_template_id_21a58ac7___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
@@ -49966,15 +50418,14 @@ throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.j
 /*!**********************************************************!*\
   !*** ./resources/js/components/city/CitiesComponent.vue ***!
   \**********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CitiesComponent_vue_vue_type_template_id_502b4fbb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CitiesComponent.vue?vue&type=template&id=502b4fbb& */ "./resources/js/components/city/CitiesComponent.vue?vue&type=template&id=502b4fbb&");
 /* harmony import */ var _CitiesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CitiesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/city/CitiesComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CitiesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CitiesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -50004,7 +50455,7 @@ component.options.__file = "resources/js/components/city/CitiesComponent.vue"
 /*!***********************************************************************************!*\
   !*** ./resources/js/components/city/CitiesComponent.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

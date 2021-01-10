@@ -9,13 +9,13 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 
-import TestComponent from './components/TestComponent';
+import CountryCityComponent from './components/CountryCityComponent';
 import CitiesComponent from './components/city/CitiesComponent';
 
 const app = new Vue({
     el: '#app',
     components: {
-        TestComponent,
+        CountryCityComponent,
         CitiesComponent,
     }
 });
