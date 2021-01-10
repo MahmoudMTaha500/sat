@@ -44,6 +44,8 @@ Route::group(['prefix' => 'dashboard'], function() {
         $page_name='add-institute';
         return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
     })->name('dashboard.add-institute');
+
+    Route::get("/country","countryController@index");
 });
 
 

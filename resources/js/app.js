@@ -10,11 +10,11 @@ window.Vue = require('vue');
 
 
 import CountryCityComponent from './components/CountryCityComponent';
-import CitiesComponent from './components/CitiesComponent';
+import CitiesComponent from './components/city/CitiesComponent';
 
 const app = new Vue({
     el: '#sat_app_vue',
-    components:{
+    components: {
         CountryCityComponent,
         CitiesComponent,
     }
