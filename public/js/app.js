@@ -2051,7 +2051,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {}
+  data: function data() {
+    return {
+      name: 'mahmoud samy'
+    };
+  },
+  methods: {
+    axiosTest: function axiosTest() {
+      axios.get("test", this.post).then(function (response) {});
+    }
+  }
 });
 
 /***/ }),
@@ -37670,25 +37679,191 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "city" } }, [_vm._v("المدينة ")]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade myModal",
+            attrs: {
+              id: "create-new-city",
+              role: "dialog",
+              "aria-labelledby": "create-new-city-modal",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              { staticClass: "modal-dialog", attrs: { role: "document" } },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success w-100",
+                        attrs: { type: "button" },
+                        on: { click: _vm.axiosTest }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                انشاء\n                            "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "country" } }, [_vm._v("الدولة")]),
-          _vm._v(" "),
+    return _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "country" } }, [_vm._v("الدولة")]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            staticClass: "select2 form-control text-left",
+            attrs: { id: "country" }
+          },
+          [
+            _c("option", { attrs: { value: "" } }, [_vm._v("حدد الدولة")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("أستراليا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("كندا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "6" } }, [_vm._v("فرنسا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "7" } }, [_vm._v("ألمانيا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "9" } }, [_vm._v("أيرلندا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "10" } }, [_vm._v("ماليزيا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "11" } }, [_vm._v("مالطا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "12" } }, [_vm._v("نيوزيلاندا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "13" } }, [_vm._v("الفلبين")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "16" } }, [_vm._v("روسيا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "17" } }, [_vm._v("جنوب أفريقيا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "18" } }, [_vm._v("سويسرا")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "21" } }, [
+              _vm._v("المملكة المتحدة")
+            ]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "22" } }, [
+              _vm._v("الولايات المتحدة الأمريكية")
+            ])
+          ]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex input-group" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-append w-100",
+          attrs: { id: "button-addon2" }
+        },
+        [
           _c(
             "select",
             {
-              staticClass: "select2 form-control text-left",
-              attrs: { id: "country" }
+              staticClass: "select2 form-control vue-app",
+              attrs: { id: "city" }
             },
-            [
+            [_c("option", { attrs: { value: "" } }, [_vm._v("حدد المدينة")])]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-sm",
+              attrs: {
+                type: "button",
+                "data-toggle": "modal",
+                "data-target": "#create-new-city"
+              }
+            },
+            [_c("i", { staticClass: "ft-plus" })]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "create-new-city-modal" } },
+        [
+          _vm._v(
+            "\n                                انشاء مدينة جديدة\n                            "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-body" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("اختر الدولة")]),
+            _vm._v(" "),
+            _c("select", { staticClass: "select2 form-control text-left" }, [
               _c("option", { attrs: { value: "" } }, [_vm._v("حدد الدولة")]),
               _vm._v(" "),
               _c("option", { attrs: { value: "1" } }, [_vm._v("أستراليا")]),
@@ -37724,210 +37899,19 @@ var staticRenderFns = [
               _c("option", { attrs: { value: "22" } }, [
                 _vm._v("الولايات المتحدة الأمريكية")
               ])
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "city" } }, [_vm._v("المدينة ")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "d-flex input-group" }, [
-            _c(
-              "span",
-              {
-                staticClass: "input-group-append w-100",
-                attrs: { id: "button-addon2" }
-              },
-              [
-                _c(
-                  "select",
-                  {
-                    staticClass: "select2 form-control vue-app",
-                    attrs: { id: "city" }
-                  },
-                  [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("حدد المدينة")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success btn-sm",
-                    attrs: {
-                      type: "button",
-                      "data-toggle": "modal",
-                      "data-target": "#create-new-city"
-                    }
-                  },
-                  [_c("i", { staticClass: "ft-plus" })]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "modal fade myModal",
-              attrs: {
-                id: "create-new-city",
-                role: "dialog",
-                "aria-labelledby": "create-new-city-modal",
-                "aria-hidden": "true"
-              }
-            },
-            [
-              _c(
-                "div",
-                { staticClass: "modal-dialog", attrs: { role: "document" } },
-                [
-                  _c("div", { staticClass: "modal-content" }, [
-                    _c("div", { staticClass: "modal-header" }, [
-                      _c(
-                        "h5",
-                        {
-                          staticClass: "modal-title",
-                          attrs: { id: "create-new-city-modal" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                انشاء مدينة جديدة\n                            "
-                          )
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "close",
-                          attrs: {
-                            type: "button",
-                            "data-dismiss": "modal",
-                            "aria-label": "Close"
-                          }
-                        },
-                        [
-                          _c("span", { attrs: { "aria-hidden": "true" } }, [
-                            _vm._v("×")
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal-body" }, [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v("اختر الدولة")]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              { staticClass: "select2 form-control text-left" },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("حدد الدولة")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("أستراليا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "3" } }, [
-                                  _vm._v("كندا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "6" } }, [
-                                  _vm._v("فرنسا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "7" } }, [
-                                  _vm._v("ألمانيا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "9" } }, [
-                                  _vm._v("أيرلندا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "10" } }, [
-                                  _vm._v("ماليزيا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "11" } }, [
-                                  _vm._v("مالطا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "12" } }, [
-                                  _vm._v("نيوزيلاندا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "13" } }, [
-                                  _vm._v("الفلبين")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "16" } }, [
-                                  _vm._v("روسيا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "17" } }, [
-                                  _vm._v("جنوب أفريقيا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "18" } }, [
-                                  _vm._v("سويسرا")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "21" } }, [
-                                  _vm._v("المملكة المتحدة")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "22" } }, [
-                                  _vm._v("الولايات المتحدة الأمريكية")
-                                ])
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-12" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v("المدينة")]),
-                            _vm._v(" "),
-                            _c("input", {
-                              staticClass: "form-control",
-                              attrs: {
-                                type: "text",
-                                placeholder: "ادخل اسم المدينة"
-                              }
-                            })
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "modal-footer" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-success w-100",
-                          attrs: { type: "button" }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                انشاء\n                            "
-                          )
-                        ]
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-12" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", [_vm._v("المدينة")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "ادخل اسم المدينة" }
+            })
+          ])
         ])
       ])
     ])

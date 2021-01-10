@@ -48,3 +48,6 @@ Route::group(['prefix' => 'dashboard'], function() {
 
 
 
+Route::get('/test', function () {
+    return response()->json(['status' => 'success' , 'data' => 'test valus']);
+});

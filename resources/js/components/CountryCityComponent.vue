@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success w-100">
+                                <button type="button" class="btn btn-success w-100" @click="axiosTest">
                                     انشاء
                                 </button>
                             </div>
@@ -95,6 +95,15 @@
 
 <script>
     export default {
-        mounted() {},
+        data(){
+          return {
+            name:'mahmoud samy',
+          }
+        },
+        methods:{
+          axiosTest(){
+            axios.get("test", this.post).then(response => {});
+          }
+        }
     };
 </script>
