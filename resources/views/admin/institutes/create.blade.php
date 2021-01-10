@@ -1,5 +1,5 @@
 @extends('admin.app') @section('admin.content')
-<div class="app-content content">
+<div class="app-content content vue-app">
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
@@ -68,24 +68,10 @@
                                                 <div class="form-group">
                                                     <label for="city">المدينة </label>
                                                     <div class="d-flex input-group">
-                                                        
                                                         <span class="input-group-append w-100" id="button-addon2">
-                                                            <select id="city" class="select2 form-control">
+                                                            <select id="city" class="select2 form-control vue-app">
                                                                 <option value="">حدد المدينة</option>
-                                                                <option value="1">أستراليا</option>
-                                                                <option value="3">كندا</option>
-                                                                <option value="6">فرنسا</option>
-                                                                <option value="7">ألمانيا</option>
-                                                                <option value="9">أيرلندا</option>
-                                                                <option value="10">ماليزيا</option>
-                                                                <option value="11">مالطا</option>
-                                                                <option value="12">نيوزيلاندا</option>
-                                                                <option value="13">الفلبين</option>
-                                                                <option value="16">روسيا</option>
-                                                                <option value="17">جنوب أفريقيا</option>
-                                                                <option value="18">سويسرا</option>
-                                                                <option value="21">المملكة المتحدة</option>
-                                                                <option value="22">الولايات المتحدة الأمريكية</option>
+                                                                <option v-for="name in names" v-text="name"></option>
                                                             </select>
                                                             <button type="button" data-toggle="modal" data-target="#create-new-city" class="btn btn-success btn-sm"><i class="ft-plus"></i></button>
                                                         </span>
@@ -185,16 +171,9 @@
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
                                         </div>
-
-                                        <div id="app">
-                                            <test-component></test-component>
-                                        </div>
-
-
                                     </div>
                                 </form>
                             </div>
@@ -209,4 +188,16 @@
 
 
 
+@endsection
+
+@section('admin.custom-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+        var app2 = new Vue({
+            el: '.vue-app',
+            data: {
+                names:['mahmoud' , 'samy' , 'hussin' , 'ali']
+            },
+        })
+    </script>
 @endsection
