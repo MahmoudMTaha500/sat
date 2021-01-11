@@ -92,18 +92,3 @@
         </div>
     </div>
 </template>
-
-<script>
-    export default {
-        data(){
-          return {
-            name:'mahmoud samy',
-          }
-        },
-        methods:{
-          axiosTest(){
-            axios.get("test", this.post).then(response => {});
-          }
-        }
-    };
-</script>
