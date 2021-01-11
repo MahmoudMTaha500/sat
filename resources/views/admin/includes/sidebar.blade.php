@@ -45,7 +45,7 @@
                     <li class="{{ $page_name == 'courses' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('dashboard.courses')}}" data-i18n="nav.navbars.nav_light">الدورات</a>
                     </li>
-                    <li class="{{ $page_name == 'courses' ? 'active' : ''}}">
+                    <li class="{{ $page_name == 'add-course' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('dashboard.add-course')}}" data-i18n="nav.navbars.nav_dark">اضافة دورة جديدة</a>
                     </li>
                     <li>
