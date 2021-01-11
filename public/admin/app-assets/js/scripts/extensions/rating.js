@@ -9,7 +9,7 @@
 ==========================================================================================*/
 $(document).ready(function(){
 
-	$.fn.raty.defaults.path = '../adminTheme-master/html/rtl/vertical-content-menu-template/../../../app-assets/images/raty/';
+	$.fn.raty.defaults.path = base_path+'/app-assets/images/raty/';
 
 	// Default
 	$('#default-star-rating').raty();

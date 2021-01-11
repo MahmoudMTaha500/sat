@@ -29,3 +29,4 @@ Route::group(['prefix' => 'dashboard'], function() {
 });
 
 
+Route::get("/test-controller","TestController@index");
