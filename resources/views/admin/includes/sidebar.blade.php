@@ -42,10 +42,10 @@
                     <span class="menu-title" data-i18n="nav.navbars.main">قسم الدورات</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="{{ $page_name == 'institutes' ? 'active' : ''}}">
+                    <li class="{{ $page_name == 'courses' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('dashboard.courses')}}" data-i18n="nav.navbars.nav_light">الدورات</a>
                     </li>
-                    <li class="{{ $page_name == 'institutes' ? 'active' : ''}}">
+                    <li class="{{ $page_name == 'courses' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('dashboard.add-course')}}" data-i18n="nav.navbars.nav_dark">اضافة دورة جديدة</a>
                     </li>
                     <li>
