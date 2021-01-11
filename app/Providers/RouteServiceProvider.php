@@ -79,7 +79,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebsiteRoutes()
     {
         Route::middleware('web')
-            ->namespace($this->dahboard_namespace)
+            ->namespace($this->website_namespace)
             ->group(base_path('routes/website.php'));
     }
 
