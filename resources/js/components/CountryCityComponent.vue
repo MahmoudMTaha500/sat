@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success w-100">
+                                <button type="button" class="btn btn-success w-100" @click="axiosTest">
                                     انشاء
                                 </button>
                             </div>

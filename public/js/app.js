@@ -37796,7 +37796,21 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _vm._m(3)
+                  _c("div", { staticClass: "modal-footer" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success w-100",
+                        attrs: { type: "button" },
+                        on: { click: _vm.axiosTest }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                انشاء\n                            "
+                        )
+                      ]
+                    )
+                  ])
                 ])
               ]
             )
@@ -37886,22 +37900,6 @@ var staticRenderFns = [
           attrs: { type: "text", placeholder: "ادخل اسم المدينة" }
         })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-success w-100", attrs: { type: "button" } },
-        [
-          _vm._v(
-            "\n                                انشاء\n                            "
-          )
-        ]
-      )
     ])
   }
 ]

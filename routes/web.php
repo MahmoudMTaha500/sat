@@ -20,6 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+// dashboard routes
+// ===================================================================================================================
+
+
+
 // dashboard
 Route::get('/dashboard', function () {
     $department_name='dashboard';
@@ -28,10 +35,10 @@ Route::get('/dashboard', function () {
 })->name('dashboard');
 
 
-// institutes department
+
 Route::group(['prefix' => 'dashboard'], function() {
 
-
+    // Institutes Department
     Route::get('/institutes', function () {
         $department_name='institutes';
         $page_name='institutes';
@@ -39,14 +46,38 @@ Route::group(['prefix' => 'dashboard'], function() {
     })->name('dashboard.institutes');
 
 
-    Route::get('/add-institutes', function () {
+    Route::get('/add-institute', function () {
         $department_name='institutes';
         $page_name='add-institute';
         return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
     })->name('dashboard.add-institute');
 
-    Route::get("/country","countryController@index");
+
+
+
+    // Courses Department
+    Route::get('/courses', function () {
+        $department_name='courses';
+        $page_name='courses';
+        return view('/admin/courses.index' , compact('department_name' , 'page_name'));
+    })->name('dashboard.courses');
+
+
+    Route::get('/add-course', function () {
+        $department_name='courses';
+        $page_name='add-course';
+        return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
+    })->name('dashboard.add-course');
+
+
+    Route::get("/country",function () {
+        return response()->json(['status' => 'success' , 'data' => 'test valus']);
+    });
 });
 
 
+
+
+// website routes
+// ===================================================================================================================
 
