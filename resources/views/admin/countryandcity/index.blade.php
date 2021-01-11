@@ -1,17 +1,18 @@
 @extends('admin.app')
 @section('admin.content')
-
+{{ $department_name = 'country'}}
+{{ $page_name = 'getcountries'}}
     <div class="app-content content">
         <div class="content-wrapper">
             <div class="content-header row">
                 <div class="content-header-left col-md-6 col-12 mb-2">
-                    <h3 class="content-header-title">قسم المعاهد</h3>
+                    <h3 class="content-header-title">قسم الدول</h3>
                     <div class="row breadcrumbs-top">
                         <div class="breadcrumb-wrapper col-12">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a>
                                 </li>
-                                <li class="breadcrumb-item active">كل المعاهد
+                                <li class="breadcrumb-item active">كل الدول
                                 </li>
                             </ol>
                         </div>
@@ -30,7 +31,7 @@
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
-                                                href="/sat/institutes/create.php"> <i class="ft-plus ft-md"></i> اضافة معهد
+                                                href="/sat/institutes/create.php"> <i class="ft-plus ft-md"></i> اضافة دوله
                                                 جديد</a></li>
                                     </ul>
                                 </div>
@@ -40,37 +41,16 @@
                                     <table id="recent-orders" class="table table-hover table-xl mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0">اسم المعهد</th>
-                                                <th class="border-top-0">الدولة</th>
-                                                <th class="border-top-0">المدينة</th>
-                                                <th class="border-top-0">عدد الكورسات</th>
-                                                <th class="border-top-0">التقييم</th>
-                                                <th class="border-top-0">التقييم بواسطة</th>
-                                                <th class="border-top-0">التعليقات</th>
+                                                <th class="border-top-0">اسم الدوله</th>
+                                             
                                                 <th class="border-top-0">اكشن</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        @foreach($country as $coun )
                                             <tr>
-                                                <td class="text-truncate">كابلان</td>
-                                                <td class="text-truncate">المنيا</td>
-                                                <td class="text-truncate">مانشيستر</td>
-                                                <td class="text-truncate"> 5 كورسات</td>
-                                                <td class="text-truncate">
-                                                    <div id="read-only-stars" data-score="1">
-                                                    </div>
-
-                                                </td>
-                                                <td>
-                                                    سات
-                                                </td>
-                                                <td>
-                                                    <a href="/sat/institutes/comments.php"><button type="button"
-                                                            class="btn btn-sm btn-outline-success round">حالي
-                                                            (15)</button></a>
-                                                    <a href="/sat/institutes/comments.php"><button type="button"
-                                                            class="btn btn-sm btn-outline-info round">جديد (10)</button></a>
-                                                </td>
+                                                <td> {{$coun->name_ar}}</td>
+                                              
                                                 <td>
                                                     <div class="btn-group mr-1 mb-1">
                                                         <button type="button" class="btn btn-primary dropdown-toggle"
@@ -93,7 +73,7 @@
 
                                                 </td>
                                             </tr>
-
+                                        @endforeach
 
 
                                         </tbody>

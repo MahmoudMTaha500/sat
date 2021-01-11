@@ -23,6 +23,7 @@ Route::group(['prefix' => 'dashboard'], function() {
 
     
     Route::get("/country","countryController@index");
+    Route::get('/getcountries',"countryController@show");
 
 
 });
