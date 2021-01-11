@@ -5,20 +5,8 @@
                 <label for="country">الدولة</label>
                 <select id="country" class="select2 form-control text-left">
                     <option value="">حدد الدولة</option>
-                    <option value="1">أستراليا</option>
-                    <option value="3">كندا</option>
-                    <option value="6">فرنسا</option>
-                    <option value="7">ألمانيا</option>
-                    <option value="9">أيرلندا</option>
-                    <option value="10">ماليزيا</option>
-                    <option value="11">مالطا</option>
-                    <option value="12">نيوزيلاندا</option>
-                    <option value="13">الفلبين</option>
-                    <option value="16">روسيا</option>
-                    <option value="17">جنوب أفريقيا</option>
-                    <option value="18">سويسرا</option>
-                    <option value="21">المملكة المتحدة</option>
-                    <option value="22">الولايات المتحدة الأمريكية</option>
+                     <option  v-for="country in countries"  :key="country.id"  :value="country.id"> {{country.name_ar}} </option>
+
                 </select>
             </div>
         </div>
@@ -55,20 +43,8 @@
                                             <label>اختر الدولة</label>
                                             <select class="select2 form-control text-left">
                                                 <option value="">حدد الدولة</option>
-                                                <option value="1">أستراليا</option>
-                                                <option value="3">كندا</option>
-                                                <option value="6">فرنسا</option>
-                                                <option value="7">ألمانيا</option>
-                                                <option value="9">أيرلندا</option>
-                                                <option value="10">ماليزيا</option>
-                                                <option value="11">مالطا</option>
-                                                <option value="12">نيوزيلاندا</option>
-                                                <option value="13">الفلبين</option>
-                                                <option value="16">روسيا</option>
-                                                <option value="17">جنوب أفريقيا</option>
-                                                <option value="18">سويسرا</option>
-                                                <option value="21">المملكة المتحدة</option>
-                                                <option value="22">الولايات المتحدة الأمريكية</option>
+                                        <option  v-for="country in countries"  :key="country.id"  :value="country.id"> {{country.name_ar}} </option>
+
                                             </select>
                                         </div>
                                     </div>
@@ -93,8 +69,28 @@
     </div>
 </template>
 
+
 <script>
-    export default {
-        mounted() {},
-    };
+export default  {
+data() {
+    return {
+        countries :{},
+    }
+},
+
+methods: {
+    getCountry(){
+        axios.get("country").then( response => this.countries = response.data.country);
+return this.countries;
+         }
+},
+created() {
+
+  this.getCountry()  
+//   console.log(this.getCountry());
+  },
+
+}
+
+                
 </script>
