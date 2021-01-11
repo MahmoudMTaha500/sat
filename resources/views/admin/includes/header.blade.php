@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/charts/chartist-plugin-tooltip.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/raty/jquery.raty.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/switchery.min.css">
-
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/jquery.toolbar.css">
     <!-- END VENDOR CSS-->
    
     <!-- BEGIN MODERN CSS-->

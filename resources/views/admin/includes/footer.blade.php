@@ -1,4 +1,5 @@
 <script src="{{asset('js/app.js')}}"></script>
+<script>var base_path = "{{url('/admin')}}";</script>
 <!-- BEGIN VENDOR JS-->
 <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
@@ -19,6 +20,8 @@
 <script src="{{url('/admin')}}/app-assets/vendors/js/forms/toggle/switchery.min.js" type="text/javascript"></script>
 <script src="{{url('/admin')}}/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js" type="text/javascript"></script>
 <script src="{{url('/admin')}}/app-assets/vendors/js/editors/ckeditor/ckeditor.js" type="text/javascript"></script>
+<script src="{{url('/admin')}}/app-assets/vendors/js/extensions/jquery.toolbar.min.js" type="text/javascript"></script>
+
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN MODERN JS-->
 <script src="{{url('/admin')}}/app-assets/js/core/app-menu.js" type="text/javascript"></script>
@@ -31,6 +34,7 @@
 <script src="{{url('/admin')}}/app-assets/js/scripts/forms/switch.js" type="text/javascript"></script>
 <script src="{{url('/admin')}}/app-assets/js/scripts/forms/form-repeater.js" type="text/javascript"></script>
 <script src="{{url('/admin')}}/app-assets/js/scripts/editors/editor-ckeditor.js" type="text/javascript"></script>
+<script src="{{url('/admin')}}/app-assets/js/scripts/extensions/toolbar.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
 
 <!-- Costum Scripts -->
