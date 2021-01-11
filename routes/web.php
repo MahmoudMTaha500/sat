@@ -46,11 +46,7 @@ Route::group(['prefix' => 'dashboard'], function() {
     })->name('dashboard.institutes');
 
 
-    Route::get('/add-institute', function () {
-        $department_name='institutes';
-        $page_name='add-institute';
-        return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
-    })->name('dashboard.add-institute');
+   
 
 
 
@@ -70,9 +66,6 @@ Route::group(['prefix' => 'dashboard'], function() {
     })->name('dashboard.add-course');
 
 
-    Route::get("/country",function () {
-        return response()->json(['status' => 'success' , 'data' => 'test valus']);
-    });
 });
 
 
