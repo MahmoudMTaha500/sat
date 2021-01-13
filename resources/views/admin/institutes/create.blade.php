@@ -1,4 +1,6 @@
 @extends('admin.app') @section('admin.content')
+{{$department_name='institutes'}}
+{{$page_name='add-institute'}}
 <div class="app-content content vue-app">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -8,7 +10,7 @@
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('dashboard.institutes')}}"> المعاهد</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('institute.index')}}"> المعاهد</a></li>
                             <li class="breadcrumb-item active">اضافة معهد</li>
                         </ol>
                     </div>
@@ -16,6 +18,18 @@
             </div>
         </div>
         <div class="content-body">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>    
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>    
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             <div class="row justify-content-md-center">
                 <div class="col-lg-10">
                     <div class="card" style="zoom: 1;">

@@ -1,4 +1,6 @@
 @extends('admin.app') @section('admin.content')
+{{$department_name='institutes'}}
+{{$page_name='institute'}}
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -64,7 +66,7 @@
                                             <td class="text-truncate">
                                                 <div data-toolbar="transport-options-o" class="btn-toolbar btn-toolbar-primary m-0" data-toolbar-style="primary-o"><i class="ft-settings"></i></div>
                                                 <div id="transport-options-o" class="toolbar-icons hidden">
-                                                    <a href="#"><i class="la la-eye"></i></a>
+                                                    <a href="google.com"><i class="la la-eye"></i></a>
                                                     <a href="#"><i class="la la-pencil"></i></a>
                                                     <a href="#"><i class="la la-plus"></i></a>
                                                     <a href="#"><i class="la la-trash"></i></a>

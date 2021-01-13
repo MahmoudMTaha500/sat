@@ -39,11 +39,11 @@ Route::get('/dashboard', function () {
 Route::group(['prefix' => 'dashboard'], function() {
 
     // Institutes Department
-    Route::get('/institutes', function () {
-        $department_name='institutes';
-        $page_name='institutes';
-        return view('/admin/institutes.index' , compact('department_name' , 'page_name'));
-    })->name('dashboard.institutes');
+    // Route::get('/institutes', function () {
+    //     $department_name='institutes';
+    //     $page_name='institutes';
+    //     return view('/admin/institutes.index' , compact('department_name' , 'page_name'));
+    // })->name('dashboard.institutes');
 
 
    

@@ -19,11 +19,11 @@
                     <span class="menu-title" data-i18n="nav.navbars.main">قسم المعاهد</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="{{ $page_name == 'institutes' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('dashboard.institutes')}}" data-i18n="nav.navbars.nav_light">  المعاهد</a>
+                    <li class="{{ $page_name == 'institute' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('institute.index')}}" data-i18n="nav.navbars.nav_light">  المعاهد</a>
                     </li>
                     <li class="{{ $page_name == 'add-institute' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('dashboard.add-institute')}}"  data-i18n="nav.navbars.nav_dark">اضافة معهد  جديد</a>
+                        <a class="menu-item" href="{{route('institute.create')}}"  data-i18n="nav.navbars.nav_dark">اضافة معهد  جديد</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/institutes/comments.php?page=institutes" data-i18n="nav.navbars.nav_dark">التعليقات</a>
@@ -94,13 +94,13 @@
                         <a class="menu-item" href="{{url('/dashboard/getcountries')}}" data-i18n="nav.navbars.nav_light">كل الدول</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="navbar-dark.html" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
+                        <a class="menu-item" href="{{url('/dashboard/addcountry')}}" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">كل المدن</a>
+                        <a class="menu-item" href="{{route("city.index")}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>
                     </li> 
                      <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">اضافة مدينه جديده </a>
+                        <a class="menu-item" href="{{route('city.create')}}" data-i18n="nav.navbars.nav_semi">اضافة مدينه جديده </a>
                     </li>
                 </ul>
             </li>
