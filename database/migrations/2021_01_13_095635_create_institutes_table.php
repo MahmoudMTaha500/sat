@@ -15,6 +15,17 @@ class CreateInstitutesTable extends Migration
     {
         Schema::create('institutes', function (Blueprint $table) {
             $table->id();
+            $table->string("name_ar");
+            $table->string("about_ar");
+            $table->string("img")->nullable();
+            $table->string("logo")->nullable();
+            $table->integer("creator_id")->nullable();
+            $table->integer("country_id");
+            $table->integer("city_id");
+            $table->integer("sat_rate")->nullable();
+            $table->integer("rate_switch")->nullable();
+            $table->integer("active")->nullable();
+            $table->integer("approvment")->nullable();
             $table->timestamps();
         });
     }

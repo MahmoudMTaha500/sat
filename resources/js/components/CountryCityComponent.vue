@@ -6,7 +6,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="country">الدولة</label>
-                <select  v-model="selected" v-on:change="getcities()" id="country" class="  form-control text-left" name="country_id">
+                <select  v-model="selected" v-on:change="getcities()" id="country" class="  form-control text-left" name="country_id" required>
                     <option   value="">حدد الدولة</option>
                      <option  v-for="country in countries"  :key="country.id"  :value="country.id" > {{country.name_ar}} </option>
 
@@ -18,7 +18,7 @@
                 <label for="city">المدينة </label>
                 <div class="d-flex input-group">
                     <span class="input-group-append w-100" id="button-addon2">
-                        <select id="city" class="select2 form-control vue-app" name="city_id">
+                        <select id="city" class="select2 form-control vue-app" name="city_id" required>
                             <option value="">حدد المدينة</option>
                             <option  v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                         </select>
@@ -47,7 +47,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label>اختر الدولة</label>
-                                            <select  v-model="selected_city" v-on:change="get_id_for_cities()"  class=" form-control text-left"  >
+                                            <select  v-model="selected_city" v-on:change="get_id_for_cities()"  class=" form-control text-left"   >
                                                 <option value="">حدد الدولة</option>
                                         <option  v-for="country in countries"  :key="country.id"  :value="country.id" > {{country.name_ar}} </option>
 

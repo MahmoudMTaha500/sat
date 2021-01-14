@@ -37793,7 +37793,7 @@ var render = function() {
               }
             ],
             staticClass: "  form-control text-left",
-            attrs: { id: "country", name: "country_id" },
+            attrs: { id: "country", name: "country_id", required: "" },
             on: {
               change: [
                 function($event) {
@@ -37847,7 +37847,7 @@ var render = function() {
                 "select",
                 {
                   staticClass: "select2 form-control vue-app",
-                  attrs: { id: "city", name: "city_id" }
+                  attrs: { id: "city", name: "city_id", required: "" }
                 },
                 [
                   _c("option", { attrs: { value: "" } }, [

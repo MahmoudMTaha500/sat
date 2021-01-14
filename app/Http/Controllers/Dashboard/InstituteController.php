@@ -6,6 +6,9 @@ use App\country;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\institute;
+use App\institute_questions;
+
+use function GuzzleHttp\Promise\inspect;
 
 class InstituteController extends Controller
 {
@@ -25,9 +28,10 @@ class InstituteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-       
+        
+
         return view('admin.institutes.create');
     }
 
@@ -39,7 +43,29 @@ class InstituteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+      $institute =  institute::create([
+            "name_ar"=>$request->name_ar,  
+            "about_ar"=>$request->about_ar,  
+            "country_id"=>$request->country_id,  
+            "city_id"=>$request->city_id,  
+          
+  
+          ]);
+  
+          $institute_id = $institute->id;
+          $questions = $request->questionList;
+
+           foreach($questions as $question){
+            //    dump( $question['questions']);
+               institute_questions::create([
+                   'institute_id'=>  $institute_id,
+                   'question'=>  $question['questions'],
+                   'answer'=>  $question['answer'],
+               ]);
+           }
+           return back()->with('success','تم اضافة المعهد '); 
+           
     }
 
     /**
