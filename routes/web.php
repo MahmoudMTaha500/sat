@@ -51,19 +51,19 @@ Route::group(['prefix' => 'dashboard'], function() {
 
 
 
-    // Courses Department
-    Route::get('/courses', function () {
-        $department_name='courses';
-        $page_name='courses';
-        return view('/admin/courses.index' , compact('department_name' , 'page_name'));
-    })->name('dashboard.courses');
+    // // Courses Department
+    // Route::get('/courses', function () {
+    //     $department_name='courses';
+    //     $page_name='courses';
+    //     return view('/admin/courses.index' , compact('department_name' , 'page_name'));
+    // })->name('dashboard.courses');
 
 
-    Route::get('/add-course', function () {
-        $department_name='courses';
-        $page_name='add-course';
-        return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
-    })->name('dashboard.add-course');
+    // Route::get('/add-course', function () {
+    //     $department_name='courses';
+    //     $page_name='add-course';
+    //     return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
+    // })->name('dashboard.add-course');
 
 
 });

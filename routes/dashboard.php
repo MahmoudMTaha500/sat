@@ -7,13 +7,13 @@ Route::resource('institute', 'InstituteController');
 
 /*********************************************  start Country Routs **************************************************************************************************** */
 
-Route::get("/country","countryController@index");
-Route::get('/getcountries',"countryController@show");
-Route::get('/addcountry',"countryController@create");
-Route::post('/addcountry',"countryController@store");
-Route::get('/updateCountry/{id}',"countryController@edit");
-Route::post('/updateCountry',"countryController@update");
-Route::get('/deleteCountry/{id}',"countryController@delete");
+// Route::get("/country","countryController@index");
+// Route::get('/getcountries',"countryController@show");
+// Route::get('/addcountry',"countryController@create");
+// Route::post('/addcountry',"countryController@store");
+// Route::get('/updateCountry/{id}',"countryController@edit");
+// Route::post('/updateCountry',"countryController@update");
+// Route::get('/deleteCountry/{id}',"countryController@delete");
 /*********************************************  end Country Routs **************************************************************************************************** */
 
 
@@ -23,8 +23,9 @@ Route::get('/deleteCountry/{id}',"countryController@delete");
 Route::get("getcities","CityController@getCities");
 Route::post("addCity","CityController@addCity");
 
-Route::resource('country', 'CountryController');
-Route::resource('city', 'CityController');
+Route::resource('countries', 'CountryController');
+Route::resource('cities', 'CityController');
+Route::resource('courses', 'CourseController');
 
 
 

@@ -73,21 +73,17 @@
 
 <script>
     export default {
-        props: ['dahsboard_url'],
+        props: ['countries_from_blade' , 'dahsboard_url'],
         data() {
             return {
                 selected: "",
                 selected_city: "",
-                countries: {},
+                countries: this.countries_from_blade,
                 cities: {},
                 newCity: "",
             };
         },
         methods: {
-            getCountry() {
-                axios.get(this.dahsboard_url+"/country").then((response) => (this.countries = response.data.country));
-                return this.countries;
-            },
             getcities: function () {
                 var country_id = this.selected;
                 //  alert( country_id);
@@ -129,10 +125,6 @@
                 this.newCity = "";
                 this.selected_city = "";
             },
-        },
-        created() {
-            this.getCountry();
-            //   console.log(this.getCountry());
         },
     };
 </script>

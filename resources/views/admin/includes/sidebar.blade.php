@@ -43,10 +43,10 @@
                 </a>
                 <ul class="menu-content">
                     <li class="{{ $page_name == 'courses' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('dashboard.courses')}}" data-i18n="nav.navbars.nav_light">الدورات</a>
+                        <a class="menu-item" href="{{route('courses.index')}}" data-i18n="nav.navbars.nav_light">الدورات</a>
                     </li>
                     <li class="{{ $page_name == 'add-course' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('dashboard.add-course')}}" data-i18n="nav.navbars.nav_dark">اضافة دورة جديدة</a>
+                        <a class="menu-item" href="{{route('courses.create')}}" data-i18n="nav.navbars.nav_dark">اضافة دورة جديدة</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/courses/archives.php?page=courses" data-i18n="nav.navbars.nav_semi">الارشيف</a>
@@ -91,16 +91,16 @@
                 </a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="{{url('/dashboard/getcountries')}}" data-i18n="nav.navbars.nav_light">كل الدول</a>
+                        <a class="menu-item" href="{{route('countries.index')}}" data-i18n="nav.navbars.nav_light">كل الدول</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="{{url('/dashboard/addcountry')}}" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
+                        <a class="menu-item" href="{{route('countries.create')}}" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="{{route("city.index")}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>
+                        <a class="menu-item" href="{{route("cities.index")}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>
                     </li> 
                      <li>
-                        <a class="menu-item" href="{{route('city.create')}}" data-i18n="nav.navbars.nav_semi">اضافة مدينه جديده </a>
+                        <a class="menu-item" href="{{route('cities.create')}}" data-i18n="nav.navbars.nav_semi">اضافة مدينه جديده </a>
                     </li>
                 </ul>
             </li>

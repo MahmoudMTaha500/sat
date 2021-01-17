@@ -13,15 +13,18 @@ class CityController extends Controller
     public function index()
     {
         $cities = City::get();
-        return view("admin.countryandcity.city.index", ['cities' => $cities]);
+        $department_name = 'country';
+        $page_name = 'getcountries';
+        return view("admin.cities.index", compact('cities', 'department_name', 'page_name'));
     }
 
     public function create(Request $request)
     {
         $countries = Country::get();
-        return view("admin.countryandcity.city.create", ['countrties' => $countries]);
+        $department_name = 'country';
+        $page_name = 'addcountry';
+        return view("admin.cities.create", compact('countries' , 'department_name' , 'page_name'));
     }
-
 
     public function store(Request $request)
     {
@@ -37,23 +40,20 @@ class CityController extends Controller
 
     }
 
- 
     public function show(City $city)
     {
         //
     }
 
- 
     public function edit(City $city)
     {
         $countries = Country::get();
-
         $cities = City::find($city->id);
-        // dd($city);
-        return view("admin.countryandcity.city.edit", ['cities' => $cities, 'countries' => $countries]);
+        $department_name = 'country';
+        $page_name = 'addcountry';
+        return view("admin.cities.edit", compact('countries' , 'cities' , 'department_name' , 'page_name'));
     }
 
-   
     public function update(Request $request, city $city)
     {
         $city = City::find($city->id);
@@ -65,7 +65,6 @@ class CityController extends Controller
         return back()->with("success", "تم تعديل المدينه");
         // dd($request->all());
     }
-
 
     public function destroy(city $city)
     {

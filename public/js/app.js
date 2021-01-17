@@ -2029,27 +2029,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['dahsboard_url'],
+  props: ['countries_from_blade', 'dahsboard_url'],
   data: function data() {
     return {
       selected: "",
       selected_city: "",
-      countries: {},
+      countries: this.countries_from_blade,
       cities: {},
       newCity: ""
     };
   },
   methods: {
-    getCountry: function getCountry() {
-      var _this = this;
-
-      axios.get(this.dahsboard_url + "/country").then(function (response) {
-        return _this.countries = response.data.country;
-      });
-      return this.countries;
-    },
     getcities: function getcities() {
-      var _this2 = this;
+      var _this = this;
 
       var country_id = this.selected; //  alert( country_id);
 
@@ -2058,7 +2050,7 @@ __webpack_require__.r(__webpack_exports__);
           countryID: country_id
         }
       }).then(function (response) {
-        return _this2.cities = response.data.cities;
+        return _this.cities = response.data.cities;
       });
     },
     get_id_for_cities: function get_id_for_cities() {
@@ -2070,7 +2062,7 @@ __webpack_require__.r(__webpack_exports__);
       //  ).then(response => this.cities = response.data.cities)
     },
     addCity: function addCity() {
-      var _this3 = this;
+      var _this2 = this;
 
       var country_id = this.get_id_for_cities();
       var city = this.newCity;
@@ -2088,9 +2080,9 @@ __webpack_require__.r(__webpack_exports__);
 
           alert(response.data.success);
 
-          _this3.getcities();
+          _this2.getcities();
 
-          _this3.resetForm();
+          _this2.resetForm();
         });
       } else {
         alert("برجاء اكمل البيانات ");
@@ -2100,9 +2092,6 @@ __webpack_require__.r(__webpack_exports__);
       this.newCity = "";
       this.selected_city = "";
     }
-  },
-  created: function created() {
-    this.getCountry(); //   console.log(this.getCountry());
   }
 });
 

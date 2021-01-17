@@ -12,33 +12,23 @@ use function GuzzleHttp\Promise\inspect;
 
 class InstituteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+
         return view('admin.institutes.index');
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create(Request $request)
     {
-        return view('admin.institutes.create' , compact('test'));
+        $department_name='institutes';
+        $page_name='add-institute';
+        $countries = Country::all();
+        return view('admin.institutes.create' , compact('department_name' , 'page_name' , 'countries'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // dd($request->all());
@@ -66,46 +56,24 @@ class InstituteController extends Controller
            
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\institute  $institute
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Institute $institute)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\institute  $institute
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Institute $institute)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\institute  $institute
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Institute $institute)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\institute  $institute
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function destroy(Institute $institute)
     {
         //

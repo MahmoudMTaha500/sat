@@ -1,93 +1,67 @@
 <?php
 
 namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Controllers\Controller;
 use App\Models\Country;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-// use Illuminate\Support\Facades\Route;
-use Symfony\Component\HttpFoundation\Response;
 
 class countryController extends Controller
 {
-    
-public function index(Request $request){
 
-    $country =  Country::get() ;
+    public function index(Request $request)
+    {
+        $country = Country::get();
+        return view("admin.countries.index", ['country' => $country]);
+    }
 
-    // $country_id  =  $country->id;
-    // $countryname  =  $country->name_ar;
-    // echo "<pre>"; dd($country); echo"</pre>";
-    return response()->json(['country'=>$country]);
-    
-}
+    public function show(Request $request)
+    {
 
-public function show(Request $request){
+    }
 
-    $country =  Country::get() ;
+    public function create(Request $request)
+    {
 
-    // $country_id  =  $country->id;
-    // $countryname  =  $country->name_ar;
-    // echo "<pre>"; dd($country); echo"</pre>";
-    return view("admin.countryandcity.index", ['country'=>$country]);
-    
-}
+        return view("admin.countries.create");
 
-public function create(Request $request){
+    }
+    public function store(Request $request)
+    {
+        $name_ar = $request->name_ar;
+        $country = country::create(['name_ar' => $name_ar]);
+        return back()->with('success', 'تم اضافة الدولة!');
 
-    // $name_ar = $request->name_ar;
+    }
 
-    // $country =  country::create(['name'=>$name_ar]) ;
+    public function edit($id)
+    {
 
+        $country = Country::find($id);
+        return view("admin.countries.edit", ['country' => $country]);
 
-    // $country_id  =  $country->id;
-    // $countryname  =  $country->name_ar;
-    // echo "<pre>"; dd($country); echo"</pre>";
-    return view("admin.countryandcity.create");
-    
-}
-public function store(Request $request){
-    // dd($request->all());
-    $name_ar = $request->name_ar;
+    }
 
-    $country =  country::create(['name_ar'=>$name_ar]) ;
+    public function update(Request $request)
+    {
 
-    return back()->with('success','تم اضافة الدولة!');
-    // $country_id  =  $country->id;
-    // $countryname  =  $country->name_ar;
-    // echo "<pre>"; dd($country); echo"</pre>";
-    
-}
+        $countryname = $request->name_ar;
+        $id = $request->id;
+        $country = Country::find($id);
 
-public function edit($id){
+        $country->name_ar = $countryname;
+        $country->save();
+        return back()->with('success', 'تم تعديل  الدولة!');
 
-    $country = Country::find($id);
-    // dd($country);
-    return view("admin.countryandcity.edit",['country'=>$country]);
+    }
 
-}
+    public function delete($id)
+    {
 
-public function update(Request $request){
+        $country = Country::find($id);
+        $country->delete();
+        return redirect("/dashboard/getcountries");
 
-    $countryname = $request->name_ar;
-    $id= $request->id;
-    $country = Country::find($id);
-
-    $country->name_ar=$countryname;
-    $country->save();
-    return back()->with('success','تم تعديل  الدولة!');
-
-}
-
-public function delete($id){
-
-    $country = Country::find($id);
-    $country->delete();
-    // dd($country);
-    return redirect("/dashboard/getcountries");
-
-}
-
-
+    }
 
 }

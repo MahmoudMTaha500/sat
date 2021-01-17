@@ -1,6 +1,4 @@
 @extends('admin.app') @section('admin.content')
-{{$department_name='institutes'}}
-{{$page_name='add-institute'}}
 <div class="app-content content vue-app">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -11,7 +9,7 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a></li>
                             <li class="breadcrumb-item"><a href="{{route('institute.index')}}"> المعاهد</a></li>
-                            <li class="breadcrumb-item active">اضافة معهد {{$test}}</li>
+                            <li class="breadcrumb-item active">اضافة معهد</li>
                         </ol>
                     </div>
                 </div>
@@ -56,7 +54,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <country-city-component :dahsboard_url="{{ json_encode(url('/dashboard')) }}" ></country-city-component>
+                                        <country-city-component 
+                                            :countries_from_blade="{{ json_encode($countries) }}"
+                                            :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
+                                        >
+                                        </country-city-component>
                                         <div class="row">
                                             <div class="form-group col-12 mb-2 contact-repeater">
                                                 <label>الاسئلة الخاصة بالمعهد</label>
