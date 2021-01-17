@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class country extends Model
 {
     protected $table = "countries";
-    protected $fillabel = ['name_ar'];
+    protected $fillable  = ['name_ar'];
 }

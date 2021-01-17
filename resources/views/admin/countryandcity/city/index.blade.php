@@ -12,7 +12,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a>
                                 </li>
-                                <li class="breadcrumb-item active">كل الدول
+                                <li class="breadcrumb-item active">كل المدن
                                 </li>
                             </ol>
                         </div>
@@ -20,19 +20,30 @@
                 </div>
             </div>
             <div class="content-body">
-
+                @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>    
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
+                @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>    
+                    <strong>{{ $message }}</strong>
+                </div>
+                @endif
                 <!-- Recent Transactions -->
                 <div class="row">
                     <div id="recent-transactions" class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title"> الدول ({{count($country)}})</h4>
+                                <h4 class="card-title"> المدن ({{count($cities)}})</h4>
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
                                         <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
-                                                href="{{url('/dashboard/addcountry')}}"> <i class="ft-plus ft-md"></i> اضافة دوله
-                                                جديد</a></li>
+                                                href="{{route('city.create')}}"> <i class="ft-plus ft-md"></i> اضافة مدينه
+                                                جديده</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -41,19 +52,26 @@
                                     <table id="recent-orders" class="table table-hover table-xl mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="border-top-0">اسم الدوله</th>
+                                                <th class="border-top-0"> الدوله</th>
+                                                <th class="border-top-0"> المدينه</th>
                                              
                                                 <th class="border-top-0">اكشن</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($country as $coun )
+                                        @foreach($cities as $city )
                                             <tr>
-                                                <td> {{$coun->name_ar}}</td>
+                                                <td> {{\App\country::find($city->country_id)->name_ar}}</td>
+                                                <td> {{$city->name_ar}}</td>
                                               
                                                 <td class="text-truncate">
-                                                        <a href="{{url('dashboard/updateCountry/'.$coun->id)}}"><i class="la la-pencil"></i></a>
-                                                        <a    onclick="return confirm('Are you sure?')"  href="{{url('dashboard/deleteCountry/'.$coun->id)}}" ><i class="la la-trash"></i></a>
+                                                        <a href="{{route('city.edit' , $city->id)}}"><i class="la la-pencil"></i></a>
+                                                        <form action="{{route('city.destroy' , $city->id)}}" method="POST">
+                                                            @csrf
+                                                            @method("DELETE")
+                                                            <button  class="btn btn-danger btn-sm"   onclick="return confirm('Are you sure?')"  ><i class="la la-trash"></i></button> 
+ 
+                                                        </form>
                                                     
                                                     
                                                 </td>

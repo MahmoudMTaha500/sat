@@ -2027,20 +2027,78 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['dahsboard_url'],
   data: function data() {
     return {
-      countries: {}
+      selected: "",
+      selected_city: "",
+      countries: {},
+      cities: {},
+      newCity: ""
     };
   },
   methods: {
     getCountry: function getCountry() {
       var _this = this;
 
-      axios.get("country").then(function (response) {
+      axios.get(this.dahsboard_url + "/country").then(function (response) {
         return _this.countries = response.data.country;
       });
       return this.countries;
+    },
+    getcities: function getcities() {
+      var _this2 = this;
+
+      var country_id = this.selected; //  alert( country_id);
+
+      axios.get(this.dahsboard_url + "/getcities", {
+        params: {
+          countryID: country_id
+        }
+      }).then(function (response) {
+        return _this2.cities = response.data.cities;
+      });
+    },
+    get_id_for_cities: function get_id_for_cities() {
+      return this.selected_city; //  axios.get("getcities" , {
+      //      params:{
+      //          countryID: country_id
+      //      }
+      //  }
+      //  ).then(response => this.cities = response.data.cities)
+    },
+    addCity: function addCity() {
+      var _this3 = this;
+
+      var country_id = this.get_id_for_cities();
+      var city = this.newCity;
+
+      if (city && country_id) {
+        axios.post(this.dahsboard_url + "/addCity", {
+          name_ar: city,
+          country_id: country_id
+        }, {
+          headers: {
+            "X-CSRFToken": "{{ csrf_token }}"
+          }
+        }).then(function (response) {
+          console.log(response.data.city); // $('#success').html(response.data.message)
+
+          alert(response.data.success);
+
+          _this3.getcities();
+
+          _this3.resetForm();
+        });
+      } else {
+        alert("برجاء اكمل البيانات ");
+      }
+    },
+    resetForm: function resetForm() {
+      this.newCity = "";
+      this.selected_city = "";
     }
   },
   created: function created() {
@@ -37800,13 +37858,41 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-md-6" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "country" } }, [_vm._v("الدولة")]),
+        _c("label", { attrs: { for: "country" } }, [_vm._v("  الدولة")]),
         _vm._v(" "),
         _c(
           "select",
           {
-            staticClass: "select2 form-control text-left",
-            attrs: { id: "country" }
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selected,
+                expression: "selected"
+              }
+            ],
+            staticClass: "form-control text-left",
+            attrs: { id: "country", name: "country_id", required: "" },
+            on: {
+              change: [
+                function($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function(o) {
+                      return o.selected
+                    })
+                    .map(function(o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.selected = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function($event) {
+                  return _vm.getcities()
+                }
+              ]
+            }
           },
           [
             _c("option", { attrs: { value: "" } }, [_vm._v("حدد الدولة")]),
@@ -37828,7 +37914,40 @@ var render = function() {
       _c("div", { staticClass: "form-group" }, [
         _c("label", { attrs: { for: "city" } }, [_vm._v("المدينة ")]),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "d-flex input-group" }, [
+          _c(
+            "span",
+            {
+              staticClass: "input-group-append w-100",
+              attrs: { id: "button-addon2" }
+            },
+            [
+              _c(
+                "select",
+                {
+                  staticClass: "select2 form-control vue-app",
+                  attrs: { id: "city", name: "city_id", required: "" }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }, [
+                    _vm._v("حدد المدينة")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.cities, function(city) {
+                    return _c(
+                      "option",
+                      { key: city.id, domProps: { value: city.id } },
+                      [_vm._v(" " + _vm._s(city.name_ar))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _vm._m(0)
+            ]
+          )
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -37846,57 +37965,133 @@ var render = function() {
               "div",
               { staticClass: "modal-dialog", attrs: { role: "document" } },
               [
-                _c("div", { staticClass: "modal-content" }, [
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-12" }, [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", [_vm._v("اختر الدولة")]),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            { staticClass: "select2 form-control text-left" },
-                            [
-                              _c("option", { attrs: { value: "" } }, [
-                                _vm._v("حدد الدولة")
-                              ]),
-                              _vm._v(" "),
-                              _vm._l(_vm.countries, function(country) {
-                                return _c(
-                                  "option",
+                _c("form", { attrs: { action: "" } }, [
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-body" }, [
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("اختر الدولة")]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
                                   {
-                                    key: country.id,
-                                    domProps: { value: country.id }
-                                  },
-                                  [_vm._v(" " + _vm._s(country.name_ar) + " ")]
-                                )
-                              })
-                            ],
-                            2
-                          )
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selected_city,
+                                    expression: "selected_city"
+                                  }
+                                ],
+                                staticClass: "form-control text-left",
+                                on: {
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.selected_city = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    },
+                                    function($event) {
+                                      return _vm.get_id_for_cities()
+                                    }
+                                  ]
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("حدد الدولة")
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(_vm.countries, function(country) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: country.id,
+                                      domProps: { value: country.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        " " + _vm._s(country.name_ar) + " "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-12" }, [
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("المدينة")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.newCity,
+                                  expression: "newCity"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "ادخل اسم المدينة"
+                              },
+                              domProps: { value: _vm.newCity },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.newCity = $event.target.value
+                                }
+                              }
+                            })
+                          ])
                         ])
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(2)
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success w-100",
+                          attrs: {
+                            type: "button",
+                            "data-dismiss": "modal",
+                            "aria-label": "Close"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.addCity()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                                    انشاء\n                                "
+                          )
+                        ]
+                      )
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success w-100",
-                        attrs: { type: "button" },
-                        on: { click: _vm.axiosTest }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                انشاء\n                            "
-                        )
-                      ]
-                    )
                   ])
                 ])
               ]
@@ -37912,38 +38107,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "d-flex input-group" }, [
-      _c(
-        "span",
-        {
-          staticClass: "input-group-append w-100",
-          attrs: { id: "button-addon2" }
-        },
-        [
-          _c(
-            "select",
-            {
-              staticClass: "select2 form-control vue-app",
-              attrs: { id: "city" }
-            },
-            [_c("option", { attrs: { value: "" } }, [_vm._v("حدد المدينة")])]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-sm",
-              attrs: {
-                type: "button",
-                "data-toggle": "modal",
-                "data-target": "#create-new-city"
-              }
-            },
-            [_c("i", { staticClass: "ft-plus" })]
-          )
-        ]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-success btn-sm",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#create-new-city"
+        }
+      },
+      [_c("i", { staticClass: "ft-plus" })]
+    )
   },
   function() {
     var _vm = this
@@ -37955,7 +38130,7 @@ var staticRenderFns = [
         { staticClass: "modal-title", attrs: { id: "create-new-city-modal" } },
         [
           _vm._v(
-            "\n                                انشاء مدينة جديدة\n                            "
+            "\n                                    انشاء مدينة جديدة\n                                "
           )
         ]
       ),
@@ -37972,21 +38147,6 @@ var staticRenderFns = [
         },
         [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", [_vm._v("المدينة")]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "ادخل اسم المدينة" }
-        })
-      ])
     ])
   }
 ]

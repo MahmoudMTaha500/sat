@@ -1,4 +1,6 @@
 @extends('admin.app') @section('admin.content')
+{{$department_name='institutes'}}
+{{$page_name='add-institute'}}
 <div class="app-content content vue-app">
     <div class="content-wrapper">
         <div class="content-header row">
@@ -8,14 +10,26 @@
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a></li>
-                            <li class="breadcrumb-item"><a href="{{route('dashboard.institutes')}}"> المعاهد</a></li>
-                            <li class="breadcrumb-item active">اضافة معهد</li>
+                            <li class="breadcrumb-item"><a href="{{route('institute.index')}}"> المعاهد</a></li>
+                            <li class="breadcrumb-item active">اضافة معهد {{$test}}</li>
                         </ol>
                     </div>
                 </div>
             </div>
         </div>
         <div class="content-body">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>    
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
+            @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>    
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             <div class="row justify-content-md-center">
                 <div class="col-lg-10">
                     <div class="card" style="zoom: 1;">
@@ -25,30 +39,31 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form">
+                                <form class="form" action="{{route('institute.store')}}" method="POST">
+                                    @csrf
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name">اسم المعهد</label>
-                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar" />
+                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar"  required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-about">نبذة عن المعهد</label>
-                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar"></textarea>
+                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" required></textarea>
                                                 </div>
                                             </div>
                                         </div>
-                                        <country-city-component></country-city-component>
+                                        <country-city-component :dahsboard_url="{{ json_encode(url('/dashboard')) }}" ></country-city-component>
                                         <div class="row">
                                             <div class="form-group col-12 mb-2 contact-repeater">
                                                 <label>الاسئلة الخاصة بالمعهد</label>
-                                                <div data-repeater-list="repeater-group">
+                                                <div data-repeater-list="questionList">
                                                     <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="السؤال" class="form-control"/>
-                                                        <input type="tel" placeholder="الاجابة" class="form-control"/>
+                                                        <input type="tel" placeholder="السؤال" class="form-control" name="questions" required/>
+                                                        <input type="tel" placeholder="الاجابة" class="form-control"  name="answer" required/>
                                                         <span class="input-group-append" id="button-addon2">
                                                             <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                         </span>
