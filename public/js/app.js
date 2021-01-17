@@ -2120,6 +2120,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      posts: {}
+    };
+  },
+  created: function created() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*\
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -38031,6 +38118,222 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c&":
+/*!********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c& ***!
+  \********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "card" }, [
+          _c("div", { staticClass: "card-header" }, [
+            _c("h4", { staticClass: "card-title" }, [_vm._v("المعاهد (15)")]),
+            _vm._v(" "),
+            _c("a", { staticClass: "heading-elements-toggle" }, [
+              _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "heading-elements" }, [
+              _c("ul", { staticClass: "list-inline mb-0" }, [
+                _c("li", [
+                  _c(
+                    "a",
+                    {
+                      staticClass:
+                        "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                      attrs: { href: "" }
+                    },
+                    [
+                      _c("i", { staticClass: "ft-plus ft-md" }),
+                      _vm._v(" اضافة معهد جديد")
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "card-content" }, [
+            _c("div", { staticClass: "table-responsive" }, [
+              _c(
+                "table",
+                {
+                  staticClass: "table table-hover table-xl mb-0",
+                  attrs: { id: "recent-orders" }
+                },
+                [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("اسم المعهد")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("الدولة")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("المدينة")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("عدد الكورسات")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("التقييم")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("التقييم بواسطة")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("التعليقات")
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { staticClass: "border-top-0" }, [
+                        _vm._v("اكشن")
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v("كابلان")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v("المنيا")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v("مانشيستر")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v("5 كورسات")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c("div", {
+                          attrs: { id: "read-only-stars", "data-score": "1" }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(
+                          "\n                                            سات\n                                        "
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c(
+                          "a",
+                          { attrs: { href: "/sat/institutes/comments.php" } },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-success round",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("حالي (15)")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          { attrs: { href: "/sat/institutes/comments.php" } },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-info round",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("جديد (10)")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-toolbar btn-toolbar-primary m-0",
+                            attrs: {
+                              "data-toolbar": "transport-options-o",
+                              "data-toolbar-style": "primary-o"
+                            }
+                          },
+                          [_c("i", { staticClass: "ft-settings" })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "toolbar-icons hidden",
+                            attrs: { id: "transport-options-o" }
+                          },
+                          [
+                            _c("a", { attrs: { href: "dasdasd" } }, [
+                              _c("i", { staticClass: "la la-eye" })
+                            ]),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c("i", { staticClass: "la la-pencil" })
+                            ]),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c("i", { staticClass: "la la-plus" })
+                            ]),
+                            _vm._v(" "),
+                            _c("a", { attrs: { href: "#" } }, [
+                              _c("i", { staticClass: "la la-trash" })
+                            ])
+                          ]
+                        )
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js":
 /*!********************************************************************!*\
   !*** ./node_modules/vue-loader/lib/runtime/componentNormalizer.js ***!
@@ -50204,6 +50507,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CountryCityComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CountryCityComponent */ "./resources/js/components/CountryCityComponent.vue");
 /* harmony import */ var _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/city/CitiesComponent */ "./resources/js/components/city/CitiesComponent.vue");
+/* harmony import */ var _components_institute_institutesComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/institute/institutesComponent */ "./resources/js/components/institute/institutesComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -50214,11 +50518,13 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
+
 var app = new Vue({
   el: '#sat_app_vue',
   components: {
     CountryCityComponent: _components_CountryCityComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CitiesComponent: _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CitiesComponent: _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    institutesComponent: _components_institute_institutesComponent__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 
@@ -50402,6 +50708,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitiesComponent_vue_vue_type_template_id_502b4fbb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CitiesComponent_vue_vue_type_template_id_502b4fbb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/institute/institutesComponent.vue":
+/*!*******************************************************************!*\
+  !*** ./resources/js/components/institute/institutesComponent.vue ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _institutesComponent_vue_vue_type_template_id_646b9c2c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./institutesComponent.vue?vue&type=template&id=646b9c2c& */ "./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c&");
+/* harmony import */ var _institutesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./institutesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _institutesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _institutesComponent_vue_vue_type_template_id_646b9c2c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _institutesComponent_vue_vue_type_template_id_646b9c2c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/institute/institutesComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_institutesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./institutesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_institutesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c& ***!
+  \**************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_institutesComponent_vue_vue_type_template_id_646b9c2c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./institutesComponent.vue?vue&type=template&id=646b9c2c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_institutesComponent_vue_vue_type_template_id_646b9c2c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_institutesComponent_vue_vue_type_template_id_646b9c2c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
