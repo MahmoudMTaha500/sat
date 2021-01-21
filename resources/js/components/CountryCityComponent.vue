@@ -3,9 +3,9 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="country">  الدولة</label>
-                <select v-model="selected" v-on:change="getcities()" id="country" class="form-control text-left" name="country_id" required>
+                <select v-model="selected" v-on:change="getcities()"         id="country" class="form-control text-left" name="country_id" required>
                     <option value="">حدد الدولة</option>
-                    <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
+                    <option v-for="country in countries" :key="country.id" :value="country.id"     > {{country.name_ar}} </option>
                 </select>
             </div>
         </div>
@@ -14,8 +14,9 @@
                 <label for="city">المدينة </label>
                 <div class="d-flex input-group">
                     <span class="input-group-append w-100" id="button-addon2">
-                        <select id="city" class="select2 form-control vue-app" name="city_id" required>
-                            <option value="">حدد المدينة</option>
+                        <!-- select2 -->
+                        <select v-model="citySelectForUpdate" id="city"  class=" select2 form-control vue-app" name="city_id" required>
+                            <option value="" >حدد المدينة</option>
                             <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                         </select>
                         <button type="button" data-toggle="modal" data-target="#create-new-city" class="btn btn-success btn-sm">
@@ -73,7 +74,7 @@
 
 <script>
     export default {
-        props: ['countries_from_blade' , 'dahsboard_url'],
+        props: ['countries_from_blade' , 'dahsboard_url','country_id2','city_id'],
         data() {
             return {
                 selected: "",
@@ -81,6 +82,8 @@
                 countries: this.countries_from_blade,
                 cities: {},
                 newCity: "",
+                citySelectForUpdate:'',
+               
             };
         },
         methods: {
@@ -125,6 +128,20 @@
                 this.newCity = "";
                 this.selected_city = "";
             },
+          returnCountryCity: function(){
+              if(this.country_id2){
+                  this.selected = this.country_id2; 
+                   this.citySelectForUpdate = this.city_id;
+                    this.getcities();
+
+              }else{
+
+              }
+             
+          }
+        },
+        beforeMount(){
+       this.returnCountryCity();
         },
     };
 </script>

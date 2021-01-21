@@ -32,13 +32,22 @@ class CityController extends Controller
 
         $country_id = $request->country_id;
         $city_name = $request->name_ar;
-        $city = City::create([
-            'country_id' => $country_id,
-            'name_ar' => $city_name,
-        ]);
-        return back()->with("success", 'تم اضافه المدينه');
+        $get_city = City::where(['name_ar' => "$city_name","country_id"=>$country_id])->first();
+        if ($get_city == array()){
 
-    }
+            $city = City::create([
+                'country_id' => $country_id,
+                'name_ar' => $city_name,
+            ]);
+            return back()->with("success", 'تم اضافه المدينه');
+    
+    
+
+        } else{
+            return back()->with("error", 'هذه المدينه موجوده بالفعل');
+
+        }
+            }
 
     public function show(City $city)
     {
@@ -56,13 +65,28 @@ class CityController extends Controller
 
     public function update(Request $request, city $city)
     {
-        $city = City::find($city->id);
         $country_id = $request->country_id;
         $city_name = $request->name_ar;
-        $city->country_id = $country_id;
-        $city->name_ar = $city_name;
-        $city->save();
-        return back()->with("success", "تم تعديل المدينه");
+
+        $get_city = City::where(['name_ar' => "$city_name","country_id"=>$country_id])->first();
+        if ($get_city == array()){
+
+            $city = City::find($city->id);
+      
+            $city->country_id = $country_id;
+            $city->name_ar = $city_name;
+            $city->save();
+            return back()->with("success", "تم تعديل المدينه");
+    
+    
+
+        } else{
+            return back()->with("error", 'هذه المدينه موجوده بالفعل');
+
+        }
+
+       
+
         // dd($request->all());
     }
 

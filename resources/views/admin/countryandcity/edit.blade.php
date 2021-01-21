@@ -40,7 +40,7 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form"  action="{{url('dashboard/updateCountry')}}" method="POST">
+                                <form class="form"  action="{{route('countries.update')}}" method="POST">
                                     @csrf
                                     <input type="hidden"  name="id"value="{{$country->id}}">
                                     <div class="form-body">

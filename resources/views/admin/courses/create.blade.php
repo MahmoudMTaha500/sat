@@ -31,28 +31,32 @@
                 <div class="col-lg-10">
                     <div class="card" style="zoom: 1;">
                         <div class="card-header">
-                            <h4 class="card-title" id="bordered-layout-card-center">اضافة معهد جديد</h4>
+                            <h4 class="card-title" id="bordered-layout-card-center">اضافة دورة جديد</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form">
+                                <form class="form" method="POST" action="{{route('courses.store')}}">
+                                    @csrf
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">اسم الدورة</label>
-                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل اسم الدورة" name="fname" />
+                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل اسم الدورة" name="name_ar" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left">
-                                                        <option value="">كابلان</option>
-                                                        <option value="1">ام اي تي</option>
-                                                        <option value="3">هارفارد</option>
-                                                        <option value="6">اي تي اي</option>
+                                                    <select class="select2 form-control text-left" name="institute_id" required>
+                                                        <option value=""  >اختر المعهد</option>
+
+                                                        @foreach($institutes as $institute)
+
+                                                        <option value="{{$institute->id}}">{{$institute->name_ar}}</option>
+
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -61,99 +65,75 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">الحد الأدنى للعمر </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="fname" />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="min_age" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput2">يبدأ الكورس كل</label>
-                                                    <select class="form-control text-left">
-                                                        <option value="">سبت</option>
-                                                        <option value="1">احد</option>
-                                                        <option value="3">اثنين</option>
-                                                        <option value="6">ثلاثاء</option>
-                                                        <option value="6">اربع</option>
-                                                        <option value="6">خميس</option>
-                                                        <option value="6">جمعة</option>
-                                                    </select>
+                                                    {{-- <startdate-component></startdate-component>
+                                                         --}}
+
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectinput1">العدد الأقصى للطلاب في الصف </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل العدد الأقصى للطلاب" name="fname" />
-                                                </div>
-                                            </div>
+                                          
+
+
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">وقت الدراسة</label>
-                                                    <select class="form-control text-left">
-                                                        <option value="">صباحي</option>
-                                                        <option value="1">مسائي</option>
+                                                    <select class="form-control text-left" name="study_period" required>
+                                                        <option value=" صباحي">صباحي</option>
+                                                        <option value="مسائي">مسائي</option>
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">درس/الأسبوع </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="fname" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectinput1">ساعات/أسبوع </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="fname" />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" required />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
+                                            
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput1">متوسط عدد الطلاب في الصف </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل متوسط عدد الطلاب" name="fname" />
+                                                    <label for="projectinput1">ساعات/أسبوع </label>
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  required/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المستوى المطلوب</label>
-                                                    <select class="form-control text-left">
-                                                        <option value="">مبتدئ</option>
-                                                        <option value="1">متوسط</option>
-                                                        <option value="1">متقدم</option>
+                                                    <select class="form-control text-left " name="required_level" required>
+                                                        <option value=" مبتدئ ">مبتدئ</option>
+                                                        <option value=  "     متوسط "   >متوسط</option>
+                                                        <option value="  متقدم  ">متقدم</option>
                                                     </select>
                                                 </div>
+                                        </div>
+                                        <div class="row">
+                                          
+                                          
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc"></textarea>
+                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" required></textarea>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectinput4">صورة الدورة</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" />
-                                                        <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <img class="w-100" src="../adminTheme-master/html/rtl/vertical-content-menu-template/../../../app-assets/images/crop-pic.jpg" alt="" />
-                                                    </div>
-                                                </div>
-                                            </div>
+                                          
                                         </div>
                                         <div class="form-group col-12 mb-2 contact-repeater">
                                             <label for="projectinput3">سعر الكورس</label>
-                                            <div data-repeater-list="repeater-group">
+                                            <div data-repeater-list="coures_price">
                                                 <div class="input-group mb-1" data-repeater-item>
-                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control" id="example-tel-input" />
-                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control" id="example-tel-input" />
+                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control" id="example-tel-input"  name="num_of_weeks" required />
+                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control" id="example-tel-input" name="preice_per_week"  required />
                                                     <span class="input-group-append" id="button-addon2">
                                                         <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                     </span>

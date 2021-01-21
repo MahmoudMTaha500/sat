@@ -37,7 +37,7 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form" action="{{route('institute.store')}}" method="POST">
+                                <form class="form" action="{{route('institute.store')}}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                     <div class="form-body">
                                         <div class="row">
@@ -80,7 +80,7 @@
                                                 <div class="form-group">
                                                     <label for="projectinput4">لوجو المعهد</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" />
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01"  name="logo"/>
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-1">
@@ -92,7 +92,7 @@
                                                 <div class="form-group image-box-input">
                                                     <label for="projectinput4">صورة المعهد</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input image-input" id="inputGroupFile01" />
+                                                        <input type="file" class="custom-file-input image-input" id="inputGroupFile01" name="panner" />
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-1 image-box">
