@@ -12,7 +12,7 @@ class InstituteQuestionSeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 0; $x < 60; $x++) {
+        for ($x = 1; $x <= 60; $x++) {
             InstituteQuestion::create([
                 "institute_id" => rand(1,30),
                 "question" => 'quetion'.$x,

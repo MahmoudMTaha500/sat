@@ -34,47 +34,18 @@ Route::get('/dashboard', function () {
     return view('/admin/dashboard' , compact('department_name' , 'page_name'));
 })->name('dashboard');
 
-
-
-Route::group(['prefix' => 'dashboard'], function() {
-
-    // Institutes Department
-    // Route::get('/institutes', function () {
-    //     $department_name='institutes';
-    //     $page_name='institutes';
-    //     return view('/admin/institutes.index' , compact('department_name' , 'page_name'));
-    // })->name('dashboard.institutes');
-
-
-   
-
-
-
-
-    // // Courses Department
-    // Route::get('/courses', function () {
-    //     $department_name='courses';
-    //     $page_name='courses';
-    //     return view('/admin/courses.index' , compact('department_name' , 'page_name'));
-    // })->name('dashboard.courses');
-
-
-    // Route::get('/add-course', function () {
-    //     $department_name='courses';
-    //     $page_name='add-course';
-    //     return view('/admin/institutes.create' , compact('department_name' , 'page_name'));
-    // })->name('dashboard.add-course');
-
-
-});
-
-
-
-
-// website routes
-// ===================================================================================================================
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::get('/visa-archive', function () {
+    $department_name='dashboard';
+    $page_name='dashboard';
+    return view('admin.visa.archives' , compact('department_name' , 'page_name'));
+})->name('dashboard');
+
+
+Route::get('/edit-ins', function(){
+    return view('admin.institutes.edit');
+});

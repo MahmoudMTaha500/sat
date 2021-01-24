@@ -11,7 +11,7 @@ class CoursePriceSeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 0; $x < 200; $x++) {
+        for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
                 "weeks" => rand(1,10),
                 "price" => 2000,

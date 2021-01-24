@@ -1,4 +1,4 @@
-<div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true">
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class="{{ $page_name == 'dashboard' ? 'active' : ''}}">
@@ -13,17 +13,17 @@
                     <span class="menu-title" data-i18n="nav.animation.main">الموقع</span>
                 </a>
             </li>
-            <li class="nav-item {{ $department_name == 'institutes' ? 'open' : '' }}"> 
+            <li class="nav-item {{ $department_name == 'institutes' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">قسم المعاهد</span>
                 </a>
                 <ul class="menu-content">
                     <li class="{{ $page_name == 'institute' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('institute.index')}}" data-i18n="nav.navbars.nav_light">  المعاهد</a>
+                        <a class="menu-item" href="{{route('institute.index')}}" data-i18n="nav.navbars.nav_light"> المعاهد</a>
                     </li>
                     <li class="{{ $page_name == 'add-institute' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('institute.create')}}"  data-i18n="nav.navbars.nav_dark">اضافة معهد  جديد</a>
+                        <a class="menu-item" href="{{route('institute.create')}}" data-i18n="nav.navbars.nav_dark">اضافة معهد جديد</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/institutes/comments.php?page=institutes" data-i18n="nav.navbars.nav_dark">التعليقات</a>
@@ -36,7 +36,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item {{ $department_name == 'courses' ? 'open' : '' }}"> 
+            <li class="nav-item {{ $department_name == 'courses' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">قسم الدورات</span>
@@ -53,7 +53,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item"><a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم العروض</span></a>
+            <li class="nav-item">
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم العروض</span></a>
                 <ul class="menu-content">
                     <li>
                         <a class="menu-item" href="navbar-light.html" data-i18n="nav.navbars.nav_light">كل العروض</a>
@@ -82,8 +83,8 @@
                         <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
-            </li>  
-            
+            </li>
+
             <li class="nav-item {{ $department_name == 'country' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
@@ -97,9 +98,9 @@
                         <a class="menu-item" href="{{route('countries.create')}}" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="{{route("cities.index")}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>
-                    </li> 
-                     <li>
+                        <a class="menu-item" href="{{route('cities.index')}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>
+                    </li>
+                    <li>
                         <a class="menu-item" href="{{route('cities.create')}}" data-i18n="nav.navbars.nav_semi">اضافة مدينه جديده </a>
                     </li>
                 </ul>
@@ -118,7 +119,7 @@
                         <a class="menu-item" href="/sat/blogs/create.php?page=blogs" data-i18n="nav.navbars.nav_dark">اضافة مقالة جديدة</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="/sat/blogs/comments.php?page=blogs"  data-i18n="nav.navbars.nav_dark">التعليقات</a>
+                        <a class="menu-item" href="/sat/blogs/comments.php?page=blogs" data-i18n="nav.navbars.nav_dark">التعليقات</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/blog-categories/?page=blogs" data-i18n="nav.navbars.nav_dark">التصنيفات</a>
@@ -139,7 +140,7 @@
                 </a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="/sat/students?page=students" data-i18n="nav.navbars.nav_light">كل  الطلاب</a>
+                        <a class="menu-item" href="/sat/students?page=students" data-i18n="nav.navbars.nav_light">كل الطلاب</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/students/create.php?page=students" data-i18n="nav.navbars.nav_dark">اضافة طالب جديد</a>
@@ -154,7 +155,8 @@
             </li>
 
             <li class="nav-item {{ $department_name == 'employees' ? 'open' : '' }}">
-                <a href="#"><i class="la la-institution"></i>
+                <a href="#">
+                    <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">قسم الموظفين</span>
                 </a>
                 <ul class="menu-content">
@@ -196,27 +198,37 @@
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">قسم التاشيرات</span>
                 </a>
-                <ul class="menu-content"> 
+                <ul class="menu-content">
+
+                    <li class="{{ $page_name == 'visa' ? 'active' : ''}}" >
+                        <a class="menu-item" href="{{route('visas.index')}}" data-i18n="nav.navbars.nav_light"> التاشيرات</a>
+                    </li>
+                    <li class="{{ $page_name == 'add-visa' ? 'active' : ''}}" >
+                        <a class="menu-item" href="{{route('visas.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تاشيرة جديدة </a>
+                    </li>
+                    <li class="{{ $page_name == 'visa-categories' ? 'active' : ''}}" >
+                        <a class="menu-item" href="{{route('visa_categories.index')}}" data-i18n="nav.navbars.nav_semi">تصنيفات التاشيرات</a>
+                    </li>
+                    <li class="{{ $page_name == 'create-visa-category' ? 'active' : ''}}" >
+                        <a class="menu-item" href="{{route('visa_categories.create')}}" data-i18n="nav.navbars.nav_semi">اضافةتصنيف جديد</a>
+                    </li>
+                    <li class="{{ $page_name == 'visa-archive' ? 'active' : ''}}" >
+                        <a class="menu-item" href="{{route('visas.index')}}" data-i18n="nav.navbars.nav_semi">ارشيف التاشيرات</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="nav-item {{ $department_name == 'visa-requests' ? 'open' : '' }}">
+                <a href="#">
+                    <i class="la la-institution"></i>
+                    <span class="menu-title" data-i18n="nav.navbars.main">قسم طلبات التاشيرات</span>
+                </a>
+                <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="/sat/visa/index.php?page=visa" data-i18n="nav.navbars.nav_light">طلبات التاشيرات</a> 
+                        <a class="menu-item" href="/sat/visa/index.php?page=visa" data-i18n="nav.navbars.nav_light">طلبات التاشيرات</a>
                     </li>
                     <li>
-                        <a class="menu-item" href="/sat/visa/visa.php?page=visa" data-i18n="nav.navbars.nav_light"> التاشيرات</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/visa/create.php?page=visa" data-i18n="nav.navbars.nav_dark">اضافة تاشيرة جديدة </a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/visa/typeOfVisa.php?page=visa" data-i18n="nav.navbars.nav_semi">تصنيفات التاشيرات</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/visa/createNewtype.php?page=visa" data-i18n="nav.navbars.nav_semi">اضافةتصنيف جديد</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/visa/archives.php?page=visa" data-i18n="nav.navbars.nav_semi">ارشيف التاشيرات</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/visa/archivesRequests.php?page=visa" data-i18n="nav.navbars.nav_semi">ارشيف طلبات التاشيرات</a>
+                        <a class="menu-item" href="/sat/visa/archivesRequests.php?page=visa" data-i18n="nav.navbars.nav_semi">ارشيف الطلابات</a>
                     </li>
                 </ul>
             </li>
