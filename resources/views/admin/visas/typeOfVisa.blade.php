@@ -4,16 +4,14 @@
     <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
-          <h3 class="content-header-title">قسم المعاهد</h3>
+          <h3 class="content-header-title">قسم التاشيرات</h3>
           <div class="row breadcrumbs-top">
           <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/sat<?php include('../role_route.php') ?>">لوحة التحكم</a>
                 </li>
-                <li class="breadcrumb-item"><a href="/sat/institutes/">كل المعاهد</a>
-                </li>
-                <li class="breadcrumb-item active">التقييمات
+                <li class="breadcrumb-item active">كل التاشيرات
                 </li>
               </ol>
             </div>
@@ -38,10 +36,13 @@
           <div id="recent-transactions" class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> كل التقييمات (15)</h4>
+                <h4 class="card-title">   تصنيف التاشيرات (12)</h4>
                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
-                  
+                  <ul class="list-inline mb-0">
+                    <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
+                      href="/sat/visa/create.php" > <i class="ft-plus ft-md"></i> اضافة تنصنيف  جديد</a></li>
+                  </ul>
                 </div>
               </div>
               <div class="card-content">
@@ -49,22 +50,34 @@
                   <table id="recent-orders" class="table table-hover table-xl mb-0">
                     <thead>
                       <tr>
-                        <th class="border-top-0">اسم الطالب</th>
-                        <th class="border-top-0">اسم المعهد</th>
-                        <th class="border-top-0">التقييم</th>
-                        <th class="border-top-0">حذف</th>
+                        <th class="border-top-0"> التصنيف</th>
+                        
+                        <th class="border-top-0">اكشن</th>
                       </tr>
                     </thead>
                     <tbody>
-                      
+                      <style>
+                       
+
+                      </style>
                       <tr>
-                        <td class="text-truncate">محمود سامي</td>
-                        <td class="text-truncate">كابلان</td>
-                        <td class="text-truncate">
-                          <div id="read-only-stars" data-score="4"> </div>
-                        </td>
-                        <td class="text-truncate">
-                          <a href="#"><button type="button" class="btn btn-sm btn-outline-danger round">حذف</button></a>
+                        <td class="text-truncate"> سياحيه </td>
+                      
+                      
+                       
+                        <td>
+                          <div class="btn-group mr-1 mb-1">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="ft-settings"></i>
+                            </button>
+                            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+                              <a href="#" class="dropdown-item"><i class="la la-eye"></i> عرض</a>
+                              <a href="/sat/courses/edit.php" class="dropdown-item"><i class="la la-pencil"></i> تعديل</a>
+                              <a href="#" class="dropdown-item"><i class="la la-plus"></i> اضافة كورس</a>
+                              <a href="#" class="dropdown-item"><i class="la la-trash"></i> حذف</a>  
+                            </div>
+                          </div>
+                            
                         </td>
                       </tr>
                       

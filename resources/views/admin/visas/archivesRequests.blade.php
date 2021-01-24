@@ -4,14 +4,14 @@
     <div class="content-wrapper">
       <div class="content-header row">
         <div class="content-header-left col-md-6 col-12 mb-2">
-          <h3 class="content-header-title">قسم المعاهد</h3>
+          <h3 class="content-header-title">قسم التاشيرات</h3>
           <div class="row breadcrumbs-top">
           <div class="row breadcrumbs-top">
             <div class="breadcrumb-wrapper col-12">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/sat<?php include('../role_route.php') ?>">لوحة التحكم</a>
                 </li>
-                <li class="breadcrumb-item"><a href="/sat/institutes/">كل المعاهد</a>
+                <li class="breadcrumb-item"><a href="/sat/employees">كل التاشيرات</a>
                 </li>
                 <li class="breadcrumb-item active">الارشيف
                 </li>
@@ -38,11 +38,12 @@
           <div id="recent-transactions" class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"> المعاهد (15)</h4>
+                <h4 class="card-title"> التاشيرات (5)</h4>
                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                 <div class="heading-elements">
                   <ul class="list-inline mb-0">
-
+                    <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
+                      href="/sat/visa/create.php" > <i class="ft-plus ft-md"></i> اضافة تاشيرة جديد</a></li>
                   </ul>
                 </div>
               </div>
@@ -51,12 +52,11 @@
                   <table id="recent-orders" class="table table-hover table-xl mb-0">
                     <thead>
                       <tr>
-                        <th class="border-top-0">اسم المعهد</th>
-                        <th class="border-top-0">الدولة</th>
-                        <th class="border-top-0">المدينة</th>
-                        <th class="border-top-0">عدد الكورسات</th>
-                        <th class="border-top-0">التقييم</th>
-                        <th class="border-top-0">التقييم بواسطة</th>
+                      <th class="border-top-0">اسم الطالب</th>
+                        <th class="border-top-0"> مكان الاقامه </th>
+                        <th class="border-top-0"> مكان الميلاد </th>
+                        <th class="border-top-0">رقم الجوال</th>
+                        <th class="border-top-0">تاريخ الانضمام</th>
                         <th class="border-top-0">اكشن</th>
                       </tr>
                     </thead>
@@ -66,18 +66,13 @@
 
                       </style>
                       <tr>
-                        <td class="text-truncate">كابلان</td>
-                        <td class="text-truncate">المنيا</td>
-                        <td class="text-truncate">مانشيستر</td>
-                        <td class="text-truncate"> 5 كورسات</td>
-                        <td class="text-truncate">
-                          <div id="read-only-stars" data-score="1">
-                          </div>
-                          
-                        </td>
-                        <td>
-                          سات
-                        </td>
+                      <td class="text-truncate">محمد مجدي </td>
+                        <td class="text-truncate">السعوديه</td>
+                        <td class="text-truncate"> مصر</td>
+                        <td class="text-truncate"> 010125457</td>
+                        <td class="text-truncate"> 20/12/2020</td>
+                      
+                       
                         <td>
                             <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-danger round">حذف نهائي</button></a>
                             <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-success round">اعدة التخزين</button></a>

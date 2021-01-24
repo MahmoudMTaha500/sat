@@ -26,6 +26,8 @@ Route::post("addCity","CityController@addCity");
 Route::resource('countries', 'CountryController');
 Route::resource('cities', 'CityController');
 Route::resource('courses', 'CourseController');
+Route::resource('visas', 'VisaController');
+Route::resource('visa_categories', 'VisaCategoryController');
 
 
 

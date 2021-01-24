@@ -11,7 +11,7 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 0; $x < 90; $x++) {
+        for ($x = 1; $x <= 90; $x++) {
             $int= mt_rand(1262055681,1262055681);
             Course::create([
                 "name_ar" => 'course'.$x,

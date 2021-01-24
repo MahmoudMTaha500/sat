@@ -18,5 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call(InstituteQuestionSeeder::class);
         $this->call(CourseSeeder::class);
         $this->call(CoursePriceSeeder::class);
+        $this->call(VisaCategorySeeder::class);
+        $this->call(VisaSeeder::class);
+        $this->call(VisaQuestionSeeder::class);
     }
 }

@@ -12,7 +12,7 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 0; $x < 30; $x++) {
+        for ($x = 1; $x <= 30; $x++) {
             City::create([
                 "name_ar" => 'city'.$x,
                 "country_id" => rand(1,10)
