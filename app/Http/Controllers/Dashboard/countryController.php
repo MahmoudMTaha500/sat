@@ -29,9 +29,18 @@ class countryController extends Controller
     public function store(Request $request)
     {
         $name_ar = $request->name_ar;
-        $country = country::create(['name_ar' => $name_ar]);
-        return back()->with('success', 'تم اضافة الدولة!');
+        $get_country = country::where(['name_ar' => "$name_ar"])->first();
+        if($get_country == array()){
 
+            $country = country::create(['name_ar' => $name_ar]);
+            return back()->with('success', 'تم اضافة الدولة!');
+    
+        } else{
+            return back()->with('error', ' هذه الدوله موجوده بالفعل');
+
+        }
+
+        
     }
 
     public function edit($id)
@@ -47,11 +56,24 @@ class countryController extends Controller
 
         $countryname = $request->name_ar;
         $id = $request->id;
-        $country = Country::find($id);
 
-        $country->name_ar = $countryname;
-        $country->save();
-        return back()->with('success', 'تم تعديل  الدولة!');
+        $get_country = country::where(['name_ar' => "$countryname"])->first();
+        if($get_country == array()){
+            $country = Country::find($id);
+
+            $country->name_ar = $countryname;
+            $country->save();
+            return back()->with('success', 'تم تعديل  الدولة!');
+           
+    
+        } else{
+            return back()->with('error', ' هذه الدوله موجوده بالفعل');
+
+        }
+
+
+
+       
 
     }
 

@@ -37,21 +37,28 @@
                                 <table id="recent-orders" class="table table-hover table-xl mb-0">
                                     <thead>
                                         <tr>
+                                            <th class="border-top-0">#</th>
                                             <th class="border-top-0">اسم المعهد</th>
                                             <th class="border-top-0">الدولة</th>
                                             <th class="border-top-0">المدينة</th>
                                             <th class="border-top-0">عدد الكورسات</th>
-                                            <th class="border-top-0">التقييم</th>
+                                            {{-- <th class="border-top-0">التقييم</th> --}}
                                             <th class="border-top-0">التقييم بواسطة</th>
                                             <th class="border-top-0">التعليقات</th>
+
+
                                             <th class="border-top-0">اكشن</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody> 
+                                        {{-- {{$x = 0 }} --}}
+                                        @foreach($institutes as $institute)
+                                        {{-- {{dd($institute)}} --}}
                                         <tr>
-                                            <td class="text-truncate">كابلان</td>
-                                            <td class="text-truncate">المنيا</td>
-                                            <td class="text-truncate">مانشيستر</td>
+                                            <td class="text-truncate">{{$institute->id}}</td>
+                                            <td class="text-truncate">{{$institute->name_ar}}</td>
+                                            <td class="text-truncate">{{$institute->country[0]->name_ar}}</td>
+                                            <td class="text-truncate">{{$institute->city->name_ar}}</td>
                                             <td class="text-truncate">5 كورسات</td>
                                             <td class="text-truncate">
                                                 <div id="read-only-stars" data-score="1"></div>
@@ -64,15 +71,13 @@
                                                 <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-info round">جديد (10)</button></a>
                                             </td>
                                             <td class="text-truncate">
-                                                <div data-toolbar="transport-options-o" class="btn-toolbar btn-toolbar-primary m-0" data-toolbar-style="primary-o"><i class="ft-settings"></i></div>
-                                                <div id="transport-options-o" class="toolbar-icons hidden">
-                                                    <a href="google.com"><i class="la la-eye"></i></a>
-                                                    <a href="#"><i class="la la-pencil"></i></a>
-                                                    <a href="#"><i class="la la-plus"></i></a>
-                                                    <a href="#"><i class="la la-trash"></i></a>
-                                                </div>
+                                                    <a href="{{route('institute.edit',$institute->id)}}"><i class="la la-pencil"></i></a>
+                                                    <a href="{{route('institute.destroy',$institute->id)}}"><i class="la la-trash"></i></a>
+                                                
                                             </td>
                                         </tr>
+                                        {{-- {{$x++}} --}}
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -81,6 +86,7 @@
                 </div>
             </div>
             <!--/ Recent Transactions -->
+            {{$institutes->links()}}
         </div>
     </div>
 </div>

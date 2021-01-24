@@ -8,10 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-
+import Datepicker from 'vuejs-datepicker';
 import CountryCityComponent from './components/CountryCityComponent';
 import CitiesComponent from './components/city/CitiesComponent';
 import institutesComponent from './components/institute/institutesComponent';
+import startdateComponent from './components/startdate/startdateComponent';
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -19,5 +20,7 @@ const app = new Vue({
         CountryCityComponent,
         CitiesComponent,
         institutesComponent,
+        startdateComponent,
+        Datepicker
     }
 });

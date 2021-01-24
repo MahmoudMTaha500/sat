@@ -52,8 +52,8 @@
                                                 <td> {{$coun->name_ar}}</td>
                                               
                                                 <td class="text-truncate">
-                                                        <a href="{{url('dashboard/updateCountry/'.$coun->id)}}"><i class="la la-pencil"></i></a>
-                                                        <a    onclick="return confirm('Are you sure?')"  href="{{url('dashboard/deleteCountry/'.$coun->id)}}" ><i class="la la-trash"></i></a>
+                                                        <a href="{{route('countries.edit', $coun->id)}}"><i class="la la-pencil"></i></a>
+                                                        <a    onclick="return confirm('Are you sure?')"  href="{{route('countries.destroy' ,$coun->id)}}" ><i class="la la-trash"></i></a>
                                                     
                                                     
                                                 </td>

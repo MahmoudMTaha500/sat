@@ -11,4 +11,5 @@ class CoursePrice extends Model
                             'price',
                             'course_id',
                         ];
+                        
 }

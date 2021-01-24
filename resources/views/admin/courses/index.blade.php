@@ -21,7 +21,7 @@
                 <div id="recent-transactions" class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">الدورات (15)</h4>
+                            <h4 class="card-title">الدورات ({{$count_courses}})</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -45,25 +45,27 @@
                                 </thead>
                                 <tbody>
                                     <style></style>
+                                    @foreach($courses as $course)
                                     <tr>
-                                        <td class="text-truncate">دورة انجليزية صباحي</td>
-                                        <td class="text-truncate">كابلان</td>
-                                        <td class="text-truncate">مانشيستر</td>
+                                        <td class="text-truncate"> {{$course->name_ar}}</td>
+                                        <td class="text-truncate">{{$course->institute->name_ar}}</td>
+                                        <td class="text-truncate">{{$course->institute->city->name_ar}}</td>
                                         <td class="text-truncate">5 طلابات</td>
 
                                         <td>
-                                            <div class="btn-group mr-1 mb-1">
-                                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <i class="ft-settings"></i>
-                                                </button>
-                                                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
-                                                    <a href="#" class="dropdown-item"><i class="la la-eye"></i> عرض</a>
-                                                    <a href="/sat/courses/edit.php" class="dropdown-item"><i class="la la-pencil"></i> تعديل</a>
-                                                    <a href="#" class="dropdown-item"><i class="la la-trash"></i> حذف</a>
-                                                </div>
-                                            </div>
+                                           
+                                                    <a href="{{route('courses.edit',$course->id)}}" class="dropdown-item"><i class="la la-pencil"></i> تعديل</a>
+                                                    <form action="{{route('courses.destroy',$course->id)}}" method="POST">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <button href="" class="dropdown-item"><i class="la la-trash"></i> حذف</button>
+
+                                                    </form>
+                                                
+                                            
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                             </div>
@@ -71,6 +73,7 @@
                     </div>
                 </div>
             </div>
+            {{$courses->links()}}
             <!--/ Recent Transactions -->
         </div>
     </div>

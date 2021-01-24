@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+
     protected $fillable  = [
                         'name_ar',
                         'about_ar',
@@ -19,4 +20,11 @@ class Course extends Model
                         'required_level',
                         'discount',
                 ];
+
+                public function institute(){
+                   return   $this->hasOne('App\Models\Institute' , 'id', 'institute_id');
+                }
+                public function coursesPrice(){
+                    return $this->hasMany('App\Models\CoursePrice','id','course_id');
+                }
 }
