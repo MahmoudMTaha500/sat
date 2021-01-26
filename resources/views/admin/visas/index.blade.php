@@ -20,7 +20,7 @@
                 <div id="recent-transactions" class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">التاشيرات (12)</h4>
+                            <h4 class="card-title">التاشيرات ({{count($visas)}})</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -44,22 +44,26 @@
                                     </thead>
                                     <tbody>
                                         <style></style>
+                                        @foreach($visas as $visa)
+                                      
                                         <tr>
-                                            <td> بريطانية</td>
-                                            <td> قصيرة المدى ( 3 شهور) دراسية</td>
+                                            <td> {{$visa->country->name_ar}}</td>
+                                            <td> {{ $visa->category->name_ar ?? "غير مصنف"}}</td>
                                             <td><a href="#" class="btn btn-primary round btn-min-width btn-sm">15 طلب </a></td>
-                                            <td>20/12/2020</td>
+                                            <td>{{$visa->created_at}}</td>
 
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="" class="btn btn-info btn-sm round">تعديل <i class="la la-pencil"></i></a>
-                                                    <form action="" method="POST" class="btn-group">
-                                                        @csrf @method("DELETE")
+                                                    <a href="{{route('visas.edit',$visa->id)}}" class="btn btn-info btn-sm round">تعديل <i class="la la-pencil"></i></a>
+                                                    <form action="{{route('visas.destroy',$visa->id)}}" method="POST" class="btn-group">
+                                                        @csrf 
+                                                        @method("DELETE")
                                                         <button class="btn btn-danger btn-sm round" onclick="return confirm('Are you sure?')">حذف <i class="la la-trash"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

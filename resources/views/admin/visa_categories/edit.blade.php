@@ -3,7 +3,7 @@
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-6 col-12 mb-2">
-                <h3 class="content-header-title">قسم المدن</h3>
+                <h3 class="content-header-title">قسم التاشيرات</h3>
                 <div class="row breadcrumbs-top">
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
@@ -37,14 +37,15 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form" action="{{route('visa_categories.update' , 1)}}" method="POST">
+                                <form class="form" action="{{route('visa_categories.update' , $category->id)}}" method="POST">
                                     @csrf
+                                    @method('put')
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="institute-name">اسم التصنيف</label>
-                                                    <input value="تصنيف1" type="text" class="form-control" placeholder="ادخل اسم التصنيف" name="name_ar" required />
+                                                    <input type="text" class="form-control" placeholder="ادخل اسم التصنيف" name="name_ar" value="{{$category->name_ar}}" required />
                                                 </div>
                                             </div>
                                         </div>

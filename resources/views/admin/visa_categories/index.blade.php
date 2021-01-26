@@ -16,12 +16,23 @@
             </div>
         </div>
         <div class="content-body">
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif @if ($message = Session::get('error'))
+            <div class="alert alert-danger alert-block">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                <strong>{{ $message }}</strong>
+            </div>
+            @endif
             <!-- Recent Transactions -->
             <div class="row">
                 <div id="recent-transactions" class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title">تصنيف (15)</h4>
+                            <h4 class="card-title">تصنيف ({{count( $categories )}})</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                             <div class="heading-elements">
                                 <ul class="list-inline mb-0">
@@ -30,8 +41,14 @@
                                     </li>
                                 </ul>
                             </div>
+                            
                         </div>
+                     
                         <div class="card-content text-center">
+
+
+
+                            
                             <div class="table-responsive">
                                 <table id="recent-orders" class="table table-hover table-xl mb-0">
                                     <thead>
@@ -42,20 +59,22 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($categories as $cat)
                                         <tr>
-                                            <td>تصنيف1</td>
+                                            <td>{{$cat->name_ar}}</td>
                                             <td><a href="#" class="btn btn-primary round btn-min-width btn-sm">15 تاشيرة </a></td>
 
                                             <td class="text-truncate">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                                    <a href="{{route('visa_categories.edit' , 1)}}" class="btn btn-info btn-sm round">تعديل <i class="la la-pencil"></i></a>
-                                                    <form action="" method="POST" class="btn-group">
+                                                    <a href="{{route('visa_categories.edit' ,$cat->id)}}" class="btn btn-info btn-sm round">تعديل <i class="la la-pencil"></i></a>
+                                                    <form action="{{route('visa_categories.destroy',$cat->id)}}" method="POST" class="btn-group">
                                                         @csrf @method("DELETE")
                                                         <button class="btn btn-danger btn-sm round" onclick="return confirm('Are you sure?')">حذف <i class="la la-trash"></i></button>
                                                     </form>
                                                 </div>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

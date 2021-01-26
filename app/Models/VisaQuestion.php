@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisaQuestion extends Model
 {
+    
     protected $fillable=[
         'visa_id',
         'question_ar',
         'field_type',
+        'priority'
     ];
 
     public function visa()
