@@ -25,7 +25,8 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form">
+                                <form class="form" method="post" action="{{route('visas.store')}}">
+                                    @csrf
                                     <div class="form-body">
                                         <div class="row">
                                             <div class="col-md-6">
