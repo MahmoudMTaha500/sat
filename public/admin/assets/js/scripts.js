@@ -24,7 +24,9 @@
     $(document).on("change", ".visa-question-type", function() {
         var el = $(this)
         if (el.val() == 'select') {
-            el.parent().find('.visa-question-select').show()
+            alert(11);
+            el.parent().find('.visa-question-select').show();
+
         } else {
             el.parent().find('.visa-question-select').hide()
         }

@@ -17,7 +17,7 @@ class CreateVisaQuestionChoicesTable extends Migration
             $table->id();
             $table->string("choice_ar");
             $table->bigInteger("question_id")->unsigned();
-            $table->foreign('question_id')->references('id')->on('visa_questions');
+            $table->foreign('question_id')->references('id')->on('visa_questions')->onDelete('cascade');
             $table->timestamps();
             
         });
