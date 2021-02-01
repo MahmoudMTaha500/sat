@@ -30,9 +30,4 @@
             el.parent().find('.visa-question-select').hide()
         }
     });
-
-
-
-
-
 })(window);
