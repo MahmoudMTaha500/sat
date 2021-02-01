@@ -7,6 +7,7 @@
         <div id="sat_app_vue">
             @yield('admin.content')                        
         </div>
+        @yield('admin.VueJs')
         @include('admin.includes.footer')  
         @yield('admin.custom-js-scripts')
     </body>

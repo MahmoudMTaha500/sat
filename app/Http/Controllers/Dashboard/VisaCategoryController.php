@@ -11,12 +11,13 @@ class VisaCategoryController extends Controller
 
     public function index()
     {
+        $categories = VisaCategory::paginate(10);
         $department_name='visa';
         $page_name='visa-categories';
-        return view('admin.visa_categories.index' , compact('department_name' , 'page_name'));
+        return view('admin.visa_categories.index' , compact('department_name' , 'page_name','categories'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $department_name='visa';
         $page_name='create-visa-category';
@@ -25,7 +26,8 @@ class VisaCategoryController extends Controller
 
     public function store(Request $request)
     {
-        //
+             VisaCategory::create(['name_ar'=>$request->name_ar,'creator_id'=>1]); 
+             return back()->with('success','تم اضافة التصنيف');
     }
 
     public function show(VisaCategory $visaCategory)
@@ -35,18 +37,32 @@ class VisaCategoryController extends Controller
 
     public function edit(VisaCategory $visaCategory)
     {
+        $category = VisaCategory::find($visaCategory->id);
         $department_name='visa';
         $page_name='edit-visa-category';
-        return view('admin.visa_categories.edit' , compact('department_name' , 'page_name'));
+        return view('admin.visa_categories.edit' , compact('department_name' , 'page_name','category'));
     }
 
     public function update(Request $request, VisaCategory $visaCategory)
     {
-        //
+        
+        $category = VisaCategory::find($visaCategory->id);
+        $category->name_ar = $request->name_ar;
+        $category->save();
+        return back()->with('success','تم تعديل التصنيف');
+
+        
     }
 
     public function destroy(VisaCategory $visaCategory)
     {
-        //
+        // dd($visaCategory);
+
+        $category = VisaCategory::find($visaCategory->id);
+        $category->delete();
+        return back()->with('success','تم مسح التصنيف');
+
+
+        
     }
 }

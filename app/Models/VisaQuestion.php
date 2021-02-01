@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisaQuestion extends Model
 {
+    
     protected $fillable=[
         'visa_id',
         'question_ar',
         'field_type',
+        'priority'
     ];
 
     public function visa()
@@ -19,6 +21,6 @@ class VisaQuestion extends Model
 
     public function question_choices()
     {
-        return $this->hasMany('App\Models\VisaQuestionChoice' , 'question_id' , 'id');
+        return $this->hasMany('App\Models\VisaQuestionChoices' , 'question_id' , 'id');
     }
 }

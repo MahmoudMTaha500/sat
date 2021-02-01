@@ -1,6 +1,7 @@
-<script src="{{asset('js/app.js')}}"></script>
+
 <script>var base_path = "{{url('/admin')}}";</script>
 <!-- BEGIN VENDOR JS-->
+
 <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
 

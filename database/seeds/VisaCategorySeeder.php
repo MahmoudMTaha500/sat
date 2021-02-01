@@ -20,3 +20,4 @@ class VisaCategorySeeder extends Seeder
         }
     }
 }
+

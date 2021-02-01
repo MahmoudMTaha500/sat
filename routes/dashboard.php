@@ -31,3 +31,16 @@ Route::resource('visa_categories', 'VisaCategoryController');
 
 
 
+Route::get("test-getquestions",function(){
+    $questions = \App\Models\VisaQuestion::with('question_choices')->get();
+
+    foreach($questions as $q){
+        echo $q->question_ar.'</br>';
+        if(!empty($q->question_choices[0])){
+            foreach($q->question_choices as $qc){
+                echo $qc->choice_ar.',';
+            }
+        }
+
+    }
+});

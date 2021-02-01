@@ -15,8 +15,7 @@ class CreateVisasTable extends Migration
     {
         Schema::create('visas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("category_id")->unsigned();
-            $table->foreign('category_id')->references('id')->on('visa_categories');
+            $table->bigInteger("category_id")->nullable();
             $table->bigInteger("country_id")->unsigned();
             $table->foreign('country_id')->references('id')->on('countries');
             $table->bigInteger("creator_id")->unsigned();
