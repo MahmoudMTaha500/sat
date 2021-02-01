@@ -1,4 +1,4 @@
-
+@yield('admin.VueJs')
 <script>var base_path = "{{url('/admin')}}";</script>
 <!-- BEGIN VENDOR JS-->
 
