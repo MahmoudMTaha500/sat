@@ -1,5 +1,7 @@
 
-  @yield('admin.VueJs')
+  @if (isset($useVue))
+  <script src="{{asset('js/app.js')}}"></script>      
+  @endif
   <script>var base_path = "{{url('/admin')}}";</script>
   <!-- BEGIN VENDOR JS-->
   

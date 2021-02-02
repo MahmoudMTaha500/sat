@@ -37,6 +37,7 @@ Route::resource('visas', 'VisaController');
 Route::resource('visa_categories', 'VisaCategoryController');
 // Blog Route
 Route::resource('blogs', 'BlogController');
+Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blogs_by_vue');
 // Blog Category Route
 Route::resource('blog_categories', 'BlogCategoryController');
 

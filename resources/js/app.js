@@ -8,11 +8,15 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import Datepicker from 'vuejs-datepicker';
+Vue.use(require('vue-resource'));
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+
 import CountryCityComponent from './components/CountryCityComponent';
 import CitiesComponent from './components/city/CitiesComponent';
 import institutesComponent from './components/institute/institutesComponent';
 import startdateComponent from './components/startdate/startdateComponent';
+import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -21,6 +25,6 @@ const app = new Vue({
         CitiesComponent,
         institutesComponent,
         startdateComponent,
-        Datepicker
+        BlogIndexComponent
     }
 });

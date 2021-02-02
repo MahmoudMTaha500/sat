@@ -9,12 +9,19 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {   
-        $blogs = Blog::all();
         $department_name = 'blogs';
         $page_name = 'blogs';
-        return view("admin.blogs.index", compact('blogs', 'department_name', 'page_name'));
+        $useVue = true;
+
+        return view("admin.blogs.index", compact('department_name', 'page_name' , 'useVue'));
+    }
+
+    public function get_blogs_by_vue(Request $request)
+    {   
+        $blogs = Blog::paginate(5);
+        return response()->json($blogs);
     }
 
 
@@ -28,7 +35,7 @@ class BlogController extends Controller
 
     public function store(Request $request)
     {
-        //
+        return response()->json($request->all());
     }
 
 
