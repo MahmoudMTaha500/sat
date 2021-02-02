@@ -12,7 +12,6 @@ class Visa extends Model
         'creator_id',
         'price',
         'approvement',
-        'active',
     ];
 
     public function category()

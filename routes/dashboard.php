@@ -2,7 +2,6 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::resource('institute', 'InstituteController');
 
 
 /*********************************************  start Country Routs **************************************************************************************************** */
@@ -23,24 +22,21 @@ Route::resource('institute', 'InstituteController');
 Route::get("getcities","CityController@getCities");
 Route::post("addCity","CityController@addCity");
 
+
+// Institute Route
+Route::resource('institute', 'InstituteController');
+// Country Route
 Route::resource('countries', 'CountryController');
+// City Route
 Route::resource('cities', 'CityController');
+// Course Route
 Route::resource('courses', 'CourseController');
+// Visa Route
 Route::resource('visas', 'VisaController');
+// Visa Category Route
 Route::resource('visa_categories', 'VisaCategoryController');
+// Blog Route
+Route::resource('blogs', 'BlogController');
+// Blog Category Route
+Route::resource('blog_categories', 'BlogCategoryController');
 
-
-
-Route::get("test-getquestions",function(){
-    $questions = \App\Models\VisaQuestion::with('question_choices')->get();
-
-    foreach($questions as $q){
-        echo $q->question_ar.'</br>';
-        if(!empty($q->question_choices[0])){
-            foreach($q->question_choices as $qc){
-                echo $qc->choice_ar.',';
-            }
-        }
-
-    }
-});

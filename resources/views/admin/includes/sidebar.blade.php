@@ -106,26 +106,26 @@
                 </ul>
             </li>
 
-            <li class="nav-item {{ $department_name == 'blogs' ? 'open' : '' }}">
+            <li class="nav-item">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">المقلات</span>
                 </a>
                 <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="/sat/blogs/?page=blogs" data-i18n="nav.navbars.nav_light">كل المقلات</a>
+                    <li class="{{ $page_name == 'blogs' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('blogs.index')}}" data-i18n="nav.navbars.nav_light">كل المقلات</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/blogs/create.php?page=blogs" data-i18n="nav.navbars.nav_dark">اضافة مقالة جديدة</a>
+                    <li class="{{ $page_name == 'add-blog' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('blogs.create')}}" data-i18n="nav.navbars.nav_dark">اضافة مقالة جديدة</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/blogs/comments.php?page=blogs" data-i18n="nav.navbars.nav_dark">التعليقات</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/blog-categories/?page=blogs" data-i18n="nav.navbars.nav_dark">التصنيفات</a>
+                    <li class="{{ $page_name == 'add-blog-category' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('blog_categories.index')}}" data-i18n="nav.navbars.nav_dark">التصنيفات</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/blog-categories/create.php?page=blogs" data-i18n="nav.navbars.nav_dark">اضافة تصنيف جديد</a>
+                    <li class="{{ $page_name == 'edit-blog-category' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('blog_categories.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تصنيف جديد</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/blogs/archives.php?page=blogs" data-i18n="nav.navbars.nav_semi">الارشيف</a>

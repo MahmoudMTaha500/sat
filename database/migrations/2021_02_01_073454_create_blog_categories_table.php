@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVisasTable extends Migration
+class CreateBlogCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreateVisasTable extends Migration
      */
     public function up()
     {
-        Schema::create('visas', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("category_id")->nullable();
-            $table->bigInteger("country_id")->unsigned();
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->string("name_ar");
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->string("price");
             $table->integer("approvement");
             $table->timestamps();
         });
@@ -33,6 +30,6 @@ class CreateVisasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visas');
+        Schema::dropIfExists('blog_categories');
     }
 }

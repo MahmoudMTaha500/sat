@@ -17,7 +17,6 @@ class Institute extends Model
         'creator_id',
         'sat_rate',
         'rate_switch',
-        'active',
         'approvment',
     ];
 

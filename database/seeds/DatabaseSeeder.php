@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VisaCategorySeeder::class);
         $this->call(VisaSeeder::class);
         $this->call(VisaQuestionSeeder::class);
+        $this->call(BlogCategorySeeder::class);
+        $this->call(BlogSeeder::class);
     }
 }
