@@ -104,7 +104,7 @@
                                                     <div class="mt-1 image-box">
 <img class="w-100" src="{{asset($institute->banner)}}" alt="">
                                                         
-                                                    </div>
+</div>
                                                 </div>
                                             </div>
                                         </div>

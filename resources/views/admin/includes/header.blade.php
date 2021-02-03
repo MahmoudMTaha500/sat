@@ -28,6 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/jquery.toolbar.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/switchery.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/sweetalert.css">
     <!-- END VENDOR CSS-->
    
     <!-- BEGIN MODERN CSS-->

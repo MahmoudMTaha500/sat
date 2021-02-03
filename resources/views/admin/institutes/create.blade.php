@@ -37,6 +37,7 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
+                                @include('admin.includes.errors')
                                 <form class="form" action="{{route('institute.store')}}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                     <div class="form-body">
@@ -44,13 +45,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name">اسم المعهد</label>
-                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar"  required/>
+                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-about">نبذة عن المعهد</label>
-                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" required></textarea>
+                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -64,8 +65,8 @@
                                                 <label>الاسئلة الخاصة بالمعهد</label>
                                                 <div data-repeater-list="questionList">
                                                     <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="السؤال" class="form-control" name="questions" required/>
-                                                        <input type="tel" placeholder="الاجابة" class="form-control"  name="answer" required/>
+                                                        <input type="tel" placeholder="السؤال" class="form-control" name="questions" />
+                                                        <input type="tel" placeholder="الاجابة" class="form-control"  name="answer" />
                                                         <span class="input-group-append" id="button-addon2">
                                                             <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                         </span>

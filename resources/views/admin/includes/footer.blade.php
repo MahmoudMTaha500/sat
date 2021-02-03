@@ -18,6 +18,8 @@
   <script src="{{url('/admin')}}/app-assets/vendors/js/forms/toggle/bootstrap-checkbox.min.js" type="text/javascript"></script>
   <script src="{{url('/admin')}}/app-assets/vendors/js/forms/toggle/switchery.min.js" type="text/javascript"></script>
   <script src="{{url('/admin')}}/app-assets/vendors/js/editors/ckeditor/ckeditor.js" type="text/javascript"></script>
+  <script src="{{url('/admin')}}/app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
+
   
   <!-- END PAGE VENDOR JS-->
   <!-- BEGIN MODERN JS-->
@@ -32,6 +34,7 @@
   <script src="{{url('/admin')}}/app-assets/js/scripts/extensions/toolbar.js" type="text/javascript"></script>
   <script src="{{url('/admin')}}/app-assets/js/scripts/forms/switch.js" type="text/javascript"></script>
   <script src="{{url('/admin')}}/app-assets/js/scripts/editors/editor-ckeditor.js" type="text/javascript"></script>
+  <script src="{{url('/admin')}}/app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
   <!-- END PAGE LEVEL JS-->
   
   <!-- Costum Scripts -->
