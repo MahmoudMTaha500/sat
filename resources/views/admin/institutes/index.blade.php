@@ -102,7 +102,7 @@
                                             <td class="text-truncate">{{$institute->city->name_ar}}</td>
                                             <td class="text-truncate">5 كورسات</td>
                                             <td class="text-truncate">
-                                                <div id="read-only-stars" data-score="1"></div>
+                                                <div class="read-only-stars" data-score="1"></div>
                                             </td>
                                             <td class="text-truncate">
                                                 سات

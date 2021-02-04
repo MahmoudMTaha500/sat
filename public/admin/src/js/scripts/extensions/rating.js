@@ -31,7 +31,7 @@ $(document).ready(function(){
 	});
 
 	// Read Only
-	$('#read-only-stars').raty({
+	$('.read-only-stars').raty({
 		readOnly: true,
 		score: 3
 	});

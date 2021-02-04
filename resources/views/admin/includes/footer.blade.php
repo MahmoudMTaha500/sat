@@ -39,7 +39,12 @@
   
   <!-- Costum Scripts -->
   <script src="{{url('/admin')}}/assets/js/scripts.js" type="text/javascript"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   
-
+<script>
+  $('.rating-read-only').raty({
+    readOnly: function() {
+      return true;
+    }
+  });
+</script>
 
