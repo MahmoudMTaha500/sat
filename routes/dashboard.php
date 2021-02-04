@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-
+Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::resource('institute', 'InstituteController');
 
 

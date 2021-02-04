@@ -14,15 +14,31 @@ use function GuzzleHttp\Promise\inspect;
 class InstituteController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $institutes = Institute::paginate(10);
-        
+
+        $institutes = Institute::with('country','city')->paginate(5);
+        // dd($institutes);
+        if($request->has('type')){
+            if($request->type == 'vue_request'){
+                return response()->json(['institutes' => $institutes]); 
+            }
+        }        
 
         return view('admin.institutes.index',['institutes' => $institutes]);
         
     }
 
+    public function getInstitues(Request $request)
+    {
+
+        $institutes = Institute::with('country','city')->paginate(5);
+        // dd($institutes);
+             
+        return response()->json(['institutes' => $institutes]); 
+
+        
+    }
 
     public function create(Request $request)
     {
@@ -199,6 +215,6 @@ class InstituteController extends Controller
  
     public function destroy(Institute $institute)
     {
-        //
+        dd($institute);
     }
 }
