@@ -27,7 +27,6 @@ class InstituteSeeder extends Seeder
                 "creator_id" => 1,
                 "sat_rate" => 5,
                 "rate_switch" => 1,
-                "active" => 1,
                 "approvment" => 1,
             ]);
         }

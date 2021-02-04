@@ -26,6 +26,9 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/raty/jquery.raty.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/switchery.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/jquery.toolbar.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/switchery.min.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/sweetalert.css">
     <!-- END VENDOR CSS-->
    
     <!-- BEGIN MODERN CSS-->
@@ -40,6 +43,8 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/core/colors/palette-gradient.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/pages/timeline.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/plugins/forms/switch.css">
+
 
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->

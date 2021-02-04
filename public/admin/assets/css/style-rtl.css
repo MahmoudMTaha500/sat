@@ -11,7 +11,7 @@ span,
 a,
 li
 {
-	font-family: 'Cairo', sans-serif;
+	font-family: 'Cairo', sans-serif!important;
 }
 
 .select2.select2-container{

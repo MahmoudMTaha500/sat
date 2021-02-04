@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Visa;
+use App\Models\BlogCategory;
 
-
-class VisaSeeder extends Seeder
+class BlogCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,12 +12,10 @@ class VisaSeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 1; $x <= 5; $x++) {
-            Visa::create([
-                "category_id" => $x,
-                "country_id" => $x,
+        for ($x = 1; $x <= 10; $x++) {
+            BlogCategory::create([
+                "name_ar" => 'مقال'.$x,
                 "creator_id" => 1,
-                "price" => rand(1 , 9)*1000,
                 "approvement" => 1,
             ]);
         }

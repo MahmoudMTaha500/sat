@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInstitutesTable extends Migration
+class CreateBlogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateInstitutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('institutes', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string("name_ar");
-            $table->text("about_ar");
-            $table->string("logo");
+            $table->string("title_ar");
+            $table->longText("content_ar");
             $table->string("banner");
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
@@ -25,9 +24,11 @@ class CreateInstitutesTable extends Migration
             $table->foreign('country_id')->references('id')->on('countries');
             $table->bigInteger("city_id")->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->integer("sat_rate");
-            $table->integer("rate_switch");
-            $table->integer("approvment");
+            $table->bigInteger("institute_id")->unsigned();
+            $table->foreign('institute_id')->references('id')->on('institutes');
+            $table->bigInteger("category_id")->unsigned();
+            $table->foreign('category_id')->references('id')->on('blog_categories');
+            $table->integer("approvement");
             $table->timestamps();
         });
     }
@@ -39,6 +40,6 @@ class CreateInstitutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('institutes');
+        Schema::dropIfExists('blogs');
     }
 }

@@ -64,6 +64,20 @@
                                         >
                                         </country-city-component>
                                         <div class="row">
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                <label for="projectinput4">التقييم</label>
+                                                <div id="default-star-rating"></div>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="form-group">
+                                                <label for="projectinput4">التقييم بواسطة سات</label>
+                                                <input type="checkbox" id="switchery" class="switchery" checked/>
+                                              </div>
+                                            </div>
+                                          </div> 
+                                        <div class="row">
                                             <div class="form-group col-12 mb-2 contact-repeater">
                                                 <label>الاسئلة الخاصة بالمعهد</label>
                                                 <div data-repeater-list="questionList">
@@ -104,7 +118,7 @@
                                                     <div class="mt-1 image-box">
 <img class="w-100" src="{{asset($institute->banner)}}" alt="">
                                                         
-                                                    </div>
+</div>
                                                 </div>
                                             </div>
                                         </div>

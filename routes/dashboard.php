@@ -1,8 +1,12 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+<<<<<<< HEAD
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::resource('institute', 'InstituteController');
+=======
+
+>>>>>>> 24027365b73f3aaf9c1784e0f5733783619e148f
 
 
 /*********************************************  start Country Routs **************************************************************************************************** */
@@ -23,24 +27,22 @@ Route::resource('institute', 'InstituteController');
 Route::get("getcities","CityController@getCities");
 Route::post("addCity","CityController@addCity");
 
+
+// Institute Route
+Route::resource('institute', 'InstituteController');
+// Country Route
 Route::resource('countries', 'CountryController');
+// City Route
 Route::resource('cities', 'CityController');
+// Course Route
 Route::resource('courses', 'CourseController');
+// Visa Route
 Route::resource('visas', 'VisaController');
+// Visa Category Route
 Route::resource('visa_categories', 'VisaCategoryController');
+// Blog Route
+Route::resource('blogs', 'BlogController');
+Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blogs_by_vue');
+// Blog Category Route
+Route::resource('blog_categories', 'BlogCategoryController');
 
-
-
-Route::get("test-getquestions",function(){
-    $questions = \App\Models\VisaQuestion::with('question_choices')->get();
-
-    foreach($questions as $q){
-        echo $q->question_ar.'</br>';
-        if(!empty($q->question_choices[0])){
-            foreach($q->question_choices as $qc){
-                echo $qc->choice_ar.',';
-            }
-        }
-
-    }
-});
