@@ -1,12 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-<<<<<<< HEAD
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::resource('institute', 'InstituteController');
-=======
-
->>>>>>> 24027365b73f3aaf9c1784e0f5733783619e148f
 
 
 /*********************************************  start Country Routs **************************************************************************************************** */
