@@ -76,7 +76,7 @@
                                                 <input type="checkbox" id="switchery" class="switchery" checked/>
                                               </div>
                                             </div>
-                                          </div>
+                                          </div> 
                                         <div class="row">
                                             <div class="form-group col-12 mb-2 contact-repeater">
                                                 <label>الاسئلة الخاصة بالمعهد</label>
