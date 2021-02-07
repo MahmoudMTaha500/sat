@@ -25,8 +25,8 @@
                     <li class="{{ $page_name == 'add-institute' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('institute.create')}}" data-i18n="nav.navbars.nav_dark">اضافة معهد جديد</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/institutes/comments.php?page=institutes" data-i18n="nav.navbars.nav_dark">التعليقات</a>
+                    <li   class="{{ $page_name == 'comment' ? 'active' : ''}}">
+                        <a    class="menu-item" href="{{route('comment.index')}}" data-i18n="nav.navbars.nav_dark">التعليقات</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/institutes/rating.php?page=institutes" data-i18n="nav.navbars.nav_dark">التقيمات</a>

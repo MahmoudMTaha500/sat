@@ -11,7 +11,7 @@
                                 <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right"><i class="ft-filter ft-md"></i> فلتر</button>
                             </li>
                             <li>
-                                <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" href="/sat/institutes/create.php"> <i class="ft-plus ft-md"></i> اضافة معهد جديد</a>
+                                <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" :href="route_create"> <i class="ft-plus ft-md"></i> اضافة معهد جديد</a>
                             </li>
                         </ul>
 
@@ -63,6 +63,7 @@
                             <thead>
                                 <tr>
                                     <th class="border-top-0">#</th>
+                                    <th class="border-top-0">لوجو المعهد</th>
                                     <th class="border-top-0">اسم المعهد</th>
                                     <th class="border-top-0">الدولة</th>
                                     <th class="border-top-0">المدينة</th>
@@ -71,6 +72,8 @@
                                     <th class="border-top-0">التقييم</th>
 
                                     <th class="border-top-0">التقييم بواسطة</th>
+                                    <th class="border-top-0">الحاله</th>
+
                                     <th class="border-top-0">التعليقات</th>
 
                                     <th class="border-top-0">اكشن</th>
@@ -79,6 +82,9 @@
                             <tbody>
                                 <tr v-for="institute in institutes.data" :key="institute.id">
                                     <td>{{institute.id}}</td>
+                                    <td>  
+                                        <img  style="max-width:100px"  :src="path_logo+institute.logo ">
+                                    </td>
                                     <td>{{institute.name_ar}}</td>
                                     <td>{{institute.country[0].name_ar}}</td>
                                     <td>{{institute.city.name_ar}}</td>
@@ -88,18 +94,29 @@
                                     </td>
                                     <td class="text-truncate">
                                         سات
+                                    </td>   
+                                    
+                                    <td class="text-truncate">
+                                        <input type="checkbox" id="checkbox"       v-model="institute.approvment"   @change="updateApprovment" @click="getInstitute_id(institute.id)" > 
+                                        <label for="checkbox">{{  (institute.approvment == 1) ? "مقبول":"غير مقبول" }}</label>
+                                        
                                     </td>
                                     <td class="text-truncate">
                                         <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-success round">حالي (15)</button></a>
                                         <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-info round">جديد (10)</button></a>
                                     </td>
                                     <td class="text-truncate">
-                                        <a :href="instutite_url_edit +'/'+ institute.id+'/edit'"><i class="la la-pencil"></i></a>
-                                        <form :action="instutite_url_edit +'/'+ institute.id" method="post">
+                                        
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                        <a :href="instutite_url_edit +'/'+ institute.id+'/edit'"   class="btn btn-info btn-sm round">تعديل</a>
+                                        <a href="#"   class="btn btn-default btn-sm round">عرض</a>
+                                        <form :action="instutite_url_edit +'/'+ institute.id" method="post"  class="btn-group">
                                             <input type="hidden" name="_token" :value="csrftoken" />
                                             <input type="hidden" name="_method" value="delete">
-                                            <button type="submit"><i class="la la-trash"></i></button>
+                                            <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button>
                                         </form>
+                                        </div>
+
                                     </td>
                                 </tr>
                              
@@ -126,7 +143,7 @@
 <script>
 
     export default {
-        props: ["instutite_url", "instutite_url_edit", "csrftoken"],
+        props: ["instutite_url", "instutite_url_edit", "csrftoken","aprove_route",'path_logo','route_create'],
         data() {
             return {
                 institutes: {}, 
@@ -134,25 +151,33 @@
               currentPage: 1,
               paginate: {},
               url: this.instutite_url,
+              institute_id:'',
+              aproveRoute: this.aprove_route,
             };
         },
-         
         methods: {
-            getInstitutes: function () {
+                    getInstitutes: function () {
 
+                            let $this = this;
+                            axios.get(this.url).then((response) => (this.institutes = response.data.institutes));
+                    },
 
-let $this = this;
-                axios.get(this.url).then((response) => (this.institutes = response.data.institutes));
-            },
-           
-        fetchInstitutes: function (url1){
-  this.url = url1;
-
-       this.getInstitutes();
-            }
-        },
-        created() {
-        },
+                    fetchInstitutes: function (url1){
+                            this.url = url1;
+                            this.getInstitutes();
+                    }, 
+                  
+    updateApprovment:function(e){
+                          const newValue = e.target.checked;
+                          axios.post(this.aproveRoute, {"institute_id":  this.institute_id ,"approvment":newValue},
+                          {headers:{"X-CSRFToken":"{{ csrf_token()}}"} } )
+                          .then((response) => {
+                          } )
+                    },
+                    getInstitute_id:function(id){
+                        return this.institute_id= id ;
+                    }
+                 },
      
         beforeMount() {
             this.getInstitutes();
