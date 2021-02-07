@@ -27,7 +27,7 @@ class CreateInstitutesTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->integer("sat_rate");
             $table->integer("rate_switch");
-            $table->integer("approvment");
+            $table->integer("approvement");
             $table->timestamps();
         });
     }

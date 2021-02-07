@@ -43,3 +43,4 @@ Route::resource('blog_categories', 'BlogCategoryController');
 // Student Route
 Route::resource('students', 'StudentController');
 
+

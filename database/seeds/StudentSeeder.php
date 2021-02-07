@@ -12,10 +12,13 @@ class StudentSeeder extends Seeder
      */
     public function run()
     {
-        for ($x=1; $x <= 30 ; $x++) { 
+        for ($x=1; $x <= 70 ; $x++) { 
             Student::create([
                 "name" => 'student'.$x,
+                "phone" => '0123456'.$x,
                 "email" => 'student@app.com'.$x,
+                "country" => 'country'.$x,
+                "city" => 'city'.$x,
                 "password" => bcrypt('123123')
             ]);
         }
