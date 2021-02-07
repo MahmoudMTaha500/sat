@@ -176,16 +176,7 @@
                 </a>
                 <ul class="menu-content">
                     <li>
-                        <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_light">كل الطلابات</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_dark">الطلبات المقبولة </a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_semi">الطلابات المعلقة</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_semi">الطلابات المرفوضة</a>
+                        <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_light">الطلابات</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_semi">الارشيف</a>
