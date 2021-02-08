@@ -14,6 +14,7 @@ class InstituteSeeder extends Seeder
         for ($x = 1; $x <= 30; $x++) {
             Institute::create([
                 "name_ar" => 'Institute'.$x,
+                "slug" => 'Institute'.$x,
                 "about_ar" => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
                                 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo

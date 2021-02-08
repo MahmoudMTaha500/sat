@@ -18,6 +18,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 import CountryCityComponent from './components/CountryCityComponent';
 import CitiesComponent from './components/city/CitiesComponent';
 import institutesComponent from './components/institute/institutesComponent';
+import CommentComponent from './components/comment/CommentComponent';
 import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 
@@ -29,6 +30,7 @@ const app = new Vue({
         CitiesComponent,
         institutesComponent,
         startdateComponent,
+        CommentComponent,
         BlogIndexComponent
     }
 });

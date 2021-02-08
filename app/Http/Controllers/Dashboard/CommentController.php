@@ -14,13 +14,33 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    { 
+
+        $comments =  Comment::where(['element_type'=>"institute"])->paginate(10);
+        // dd($comments);
            
         $department_name = 'comment';
         $page_name = 'comment';
+        $useVue = true;
 
-  return  view("admin.institutes.comments.index", compact('department_name','page_name'));
+  return  view("admin.institutes.comments.index", compact( 'useVue','comments','department_name','page_name'));
     }
+
+
+    /********************************* */
+    /********************************* */
+    /********************************* */
+     public function getcomment()
+     {
+    
+        $comments =  Comment::where(['element_type'=>"institute"])->with('institute','student')->get();
+
+         return response()->json(['comments'=>$comments]);
+
+     }
+
+    /********************************* */
+    /********************************* */
 
     /**
      * Show the form for creating a new resource.
@@ -62,8 +82,13 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
-    }
+              $comment = Comment::find($id);
+              $department_name = 'comment';
+              $page_name = 'comment';
+      
+        return  view("admin.institutes.comments.edit", compact('comment','department_name','page_name'));
+              
+        }
 
     /**
      * Update the specified resource in storage.
@@ -74,7 +99,12 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->comment = $request->comment;
+        $comment->save();
+        session()->flash("alert_message",["message"=>'تم تعديل التعليق',"icon"=>"success"]);
+          return back();
+
     }
 
     /**
@@ -87,4 +117,16 @@ class CommentController extends Controller
     {
         //
     }
+
+    public function updateAprovement(Request $request){
+        // echo "1111";  
+        // dd($request->all());
+            $institute = Comment::find($request->comment_id);
+            $institute->approvement = $request->approvment;
+            $institute->save();
+            
+    //    return     session()->flash('alert_message', ['message' => 'تم تعديل الحاله بنجاح', 'icon' => 'success']);
+       
+      }
+
 }

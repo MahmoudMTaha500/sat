@@ -22,9 +22,9 @@ class CommentSeeder extends Seeder
                 $element_type = 'institute';
                 $element_id = rand(1,30);
             }
-            City::create([
+            Comment::create([
                 "comment" => 'this is comment'.$x,
-                "commenter_id" => 1,
+                "commenter_id" => rand(1,50),
                 "element_type" => $element_type,
                 "element_id" => $element_id,
                 "approvement" => 1,
