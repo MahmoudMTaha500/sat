@@ -11,4 +11,11 @@ class InstituteRate extends Model
         'student_id',
         'institute_id',
     ];
+
+    public function institute(){
+        return $this->hasOne("App\Models\Institute",'id','institute_id');
+    }
+    public function student(){
+        return $this->hasOne("App\Models\Student",'id','student_id');
+    }
 }

@@ -17,13 +17,15 @@ class InstituteController extends Controller
     {
         $institutes = Institute::with('country', 'city')->paginate(5);
         $useVue = true ;
+        $countries = Country::all();
+
         if ($request->has('type')) {
             if ($request->type == 'vue_request') {
-                return response()->json(['institutes' => $institutes]);
+                return response()->json(['institutes' => $institutes,'countries'=>$countries]);
             }
         }
     
-        return view('admin.institutes.index', ['institutes' => $institutes,"useVue"=>$useVue]);
+        return view('admin.institutes.index', ['institutes' => $institutes,"useVue"=>$useVue,'countries'=>$countries]);
     }
     public function getInstitues(Request $request)
     {
@@ -205,6 +207,25 @@ class InstituteController extends Controller
             
     //    return     session()->flash('alert_message', ['message' => 'تم تعديل الحاله بنجاح', 'icon' => 'success']);
        
+      }
+      public function filter(Request $request){
+          dump( $request->all());
+          $country_id=$request->country_id;
+          $city_id=$request->city_id;
+          $name_ar=$request->name_ar;
+          if($request->country_id ){
+$institute = Institute::where(['country_id'=>$request->country_id,'city_id'=>$city_id])->get();
+dd($institute);        
+} 
+          dump( $request->all());
+
+        // elseif($country_id && $city_id){
+
+        //   }  elseif($country_id){
+
+        //   } elseif($country_id){
+
+        //   }
       }
 
 

@@ -3,11 +3,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::post('updateAprovement', 'InstituteController@updateAprovement');
+Route::post('filter', 'InstituteController@filter');
 Route::resource('institute', 'InstituteController');
 Route::get('getcomment', 'CommentController@getcomment');
 Route::post('comment/updateAprovement', 'CommentController@updateAprovement');
 
 Route::resource('comment', 'CommentController');
+
+Route::get('getrate', 'InstituteRateController@getrates');
+Route::post('updaterate', 'InstituteRateController@updaterate');
+Route::resource('rate', 'InstituteRateController');
+
 
 
 /*********************************************  start Country Routs **************************************************************************************************** */

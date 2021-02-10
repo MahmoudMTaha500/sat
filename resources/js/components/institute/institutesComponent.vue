@@ -28,29 +28,26 @@
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="projectinput1">الدولة</label>
-                                            <select class="form-control" name="fname">
-                                                <option value="" selected="" disabled="">اختر الدولة</option>
-                                                <option value="">كل الدول</option>
-                                                <option value="">دولة</option>
-                                                <option value="">دولة</option>
+                                            <select v-model="selected" v-on:change="getcities()"         id="country" class="form-control" name="country_id" required>
+                                            <option value="">حدد الدولة</option>
+                                            <option v-for="country in countries" :key="country.id" :value="country.id"     > {{country.name_ar}} </option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="projectinput1">المدينة</label>
-                                            <select class="form-control" name="fname">
-                                                <option value="" selected="" disabled="">اختر المدينة</option>
-                                                <option value="">كل المدن</option>
-                                                <option value="">دولة</option>
-                                                <option value="">دولة</option>
+
+                                            <select v-model="selected_city"      id="city"  class="  form-control " name="city_id" required>
+                                            <option value="" >حدد المدينة</option>
+                                            <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
-                                            <input type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="fname" />
+                                            <input   v-model="name_ar" type="text" id="projectinput1" class="form-control"    placeholder="ادخل كلمة مفتاحية" name="name_ar" />
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary w-100">بحث</button>
+                                        <button type="button" class="btn btn-primary w-100"   @click="filterInstitute()"  data-dismiss="modal" aria-label="Close"   >بحث</button>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +84,7 @@
                                     </td>
                                     <td>{{institute.name_ar}}</td>
                                     <td>{{institute.country[0].name_ar}}</td>
-                                    <td>{{institute.city.name_ar}}</td>
+                                    <td>{{institute.city[0].name_ar}}</td>
                                     <td class="text-truncate">5 كورسات</td>
                                     <td class="text-truncate">
                                         <div id="read-only-stars" data-score="1"></div>
@@ -143,7 +140,7 @@
 <script>
 
     export default {
-        props: ["instutite_url", "instutite_url_edit", "csrftoken","aprove_route",'path_logo','route_create'],
+        props: ["instutite_url", "instutite_url_edit", "csrftoken","aprove_route",'path_logo','route_create','countries_from_blade','dahsboard_url','url_filtier'],
         data() {
             return {
                 institutes: {}, 
@@ -153,6 +150,13 @@
               url: this.instutite_url,
               institute_id:'',
               aproveRoute: this.aprove_route,
+                selected: "",
+                selected_city: "",
+                countries: this.countries_from_blade,
+                cities: {},
+                newCity: "",
+                citySelectForUpdate:'',
+                name_ar:""
             };
         },
         methods: {
@@ -176,12 +180,70 @@
                     },
                     getInstitute_id:function(id){
                         return this.institute_id= id ;
-                    }
+                    },
+
+      getcities: function () {
+                var country_id = this.selected;
+                //  alert( country_id);
+                axios
+                    .get(this.dahsboard_url+"/getcities", {
+                        params: {
+                            countryID: country_id,
+                        },
+                    })
+                    .then((response) => (this.cities = response.data.cities));
+            },
+            get_id_for_cities: function () {
+                return this.selected_city;
+
+                //  axios.get("getcities" , {
+                //      params:{
+                //          countryID: country_id
+                //      }
+                //  }
+                //  ).then(response => this.cities = response.data.cities)
+            },
+
+         
+            resetForm: function () {
+                this.newCity = "";
+                this.selected_city = "";
+            },
+          returnCountryCity: function(){
+              if(this.country_id2){
+                  this.selected = this.country_id2; 
+                   this.citySelectForUpdate = this.city_id;
+                    this.getcities();
+
+              }else{
+
+              }
+             
+          },
+          filterInstitute:function(){
+            //   alert(this.selected);
+            //   alert(this.selected_city);
+            //   alert(this.name_ar
+            //   );
+              axios.post(this.url_filtier,{'country_id': this.selected,'city_id':this.selected_city,'name_ar':this.name_ar},{headers:{"X-CSRFToken":"{{csrf_token()}}"}}).then((response)=>{
+
+              });
+
+
+
+          }
+
+
                  },
      
         beforeMount() {
             this.getInstitutes();
+       this.returnCountryCity();
+
         },
  
     };
+
+
+  
 </script>

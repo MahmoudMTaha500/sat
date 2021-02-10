@@ -6,6 +6,9 @@
 
 
 import Vue from 'vue';
+import rate from 'vue-rate';
+import 'vue-rate/dist/vue-rate.css';
+Vue.use(rate);
 
 require('./bootstrap');
 
@@ -19,9 +22,9 @@ import CountryCityComponent from './components/CountryCityComponent';
 import CitiesComponent from './components/city/CitiesComponent';
 import institutesComponent from './components/institute/institutesComponent';
 import CommentComponent from './components/comment/CommentComponent';
+import RateComponent from './components/rate/RateComponent';
 import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
-
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -31,6 +34,7 @@ const app = new Vue({
         institutesComponent,
         startdateComponent,
         CommentComponent,
+        RateComponent,
         BlogIndexComponent
     }
 });
