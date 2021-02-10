@@ -40,6 +40,7 @@
                                         <th class="border-top-0">اسم المعهد</th>
                                         <th class="border-top-0">المدينة</th>
                                         <th class="border-top-0">عدد الطلابات</th>
+                                        <th class="border-top-0">الحالة</th>
                                         <th class="border-top-0">اكشن</th>
                                     </tr>
                                 </thead>
@@ -50,6 +51,7 @@
                                         <td class="text-truncate"> {{$course->name_ar}}</td>
                                         <td class="text-truncate">{{$course->institute->name_ar}}</td>
                                         <td class="text-truncate">{{$course->institute->city->name_ar}}</td>
+                                        <td class="text-truncate">مقبول او مرفوض</td>
                                         <td class="text-truncate">5 طلابات</td>
 
                                         <td>

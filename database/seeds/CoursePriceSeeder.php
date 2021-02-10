@@ -16,6 +16,7 @@ class CoursePriceSeeder extends Seeder
                 "weeks" => rand(1,10),
                 "price" => 2000,
                 "course_id" => rand(1 , 90),
+                "approvement" => 1,
             ]);
         }
     }

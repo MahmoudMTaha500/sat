@@ -27,7 +27,7 @@ class CreateCoursesTable extends Migration
             $table->integer("lessons_per_week");
             $table->integer("hours_per_week");
             $table->string("required_level");
-            $table->integer("discount");
+            $table->integer("discount")->nullable();
             $table->timestamps();
         });
     }
