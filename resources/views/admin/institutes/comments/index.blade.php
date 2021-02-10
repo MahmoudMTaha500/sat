@@ -1,7 +1,6 @@
 @extends('admin.app')
  @section('admin.content')
- {{$department_name='institutes'}}
- {{$page_name='institute'}}
+ 
 
  <div class="app-content content">
     <div class="content-wrapper">
@@ -19,17 +18,21 @@
             </div>
         </div>
         <div class="content-body">
-            <institutes-component 
-            :instutite_url="{{ json_encode(url('/dashboard/getinstitues')) }}"
-            :instutite_url_edit="{{ json_encode(url('/dashboard/institute/')) }}"
-            :csrftoken="{{ json_encode(csrf_token()) }}"
-            :aprove_route="{{json_encode(url('/dashboard/updateAprovement'))}}"
-            :path_logo="{{json_encode(asset('/'))}}"
-            :route_create="{{json_encode(url('/dashboard/institute/create'))}}"
+          
+          
+          
+            <comment-component
+            :url_comment="{{ json_encode(url('/dashboard/getcomment')) }}"  
+            :comment_route="{{ json_encode(url('/dashboard/comment')) }}"  
+            :aprove_route="{{json_encode(url('/dashboard/comment/updateAprovement'))}}"
+            
+            > 
+        </comment-component>
+        
+               
+                
+              </div>
 
-           
-            ></institutes-component>
-        </div>
     </div>
 </div>
 

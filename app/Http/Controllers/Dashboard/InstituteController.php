@@ -16,14 +16,14 @@ class InstituteController extends Controller
     public function index(Request $request)
     {
         $institutes = Institute::with('country', 'city')->paginate(5);
-        // dd($institutes);
+        $useVue = true ;
         if ($request->has('type')) {
             if ($request->type == 'vue_request') {
                 return response()->json(['institutes' => $institutes]);
             }
         }
     
-        return view('admin.institutes.index', compact('institutes'));
+        return view('admin.institutes.index', ['institutes' => $institutes,"useVue"=>$useVue]);
     }
     public function getInstitues(Request $request)
     {
@@ -65,9 +65,16 @@ class InstituteController extends Controller
 
         $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
         //   dd($pannerNamePath);
+        $slug = str_replace(' ', '-',$request->name_ar);
 
-        $institute = Institute::create([
+            
+   $InstituteExists = Institute::where(['country_id'=>$request->country_id,   "name_ar" => $request->name_ar,  "city_id" => $request->city_id,
+   ])->get();
+   if(empty( $InstituteExists)){
+
+            $institute = Institute::create([
             "name_ar" => $request->name_ar,
+            "slug" => $slug,
             "about_ar" => $request->about_ar,
             "country_id" => $request->country_id,
             "city_id" => $request->city_id,
@@ -79,21 +86,29 @@ class InstituteController extends Controller
             "active" => 1,
             "approvment" => 1,
 
-        ]);
+            ]);
 
-        $institute_id = $institute->id;
-        $questions = $request->questionList;
+            $institute_id = $institute->id;
+            $questions = $request->questionList;
 
-        foreach ($questions as $question) {
+            foreach ($questions as $question) {
             //    dump( $question['questions']);
             InstituteQuestion::create([
-                'institute_id' => $institute_id,
-                'question' => $question['questions'],
-                'answer' => $question['answer'],
+            'institute_id' => $institute_id,
+            'question' => $question['questions'],
+            'answer' => $question['answer'],
             ]);
-        }
-        session()->flash('alert_message', ['message' => 'تم اضافة المعهد بنجاح', 'icon' => 'success']);
-        return redirect()->route('institute.index');
+            }
+            session()->flash('alert_message', ['message' => 'تم اضافة المعهد بنجاح', 'icon' => 'success']);
+            return redirect()->route('institute.index');
+
+   } else{
+
+            session()->flash('alert_message', ['message' => ' هذا المعهد موجود بالفعل ', 'icon' => 'error']);
+            return redirect()->route('institute.index');
+
+   }
+       
     }
 
     public function show(Institute $institute)
@@ -117,7 +132,7 @@ class InstituteController extends Controller
     public function update(Request $request, Institute $institute)
     {
 
-        dd($request->all());
+        // dd($request->all());
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
         $institute->about_ar = $request->about_ar;
@@ -181,4 +196,17 @@ class InstituteController extends Controller
     {
         dd($institute);
     }
+
+      public function updateAprovement(Request $request){
+        //   dd($request->all());
+            $institute = Institute::find($request->institute_id);
+            $institute->approvment = $request->approvment;
+            $institute->save();
+            
+    //    return     session()->flash('alert_message', ['message' => 'تم تعديل الحاله بنجاح', 'icon' => 'success']);
+       
+      }
+
+
+
 }

@@ -16,6 +16,7 @@ class CreateInstitutesTable extends Migration
         Schema::create('institutes', function (Blueprint $table) {
             $table->id();
             $table->string("name_ar");
+            $table->string("slug");
             $table->text("about_ar");
             $table->string("logo");
             $table->string("banner");

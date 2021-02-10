@@ -9,6 +9,7 @@ class Institute extends Model
     protected $table = 'institutes';
     protected $fillable=[
         'name_ar',
+        'slug',
         'about_ar',
         'country_id',
         'city_id',
