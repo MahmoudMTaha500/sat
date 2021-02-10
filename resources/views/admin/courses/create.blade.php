@@ -43,13 +43,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">اسم الدورة</label>
-                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل اسم الدورة" name="name_ar" required />
+                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل اسم الدورة" name="name_ar" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left" name="institute_id" required>
+                                                    <select class="select2 form-control text-left" name="institute_id">
                                                         <option value=""  >اختر المعهد</option>
 
                                                         @foreach($institutes as $institute)
@@ -65,7 +65,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">الحد الأدنى للعمر </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="min_age" required />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="min_age" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -83,7 +83,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">وقت الدراسة</label>
-                                                    <select class="form-control text-left" name="study_period" required>
+                                                    <select class="form-control text-left" name="study_period">
                                                         <option value=" صباحي">صباحي</option>
                                                         <option value="مسائي">مسائي</option>
                                                     </select>
@@ -92,7 +92,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">درس/الأسبوع </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" required />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" />
                                                 </div>
                                             </div>
                                         </div>
@@ -101,13 +101,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">ساعات/أسبوع </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  required/>
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المستوى المطلوب</label>
-                                                    <select class="form-control text-left " name="required_level" required>
+                                                    <select class="form-control text-left " name="required_level">
                                                         <option value=" مبتدئ ">مبتدئ</option>
                                                         <option value=  "     متوسط "   >متوسط</option>
                                                         <option value="  متقدم  ">متقدم</option>
@@ -123,7 +123,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" required></textarea>
+                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc"></textarea>
                                                 </div>
                                             </div>
                                           
@@ -132,8 +132,8 @@
                                             <label for="projectinput3">سعر الكورس</label>
                                             <div data-repeater-list="coures_price">
                                                 <div class="input-group mb-1" data-repeater-item>
-                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control" id="example-tel-input"  name="num_of_weeks" required />
-                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control" id="example-tel-input" name="preice_per_week"  required />
+                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control" id="example-tel-input"  name="num_of_weeks" />
+                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control" id="example-tel-input" name="preice_per_week"  />
                                                     <span class="input-group-append" id="button-addon2">
                                                         <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                     </span>
