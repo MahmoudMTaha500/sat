@@ -9,7 +9,6 @@ use App\Models\Institute;
 use App\Models\InstituteQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
 class InstituteController extends Controller
 {
 
@@ -196,36 +195,52 @@ class InstituteController extends Controller
 
     public function destroy(Institute $institute)
     {
-        dd($institute);
-    }
+            $institute->delete();
+            session()->flash('alert_message', ['message' => 'تم مسح المعهد بنجاح', 'icon' => 'error']);
+            return back();
 
+    }
+    /************************************************************** */ 
+
+
+        public function archive(Request $request){
+
+        $institutes = Institute::onlyTrashed()->get();
+        return  view('admin.institutes.archives',['institutes'=>$institutes]);
+      
+        }
+    /************************************************************** */ 
+
+        public function restor(Request $request,$id){
+        $restor = Institute::where(['id'=>$id])->restore();
+        session()->flash('alert_message', ['message' => 'تم ارجاع المعهد بنجاح', 'icon' => 'success']);
+        return back();
+
+        }
+    /************************* */ 
       public function updateAprovement(Request $request){
-        //   dd($request->all());
             $institute = Institute::find($request->institute_id);
             $institute->approvment = $request->approvment;
             $institute->save();
-            
-    //    return     session()->flash('alert_message', ['message' => 'تم تعديل الحاله بنجاح', 'icon' => 'success']);
-       
       }
       public function filter(Request $request){
-          dump( $request->all());
           $country_id=$request->country_id;
           $city_id=$request->city_id;
           $name_ar=$request->name_ar;
-          if($request->country_id ){
-$institute = Institute::where(['country_id'=>$request->country_id,'city_id'=>$city_id])->get();
-dd($institute);        
-} 
-          dump( $request->all());
+          if($request->country_id && $city_id){
+                $institute = Institute::where(['country_id'=>$request->country_id , 'city_id'=>$city_id])->where("name_ar",'LIKE',"%{$request->name_ar}%")->with('country','city')->paginate(5);
+                return response()->json(['institute'=>$institute]);
+        }elseif($country_id && $name_ar){
+                $institute = Institute::where(['country_id'=>$request->country_id ])->where("name_ar",'LIKE',"%{$request->name_ar}%")->with('country','city')->paginate(5);
+                return response()->json(['institute'=>$institute]);
+          }  elseif($name_ar){
+                $institute = Institute::where("name_ar",'LIKE',"%{$request->name_ar}%")->with('country','city')->paginate(5);
+                return response()->json(['institute'=>$institute]);
+          } elseif($country_id){
+                $institute = Institute::where(['country_id'=>$request->country_id ])->with('country','city')->paginate(5);
+                return response()->json(['institute'=>$institute]);
 
-        // elseif($country_id && $city_id){
-
-        //   }  elseif($country_id){
-
-        //   } elseif($country_id){
-
-        //   }
+          }
       }
 
 

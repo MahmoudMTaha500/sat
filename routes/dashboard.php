@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::post('updateAprovement', 'InstituteController@updateAprovement');
 Route::post('filter', 'InstituteController@filter');
+
+
+Route::get('institute/restor/{id}', 'InstituteController@restor');
+Route::get('institute/archive', 'InstituteController@archive');
 Route::resource('institute', 'InstituteController');
 Route::get('getcomment', 'CommentController@getcomment');
 Route::post('comment/updateAprovement', 'CommentController@updateAprovement');

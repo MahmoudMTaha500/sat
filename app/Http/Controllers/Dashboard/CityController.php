@@ -102,8 +102,8 @@ class CityController extends Controller
     {
         $country_id = $request->countryID;
         $cities = City::where("country_id", $country_id)->get();
-        // return response()->json(['cities' => $cities]);
-dd($cities);
+        return response()->json(['cities' => $cities]);
+// dd($cities);
     }
 /****************************************************************************** */
     public function addCity(Request $request)

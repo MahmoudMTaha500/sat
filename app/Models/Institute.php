@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Institute extends Model
 {
+    use SoftDeletes;
     protected $table = 'institutes';
     protected $fillable=[
         'name_ar',
@@ -20,6 +22,8 @@ class Institute extends Model
         'rate_switch',
         'approvment',
     ];
+protected $date = ['deleted_at'];
+
 
     public function country()
     {

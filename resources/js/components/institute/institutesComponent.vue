@@ -77,7 +77,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="institute in institutes.data" :key="institute.id">
+                                <tr      v-for="institute in institutes.data" :key="institute.id">
                                     <td>{{institute.id}}</td>
                                     <td>  
                                         <img  style="max-width:100px"  :src="path_logo+institute.logo ">
@@ -184,7 +184,6 @@
 
       getcities: function () {
                 var country_id = this.selected;
-                //  alert( country_id);
                 axios
                     .get(this.dahsboard_url+"/getcities", {
                         params: {
@@ -225,7 +224,17 @@
             //   alert(this.selected_city);
             //   alert(this.name_ar
             //   );
-              axios.post(this.url_filtier,{'country_id': this.selected,'city_id':this.selected_city,'name_ar':this.name_ar},{headers:{"X-CSRFToken":"{{csrf_token()}}"}}).then((response)=>{
+              axios.post(this.url_filtier,{'country_id': this.selected,'city_id':this.selected_city,'name_ar':this.name_ar},{headers:{"X-CSRFToken":"{{csrf_token()}}"}})
+              .then((response)=>{  this.institutes =  response.data.institute;   
+
+//                   if( empty(response.data.institute.data)  ){
+
+// alert("لا يوجد نتائج ");
+
+// } else{
+
+              
+// }
 
               });
 
