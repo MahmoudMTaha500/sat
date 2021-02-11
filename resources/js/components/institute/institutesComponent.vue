@@ -109,7 +109,7 @@
                                         
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                         <a :href="instutite_url_edit +'/'+ institute.id+'/edit'"   class="btn btn-info btn-sm round">تعديل</a>
-                                        <a href="#"   class="btn btn-default btn-sm round">عرض</a>
+                                        <a :href="show_instutite_url +'/'+ institute.id"   class="btn btn-default btn-sm round">عرض</a>
                                         <form :action="instutite_url_edit +'/'+ institute.id" method="post"  class="btn-group">
                                             <input type="hidden" name="_token" :value="csrftoken" />
                                             <input type="hidden" name="_method" value="delete">
@@ -143,7 +143,7 @@
 <script>
 
     export default {
-        props: ["instutite_url", "instutite_url_edit", "csrftoken","aprove_route",'path_logo','route_create'],
+        props: ["instutite_url", "instutite_url_edit", "csrftoken","aprove_route",'path_logo','route_create' , 'show_instutite_url'],
         data() {
             return {
                 institutes: {}, 

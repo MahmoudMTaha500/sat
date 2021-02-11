@@ -25,6 +25,10 @@ class Institute extends Model
     {
         return $this->hasMany('App\Models\Country' , 'id' , 'country_id');
     }
+    public function courses()
+    {
+        return $this->hasMany('App\Models\Course' , 'institute_id' , 'id');
+    }
     
 
     public function city (){

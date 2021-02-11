@@ -113,7 +113,9 @@ class InstituteController extends Controller
 
     public function show(Institute $institute)
     {
-        //
+        $department_name = 'institutes';
+        $page_name = 'add-institute';
+        return view('admin.institutes.show', compact('department_name', 'page_name', 'institute'));
     }
 
     public function edit(Institute $institute)
