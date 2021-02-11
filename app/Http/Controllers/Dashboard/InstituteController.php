@@ -70,8 +70,8 @@ class InstituteController extends Controller
 
             
    $InstituteExists = Institute::where(['country_id'=>$request->country_id,   "name_ar" => $request->name_ar,  "city_id" => $request->city_id,
-   ])->get();
-   if(empty( $InstituteExists)){
+   ])->first();
+      if( empty($InstituteExists) ){
 
             $institute = Institute::create([
             "name_ar" => $request->name_ar,
@@ -85,7 +85,7 @@ class InstituteController extends Controller
             "sat_rate" => 1,
             "rate_switch" => 1,
             "active" => 1,
-            "approvment" => 1,
+            "approvement" => 1,
 
             ]);
 

@@ -20,7 +20,7 @@ class Institute extends Model
         'creator_id',
         'sat_rate',
         'rate_switch',
-        'approvment',
+        'approvement',
     ];
 protected $date = ['deleted_at'];
 

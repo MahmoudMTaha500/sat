@@ -2423,7 +2423,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['url_comment', 'comment_route', 'aprove_route'],
   data: function data() {
     return {
-      comments: '',
+      comments: {},
       url: this.url_comment,
       comment_id: '',
       aproveRoute: this.aprove_route

@@ -172,6 +172,8 @@ class CourseController extends Controller
         Course::find($course->id)->delete();
 
         // CoursePrice::where(["course_id"=>$course->id])->delete();    
+        session()->flash("alert_message",["message"=>'تم حذف الدورة',"icon"=>"error"]);
+
         return back()->with("success", 'تم الحذف الدورة');
 
 
