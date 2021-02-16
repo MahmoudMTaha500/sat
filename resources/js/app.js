@@ -25,6 +25,7 @@ import CommentComponent from './components/comment/CommentComponent';
 import RateComponent from './components/rate/RateComponent';
 import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
+import coursesComponent from "./components/course/coursesComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -35,6 +36,7 @@ const app = new Vue({
         startdateComponent,
         CommentComponent,
         RateComponent,
-        BlogIndexComponent
+        BlogIndexComponent,
+        coursesComponent
     }
 });
