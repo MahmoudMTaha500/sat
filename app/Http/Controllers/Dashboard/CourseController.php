@@ -18,7 +18,7 @@ class CourseController extends Controller
     public function index()
     {
         $institutes = institute::get();
-        $courses = Course::paginate(10);
+        $courses = Course::get();
         $countercourse = Course::get(); 
         // $countercourse->count();
         $count_courses = count($countercourse);

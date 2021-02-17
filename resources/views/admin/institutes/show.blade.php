@@ -86,7 +86,7 @@
                                 <tr>
                                     <td class="text-truncate">{{$course->name_ar}}</td>
                                     <td class="text-truncate">{{$course->institute->name_ar}}</td>
-                                    <td class="text-truncate">{{$course->institute->city->name_ar}}</td>
+                                    <td class="text-truncate">{{$course->institute->city[0]->name_ar}}</td>
                                     <td class="text-truncate">مقبول او مرفوض</td>
                                     <td class="text-truncate">5 طلابات</td>
                         
@@ -110,59 +110,7 @@
              
             </section>
 
-            <section id="timeline" class="timeline-center timeline-wrapper">
-                <h3 class="page-title text-center">طلابات الطلاب</h3>
-                <ul class="timeline">
-                  <li class="timeline-line"></li>
-                  
-                  <li class="timeline-item block">
-                    <div class="timeline-badge">
-                      <a title="" data-context="inverse" data-container="body" class="border-silc" href="#"
-                      data-original-title="block highlight"></a>
-                    </div>
-                    <div class="timeline-card card border-grey border-lighten-2">
-                      <div class="card-header">
-                        <div class="text-center">
-                          <table id="recent-orders" class="table table-hover table-xl mb-0">
-                              <thead>
-                                  <tr>
-                                      <th class="border-top-0">اسم الدورة</th>
-                                      <th class="border-top-0">اسم المعهد</th>
-                                      <th class="border-top-0">المدينة</th>
-                                      <th class="border-top-0">عدد الطلابات</th>
-                                      <th class="border-top-0">الحالة</th>
-                                      <th class="border-top-0">اكشن</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                                  <style></style>
-                                  @foreach($institute->courses as $course)
-                                  <tr>
-                                      <td class="text-truncate">{{$course->name_ar}}</td>
-                                      <td class="text-truncate">{{$course->institute->name_ar}}</td>
-                                      <td class="text-truncate">{{$course->institute->city->name_ar}}</td>
-                                      <td class="text-truncate">مقبول او مرفوض</td>
-                                      <td class="text-truncate">5 طلابات</td>
-                          
-                                      <td>
-                                          <a href="{{route('courses.edit',$course->id)}}" class="dropdown-item"><i class="la la-pencil"></i> تعديل</a>
-                                          <form action="{{route('courses.destroy',$course->id)}}" method="POST">
-                                              @csrf @method('delete')
-                                              <button href="" class="dropdown-item"><i class="la la-trash"></i> حذف</button>
-                                          </form>
-                                      </td>
-                                  </tr>
-                                  @endforeach
-                              </tbody>
-                          </table>
-                          
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-               
-              </section>
+            
           </div>
     </div>
 </div>

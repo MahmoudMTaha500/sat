@@ -28,11 +28,11 @@
                     <li   class="{{ $page_name == 'comment' ? 'active' : ''}}">
                         <a    class="menu-item" href="{{route('comment.index')}}" data-i18n="nav.navbars.nav_dark">التعليقات</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/institutes/rating.php?page=institutes" data-i18n="nav.navbars.nav_dark">التقيمات</a>
+                    <li   class="{{ $page_name == 'rate' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('rate.index')}}" data-i18n="nav.navbars.nav_dark">التقيمات</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/institutes/archives.php?page=institutes" data-i18n="nav.navbars.nav_semi">الارشيف</a>
+                    <li  class="{{ $page_name == 'archive' ? 'active' : ''}}">
+                        <a class="menu-item"  href="{{url('/dashboard/institute/archive')}}" data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
             </li>

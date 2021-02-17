@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Institute extends Model
 {
+    use SoftDeletes;
     protected $table = 'institutes';
     protected $fillable=[
         'name_ar',
@@ -18,8 +20,10 @@ class Institute extends Model
         'creator_id',
         'sat_rate',
         'rate_switch',
-        'approvment',
+        'approvement',
     ];
+protected $date = ['deleted_at'];
+
 
     public function country()
     {
@@ -32,7 +36,10 @@ class Institute extends Model
     
 
     public function city (){
-        return $this->hasOne("App\Models\City",'id','city_id');
+        return $this->hasMany("App\Models\City",'id','city_id');
+    }
+    public function rats (){
+        return $this->hasMany("App\Models\InstituteRate",'institute_id','id');
     }
 
     

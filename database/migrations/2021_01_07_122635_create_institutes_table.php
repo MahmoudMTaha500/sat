@@ -29,6 +29,7 @@ class CreateInstitutesTable extends Migration
             $table->integer("sat_rate");
             $table->integer("rate_switch");
             $table->integer("approvement");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

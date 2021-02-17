@@ -14,8 +14,30 @@ class InstituteRateController extends Controller
      */
     public function index()
     {
-        //
-    }
+    $rates  = InstituteRate::with('institute','student')->get();
+          
+    $department_name = 'institutes';
+    $page_name = 'rate';
+    $useVue = true;
+    return  view("admin.institutes.rates.index", compact( 'useVue','rates','department_name','page_name'));
+    
+}
+
+   public function getrates(){
+    $rates  = InstituteRate::with('institute','student')->get();
+
+    return response()->json(['rates'=>$rates]);
+
+   }
+
+
+public function updaterate(Request $request){
+// dd($request->all());
+$rate = InstituteRate::find($request->rate_id);
+$rate->rate = $request->rate;
+$rate->save();
+}
+
 
     /**
      * Show the form for creating a new resource.
