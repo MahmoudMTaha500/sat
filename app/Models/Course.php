@@ -9,27 +9,28 @@ class Course extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = [
+        'name_ar',
+        'about_ar',
+        'institute_id',
+        'creator_id',
+        'min_age',
+        'start_day',
+        'study_period',
+        'lessons_per_week',
+        'hours_per_week',
+        'required_level',
+        'discount',
+        'approvment',
+    ];
+    protected $date = ['deleted_at'];
 
-    protected $fillable  = [
-                        'name_ar',
-                        'about_ar',
-                        'institute_id',
-                        'creator_id',
-                        'min_age',
-                        'start_day',
-                        'study_period',
-                        'lessons_per_week',
-                        'hours_per_week',
-                        'required_level',
-                        'discount',
-                        'approvment'
-                ];
-protected $date = ['deleted_at'];
-
-                public function institute(){
-                   return   $this->hasOne('App\Models\Institute' , 'id', 'institute_id');
-                }
-                public function coursesPrice(){
-                    return $this->hasMany('App\Models\CoursePrice','id','course_id');
-                }
+    public function institute()
+    {
+        return $this->belongsTo('App\Models\Institute', 'institute_id', 'id');
+    }
+    public function coursesPrice()
+    {
+        return $this->hasMany('App\Models\CoursePrice', 'course_id', 'id');
+    }
 }

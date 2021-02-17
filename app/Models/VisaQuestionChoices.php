@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisaQuestionChoices extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'choice_ar',
         'question_id',
     ];
 
     public function question()
     {
-        return $this->hasOne('App\Models\VisaQuestion' , 'id' , 'question_id');
+        return $this->belongsTo('App\Models\VisaQuestion', 'question_id', 'id');
     }
 }

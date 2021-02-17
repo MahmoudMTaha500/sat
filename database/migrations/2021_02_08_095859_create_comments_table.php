@@ -21,6 +21,7 @@ class CreateCommentsTable extends Migration
             $table->string("element_type");
             $table->bigInteger("element_id")->unsigned();
             $table->integer("approvement");
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -2,9 +2,8 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('getinstitues', 'InstituteController@getInstitues');
-Route::post('updateAprovement', 'InstituteController@updateAprovement');
+Route::post('update-institute-aprovement', 'InstituteController@updateAprovement');
 Route::post('filter', 'InstituteController@filter');
-
 
 Route::get('institute/restor/{id}', 'InstituteController@restor');
 Route::get('institute/archive', 'InstituteController@archive');
@@ -18,26 +17,9 @@ Route::get('getrate', 'InstituteRateController@getrates');
 Route::post('updaterate', 'InstituteRateController@updaterate');
 Route::resource('rate', 'InstituteRateController');
 
-
-
-/*********************************************  start Country Routs **************************************************************************************************** */
-
-// Route::get("/country","countryController@index");
-// Route::get('/getcountries',"countryController@show");
-// Route::get('/addcountry',"countryController@create");
-// Route::post('/addcountry',"countryController@store");
-// Route::get('/updateCountry/{id}',"countryController@edit");
-// Route::post('/updateCountry',"countryController@update");
-// Route::get('/deleteCountry/{id}',"countryController@delete");
-/*********************************************  end Country Routs **************************************************************************************************** */
-
-
-/*********************************************  start City Routs **************************************************************************************************** */
-  
 /**********************************Axios Route city ************************************************************************************** */
-Route::get("getcities","CityController@getCities");
-Route::post("addCity","CityController@addCity");
-
+Route::get("getcities", "CityController@getCities");
+Route::post("addCity", "CityController@addCity");
 
 // Institute Route
 Route::resource('institute', 'InstituteController');
@@ -49,7 +31,7 @@ Route::resource('cities', 'CityController');
 
 Route::get('filtercourses', 'CourseController@filtercourses');
 Route::get('getcourses', 'CourseController@getCourses');
-Route::post('updateAprovement', 'CourseController@updateAprovement');
+Route::post('update-course-aprovement', 'CourseController@updateAprovement');
 
 Route::get('courses/restor/{id}', 'CourseController@restor');
 Route::get('courses/archive', 'CourseController@archive');
@@ -65,5 +47,3 @@ Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blo
 Route::resource('blog_categories', 'BlogCategoryController');
 // Student Route
 Route::resource('students', 'StudentController');
-
-

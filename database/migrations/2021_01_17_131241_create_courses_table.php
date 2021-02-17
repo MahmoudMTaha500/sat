@@ -30,7 +30,6 @@ class CreateCoursesTable extends Migration
             $table->string("required_level");
             $table->integer("discount")->nullable();
             $table->softDeletes();
-
             $table->timestamps();
         });
     }

@@ -19,11 +19,11 @@ class Blog extends Model
 
     public function creator()
     {
-        return $this->hasOne('App\User' , 'id' , 'creator_id');
+        return $this->belongsTo('App\User', 'creator_id', 'id');
     }
 
     public function category()
     {
-        return $this->hasOne('App\Models\BlogCategory' , 'id' , 'category_id');
+        return $this->belongsTo('App\Models\BlogCategory', 'category_id', 'id');
     }
 }

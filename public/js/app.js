@@ -2584,21 +2584,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['course_url', 'dahsboard_url', 'course_url', 'countries_from_blade', 'institutes', 'csrftoken'],
+  props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken"],
   data: function data() {
     return {
       courses: {},
@@ -2607,7 +2594,7 @@ __webpack_require__.r(__webpack_exports__);
       selected_city: "",
       countries: this.countries_from_blade,
       cities: {},
-      selected_institute: '',
+      selected_institute: "",
       name_ar: "",
       course_id: ""
     };
@@ -2635,30 +2622,30 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this2.cities = response.data.cities;
       });
+
+      if (this.country_id == null) {
+        this.selected_city = null;
+      }
     },
     filterCoureses: function filterCoureses() {
       var _this3 = this;
 
-      //   alert(this.selected_institute);
-      //        alert(this.selected);
-      //   alert(this.selected_city);
-      //   alert(this.name_ar);
-      axios.get(this.dahsboard_url + '/filtercourses', {
+      axios.get(this.dahsboard_url + "/filtercourses", {
         params: {
-          'institute_id': this.selected_institute,
-          "country_id": this.selected,
-          'city_id': this.selected_city,
-          "name_ar": this.name_ar
+          institute_id: this.selected_institute,
+          country_id: this.selected,
+          city_id: this.selected_city,
+          name_ar: this.name_ar
         }
       }).then(function (response) {
         return _this3.courses = response.data.courses;
-      }); //   this.coursesPagination();
+      });
     },
     updateApprovment: function updateApprovment(e) {
       var newValue = e.target.checked;
-      axios.post(this.dahsboard_url + '/updateAprovement', {
-        "course_id": this.course_id,
-        "approvment": newValue
+      axios.post(this.dahsboard_url + "/update-course-aprovement", {
+        course_id: this.course_id,
+        approvment: newValue
       }, {
         headers: {
           "X-CSRFToken": "{{ csrf_token()}}"
@@ -41179,7 +41166,7 @@ var render = function() {
                           expression: "selected_city"
                         }
                       ],
-                      staticClass: "  form-control ",
+                      staticClass: "form-control",
                       attrs: { id: "city", name: "city_id", required: "" },
                       on: {
                         change: function($event) {
@@ -41324,7 +41311,7 @@ var render = function() {
                       _vm._l(_vm.courses.data, function(course) {
                         return _c("tr", { key: course.id }, [
                           _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(" " + _vm._s(course.name_ar))
+                            _vm._v(_vm._s(course.name_ar))
                           ]),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
@@ -41332,7 +41319,11 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(_vm._s(course.institute.city[0].name_ar))
+                            _vm._v(_vm._s(course.institute.city.name_ar))
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-truncate" }, [
+                            _vm._v("5 طلابات")
                           ]),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
@@ -41396,10 +41387,6 @@ var render = function() {
                                 )
                               )
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v("5 طلابات")
                           ]),
                           _vm._v(" "),
                           _c("td", [
@@ -41502,7 +41489,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                        Previos\n                                        "
+                        "\n                                Previos\n                            "
                       )
                     ]
                   ),
@@ -41513,7 +41500,7 @@ var render = function() {
                         _vm._s(_vm.courses.current_page) +
                         " of " +
                         _vm._s(_vm.courses.last_page) +
-                        "  "
+                        " "
                     )
                   ]),
                   _vm._v(" "),
@@ -41532,7 +41519,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                        Next\n                                        "
+                        "\n                                Next\n                            "
                       )
                     ]
                   )
@@ -41554,7 +41541,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
-        [_vm._v("البحث في المعاهد")]
+        [_vm._v("البحث في المدن")]
       ),
       _vm._v(" "),
       _c(
@@ -41904,9 +41891,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(institute.name_ar))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(institute.country[0].name_ar))]),
+                      _c("td", [_vm._v(_vm._s(institute.country.name_ar))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(institute.city[0].name_ar))]),
+                      _c("td", [_vm._v(_vm._s(institute.city.name_ar))]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
                         _vm._v("5 كورسات")
@@ -56860,7 +56847,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-throw new Error("Module build failed (from ./node_modules/css-loader/index.js):\nModuleBuildError: Module build failed (from ./node_modules/sass-loader/dist/cjs.js):\nSassError: Can't find stylesheet to import.\n  ╷\n8 │ @import '~bootstrap/scss/bootstrap';\n  │         ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  ╵\n  C:\\wamp64\\www\\sat-laravel\\resources\\sass\\app.scss 8:9  root stylesheet\n    at C:\\wamp64\\www\\sat-laravel\\node_modules\\webpack\\lib\\NormalModule.js:316:20\n    at C:\\wamp64\\www\\sat-laravel\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\wamp64\\www\\sat-laravel\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\wamp64\\www\\sat-laravel\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at C:\\wamp64\\www\\sat-laravel\\node_modules\\sass-loader\\dist\\index.js:73:7\n    at Function.call$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:90950:16)\n    at _render_closure1.call$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:79870:12)\n    at _RootZone.runBinary$3$3 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:27175:18)\n    at _FutureListener.handleError$1 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25703:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:26000:49)\n    at Object._Future__propagateToListeners (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4539:77)\n    at _Future._completeError$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25833:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25176:12)\n    at Object._asyncRethrow (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4288:17)\n    at C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:13184:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4313:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25197:12)\n    at _awaitOnObject_closure0.call$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25189:25)\n    at _RootZone.runBinary$3$3 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:27175:18)\n    at _FutureListener.handleError$1 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25703:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:26000:49)\n    at Object._Future__propagateToListeners (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4539:77)\n    at _Future._completeError$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25833:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25176:12)\n    at Object._asyncRethrow (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4288:17)\n    at C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:17963:20\n    at _wrapJsFunctionForAsync_closure.$protected (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4313:15)\n    at _wrapJsFunctionForAsync_closure.call$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25197:12)\n    at _awaitOnObject_closure0.call$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25189:25)\n    at _RootZone.runBinary$3$3 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:27175:18)\n    at _FutureListener.handleError$1 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25703:19)\n    at _Future__propagateToListeners_handleError.call$0 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:26000:49)\n    at Object._Future__propagateToListeners (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4539:77)\n    at _Future._completeError$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25833:9)\n    at _AsyncAwaitCompleter.completeError$2 (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:25176:12)\n    at Object._asyncRethrow (C:\\wamp64\\www\\sat-laravel\\node_modules\\sass\\sass.dart.js:4288:17)");
+// removed by extract-text-webpack-plugin
 
 /***/ }),
 

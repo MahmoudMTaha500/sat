@@ -6,15 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisaCategory extends Model
 {
-    
 
-    protected $fillable=[
+    protected $fillable = [
         'creator_id',
-        'name_ar'
+        'name_ar',
     ];
 
     public function creator()
     {
-        return $this->hasOne('App\Models\User' , 'id' , 'creator_id');
+        return $this->belongsTo('App\Models\User', 'creator_id', 'id');
     }
 }

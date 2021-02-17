@@ -9,7 +9,7 @@ class Institute extends Model
 {
     use SoftDeletes;
     protected $table = 'institutes';
-    protected $fillable=[
+    protected $fillable = [
         'name_ar',
         'slug',
         'about_ar',
@@ -22,25 +22,23 @@ class Institute extends Model
         'rate_switch',
         'approvement',
     ];
-protected $date = ['deleted_at'];
+    protected $date = ['deleted_at'];
 
-
-    public function country()
-    {
-        return $this->hasMany('App\Models\Country' , 'id' , 'country_id');
-    }
     public function courses()
     {
-        return $this->hasMany('App\Models\Course' , 'institute_id' , 'id');
+        return $this->hasMany('App\Models\Course', 'institute_id', 'id');
     }
-    
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Country', 'country_id', 'id');
+    }
+    public function city()
+    {
+        return $this->belongsTo("App\Models\City", 'city_id', 'id');
+    }
+    public function rats()
+    {
+        return $this->hasMany("App\Models\InstituteRate", 'institute_id', 'id');
+    }
 
-    public function city (){
-        return $this->hasMany("App\Models\City",'id','city_id');
-    }
-    public function rats (){
-        return $this->hasMany("App\Models\InstituteRate",'institute_id','id');
-    }
-
-    
 }

@@ -20,7 +20,7 @@
                 :instutite_url="{{ json_encode(url('/dashboard/getinstitues')) }}"
                 :instutite_url_edit="{{ json_encode(url('/dashboard/institute/')) }}"
                 :csrftoken="{{ json_encode(csrf_token()) }}"
-                :aprove_route="{{json_encode(url('/dashboard/updateAprovement'))}}"
+                :aprove_route="{{json_encode(url('/dashboard/update-institute-aprovement'))}}"
                 :path_logo="{{json_encode(asset('/'))}}"
                 :route_create="{{json_encode(url('/dashboard/institute/create'))}}"
                 :show_instutite_url="{{json_encode(route('institute.index'))}}"

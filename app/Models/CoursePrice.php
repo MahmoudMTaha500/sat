@@ -9,12 +9,11 @@ class CoursePrice extends Model
 {
     use SoftDeletes;
 
-    protected $fillable  = [
-                            'weeks',
-                            'price',
-                            'course_id',
-                        ];
-protected $date = ['deleted_at'];
+    protected $fillable = [
+        'weeks',
+        'price',
+        'course_id',
+    ];
+    protected $date = ['deleted_at'];
 
-                        
 }

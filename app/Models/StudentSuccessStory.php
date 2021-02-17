@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentSuccessStory extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'storey',
         'student_id',
         'approvement',

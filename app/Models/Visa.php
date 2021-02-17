@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visa extends Model
 {
-    protected $fillable=[
+    protected $fillable = [
         'category_id',
         'country_id',
         'creator_id',
@@ -16,18 +16,18 @@ class Visa extends Model
 
     public function category()
     {
-        return $this->hasOne('App\Models\VisaCategory' , 'id' , 'category_id');
+        return $this->belongsTo('App\Models\VisaCategory', 'category_id', 'id');
     }
     public function country()
     {
-        return $this->hasOne('App\Models\Country' , 'id' , 'country_id');
+        return $this->belongsTo('App\Models\Country', 'country_id', 'id');
     }
     public function creator()
     {
-        return $this->hasOne('App\Models\User' , 'id' , 'creator_id');
+        return $this->belongsTo('App\Models\User', 'id', 'creator_id');
     }
     public function questions()
     {
-        return $this->hasMany('App\Models\VisaQuestion' , 'visa_id' , 'id');
+        return $this->hasMany('App\Models\VisaQuestion', 'visa_id', 'id');
     }
 }

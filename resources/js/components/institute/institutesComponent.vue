@@ -83,8 +83,8 @@
                                         <img style="max-width: 100px;" :src="path_logo+institute.logo " />
                                     </td>
                                     <td>{{institute.name_ar}}</td>
-                                    <td>{{institute.country[0].name_ar}}</td>
-                                    <td>{{institute.city[0].name_ar}}</td>
+                                    <td>{{institute.country.name_ar}}</td>
+                                    <td>{{institute.city.name_ar}}</td>
                                     <td class="text-truncate">5 كورسات</td>
                                     <td class="text-truncate">
                                         <div id="read-only-stars" data-score="1"></div>
@@ -134,7 +134,18 @@
 
 <script>
     export default {
-        props: ["instutite_url", "instutite_url_edit", "csrftoken", "aprove_route", "path_logo", "route_create", "countries_from_blade", "dahsboard_url", "url_filtier", "show_instutite_url"],
+        props: [
+                "instutite_url", 
+                "instutite_url_edit", 
+                "csrftoken", 
+                "aprove_route", 
+                "path_logo", 
+                "route_create", 
+                "countries_from_blade",
+                "dahsboard_url", 
+                "url_filtier", 
+                "show_instutite_url"
+            ],
         data() {
             return {
                 institutes: {},

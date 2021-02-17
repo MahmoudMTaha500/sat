@@ -8,17 +8,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class InstituteRate extends Model
 {
     use SoftDeletes;
-    protected $fillable=[
+    protected $fillable = [
         'rate',
         'student_id',
         'institute_id',
     ];
 
     protected $date = ['deleted_at'];
-    public function institute(){
-        return $this->hasOne("App\Models\Institute",'id','institute_id');
+    public function institute()
+    {
+        return $this->belongsTo("App\Models\Institute", 'institute_id', 'id');
     }
-    public function student(){
-        return $this->hasOne("App\Models\Student",'id','student_id');
+    public function student()
+    {
+        return $this->belongsTo("App\Models\Student", 'student_id', 'id');
     }
 }

@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Comment extends Model
 {
-    protected $tabel ='comments';
+    use SoftDeletes;
+    protected $tabel = 'comments';
     protected $fillable = [
         'comment',
         'commenter_id',
@@ -15,11 +17,13 @@ class Comment extends Model
         'approvement',
     ];
 
-    public function institute(){
-        return $this->hasOne("App\Models\Institute",'id','element_id');
+    public function institute()
+    {
+        return $this->belongsTo("App\Models\Institute", 'element_id', 'id');
     }
-   
-    public function student(){
-        return $this->hasOne("App\Models\Student",'id','commenter_id');
+
+    public function student()
+    {
+        return $this->belongsTo("App\Models\Student", 'commenter_id', 'id');
     }
 }

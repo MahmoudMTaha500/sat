@@ -53,7 +53,7 @@
                               <tr>  
                                   <td class="text-truncate"> {{$course->name_ar}}</td>
                                   <td class="text-truncate">{{$course->institute->name_ar}}</td>
-                                  <td class="text-truncate">{{$course->institute->city[0]->name_ar}}</td>
+                                  <td class="text-truncate">{{$course->institute->city->name_ar}}</td>
                                
                                   <td class="text-truncate">5 طلابات</td>
 
