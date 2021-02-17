@@ -134,8 +134,8 @@
                                             <div data-repeater-list="coures_price">
                                               @foreach($course_prices as $price)
                                                 <div class="input-group mb-1" data-repeater-item>
-                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control" id="example-tel-input"  name="num_of_weeks" required  value="{{$price->weeks}}"/>
-                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control" id="example-tel-input" name="preice_per_week"  required  value="{{$price->price}}"/>
+                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control  vaildate" id="example-tel-input"  name="num_of_weeks"   value="{{$price->weeks}}"/>
+                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control  vaildate" id="example-tel-input" name="preice_per_week"    value="{{$price->price}}"/>
                                                     <span class="input-group-append" id="button-addon2">
                                                         <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                     </span>
@@ -153,7 +153,7 @@
                                             </div>
 
                                             <div class="form-actions center">
-                                                <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
+                                                <button type="submit" class="btn btn-primary w-100  test-btn"><i class="la la-check-square-o"></i> حفظ</button>
                                             </div>
                                         </div>
                                     </div>
@@ -167,4 +167,27 @@
     </div>
 </div>
 
+@endsection
+@section('admin.custom-js-scripts')
+    <script>
+         function vaildate(){
+$('form').submit(function(e) {
+      var err = 0;
+      $('.vaildate').each(function(e){
+            // alert(this.value);
+            if (!$(this).val()) {
+              err = 1;
+            }
+        });
+      if (err != 0) {
+alert("يرجي ادخل اسعار الدورة");
+        return false;
+      }
+    //   console.log('submitted');
+    });
+    }
+    $(document).on('click' , '.test-btn' , function(){
+      vaildate()
+    })
+    </script>
 @endsection

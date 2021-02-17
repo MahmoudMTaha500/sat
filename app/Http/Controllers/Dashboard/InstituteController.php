@@ -31,8 +31,15 @@ class InstituteController extends Controller
     public function getInstitues(Request $request)
     {
 
+<<<<<<< HEAD
         $institutes = Institute::with('country', 'city')->paginate(5);
         return response()->json(['institutes' => $institutes]);
+=======
+        $institutes = Institute::with('country','city')->paginate(10);
+        // dd($institutes);
+             
+        return response()->json(['institutes' => $institutes]); 
+>>>>>>> 6483a93a4c3f585863e859c78bbd5f11708bca71
 
     }
 
@@ -65,6 +72,7 @@ class InstituteController extends Controller
         $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
         $slug = str_replace(' ', '-', $request->name_ar);
 
+<<<<<<< HEAD
         $InstituteExists = Institute::where(['country_id' => $request->country_id, "name_ar" => $request->name_ar, "city_id" => $request->city_id,
         ])->get();
         if (!empty($InstituteExists)) {
@@ -82,6 +90,26 @@ class InstituteController extends Controller
                 "rate_switch" => 1,
                 "active" => 1,
                 "approvement" => 1,
+=======
+            
+   $InstituteExists = Institute::where(['country_id'=>$request->country_id,   "name_ar" => $request->name_ar,  "city_id" => $request->city_id,
+   ])->first();
+      if( empty($InstituteExists) ){
+
+            $institute = Institute::create([
+            "name_ar" => $request->name_ar,
+            "slug" => $slug,
+            "about_ar" => $request->about_ar,
+            "country_id" => $request->country_id,
+            "city_id" => $request->city_id,
+            "logo" => $logoNamePath,
+            "banner" => $pannerNamePath,
+            "creator_id" => 1,
+            "sat_rate" => 1,
+            "rate_switch" => 1,
+            "active" => 1,
+            "approvement" => 1,
+>>>>>>> 6483a93a4c3f585863e859c78bbd5f11708bca71
 
             ]);
 
@@ -212,6 +240,7 @@ class InstituteController extends Controller
         session()->flash('alert_message', ['message' => 'تم ارجاع المعهد بنجاح', 'icon' => 'success']);
         return back();
 
+<<<<<<< HEAD
     }
     /************************* */
     public function updateAprovement(Request $request)
@@ -237,6 +266,35 @@ class InstituteController extends Controller
         } elseif ($country_id) {
             $institute = Institute::where(['country_id' => $request->country_id])->with('country', 'city')->paginate(5);
             return response()->json(['institute' => $institute]);
+=======
+        }
+    /************************* */ 
+      public function updateAprovement(Request $request){
+            $institute = Institute::find($request->institute_id);
+            $institute->approvment = $request->approvment;
+            $institute->save();
+      }
+      public function filter(Request $request){
+          $country_id=$request->country_id;
+          $city_id=$request->city_id;
+          $name_ar=$request->name_ar;
+          if($request->country_id && $city_id){
+                $institute = Institute::where(['country_id'=>$request->country_id , 'city_id'=>$city_id])->where("name_ar",'LIKE',"%{$request->name_ar}%")->with('country','city')->paginate(10);
+                return response()->json(['institute'=>$institute]);
+        }elseif($country_id && $name_ar){
+                $institute = Institute::where(['country_id'=>$request->country_id ])->where("name_ar",'LIKE',"%{$request->name_ar}%")->with('country','city')->paginate(10);
+                return response()->json(['institute'=>$institute]);
+          }  elseif($name_ar){
+                $institute = Institute::where("name_ar",'LIKE',"%{$request->name_ar}%")->with('country','city')->paginate(10);
+                return response()->json(['institute'=>$institute]);
+          } elseif($country_id){
+                $institute = Institute::where(['country_id'=>$request->country_id ])->with('country','city')->paginate(10);
+                return response()->json(['institute'=>$institute]);
+
+          }
+      }
+
+>>>>>>> 6483a93a4c3f585863e859c78bbd5f11708bca71
 
         }
     }

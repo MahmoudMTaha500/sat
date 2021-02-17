@@ -72,7 +72,7 @@ export default {
   
     data() {
             return {
-                comments:''  ,
+                comments:{}  ,
              url:this.url_comment, 
              comment_id:'',
              aproveRoute: this.aprove_route,

@@ -48,8 +48,8 @@
                     <li class="{{ $page_name == 'add-course' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('courses.create')}}" data-i18n="nav.navbars.nav_dark">اضافة دورة جديدة</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/courses/archives.php?page=courses" data-i18n="nav.navbars.nav_semi">الارشيف</a>
+                    <li class="{{ $page_name == 'archive_course' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{url('dashboard/courses/archive')}}" data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
             </li>

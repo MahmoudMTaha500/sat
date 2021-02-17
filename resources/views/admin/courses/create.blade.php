@@ -36,6 +36,7 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
+                                @include('admin.includes.errors')
                                 <form class="form" method="POST" action="{{route('courses.store')}}">
                                     @csrf
                                     <div class="form-body">
@@ -123,7 +124,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc"></textarea>
+                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" ></textarea>
                                                 </div>
                                             </div>
                                           
@@ -132,8 +133,8 @@
                                             <label for="projectinput3">سعر الكورس</label>
                                             <div data-repeater-list="coures_price">
                                                 <div class="input-group mb-1" data-repeater-item>
-                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control" id="example-tel-input"  name="num_of_weeks" />
-                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control" id="example-tel-input" name="preice_per_week"  />
+                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input"  name="num_of_weeks" />
+                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control   vaildate" id="example-tel-input" name="preice_per_week"  />
                                                     <span class="input-group-append" id="button-addon2">
                                                         <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                     </span>
@@ -150,7 +151,7 @@
                                             </div>
 
                                             <div class="form-actions center">
-                                                <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
+                                                <button type="submit" class="btn btn-primary w-100 test-btn"  ><i class="la la-check-square-o"></i> حفظ</button>
                                             </div>
                                         </div>
                                     </div>
@@ -164,4 +165,30 @@
     </div>
 </div>
 
+
+
+@endsection
+
+@section('admin.custom-js-scripts')
+    <script>
+         function vaildate(){
+$('form').submit(function(e) {
+      var err = 0;
+      $('.vaildate').each(function(e){
+            // alert(this.value);
+            if (!$(this).val()) {
+              err = 1;
+            }
+        });
+      if (err != 0) {
+alert("يرجي ادخل اسعار الدورة");
+        return false;
+      }
+    //   console.log('submitted');
+    });
+    }
+    $(document).on('click' , '.test-btn' , function(){
+      vaildate()
+    })
+    </script>
 @endsection

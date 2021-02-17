@@ -46,6 +46,13 @@ Route::resource('countries', 'CountryController');
 // City Route
 Route::resource('cities', 'CityController');
 // Course Route
+
+Route::get('filtercourses', 'CourseController@filtercourses');
+Route::get('getcourses', 'CourseController@getCourses');
+Route::post('updateAprovement', 'CourseController@updateAprovement');
+
+Route::get('courses/restor/{id}', 'CourseController@restor');
+Route::get('courses/archive', 'CourseController@archive');
 Route::resource('courses', 'CourseController');
 // Visa Route
 Route::resource('visas', 'VisaController');

@@ -17,7 +17,6 @@ class CommentController extends Controller
     { 
 
         $comments =  Comment::where(['element_type'=>"institute"])->paginate(10);
-        // dd($comments);
            
         $department_name = 'comment';
         $page_name = 'comment';

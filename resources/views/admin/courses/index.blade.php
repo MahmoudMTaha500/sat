@@ -16,6 +16,7 @@
             </div>
         </div>
         <div class="content-body">
+<<<<<<< HEAD
             <!-- Recent Transactions -->
             <div class="row">
                 <div id="recent-transactions" class="col-12">
@@ -53,29 +54,22 @@
                                         <td class="text-truncate">{{$course->institute->city[0]->name_ar}}</td>
                                         <td class="text-truncate">مقبول او مرفوض</td>
                                         <td class="text-truncate">5 طلابات</td>
+=======
+>>>>>>> 6483a93a4c3f585863e859c78bbd5f11708bca71
 
-                                        <td>
-                                           
-                                                    <a href="{{route('courses.edit',$course->id)}}" class="dropdown-item"><i class="la la-pencil"></i> تعديل</a>
-                                                    <form action="{{route('courses.destroy',$course->id)}}" method="POST">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button href="" class="dropdown-item"><i class="la la-trash"></i> حذف</button>
 
-                                                    </form>
-                                                
-                                            
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {{$courses->links()}}
+            <courses-component
+            :course_url="{{json_encode(url('/dashboard/getcourses'))}}"
+            :dahsboard_url="{{ json_encode(url('/dashboard')) }}"   
+            :countries_from_blade="{{ json_encode($countries) }}"
+            :institutes="{{ json_encode($institutes) }}"
+            :csrftoken="{{ json_encode(csrf_token()) }}"
+
+
+            ></courses-component>
+            <!-- Recent Transactions -->
+       
+            {{-- {{$courses->links()}} --}}
             <!--/ Recent Transactions -->
         </div>
     </div>

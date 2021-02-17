@@ -19,7 +19,8 @@ class CreateCoursePricesTable extends Migration
             $table->integer("price");
             $table->bigInteger("course_id")->unsigned();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->integer("approvement");
+            $table->softDeletes();
+           
             $table->timestamps();
         });
     }

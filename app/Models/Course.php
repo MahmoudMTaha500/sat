@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Course extends Model
 {
+    use SoftDeletes;
+
 
     protected $fillable  = [
                         'name_ar',
@@ -19,7 +22,9 @@ class Course extends Model
                         'hours_per_week',
                         'required_level',
                         'discount',
+                        'approvment'
                 ];
+protected $date = ['deleted_at'];
 
                 public function institute(){
                    return   $this->hasOne('App\Models\Institute' , 'id', 'institute_id');
