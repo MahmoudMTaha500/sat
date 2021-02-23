@@ -1,7 +1,7 @@
 <template>
     <div class="row">
         <div class="col-12">
-             <div class="card">
+            <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">المقالات ({{ blogs.total }})</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
@@ -29,17 +29,15 @@
                                         <div class="form-group">
                                             <label class="font-medium-2 text-bold-600">الكاتب</label>
                                             <select v-model="user_id" class="form-control" name="fname">
-                                                <option value="" selected="" disabled="">اختر الكاتب</option>
-                                                <option  v-for="user in users" :key="user.id" :value="user.id"> {{user.name}}</option>
-                                               
+                                                <option value="">اختر الكاتب</option>
+                                                <option v-for="user in users" :key="user.id" :value="user.id"> {{user.name}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="font-medium-2 text-bold-600">التصنيف</label>
-                                            <select  v-model="cat_id" class="form-control" name="fname">
-                                                <option value="" selected="" disabled="">اختر التصنيف</option>
-                                                <option  v-for="cat in categories" :key="cat.id"  :value="cat.id"> {{ cat.name_ar}}</option>
-                                               
+                                            <select v-model="cat_id" class="form-control" name="fname">
+                                                <option value="">اختر التصنيف</option>
+                                                <option v-for="cat in categories" :key="cat.id" :value="cat.id"> {{ cat.name_ar}}</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
@@ -47,14 +45,11 @@
                                             <div class="row">
                                                 <div class="col-4 d-flex">
                                                     <div class="form-group mt-1">
-                                                             <input type="checkbox" id="checkbox" v-model="status" />
-                                        <label for="checkbox">{{ (status == 1) ? "مقبول":"غير مقبول" }}</label>
-                                                        <!-- <label for="switcherySize13" class="mr-1">مقبول</label> -->
-                                                        <!-- <input type="checkbox" id="switcherySize13" class="switchery" data-size="xs" /> -->
+                                                        <input checked type="checkbox" id="checkbox" v-model="status" />
+                                                        <label for="checkbox">{{ (status == 1) ? "مقبول":"غير مقبول" }}</label>
                                                     </div>
                                                 </div>
                                                 <div class="col-2"></div>
-                                             
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -63,7 +58,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button   type="button"  @click="filter" class="  btn btn-primary w-100 " data-dismiss="modal" aria-label="Close">بحث</button>
+                                        <button type="button" @click="filter" class="btn btn-primary w-100" data-dismiss="modal" aria-label="Close">بحث</button>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +79,7 @@
 
                                     <th class="border-top-0">التعليقات</th>
                                     <th class="border-top-0">التاريخ</th>
-                                    <th class="border-top-0">الحاله </th>
+                                    <th class="border-top-0">الحاله</th>
                                     <th class="border-top-0">اكشن</th>
                                 </tr>
                             </thead>
@@ -97,8 +92,6 @@
                                     <td>{{blog.country.name_ar}}</td>
                                     <td>{{blog.city.name_ar}}</td>
 
-                                    
-                                    
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="" class="btn btn-outline-info btn-sm round">حالي</a>
@@ -106,7 +99,7 @@
                                         </div>
                                     </td>
                                     <td>{{blog.created_at}}</td>
-                                      <td class="text-truncate">
+                                    <td class="text-truncate">
                                         <input type="checkbox" id="checkbox" v-model="blog.approvement" @change="updateApprovement" @click="getblog_id(blog.id)" />
                                         <label for="checkbox">{{ (blog.approvement == 1) ? "مقبول":"غير مقبول" }}</label>
                                     </td>
@@ -114,8 +107,8 @@
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a :href="url_dashboard+'/blogs/'+blog.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
                                             <form :action="url_dashboard+'/blogs/'+blog.id" method="POST" class="btn-group">
-                                             <input type="hidden" name="_token" :value="csrftoken" />
-                                                <input type="hidden" name="_method" value="delete" />   
+                                                <input type="hidden" name="_token" :value="csrftoken" />
+                                                <input type="hidden" name="_method" value="delete" />
                                                 <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المقال')">حذف</button>
                                             </form>
                                         </div>
@@ -123,10 +116,16 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="pagination">
+                                <button class="btn btn-default" @click="Pagination(blogs.prev_page_url)" :disabled="!blogs.prev_page_url">
+                                    Previos
+                                </button>
+                                <span> page {{blogs.current_page}} of {{blogs.last_page }} </span>
+                                <button class="btn btn-default" @click="Pagination(blogs.next_page_url)" :disabled="!blogs.next_page_url">
+                                    Next
+                                </button>
+                            </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <pagination :data="blogs" @pagination-change-page="getBlogs"></pagination>
                 </div>
             </div>
         </div>
@@ -135,17 +134,24 @@
 
 <script>
     export default {
-        props:['aprove_route','dahsboard_url','csrftoken','categories','users'],
+        props: [
+                "aprove_route", 
+                "dahsboard_url", 
+                "get_blogs_url", 
+                "csrftoken", 
+                "categories", 
+                "users"
+                ],
         data() {
             return {
                 blogs: {},
-                blog_id:'',
-                url_dashboard:this.dahsboard_url,
-                cat_id:'',
-                user_id:'',
-                keyword:'',
-                status:0
-            }
+                blog_id: "",
+                url_dashboard: this.dahsboard_url,
+                cat_id: "",
+                user_id: "",
+                keyword: "",
+                status: true,
+            };
         },
 
         mounted() {
@@ -153,29 +159,29 @@
         },
 
         methods: {
-            getBlogs(page = 1) {
-                axios.get('get_blogs_by_vue?page=' + page)
-                    .then(response => {
-                        this.blogs = response.data;
-                    });
+            getBlogs() {
+                 axios.get(this.get_blogs_url).then((response) => (this.blogs = response.data));
             },
-               updateApprovement: function (e) {
+            Pagination: function (url) {
+                this.get_blogs_url = url+'&user_id='+this.user_id+'&cat_id='+this.cat_id+'&keyword='+this.keyword+'&status='+this.status;
+                this.getBlogs();
+            },
+            updateApprovement: function (e) {
                 const newValue = e.target.checked;
-                axios.post(this.aprove_route, { "blog_id": this.blog_id, approvement: newValue }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
+                axios.post(this.aprove_route, { blog_id: this.blog_id, approvement: newValue }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
             },
             getblog_id: function (id) {
                 return (this.blog_id = id);
             },
-            filter:function(){
-
-                // alert(this.status);
-                // alert(this.keyword);
-                // alert(this.cat_id);
-                // alert(this.user_id);
-                  axios.get(this.dahsboard_url+'/blog/filter',{params:{ 'user_id':this.user_id,'cat_id':this.cat_id,'keyword':this.keyword,'status':this.status}}).then((response)=>this.blogs = response.data  )
-               
-
-            }
-        }
+            filter: function () {
+                axios.get(this.dahsboard_url + "/blog/filter", { params: { user_id: this.user_id, cat_id: this.cat_id, keyword: this.keyword, status: this.status } })
+                .then((response) => (
+                    this.blogs = response.data,
+                    this.blogs.prev_page_url += '&user_id='+this.user_id+'&cat_id='+this.cat_id+'&keyword='+this.keyword+'&status='+this.status,
+                    this.blogs.next_page_url += '&user_id='+this.user_id+'&cat_id='+this.cat_id+'&keyword='+this.keyword+'&status='+this.status
+                ));
+                
+            },
+        },
     };
 </script>

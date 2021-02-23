@@ -140,7 +140,7 @@
                 axios.get(this.url_course).then((response) => (this.courses = response.data.courses));
             },
             coursesPagination: function (url) {
-                this.url_course = url;
+                this.url_course = url
                 this.getcourses();
             },
             getcities: function () {
@@ -153,13 +153,17 @@
                     })
                     .then((response) => (this.cities = response.data.cities));
                     if(this.country_id == null){
-                        this.selected_city = null
+                        this.selected_city = ''
                     }
             },
             filterCoureses: function () {
                 axios
                     .get(this.dahsboard_url + "/filtercourses", { params: { institute_id: this.selected_institute, country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar } })
-                    .then((response) => (this.courses = response.data.courses));
+                    .then((response) => (
+                        this.courses = response.data.courses,
+                        this.courses.prev_page_url += '&institute_id='+this.selected_institute+'&country_id='+this.selected+'&city_id='+this.selected_city+'&name_ar='+this.name_ar,
+                        this.courses.next_page_url += '&institute_id='+this.selected_institute+'&country_id='+this.selected+'&city_id='+this.selected_city+'&name_ar='+this.name_ar
+                    ));
             },
             updateApprovment: function (e) {
                 const newValue = e.target.checked;

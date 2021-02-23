@@ -14,7 +14,7 @@ class BlogCategorySeeder extends Seeder
     {
         for ($x = 1; $x <= 10; $x++) {
             BlogCategory::create([
-                "name_ar" => 'مقال'.$x,
+                "name_ar" => 'تصنيف'.$x,
                 "creator_id" => 1,
             ]);
         }
