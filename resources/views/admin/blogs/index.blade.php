@@ -17,6 +17,14 @@
         <div class="content-body">
             <blog-index-component
                 :get_blogs_url="{{ json_encode(route('get_blogs_by_vue')) }}"
+                :aprove_route="{{json_encode(url('/dashboard/update-blog-aprovement'))}}"
+                :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
+                :csrftoken="{{ json_encode(csrf_token()) }}"
+                :users="{{ json_encode($users) }}"
+                :categories="{{ json_encode($categories) }}"
+
+
+
             >
 
             </blog-index-component>

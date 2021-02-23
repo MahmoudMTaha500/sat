@@ -18,7 +18,7 @@ class CreateBlogCategoriesTable extends Migration
             $table->string("name_ar");
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->integer("approvement");
+            
             $table->timestamps();
         });
     }

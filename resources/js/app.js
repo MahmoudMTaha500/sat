@@ -19,9 +19,11 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 
 import CountryCityComponent from './components/CountryCityComponent';
+import CountryCityBlogComponent from './components/country_city_blog/CountryCityBlogComponent.vue';
 import CitiesComponent from './components/city/CitiesComponent';
 import institutesComponent from './components/institute/institutesComponent';
 import CommentComponent from './components/comment/CommentComponent';
+import CommentBlogComponent from './components/comment/CommentBlogComponent';
 import RateComponent from './components/rate/RateComponent';
 import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
@@ -37,6 +39,8 @@ const app = new Vue({
         CommentComponent,
         RateComponent,
         BlogIndexComponent,
-        coursesComponent
+        coursesComponent,
+        CountryCityBlogComponent,
+        CommentBlogComponent
     }
 });

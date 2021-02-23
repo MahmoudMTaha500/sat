@@ -106,7 +106,7 @@
                 </ul>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ $department_name == 'blogs' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">المقلات</span>
@@ -117,18 +117,18 @@
                     </li>
                     <li class="{{ $page_name == 'add-blog' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('blogs.create')}}" data-i18n="nav.navbars.nav_dark">اضافة مقالة جديدة</a>
+                    </li  >
+                    <li   class="{{ $page_name == 'blog-comment' ? 'active' : ''}}">
+                        <a class="menu-item"  href="{{url('dashboard/blogs/comment')}}" data-i18n="nav.navbars.nav_dark">التعليقات</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/blogs/comments.php?page=blogs" data-i18n="nav.navbars.nav_dark">التعليقات</a>
-                    </li>
-                    <li class="{{ $page_name == 'add-blog-category' ? 'active' : ''}}">
+                    <li class="{{ $page_name == 'blog-categories' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('blog_categories.index')}}" data-i18n="nav.navbars.nav_dark">التصنيفات</a>
                     </li>
                     <li class="{{ $page_name == 'edit-blog-category' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('blog_categories.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تصنيف جديد</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/blogs/archives.php?page=blogs" data-i18n="nav.navbars.nav_semi">الارشيف</a>
+                    <li   class="{{ $page_name == 'archive-blog' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{url('dashboard/blogs/archive')}}"data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
             </li>

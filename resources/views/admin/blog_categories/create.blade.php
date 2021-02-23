@@ -36,7 +36,10 @@
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         </div>
                         <div class="card-content collpase show">
+                            
                             <div class="card-body">
+                                @include('admin.includes.errors')
+
                                 <form class="form" action="{{route('blog_categories.store')}}" method="POST">
                                     @csrf
                                     <div class="form-body">
@@ -44,7 +47,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="institute-name">اسم التصنيف</label>
-                                                    <input type="text" class="form-control" placeholder="ادخل اسم التصنيف" name="name_ar" required />
+                                                    <input type="text" class="form-control" placeholder="ادخل اسم التصنيف" name="name_ar"  />
                                                 </div>
                                             </div>
                                         </div>

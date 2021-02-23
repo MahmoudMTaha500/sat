@@ -36,6 +36,8 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
+                                @include('admin.includes.errors')
+
                                 <form class="form" action="{{route('blogs.store')}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-body">
@@ -43,63 +45,53 @@
                                             <div class="col-lg-8">
                                                 <div class="form-group">
                                                     <label for="projectinput1">العنوان</label>
-                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل اسم المعهد" name="fullname" />
+                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل اسم المعهد" name="title_ar" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="projectinput4">المحتوى</label>
-                                                    <textarea name="ckeditor" id="ckeditor" cols="30" rows="20" class="ckeditor"> </textarea>
+                                                    <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor"> </textarea>
                                                 </div>
                                                 
                                               
                                             </div>
+                                          
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="projectinput2">التصنيف</label>
-                                                    <select class="select2 form-control text-left">
+                                                    <select  name="category_id" class="select2 form-control text-left">
                                                         <option value="" selected="" disabled="">اختر التصنيف</option>
-                                                        <option value="">غير مصنف</option>
-                                                        <option value="">الدراسة في كندا</option>
-                                                        <option value="">الدراسة في بريطانية</option>
-                                                        <option value="">الدراسة في امريكا</option>
-                                                        <option value="">الدراسة في استراليا</option>
-                                                        <option value="">الدراسة في لندن</option>
-                                                        <option value="">الدراسة في مصر</option>
+                                                       
+                                                          
+    
+                                                            @foreach($BlogCategories as $category)
+    
+                                                            <option value="{{$category->id}}">{{$category->name_ar}}</option>
+    
+                                                            @endforeach
+                                                        
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="projectinput2">الدولة</label>
-                                                    <select class="select2 form-control text-left">
-                                                        <option value="" selected="" disabled="">اختر الدولة</option>
-                                                        <option value="">لا ينتمي الي دولة</option>
-                                                        <option value="">مصر</option>
-                                                        <option value="">مصر</option>
-                                                        <option value="">مصر</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="projectinput2">المدينة</label>
-                                                    <select class="select2 form-control text-left">
-                                                        <option value="" selected="" disabled="">اختر المدينة</option>
-                                                        <option value="">لا ينتمي الي مدينة</option>
-                                                        <option value="">جيزة</option>
-                                                        <option value="">قاهرة</option>
-                                                        <option value="">اسيوط</option>
-                                                    </select>
-                                                </div>
+                                                <country-city-blog-component 
+                                            :countries_from_blade="{{ json_encode($countries) }}"
+                                            :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
+                                        >
+                                        </country-city-blog-component>
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left">
-                                                        <option value="" selected="" disabled="">اختر المعهد</option>
-                                                        <option value="">لا ينتمي الي معهد</option>
-                                                        <option value="">كابلان</option>
-                                                        <option value="">كابلان</option>
-                                                        <option value="">كابلان</option>
+                                                    <select class="select2 form-control text-left" name="institute_id">
+                                                        <option value=""  >اختر المعهد</option>
+
+                                                        @foreach($Institutes as $institute)
+
+                                                        <option value="{{$institute->id}}">{{$institute->name_ar}}</option>
+
+                                                        @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="projectinput4">صورة المقال</label>
                                                     <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" />
+                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name='banner' />
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-3">

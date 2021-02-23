@@ -9,6 +9,5 @@ class BlogCategory extends Model
     protected $fillable = [
         'name_ar',
         'creator_id',
-        'approvement',
     ];
 }

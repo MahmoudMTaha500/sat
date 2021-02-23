@@ -16,6 +16,7 @@ class CreateBlogsTable extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string("title_ar");
+            $table->string("slug");
             $table->longText("content_ar");
             $table->string("banner");
             $table->bigInteger("creator_id")->unsigned();
@@ -27,8 +28,10 @@ class CreateBlogsTable extends Migration
             $table->bigInteger("institute_id")->unsigned();
             $table->foreign('institute_id')->references('id')->on('institutes');
             $table->bigInteger("category_id")->unsigned();
-            $table->foreign('category_id')->references('id')->on('blog_categories');
+            $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('cascade');
             $table->integer("approvement");
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }
