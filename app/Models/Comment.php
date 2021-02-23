@@ -26,4 +26,8 @@ class Comment extends Model
     {
         return $this->belongsTo("App\Models\Student", 'commenter_id', 'id');
     }
+    public function blog()
+    {
+        return $this->belongsTo("App\Models\Blog", 'element_id', 'id');
+    }
 }

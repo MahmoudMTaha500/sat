@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use App\Http\Requests\blogs_categories\blogCategoryRequest;
 
 class BlogCategoryController extends Controller
 {
@@ -25,9 +26,13 @@ class BlogCategoryController extends Controller
         return view("admin.blog_categories.create", compact('department_name', 'page_name'));
     }
 
-    public function store(Request $request)
+    public function store(blogCategoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+        // dd($request->all());
+           BlogCategory::create(['name_ar'=>$request->name_ar,'creator_id'=>1]);
+           session()->flash('alert_message',['message' =>'تم اضافه التصنيف','icon'=>'success']);
+           return redirect()->route('blog_categories.index');
     }
 
     public function show(BlogCategory $blogCategory)
@@ -45,13 +50,22 @@ class BlogCategoryController extends Controller
     }
 
  
-    public function update(Request $request, BlogCategory $blogCategory)
+    public function update(blogCategoryRequest $request, BlogCategory $blogCategory)
     {
-        //
+        $validated = $request->validated();
+        $update =  BlogCategory::find($blogCategory->id);
+        $update->name_ar = $request->name_ar;
+        $update->save();
+        session()->flash('alert_message',['message' =>'تم تعديل التصنيف','icon'=>'success']);
+        return back();
+        
     }
 
     public function destroy(BlogCategory $blogCategory)
     {
-        //
+        $delete =  BlogCategory::find($blogCategory->id);
+        $delete->delete();
+        session()->flash('alert_message',['message' =>'تم حذف التصنيف','icon'=>'error']);
+        return back();
     }
 }

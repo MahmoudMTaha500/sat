@@ -39,6 +39,29 @@ class CommentController extends Controller
      }
 
     /********************************* */
+
+    public function blog()
+    { 
+
+        $comments =  Comment::where(['element_type'=>"blog"])->paginate(10);
+           
+        $department_name = 'comment';
+        $page_name = 'blog-comment';
+        $useVue = true;
+
+  return  view("admin.blogs.comments", compact( 'useVue','comments','department_name','page_name'));
+    }
+
+    public function getcommentBlog()
+    {
+   
+       $comments =  Comment::where(['element_type'=>"blog"])->with('blog','student')->paginate(10);
+
+        return response()->json(['comments'=>$comments]);
+
+    }
+
+
     /********************************* */
 
     /**

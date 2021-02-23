@@ -37,7 +37,7 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
-                                <form class="form" action="{{route('visa_categories.update' , $category->id)}}" method="POST">
+                                <form class="form" action="{{route('blog_categories.update' , $category->id)}}" method="POST">
                                     @csrf
                                     @method('put')
                                     <div class="form-body">

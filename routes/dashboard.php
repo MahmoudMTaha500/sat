@@ -11,6 +11,7 @@ Route::resource('institute', 'InstituteController');
 Route::get('getcomment', 'CommentController@getcomment');
 Route::post('comment/updateAprovement', 'CommentController@updateAprovement');
 
+
 Route::resource('comment', 'CommentController');
 
 Route::get('getrate', 'InstituteRateController@getrates');
@@ -41,6 +42,14 @@ Route::resource('visas', 'VisaController');
 // Visa Category Route
 Route::resource('visa_categories', 'VisaCategoryController');
 // Blog Route
+
+Route::post('update-blog-aprovement', 'BlogController@updateAprovement');
+Route::get('blog/filter', 'BlogController@filter');
+Route::get('blogs/comment', 'CommentController@blog');
+Route::get('blogs/getcomment', 'CommentController@getcommentBlog');
+Route::get('blogs/archive', 'BlogController@archive');
+Route::get('blogs/restor/{id}', 'BlogController@restor');
+
 Route::resource('blogs', 'BlogController');
 Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blogs_by_vue');
 // Blog Category Route

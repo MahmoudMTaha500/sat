@@ -16,7 +16,6 @@ class BlogCategorySeeder extends Seeder
             BlogCategory::create([
                 "name_ar" => 'مقال'.$x,
                 "creator_id" => 1,
-                "approvement" => 1,
             ]);
         }
     }
