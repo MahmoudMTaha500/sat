@@ -148,6 +148,9 @@ class CourseController extends Controller
         $country_id = $request->country_id;
         $city_id = $request->city_id;
         $name_ar = $request->name_ar;
+        $switchery = $request->switchery;
+        $discount = $request->discount;
+
         $courses = new Course();
 
         if ($institute_id != null) {
@@ -165,6 +168,20 @@ class CourseController extends Controller
         }
         if ($name_ar != null) {
             $courses = $courses->where("name_ar", 'LIKE', "%{$request->name_ar}%");
+
+        }
+
+        if($switchery == true){
+            if( $discount == "true" ){
+            $courses = $courses->where("discount", '!=','null');
+
+            }
+             if($discount == '' || $discount == "false") {
+                // dd($discount);
+                $courses = $courses->where("discount",null);
+
+            }
+            // $courses = $courses->where("discount", $institute_id);
 
         }
         $courses = $courses->with('institute', 'institute.city')->paginate(10);

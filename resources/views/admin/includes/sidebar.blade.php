@@ -53,7 +53,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم العروض</span></a>
                 <ul class="menu-content">
                     <li>
@@ -66,7 +66,7 @@
                         <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="#">
                     <i class="la la-institution"></i>

@@ -34,6 +34,14 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="projectinput1">العروض</label>  <br>
+                              <input type="checkbox" id="switchery"  class="switchery" v-model="switchery"  name="rate_switch"    
+                                               />
+                             <br>
+                            <input type="checkbox" id="checkbox" v-model="discount"  />
+                            <label for="checkbox">{{ (discount) ? "عرض":"بدون عرض" }}</label>
+                        </div>
+                        <div class="form-group">
                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
                             <input v-model="name_ar" type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="name_ar" />
                         </div>
@@ -71,6 +79,7 @@
                                         <th class="border-top-0">اسم المعهد</th>
                                         <th class="border-top-0">المدينة</th>
                                         <th class="border-top-0">عدد الطلابات</th>
+                                        <th class="border-top-0">العروض</th>
                                         <th class="border-top-0">الحالة</th>
                                         <th class="border-top-0">اكشن</th>
                                     </tr>
@@ -82,6 +91,7 @@
                                         <td class="text-truncate">{{course.institute.city.name_ar}}</td>
                                         
                                         <td class="text-truncate">5 طلابات</td>
+                                        <td class="text-truncate">{{ (course.discount != null) ? course.discount : "-"  }} </td>
                                         <td class="text-truncate">
                                             <input type="checkbox" id="checkbox" v-model="course.approvment" @change="updateApprovment" @click="getCourse_id(course.id)" />
                                             <label for="checkbox">{{ (course.approvment == 1) ? "مقبول":"غير مقبول" }}</label>
@@ -133,6 +143,8 @@
                 selected_institute: "",
                 name_ar: "",
                 course_id: "",
+                discount:"",
+                switchery:""
             };
         },
         methods: {
@@ -157,8 +169,9 @@
                     }
             },
             filterCoureses: function () {
+
                 axios
-                    .get(this.dahsboard_url + "/filtercourses", { params: { institute_id: this.selected_institute, country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar } })
+                    .get(this.dahsboard_url + "/filtercourses", { params: { institute_id: this.selected_institute, country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar ,switchery:this.switchery ,discount:this.discount} })
                     .then((response) => (
                         this.courses = response.data.courses,
                         this.courses.prev_page_url += '&institute_id='+this.selected_institute+'&country_id='+this.selected+'&city_id='+this.selected_city+'&name_ar='+this.name_ar,

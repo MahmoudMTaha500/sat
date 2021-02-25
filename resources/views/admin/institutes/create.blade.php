@@ -78,7 +78,7 @@
 
                                         <div class="row">
                                             <div class="col-md-6">
-                                                <div class="form-group">
+                                                {{-- <div class="form-group">
                                                     <label for="projectinput4">لوجو المعهد</label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="inputGroupFile01"  name="logo"/>
@@ -87,10 +87,14 @@
                                                     <div class="mt-1">
                                                         <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="">
                                                     </div>
-                                                </div>
+                                                </div> --}}
+                                                <show-images-component
+                                                :image_name="{{json_encode("logo")}}"
+                                                :image_label="{{json_encode("اختر الصورة")}}"
+                                                ></show-images-component>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="form-group image-box-input">
+                                                {{-- <div class="form-group image-box-input">
                                                     <label for="projectinput4">صورة المعهد</label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input image-input" id="inputGroupFile01" name="panner" />
@@ -99,7 +103,12 @@
                                                     <div class="mt-1 image-box">
                                                         <img class="w-100" src="{{url('/admin')}}/app-assets/images/crop-pic.jpg" alt="">
                                                     </div>
-                                                </div>
+                                                </div> --}}
+                                                <show-images-component
+                                                :image_name="{{json_encode("panner")}}"
+                                                :image_label="{{json_encode("اختر الصورة")}}"
+
+                                                ></show-images-component>
                                             </div>
                                         </div>
                                         
