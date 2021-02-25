@@ -16,7 +16,7 @@ class InstituteSeeder extends Seeder
             $city_id = rand(1,30);
             $country_id = City::where('id' , $city_id)->get('country_id')[0]->country_id;
             Institute::create([
-                "name_ar" => 'Institute'.$x,
+                "name_ar" => 'معهد'.$x,
                 "slug" => 'Institute'.$x,
                 "about_ar" => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                 tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

@@ -14,7 +14,7 @@ class CitySeeder extends Seeder
     {
         for ($x = 1; $x <= 30; $x++) {
             City::create([
-                "name_ar" => 'city'.$x,
+                "name_ar" => 'مدينة'.$x,
                 "country_id" => rand(1,10)
             ]);
         }

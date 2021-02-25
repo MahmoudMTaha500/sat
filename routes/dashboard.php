@@ -1,6 +1,13 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+Route::get('/', function () {
+    $department_name='dashboard';
+    $page_name='dashboard';
+    return view('/admin/dashboard' , compact('department_name' , 'page_name'));
+})->name('dashboard');
+
+
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::post('update-institute-aprovement', 'InstituteController@updateAprovement');
 Route::post('filter', 'InstituteController@filter');

@@ -18,4 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/get_countries', 'VueRequestsController@get_countries')->name('vue.get.countries');
+Route::get('/get_cities', 'VueRequestsController@get_cities')->name('vue.get.cities');
+
 

@@ -23,7 +23,7 @@ class CommentSeeder extends Seeder
                 $element_id = rand(1,30);
             }
             Comment::create([
-                "comment" => 'this is comment'.$x,
+                "comment" => 'هذا التعليق مجرد للعرض'.$x,
                 "commenter_id" => rand(1,50),
                 "element_type" => $element_type,
                 "element_id" => $element_id,

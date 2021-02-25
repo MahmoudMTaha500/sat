@@ -28,6 +28,8 @@ import RateComponent from './components/rate/RateComponent';
 import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 import coursesComponent from "./components/course/coursesComponent.vue";
+import CityComponent from "./components/website/CityComponent.vue";
+import CountryComponent from "./components/website/CountryComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -41,6 +43,8 @@ const app = new Vue({
         BlogIndexComponent,
         coursesComponent,
         CountryCityBlogComponent,
-        CommentBlogComponent
+        CommentBlogComponent,
+        CityComponent,
+        CountryComponent,
     }
 });
