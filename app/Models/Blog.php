@@ -9,18 +9,6 @@ class Blog extends Model
 {
     use SoftDeletes;
 
-    // protected $fillable = [
-    //     'title_ar',
-    //     'slug',
-    //     'content_ar',
-    //     'banner',
-    //     'creator_id',
-    //     'country_id',
-    //     'city_id',
-    //     'institute_id',
-    //     'approvement',
-    // ];
-
     protected $guarded = [];  
     protected $date = ['deleted_at'];
 

@@ -14,7 +14,8 @@ class CourseSeeder extends Seeder
         for ($x = 1; $x <= 90; $x++) {
             $int= mt_rand(1262055681,1262055681);
             Course::create([
-                "name_ar" => 'دورة'.$x,
+                "name_ar" => 'دورة '.$x,
+                "slug" => 'دورة-'.$x,
                 "about_ar" => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id quos officia quibusdam fugit vel! Perspiciatis, asperiores obcaecati. Ut quis eligendi expedita accusamus similique eos aliquid esse officia nihil aspernatur? Perspiciatis.', 
                 "institute_id" => rand(1,30),
                 "creator_id" => 1,
@@ -23,8 +24,8 @@ class CourseSeeder extends Seeder
                 "study_period" => 'morning',
                 "lessons_per_week" => 5,
                 "hours_per_week" => 20,
-                "required_level" => 'advanced',
-                "discount" => 0.5,
+                "required_level" => 'مبتدئ',
+                "discount" => rand(0,95)/100,
             ]);
         }
     }

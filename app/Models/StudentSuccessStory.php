@@ -11,4 +11,9 @@ class StudentSuccessStory extends Model
         'student_id',
         'approvement',
     ];
+
+    public function student()
+    {
+        return $this->belongsTo('App\Models\Student', 'student_id', 'id');
+    }
 }

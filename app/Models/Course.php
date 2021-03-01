@@ -22,12 +22,17 @@ class Course extends Model
         'required_level',
         'discount',
         'approvment',
+        'slug',
     ];
     protected $date = ['deleted_at'];
 
     public function institute()
     {
         return $this->belongsTo('App\Models\Institute', 'institute_id', 'id');
+    }
+    public function coursesPricePerWeek()
+    {
+        return $this->hasOne('App\Models\CoursePrice', 'course_id', 'id')->orderBy('weeks' , 'ASC');
     }
     public function coursesPrice()
     {
