@@ -86,11 +86,15 @@
                                     <td>{{institute.country.name_ar}}</td>
                                     <td>{{institute.city.name_ar}}</td>
                                     <td class="text-truncate">5 كورسات</td>
-                                    <td class="text-truncate">
-                                        <div id="read-only-stars" data-score="1"></div>
+                                    <td  class="text-truncate"> 
+
+                                          <rate :length="5"     :value="institute_rate(institute)"    disabled    />
                                     </td>
+
                                     <td class="text-truncate">
-                                        سات
+                                        <span v-if="institute.rate_switch" > سات    </span>
+                                        <span v-else> طلبه    </span>
+                                        
                                     </td>
 
                                     <td class="text-truncate">
@@ -213,6 +217,39 @@
                 axios.post(this.url_filtier, { country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar }, { headers: { "X-CSRFToken": "{{csrf_token()}}" } }).then((response) => {
                     this.institutes = response.data.institute;
                 });
+            },
+            avargae:function(obj){
+                    //  console.dir(obj);
+var  str = JSON.stringify(obj);
+console.log(str); // Logs output to dev tools console.
+                var total=0;
+              for( var rate in str){
+                     total = rate.rate; 
+                     alert(rate)
+                    //  console.log(rate);
+              }
+              return total;
+            },
+            institute_rate: function (institute_obj) {
+                if(institute_obj.rate_switch == 1){
+
+                    return institute_obj.sat_rate
+                }else{
+                    if(institute_obj.rats[0] == null){
+                        return 5
+                    }else{
+                        var students_rate = 0
+                        var arr_length= institute_obj.rats.length
+                        var rate_avg = 0
+                        institute_obj.rats.forEach(element => {
+                            students_rate += element.rate
+                        });
+                        rate_avg = students_rate/arr_length
+                        return Math.round(rate_avg)
+
+                    }
+                }
+                
             },
         },
 

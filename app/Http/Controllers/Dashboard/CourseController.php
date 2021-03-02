@@ -150,6 +150,9 @@ class CourseController extends Controller
         $country_id = $request->country_id;
         $city_id = $request->city_id;
         $name_ar = $request->name_ar;
+        $discount_offers = $request->discount_offers;
+        $non_discount_offers = $request->non_discount_offers;
+
         $courses = new Course();
 
         if ($institute_id != null) {
@@ -167,8 +170,16 @@ class CourseController extends Controller
         }
         if ($name_ar != null) {
             $courses = $courses->where("name_ar", 'LIKE', "%{$request->name_ar}%");
-
         }
+
+        if ($discount_offers == 'false') {
+            
+            $courses = $courses->where("discount" , 0);
+        }
+        if ($non_discount_offers == 'false') {
+            $courses = $courses->where("discount" , '!=' , 0);
+        }
+
         $courses = $courses->with('institute', 'institute.city')->paginate(10);
         return response()->json(['courses' => $courses]);
 

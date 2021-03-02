@@ -12,7 +12,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="projectinput1">المعهد</label>
-                            <select v-model="selected_institute" id="" class="form-control" name="institute_id" required>
+                            <select v-model="institute_id" id="" class="form-control" name="institute_id" required>
                                 <option value="">حدد المعهد</option>
                                 <option v-for="institute in institutes" :key="institute.id" :value="institute.id"> {{institute.name_ar}} </option>
                             </select>
@@ -20,7 +20,7 @@
 
                         <div class="form-group">
                             <label for="projectinput1">الدولة</label>
-                            <select v-model="selected" v-on:change="getcities()" id="country" class="form-control" name="country_id" required>
+                            <select v-model="country_id" v-on:change="getcities()" id="country" class="form-control" name="country_id" required>
                                 <option value="">حدد الدولة</option>
                                 <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
                             </select>
@@ -28,10 +28,23 @@
                         <div class="form-group">
                             <label for="projectinput1">المدينة</label>
 
-                            <select v-model="selected_city" id="city" class="form-control" name="city_id" required>
+                            <select v-model="city_id" id="city" class="form-control" name="city_id" required>
                                 <option value="">حدد المدينة</option>
                                 <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                             </select>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="projectinput1">تخفيضات</label> <br />
+                                    <input type="checkbox"  data-size="sm" checked class="switchery" v-model="discount_offers"/>
+                                </div>
+                                <div class="col-6">
+                                    <label for="projectinput1">بدون تخفيضات</label> <br />
+                                    <input type="checkbox"  data-size="sm" checked class="switchery" v-model="non_discount_offers"/>
+                                </div>
+                            </div>
+                            
                         </div>
                         <div class="form-group">
                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
@@ -71,6 +84,7 @@
                                         <th class="border-top-0">اسم المعهد</th>
                                         <th class="border-top-0">المدينة</th>
                                         <th class="border-top-0">عدد الطلابات</th>
+                                        <th class="border-top-0">العروض</th>
                                         <th class="border-top-0">الحالة</th>
                                         <th class="border-top-0">اكشن</th>
                                     </tr>
@@ -80,8 +94,9 @@
                                         <td class="text-truncate">{{course.name_ar}}</td>
                                         <td class="text-truncate">{{course.institute.name_ar}}</td>
                                         <td class="text-truncate">{{course.institute.city.name_ar}}</td>
-                                        
+
                                         <td class="text-truncate">5 طلابات</td>
+                                        <td class="text-truncate">{{ (course.discount != null) ? course.discount : "-" }}</td>
                                         <td class="text-truncate">
                                             <input type="checkbox" id="checkbox" v-model="course.approvment" @change="updateApprovment" @click="getCourse_id(course.id)" />
                                             <label for="checkbox">{{ (course.approvment == 1) ? "مقبول":"غير مقبول" }}</label>
@@ -91,7 +106,7 @@
                                                 <a :href="dahsboard_url+'/courses/'+course.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
                                                 <a href="#" class="btn btn-default btn-sm round">عرض</a>
 
-                                                <form :action="dahsboard_url+'/courses/'+course.id" method="POST">
+                                                <form :action="dahsboard_url+'/courses/'+course.id" method="POST" class="btn-group">
                                                     <input type="hidden" name="_token" :value="csrftoken" />
                                                     <input type="hidden" name="_method" value="delete" />
                                                     <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذه الدورة')">حذف</button>
@@ -126,13 +141,15 @@
             return {
                 courses: {},
                 url_course: this.course_url,
-                selected: "",
-                selected_city: "",
+                country_id: "",
+                city_id: "",
                 countries: this.countries_from_blade,
                 cities: {},
-                selected_institute: "",
+                institute_id: "",
                 name_ar: "",
                 course_id: "",
+                discount_offers: true,
+                non_discount_offers: true,
             };
         },
         methods: {
@@ -140,11 +157,11 @@
                 axios.get(this.url_course).then((response) => (this.courses = response.data.courses));
             },
             coursesPagination: function (url) {
-                this.url_course = url
+                this.url_course = url;
                 this.getcourses();
             },
             getcities: function () {
-                var country_id = this.selected;
+                var country_id = this.country_id;
                 axios
                     .get(this.dahsboard_url + "/getcities", {
                         params: {
@@ -152,18 +169,36 @@
                         },
                     })
                     .then((response) => (this.cities = response.data.cities));
-                    if(this.country_id == null){
-                        this.selected_city = ''
-                    }
+                if (this.country_id == "") {
+                    this.city_id = "";
+                }
             },
             filterCoureses: function () {
+                var filter_params = {
+                    institute_id: this.institute_id, 
+                    country_id: this.country_id, 
+                    city_id: this.city_id, 
+                    name_ar: this.name_ar, 
+                    discount_offers: this.discount_offers, 
+                    non_discount_offers: this.non_discount_offers
+                }
+                var pagination_params = "&institute_id=" + this.institute_id + 
+                                        "&country_id=" + this.country_id + 
+                                        "&city_id=" + this.city_id + 
+                                        "&name_ar=" + this.name_ar
+                                        "&discount_offers=" + this.discount_offers
+                                        "&non_discount_offers=" + this.non_discount_offers
                 axios
-                    .get(this.dahsboard_url + "/filtercourses", { params: { institute_id: this.selected_institute, country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar } })
-                    .then((response) => (
-                        this.courses = response.data.courses,
-                        this.courses.prev_page_url += '&institute_id='+this.selected_institute+'&country_id='+this.selected+'&city_id='+this.selected_city+'&name_ar='+this.name_ar,
-                        this.courses.next_page_url += '&institute_id='+this.selected_institute+'&country_id='+this.selected+'&city_id='+this.selected_city+'&name_ar='+this.name_ar
-                    ));
+                    .get(this.dahsboard_url + "/filtercourses", {
+                        params: filter_params,
+                    })
+                    .then(
+                        (response) => (
+                            (this.courses = response.data.courses),
+                            (this.courses.prev_page_url += pagination_params),
+                            (this.courses.next_page_url += pagination_params)
+                        )
+                    );
             },
             updateApprovment: function (e) {
                 const newValue = e.target.checked;

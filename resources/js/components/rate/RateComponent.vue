@@ -29,7 +29,7 @@
                               <td class="text-truncate">{{rate.student.name}}</td>
                               <td class="text-truncate">{{rate.institute.name_ar}}</td>
                               <td class="text-truncate"   >
-                                <rate :length="5"     :value="rate.rate"    @before-rate="getid(rate.id)"  @after-rate="onAfterRate"  />
+                                <rate :length="5"     :value="rate.rate"  disabled  :readonly="true"   @before-rate="getid(rate.id)"  @after-rate="onAfterRate"  />
                               </td>
                               <td class="text-truncate">
                                 <a href="#"><button type="button" class="btn btn-sm btn-outline-danger round">حذف</button></a>

@@ -67,13 +67,14 @@
                                             <div class="col-md-6">
                                               <div class="form-group">
                                                 <label for="projectinput4">التقييم</label>
-                                                <div id="default-star-rating"></div>
+                                                <div id="default-star-rating" data-score = "{{$institute->sat_rate}}"></div>
                                               </div>
                                             </div>
                                             <div class="col-md-6">
                                               <div class="form-group">
                                                 <label for="projectinput4">التقييم بواسطة سات</label>
-                                                <input type="checkbox" id="switchery" class="switchery" checked/>
+                                                <input type="checkbox" id="switchery" class="switchery"  name="rate_switch"    
+                                                @if($institute->rate_switch == 1) checked @endif />
                                               </div>
                                             </div>
                                           </div> 

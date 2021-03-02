@@ -88,16 +88,11 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="projectinput4">صورة المقال</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01" name='banner' />
-                                                        <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <img class="w-100" src="{{url('admin')}}/app-assets/images/crop-pic.jpg" alt="" />
-                                                    </div>
-                                                </div>
+                                              <show-images-component
+                                              :image_name="{{json_encode("banner")}}"
+                                              :image_label="{{json_encode("اختر الصورة")}}"
+
+                                              ></show-images-component>
                                             </div>
                                         </div>
                                         <div class="form-actions center">

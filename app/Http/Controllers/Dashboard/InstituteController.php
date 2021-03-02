@@ -33,7 +33,7 @@ class InstituteController extends Controller
     public function getInstitues(Request $request)
     {
 
-        $institutes = Institute::with('country', 'city')->paginate(10);
+        $institutes = Institute::with('country', 'city','rats')->paginate(10);
 
         return response()->json(['institutes' => $institutes]);
 
@@ -131,6 +131,8 @@ class InstituteController extends Controller
     /************************************************************** */
     public function update(Request $request, Institute $institute)
     {
+        // dd($request->all());
+
 
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
@@ -184,6 +186,14 @@ class InstituteController extends Controller
                 'answer' => $question['answer'],
             ]);
         }
+   $rateSwitch = 0;
+   if($request->rate_switch =="on"){
+    $rateSwitch = 1;
+
+   }
+   $institute->rate_switch = $rateSwitch;
+   $institute->sat_rate = $request->score;
+
         $institute->save();
         session()->flash('alert_message', ['message' => 'تم تعديل المعهد بنجاح', 'icon' => 'success']);
         return back();

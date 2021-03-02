@@ -30,6 +30,7 @@ import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 import coursesComponent from "./components/course/coursesComponent.vue";
 import CityComponent from "./components/website/CityComponent.vue";
 import CountryComponent from "./components/website/CountryComponent.vue";
+import ShowImagesComponent from "./components/ShowImagesComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -46,5 +47,6 @@ const app = new Vue({
         CommentBlogComponent,
         CityComponent,
         CountryComponent,
+        ShowImagesComponent
     }
 });

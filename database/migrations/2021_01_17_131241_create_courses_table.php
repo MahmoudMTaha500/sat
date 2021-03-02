@@ -29,7 +29,7 @@ class CreateCoursesTable extends Migration
             $table->integer("hours_per_week");
             $table->integer("approvment")->default(0);
             $table->string("required_level");
-            $table->decimal("discount")->nullable();
+            $table->decimal("discount")->default('1');
             $table->softDeletes();
             $table->timestamps();
         });
