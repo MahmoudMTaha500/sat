@@ -16,6 +16,7 @@ class CreateCoursesTable extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string("name_ar");
+            $table->string("slug");
             $table->text("about_ar");
             $table->bigInteger("institute_id")->unsigned();
             $table->foreign('institute_id')->references('id')->on('institutes');
@@ -28,7 +29,7 @@ class CreateCoursesTable extends Migration
             $table->integer("hours_per_week");
             $table->integer("approvment")->default(0);
             $table->string("required_level");
-            $table->integer("discount")->nullable();
+            $table->decimal("discount")->default('1');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -46,10 +46,12 @@ class CourseController extends Controller
     {
         $validate = $request->validated();
         $name_ar = $request->name_ar;
+        $name_ar = $request->name_ar;
         $getcourse = Course::where(['institute_id' => $request->institute_id, 'name_ar' => $name_ar])->first();
         if ($getcourse == []) {
             $course = Course::create([
                 'name_ar' => $request->name_ar,
+                'slug' => str_replace(' ', '-', $request->name_ar),
                 'about_ar' => $request->desc,
                 'institute_id' => $request->institute_id,
                 'creator_id' => 1,
@@ -59,7 +61,7 @@ class CourseController extends Controller
                 'lessons_per_week' => $request->lessons_per_week,
                 'hours_per_week' => $request->hours_per_week,
                 'required_level' => $request->required_level,
-                'discount' => $request->discount,
+                'discount' => $request->discount/100,
                 'approvment' => 0,
 
             ]);
@@ -112,7 +114,7 @@ class CourseController extends Controller
         $updateCourse->lessons_per_week = $request->lessons_per_week;
         $updateCourse->hours_per_week = $request->hours_per_week;
         $updateCourse->required_level = $request->required_level;
-        $updateCourse->discount = $request->discount;
+        $updateCourse->discount = $request->discount/100;
         $updateCourse->save();
 
         CoursePrice::where(["course_id" => $course->id])->delete();
@@ -148,8 +150,8 @@ class CourseController extends Controller
         $country_id = $request->country_id;
         $city_id = $request->city_id;
         $name_ar = $request->name_ar;
-        $switchery = $request->switchery;
-        $discount = $request->discount;
+        $discount_offers = $request->discount_offers;
+        $non_discount_offers = $request->non_discount_offers;
 
         $courses = new Course();
 
@@ -168,22 +170,16 @@ class CourseController extends Controller
         }
         if ($name_ar != null) {
             $courses = $courses->where("name_ar", 'LIKE', "%{$request->name_ar}%");
-
         }
 
-        if($switchery == true){
-            if( $discount == "true" ){
-            $courses = $courses->where("discount", '!=','null');
-
-            }
-             if($discount == '' || $discount == "false") {
-                // dd($discount);
-                $courses = $courses->where("discount",null);
-
-            }
-            // $courses = $courses->where("discount", $institute_id);
-
+        if ($discount_offers == 'false') {
+            
+            $courses = $courses->where("discount" , 0);
         }
+        if ($non_discount_offers == 'false') {
+            $courses = $courses->where("discount" , '!=' , 0);
+        }
+
         $courses = $courses->with('institute', 'institute.city')->paginate(10);
         return response()->json(['courses' => $courses]);
 

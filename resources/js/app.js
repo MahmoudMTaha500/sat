@@ -28,6 +28,8 @@ import RateComponent from './components/rate/RateComponent';
 import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 import coursesComponent from "./components/course/coursesComponent.vue";
+import CityComponent from "./components/website/CityComponent.vue";
+import CountryComponent from "./components/website/CountryComponent.vue";
 import ShowImagesComponent from "./components/ShowImagesComponent.vue";
 import InsuranceComponent from "./components/insurance/InsuranceComponent.vue";
 import AirportComponent from "./components/airport/AirportComponent.vue";
@@ -49,6 +51,9 @@ const app = new Vue({
         ShowImagesComponent,
         InsuranceComponent,
         AirportComponent,
-        ResidenceComponent
+        ResidenceComponent,
+        CityComponent,
+        CountryComponent,
+
     }
 });

@@ -14,7 +14,7 @@ class StudentSeeder extends Seeder
     {
         for ($x=1; $x <= 70 ; $x++) { 
             Student::create([
-                "name" => 'student'.$x,
+                "name" => 'طالب'.$x,
                 "phone" => '0123456'.$x,
                 "email" => 'student@app.com'.$x,
                 "country" => 'country'.$x,

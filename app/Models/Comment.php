@@ -9,13 +9,8 @@ class Comment extends Model
 {
     use SoftDeletes;
     protected $tabel = 'comments';
-    protected $fillable = [
-        'comment',
-        'commenter_id',
-        'element_type',
-        'element_id',
-        'approvement',
-    ];
+    protected $guarded = [];  
+
 
     public function institute()
     {

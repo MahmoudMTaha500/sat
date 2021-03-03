@@ -67,7 +67,7 @@
                                             <div class="col-md-6">
                                               <div class="form-group">
                                                 <label for="projectinput4">التقييم</label>
-                                                <div id="default-star-rating"></div>
+                                                <div id="default-star-rating" data-score = "{{$institute->sat_rate}}"></div>
                                               </div>
                                             </div>
                                             <div class="col-md-6">

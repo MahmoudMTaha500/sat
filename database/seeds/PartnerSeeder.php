@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Country;
+use App\Models\Partner;
 
-class CountrySeeder extends Seeder
+class PartnerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,9 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 1; $x <= 10; $x++) {
-            Country::create([
-                "name_ar" => 'دولة'.$x
+        for ($x=1; $x <= 20 ; $x++) { 
+            Partner::create([
+                "name" => 'شريك '.$x,
             ]);
         }
     }

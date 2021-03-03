@@ -90,22 +90,7 @@
 
                                           <rate :length="5"     :value="institute_rate(institute)"    disabled    />
                                     </td>
-                                    <!-- <td class="text-truncate">
-                                        <div v-if="institute.rate_switch"> 
-                              
-                                            
-                                             </div>
-                                             <div v-else>
-                                                     {{  avargae(institute.rats) }} 
 
-                                                  <div v-for="rate in institute.rats" :key="rate.id">
-                                                     {{   rate.rate}}
-                                                    {{institute.rats.length }}
-                                                     
-                                                 </div>
-                                                
-                                             </div>
-                                    </td> -->
                                     <td class="text-truncate">
                                         <span v-if="institute.rate_switch" > سات    </span>
                                         <span v-else> طلبه    </span>
