@@ -29,6 +29,9 @@ import startdateComponent from './components/startdate/startdateComponent';
 import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 import coursesComponent from "./components/course/coursesComponent.vue";
 import ShowImagesComponent from "./components/ShowImagesComponent.vue";
+import InsuranceComponent from "./components/insurance/InsuranceComponent.vue";
+import AirportComponent from "./components/airport/AirportComponent.vue";
+import ResidenceComponent from "./components/residence/ResidenceComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -43,6 +46,9 @@ const app = new Vue({
         coursesComponent,
         CountryCityBlogComponent,
         CommentBlogComponent,
-        ShowImagesComponent
+        ShowImagesComponent,
+        InsuranceComponent,
+        AirportComponent,
+        ResidenceComponent
     }
 });

@@ -132,6 +132,51 @@
                     </li>
                 </ul>
             </li>
+                     <li class="nav-item   {{ $department_name == 'services' ? 'open' : '' }} "   >
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم الخدمات</span></a>
+                <ul class="menu-content">
+                    <li  class="{{ $page_name == 'residences' ? 'active' : ''}}">
+                        
+                        <a class="menu-item" href="{{route('residences.index')}}" data-i18n="nav.navbars.nav_light"> السكن</a>
+                    </li>
+
+                    <li  class="{{ $page_name == 'insurances' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('insurances.index')}}" data-i18n="nav.navbars.nav_light"> التامينات</a>
+                    </li>
+                    <li>
+                        <a class="menu-item"  href="{{route('airports.index')}}" data-i18n="nav.navbars.nav_light"> المطارات</a>
+                    </li>
+
+                </ul>
+            </li>
+                     {{-- <li class="nav-item  {{ $department_name == 'insurances' ? 'open' : '' }}">
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم التامينات</span></a>
+                <ul class="menu-content">
+                    <li  class="{{ $page_name == 'insurances' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('insurances.index')}}" data-i18n="nav.navbars.nav_light">كل التامينات</a>
+                    </li>
+                    <li   class="{{ $page_name == 'add-insurances' ? 'active' : ''}}">
+                        <a class="menu-item"  href="{{route('insurances.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تامين جديد</a>
+                    </li>
+                    <li>
+                        <a class="menu-item"  href="#" data-i18n="nav.navbars.nav_semi">الارشيف</a>
+                    </li>
+                </ul>
+            </li> --}}
+                     {{-- <li class="nav-item">
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم المطارات</span></a>
+                <ul class="menu-content">
+                    <li>
+                        <a class="menu-item"  href="{{route('blog_categories.create')}}" data-i18n="nav.navbars.nav_light">كل المطارات</a>
+                    </li>
+                    <li>
+                        <a class="menu-item"  href="{{route('blog_categories.create')}}"data-i18n="nav.navbars.nav_dark">اضافة مطار جديد</a>
+                    </li>
+                    <li>
+                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
+                    </li>
+                </ul>
+            </li> --}}
 
             <li class="nav-item {{ $department_name == 'students' ? 'open' : '' }}">
                 <a href="#">

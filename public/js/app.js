@@ -2168,6 +2168,163 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/airport/AirportComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/airport/AirportComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['dahsboard_url', 'csrftoken', 'institutes'],
+  data: function data() {
+    return {
+      airports: {},
+      selected_institute: '',
+      name_ar: '',
+      url: this.dahsboard_url + '/airports/get'
+    };
+  },
+  methods: {
+    getAirports: function getAirports() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        return _this.airports = response.data.airports;
+      });
+    },
+    filterAirports: function filterAirports() {
+      var _this2 = this;
+
+      axios.get(this.dahsboard_url + '/airports/filter', {
+        params: {
+          institute_id: this.selected_institute,
+          name_ar: this.name_ar
+        }
+      }).then(function (response) {
+        _this2.airports = response.data.airports, _this2.airports.prev_page_url += "&institute_id=" + _this2.selected_institute + "&name_ar" + _this2.name_ar, _this2.airports.next_page_url += "&institute_id=" + _this2.selected_institute + "&name_ar" + _this2.name_ar;
+      });
+    },
+    fetchAirports: function fetchAirports(url1) {
+      this.url = url1;
+      this.getAirports();
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.getAirports();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/blog/BlogIndexComponent.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/blog/BlogIndexComponent.vue?vue&type=script&lang=js& ***!
@@ -3310,6 +3467,166 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insurance/InsuranceComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insurance/InsuranceComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['dahsboard_url', 'csrftoken', 'institutes'],
+  data: function data() {
+    return {
+      insurances: {},
+      selected_institute: '',
+      name_ar: '',
+      url: this.dahsboard_url + '/insurances/get'
+    };
+  },
+  methods: {
+    getinsurance: function getinsurance() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        return _this.insurances = response.data.insurances;
+      });
+    },
+    getid: function getid(id) {
+      return this.RateID = id;
+    },
+    filterInsurance: function filterInsurance() {
+      var _this2 = this;
+
+      axios.get(this.dahsboard_url + '/insurances/filter', {
+        params: {
+          institute_id: this.selected_institute,
+          name_ar: this.name_ar
+        }
+      }).then(function (response) {
+        _this2.insurances = response.data.insurances, _this2.insurances.prev_page_url += "&institute_id=" + _this2.selected_institute + "&name_ar" + _this2.name_ar, _this2.insurances.next_page_url += "&institute_id=" + _this2.selected_institute + "&name_ar" + _this2.name_ar;
+      });
+    },
+    fetchInsurance: function fetchInsurance(url1) {
+      this.url = url1;
+      this.getinsurance();
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.getinsurance();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rate/RateComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rate/RateComponent.vue?vue&type=script&lang=js& ***!
@@ -3405,6 +3722,163 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     this.getrates();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/residence/ResidenceComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/residence/ResidenceComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['dahsboard_url', 'csrftoken', 'institutes'],
+  data: function data() {
+    return {
+      residences: {},
+      selected_institute: '',
+      name_ar: '',
+      url: this.dahsboard_url + '/residences/get'
+    };
+  },
+  methods: {
+    getresidences: function getresidences() {
+      var _this = this;
+
+      axios.get(this.url).then(function (response) {
+        return _this.residences = response.data.residences;
+      });
+    },
+    filterresidences: function filterresidences() {
+      var _this2 = this;
+
+      axios.get(this.dahsboard_url + '/residences/filter', {
+        params: {
+          institute_id: this.selected_institute,
+          name_ar: this.name_ar
+        }
+      }).then(function (response) {
+        _this2.residences = response.data.residences, _this2.residences.prev_page_url += "&institute_id=" + _this2.selected_institute + "&name_ar" + _this2.name_ar, _this2.residences.next_page_url += "&institute_id=" + _this2.selected_institute + "&name_ar" + _this2.name_ar;
+      });
+    },
+    fetchresidences: function fetchresidences(url1) {
+      this.url = url1;
+      this.getresidences();
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.getresidences();
   }
 });
 
@@ -40624,6 +41098,418 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/airport/AirportComponent.vue?vue&type=template&id=1bb424be&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/airport/AirportComponent.vue?vue&type=template&id=1bb424be& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12", attrs: { id: "recent-transactions" } }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v(" كل المطارات (" + _vm._s(_vm.airports.total) + ")")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "heading-elements" }, [
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                    attrs: { href: _vm.dahsboard_url + "/airports/create" }
+                  },
+                  [
+                    _c("i", { staticClass: "ft-plus ft-md" }),
+                    _vm._v(" اضافة مطار جديد")
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "exampleModalCenter",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-labelledby": "exampleModalCenterTitle",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered",
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "projectinput1" } }, [
+                            _vm._v("المعهد")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selected_institute,
+                                  expression: "selected_institute"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "", name: "institute_id" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.selected_institute = $event.target
+                                    .multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("حدد المعهد")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.institutes, function(institute) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: institute.id,
+                                    domProps: { value: institute.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " " + _vm._s(institute.name_ar) + " "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "projectinput1" } }, [
+                            _vm._v("البحث بكلمات مفتاحية")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.name_ar,
+                                expression: "name_ar"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "projectinput1",
+                              placeholder: "ادخل كلمة مفتاحية",
+                              name: "name_ar"
+                            },
+                            domProps: { value: _vm.name_ar },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.name_ar = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary w-100",
+                            attrs: {
+                              type: "button",
+                              "data-dismiss": "modal",
+                              "aria-label": "Close"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.filterAirports()
+                              }
+                            }
+                          },
+                          [_vm._v("بحث")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-content" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-hover table-xl mb-0",
+                attrs: { id: "recent-orders" }
+              },
+              [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.airports.data, function(airport) {
+                    return _c("tr", { key: airport.id }, [
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(airport.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(airport.institute.name_ar))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(airport.name_ar))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(airport.price))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/airports/" +
+                                "edit/" +
+                                airport.id
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-primary round",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("تعديل")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/airports/" +
+                                "delete/" +
+                                airport.id
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-danger round",
+                                attrs: {
+                                  type: "button",
+                                  onclick:
+                                    "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                }
+                              },
+                              [_vm._v("حذف")]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pagination" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.airports.prev_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchAirports(_vm.airports.prev_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                             Previos\n                         "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  " page " +
+                    _vm._s(_vm.airports.current_page) +
+                    " of " +
+                    _vm._s(_vm.airports.last_page) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.airports.next_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchAirports(_vm.airports.next_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                             Next\n                         "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#exampleModalCenter"
+          }
+        },
+        [_c("i", { staticClass: "ft-filter ft-md" }), _vm._v(" فلتر")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("البحث في المطارات")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" #")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" المطار")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("تحكم")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/blog/BlogIndexComponent.vue?vue&type=template&id=0187fabf&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/blog/BlogIndexComponent.vue?vue&type=template&id=0187fabf& ***!
@@ -43354,6 +44240,418 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insurance/InsuranceComponent.vue?vue&type=template&id=a84662fa&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/insurance/InsuranceComponent.vue?vue&type=template&id=a84662fa& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12", attrs: { id: "recent-transactions" } }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v(" كل التامينات (" + _vm._s(_vm.insurances.total) + ")")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "heading-elements" }, [
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                    attrs: { href: _vm.dahsboard_url + "/insurances/create" }
+                  },
+                  [
+                    _c("i", { staticClass: "ft-plus ft-md" }),
+                    _vm._v(" اضافة تامين جديد")
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "exampleModalCenter",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-labelledby": "exampleModalCenterTitle",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered",
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "projectinput1" } }, [
+                            _vm._v("المعهد")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selected_institute,
+                                  expression: "selected_institute"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "", name: "institute_id" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.selected_institute = $event.target
+                                    .multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("حدد المعهد")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.institutes, function(institute) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: institute.id,
+                                    domProps: { value: institute.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " " + _vm._s(institute.name_ar) + " "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "projectinput1" } }, [
+                            _vm._v("البحث بكلمات مفتاحية")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.name_ar,
+                                expression: "name_ar"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "projectinput1",
+                              placeholder: "ادخل كلمة مفتاحية",
+                              name: "name_ar"
+                            },
+                            domProps: { value: _vm.name_ar },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.name_ar = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary w-100",
+                            attrs: {
+                              type: "button",
+                              "data-dismiss": "modal",
+                              "aria-label": "Close"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.filterInsurance()
+                              }
+                            }
+                          },
+                          [_vm._v("بحث")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-content" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-hover table-xl mb-0",
+                attrs: { id: "recent-orders" }
+              },
+              [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.insurances.data, function(insurance) {
+                    return _c("tr", { key: insurance.id }, [
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(insurance.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(insurance.institute.name_ar))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(insurance.name_ar))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(insurance.price))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/insurances/" +
+                                "edit/" +
+                                insurance.id
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-primary round",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("تعديل")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/insurances/" +
+                                "delete/" +
+                                insurance.id
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-danger round",
+                                attrs: {
+                                  type: "button",
+                                  onclick:
+                                    "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                }
+                              },
+                              [_vm._v("حذف")]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pagination" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.insurances.prev_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchInsurance(_vm.insurances.prev_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                             Previos\n                         "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  " page " +
+                    _vm._s(_vm.insurances.current_page) +
+                    " of " +
+                    _vm._s(_vm.insurances.last_page) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.insurances.next_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchInsurance(_vm.insurances.next_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                             Next\n                         "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#exampleModalCenter"
+          }
+        },
+        [_c("i", { staticClass: "ft-filter ft-md" }), _vm._v(" فلتر")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("البحث في التامنيات")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" #")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" التامين")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("تحكم")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/rate/RateComponent.vue?vue&type=template&id=14c8090e&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/rate/RateComponent.vue?vue&type=template&id=14c8090e& ***!
@@ -43483,6 +44781,418 @@ var staticRenderFns = [
           },
           [_vm._v("حذف")]
         )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/residence/ResidenceComponent.vue?vue&type=template&id=a90ac7aa&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/residence/ResidenceComponent.vue?vue&type=template&id=a90ac7aa& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-12", attrs: { id: "recent-transactions" } }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v(" كل السكن (" + _vm._s(_vm.residences.total) + ")")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "heading-elements" }, [
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                    attrs: { href: _vm.dahsboard_url + "/residences/create" }
+                  },
+                  [
+                    _c("i", { staticClass: "ft-plus ft-md" }),
+                    _vm._v(" اضافة سكن جديد")
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "modal fade",
+                attrs: {
+                  id: "exampleModalCenter",
+                  tabindex: "-1",
+                  role: "dialog",
+                  "aria-labelledby": "exampleModalCenterTitle",
+                  "aria-hidden": "true"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "modal-dialog modal-dialog-centered",
+                    attrs: { role: "document" }
+                  },
+                  [
+                    _c("div", { staticClass: "modal-content" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "projectinput1" } }, [
+                            _vm._v("المعهد")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selected_institute,
+                                  expression: "selected_institute"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "", name: "institute_id" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.selected_institute = $event.target
+                                    .multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { selected: "" } }, [
+                                _vm._v("حدد المعهد")
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.institutes, function(institute) {
+                                return _c(
+                                  "option",
+                                  {
+                                    key: institute.id,
+                                    domProps: { value: institute.id }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " " + _vm._s(institute.name_ar) + " "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", { attrs: { for: "projectinput1" } }, [
+                            _vm._v("البحث بكلمات مفتاحية")
+                          ]),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.name_ar,
+                                expression: "name_ar"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              id: "projectinput1",
+                              placeholder: "ادخل كلمة مفتاحية",
+                              name: "name_ar"
+                            },
+                            domProps: { value: _vm.name_ar },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.name_ar = $event.target.value
+                              }
+                            }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary w-100",
+                            attrs: {
+                              type: "button",
+                              "data-dismiss": "modal",
+                              "aria-label": "Close"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.filterresidences()
+                              }
+                            }
+                          },
+                          [_vm._v("بحث")]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-content" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-hover table-xl mb-0",
+                attrs: { id: "recent-orders" }
+              },
+              [
+                _vm._m(3),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.residences.data, function(residence) {
+                    return _c("tr", { key: residence.id }, [
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(residence.id))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(residence.institute.name_ar))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(residence.name_ar))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _vm._v(_vm._s(residence.price))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/residences/" +
+                                "edit/" +
+                                residence.id
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-primary round",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("تعديل")]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/residences/" +
+                                "delete/" +
+                                residence.id
+                            }
+                          },
+                          [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-danger round",
+                                attrs: {
+                                  type: "button",
+                                  onclick:
+                                    "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                }
+                              },
+                              [_vm._v("حذف")]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pagination" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.residences.prev_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchresidences(_vm.residences.prev_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                             Previos\n                         "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  " page " +
+                    _vm._s(_vm.residences.current_page) +
+                    " of " +
+                    _vm._s(_vm.residences.last_page) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.residences.next_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.fetchresidences(_vm.residences.next_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                             Next\n                         "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#exampleModalCenter"
+          }
+        },
+        [_c("i", { staticClass: "ft-filter ft-md" }), _vm._v(" فلتر")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("البحث في المطارات")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" #")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" المطار")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("تحكم")])
       ])
     ])
   }
@@ -57331,6 +59041,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_blog_BlogIndexComponent_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/blog/BlogIndexComponent.vue */ "./resources/js/components/blog/BlogIndexComponent.vue");
 /* harmony import */ var _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/course/coursesComponent.vue */ "./resources/js/components/course/coursesComponent.vue");
 /* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
+/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
+/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
+/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -57357,6 +59070,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_req
 
 
 
+
+
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#sat_app_vue',
   components: {
@@ -57370,7 +59086,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     coursesComponent: _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     CountryCityBlogComponent: _components_country_city_blog_CountryCityBlogComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     CommentBlogComponent: _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
-    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
+    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
+    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"]
   }
 });
 
@@ -57494,15 +59213,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************!*\
   !*** ./resources/js/components/ShowImagesComponent.vue ***!
   \*********************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ShowImagesComponent_vue_vue_type_template_id_c64ca2e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ShowImagesComponent.vue?vue&type=template&id=c64ca2e6& */ "./resources/js/components/ShowImagesComponent.vue?vue&type=template&id=c64ca2e6&");
 /* harmony import */ var _ShowImagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ShowImagesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/ShowImagesComponent.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ShowImagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ShowImagesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -57532,7 +59250,7 @@ component.options.__file = "resources/js/components/ShowImagesComponent.vue"
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/ShowImagesComponent.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57555,6 +59273,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowImagesComponent_vue_vue_type_template_id_c64ca2e6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ShowImagesComponent_vue_vue_type_template_id_c64ca2e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/airport/AirportComponent.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/airport/AirportComponent.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AirportComponent_vue_vue_type_template_id_1bb424be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AirportComponent.vue?vue&type=template&id=1bb424be& */ "./resources/js/components/airport/AirportComponent.vue?vue&type=template&id=1bb424be&");
+/* harmony import */ var _AirportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AirportComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/airport/AirportComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AirportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AirportComponent_vue_vue_type_template_id_1bb424be___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AirportComponent_vue_vue_type_template_id_1bb424be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/airport/AirportComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/airport/AirportComponent.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/airport/AirportComponent.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AirportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AirportComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/airport/AirportComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AirportComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/airport/AirportComponent.vue?vue&type=template&id=1bb424be&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/airport/AirportComponent.vue?vue&type=template&id=1bb424be& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AirportComponent_vue_vue_type_template_id_1bb424be___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AirportComponent.vue?vue&type=template&id=1bb424be& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/airport/AirportComponent.vue?vue&type=template&id=1bb424be&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AirportComponent_vue_vue_type_template_id_1bb424be___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AirportComponent_vue_vue_type_template_id_1bb424be___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -58043,6 +59830,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/insurance/InsuranceComponent.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/insurance/InsuranceComponent.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _InsuranceComponent_vue_vue_type_template_id_a84662fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./InsuranceComponent.vue?vue&type=template&id=a84662fa& */ "./resources/js/components/insurance/InsuranceComponent.vue?vue&type=template&id=a84662fa&");
+/* harmony import */ var _InsuranceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./InsuranceComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/insurance/InsuranceComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _InsuranceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _InsuranceComponent_vue_vue_type_template_id_a84662fa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _InsuranceComponent_vue_vue_type_template_id_a84662fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/insurance/InsuranceComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/insurance/InsuranceComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/insurance/InsuranceComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InsuranceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./InsuranceComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insurance/InsuranceComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_InsuranceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/insurance/InsuranceComponent.vue?vue&type=template&id=a84662fa&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/insurance/InsuranceComponent.vue?vue&type=template&id=a84662fa& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InsuranceComponent_vue_vue_type_template_id_a84662fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./InsuranceComponent.vue?vue&type=template&id=a84662fa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/insurance/InsuranceComponent.vue?vue&type=template&id=a84662fa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InsuranceComponent_vue_vue_type_template_id_a84662fa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_InsuranceComponent_vue_vue_type_template_id_a84662fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/rate/RateComponent.vue":
 /*!********************************************************!*\
   !*** ./resources/js/components/rate/RateComponent.vue ***!
@@ -58107,6 +59963,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RateComponent_vue_vue_type_template_id_14c8090e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_RateComponent_vue_vue_type_template_id_14c8090e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/residence/ResidenceComponent.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/residence/ResidenceComponent.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ResidenceComponent_vue_vue_type_template_id_a90ac7aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResidenceComponent.vue?vue&type=template&id=a90ac7aa& */ "./resources/js/components/residence/ResidenceComponent.vue?vue&type=template&id=a90ac7aa&");
+/* harmony import */ var _ResidenceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResidenceComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/residence/ResidenceComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ResidenceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ResidenceComponent_vue_vue_type_template_id_a90ac7aa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ResidenceComponent_vue_vue_type_template_id_a90ac7aa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/residence/ResidenceComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/residence/ResidenceComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/residence/ResidenceComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResidenceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResidenceComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/residence/ResidenceComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResidenceComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/residence/ResidenceComponent.vue?vue&type=template&id=a90ac7aa&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/components/residence/ResidenceComponent.vue?vue&type=template&id=a90ac7aa& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResidenceComponent_vue_vue_type_template_id_a90ac7aa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResidenceComponent.vue?vue&type=template&id=a90ac7aa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/residence/ResidenceComponent.vue?vue&type=template&id=a90ac7aa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResidenceComponent_vue_vue_type_template_id_a90ac7aa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResidenceComponent_vue_vue_type_template_id_a90ac7aa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
