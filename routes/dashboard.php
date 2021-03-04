@@ -63,3 +63,21 @@ Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blo
 Route::resource('blog_categories', 'BlogCategoryController');
 // Student Route
 Route::resource('students', 'StudentController');
+
+Route::get('/insurances/get','InsurancesController@getInsurances');
+Route::get('/insurances/edit/{id}','InsurancesController@editInsuarnce');
+Route::get('/insurances/delete/{id}','InsurancesController@destroy');
+Route::get('/insurances/filter/','InsurancesController@filter');
+Route::resource('insurances','InsurancesController');
+
+Route::get('/airports/get','AirportsController@getAirports');
+Route::get('/airports/edit/{id}','AirportsController@editAirports');
+Route::get('/airports/delete/{id}','AirportsController@destroy');
+Route::get('/airports/filter/','AirportsController@filter');
+Route::resource('airports','AirportsController');
+
+Route::get('/residences/get','ResidencesController@getResidences');
+Route::get('/residences/edit/{id}','ResidencesController@editResidences');
+Route::get('/residences/delete/{id}','ResidencesController@destroy');
+Route::get('/residences/filter/','ResidencesController@filter');
+Route::resource('residences','ResidencesController');
