@@ -1,6 +1,6 @@
 <template>
     <div style="display:inline">
-        <select v-model="country_id" @change="get_cities" ref="test3" name="">
+        <select v-model="country_id" @change="get_cities" ref = "country_id_ref">
             <option hidden value="">الدولة</option>
             <option value="">برجاء اختيار المدينة</option>
             <option v-for="country in countries" :key="country.id" :value="country.id">{{country.name}}</option>
@@ -12,7 +12,6 @@
     export default {
         props:[
                 'get_countries_url',
-                'get_cities_url',
             ],
         data() {
             return {
@@ -25,7 +24,7 @@
                 axios.get(this.get_countries_url).then((response) => (this.countries = response.data));
             },
             get_cities(){
-                console.log(this.$root.$refs.cities_ref.get_cities(this.country_id))
+                console.log(this.$parent.$refs.cities_component_ref.get_cities(this.country_id))
             }
         },
         beforeMount() {

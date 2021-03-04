@@ -1,6 +1,6 @@
 <template>
     <div style="display:inline">
-        <select name="">
+        <select ref = "city_id_ref">
             <option hidden value="">المدينة</option>
             <option value="">برجاء اختيار المدينة</option>
             <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>

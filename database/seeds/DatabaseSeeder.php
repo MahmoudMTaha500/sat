@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $this->call(InstituteRateSeeder::class);
         $this->call(PartnerSeeder::class);
         // $this->call(StudentRequestSeeder::class);
-        $this->call(InsurancesSeeder::class);
+        $this->call(InsuranceSeeder::class);
         $this->call(AirportsSeeder::class);
         $this->call(ResidencesSeeder::class);
     }

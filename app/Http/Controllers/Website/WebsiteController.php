@@ -21,13 +21,21 @@ class WebsiteController extends Controller
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
-        return view('website.home_page' , compact(
-                                                    'useVue', 
-                                                    'best_offers', 
-                                                    'success_stories',
-                                                    'two_blogs',
-                                                    'blogs',
-                                                    'partners',
-                                                ));
+        return view('website.home' , compact(
+                                                'useVue', 
+                                                'best_offers', 
+                                                'success_stories',
+                                                'two_blogs',
+                                                'blogs',
+                                                'partners',
+                                            ));
+    }
+
+    public function institutes_page()
+    {
+        $useVue = true;
+        return view('website.institutes' , compact(
+                                                'useVue'
+                                            ));
     }
 }
