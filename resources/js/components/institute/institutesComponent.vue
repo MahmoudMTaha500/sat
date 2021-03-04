@@ -14,7 +14,6 @@
                                 <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" :href="route_create"> <i class="ft-plus ft-md"></i> اضافة معهد جديد</a>
                             </li>
                         </ul>
-
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -65,14 +64,10 @@
                                     <th class="border-top-0">الدولة</th>
                                     <th class="border-top-0">المدينة</th>
                                     <th class="border-top-0">عدد الكورسات</th>
-
                                     <th class="border-top-0">التقييم</th>
-
                                     <th class="border-top-0">التقييم بواسطة</th>
                                     <th class="border-top-0">الحاله</th>
-
                                     <th class="border-top-0">التعليقات</th>
-
                                     <th class="border-top-0">اكشن</th>
                                 </tr>
                             </thead>
@@ -87,7 +82,6 @@
                                     <td>{{institute.city.name_ar}}</td>
                                     <td class="text-truncate">5 كورسات</td>
                                     <td  class="text-truncate"> 
-
                                           <rate :length="5"     :value="institute_rate(institute)"    disabled    />
                                     </td>
 

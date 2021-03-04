@@ -3169,12 +3169,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["instutite_url", "instutite_url_edit", "csrftoken", "aprove_route", "path_logo", "route_create", "countries_from_blade", "dahsboard_url", "url_filtier", "show_instutite_url"],
   data: function data() {
