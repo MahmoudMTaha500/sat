@@ -25,6 +25,8 @@
                 <p>{{course.discount*100}} %</p>
             </div>
         </a>
+
+        
         <div class="pagination">
             <button class="btn btn-default" @click="pagination(prev_page_url)" :disabled="!courses.prev_page_url">
                 Previos

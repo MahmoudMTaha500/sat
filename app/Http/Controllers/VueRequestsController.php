@@ -27,7 +27,6 @@ class VueRequestsController extends Controller
     public function get_courses(Request $request)
     {
         $courses = new Course();
-
         if(!empty($request->keyword)){
             $courses = $courses->where("name_ar", 'LIKE', "%{$request->keyword}%");
         }
@@ -42,7 +41,7 @@ class VueRequestsController extends Controller
             });
         }
 
-        $courses = $courses->with('institute', 'institute.city' , 'institute.country' , 'coursesPricePerWeek')->paginate(3);
+        $courses = $courses->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(10);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 }

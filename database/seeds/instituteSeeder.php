@@ -30,8 +30,8 @@ class InstituteSeeder extends Seeder
                 "banner" => 'storage/default_images.png',
                 "creator_id" => 1,
                 "sat_rate" => 5,
-                "rate_switch" => 1,
-                "approvement" => 1,
+                "rate_switch" => rand(0 , 1),
+                "approvement" => rand(0 , 1),
             ]);
         }
     }

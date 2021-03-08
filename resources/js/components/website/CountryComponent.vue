@@ -4,6 +4,7 @@
             <option hidden value="">الدولة</option>
             <option value="">برجاء اختيار المدينة</option>
             <option v-for="country in countries" :key="country.id" :value="country.id">{{country.name}}</option>
+            <option v-if="option_null" value="">اخرى</option>
         </select>
     </div>
 </template>
@@ -12,6 +13,7 @@
     export default {
         props:[
                 'get_countries_url',
+                'option_null',
             ],
         data() {
             return {

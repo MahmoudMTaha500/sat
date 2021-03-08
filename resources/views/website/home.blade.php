@@ -1,6 +1,13 @@
 @extends('website.app')
 
 @section('website.content')
+@if(Auth::guard('student')->check())
+    Hello {{Auth::guard('student')->user()->name}}
+@else
+    Hello there 
+@endif
+<br>
+<h1>@lang('website_lang.test')</h1>
 <div>
     <h1>فورم البحث الخاص بالهيدر</h1>
     <form action="">

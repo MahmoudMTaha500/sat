@@ -12,3 +12,5 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::post('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');

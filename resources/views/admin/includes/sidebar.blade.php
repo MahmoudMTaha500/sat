@@ -109,11 +109,11 @@
             <li class="nav-item {{ $department_name == 'blogs' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">المقلات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main">المقالات</span>
                 </a>
                 <ul class="menu-content">
                     <li class="{{ $page_name == 'blogs' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('blogs.index')}}" data-i18n="nav.navbars.nav_light">كل المقلات</a>
+                        <a class="menu-item" href="{{route('blogs.index')}}" data-i18n="nav.navbars.nav_light">كل المقالات</a>
                     </li>
                     <li class="{{ $page_name == 'add-blog' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('blogs.create')}}" data-i18n="nav.navbars.nav_dark">اضافة مقالة جديدة</a>

@@ -4,13 +4,14 @@
             <option hidden value="">المدينة</option>
             <option value="">برجاء اختيار المدينة</option>
             <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
+            <option v-if="cities.length != null && cities.length != 0 && option_null" value=""> اخرى</option>
         </select>
     </div>
 </template>
 
 <script>
     export default {
-        props:['get_cities_url'],
+        props:['get_cities_url' , 'option_null'],
         data() {
             return {
                 cities: {},

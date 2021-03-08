@@ -3918,8 +3918,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_cities_url'],
+  props: ['get_cities_url', 'option_null'],
   data: function data() {
     return {
       cities: {}
@@ -3962,8 +3963,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_countries_url'],
+  props: ['get_countries_url', 'option_null'],
   data: function data() {
     return {
       countries: {},
@@ -4002,6 +4004,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -45480,7 +45484,11 @@ var render = function() {
           return _c("option", { key: city.id, domProps: { value: city.id } }, [
             _vm._v(_vm._s(city.name))
           ])
-        })
+        }),
+        _vm._v(" "),
+        _vm.cities.length != null && _vm.cities.length != 0 && _vm.option_null
+          ? _c("option", { attrs: { value: "" } }, [_vm._v(" اخرى")])
+          : _vm._e()
       ],
       2
     )
@@ -45553,7 +45561,11 @@ var render = function() {
             { key: country.id, domProps: { value: country.id } },
             [_vm._v(_vm._s(country.name))]
           )
-        })
+        }),
+        _vm._v(" "),
+        _vm.option_null
+          ? _c("option", { attrs: { value: "" } }, [_vm._v("اخرى")])
+          : _vm._e()
       ],
       2
     )
