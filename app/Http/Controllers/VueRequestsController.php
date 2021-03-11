@@ -19,7 +19,9 @@ class VueRequestsController extends Controller
     {
         $cities = new City();
         if($request->has('country_id')){
-            $cities = $cities->where('country_id' , $request->country_id);
+            if( $request->country_id != 'all'){
+                $cities = $cities->where('country_id' , $request->country_id);
+            }
         }
         $cities = $cities->get(['name_ar as name' , 'id']);
         return response()->json($cities);
@@ -41,7 +43,7 @@ class VueRequestsController extends Controller
             });
         }
 
-        $courses = $courses->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(10);
+        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 }

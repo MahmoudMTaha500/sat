@@ -1,0 +1,10 @@
+.mission {
+  border: 2px solid transparent;
+  color: #006FFF !important;
+  transition: all 0.4s ease-in-out; }
+  .mission:hover {
+    border: 2px solid #F4C20D; }
+    .mission:hover .mission-icon i {
+      color: #F4C20D !important; }
+
+/*# sourceMappingURL=about.css.map */

@@ -3920,7 +3920,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_cities_url', 'option_null'],
+  props: ['get_cities_url', 'option_null', 'ele_class'],
   data: function data() {
     return {
       cities: {}
@@ -3965,7 +3965,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_countries_url', 'option_null'],
+  props: ['get_countries_url', 'option_null', 'ele_class'],
   data: function data() {
     return {
       countries: {},
@@ -4004,6 +4004,126 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -45472,13 +45592,11 @@ var render = function() {
   return _c("div", { staticStyle: { display: "inline" } }, [
     _c(
       "select",
-      { ref: "city_id_ref" },
+      { ref: "city_id_ref", class: _vm.ele_class },
       [
         _c("option", { attrs: { hidden: "", value: "" } }, [_vm._v("المدينة")]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [
-          _vm._v("برجاء اختيار المدينة")
-        ]),
+        _c("option", { attrs: { value: "all" } }, [_vm._v("كل المدن")]),
         _vm._v(" "),
         _vm._l(_vm.cities, function(city) {
           return _c("option", { key: city.id, domProps: { value: city.id } }, [
@@ -45529,6 +45647,7 @@ var render = function() {
           }
         ],
         ref: "country_id_ref",
+        class: _vm.ele_class,
         on: {
           change: [
             function($event) {
@@ -45551,9 +45670,7 @@ var render = function() {
       [
         _c("option", { attrs: { hidden: "", value: "" } }, [_vm._v("الدولة")]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [
-          _vm._v("برجاء اختيار المدينة")
-        ]),
+        _c("option", { attrs: { value: "all" } }, [_vm._v("كل الدول")]),
         _vm._v(" "),
         _vm._l(_vm.countries, function(country) {
           return _c(
@@ -45593,147 +45710,515 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { display: "inline" } },
-    [
-      _c("h1", [_vm._v("المعاهد")]),
-      _vm._v(" "),
-      _c("div", [
-        _c(
-          "div",
-          [
-            _c("input", { ref: "keyword", attrs: { type: "text" } }),
-            _vm._v(" "),
-            _c("country-component", {
-              ref: "countries_component_ref",
-              attrs: { get_countries_url: _vm.get_countries_url }
-            }),
-            _vm._v(" "),
-            _c("city-component", {
-              ref: "cities_component_ref",
-              attrs: { get_cities_url: _vm.get_cities_url }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.filter_courses()
-                  }
-                }
-              },
-              [_vm._v("بحث")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.courses.data, function(course) {
-        return _c("a", { key: course.id, attrs: { href: course.slug } }, [
-          _c(
-            "div",
-            {
-              staticStyle: {
-                width: "33%",
-                display: "inline-block",
-                "margin-left": "0.2%"
-              }
-            },
-            [
-              _c("img", {
-                attrs: {
-                  width: "100%",
-                  src: _vm.public_path + course.institute.banner,
-                  alt: course.institute.name_ar
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", [_vm._v("معهد " + _vm._s(course.institute.name_ar))]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(_vm.institute_rate(course.institute)))]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(course.institute.country.name_ar) +
-                    " , " +
-                    _vm._s(course.institute.city.name_ar)
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(course.name_ar))]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(course.study_period == "morning" ? "صباحي" : "مسائي")
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(course.required_level))]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(
-                    course.courses_price_per_week.price * (1 - course.discount)
-                  )
-                )
-              ]),
-              _vm._v(" "),
-              _c("del", [_vm._v(_vm._s(course.courses_price_per_week.price))]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(course.discount * 100) + " %")])
-            ]
-          )
-        ])
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "pagination" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default",
-            attrs: { disabled: !_vm.courses.prev_page_url },
-            on: {
-              click: function($event) {
-                return _vm.pagination(_vm.prev_page_url)
-              }
-            }
-          },
-          [_vm._v("\n            Previos\n        ")]
-        ),
+  return _c("div", { staticStyle: { display: "inline" } }, [
+    _c("section", { staticClass: "institutes py-5 bg-sub-secondary-color" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _c("span", [
-          _vm._v(
-            " page " +
-              _vm._s(_vm.courses.current_page) +
-              " of " +
-              _vm._s(_vm.courses.last_page) +
-              " "
-          )
+        _c("div", { staticClass: "row px-xl-5 mb-5" }, [
+          _c("div", { staticClass: "col-xl-3" }, [
+            _c(
+              "div",
+              { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
+              [
+                _c("div", { staticClass: "card rounded-10 shadow-sm mb-4" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "collapse show",
+                      attrs: {
+                        id: "collapseOne",
+                        "aria-labelledby": "headingOne",
+                        "data-parent": "#accordion"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "card-body border-top" }, [
+                        _c("form", { attrs: { action: "" } }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light"
+                            },
+                            [
+                              _c("input", {
+                                ref: "keyword",
+                                staticClass:
+                                  "form-control border-0 bg-transparent pr-1",
+                                attrs: { type: "text", placeholder: "بحث" }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(2)
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("country-component", {
+                                ref: "countries_component_ref",
+                                attrs: {
+                                  get_countries_url: _vm.get_countries_url,
+                                  ele_class: "form-control rounded-10"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("city-component", {
+                                ref: "cities_component_ref",
+                                attrs: {
+                                  get_cities_url: _vm.get_cities_url,
+                                  ele_class: "form-control rounded-10"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.filter_courses()
+                                }
+                              }
+                            },
+                            [_vm._v("فلتر")]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-9" }, [
+            _c("div", { staticClass: "institutes-list pt-4" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.courses.data, function(course) {
+                  return _c(
+                    "div",
+                    { key: course.id, staticClass: "col-lg-4 col-md-6" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "offer-icon position-absolute bg-secondary-color text-white"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        - " +
+                                  _vm._s(Math.round(course.discount * 100)) +
+                                  " %\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(6, true),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: course.slug } }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "institute-img d-inline-block position-relative"
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "card-img-top",
+                                  attrs: {
+                                    src:
+                                      _vm.public_path + course.institute.banner,
+                                    alt: course.institute.name_ar
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "card-body rounded-10 bg-white" },
+                            [
+                              _c("h5", { staticClass: "card-title" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-main-color",
+                                    attrs: { href: course.slug }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " معهد " +
+                                        _vm._s(course.institute.name_ar)
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "mb-0 d-flex" },
+                                [
+                                  _c("rate", {
+                                    attrs: {
+                                      length: 5,
+                                      value: _vm.institute_rate(
+                                        course.institute
+                                      ),
+                                      disabled: ""
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticStyle: { "line-height": "39px" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.institute_rate(course.institute)
+                                        )
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-map-marker-alt text-main-color"
+                                }),
+                                _vm._v(
+                                  " " +
+                                    _vm._s(course.institute.country.name_ar) +
+                                    " , " +
+                                    _vm._s(course.institute.city.name_ar)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-graduation-cap text-main-color"
+                                }),
+                                _vm._v(" " + _vm._s(course.name_ar))
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0 overflow-hidden" }, [
+                                _c("span", { staticClass: "float-right" }, [
+                                  _c("i", {
+                                    staticClass: "fas fa-sun text-main-color"
+                                  }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        course.study_period == "morning"
+                                          ? "صباحي"
+                                          : "مسائي"
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "float-left" }, [
+                                  _c("i", {
+                                    staticClass: "fas fa-signal text-main-color"
+                                  }),
+                                  _vm._v(" " + _vm._s(course.required_level))
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "card-footer bg-white overflow-hidden"
+                            },
+                            [
+                              _c("del", { staticClass: "text-muted del" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    Math.round(
+                                      course.courses_price_per_week.price
+                                    )
+                                  ) + " ريال / أسبوع "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "float-left text-main-color" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      Math.round(
+                                        course.courses_price_per_week.price *
+                                          (1 - course.discount)
+                                      )
+                                    ) + " ريال / أسبوع "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "row px-xl-5" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("nav", { attrs: { "aria-label": "Page navigation  " } }, [
+              _c(
+                "ul",
+                { staticClass: "pagination d-flex justify-content-end" },
+                [
+                  _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "page-link rounded-10 mx-1 text-dark border-0",
+                        attrs: {
+                          disabled: !_vm.courses.prev_page_url,
+                          href: "#"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.pagination(_vm.prev_page_url)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-chevron-right" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "page-link rounded-10 mx-1 text-dark border-0",
+                        attrs: {
+                          disabled: !_vm.courses.next_page_url,
+                          href: "#"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.pagination(_vm.next_page_url)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-chevron-left" })]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row px-xl-5" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "heading-institutes" }, [
+          _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
+            _vm._v("المعاهد")
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها"
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card-header border-bottom bg-white rounded-10 border-0",
+        attrs: { id: "headingOne" }
+      },
+      [
         _c(
-          "button",
+          "h5",
           {
-            staticClass: "btn btn-default",
-            attrs: { disabled: !_vm.courses.next_page_url },
-            on: {
-              click: function($event) {
-                return _vm.pagination(_vm.next_page_url)
-              }
+            staticClass: "font-weight-bold text-main-color",
+            attrs: {
+              "data-toggle": "collapse",
+              "data-target": "#collapseOne",
+              "aria-expanded": "true",
+              "aria-controls": "collapseOne"
             }
           },
-          [_vm._v("\n            Next\n        ")]
+          [_vm._v("فلتر بواسطة")]
         )
-      ])
-    ],
-    2
-  )
-}
-var staticRenderFns = []
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text border-0 p-0 bg-transparent",
+          attrs: { id: "basic-addon2" }
+        },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
+      [
+        _c("input", {
+          staticClass: "datepicker form-control border-0 bg-transparent",
+          attrs: {
+            type: "text",
+            "data-toggle": "datepicker",
+            placeholder: "تاريخ البداية"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append" }, [
+          _c(
+            "span",
+            {
+              staticClass:
+                "input-group-text border-0 bg-white p-0 bg-transparent",
+              attrs: { id: "basic-addon2" }
+            },
+            [_c("i", { staticClass: "far fa-calendar" })]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
+            _vm._v("عدد الاسابيع")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("1")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
+            _vm._v("المستوي")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "مبتدئ" } }, [_vm._v("مبتدئ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "متوسط" } }, [_vm._v("متوسط")]),
+          _vm._v(" "),
+          _c("option", { staticClass: "متقدم" }, [_vm._v("متقدم")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "add-favourite position-absolute" }, [
+      _c("i", { staticClass: "far fa-heart" })
+    ])
+  }
+]
 render._withStripped = true
 
 

@@ -1,0 +1,26 @@
+@import 'helpers/variables';
+@import 'helpers/reset';
+@import 'helpers/grid';
+@import 'helpers/colors';
+@import 'helpers/border';
+@import'helpers/font';
+@import 'layout/header';
+@import 'layout/footer';
+@import 'components/buttons';
+@import 'components/form';
+@import 'components/carousel';
+@import 'components/tabs';
+@import 'components/card';
+@import 'components/pagination';
+@import 'components/step';
+body{
+    font-family: $fontFamily;
+    direction: $pgDirection;
+    text-align: $textDirection;
+
+    font-size: $defaultFontSize;
+}
+
+// *{
+//     border: 1px solid red;
+// }

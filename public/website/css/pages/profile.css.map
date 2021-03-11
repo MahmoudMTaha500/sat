@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAII,gCAAuB;EACnB,UAAU,EAAE,CAAC;EACb,kCAAC;IACG,KAAK,EAAE,kBAA0B;AAGzC,yBAAgB;EACZ,UAAU,EAAE,IAAI;EAEhB,2BAAC;IACG,eAAe,EAAC,IAAI;IACpB,UAAU,EAAE,eAAe;EAG3B,iCAAC;IACG,KAAK,EAAE,kBAA0B",
+"sources": ["../../sass/pages/profile.scss"],
+"names": [],
+"file": "profile.css"
+}

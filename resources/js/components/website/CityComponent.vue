@@ -1,8 +1,8 @@
 <template>
     <div style="display:inline">
-        <select ref = "city_id_ref">
+        <select :class="ele_class" ref = "city_id_ref">
             <option hidden value="">المدينة</option>
-            <option value="">برجاء اختيار المدينة</option>
+            <option value="all">كل المدن</option>
             <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
             <option v-if="cities.length != null && cities.length != 0 && option_null" value=""> اخرى</option>
         </select>
@@ -11,7 +11,7 @@
 
 <script>
     export default {
-        props:['get_cities_url' , 'option_null'],
+        props:['get_cities_url' , 'option_null' , 'ele_class'],
         data() {
             return {
                 cities: {},

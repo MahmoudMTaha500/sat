@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Cairo Font  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/pages/profile.css">
+
+    <title>Classat</title>
+</head>
+
+<body class="bg-sub-secondary-color min-vh-100">
+    <!-- Header -->
+  <header class="bg-white shadow-sm">
+    <div class="container-fluid">
+      <div class="row px-lg-0 px-xl-5 ">
+        <div class="col-12">
+          <!-- NavBar -->
+          <nav class="navbar navbar-expand-lg navbar-light py-3 px-0 ">
+            <a class="navbar-brand mb-3" href="#"><img src="imgs/logo.png" alt="" class="img-fluid"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Login & Register In Mobile Screen -->
+            <div class="mobile-log-in-out d-lg-none d-block ">
+
+              <a href="signin.html" class="btn rounded-10 text-secondary-color  ">تسجيل الدخول</a>
+              <a href="sign-out.html" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>
+            </div>
+            <!-- ./Login & Register In Mobile Screen -->
+            <!-- User Logged In Mobile Screen -->
+            <!-- <div class="loged position-relative mt-1 d-lg-none d-block">
+
+              <a class="text-main-color text-decoration-none notification align-middle" href="notification-full.html">
+                <i class="text-main-color fas fa-bell"></i> <span
+                  class="badge badge-primary badge-pill rounded-circle bg-secondary-color text-center font-weight-bold p-0 position-absolute">14</span></a>
+              <div class="dropdown open-sidemenu d-inline-block">
+                <a class="btn bg-transparent " href="#">
+                  <img src="imgs/users/user2.png" alt="" class="rounded-circle">
+
+                </a>
+                <div class="sidemenu position-fixed">
+                  <div class="sidemenu-nav bg-white">
+                    <div class="profile-img py-4 text-center position-relative mx-auto">
+                      <input type="file" class="d-none upload">
+                      <div class="overlay text-center text-white position-absolute"><i class="far fa-image"></i></div>
+                      <img src="imgs/users/user2.png" alt="" class="img-fluid rounded-circle img-uploaded">
+                      <h6 class="text-main-color font-weight-bold mt-2">احمد مجدي</h6>
+                    </div>
+                    <ul class="list-group list-group-flush p-0 border-0">
+                      <li class="list-group-item py-3  border-bottom text-center"><a href="profile.html"
+                          class="text-dark">البيانات الشخصية</a></li>
+                      <li class="list-group-item py-3 border-bottom text-center"><a href="favourite.html"
+                          class="text-dark">المفضلة</a></li>
+                      <li class="list-group-item py-3 border-bottom text-center"><a href="reservation.html"
+                          class="text-dark">الحجوزات</a></li>
+                      <li class="list-group-item py-3 text-center border-bottom"><a href="notification.html"
+                          class="text-dark">الاشعارات</a></li>
+                      <li class="list-group-item py-3 text-center"><a href="#" class="text-dark">تسجيل الخروج</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- ./User Logged In Mobile Screen -->
+            <!-- Nav Menu  -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="الرئيسية" href="index.html">الرئيسية <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="المعاهد" href="institutes.html">المعاهد</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="طلب تأشيرة" href="order-visa.html">طلب تأشيرة</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="العروض" href="offers.html">العروض</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="المقالات" href="articles.html">المقالات</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="تواصل معنا" href="contact-us.html">تواصل معنا</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="من نحن" href="about-us.html">من نحن</a>
+                </li>
+                <li class="nav-item px-xl-2 social-links d-xl-block  d-none">
+                  <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#"><span class="text-white"><i
+                        class="fab fa-facebook-f"></i></span></a>
+                  <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#"><span class="text-white"><i
+                        class="fab fa-twitter"></i></span></a>
+                  <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#"><span class="text-white"><i
+                        class="fab fa-instagram"></i></span></a>
+
+                </li>
+              </ul>
+
+
+              <div class=" my-2 my-xl-0">
+
+                <!-- Login & Register In Large Screen -->
+                <div class="not-logged d-lg-block d-none">
+                  <a href="signin.html" class="btn rounded-10 text-secondary-color  ">تسجيل الدخول</a>
+                  <a href="sign-out.html" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>
+                </div>
+                <!-- ./Login & Register In Large Screen -->
+                <!-- User Loged in Large Screen-->
+                <!-- <div class="loged position-relative mt-1 d-lg-block d-none">
+
+                  <a class="text-main-color text-decoration-none notification align-middle"
+                    href="notification-full.html"> <i class="text-main-color fas fa-bell"></i> <span
+                      class="badge badge-primary badge-pill rounded-circle bg-secondary-color text-center font-weight-bold p-0 position-absolute">14</span></a>
+                  <div class="dropdown d-inline-block">
+                    <a class="btn bg-transparent dropdown-toggle " href="#" role="button" id="dropdownMenuLink"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="imgs/users/user2.png" alt="" class="rounded-circle">
+                      احمد مجدي
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="profile.html">الصفحة الشخصية</a>
+                      <a class="dropdown-item" href="#">تسجيل الخروج</a>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- User Loged in Large Screen-->
+
+              </div>
+            </div>
+            <!-- ./Nav Menu  -->
+          </nav>
+          <!-- ./NavBar -->
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ./Header -->
+    <!-- Profile -->
+    <section class="profile py-5">
+        <div class="container-fluid">
+            <div class="row  px-xl-5 mb-4">
+                <!-- Section Heading -->
+                <div class="col-12 d-lg-block d-none">
+                    <h3 class="text-main-color font-weight-bold">الملف الشخصي</h3>
+                </div>
+                <!-- ./Section Heading -->
+            </div>
+            <div class="row px-xl-5">
+                <!-- Side Nav -->
+                <div class="col-lg-3 mb-4 d-lg-block d-none">
+                    <div class="bg-white rounded-10 py-4 shadow-sm">
+                        <div class="profile-img pt-4 text-center position-relative mx-auto">
+                            <input type="file" class="d-none upload">
+                            <div class="overlay text-center text-white position-absolute"><i class="far fa-image"></i></div>
+                            <img src="imgs/users/user2.png" alt="" class="img-fluid rounded-circle img-uploaded">
+                            <h6 class="text-main-color font-weight-bold mt-2">احمد مجدي</h6>
+                        </div>
+                        <ul class="list-group list-group-flush p-0 border-0">
+                            <li class="list-group-item py-3  border-bottom "><a href="profile.html"
+                                    class="text-dark">البيانات الشخصية</a></li>
+                            <li class="list-group-item py-3 border-bottom"><a href="favourite.html"
+                                    class="text-dark">المفضلة</a></li>
+                            <li class="list-group-item py-3 border-top border-bottom active"><a href="reservation.html"
+                                    class="text-dark">الحجوزات</a></li>
+                            <li class="list-group-item py-3"><a href="notification.html" class="text-dark">الاشعارات</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- ./Side Nav -->
+                <div class="col-lg-9 ">
+                    <!-- Section Heading -->
+                    <div class="heading overflow-hidden  mb-4">
+                        <span class="text-main-color font-weight-bold h5   d-inline-block pt-2">
+                            تفاصيل الحجز للدورة
+
+                        </span>
+                       <button class="btn float-left bg-secondary-color text-white rounded-10">أعادة حجز الدورة</button>
+
+                    </div>
+                    <!-- ./Section Heading -->
+                    <!-- Reservation Details -->
+                    <div class="reservation-details">
+                        <div class="card rounded-10 border-0">
+                            <div class="card-body">
+                            
+                                <p><span class="font-weight-bold">أجمالي تكاليف الدورة :</span> 4453.00 دولار
+                                    امريكي</p>
+                                    
+                                <p><span class="font-weight-bold">أسم المعهد :</span> معهد نيويورك</p>
+                                <p><span class="font-weight-bold">اسم الدورة :</span> لغة إنجليزية</p>
+                                <p><span class="font-weight-bold">المدينة :</span>أبو ظبي</p>
+                                <p><span class="font-weight-bold">تاريخ بداية الدورة :</span>8-12-2020</p>
+                                <p><span class="font-weight-bold">تاريخ إنتهاء  الدورة :</span>1-2-2020</p>
+                                <p><span class="font-weight-bold">عدد الأسابيع :</span>4 أسابيع</p>
+                                <p><span class="font-weight-bold">عدد الدروس :</span>27 درس / أسبوع</p>
+                                <p><span class="font-weight-bold">عدد الساعات :</span>27 ساعة في الأسبوع</p>
+                                <p><span class="font-weight-bold">تاريخ الحجز :</span>8-12-2020</p>
+                                <div class="border-top py-3">
+                                    <h5 class="text-main-color font-weight-bold mb-3">تكاليف إضافية</h5>
+                                    <p><span class="font-weight-bold">رسوم التسجيل :</span> 170.00 دولار امريكي</p>
+                                    <p><span class="font-weight-bold">عرض خاص على الرسوم الدراسية :</span> خصم 15%  (1أسبوع) 286.2 دولار امريكي</p>
+                                    <p><span class="font-weight-bold">عرض خاص من سات :</span> خصم 25%  (1أسبوع) 286.2 دولار امريكي </p>
+                                </div>
+                                
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                    <!-- ./Reservation Details -->
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- ./Profile -->
+    <!-- Footer -->
+    <footer>
+        <div class="top-footer bg-main-color py-5">
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-xl-5 col-12 ">
+                        <img src="imgs/logo-white.png" alt="" class="img-fluid">
+                        <p class="text-white mt-4">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد و مع أمهر المعلمين حول
+                            العالم نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى
+                            التعاون
+                        </p>
+                    </div>
+                    <div class="col-xl-2 col-6">
+                        <h6 class="text-secondary-color ">الخدمات</h6>
+                        <ul class="p-0">
+                            <li><a href="institutes.html" class="text-white">المعاهد</a></li>
+                            <li><a href="order-visa.html" class="text-white">طلب تأشيرة</a></li>
+                            <li><a href="offers.html" class="text-white">العروض</a></li>
+                            <li><a href="articles.html" class="text-white">المقالات</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-2 col-6">
+                        <h6 class="text-secondary-color">الشركة</h6>
+                        <ul class="p-0">
+                            <li><a href="about-us.html" class="text-white">عن الشركة</a></li>
+                            <li><a href="about-us.html#team" class="text-white">عن الفريق</a></li>
+                            <li><a href="about-us.html#trusted-us" class="text-white">الشركاء</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-3 col-12">
+                        <h6 class="text-secondary-color ">تواصل معنا </h6>
+                        <ul class="p-0">
+                            <li class="text-white"><i class="fas fa-envelope"></i> arabic@SAT.com </li>
+                            <li class="text-white"><i class="fas fa-phone"></i> 920023418 / 920023418</li>
+                            <li class="text-white mb-4"><i class="fas fa-map-marker-alt "></i> الطابق الثاني، مكتب B54
+                                الرياض, السعودية</li>
+                            <li class="social-links-sm">
+                                <a class="bg-white d-inline-block text-center ml-3" href="#"><span
+                                        class="text-main-color font-weight-bold"><i
+                                            class="fab fa-facebook-f"></i></span></a>
+                                <a class="bg-white d-inline-block text-center ml-3" href="#"><span
+                                        class="text-main-color font-weight-bold"><i
+                                            class="fab fa-twitter"></i></span></a>
+                                <a class="bg-white d-inline-block text-center ml-3" href="#"><span
+                                        class="text-main-color font-weight-bold"><i
+                                            class="fab fa-instagram"></i></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer py-2 bg-sub-main-color">
+            <p class="text-center text-white">Copyright &copy; All rights reserve 2021</p>
+        </div>
+    </footer>
+    <!-- ./Footer -->
+
+
+    <!-- Jquery, Popper and Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+<!-- Custom Js -->
+<script src="js/plugins/uploadImg.js"></script>
+<script src="js/shared/sidemenu.js"></script>
+</body>
+
+</html>

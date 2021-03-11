@@ -1,0 +1,25 @@
+@import '../helpers/variables';
+// Profile 
+.profile{
+    // Nav
+    .list-group-item.active{
+        border-top: 0;
+        a{
+            color: $secondaryColor !important;
+        }
+    }
+    .list-group-item{
+        background: #fff;
+        
+        a{
+            text-decoration:none;
+            transition: all ease-in-out;
+        }
+        &:hover{
+            a{
+                color: $secondaryColor !important;
+
+            }
+        }
+    }
+}

@@ -1,6 +1,10 @@
 @extends('website.app')
 
 @section('website.content')
+
+
+
+
 <institutes-pgae-component
     :get_courses_url="{{ json_encode(route('vue.get.courses')) }}"
     :public_path="{{ json_encode(asset('/')) }}"
