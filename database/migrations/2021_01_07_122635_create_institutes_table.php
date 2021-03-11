@@ -18,6 +18,7 @@ class CreateInstitutesTable extends Migration
             $table->string("name_ar");
             $table->string("slug");
             $table->text("about_ar");
+            $table->longText("content_ar");
             $table->string("logo");
             $table->string("banner");
             $table->bigInteger("creator_id")->unsigned();

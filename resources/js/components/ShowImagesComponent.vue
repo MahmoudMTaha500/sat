@@ -13,7 +13,7 @@
   <div class="form-group">
         <label for="projectinput4"> {{this.image_label}}</label>
         <div class="custom-file">
-            <input type="file" class="custom-file-input"  @change="previewImage"   :name="this.image_name" />
+            <input type="file"  class="custom-file-input"  @change="previewImage"   :name="this.image_name"  />
             <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
         </div>
         <div class="mt-3">
@@ -25,7 +25,7 @@
 </template>
  <script>
 export default {
-    props:['image_name','image_label'],
+    props:['image_name','image_label','old'],
       data(){
           return{
                imageData: "",

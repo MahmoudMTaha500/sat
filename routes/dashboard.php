@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::post('update-institute-aprovement', 'InstituteController@updateAprovement');
-Route::post('filter', 'InstituteController@filter');
+Route::get('filter', 'InstituteController@filter');
 
 Route::get('institute/restor/{id}', 'InstituteController@restor');
 Route::get('institute/archive', 'InstituteController@archive');

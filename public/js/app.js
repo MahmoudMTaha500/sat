@@ -2029,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id"],
+  props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id", 'old_country_id', 'old_city_id'],
   data: function data() {
     return {
       selected: "",
@@ -2136,7 +2136,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['image_name', 'image_label'],
+  props: ['image_name', 'image_label', 'old'],
   data: function data() {
     return {
       imageData: ""
@@ -3388,7 +3388,8 @@ __webpack_require__.r(__webpack_exports__);
           countryID: country_id
         }
       }).then(function (response) {
-        return _this2.cities = response.data.cities;
+        _this2.cities = response.data.cities;
+        _this2.selected_city = '';
       });
     },
     get_id_for_cities: function get_id_for_cities() {
@@ -3408,10 +3409,12 @@ __webpack_require__.r(__webpack_exports__);
     filterInstitute: function filterInstitute() {
       var _this3 = this;
 
-      axios.post(this.url_filtier, {
-        country_id: this.selected,
-        city_id: this.selected_city,
-        name_ar: this.name_ar
+      axios.get(this.url_filtier, {
+        params: {
+          country_id: this.selected,
+          city_id: this.selected_city,
+          name_ar: this.name_ar
+        }
       }, {
         headers: {
           "X-CSRFToken": "{{csrf_token()}}"

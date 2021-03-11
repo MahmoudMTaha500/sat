@@ -68,14 +68,13 @@ class InstituteController extends Controller
         $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
         $slug = str_replace(' ', '-', $request->name_ar);
 
-        $InstituteExists = Institute::where(['country_id' => $request->country_id, "name_ar" => $request->name_ar, "city_id" => $request->city_id,
-        ])->first();
-        if (empty($InstituteExists)) {
+       
 
             $institute = Institute::create([
                 "name_ar" => $request->name_ar,
                 "slug" => $slug,
                 "about_ar" => $request->about_ar,
+                "content_ar" => $request->content_ar,
                 "country_id" => $request->country_id,
                 "city_id" => $request->city_id,
                 "logo" => $logoNamePath,
@@ -88,25 +87,10 @@ class InstituteController extends Controller
 
             ]);
 
-            $institute_id = $institute->id;
-            $questions = $request->questionList;
-
-            foreach ($questions as $question) {
-                InstituteQuestion::create([
-                    'institute_id' => $institute_id,
-                    'question' => $question['questions'],
-                    'answer' => $question['answer'],
-                ]);
-            }
+          
             session()->flash('alert_message', ['message' => 'تم اضافة المعهد بنجاح', 'icon' => 'success']);
             return redirect()->route('institute.index');
 
-        } else {
-
-            session()->flash('alert_message', ['message' => ' هذا المعهد موجود بالفعل ', 'icon' => 'error']);
-            return redirect()->route('institute.index');
-
-        }
 
     }
     /************************************************************** */
@@ -137,6 +121,7 @@ class InstituteController extends Controller
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
         $institute->about_ar = $request->about_ar;
+        $institute->content_ar = $request->content_ar;
         $institute->country_id = $request->country_id;
         $institute->city_id = $request->city_id;
 
@@ -176,16 +161,7 @@ class InstituteController extends Controller
 
         }
 
-        $questions = $request->questionList;
-        InstituteQuestion::where(["institute_id" => $institute->id])->delete();
-
-        foreach ($questions as $question) {
-            InstituteQuestion::create([
-                'institute_id' => $institute->id,
-                'question' => $question['questions'],
-                'answer' => $question['answer'],
-            ]);
-        }
+  
    $rateSwitch = 0;
    if($request->rate_switch =="on"){
     $rateSwitch = 1;
@@ -242,20 +218,35 @@ class InstituteController extends Controller
         $country_id = $request->country_id;
         $city_id = $request->city_id;
         $name_ar = $request->name_ar;
-        if ($request->country_id && $city_id) {
-            $institute = Institute::where(['country_id' => $request->country_id, 'city_id' => $city_id])->where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
-            return response()->json(['institute' => $institute]);
-        } elseif ($country_id && $name_ar) {
-            $institute = Institute::where(['country_id' => $request->country_id])->where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
-            return response()->json(['institute' => $institute]);
-        } elseif ($name_ar) {
-            $institute = Institute::where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
-            return response()->json(['institute' => $institute]);
-        } elseif ($country_id) {
-            $institute = Institute::where(['country_id' => $request->country_id])->with('country', 'city')->paginate(10);
-            return response()->json(['institute' => $institute]);
 
+        $institute = new Institute;
+        if($country_id){
+            $institute = $institute->where('country_id',$country_id);
         }
+        if($city_id){
+            $institute = $institute->where('city_id',$city_id);
+        }  
+          if($name_ar){
+            $name_ar = $institute->where('name_ar',$name_ar);
+        }
+
+         $institute = $institute->with('country', 'city')->paginate(10);
+        return response()->json(['institute' => $institute]);
+
+        // if ($request->country_id && $city_id) {
+        //     $institute = Institute::where(['country_id' => $request->country_id, 'city_id' => $city_id])->where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
+        //     return response()->json(['institute' => $institute]);
+        // } elseif ($country_id && $name_ar) {
+        //     $institute = Institute::where(['country_id' => $request->country_id])->where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
+        //     return response()->json(['institute' => $institute]);
+        // } elseif ($name_ar) {
+        //     $institute = Institute::where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
+        //     return response()->json(['institute' => $institute]);
+        // } elseif ($country_id) {
+        //     $institute = Institute::where(['country_id' => $request->country_id])->with('country', 'city')->paginate(10);
+        //     return response()->json(['institute' => $institute]);
+
+        // }
     }
 
 }

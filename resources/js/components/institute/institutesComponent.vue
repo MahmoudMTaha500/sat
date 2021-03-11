@@ -195,7 +195,12 @@
                             countryID: country_id,
                         },
                     })
-                    .then((response) => (this.cities = response.data.cities));
+                    .then((response) => {
+                        this.cities = response.data.cities
+                      this.selected_city='';
+                    }
+                        
+                    );
             },
             get_id_for_cities: function () {
                 return this.selected_city;
@@ -214,7 +219,7 @@
                 }
             },
             filterInstitute: function () {
-                axios.post(this.url_filtier, { country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar }, { headers: { "X-CSRFToken": "{{csrf_token()}}" } }).then((response) => {
+                axios.get(this.url_filtier, {  params:{  country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar }}, { headers: { "X-CSRFToken": "{{csrf_token()}}" } }).then((response) => {
                     this.institutes = response.data.institute;
                 });
             },

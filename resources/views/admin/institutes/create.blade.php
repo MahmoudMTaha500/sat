@@ -45,34 +45,31 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name">اسم المعهد</label>
-                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar"  />
+                                                    <input type="text" id="institute-name" class="form-control" placeholder="ادخل اسم المعهد" name="name_ar" value="{{old('name_ar')}}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-about">نبذة عن المعهد</label>
-                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" ></textarea>
+                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" >{{old('about_ar')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <country-city-component 
                                             :countries_from_blade="{{ json_encode($countries) }}"
                                             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
+                                            :old_country_id="{{json_encode(old('country_id'))}}"
+                                            :old_city_id="{{json_encode(old('city_id'))}}"
+
                                         >
                                         </country-city-component>
                                         <div class="row">
-                                            <div class="form-group col-12 mb-2 contact-repeater">
-                                                <label>الاسئلة الخاصة بالمعهد</label>
-                                                <div data-repeater-list="questionList">
-                                                    <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="السؤال" class="form-control" name="questions" />
-                                                        <input type="tel" placeholder="الاجابة" class="form-control"  name="answer" />
-                                                        <span class="input-group-append" id="button-addon2">
-                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <button type="button" data-repeater-create class="btn btn-success btn-sm"><i class="ft-plus"></i> اضافة سؤال جديد</button>
+                                            <div class="col-md-12">
+
+                                            <div class="form-group">
+                                                <label for="projectinput4">المحتوى</label>
+                                                <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor">{{old('content_ar')}} </textarea>
+                                            </div>
                                             </div>
                                         </div>
 
@@ -91,6 +88,7 @@
                                                 <show-images-component
                                                 :image_name="{{json_encode("logo")}}"
                                                 :image_label="{{json_encode("اختر الصورة")}}"
+                                                :old="{{json_encode(old('logo'))}}"
                                                 ></show-images-component>
                                             </div>
                                             <div class="col-md-6">
@@ -107,6 +105,8 @@
                                                 <show-images-component
                                                 :image_name="{{json_encode("panner")}}"
                                                 :image_label="{{json_encode("اختر الصورة")}}"
+                                                :old="{{json_encode(old('panner'))}}"
+
 
                                                 ></show-images-component>
                                             </div>

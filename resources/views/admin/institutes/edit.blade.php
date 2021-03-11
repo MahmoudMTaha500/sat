@@ -78,21 +78,13 @@
                                               </div>
                                             </div>
                                           </div> 
-                                        <div class="row">
-                                            <div class="form-group col-12 mb-2 contact-repeater">
-                                                <label>الاسئلة الخاصة بالمعهد</label>
-                                                <div data-repeater-list="questionList">
-                                                  @foreach($questions as $question)
-                                                    <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="السؤال" class="form-control" name="questions" value="{{$question->question}}" required/>
-                                                        <input type="tel" placeholder="الاجابة" class="form-control"  name="answer"    value="{{$question->answer}}" required/>
-                                                        <span class="input-group-append" id="button-addon2">
-                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
-                                                        </span>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-                                                <button type="button" data-repeater-create class="btn btn-success btn-sm"><i class="ft-plus"></i> اضافة سؤال جديد</button>
+                                          <div class="row">
+                                            <div class="col-md-12">
+
+                                            <div class="form-group">
+                                                <label for="projectinput4">المحتوى</label>
+                                                <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor" >{{$institute->content_ar}} </textarea>
+                                            </div>
                                             </div>
                                         </div>
 
