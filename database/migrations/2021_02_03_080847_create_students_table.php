@@ -20,8 +20,12 @@ class CreateStudentsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone');
             $table->string('password');
-            $table->string('country');
-            $table->string('city');
+            $table->longText('address');
+            $table->string('nationality');
+            $table->bigInteger("country_id")->unsigned()->nullable();
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->bigInteger("city_id")->unsigned()->nullable();
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->string('profile_image')->nullable();
             $table->rememberToken();
             $table->timestamps();

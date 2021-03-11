@@ -32,16 +32,12 @@ class InstituteController extends Controller
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-
         $institutes = Institute::with('country', 'city','rats')->paginate(10);
-
         return response()->json(['institutes' => $institutes]);
-
     }
     /************************************************************** */
     public function create()
     {
-
         $department_name = 'institutes';
         $page_name = 'add-institute';
         $countries = Country::all();
@@ -115,8 +111,6 @@ class InstituteController extends Controller
     /************************************************************** */
     public function update(Request $request, Institute $institute)
     {
-        // dd($request->all());
-
 
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
@@ -145,7 +139,6 @@ class InstituteController extends Controller
 
         if ($request->panner) {
             $validate_images = $request->validate([
-
                 'panner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 

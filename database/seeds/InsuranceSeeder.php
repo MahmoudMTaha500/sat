@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use App\Models\Insurances;
-class InsurancesSeeder extends Seeder
+
+class InsuranceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +15,8 @@ class InsurancesSeeder extends Seeder
         for ($x = 1; $x <= 30; $x++) {
             Insurances::create([
                 "name_ar" => 'Institute'.$x,
-                "institute_id" => rand(1,30),
-                "price" => rand(10,3000),
-               
+                "institute_id" => $x,
+                "price" => rand(1,9)*100,
             ]);
         }
     }

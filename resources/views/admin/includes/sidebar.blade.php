@@ -16,7 +16,7 @@
             <li class="nav-item {{ $department_name == 'institutes' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم المعاهد</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> المعاهد</span>
                 </a>
                 <ul class="menu-content">
                     <li class="{{ $page_name == 'institute' ? 'active' : ''}}">
@@ -39,7 +39,7 @@
             <li class="nav-item {{ $department_name == 'courses' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم الدورات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الدورات</span>
                 </a>
                 <ul class="menu-content">
                     <li class="{{ $page_name == 'courses' ? 'active' : ''}}">
@@ -54,7 +54,7 @@
                 </ul>
             </li>
             {{-- <li class="nav-item">
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم العروض</span></a>
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> العروض</span></a>
                 <ul class="menu-content">
                     <li>
                         <a class="menu-item" href="navbar-light.html" data-i18n="nav.navbars.nav_light">كل العروض</a>
@@ -70,7 +70,7 @@
             <li class="nav-item">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم الفواتير</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الفواتير</span>
                 </a>
                 <ul class="menu-content">
                     <li>
@@ -88,7 +88,7 @@
             <li class="nav-item {{ $department_name == 'country' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم الدول والمدن</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الدول والمدن</span>
                 </a>
                 <ul class="menu-content">
                     <li>
@@ -109,11 +109,11 @@
             <li class="nav-item {{ $department_name == 'blogs' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">المقلات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main">المقالات</span>
                 </a>
                 <ul class="menu-content">
                     <li class="{{ $page_name == 'blogs' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('blogs.index')}}" data-i18n="nav.navbars.nav_light">كل المقلات</a>
+                        <a class="menu-item" href="{{route('blogs.index')}}" data-i18n="nav.navbars.nav_light">كل المقالات</a>
                     </li>
                     <li class="{{ $page_name == 'add-blog' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('blogs.create')}}" data-i18n="nav.navbars.nav_dark">اضافة مقالة جديدة</a>
@@ -133,7 +133,7 @@
                 </ul>
             </li>
                      <li class="nav-item   {{ $department_name == 'services' ? 'open' : '' }} "   >
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم الخدمات</span></a>
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> الخدمات</span></a>
                 <ul class="menu-content">
                     <li  class="{{ $page_name == 'residences' ? 'active' : ''}}">
                         
@@ -150,7 +150,7 @@
                 </ul>
             </li>
                      {{-- <li class="nav-item  {{ $department_name == 'insurances' ? 'open' : '' }}">
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم التامينات</span></a>
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> التامينات</span></a>
                 <ul class="menu-content">
                     <li  class="{{ $page_name == 'insurances' ? 'active' : ''}}">
                         <a class="menu-item" href="{{route('insurances.index')}}" data-i18n="nav.navbars.nav_light">كل التامينات</a>
@@ -164,7 +164,7 @@
                 </ul>
             </li> --}}
                      {{-- <li class="nav-item">
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main">قسم المطارات</span></a>
+                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> المطارات</span></a>
                 <ul class="menu-content">
                     <li>
                         <a class="menu-item"  href="{{route('blog_categories.create')}}" data-i18n="nav.navbars.nav_light">كل المطارات</a>
@@ -181,7 +181,7 @@
             <li class="nav-item {{ $department_name == 'students' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم الطلاب</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الطلاب</span>
                 </a>
                 <ul class="menu-content">
                     <li>
@@ -202,7 +202,7 @@
             <li class="nav-item {{ $department_name == 'employees' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم الموظفين</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الموظفين</span>
                 </a>
                 <ul class="menu-content">
                     <li>
@@ -217,7 +217,7 @@
             <li class="nav-item {{ $department_name == 'student_requests' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم الطلابات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الطلابات</span>
                 </a>
                 <ul class="menu-content">
                     <li>
@@ -232,7 +232,7 @@
             <li class="nav-item {{ $department_name == 'visa' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم التاشيرات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> التاشيرات</span>
                 </a>
                 <ul class="menu-content">
 
@@ -257,7 +257,7 @@
             <li class="nav-item {{ $department_name == 'visa-requests' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">قسم طلبات التاشيرات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> طلبات التاشيرات</span>
                 </a>
                 <ul class="menu-content">
                     <li>
