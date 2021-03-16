@@ -108,6 +108,10 @@
                                                 <input type="hidden" name="_method" value="delete" />
                                                 <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button>
                                             </form>
+                                            <a :href="instutite_url_edit +'/forceDelete/'+ institute.id"
+                                             onclick="return confirm('سوف يتم حذف المعهد نهائيا .هل انت متاكد؟')"
+                                             class="btn btn-dark btn-sm round" style="margin-right:3px;">حذف نهائي</a>
+
                                         </div>
                                     </td>
                                 </tr>

@@ -7,11 +7,11 @@ use App\Http\Requests\institute\StoreInstituteRequest;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Institute;
-use App\Models\InstituteQuestion;
 use App\Models\InstituteRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
+use App\Models\Course;
+use App\Models\CoursePrice;
 class InstituteController extends Controller
 {
 
@@ -70,6 +70,7 @@ class InstituteController extends Controller
                 "name_ar" => $request->name_ar,
                 "slug" => $slug,
                 "about_ar" => $request->about_ar,
+                "institute_questions" => $request->institute_questions,
                 "country_id" => $request->country_id,
                 "city_id" => $request->city_id,
                 "logo" => $logoNamePath,
@@ -99,7 +100,6 @@ class InstituteController extends Controller
     public function edit(Institute $institute)
     {
         $institute = Institute::find($institute->id);
-        $questions = InstituteQuestion::where(['institute_id' => $institute->id])->get();
         $department_name = 'institutes';
         $page_name = 'add-institute';
         $countries = Country::all();
@@ -114,6 +114,7 @@ class InstituteController extends Controller
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
         $institute->about_ar = $request->about_ar;
+        $institute->institute_questions = $request->institute_questions;
         $institute->country_id = $request->country_id;
         $institute->city_id = $request->city_id;
 
@@ -143,7 +144,7 @@ class InstituteController extends Controller
             $pannerObject = $validate_images['panner'];
             $PannerName = time() . $pannerObject->getClientOriginalName();
             $pathPanner = public_path("\storage\institute\banners");
-            File::delete($institute->logo);
+            File::delete($institute->panner);
 
             $request->panner->move($pathPanner, $PannerName);
 
@@ -173,6 +174,30 @@ class InstituteController extends Controller
         Comment::where(['element_id' => $institute->id, 'element_type' => 'institute'])->delete();
         $institute->delete();
         session()->flash('alert_message', ['message' => 'تم مسح المعهد بنجاح', 'icon' => 'error']);
+        return back();
+
+    }
+    /************************************************************** */
+    public function force_Delete(Institute $institute,$id)
+    {
+        // dd($id);
+        InstituteRate::where('institute_id', $id)->forceDelete();
+        Comment::where(['element_id' => $id, 'element_type' => 'institute'])->forceDelete();
+        $courses = Course::where('institute_id', $id)->get();
+        foreach($courses as $course){
+            $courses_price = CoursePrice::where('course_id',$course->id)->forceDelete();
+        }
+        Course::where('institute_id', $id)->forceDelete();
+         
+        $institute = Institute::find($id);
+
+        File::delete($institute->logo);
+
+        File::delete($institute->panner);
+$institute->forceDelete();
+        
+        // Institute::where('id', $id)->forceDelete();
+        session()->flash('alert_message', ['message' => 'تم حذف  المعهد  نهائيا بنجاح', 'icon' => 'error']);
         return back();
 
     }
@@ -212,7 +237,7 @@ class InstituteController extends Controller
 
         $institute = new Institute;
         if($country_id){
-            $institute = $institute->where('country_id',$country_id);
+            return $institute = $institute->where('country_id',$country_id);
         }
         if($city_id){
             $institute = $institute->where('city_id',$city_id);
@@ -221,7 +246,7 @@ class InstituteController extends Controller
             $name_ar = $institute->where('name_ar',$name_ar);
         }
 
-         $institute = $institute->with('country', 'city')->paginate(10);
+        $institute = $institute->with('country', 'city')->paginate(10);
         return response()->json(['institute' => $institute]);
 
         // if ($request->country_id && $city_id) {

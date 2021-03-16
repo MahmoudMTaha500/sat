@@ -3,7 +3,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="country"> الدولة</label>
-                <select v-model="selected" v-on:change="getcities()" id="country" class="form-control text-left" name="country_id">
+                <select v-model="selected" v-on:change="getcities()" id="country" class="form-control text-left" name="country_id"   >
                     <option value="">حدد الدولة</option>
                     <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
                 </select>
@@ -76,8 +76,8 @@
         props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id",'old_country_id','old_city_id'],
         data() {
             return {
-                selected: "",
-                selected_city: "",
+                selected: this.old_country_id,
+                selected_city: this.old_city_id,
                 countries: this.countries_from_blade,
                 cities: {},
                 newCity: "",
@@ -128,6 +128,10 @@
         },
         beforeMount() {
             this.returnCountryCity();
+
+            if(this.old_country_id && this.old_city_id){
+               this.getcities();
+            }
         },
     };
 </script>

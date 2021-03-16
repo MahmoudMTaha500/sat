@@ -26,7 +26,7 @@ class StoreInstituteRequest extends FormRequest
         return [
             'name_ar' => 'required',
             'about_ar' => 'required',
-            'content_ar' => 'required',
+            'institute_questions' => 'required',
             'country_id' => 'required',
             'city_id' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
@@ -39,7 +39,7 @@ class StoreInstituteRequest extends FormRequest
         return [
             'name_ar.required' => 'اسم المعهد مطلوب',
             'about_ar.required' => 'برجاء ادخال نبذة مختصرة عن المعهد',
-            'content_ar.required' => 'برجاء ادخال اسئله المعهد  ',
+            'institute_questions.required' => 'برجاء ادخال اسئله المعهد  ',
             'country_id.required' => 'برجاء تحديد الدولة',
             'city_id.required' => 'برجاء تحديد المدينة',
             'logo.required' => 'لوجو المعهد مطلوب',

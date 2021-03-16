@@ -82,13 +82,13 @@
                                             <div class="col-md-12">
 
                                             <div class="form-group">
-                                                <label for="projectinput4">المحتوى</label>
-                                                <textarea name="about_ar" id="ckeditor" cols="30" rows="20" class="ckeditor" >{{$institute->about_ar}} </textarea>
+                                                <label for="projectinput4">الاسئله</label>
+                                                <textarea name="institute_questions" id="ckeditor" cols="30" rows="20" class="ckeditor" >{{$institute->institute_questions}} </textarea>
                                             </div>
                                             </div>
                                         </div>
 
-                                        <div class="row">
+                                        {{-- <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput4">لوجو المعهد</label>
@@ -113,6 +113,26 @@
                                                         
 </div>
                                                 </div>
+                                            </div>
+                                        </div> --}}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <show-images-component
+                                                :image_name="{{json_encode("logo")}}"
+                                                :image_label="{{json_encode("اختر الصورة")}}"
+                                                :old="{{json_encode(old('logo'))}}"
+                                                :path_image_edit="{{ json_encode( asset($institute->logo) )}}"
+                                                ></show-images-component>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <show-images-component
+                                                :image_name="{{json_encode("panner")}}"
+                                                :image_label="{{json_encode("اختر الصورة")}}"
+                                                :old="{{json_encode(old('panner'))}}"
+                                                :path_image_edit="{{ json_encode( asset($institute->banner) )}}"
+
+
+                                                ></show-images-component>
                                             </div>
                                         </div>
                                         

@@ -30,11 +30,19 @@ Route::get("getcities", "CityController@getCities");
 Route::post("addCity", "CityController@addCity");
 
 // Institute Route
+Route::get('/institute/forceDelete/{id}', 'InstituteController@force_Delete');
 Route::resource('institute', 'InstituteController');
+/**********************************   ************************************************************************************** */
+
 // Country Route
 Route::resource('countries', 'CountryController');
+
 // City Route
+/**********************************   ************************************************************************************** */
+
 Route::resource('cities', 'CityController');
+/**********************************   ************************************************************************************** */
+
 // Course Route
 
 Route::get('filtercourses', 'CourseController@filtercourses');
@@ -44,10 +52,17 @@ Route::post('update-course-aprovement', 'CourseController@updateAprovement');
 Route::get('courses/restor/{id}', 'CourseController@restor');
 Route::get('courses/archive', 'CourseController@archive');
 Route::resource('courses', 'CourseController');
+/**********************************   ************************************************************************************** */
+
 // Visa Route
 Route::resource('visas', 'VisaController');
+/**********************************   ************************************************************************************** */
+
 // Visa Category Route
+
 Route::resource('visa_categories', 'VisaCategoryController');
+/**********************************   ************************************************************************************** */
+
 // Blog Route
 
 Route::post('update-blog-aprovement', 'BlogController@updateAprovement');
@@ -62,6 +77,9 @@ Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blo
 // Blog Category Route
 Route::resource('blog_categories', 'BlogCategoryController');
 // Student Route
+Route::get('/students/get','StudentController@getStudents');
+Route::get('/students/filter','StudentController@filter');
+
 Route::resource('students', 'StudentController');
 
 Route::get('/insurances/get','InsurancesController@getInsurances');
@@ -81,3 +99,8 @@ Route::get('/residences/edit/{id}','ResidencesController@editResidences');
 Route::get('/residences/delete/{id}','ResidencesController@destroy');
 Route::get('/residences/filter/','ResidencesController@filter');
 Route::resource('residences','ResidencesController');
+
+/**********************************   ************************************************************************************** */
+// Student Route  
+
+

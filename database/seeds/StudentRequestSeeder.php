@@ -27,7 +27,7 @@ class StudentRequestSeeder extends Seeder
             StudentRequest::create([
                 "student_id" => $x,
                 "course_id" => $x,
-                "institute_message" => $course->institute->questions,
+                "institute_message" => $course->institute->institute_questions,
                 "status" => 'new',
                 "weeks" => $weeks,
                 "price_per_week" => $price_per_week,

@@ -184,8 +184,8 @@
                     <span class="menu-title" data-i18n="nav.navbars.main"> الطلاب</span>
                 </a>
                 <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="/sat/students?page=students" data-i18n="nav.navbars.nav_light">كل الطلاب</a>
+                    <li   class="{{ $page_name == 'students' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('students.index')}}" data-i18n="nav.navbars.nav_light">كل الطلاب</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/students/create.php?page=students" data-i18n="nav.navbars.nav_dark">اضافة طالب جديد</a>

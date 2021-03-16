@@ -25,7 +25,7 @@
 </template>
  <script>
 export default {
-    props:['image_name','image_label','old'],
+    props:['image_name','image_label','old','path_image_edit'],
       data(){
           return{
                imageData: "",
@@ -49,6 +49,12 @@ export default {
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    },
+    beforeMount(){
+        if (this.path_image_edit){
+            this.imageData = this.path_image_edit;
+        }
+
     }
 
 }
