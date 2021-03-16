@@ -13,7 +13,7 @@ class AirportsSeeder extends Seeder
     {
         for ($x = 1; $x <= 30; $x++) {
             Airports::create([
-                "name_ar" => 'airports'.$x,
+                "name_ar" => 'مطار'.$x,
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                

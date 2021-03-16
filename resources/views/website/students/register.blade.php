@@ -1,24 +1,24 @@
 @extends('website.app')
 
 @section('website.content')
-<form method="POST" action="{{ route('student.register') }}">
+<form class="text-center" method="POST" action="{{ route('student.register') }}">
     @csrf
 
     <input type="text" name="name" placeholder="الاسم">
     @error('name')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>
     <input type="email" name="email" placeholder="البريد الاليكتروني">
     @error('email')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>
     <input type="text" name="phone" placeholder="الهاتف">
     @error('phone')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>
@@ -36,25 +36,25 @@
     </city-component><br>
     <input type="text" name="address" placeholder="العنوان">
     @error('address')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>
     <input type="text" name="nationality" placeholder="الجنسية">
     @error('nationality')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>
     <input type="password" name="password" placeholder="كلمة السر">
     @error('password')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>
     <input type="password" name="password_confirmation" placeholder="اعادة كلمة السر">
     @error('password_confirmation')
-        <span style="color:red" class="invalid-feedback" role="alert">
+        <span style="color:red;display:block" class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
     @enderror <br>

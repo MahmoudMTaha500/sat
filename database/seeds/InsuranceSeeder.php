@@ -13,10 +13,11 @@ class InsuranceSeeder extends Seeder
     public function run()
     {
         for ($x = 1; $x <= 30; $x++) {
+            $weeks = rand(1,30);
             Insurances::create([
-                "name_ar" => 'Institute'.$x,
+                "weeks" => $weeks,
                 "institute_id" => $x,
-                "price" => rand(1,9)*100,
+                "price" => $weeks*100,
             ]);
         }
     }

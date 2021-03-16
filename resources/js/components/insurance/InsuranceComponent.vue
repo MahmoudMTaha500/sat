@@ -56,7 +56,7 @@
                             <tr>
                               <th class="border-top-0"> #</th>
                               <th class="border-top-0">اسم المعهد</th>
-                              <th class="border-top-0"> التامين</th>
+                              <th class="border-top-0"> عدد الاسابيع</th>
                               <th class="border-top-0">السعر</th>
                               <th class="border-top-0">تحكم</th>
                             </tr>
@@ -66,7 +66,7 @@
                             <tr v-for="insurance in insurances.data" :key="insurance.id">
                               <td class="text-truncate">{{insurance.id}}</td>
                               <td class="text-truncate">{{insurance.institute.name_ar}}</td>
-                              <td class="text-truncate">{{insurance.name_ar}}</td>
+                              <td class="text-truncate">{{insurance.weeks}}</td>
 
                             
                               <td class="text-truncate">{{insurance.price}}</td>

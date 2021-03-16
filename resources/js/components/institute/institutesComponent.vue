@@ -83,7 +83,7 @@
                                     <td class="text-truncate">5 كورسات</td>
                                     <td  class="text-truncate"> 
                                           <rate :length="5"     :value="institute_rate(institute)"    disabled    />
-                                    </td>
+                                    </td> 
 
                                     <td class="text-truncate">
                                         <span v-if="institute.rate_switch" > سات    </span>
@@ -235,7 +235,6 @@ console.log(str); // Logs output to dev tools console.
             },
             institute_rate: function (institute_obj) {
                 if(institute_obj.rate_switch == 1){
-
                     return institute_obj.sat_rate
                 }else{
                     if(institute_obj.rats[0] == null){

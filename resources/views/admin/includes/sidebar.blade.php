@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="animation.html">
+                <a href="{{route('website.home')}}">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.animation.main">الموقع</span>
                 </a>
@@ -268,20 +268,20 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="animation.html">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.animation.main">دردشة مباشرة</span>
                 </a>
-            </li>
+            </li> --}}
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="animation.html">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.animation.main">اعدادات الموقع</span>
                 </a>
-            </li>
-            <li class="nav-item">
+            </li> --}}
+            {{-- <li class="nav-item">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main">المحفظة</span>
@@ -300,7 +300,7 @@
                         <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">المحفظة</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a href="animation.html">
                     <i class="la la-institution"></i>

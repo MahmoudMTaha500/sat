@@ -4241,7 +4241,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_cities_url', 'option_null'],
+  props: ['get_cities_url', 'option_null', 'ele_class'],
   data: function data() {
     return {
       cities: {}
@@ -4286,7 +4286,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_countries_url', 'option_null'],
+  props: ['get_countries_url', 'option_null', 'ele_class'],
   data: function data() {
     return {
       countries: {},
@@ -4312,6 +4312,130 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['course_id', 'course_for_institute_page_url'],
+  data: function data() {
+    return {
+      weeks: 1,
+      price_per_week: ''
+    };
+  },
+  methods: {
+    change_price_per_week: function change_price_per_week() {
+      if (this.weeks == 1) {
+        this.price_per_week = this.course.coursesPricePerWeek;
+        alert(this.weeks);
+      }
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.change_price_per_week();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/InstitutesPgaeComponent.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/InstitutesPgaeComponent.vue?vue&type=script&lang=js& ***!
@@ -4325,6 +4449,126 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -45019,7 +45263,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _vm._v(_vm._s(insurance.name_ar))
+                        _vm._v(_vm._s(insurance.weeks))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
@@ -45202,7 +45446,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v(" التامين")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" عدد الاسابيع")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
         _vm._v(" "),
@@ -46417,13 +46661,11 @@ var render = function() {
   return _c("div", { staticStyle: { display: "inline" } }, [
     _c(
       "select",
-      { ref: "city_id_ref" },
+      { ref: "city_id_ref", class: _vm.ele_class },
       [
         _c("option", { attrs: { hidden: "", value: "" } }, [_vm._v("المدينة")]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [
-          _vm._v("برجاء اختيار المدينة")
-        ]),
+        _c("option", { attrs: { value: "all" } }, [_vm._v("كل المدن")]),
         _vm._v(" "),
         _vm._l(_vm.cities, function(city) {
           return _c("option", { key: city.id, domProps: { value: city.id } }, [
@@ -46474,6 +46716,7 @@ var render = function() {
           }
         ],
         ref: "country_id_ref",
+        class: _vm.ele_class,
         on: {
           change: [
             function($event) {
@@ -46496,9 +46739,7 @@ var render = function() {
       [
         _c("option", { attrs: { hidden: "", value: "" } }, [_vm._v("الدولة")]),
         _vm._v(" "),
-        _c("option", { attrs: { value: "" } }, [
-          _vm._v("برجاء اختيار المدينة")
-        ]),
+        _c("option", { attrs: { value: "all" } }, [_vm._v("كل الدول")]),
         _vm._v(" "),
         _vm._l(_vm.countries, function(country) {
           return _c(
@@ -46523,6 +46764,296 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticStyle: { display: "inline" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
+        _c("form", { attrs: { action: "" } }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.weeks,
+                    expression: "weeks"
+                  }
+                ],
+                staticClass: "form-control selectpicker rounded-10 border",
+                attrs: { "data-live-search": "true" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.weeks = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.change_price_per_week()
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("عدد الاسابيع")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v(" 1 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v(" 2 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [_vm._v(" 3 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "4" } }, [_vm._v(" 4 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "5" } }, [_vm._v(" 5 ")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
+              attrs: { href: "confirm-reservation.html" }
+            },
+            [_vm._v("حجز")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.get_course } }, [_vm._v("click")])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-white py-4 rounded-10 mb-4" }, [
+      _c("div", { staticClass: "cost-heading border-bottom pb-2 px-3" }, [
+        _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
+          _vm._v("التكاليف")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cost-body px-3 pt-3" }, [
+        _c("p", { staticClass: "text-dark" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("اللغة الإنجليزية العامة : ")
+          ]),
+          _vm._v(" ٤٦\n                        دولار أمريكي")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-dark" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("تأمين الطلاب (في الأسبوع) : ")
+          ]),
+          _vm._v(" ٤٦\n                        دولار أمريكي")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-dark" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("رسوم التسجيل : ")
+          ]),
+          _vm._v(" ٤٦ دولار أمريكي\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-main-color" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("إجمالي تكاليف الحجز : ")
+          ]),
+          _vm._v(" ٤٦\n                        دولار أمريكي")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "reservation-heading border-bottom pb-2 px-3" },
+      [
+        _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
+          _vm._v("الحجز والتقديم")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
+      [
+        _c("input", {
+          staticClass: "form-control border-0 bg-transparent datepicker",
+          attrs: {
+            type: "text",
+            "data-toggle": "datepicker",
+            disabled: "",
+            placeholder: "تاريخ البداية",
+            value: "03/02/2021"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append " }, [
+          _c(
+            "span",
+            {
+              staticClass:
+                "input-group-text border-0 bg-white p-0 bg-transparent",
+              attrs: { id: "basic-addon2" }
+            },
+            [_c("i", { staticClass: "far fa-calendar" })]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10 border",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("هل ترغب في السكن؟")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v("لا احتاج خدمة سكن")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10 border",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("المستوي")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v(" الاستقبال في مطار هيثرو - 240 دولار امريكي")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10 border",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("التأمين الصحي")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v(" لا احتاج لخدمة التأمين الصحي")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/InstitutesPgaeComponent.vue?vue&type=template&id=287f1375&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/InstitutesPgaeComponent.vue?vue&type=template&id=287f1375& ***!
@@ -46538,147 +47069,515 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticStyle: { display: "inline" } },
-    [
-      _c("h1", [_vm._v("المعاهد")]),
-      _vm._v(" "),
-      _c("div", [
-        _c(
-          "div",
-          [
-            _c("input", { ref: "keyword", attrs: { type: "text" } }),
-            _vm._v(" "),
-            _c("country-component", {
-              ref: "countries_component_ref",
-              attrs: { get_countries_url: _vm.get_countries_url }
-            }),
-            _vm._v(" "),
-            _c("city-component", {
-              ref: "cities_component_ref",
-              attrs: { get_cities_url: _vm.get_cities_url }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.filter_courses()
-                  }
-                }
-              },
-              [_vm._v("بحث")]
-            )
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _vm._l(_vm.courses.data, function(course) {
-        return _c("a", { key: course.id, attrs: { href: course.slug } }, [
-          _c(
-            "div",
-            {
-              staticStyle: {
-                width: "33%",
-                display: "inline-block",
-                "margin-left": "0.2%"
-              }
-            },
-            [
-              _c("img", {
-                attrs: {
-                  width: "100%",
-                  src: _vm.public_path + course.institute.banner,
-                  alt: course.institute.name_ar
-                }
-              }),
-              _vm._v(" "),
-              _c("h3", [_vm._v("معهد " + _vm._s(course.institute.name_ar))]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(_vm.institute_rate(course.institute)))]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(course.institute.country.name_ar) +
-                    " , " +
-                    _vm._s(course.institute.city.name_ar)
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(course.name_ar))]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(course.study_period == "morning" ? "صباحي" : "مسائي")
-                )
-              ]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(course.required_level))]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  _vm._s(
-                    course.courses_price_per_week.price * (1 - course.discount)
-                  )
-                )
-              ]),
-              _vm._v(" "),
-              _c("del", [_vm._v(_vm._s(course.courses_price_per_week.price))]),
-              _vm._v(" "),
-              _c("p", [_vm._v(_vm._s(course.discount * 100) + " %")])
-            ]
-          )
-        ])
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "pagination" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-default",
-            attrs: { disabled: !_vm.courses.prev_page_url },
-            on: {
-              click: function($event) {
-                return _vm.pagination(_vm.prev_page_url)
-              }
-            }
-          },
-          [_vm._v("\n            Previos\n        ")]
-        ),
+  return _c("div", { staticStyle: { display: "inline" } }, [
+    _c("section", { staticClass: "institutes py-5 bg-sub-secondary-color" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _vm._m(0),
         _vm._v(" "),
-        _c("span", [
-          _vm._v(
-            " page " +
-              _vm._s(_vm.courses.current_page) +
-              " of " +
-              _vm._s(_vm.courses.last_page) +
-              " "
-          )
+        _c("div", { staticClass: "row px-xl-5 mb-5" }, [
+          _c("div", { staticClass: "col-xl-3" }, [
+            _c(
+              "div",
+              { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
+              [
+                _c("div", { staticClass: "card rounded-10 shadow-sm mb-4" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "collapse show",
+                      attrs: {
+                        id: "collapseOne",
+                        "aria-labelledby": "headingOne",
+                        "data-parent": "#accordion"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "card-body border-top" }, [
+                        _c("form", { attrs: { action: "" } }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light"
+                            },
+                            [
+                              _c("input", {
+                                ref: "keyword",
+                                staticClass:
+                                  "form-control border-0 bg-transparent pr-1",
+                                attrs: { type: "text", placeholder: "بحث" }
+                              }),
+                              _vm._v(" "),
+                              _vm._m(2)
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("country-component", {
+                                ref: "countries_component_ref",
+                                attrs: {
+                                  get_countries_url: _vm.get_countries_url,
+                                  ele_class: "form-control rounded-10"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("city-component", {
+                                ref: "cities_component_ref",
+                                attrs: {
+                                  get_cities_url: _vm.get_cities_url,
+                                  ele_class: "form-control rounded-10"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.filter_courses()
+                                }
+                              }
+                            },
+                            [_vm._v("فلتر")]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-xl-9" }, [
+            _c("div", { staticClass: "institutes-list pt-4" }, [
+              _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.courses.data, function(course) {
+                  return _c(
+                    "div",
+                    { key: course.id, staticClass: "col-lg-4 col-md-6" },
+                    [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5"
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "offer-icon position-absolute bg-secondary-color text-white"
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        - " +
+                                  _vm._s(Math.round(course.discount * 100)) +
+                                  " %\n                                    "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _vm._m(6, true),
+                          _vm._v(" "),
+                          _c("a", { attrs: { href: course.slug } }, [
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "institute-img d-inline-block position-relative"
+                              },
+                              [
+                                _c("img", {
+                                  staticClass: "card-img-top",
+                                  attrs: {
+                                    src:
+                                      _vm.public_path + course.institute.banner,
+                                    alt: course.institute.name_ar
+                                  }
+                                })
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "card-body rounded-10 bg-white" },
+                            [
+                              _c("h5", { staticClass: "card-title" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "text-main-color",
+                                    attrs: { href: course.slug }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " معهد " +
+                                        _vm._s(course.institute.name_ar)
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "p",
+                                { staticClass: "mb-0 d-flex" },
+                                [
+                                  _c("rate", {
+                                    attrs: {
+                                      length: 5,
+                                      value: _vm.institute_rate(
+                                        course.institute
+                                      ),
+                                      disabled: ""
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    { staticStyle: { "line-height": "39px" } },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          _vm.institute_rate(course.institute)
+                                        )
+                                      )
+                                    ]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-map-marker-alt text-main-color"
+                                }),
+                                _vm._v(
+                                  " " +
+                                    _vm._s(course.institute.country.name_ar) +
+                                    " , " +
+                                    _vm._s(course.institute.city.name_ar)
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0" }, [
+                                _c("i", {
+                                  staticClass:
+                                    "fas fa-graduation-cap text-main-color"
+                                }),
+                                _vm._v(" " + _vm._s(course.name_ar))
+                              ]),
+                              _vm._v(" "),
+                              _c("p", { staticClass: "mb-0 overflow-hidden" }, [
+                                _c("span", { staticClass: "float-right" }, [
+                                  _c("i", {
+                                    staticClass: "fas fa-sun text-main-color"
+                                  }),
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        course.study_period == "morning"
+                                          ? "صباحي"
+                                          : "مسائي"
+                                      )
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "float-left" }, [
+                                  _c("i", {
+                                    staticClass: "fas fa-signal text-main-color"
+                                  }),
+                                  _vm._v(" " + _vm._s(course.required_level))
+                                ])
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "card-footer bg-white overflow-hidden"
+                            },
+                            [
+                              _c("del", { staticClass: "text-muted del" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    Math.round(
+                                      course.courses_price_per_week.price
+                                    )
+                                  ) + " ريال / أسبوع "
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "span",
+                                { staticClass: "float-left text-main-color" },
+                                [
+                                  _vm._v(
+                                    _vm._s(
+                                      Math.round(
+                                        course.courses_price_per_week.price *
+                                          (1 - course.discount)
+                                      )
+                                    ) + " ريال / أسبوع "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "row px-xl-5" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("nav", { attrs: { "aria-label": "Page navigation  " } }, [
+              _c(
+                "ul",
+                { staticClass: "pagination d-flex justify-content-end" },
+                [
+                  _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "page-link rounded-10 mx-1 text-dark border-0",
+                        attrs: {
+                          disabled: !_vm.courses.prev_page_url,
+                          href: "#"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.pagination(_vm.prev_page_url)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-chevron-right" })]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "page-link rounded-10 mx-1 text-dark border-0",
+                        attrs: {
+                          disabled: !_vm.courses.next_page_url,
+                          href: "#"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.pagination(_vm.next_page_url)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-chevron-left" })]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row px-xl-5" }, [
+      _c("div", { staticClass: "col-12" }, [
+        _c("div", { staticClass: "heading-institutes" }, [
+          _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
+            _vm._v("المعاهد")
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها"
+            )
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card-header border-bottom bg-white rounded-10 border-0",
+        attrs: { id: "headingOne" }
+      },
+      [
         _c(
-          "button",
+          "h5",
           {
-            staticClass: "btn btn-default",
-            attrs: { disabled: !_vm.courses.next_page_url },
-            on: {
-              click: function($event) {
-                return _vm.pagination(_vm.next_page_url)
-              }
+            staticClass: "font-weight-bold text-main-color",
+            attrs: {
+              "data-toggle": "collapse",
+              "data-target": "#collapseOne",
+              "aria-expanded": "true",
+              "aria-controls": "collapseOne"
             }
           },
-          [_vm._v("\n            Next\n        ")]
+          [_vm._v("فلتر بواسطة")]
         )
-      ])
-    ],
-    2
-  )
-}
-var staticRenderFns = []
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-append" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text border-0 p-0 bg-transparent",
+          attrs: { id: "basic-addon2" }
+        },
+        [_c("i", { staticClass: "fas fa-search" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
+      [
+        _c("input", {
+          staticClass: "datepicker form-control border-0 bg-transparent",
+          attrs: {
+            type: "text",
+            "data-toggle": "datepicker",
+            placeholder: "تاريخ البداية"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append" }, [
+          _c(
+            "span",
+            {
+              staticClass:
+                "input-group-text border-0 bg-white p-0 bg-transparent",
+              attrs: { id: "basic-addon2" }
+            },
+            [_c("i", { staticClass: "far fa-calendar" })]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
+            _vm._v("عدد الاسابيع")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("1")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "", selected: "" } }, [
+            _vm._v("المستوي")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "مبتدئ" } }, [_vm._v("مبتدئ")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "متوسط" } }, [_vm._v("متوسط")]),
+          _vm._v(" "),
+          _c("option", { staticClass: "متقدم" }, [_vm._v("متقدم")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "add-favourite position-absolute" }, [
+      _c("i", { staticClass: "far fa-heart" })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -60500,13 +61399,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/course/coursesComponent.vue */ "./resources/js/components/course/coursesComponent.vue");
 /* harmony import */ var _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/website/CityComponent.vue */ "./resources/js/components/website/CityComponent.vue");
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
-/* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
-/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
-/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
-/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
-/* harmony import */ var _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/website/InstitutesPgaeComponent.vue */ "./resources/js/components/website/InstitutesPgaeComponent.vue");
-/* harmony import */ var _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/student/StudentComponent.vue */ "./resources/js/components/student/StudentComponent.vue");
-/* harmony import */ var _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/student/SuccesStoryComponent.vue */ "./resources/js/components/student/SuccesStoryComponent.vue");
+/* harmony import */ var _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/website/CoursePriceInfoComponent.vue */ "./resources/js/components/website/CoursePriceInfoComponent.vue");
+/* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
+/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
+/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
+/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
+/* harmony import */ var _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/website/InstitutesPgaeComponent.vue */ "./resources/js/components/website/InstitutesPgaeComponent.vue");
+/* harmony import */ var _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/student/StudentComponent.vue */ "./resources/js/components/student/StudentComponent.vue");
+/* harmony import */ var _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/student/SuccesStoryComponent.vue */ "./resources/js/components/student/SuccesStoryComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -60541,6 +61441,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_req
 
 
 
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#sat_app_vue',
   components: {
@@ -60554,15 +61455,16 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     coursesComponent: _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     CountryCityBlogComponent: _components_country_city_blog_CountryCityBlogComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     CommentBlogComponent: _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
-    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
-    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
-    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
     CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
     CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-    InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
-    StudentComponent: _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
-    SuccesStoryComponent: _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"]
+    CoursePriceInfoComponent: _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
+    StudentComponent: _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
+    SuccesStoryComponent: _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"]
   }
 });
 
@@ -61850,6 +62752,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryComponent_vue_vue_type_template_id_172a12e6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryComponent_vue_vue_type_template_id_172a12e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/website/CoursePriceInfoComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/website/CoursePriceInfoComponent.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& */ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&");
+/* harmony import */ var _CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CoursePriceInfoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/website/CoursePriceInfoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CoursePriceInfoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

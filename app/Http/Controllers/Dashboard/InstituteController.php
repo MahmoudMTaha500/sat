@@ -246,23 +246,8 @@ $institute->forceDelete();
             $name_ar = $institute->where('name_ar',$name_ar);
         }
 
-         $institute = $institute->with('country', 'city','rats')->paginate(10);
+        $institute = $institute->with('country', 'city' , 'rats')->paginate(10);
         return response()->json(['institute' => $institute]);
-
-        // if ($request->country_id && $city_id) {
-        //     $institute = Institute::where(['country_id' => $request->country_id, 'city_id' => $city_id])->where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
-        //     return response()->json(['institute' => $institute]);
-        // } elseif ($country_id && $name_ar) {
-        //     $institute = Institute::where(['country_id' => $request->country_id])->where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
-        //     return response()->json(['institute' => $institute]);
-        // } elseif ($name_ar) {
-        //     $institute = Institute::where("name_ar", 'LIKE', "%{$request->name_ar}%")->with('country', 'city')->paginate(10);
-        //     return response()->json(['institute' => $institute]);
-        // } elseif ($country_id) {
-        //     $institute = Institute::where(['country_id' => $request->country_id])->with('country', 'city')->paginate(10);
-        //     return response()->json(['institute' => $institute]);
-
-        // }
     }
 
 }

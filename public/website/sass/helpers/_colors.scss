@@ -1,0 +1,14 @@
+$colors:("main": $mainColor, "sub-main": $subMainColor, "secondary": $secondaryColor, "sub-secondary" :$subSecondaryColor);
+// Text Colors
+@each $name, $color  in $colors {
+    .text-#{$name}-color {
+      color:$color !important
+    }
+}
+
+// Background Colors
+@each $name, $color  in $colors {
+    .bg-#{$name}-color {
+      background:$color !important
+    }
+}

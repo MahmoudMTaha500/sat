@@ -15,7 +15,7 @@ class CreateInsurancesTable extends Migration
     {
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ar');
+            $table->string('weeks');
             $table->integer('price');
             $table->bigInteger("institute_id")->unsigned();
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');

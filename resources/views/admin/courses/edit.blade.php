@@ -147,7 +147,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="projectinput3">التخفيض</label>
-                                                        <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount" value="{{$course->discount*100}}" />
+                                                        <input type="number" id="projectinput1" min="0" class="form-control" placeholder="00%" name="discount" value="{{$course->discount*100}}" />
                                                     </div>
                                                 </div>
                                             </div>

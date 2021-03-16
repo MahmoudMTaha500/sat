@@ -19,7 +19,9 @@ class VueRequestsController extends Controller
     {
         $cities = new City();
         if($request->has('country_id')){
-            $cities = $cities->where('country_id' , $request->country_id);
+            if( $request->country_id != 'all'){
+                $cities = $cities->where('country_id' , $request->country_id);
+            }
         }
         $cities = $cities->get(['name_ar as name' , 'id']);
         return response()->json($cities);
@@ -41,7 +43,29 @@ class VueRequestsController extends Controller
             });
         }
 
-        $courses = $courses->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(10);
+        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(9);
+        return response()->json(['status' => 'success' , 'courses' => $courses]);
+    }
+
+    public function get_course_for_institute_page(Request $request)
+    {
+        return $request->course_id;
+        $courses = new Course();
+        if(!empty($request->keyword)){
+            $courses = $courses->where("name_ar", 'LIKE', "%{$request->keyword}%");
+        }
+        if(!empty($request->country_id)){
+            $courses = $courses->whereHas('institute', function ($query) use ($request) {
+                $query->where('country_id', $request->country_id);
+            });
+        }
+        if(!empty($request->city_id)){
+            $courses = $courses->whereHas('institute', function ($query) use ($request) {
+                $query->where('city_id', $request->city_id);
+            });
+        }
+
+        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 }

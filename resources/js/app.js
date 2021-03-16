@@ -30,6 +30,7 @@ import BlogIndexComponent from './components/blog/BlogIndexComponent.vue';
 import coursesComponent from "./components/course/coursesComponent.vue";
 import CityComponent from "./components/website/CityComponent.vue";
 import CountryComponent from "./components/website/CountryComponent.vue";
+import CoursePriceInfoComponent from "./components/website/CoursePriceInfoComponent.vue";
 import ShowImagesComponent from "./components/ShowImagesComponent.vue";
 import InsuranceComponent from "./components/insurance/InsuranceComponent.vue";
 import AirportComponent from "./components/airport/AirportComponent.vue";
@@ -57,6 +58,7 @@ const app = new Vue({
         ResidenceComponent,
         CityComponent,
         CountryComponent,
+        CoursePriceInfoComponent,
         InstitutesPgaeComponent,
         StudentComponent,
         SuccesStoryComponent
