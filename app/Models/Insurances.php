@@ -8,7 +8,7 @@ class Insurances extends Model
 {
     // protected $guarded = [];  
     protected $table='insurances';
-    protected $fillable=['name_ar','price','institute_id'];
+    protected $fillable=['price','institute_id' , 'weeks'];
 
     public function institute()
     {

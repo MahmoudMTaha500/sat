@@ -24,7 +24,7 @@ class InsurancesRequest extends FormRequest
     public function rules()
     {
         return [
-            "name_ar"=>'required',
+            "weeks"=>'required',
             "institute_id"=>'required',
             "price"=>'required',
         ];
@@ -34,7 +34,7 @@ class InsurancesRequest extends FormRequest
     public function messages()
     {
         return[
-            "name_ar.required"=>'اسم الخدمه مطلوب',
+            "weeks.required"=>'عدد الاسابيع مطلوب',
             "institute_id.required"=>'المعهد  مطلوب',
             "price.required"=>' السعر مطلوب',
 

@@ -2029,7 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id"],
+  props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id", 'old_country_id', 'old_city_id'],
   data: function data() {
     return {
       selected: "",
@@ -2136,7 +2136,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['image_name', 'image_label'],
+  props: ['image_name', 'image_label', 'old'],
   data: function data() {
     return {
       imageData: ""
@@ -3382,7 +3382,8 @@ __webpack_require__.r(__webpack_exports__);
           countryID: country_id
         }
       }).then(function (response) {
-        return _this2.cities = response.data.cities;
+        _this2.cities = response.data.cities;
+        _this2.selected_city = '';
       });
     },
     get_id_for_cities: function get_id_for_cities() {
@@ -3402,10 +3403,12 @@ __webpack_require__.r(__webpack_exports__);
     filterInstitute: function filterInstitute() {
       var _this3 = this;
 
-      axios.post(this.url_filtier, {
-        country_id: this.selected,
-        city_id: this.selected_city,
-        name_ar: this.name_ar
+      axios.get(this.url_filtier, {
+        params: {
+          country_id: this.selected,
+          city_id: this.selected_city,
+          name_ar: this.name_ar
+        }
       }, {
         headers: {
           "X-CSRFToken": "{{csrf_token()}}"
@@ -3986,6 +3989,130 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     this.get_countries();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['course_id', 'course_for_institute_page_url'],
+  data: function data() {
+    return {
+      weeks: 1,
+      price_per_week: ''
+    };
+  },
+  methods: {
+    change_price_per_week: function change_price_per_week() {
+      if (this.weeks == 1) {
+        this.price_per_week = this.course.coursesPricePerWeek;
+        alert(this.weeks);
+      }
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.change_price_per_week();
   }
 });
 
@@ -44801,7 +44928,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _vm._v(_vm._s(insurance.name_ar))
+                        _vm._v(_vm._s(insurance.weeks))
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
@@ -44984,7 +45111,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v(" التامين")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" عدد الاسابيع")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
         _vm._v(" "),
@@ -45689,6 +45816,296 @@ var render = function() {
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticStyle: { display: "inline" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
+      _vm._m(1),
+      _vm._v(" "),
+      _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
+        _c("form", { attrs: { action: "" } }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.weeks,
+                    expression: "weeks"
+                  }
+                ],
+                staticClass: "form-control selectpicker rounded-10 border",
+                attrs: { "data-live-search": "true" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.weeks = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    function($event) {
+                      return _vm.change_price_per_week()
+                    }
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("عدد الاسابيع")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v(" 1 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v(" 2 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [_vm._v(" 3 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "4" } }, [_vm._v(" 4 ")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "5" } }, [_vm._v(" 5 ")])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _vm._m(3),
+          _vm._v(" "),
+          _vm._m(4),
+          _vm._v(" "),
+          _vm._m(5),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
+              attrs: { href: "confirm-reservation.html" }
+            },
+            [_vm._v("حجز")]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("button", { on: { click: _vm.get_course } }, [_vm._v("click")])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bg-white py-4 rounded-10 mb-4" }, [
+      _c("div", { staticClass: "cost-heading border-bottom pb-2 px-3" }, [
+        _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
+          _vm._v("التكاليف")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "cost-body px-3 pt-3" }, [
+        _c("p", { staticClass: "text-dark" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("اللغة الإنجليزية العامة : ")
+          ]),
+          _vm._v(" ٤٦\n                        دولار أمريكي")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-dark" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("تأمين الطلاب (في الأسبوع) : ")
+          ]),
+          _vm._v(" ٤٦\n                        دولار أمريكي")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-dark" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("رسوم التسجيل : ")
+          ]),
+          _vm._v(" ٤٦ دولار أمريكي\n                    ")
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-main-color" }, [
+          _c("span", { staticClass: "font-weight-bold" }, [
+            _vm._v("إجمالي تكاليف الحجز : ")
+          ]),
+          _vm._v(" ٤٦\n                        دولار أمريكي")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "reservation-heading border-bottom pb-2 px-3" },
+      [
+        _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
+          _vm._v("الحجز والتقديم")
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
+      [
+        _c("input", {
+          staticClass: "form-control border-0 bg-transparent datepicker",
+          attrs: {
+            type: "text",
+            "data-toggle": "datepicker",
+            disabled: "",
+            placeholder: "تاريخ البداية",
+            value: "03/02/2021"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "input-group-append " }, [
+          _c(
+            "span",
+            {
+              staticClass:
+                "input-group-text border-0 bg-white p-0 bg-transparent",
+              attrs: { id: "basic-addon2" }
+            },
+            [_c("i", { staticClass: "far fa-calendar" })]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10 border",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("هل ترغب في السكن؟")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v("لا احتاج خدمة سكن")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10 border",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("المستوي")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v(" الاستقبال في مطار هيثرو - 240 دولار امريكي")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c(
+        "select",
+        {
+          staticClass: "form-control selectpicker rounded-10 border",
+          attrs: { "data-live-search": "true" }
+        },
+        [
+          _c("option", { attrs: { value: "", disabled: "" } }, [
+            _vm._v("التأمين الصحي")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v(" لا احتاج لخدمة التأمين الصحي")
+          ]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("3")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("4")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("5")])
+        ]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -60039,11 +60456,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/course/coursesComponent.vue */ "./resources/js/components/course/coursesComponent.vue");
 /* harmony import */ var _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/website/CityComponent.vue */ "./resources/js/components/website/CityComponent.vue");
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
-/* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
-/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
-/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
-/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
-/* harmony import */ var _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/website/InstitutesPgaeComponent.vue */ "./resources/js/components/website/InstitutesPgaeComponent.vue");
+/* harmony import */ var _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/website/CoursePriceInfoComponent.vue */ "./resources/js/components/website/CoursePriceInfoComponent.vue");
+/* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
+/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
+/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
+/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
+/* harmony import */ var _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/website/InstitutesPgaeComponent.vue */ "./resources/js/components/website/InstitutesPgaeComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -60076,6 +60494,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_req
 
 
 
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#sat_app_vue',
   components: {
@@ -60089,13 +60508,14 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     coursesComponent: _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
     CountryCityBlogComponent: _components_country_city_blog_CountryCityBlogComponent_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     CommentBlogComponent: _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
-    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
-    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
-    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
     CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
     CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-    InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"]
+    CoursePriceInfoComponent: _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"]
   }
 });
 
@@ -61245,6 +61665,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryComponent_vue_vue_type_template_id_172a12e6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CountryComponent_vue_vue_type_template_id_172a12e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/website/CoursePriceInfoComponent.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/website/CoursePriceInfoComponent.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& */ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&");
+/* harmony import */ var _CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CoursePriceInfoComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/website/CoursePriceInfoComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./CoursePriceInfoComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./CoursePriceInfoComponent.vue?vue&type=template&id=1b223580& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CoursePriceInfoComponent.vue?vue&type=template&id=1b223580&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CoursePriceInfoComponent_vue_vue_type_template_id_1b223580___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -16,7 +16,7 @@ class CourseSeeder extends Seeder
             Course::create([
                 "name_ar" => 'دورة '.$x,
                 "slug" => 'دورة-'.$x,
-                "about_ar" => 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id quos officia quibusdam fugit vel! Perspiciatis, asperiores obcaecati. Ut quis eligendi expedita accusamus similique eos aliquid esse officia nihil aspernatur? Perspiciatis.', 
+                "about_ar" => 'لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...وعند موافقه العميل المبدئيه على التصميم يتم ازالة هذا النص من التصميم ويتم وضع النصوص النهائية المطلوبة للتصميم ويقول البعض ان وضع النصوص التجريبية بالتصميم قد تشغل المشاهد عن وضع الكثير من الملاحظات او الانتقادات للتصميم الاساسي. وخلافاَ للاعتقاد السائد فإن لوريم إيبسوم ليس نصاَ عشوائياً، بل إن له جذور في الأدب اللاتيني الكلاسيكي منذ العام 45 قبل الميلاد. من كتاب "حول أقاصي الخير والشر"', 
                 "institute_id" => rand(1,30),
                 "creator_id" => 1,
                 "min_age" => rand(12 , 27),

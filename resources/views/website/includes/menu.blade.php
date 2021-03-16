@@ -117,10 +117,11 @@
                           <!-- Login & Register In Large Screen -->
                           <div class="not-logged d-lg-block d-none">
                               <a href="{{route('student.login')}}" class="btn rounded-10 text-secondary-color">تسجيل الدخول</a>
-                              <a href="{{route('student.login')}}" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>
+                              <a href="{{route('student.register')}}" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>
                           </div>
                           <!-- ./Login & Register In Large Screen -->
                           @endif
+                          @if(Auth::guard('student')->check()) Hello {{Auth::guard('student')->user()->name}} @else Hello there @endif
                       </div>
                   </div>
                   <!-- ./Nav Menu  -->

@@ -9,6 +9,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
 Route::get('/', 'WebsiteController@home_page')->name('website.home');
 Route::get('/institutes', 'WebsiteController@institutes_page')->name('website.institutes');
+Route::get('/institute/{institute_id?}/{institute_slug?}/{course_slug?}', 'WebsiteController@institute_page')->name('website.institute');
 
 
 /** Payment Routes *************************************/

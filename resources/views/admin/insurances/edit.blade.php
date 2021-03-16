@@ -61,8 +61,8 @@
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="form-group">
-                                                    <label for="institute-name"> التامين</label>
-                                                    <input type="text" class="form-control" placeholder="ادخل  التامين" name="name_ar" value="{{$insurance->name_ar}}" />
+                                                    <label for="institute-name"> عدد الاسابيع</label>
+                                                    <input type="number" class="form-control" placeholder="ادخل  عدد الاسابيع" name="weeks" value="{{$insurance->weeks}}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4">

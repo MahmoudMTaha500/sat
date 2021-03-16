@@ -1,4 +1,4 @@
-@extends('website.app') @section('website.content') @if(Auth::guard('student')->check()) Hello {{Auth::guard('student')->user()->name}} @else Hello there @endif
+@extends('website.app') @section('website.content') 
 <!-- Intro  -->
 <section class="intro bg-primary">
     <div class="container-fluid">
@@ -129,7 +129,7 @@
                         </div>
                         <!-- ./Add To Favourite Btn -->
                         <!-- Institute Img -->
-                        <a href="{{url($offer->slug)}}">
+                        <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                             <div class="institute-img d-inline-block position-relative">
                                 <img src="{{$offer->institute->banner}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" alt="..." />
                             </div>

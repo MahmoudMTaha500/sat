@@ -19,5 +19,6 @@
     <!-- Custom Css -->
     <link rel="stylesheet" href="{{asset('website')}}/css/theme.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/index.css" />
+    <link rel="stylesheet" href="{{asset('website')}}/css/pages/institute.css">
     <title>Classat</title>
 </head>

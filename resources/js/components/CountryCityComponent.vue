@@ -43,7 +43,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label>اختر الدولة</label>
-                                                <select v-model="selected_city" v-on:change="get_id_for_cities()" class="form-control text-left">
+                                                <select v-model="selected_city" v-on:change="get_id_for_cities()"  class="form-control text-left">
                                                     <option value="">حدد الدولة</option>
                                                     <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
                                                 </select>
@@ -73,7 +73,7 @@
 
 <script>
     export default {
-        props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id"],
+        props: ["countries_from_blade", "dahsboard_url", "country_id2", "city_id",'old_country_id','old_city_id'],
         data() {
             return {
                 selected: "",
