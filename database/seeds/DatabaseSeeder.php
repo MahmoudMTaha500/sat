@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CountrySeeder::class);
         $this->call(CitySeeder::class);
         $this->call(InstituteSeeder::class);
-        $this->call(InstituteQuestionSeeder::class);
         $this->call(CourseSeeder::class);
         $this->call(CoursePriceSeeder::class);
         $this->call(VisaCategorySeeder::class);

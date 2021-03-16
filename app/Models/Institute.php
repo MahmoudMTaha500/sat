@@ -13,7 +13,7 @@ class Institute extends Model
         'name_ar',
         'slug',
         'about_ar',
-        'content_ar',
+        'institute_questions',
         'country_id',
         'city_id',
         'logo',

@@ -20,4 +20,13 @@ class Student extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function country()
+    {
+        return $this->belongsTo('App\Models\Country', 'country_id', 'id');
+    }
+    public function city()
+    {
+        return $this->belongsTo("App\Models\City", 'city_id', 'id');
+    }
 }

@@ -58,8 +58,8 @@
                                         <country-city-component 
                                             :countries_from_blade="{{ json_encode($countries) }}"
                                             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
-                                            :old_country_id="{{json_encode(old('country_id'))}}"
-                                            :old_city_id="{{json_encode(old('city_id'))}}"
+                                            :old_country_id="{{json_encode(Session::getOldInput('country_id'))}}"
+                                            :old_city_id="{{json_encode(Session::getOldInput('city_id'))}}"
 
                                         >
                                         </country-city-component>
@@ -67,8 +67,8 @@
                                             <div class="col-md-12">
 
                                             <div class="form-group">
-                                                <label for="projectinput4">المحتوى</label>
-                                                <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor">{{old('content_ar')}} </textarea>
+                                                <label for="projectinput4">الاسئله</label>
+                                                <textarea name="institute_questions" id="ckeditor" cols="30" rows="20" class="ckeditor">{{old('institute_questions')}} </textarea>
                                             </div>
                                             </div>
                                         </div>
