@@ -6,12 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StudentSuccessStory extends Model
 {
-    protected $fillable = [
-        'storey',
-        'student_id',
-        'approvement',
-    ];
-
+    protected $guarded = []; 
     public function student()
     {
         return $this->belongsTo('App\Models\Student', 'student_id', 'id');

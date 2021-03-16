@@ -246,7 +246,7 @@ $institute->forceDelete();
             $name_ar = $institute->where('name_ar',$name_ar);
         }
 
-         $institute = $institute->with('country', 'city')->paginate(10);
+         $institute = $institute->with('country', 'city','rats')->paginate(10);
         return response()->json(['institute' => $institute]);
 
         // if ($request->country_id && $city_id) {
