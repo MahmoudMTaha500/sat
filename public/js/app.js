@@ -4281,24 +4281,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['course_id', 'course_for_institute_page_url'],
+  props: ["course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
   data: function data() {
     return {
+      course: JSON.parse(this.course_obj),
+      residences: JSON.parse(this.residence_obj),
+      airports: JSON.parse(this.airport_obj),
+      chosin_residence: 0,
+      chosin_airport: 0,
+      insurance_price: 0,
+      insurance_price_checker: 0,
       weeks: 1,
-      price_per_week: ''
+      price_per_week: 0,
+      weeks_count: 100
     };
   },
   methods: {
-    change_price_per_week: function change_price_per_week() {
-      if (this.weeks == 1) {
-        this.price_per_week = this.course.coursesPricePerWeek;
-        alert(this.weeks);
-      }
+    get_price_per_week: function get_price_per_week() {
+      var _this = this;
+
+      axios.get(this.get_course_price_url, {
+        params: {
+          course_id: this.course_id,
+          weeks: this.weeks
+        }
+      }).then(function (response) {
+        return _this.price_per_week = response.data.price_per_week;
+      });
+    },
+    get_insurance_price: function get_insurance_price() {
+      var _this2 = this;
+
+      axios.get(this.get_insurance_price_url, {
+        params: {
+          course_id: this.course_id,
+          weeks: this.weeks
+        }
+      }).then(function (response) {
+        return _this2.insurance_price = response.data.insurance_price;
+      });
     }
   },
   beforeMount: function beforeMount() {
-    this.change_price_per_week();
+    this.get_price_per_week();
+    this.get_insurance_price();
   }
 });
 
@@ -46397,14 +46428,132 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticStyle: { display: "inline" } }, [
-    _vm._m(0),
+    _c("div", { staticClass: "bg-white py-4 rounded-10 mb-4" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "cost-body px-3 pt-3" }, [
+        _c("div", [
+          _c("span", { staticClass: "font-weight-bold d-block" }, [
+            _vm._v(
+              "\n                    اللغة الإنجليزية العامة : \n                    "
+            ),
+            _c(
+              "span",
+              {
+                staticClass:
+                  "float-left bg-main-color p-2 round text-white rounded-10"
+              },
+              [
+                _vm._v(
+                  "%" + _vm._s(Math.round(_vm.course.discount * 100)) + " -"
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-main-color" }, [
+            _c("del", { staticClass: "text-danger ml-2" }, [
+              _vm._v(" " + _vm._s(_vm.price_per_week) + " ")
+            ]),
+            _vm._v(
+              "  " +
+                _vm._s(
+                  Math.round(_vm.price_per_week * (1 - _vm.course.discount))
+                ) +
+                "  دينار سعودي / الاسبوع"
+            )
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("span", { staticClass: "font-weight-bold d-block" }, [
+            _vm._v(" سعر الدورة : ")
+          ]),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-main-color" }, [
+            _vm._v(
+              " " +
+                _vm._s(
+                  Math.round(
+                    _vm.price_per_week * _vm.weeks * (1 - _vm.course.discount)
+                  )
+                ) +
+                "  دينار سعودي"
+            )
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ]),
+        _vm._v(" "),
+        _vm.chosin_residence.price != 0 &&
+        _vm.chosin_residence.price != "" &&
+        !isNaN(_vm.chosin_residence.price)
+          ? _c("div", [
+              _c("span", { staticClass: "d-block" }, [
+                _c("span", { staticClass: "font-weight-bold" }, [
+                  _vm._v(" السكن : ")
+                ]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.chosin_residence.name_ar))])
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-main-color" }, [
+                _vm._v(
+                  _vm._s(_vm.chosin_residence.price * _vm.weeks) +
+                    "  دينار سعودي / الاسبوع"
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.chosin_airport.price != 0 &&
+        _vm.chosin_airport.price != "" &&
+        !isNaN(_vm.chosin_airport.price)
+          ? _c("div", [
+              _c("span", { staticClass: "d-block" }, [
+                _c("span", { staticClass: "font-weight-bold" }, [
+                  _vm._v(" خدمة الاستقبال  : ")
+                ]),
+                _vm._v(" "),
+                _c("span", [_vm._v(_vm._s(_vm.chosin_airport.name_ar))])
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-main-color" }, [
+                _vm._v(_vm._s(_vm.chosin_airport.price) + "  دينار سعودي ")
+              ]),
+              _vm._v(" "),
+              _c("hr")
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.insurance_price_checker != 0 &&
+        _vm.insurance_price_checker != "" &&
+        !isNaN(_vm.insurance_price_checker)
+          ? _c("div", [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-main-color" }, [
+                _vm._v(
+                  _vm._s(_vm.insurance_price * _vm.weeks) + "  دينار سعودي "
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr")
+            ])
+          : _vm._e()
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
-      _vm._m(1),
+      _vm._m(2),
       _vm._v(" "),
       _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
         _c("form", { attrs: { action: "" } }, [
-          _vm._m(2),
+          _vm._m(3),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c(
@@ -46436,7 +46585,8 @@ var render = function() {
                         : $$selectedVal[0]
                     },
                     function($event) {
-                      return _vm.change_price_per_week()
+                      _vm.get_price_per_week()
+                      _vm.get_insurance_price()
                     }
                   ]
                 }
@@ -46446,24 +46596,188 @@ var render = function() {
                   _vm._v("عدد الاسابيع")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v(" 1 ")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v(" 2 ")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v(" 3 ")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [_vm._v(" 4 ")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v(" 5 ")])
-              ]
+                _vm._l(_vm.weeks_count, function(week_count) {
+                  return _c(
+                    "option",
+                    { key: week_count, domProps: { value: week_count } },
+                    [_vm._v(" " + _vm._s(week_count) + " ")]
+                  )
+                })
+              ],
+              2
             )
           ]),
           _vm._v(" "),
-          _vm._m(3),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.chosin_residence,
+                    expression: "chosin_residence"
+                  }
+                ],
+                staticClass: "form-control selectpicker rounded-10 border",
+                attrs: { "data-live-search": "true" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.chosin_residence = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { disabled: "" }, domProps: { value: 0 } },
+                  [_vm._v("هل ترغب في السكن؟")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "option",
+                  { attrs: { selected: "" }, domProps: { value: 0 } },
+                  [_vm._v("لا احتاج خدمة سكن")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.residences, function(residence) {
+                  return _c(
+                    "option",
+                    { key: residence.id, domProps: { value: residence } },
+                    [
+                      _vm._v(
+                        _vm._s(residence.name_ar) +
+                          " - " +
+                          _vm._s(residence.price)
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(4),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.chosin_airport,
+                    expression: "chosin_airport"
+                  }
+                ],
+                staticClass: "form-control selectpicker rounded-10 border",
+                attrs: { "data-live-search": "true" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.chosin_airport = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { value: "", disabled: "" } }, [
+                  _vm._v("الاستقبال من المطار")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "option",
+                  { attrs: { selected: "" }, domProps: { value: 0 } },
+                  [_vm._v(" لا احتاج خدمة الاستقبال")]
+                ),
+                _vm._v(" "),
+                _vm._l(_vm.airports, function(airport) {
+                  return _c(
+                    "option",
+                    { key: airport.id, domProps: { value: airport } },
+                    [
+                      _vm._v(
+                        _vm._s(airport.name_ar) + " - " + _vm._s(airport.price)
+                      )
+                    ]
+                  )
+                })
+              ],
+              2
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(5),
+          _c("div", { staticClass: "form-group" }, [
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.insurance_price_checker,
+                    expression: "insurance_price_checker"
+                  }
+                ],
+                staticClass: "form-control rounded-10  selectpicker border",
+                attrs: { "data-live-search": "true" },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.insurance_price_checker = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  }
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { disabled: "" }, domProps: { value: 0 } },
+                  [_vm._v("التأمين الصحي")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "option",
+                  { attrs: { selected: "" }, domProps: { value: 0 } },
+                  [_vm._v(" لا احتاج لخدمة التأمين الصحي")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "insurance_price*weeks" } }, [
+                  _vm._v(
+                    "احتاج خدمة التامين الصحي - " +
+                      _vm._s(_vm.insurance_price * _vm.weeks)
+                  )
+                ])
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c(
             "a",
@@ -46478,7 +46792,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("button", { on: { click: _vm.get_course } }, [_vm._v("click")])
+    _c("button", { on: { click: _vm.get_insurance_price } }, [_vm._v("click")])
   ])
 }
 var staticRenderFns = [
@@ -46486,41 +46800,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-white py-4 rounded-10 mb-4" }, [
-      _c("div", { staticClass: "cost-heading border-bottom pb-2 px-3" }, [
-        _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
-          _vm._v("التكاليف")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "cost-body px-3 pt-3" }, [
-        _c("p", { staticClass: "text-dark" }, [
-          _c("span", { staticClass: "font-weight-bold" }, [
-            _vm._v("اللغة الإنجليزية العامة : ")
-          ]),
-          _vm._v(" ٤٦\n                        دولار أمريكي")
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text-dark" }, [
-          _c("span", { staticClass: "font-weight-bold" }, [
-            _vm._v("تأمين الطلاب (في الأسبوع) : ")
-          ]),
-          _vm._v(" ٤٦\n                        دولار أمريكي")
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text-dark" }, [
-          _c("span", { staticClass: "font-weight-bold" }, [
-            _vm._v("رسوم التسجيل : ")
-          ]),
-          _vm._v(" ٤٦ دولار أمريكي\n                    ")
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text-main-color" }, [
-          _c("span", { staticClass: "font-weight-bold" }, [
-            _vm._v("إجمالي تكاليف الحجز : ")
-          ]),
-          _vm._v(" ٤٦\n                        دولار أمريكي")
-        ])
+    return _c("div", { staticClass: "cost-heading border-bottom pb-2 px-3" }, [
+      _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
+        _vm._v("التكاليف")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "d-block" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _vm._v(" التامين الصحي  : ")
       ])
     ])
   },
@@ -46557,7 +46849,7 @@ var staticRenderFns = [
           }
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "input-group-append " }, [
+        _c("div", { staticClass: "input-group-append" }, [
           _c(
             "span",
             {
@@ -46570,99 +46862,6 @@ var staticRenderFns = [
         ])
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "select",
-        {
-          staticClass: "form-control selectpicker rounded-10 border",
-          attrs: { "data-live-search": "true" }
-        },
-        [
-          _c("option", { attrs: { value: "", disabled: "" } }, [
-            _vm._v("هل ترغب في السكن؟")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v("لا احتاج خدمة سكن")
-          ]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("3")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("4")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("5")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "select",
-        {
-          staticClass: "form-control selectpicker rounded-10 border",
-          attrs: { "data-live-search": "true" }
-        },
-        [
-          _c("option", { attrs: { value: "", disabled: "" } }, [
-            _vm._v("المستوي")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v(" الاستقبال في مطار هيثرو - 240 دولار امريكي")
-          ]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("3")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("4")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("5")])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "select",
-        {
-          staticClass: "form-control selectpicker rounded-10 border",
-          attrs: { "data-live-search": "true" }
-        },
-        [
-          _c("option", { attrs: { value: "", disabled: "" } }, [
-            _vm._v("التأمين الصحي")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v(" لا احتاج لخدمة التأمين الصحي")
-          ]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("3")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("4")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("5")])
-        ]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -46824,25 +47023,40 @@ var render = function() {
                           _vm._v(" "),
                           _vm._m(6, true),
                           _vm._v(" "),
-                          _c("a", { attrs: { href: course.slug } }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "institute-img d-inline-block position-relative"
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "card-img-top",
-                                  attrs: {
-                                    src:
-                                      _vm.public_path + course.institute.banner,
-                                    alt: course.institute.name_ar
-                                  }
-                                })
-                              ]
-                            )
-                          ]),
+                          _c(
+                            "a",
+                            {
+                              attrs: {
+                                href:
+                                  "/institute/" +
+                                  course.institute.id +
+                                  "/" +
+                                  course.institute.slug +
+                                  "/" +
+                                  course.slug
+                              }
+                            },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "institute-img d-inline-block position-relative"
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass: "card-img-top",
+                                    attrs: {
+                                      src:
+                                        _vm.public_path +
+                                        course.institute.banner,
+                                      alt: course.institute.name_ar
+                                    }
+                                  })
+                                ]
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -46853,7 +47067,15 @@ var render = function() {
                                   "a",
                                   {
                                     staticClass: "text-main-color",
-                                    attrs: { href: course.slug }
+                                    attrs: {
+                                      href:
+                                        "/institute/" +
+                                        course.institute.id +
+                                        "/" +
+                                        course.institute.slug +
+                                        "/" +
+                                        course.slug
+                                    }
                                   },
                                   [
                                     _vm._v(

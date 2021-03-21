@@ -446,8 +446,13 @@
             </div>
             <div class="col-lg-4">
                 <course-price-info-component
+                course_obj = '{{$course}}'
+                residence_obj = '{{$course->institute->residence}}'
+                airport_obj = '{{$course->institute->airport}}'
                 course_id = '{{$course->id}}'
                 course_for_institute_page_url = {{route('vue.get.course.for.institute.page')}}
+                get_course_price_url = {{route('vue.get.course.price.per.week')}}
+                get_insurance_price_url = {{route('vue.get.insurance.price.per.week')}}
                 >
                 </course-price-info-component>
             </div>

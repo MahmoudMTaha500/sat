@@ -22,5 +22,7 @@ Route::get('/get-countries', 'VueRequestsController@get_countries')->name('vue.g
 Route::get('/get-cities', 'VueRequestsController@get_cities')->name('vue.get.cities');
 Route::get('/get-courses', 'VueRequestsController@get_courses')->name('vue.get.courses');
 Route::get('/get-course-for-institute-page', 'VueRequestsController@get_course_for_institute_page')->name('vue.get.course.for.institute.page');
+Route::get('/get-course-price-per-week', 'VueRequestsController@get_course_price_per_week')->name('vue.get.course.price.per.week');
+Route::get('/get-insurance-price-per-week', 'VueRequestsController@get_insurance_price_per_week')->name('vue.get.insurance.price.per.week');
 
 

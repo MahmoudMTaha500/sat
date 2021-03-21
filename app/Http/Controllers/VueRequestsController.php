@@ -26,11 +26,15 @@ class VueRequestsController extends Controller
         $cities = $cities->get(['name_ar as name' , 'id']);
         return response()->json($cities);
     }
+
+    // get course
     public function get_courses(Request $request)
     {
         $courses = new Course();
         if(!empty($request->keyword)){
-            $courses = $courses->where("name_ar", 'LIKE', "%{$request->keyword}%");
+            $courses = $courses->whereHas('institute', function ($query) use ($request) {
+                $query->where('name_ar', $request->keyword);
+            })->orWhere("name_ar", 'LIKE', "%{$request->keyword}%");
         }
         if(!empty($request->country_id)){
             $courses = $courses->whereHas('institute', function ($query) use ($request) {
@@ -47,6 +51,7 @@ class VueRequestsController extends Controller
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 
+    // get course details in institute profile
     public function get_course_for_institute_page(Request $request)
     {
         return $request->course_id;
@@ -67,5 +72,22 @@ class VueRequestsController extends Controller
 
         $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
+    }
+
+    // get price per week in institute profile
+    public function get_course_price_per_week(Request $request)
+    {
+        $course = Course::where(['id' => $request->course_id])->get()[0];
+        $price_per_week = price_per_week($course->coursesPrice, $request->weeks);
+        return response()->json(['status' => 'success' , 'price_per_week' => $price_per_week]);
+
+    }
+    // get price per week in institute profile
+    public function get_insurance_price_per_week(Request $request)
+    {
+        $institute = Course::where(['id' => $request->course_id])->get()[0]->institute;
+        $price_per_week = price_per_week($institute->insurancePrice, $request->weeks);
+        return response()->json(['status' => 'success' , 'insurance_price' => $price_per_week]);
+
     }
 }
