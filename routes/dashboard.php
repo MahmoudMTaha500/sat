@@ -76,11 +76,18 @@ Route::resource('blogs', 'BlogController');
 Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blogs_by_vue');
 // Blog Category Route
 Route::resource('blog_categories', 'BlogCategoryController');
+/**********************************   ************************************************************************************** */
+
 // Student Route
 Route::get('/students/get','StudentController@getStudents');
 Route::get('/students/filter','StudentController@filter');
-
 Route::resource('students', 'StudentController');
+// success story students Route
+Route::get('success-story/get', 'StudentSuccessStoryController@getstories');
+Route::post('success-story/approve', 'StudentSuccessStoryController@updateAprovement');
+Route::resource('success-story', 'StudentSuccessStoryController');
+/**********************************   ************************************************************************************** */
+
 
 Route::get('/insurances/get','InsurancesController@getInsurances');
 Route::get('/insurances/edit/{id}','InsurancesController@editInsuarnce');

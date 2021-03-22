@@ -190,8 +190,8 @@
                     <li>
                         <a class="menu-item" href="/sat/students/create.php?page=students" data-i18n="nav.navbars.nav_dark">اضافة طالب جديد</a>
                     </li>
-                    <li>
-                        <a class="menu-item" href="/sat/students/success_stories.php?page=students" data-i18n="nav.navbars.nav_dark">قصص النجاح</a>
+                    <li     class="{{ $page_name == 'success-story' ? 'active' : ''}}">
+                        <a class="menu-item" href="{{route('success-story.index')}}"  data-i18n="nav.navbars.nav_dark">قصص النجاح</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/students/archives.php?page=students" data-i18n="nav.navbars.nav_semi">الارشيف</a>

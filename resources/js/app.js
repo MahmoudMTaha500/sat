@@ -37,6 +37,7 @@ import AirportComponent from "./components/airport/AirportComponent.vue";
 import ResidenceComponent from "./components/residence/ResidenceComponent.vue";
 import InstitutesPgaeComponent from "./components/website/InstitutesPgaeComponent.vue";
 import StudentComponent from "./components/student/StudentComponent.vue";
+import SuccesStoryComponent from "./components/student/SuccesStoryComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -59,7 +60,8 @@ const app = new Vue({
         CountryComponent,
         CoursePriceInfoComponent,
         InstitutesPgaeComponent,
-        StudentComponent
+        StudentComponent,
+        SuccesStoryComponent
 
     }
 });
