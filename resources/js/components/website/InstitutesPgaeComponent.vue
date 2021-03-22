@@ -92,7 +92,7 @@
                                         </div>
                                         <!-- ./Add To Favourite Btn -->
                                         <!-- Institute Img -->
-                                        <a :href="course.slug">
+                                        <a :href="'/institute/'+course.institute.id+'/'+course.institute.slug+'/'+course.slug">
                                             <div class="institute-img d-inline-block position-relative">
                                                 <img :src="public_path+course.institute.banner" :alt="course.institute.name_ar" class="card-img-top" />
                                             </div>
@@ -100,7 +100,7 @@
                                         <!-- ./Institute Img -->
                                         <div class="card-body rounded-10 bg-white">
                                             <!-- Institute Title -->
-                                            <h5 class="card-title"><a :href="course.slug" class="text-main-color"> معهد {{course.institute.name_ar}}</a></h5>
+                                            <h5 class="card-title"><a :href="'/institute/'+course.institute.id+'/'+course.institute.slug+'/'+course.slug" class="text-main-color"> معهد {{course.institute.name_ar}}</a></h5>
                                             <!-- ./Institute Title -->
                                             <!-- Institute Rate -->
                                             

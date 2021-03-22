@@ -51,9 +51,10 @@ function ArabicDate($date) {
 
 
 // return the price of selected week
-function price_per_week($course_prices_obj , $weeks){
+function price_per_week($prices_obj , $weeks){
     $price_per_week=0;
-    foreach($course_prices_obj as $week_price){
+    $prices_obj = $prices_obj->sort();
+    foreach($prices_obj as $week_price){
         $price_per_week = $week_price->price;
         if($weeks <= $week_price->weeks){
             $price_per_week = $week_price->price;

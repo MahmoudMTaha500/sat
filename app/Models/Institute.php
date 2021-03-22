@@ -38,6 +38,18 @@ class Institute extends Model
     {
         return $this->belongsTo("App\Models\City", 'city_id', 'id');
     }
+    public function residence()
+    {
+        return $this->hasMany("App\Models\Residences", 'institute_id', 'id');
+    }
+    public function airport()
+    {
+        return $this->hasMany("App\Models\Airports", 'institute_id', 'id');
+    }
+    public function insurancePrice()
+    {
+        return $this->hasMany('App\Models\Insurances', 'institute_id', 'id')->orderBy('weeks' , 'ASC');
+    }
     public function rats()
     {
         return $this->hasMany("App\Models\InstituteRate", 'institute_id', 'id');
