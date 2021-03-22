@@ -91,6 +91,15 @@
                                                 ></show-images-component>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                        <div  class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="institute-name"> الموقع</label>
+                                                <input type="text" id="institute-map" class="form-control" placeholder="ادخل  الموقع" name="map" value="{{old('map')}}" />
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
                                         
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>

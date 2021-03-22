@@ -25,6 +25,7 @@ class StoreInstituteRequest extends FormRequest
     {
         return [
             'name_ar' => 'required',
+            'map' => 'required',
             'about_ar' => 'required',
             'institute_questions' => 'required',
             'country_id' => 'required',
@@ -38,6 +39,7 @@ class StoreInstituteRequest extends FormRequest
     {
         return [
             'name_ar.required' => 'اسم المعهد مطلوب',
+            'map.required' => '  موقع المعهد مطلوب ',
             'about_ar.required' => 'برجاء ادخال نبذة مختصرة عن المعهد',
             'institute_questions.required' => 'برجاء ادخال اسئله المعهد  ',
             'country_id.required' => 'برجاء تحديد الدولة',

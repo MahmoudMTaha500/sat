@@ -109,5 +109,9 @@ Route::resource('residences','ResidencesController');
 
 /**********************************   ************************************************************************************** */
 // Student Route  
+Route::get('/student-requests/getStudentRequests','StudentRequestsController@getStudentsRequest');   
+Route::post('/student-requests/update-status','StudentRequestsController@updateStatus');   
+
+Route::resource('student-requests', "StudentRequestsController");
 
 

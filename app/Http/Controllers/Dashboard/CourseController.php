@@ -128,7 +128,9 @@ class CourseController extends Controller
             ]);
 
         }
-        return back()->with("success", 'تم تعديل الدورة');
+        session()->flash('alert_message', ['message' => 'تم تعديل الدورة بنجاح', 'icon' => 'success']);
+
+        return back();
 
     }
     /************************************************************** */

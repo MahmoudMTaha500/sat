@@ -9,7 +9,9 @@ import Vue from 'vue';
 import rate from 'vue-rate';
 import 'vue-rate/dist/vue-rate.css';
 Vue.use(rate);
-
+// import CKEditor from '@ckeditor/ckeditor5-vue';
+import CKEditor from '@ckeditor/ckeditor5-vue2';
+Vue.use(CKEditor);
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -38,6 +40,7 @@ import ResidenceComponent from "./components/residence/ResidenceComponent.vue";
 import InstitutesPgaeComponent from "./components/website/InstitutesPgaeComponent.vue";
 import StudentComponent from "./components/student/StudentComponent.vue";
 import SuccesStoryComponent from "./components/student/SuccesStoryComponent.vue";
+import StudentRequestComponent from "./components/studentRequest/StudentRequestComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -61,7 +64,9 @@ const app = new Vue({
         CoursePriceInfoComponent,
         InstitutesPgaeComponent,
         StudentComponent,
-        SuccesStoryComponent
+        SuccesStoryComponent,
+        StudentRequestComponent,
+
 
     }
 });
