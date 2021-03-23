@@ -14,7 +14,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.use(require('vue-resource'));
+// Vue.use(require('vue-resource'));
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 
