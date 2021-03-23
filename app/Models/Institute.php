@@ -22,6 +22,7 @@ class Institute extends Model
         'sat_rate',
         'rate_switch',
         'approvement',
+        'map'
     ];
     protected $date = ['deleted_at'];
 

@@ -80,6 +80,8 @@ class InstituteController extends Controller
                 "rate_switch" => 1,
                 "active" => 1,
                 "approvement" => 1,
+                "map" => $request->map,
+
 
             ]);
 
@@ -104,7 +106,7 @@ class InstituteController extends Controller
         $page_name = 'add-institute';
         $countries = Country::all();
         $useVue = true;
-        return view('admin.institutes.edit', compact('useVue', 'department_name', 'page_name', 'countries', 'institute', 'questions'));
+        return view('admin.institutes.edit', compact('useVue', 'department_name', 'page_name', 'countries', 'institute'));
 
     }
     /************************************************************** */
@@ -117,6 +119,8 @@ class InstituteController extends Controller
         $institute->institute_questions = $request->institute_questions;
         $institute->country_id = $request->country_id;
         $institute->city_id = $request->city_id;
+        $institute->map = $request->map;
+
 
         if ($request->logo) {
             $validate_images = $request->validate([
