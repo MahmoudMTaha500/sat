@@ -29,4 +29,12 @@ class Student extends Authenticatable
     {
         return $this->belongsTo("App\Models\City", 'city_id', 'id');
     }
+    public function all_courses_requests()
+    {
+        return $this->hasMany("App\Models\StudentRequest", 'student_id', 'id');
+    }
+    public function single_course_request()
+    {
+        return $this->hasOne("App\Models\StudentRequest", 'student_id', 'id');
+    }
 }

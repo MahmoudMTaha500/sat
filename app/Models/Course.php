@@ -36,6 +36,6 @@ class Course extends Model
     }
     public function coursesPrice()
     {
-        return $this->hasMany('App\Models\CoursePrice', 'course_id', 'id')->orderBy('weeks' , 'ASC');
+        return $this->hasMany('App\Models\CoursePrice', 'course_id', 'id')->orderByRaw("CAST(weeks as UNSIGNED) ASC")->select('weeks' , 'price');
     }
 }

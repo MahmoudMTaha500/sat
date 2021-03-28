@@ -4886,8 +4886,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
+  props: ["csrf_token", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
   data: function data() {
     return {
       course: JSON.parse(this.course_obj),
@@ -4926,6 +4933,19 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this2.insurance_price = response.data.insurance_price;
       });
+    },
+    total_price: function total_price() {
+      var totalPrice = (this.insurance_price + this.price_per_week * (1 - this.course.discount)) * this.weeks;
+
+      if (!isNaN(this.chosin_airport.price)) {
+        totalPrice += this.chosin_airport.price;
+      }
+
+      if (!isNaN(this.chosin_residence.price)) {
+        totalPrice += this.chosin_residence.price * this.weeks;
+      }
+
+      return totalPrice;
     }
   },
   beforeMount: function beforeMount() {
@@ -48558,16 +48578,34 @@ var render = function() {
               _vm._v(" "),
               _c("hr")
             ])
-          : _vm._e()
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-main-color" }, [
+            _vm._v(_vm._s(_vm.total_price()) + " دينار سعودي ")
+          ])
+        ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
-      _vm._m(2),
+      _vm._m(3),
       _vm._v(" "),
       _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
-        _c("form", { attrs: { action: "" } }, [
-          _vm._m(3),
+        _c("form", { attrs: { action: _vm.save_request_url, method: "get" } }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf_token }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "course_id" },
+            domProps: { value: _vm.course_id }
+          }),
+          _vm._v(" "),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c(
@@ -48582,7 +48620,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control selectpicker rounded-10 border",
-                attrs: { "data-live-search": "true" },
+                attrs: { name: "weeks", "data-live-search": "true" },
                 on: {
                   change: [
                     function($event) {
@@ -48680,7 +48718,12 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "residence" },
+              domProps: { value: JSON.stringify(_vm.chosin_residence) }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -48737,11 +48780,16 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "airport" },
+              domProps: { value: JSON.stringify(_vm.chosin_airport) }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _vm._m(4),
+            _vm._m(5),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-6" }, [
               _c(
@@ -48825,19 +48873,16 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c(
-            "a",
+            "button",
             {
               staticClass:
-                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
-              attrs: { href: "confirm-reservation.html" }
+                "btn rounded-10 bg-secondary-color text-white mb-2 w-100"
             },
             [_vm._v("حجز")]
           )
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.get_insurance_price } }, [_vm._v("click")])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -48858,6 +48903,16 @@ var staticRenderFns = [
     return _c("span", { staticClass: "d-block" }, [
       _c("span", { staticClass: "font-weight-bold" }, [
         _vm._v(" التامين الصحي : ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "d-block" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _vm._v(" اجمالي السعر : ")
       ])
     ])
   },
@@ -48886,6 +48941,7 @@ var staticRenderFns = [
         _c("input", {
           staticClass: "form-control border-0 bg-transparent",
           attrs: {
+            name: "started_date",
             type: "text",
             onfocus: "return this.setAttribute('type', 'date')",
             onfocusout: "return this.setAttribute('type', 'text')",

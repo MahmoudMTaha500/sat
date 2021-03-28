@@ -13,7 +13,7 @@ class ResidencesSeeder extends Seeder
     {
         for ($x = 1; $x <= 30; $x++) {
             residences::create([
-                "name_ar" => 'Institute'.$x,
+                "name_ar" => 'سكن'.$x,
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                

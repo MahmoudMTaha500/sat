@@ -34,6 +34,10 @@
                     <span class="text-main-color">{{insurance_price*weeks}} دينار سعودي </span>
                     <hr />
                 </div>
+                <div>
+                    <span class="d-block"><span class="font-weight-bold"> اجمالي السعر : </span> </span>
+                    <span class="text-main-color">{{total_price()}} دينار سعودي </span>
+                </div>
             </div>
         </div>
         <!-- ./Cost -->
@@ -43,15 +47,17 @@
                 <h5 class="font-weight-bold text-main-color">الحجز والتقديم</h5>
             </div>
             <div class="reservation-body px-3 pt-3">
-                <form action="">
+                <form :action="save_request_url" method="get">
+                    <input type="hidden" name="_token" :value="csrf_token">
+                    <input type="hidden" name="course_id" :value="course_id">
                     <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                        <input type="text" onfocus="return this.setAttribute('type', 'date')" onfocusout="return this.setAttribute('type', 'text')" placeholder="تاريخ البداية" class="form-control border-0 bg-transparent"/>
+                        <input name="started_date" type="text" onfocus="return this.setAttribute('type', 'date')" onfocusout="return this.setAttribute('type', 'text')" placeholder="تاريخ البداية" class="form-control border-0 bg-transparent"/>
                         <div class="input-group-append">
                             <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
                         </div>
                     </div>
                     <div class="form-group">
-                        <select @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                        <select name="weeks" @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option value="">عدد الاسابيع</option>
                             <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                         </select>
@@ -62,6 +68,7 @@
                             <option :value="0" selected>لا احتاج خدمة سكن</option>
                             <option v-for="residence in residences" :key="residence.id" :value="residence">{{residence.name_ar}} - {{residence.price}}</option>
                         </select>
+                        <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
                     </div>
                     <div class="form-group">
                         <select v-model="chosin_airport" class="form-control selectpicker rounded-10 border" data-live-search="true">
@@ -69,6 +76,7 @@
                             <option selected :value="0"> لا احتاج خدمة الاستقبال</option>
                             <option v-for="airport in airports" :key="airport.id" :value="airport">{{airport.name_ar}} - {{airport.price}}</option>
                         </select>
+                        <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
                     </div>
                     <div class="row">
                         <div class="col-md-12"><label>هل تحتاج الي التامين الصحي</label> <br /></div>
@@ -85,18 +93,17 @@
                     </div>
                     
                     <!-- Redirect to Confirm Reservation -->
-                    <a href="confirm-reservation.html" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">حجز</a>
+                    <button class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">حجز</button>
                 </form>
             </div>
         </div>
         <!-- ./Reservation -->
-        <button @click="get_insurance_price">click</button>
     </div>
 </template>
 
 <script>
     export default {
-        props: ["course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
+        props: ["csrf_token" , "save_request_url" , "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
         data() {
             return {
                 course: JSON.parse(this.course_obj),
@@ -125,6 +132,16 @@
                         params: { course_id: this.course_id, weeks: this.weeks },
                     })
                     .then((response) => (this.insurance_price = response.data.insurance_price));
+            },
+            total_price() {
+                var totalPrice = (this.insurance_price + this.price_per_week*(1- this.course.discount))*this.weeks
+                if(!isNaN(this.chosin_airport.price)){
+                    totalPrice += this.chosin_airport.price
+                }
+                if(!isNaN(this.chosin_residence.price)){
+                    totalPrice += this.chosin_residence.price*this.weeks
+                }
+               return totalPrice
             },
         },
         beforeMount() {

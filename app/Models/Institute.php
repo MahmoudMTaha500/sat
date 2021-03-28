@@ -48,7 +48,7 @@ class Institute extends Model
     }
     public function insurancePrice()
     {
-        return $this->hasMany('App\Models\Insurances', 'institute_id', 'id')->orderBy('weeks' , 'ASC');
+        return $this->hasMany('App\Models\Insurances', 'institute_id', 'id')->orderByRaw("CAST(weeks as UNSIGNED) ASC")->select('weeks' , 'price');
     }
     public function rats()
     {
