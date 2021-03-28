@@ -22,9 +22,10 @@ class CourseController extends Controller
         $count_courses = count($countercourse);
         $department_name = 'courses';
         $page_name = 'courses';
+        $page_title = 'courses';
         $useVue = true;
 
-        return view("admin.courses.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'count_courses', 'countries'));
+        return view("admin.courses.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'count_courses', 'countries','page_title'));
     }
     /************************************************************** */
     public function getCourses()
@@ -39,7 +40,9 @@ class CourseController extends Controller
         $institutes = institute::get();
         $department_name = 'courses';
         $page_name = 'add-course';
-        return view("admin.courses.create", compact('department_name', 'page_name', 'institutes'));
+        $page_title = 'courses';
+
+        return view("admin.courses.create", compact('department_name', 'page_name', 'institutes','page_title'));
     }
     /************************************************************** */
     public function store(StoreCoursesRequest $request)
@@ -96,7 +99,9 @@ class CourseController extends Controller
         $course_prices = CoursePrice::where(["course_id" => $course->id])->get();
         $department_name = 'courses';
         $page_name = 'courses';
-        return view("admin.courses.edit", compact('course', 'institutes', 'department_name', 'page_name', 'course_prices'));
+        $page_title = 'courses';
+
+        return view("admin.courses.edit", compact('course', 'institutes', 'department_name', 'page_name', 'course_prices','page_title'));
         // dd($course);
     }
     /************************************************************** */

@@ -20,10 +20,11 @@ class BlogController extends Controller
     {
         $department_name = 'blogs';
         $page_name = 'blogs';
+        $page_title = 'blogs';
         $useVue = true;
         $users = User::get();
         $categories = BlogCategory::get();
-        return view("admin.blogs.index", compact('department_name', 'page_name', 'useVue', 'users', 'categories'));
+        return view("admin.blogs.index", compact('department_name', 'page_name', 'useVue', 'users', 'page_title', 'categories'));
     }
     /***************************************************************/
     public function get_blogs_by_vue(Request $request)
@@ -40,7 +41,9 @@ class BlogController extends Controller
         $useVue = true;
         $department_name = 'blogs';
         $page_name = 'add-blog';
-        return view("admin.blogs.create", compact('countries', 'department_name', 'page_name', 'useVue', 'Institutes', 'BlogCategories'));
+        $page_title = 'blogs';
+
+        return view("admin.blogs.create", compact('countries', 'department_name', 'page_name', 'useVue', 'Institutes', 'BlogCategories' ,'page_title'));
     }
     /***************************************************************/
     public function store(blogRequest $request)
@@ -85,7 +88,8 @@ class BlogController extends Controller
 
         $department_name = 'blogs';
         $page_name = 'edit-blog';
-        return view("admin.blogs.edit", compact('useVue', 'blog', 'department_name', 'page_name', 'Institutes', 'BlogCategories', 'countries'));
+        $page_title = 'blogs';
+        return view("admin.blogs.edit", compact('useVue', 'blog', 'department_name', 'page_name', 'Institutes', 'BlogCategories', 'countries' ,'page_title'));
     }
     /***************************************************************/
     public function update(blogEditRequest $request, Blog $blog)

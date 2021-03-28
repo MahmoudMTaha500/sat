@@ -9,6 +9,7 @@ use App\Models\Course;
 use App\Models\CoursePrice;
 use App\Models\institute;
 use App\Models\StudentRequest;
+use App\Models\Insurances;
 
 class StudentRequestsController extends Controller
 {
@@ -87,8 +88,36 @@ public function updateStatus(Request $request){
      */
     public function edit($id)
     {
-        //
+    $request_student = StudentRequest::with('student','course.institute.residence','course.institute.insurancePrice','course','airport','residence','insurance','course.coursesPrice')->find($id);
+    $department_name = 'student-request';
+    $page_name = 'student-request';
+    $useVue = true;
+    $residence_obj = $request_student->residence;
+    $airport_obj = $request_student->airport;
+    $insurance_obj = $request_student->insurance;
+        return view("admin.students_requests.edit", compact('useVue', 'department_name', 'page_name', "request_student",'residence_obj','airport_obj','insurance_obj'));
+           
+
     }
+
+    public function get_price_per_week(Request $request)
+    {
+        $course = Course::where('id',$request->id)->with('coursesPrice')->first();
+           $weeks = $request->weeks;
+           $price =   price_per_week($course->coursesPrice, $weeks); 
+           return response()->json(['total_price'=>$price]);
+    }
+
+    public function get_price_insurance(Request $request)
+    {
+        $Insurances = Insurances::select('weeks','price')->where('institute_id',$request->id)->get();
+           $weeks = $request->weeks;
+           $price =   price_per_week($Insurances, $weeks); 
+           return response()->json(['total_price'=>$price]);
+    }
+public function calc_total(Request $request){
+    dd($request->all());
+}
 
     /**
      * Update the specified resource in storage.

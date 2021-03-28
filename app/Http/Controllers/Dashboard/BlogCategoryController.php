@@ -15,7 +15,8 @@ class BlogCategoryController extends Controller
         $categories = BlogCategory::all();
         $department_name = 'blogs';
         $page_name = 'blog-categories';
-        return view("admin.blog_categories.index", compact('categories', 'department_name', 'page_name'));
+        $page_title = '';
+        return view("admin.blog_categories.index", compact('categories', 'department_name', 'page_title','page_name'));
     }
 
 
@@ -23,7 +24,9 @@ class BlogCategoryController extends Controller
     {
         $department_name = 'blogs';
         $page_name = 'add-blog-category';
-        return view("admin.blog_categories.create", compact('department_name', 'page_name'));
+        $page_title = 'blog-categories';
+
+        return view("admin.blog_categories.create", compact('department_name', 'page_title','page_name'));
     }
 
     public function store(blogCategoryRequest $request)
@@ -46,7 +49,9 @@ class BlogCategoryController extends Controller
         $category = $blogCategory;
         $department_name = 'blogs';
         $page_name = 'edit-blog-category';
-        return view("admin.blog_categories.edit", compact( 'category' ,'department_name', 'page_name'));
+        $page_title = 'blog-categories';
+
+        return view("admin.blog_categories.edit", compact( 'category' ,'department_name', 'page_title','page_name'));
     }
 
  

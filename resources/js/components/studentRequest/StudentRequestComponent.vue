@@ -271,10 +271,10 @@
 
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a :href="dahsboard_url+'/courses/'+request.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
+                                                <a :href="dahsboard_url+'/student-requests/'+request.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
                                                 <a href="#" class="btn btn-default btn-sm round">عرض</a>
 
-                                                <form :action="dahsboard_url+'/courses/'+request.id" method="POST" class="btn-group">
+                                                <form :action="dahsboard_url+'/student-requests/'+request.id" method="POST" class="btn-group">
                                                     <input type="hidden" name="_token" :value="csrftoken" />
                                                     <input type="hidden" name="_method" value="delete" />
                                                     <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذه الدورة')">حذف</button>

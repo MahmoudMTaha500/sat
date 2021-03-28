@@ -16,7 +16,7 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.use(require('vue-resource'));
+// Vue.use(require('vue-resource'));
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 
@@ -41,6 +41,7 @@ import InstitutesPgaeComponent from "./components/website/InstitutesPgaeComponen
 import StudentComponent from "./components/student/StudentComponent.vue";
 import SuccesStoryComponent from "./components/student/SuccesStoryComponent.vue";
 import StudentRequestComponent from "./components/studentRequest/StudentRequestComponent.vue";
+import StudentRequestEditComponent from "./components/studentRequest/StudentRequestEditComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -66,6 +67,7 @@ const app = new Vue({
         StudentComponent,
         SuccesStoryComponent,
         StudentRequestComponent,
+        StudentRequestEditComponent,
 
 
     }
