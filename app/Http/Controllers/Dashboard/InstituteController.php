@@ -27,7 +27,6 @@ class InstituteController extends Controller
             }
         }
         $page_title = 'Institutes';
- 
         return view('admin.institutes.index', ['institutes' => $institutes, "useVue" => $useVue, 'countries' => $countries,'page_title'=>$page_title]);
     }
     /************************************************************** */
@@ -53,20 +52,13 @@ class InstituteController extends Controller
         $logoName = time() . $logoObject->getClientOriginalName();
         $pathLogo = public_path("\storage\institute\logos");
         $request->logo->move($pathLogo, $logoName);
-
         $logoNamePath = "storage/institute/logos" . '/' . $logoName;
-
         $pannerObject = $validated['panner'];
         $PannerName = time() . $pannerObject->getClientOriginalName();
         $pathPanner = public_path("\storage\institute\banners");
-
         $request->panner->move($pathPanner, $PannerName);
-
         $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
         $slug = str_replace(' ', '-', $request->name_ar);
-
-       
-
             $institute = Institute::create([
                 "name_ar" => $request->name_ar,
                 "slug" => $slug,
@@ -82,15 +74,9 @@ class InstituteController extends Controller
                 "active" => 1,
                 "approvement" => 1,
                 "map" => $request->map,
-
-
             ]);
-
-          
             session()->flash('alert_message', ['message' => 'تم اضافة المعهد بنجاح', 'icon' => 'success']);
             return redirect()->route('institute.index');
-
-
     }
     /************************************************************** */
     public function show(Institute $institute)
@@ -121,26 +107,18 @@ class InstituteController extends Controller
         $institute->country_id = $request->country_id;
         $institute->city_id = $request->city_id;
         $institute->map = $request->map;
-
-
         if ($request->logo) {
             $validate_images = $request->validate([
-
                 'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
-
             $logoObject = $validate_images['logo'];
             $logoName = time() . $logoObject->getClientOriginalName();
             $pathLogo = public_path("\storage\institute\logos");
             File::delete($institute->logo);
             $request->logo->move($pathLogo, $logoName);
-
             $logoNamePath = "storage/institute/logos" . '/' . $logoName;
-
             $institute->logo = $logoNamePath;
-
         }
-
         if ($request->panner) {
             $validate_images = $request->validate([
                 'panner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
@@ -155,10 +133,7 @@ class InstituteController extends Controller
 
             $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
             $institute->banner = $pannerNamePath;
-
         }
-
-  
    $rateSwitch = 0;
    if($request->rate_switch =="on"){
     $rateSwitch = 1;
@@ -166,11 +141,9 @@ class InstituteController extends Controller
    }
    $institute->rate_switch = $rateSwitch;
    $institute->sat_rate = $request->score;
-
         $institute->save();
         session()->flash('alert_message', ['message' => 'تم تعديل المعهد بنجاح', 'icon' => 'success']);
         return back();
-
     }
     /************************************************************** */
     public function destroy(Institute $institute)
@@ -193,21 +166,15 @@ class InstituteController extends Controller
             $courses_price = CoursePrice::where('course_id',$course->id)->forceDelete();
         }
         Course::where('institute_id', $id)->forceDelete();
-         
         $institute = Institute::find($id);
-
         File::delete($institute->logo);
-
         File::delete($institute->panner);
 $institute->forceDelete();
-        
         // Institute::where('id', $id)->forceDelete();
         session()->flash('alert_message', ['message' => 'تم حذف  المعهد  نهائيا بنجاح', 'icon' => 'error']);
         return back();
-
     }
     /************************************************************** */
-
     public function archive(Request $request)
     {
 
@@ -216,7 +183,6 @@ $institute->forceDelete();
 
     }
     /************************************************************** */
-
     public function restor(Request $request, $id)
     {
         $restor = Institute::where(['id' => $id])->restore();
@@ -224,7 +190,6 @@ $institute->forceDelete();
         Comment::where(['element_id' => $id, 'element_type' => 'institute'])->restore();
         session()->flash('alert_message', ['message' => 'تم ارجاع المعهد بنجاح', 'icon' => 'success']);
         return back();
-
     }
     /************************************************************** */
     public function updateAprovement(Request $request)
@@ -239,7 +204,6 @@ $institute->forceDelete();
         $country_id = $request->country_id;
         $city_id = $request->city_id;
         $name_ar = $request->name_ar;
-
         $institute = new Institute;
         if($country_id){
             $institute = $institute->where('country_id',$country_id);
@@ -247,10 +211,9 @@ $institute->forceDelete();
         if($city_id){
             $institute = $institute->where('city_id',$city_id);
         }  
-          if($name_ar){
+        if($name_ar){
             $name_ar = $institute->where('name_ar',$name_ar);
         }
-
         $institute = $institute->with('country', 'city' , 'rats')->paginate(10);
         return response()->json(['institute' => $institute]);
     }
