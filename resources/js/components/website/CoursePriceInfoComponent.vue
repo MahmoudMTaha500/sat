@@ -11,32 +11,32 @@
                         اللغة الإنجليزية العامة :
                         <span class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} -</span>
                     </span>
-                    <span class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del> {{Math.round(price_per_week*(1- course.discount))}} دينار سعودي / الاسبوع</span>
+                    <span class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del> {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الاسبوع</span>
                     <hr />
                 </div>
                 <div>
                     <span class="font-weight-bold d-block"> سعر الدورة : </span>
-                    <span class="text-main-color"> {{Math.round(price_per_week*weeks*(1- course.discount))}} دينار سعودي</span>
+                    <span class="text-main-color"> {{Math.round(price_per_week*weeks*(1- course.discount))}} ريال سعودي</span>
                     <hr />
                 </div>
                 <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
-                    <span class="text-main-color">{{chosin_residence.price*weeks}} دينار سعودي </span>
+                    <span class="text-main-color">{{chosin_residence.price*weeks}} ريال سعودي </span>
                     <hr />
                 </div>
                 <div v-if="chosin_airport.price !=0 && chosin_airport.price != '' && !isNaN(chosin_airport.price) ">
                     <span class="d-block"><span class="font-weight-bold"> خدمة الاستقبال : </span> <span>{{chosin_airport.name_ar}}</span> </span>
-                    <span class="text-main-color">{{chosin_airport.price}} دينار سعودي </span>
+                    <span class="text-main-color">{{chosin_airport.price}} ريال سعودي </span>
                     <hr />
                 </div>
                 <div v-if="insurance_price_checker !=0">
                     <span class="d-block"><span class="font-weight-bold"> التامين الصحي : </span> </span>
-                    <span class="text-main-color">{{insurance_price*weeks}} دينار سعودي </span>
+                    <span class="text-main-color">{{insurance_price*weeks}} ريال سعودي </span>
                     <hr />
                 </div>
                 <div>
                     <span class="d-block"><span class="font-weight-bold"> اجمالي السعر : </span> </span>
-                    <span class="text-main-color">{{total_price()}} دينار سعودي </span>
+                    <span class="text-main-color">{{total_price()}} ريال سعودي </span>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
                         <div class="col-md-12"><label>هل تحتاج الي التامين الصحي</label> <br /></div>
                         <div class="col-md-6">
                             <div class="form-check form-check-inline mr-0 ml-4">
-                                <input v-model="insurance_price_checker"  name="insurance" type="radio" id="inlineCheckbox1" value="1" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">نعم ({{insurance_price*weeks}} دينار)</label>
+                                <input v-model="insurance_price_checker"  name="insurance" type="radio" id="inlineCheckbox1" value="1" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">نعم ({{insurance_price*weeks}} ريال)</label>
                             </div>
                         </div>
                         <div class="col-md-6">

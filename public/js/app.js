@@ -4547,26 +4547,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken"],
@@ -4591,7 +4571,7 @@ __webpack_require__.r(__webpack_exports__);
       institute_name: "",
       institute_message: "",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
-      editorData: '<p>Content of the editor.</p>',
+      editorData: "<p>Content of the editor.</p>",
       editorConfig: {// The configuration of the editor.
       },
       notes: ""
@@ -4662,28 +4642,291 @@ __webpack_require__.r(__webpack_exports__);
     },
     modelService: function modelService(obj) {
       this.serviceObj = obj; //  console.log(this.serviceObj);
-      //    $('#institute_email_modal').modal('show'); 
+      //    $('#institute_email_modal').modal('show');
 
       this.course_Obj = this.serviceObj.course;
       this.airport_Obj = this.serviceObj.airport;
       this.insurance_Obj = this.serviceObj.insurance;
       this.residence_Obj = this.serviceObj.residence;
       this.institute_name = this.course_Obj.institute.name_ar;
-      $('#request_details_modal').modal('show');
+      $("#request_details_modal").modal("show");
     },
     modelmessageInstitute: function modelmessageInstitute(obj) {
       this.institute_message = obj.institute_message;
       this.editorData = obj.institute_message; //  console.log(this.institute_message);
 
-      $('#institute_email_modal').modal('show');
+      $("#institute_email_modal").modal("show");
     },
     notes_request: function notes_request(obj) {
       this.notes = obj.note;
-      $('#notes').modal('show');
+      $("#notes").modal("show");
     }
   },
   beforeMount: function beforeMount() {
     this.getstudentsRequests();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["csrf_token", "get_course_price_url", "get_insurance_price_url", "student_request", "student_requests_url"],
+  data: function data() {
+    return {
+      student_name: this.student_request.student.name,
+      institute_name: this.student_request.course.institute.name_ar,
+      course_name: this.student_request.course.name_ar,
+      course_discount: this.student_request.course.discount,
+      total_price: this.student_request.total_price,
+      paid_price: this.student_request.paid_price,
+      remaining_price: this.student_request.remaining_price,
+      status: this.student_request.status,
+      weeks: this.student_request.weeks,
+      notes: this.student_request.note,
+      institute_message: this.student_request.institute_message,
+      started_date: this.student_request.started_date,
+      residences: this.student_request.course.institute.residence,
+      chosin_residence: '',
+      airports: this.student_request.course.institute.airport,
+      chosin_airport: '',
+      insurance_price_checker: this.student_request.insurance_price == 0 ? false : true,
+      insurance_price: '',
+      course_price: ''
+    };
+  },
+  methods: {
+    set_chosin_residence: function set_chosin_residence() {
+      var _this = this;
+
+      this.residences.forEach(function (res) {
+        if (res.id == _this.student_request.residence_id) {
+          _this.chosin_residence = res;
+        }
+      });
+    },
+    set_chosin_airport: function set_chosin_airport() {
+      var _this2 = this;
+
+      this.airports.forEach(function (airp) {
+        if (airp.id == _this2.student_request.airport_id) {
+          _this2.chosin_airport = airp;
+        }
+      });
+    },
+    get_insurance_price: function get_insurance_price() {
+      var _this3 = this;
+
+      axios.get(this.get_insurance_price_url, {
+        params: {
+          course_id: this.student_request.course_id,
+          weeks: this.weeks
+        }
+      }).then(function (response) {
+        return _this3.insurance_price = response.data.insurance_price;
+      });
+    },
+    get_course_price: function get_course_price() {
+      var _this4 = this;
+
+      axios.get(this.get_course_price_url, {
+        params: {
+          course_id: this.student_request.course_id,
+          weeks: this.weeks
+        }
+      }).then(function (response) {
+        return _this4.course_price = response.data.price_per_week;
+      });
+    },
+    totalPrice: function totalPrice() {
+      var total_price = this.course_price * (1 - this.course_discount) * this.weeks;
+
+      if (this.insurance_price_checker) {
+        total_price += this.insurance_price * this.weeks;
+      }
+
+      if (!isNaN(this.chosin_airport.price)) {
+        total_price += this.chosin_airport.price;
+      }
+
+      if (!isNaN(this.chosin_residence.price)) {
+        total_price += this.chosin_residence.price * this.weeks;
+      }
+
+      return total_price;
+    }
+  },
+  beforeMount: function beforeMount() {
+    this.set_chosin_residence();
+    this.set_chosin_airport();
+    this.get_insurance_price();
+    this.get_course_price();
   }
 });
 
@@ -9765,17 +10008,17 @@ function toComment(sourceMap) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.6.0
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
  * https://sizzlejs.com/
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2021-03-02T17:08Z
+ * Date: 2020-05-04T22:49Z
  */
 ( function( global, factory ) {
 
@@ -9842,16 +10085,12 @@ var support = {};
 
 var isFunction = function isFunction( obj ) {
 
-		// Support: Chrome <=57, Firefox <=52
-		// In some browsers, typeof returns "function" for HTML <object> elements
-		// (i.e., `typeof document.createElement( "object" ) === "function"`).
-		// We don't want to classify *any* DOM node as a function.
-		// Support: QtWeb <=3.8.5, WebKit <=534.34, wkhtmltopdf tool <=0.12.5
-		// Plus for old WebKit, typeof returns "function" for HTML collections
-		// (e.g., `typeof document.getElementsByTagName("div") === "function"`). (gh-4756)
-		return typeof obj === "function" && typeof obj.nodeType !== "number" &&
-			typeof obj.item !== "function";
-	};
+      // Support: Chrome <=57, Firefox <=52
+      // In some browsers, typeof returns "function" for HTML <object> elements
+      // (i.e., `typeof document.createElement( "object" ) === "function"`).
+      // We don't want to classify *any* DOM node as a function.
+      return typeof obj === "function" && typeof obj.nodeType !== "number";
+  };
 
 
 var isWindow = function isWindow( obj ) {
@@ -9917,7 +10156,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.6.0",
+	version = "3.5.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -10171,7 +10410,7 @@ jQuery.extend( {
 			if ( isArrayLike( Object( arr ) ) ) {
 				jQuery.merge( ret,
 					typeof arr === "string" ?
-						[ arr ] : arr
+					[ arr ] : arr
 				);
 			} else {
 				push.call( ret, arr );
@@ -10266,9 +10505,9 @@ if ( typeof Symbol === "function" ) {
 
 // Populate the class2type map
 jQuery.each( "Boolean Number String Function Array Date RegExp Object Error Symbol".split( " " ),
-	function( _i, name ) {
-		class2type[ "[object " + name + "]" ] = name.toLowerCase();
-	} );
+function( _i, name ) {
+	class2type[ "[object " + name + "]" ] = name.toLowerCase();
+} );
 
 function isArrayLike( obj ) {
 
@@ -10288,14 +10527,14 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.6
+ * Sizzle CSS Selector Engine v2.3.5
  * https://sizzlejs.com/
  *
  * Copyright JS Foundation and other contributors
  * Released under the MIT license
  * https://js.foundation/
  *
- * Date: 2021-02-16
+ * Date: 2020-03-14
  */
 ( function( window ) {
 var i,
@@ -10878,8 +11117,8 @@ support = Sizzle.support = {};
  * @returns {Boolean} True iff elem is a non-HTML XML node
  */
 isXML = Sizzle.isXML = function( elem ) {
-	var namespace = elem && elem.namespaceURI,
-		docElem = elem && ( elem.ownerDocument || elem ).documentElement;
+	var namespace = elem.namespaceURI,
+		docElem = ( elem.ownerDocument || elem ).documentElement;
 
 	// Support: IE <=8
 	// Assume HTML when documentElement doesn't yet exist, such as inside loading iframes
@@ -12794,9 +13033,9 @@ var rneedsContext = jQuery.expr.match.needsContext;
 
 function nodeName( elem, name ) {
 
-	return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
+  return elem.nodeName && elem.nodeName.toLowerCase() === name.toLowerCase();
 
-}
+};
 var rsingleTag = ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i );
 
 
@@ -13767,8 +14006,8 @@ jQuery.extend( {
 			resolveContexts = Array( i ),
 			resolveValues = slice.call( arguments ),
 
-			// the primary Deferred
-			primary = jQuery.Deferred(),
+			// the master Deferred
+			master = jQuery.Deferred(),
 
 			// subordinate callback factory
 			updateFunc = function( i ) {
@@ -13776,30 +14015,30 @@ jQuery.extend( {
 					resolveContexts[ i ] = this;
 					resolveValues[ i ] = arguments.length > 1 ? slice.call( arguments ) : value;
 					if ( !( --remaining ) ) {
-						primary.resolveWith( resolveContexts, resolveValues );
+						master.resolveWith( resolveContexts, resolveValues );
 					}
 				};
 			};
 
 		// Single- and empty arguments are adopted like Promise.resolve
 		if ( remaining <= 1 ) {
-			adoptValue( singleValue, primary.done( updateFunc( i ) ).resolve, primary.reject,
+			adoptValue( singleValue, master.done( updateFunc( i ) ).resolve, master.reject,
 				!remaining );
 
 			// Use .then() to unwrap secondary thenables (cf. gh-3000)
-			if ( primary.state() === "pending" ||
+			if ( master.state() === "pending" ||
 				isFunction( resolveValues[ i ] && resolveValues[ i ].then ) ) {
 
-				return primary.then();
+				return master.then();
 			}
 		}
 
 		// Multiple arguments are aggregated like Promise.all array elements
 		while ( i-- ) {
-			adoptValue( resolveValues[ i ], updateFunc( i ), primary.reject );
+			adoptValue( resolveValues[ i ], updateFunc( i ), master.reject );
 		}
 
-		return primary.promise();
+		return master.promise();
 	}
 } );
 
@@ -13950,8 +14189,8 @@ var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
 			for ( ; i < len; i++ ) {
 				fn(
 					elems[ i ], key, raw ?
-						value :
-						value.call( elems[ i ], i, fn( elems[ i ], key ) )
+					value :
+					value.call( elems[ i ], i, fn( elems[ i ], key ) )
 				);
 			}
 		}
@@ -14859,7 +15098,10 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 }
 
 
-var rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
+var
+	rkeyEvent = /^key/,
+	rmouseEvent = /^(?:mouse|pointer|contextmenu|drag|drop)|click/,
+	rtypenamespace = /^([^.]*)(?:\.(.+)|)/;
 
 function returnTrue() {
 	return true;
@@ -15154,8 +15396,8 @@ jQuery.event = {
 			event = jQuery.event.fix( nativeEvent ),
 
 			handlers = (
-				dataPriv.get( this, "events" ) || Object.create( null )
-			)[ event.type ] || [],
+					dataPriv.get( this, "events" ) || Object.create( null )
+				)[ event.type ] || [],
 			special = jQuery.event.special[ event.type ] || {};
 
 		// Use the fix-ed jQuery.Event rather than the (read-only) native event
@@ -15279,12 +15521,12 @@ jQuery.event = {
 			get: isFunction( hook ) ?
 				function() {
 					if ( this.originalEvent ) {
-						return hook( this.originalEvent );
+							return hook( this.originalEvent );
 					}
 				} :
 				function() {
 					if ( this.originalEvent ) {
-						return this.originalEvent[ name ];
+							return this.originalEvent[ name ];
 					}
 				},
 
@@ -15423,13 +15665,7 @@ function leverageNative( el, type, expectSync ) {
 						// Cancel the outer synthetic event
 						event.stopImmediatePropagation();
 						event.preventDefault();
-
-						// Support: Chrome 86+
-						// In Chrome, if an element having a focusout handler is blurred by
-						// clicking outside of it, it invokes the handler synchronously. If
-						// that handler calls `.remove()` on the element, the data is cleared,
-						// leaving `result` undefined. We need to guard against this.
-						return result && result.value;
+						return result.value;
 					}
 
 				// If this is an inner synthetic event for an event with a bubbling surrogate
@@ -15594,7 +15830,34 @@ jQuery.each( {
 	targetTouches: true,
 	toElement: true,
 	touches: true,
-	which: true
+
+	which: function( event ) {
+		var button = event.button;
+
+		// Add which for key events
+		if ( event.which == null && rkeyEvent.test( event.type ) ) {
+			return event.charCode != null ? event.charCode : event.keyCode;
+		}
+
+		// Add which for click: 1 === left; 2 === middle; 3 === right
+		if ( !event.which && button !== undefined && rmouseEvent.test( event.type ) ) {
+			if ( button & 1 ) {
+				return 1;
+			}
+
+			if ( button & 2 ) {
+				return 3;
+			}
+
+			if ( button & 4 ) {
+				return 2;
+			}
+
+			return 0;
+		}
+
+		return event.which;
+	}
 }, jQuery.event.addProp );
 
 jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateType ) {
@@ -15617,12 +15880,6 @@ jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateTyp
 			leverageNative( this, type );
 
 			// Return non-false to allow normal event-path propagation
-			return true;
-		},
-
-		// Suppress native focus or blur as it's already being fired
-		// in leverageNative.
-		_default: function() {
 			return true;
 		},
 
@@ -16293,10 +16550,6 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 		// set in CSS while `offset*` properties report correct values.
 		// Behavior in IE 9 is more subtle than in newer versions & it passes
 		// some versions of this test; make sure not to make it pass there!
-		//
-		// Support: Firefox 70+
-		// Only Firefox includes border widths
-		// in computed dimensions. (gh-4529)
 		reliableTrDimensions: function() {
 			var table, tr, trChild, trStyle;
 			if ( reliableTrDimensionsVal == null ) {
@@ -16304,22 +16557,9 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 				tr = document.createElement( "tr" );
 				trChild = document.createElement( "div" );
 
-				table.style.cssText = "position:absolute;left:-11111px;border-collapse:separate";
-				tr.style.cssText = "border:1px solid";
-
-				// Support: Chrome 86+
-				// Height set through cssText does not get applied.
-				// Computed height then comes back as 0.
+				table.style.cssText = "position:absolute;left:-11111px";
 				tr.style.height = "1px";
 				trChild.style.height = "9px";
-
-				// Support: Android 8 Chrome 86+
-				// In our bodyBackground.html iframe,
-				// display for all div elements is set to "inline",
-				// which causes a problem only in Android 8 Chrome 86.
-				// Ensuring the div is display: block
-				// gets around this issue.
-				trChild.style.display = "block";
 
 				documentElement
 					.appendChild( table )
@@ -16327,9 +16567,7 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 					.appendChild( trChild );
 
 				trStyle = window.getComputedStyle( tr );
-				reliableTrDimensionsVal = ( parseInt( trStyle.height, 10 ) +
-					parseInt( trStyle.borderTopWidth, 10 ) +
-					parseInt( trStyle.borderBottomWidth, 10 ) ) === tr.offsetHeight;
+				reliableTrDimensionsVal = parseInt( trStyle.height ) > 3;
 
 				documentElement.removeChild( table );
 			}
@@ -16793,10 +17031,10 @@ jQuery.each( [ "height", "width" ], function( _i, dimension ) {
 					// Running getBoundingClientRect on a disconnected node
 					// in IE throws an error.
 					( !elem.getClientRects().length || !elem.getBoundingClientRect().width ) ?
-					swap( elem, cssShow, function() {
-						return getWidthOrHeight( elem, dimension, extra );
-					} ) :
-					getWidthOrHeight( elem, dimension, extra );
+						swap( elem, cssShow, function() {
+							return getWidthOrHeight( elem, dimension, extra );
+						} ) :
+						getWidthOrHeight( elem, dimension, extra );
 			}
 		},
 
@@ -16855,7 +17093,7 @@ jQuery.cssHooks.marginLeft = addGetHookIf( support.reliableMarginLeft,
 					swap( elem, { marginLeft: 0 }, function() {
 						return elem.getBoundingClientRect().left;
 					} )
-			) + "px";
+				) + "px";
 		}
 	}
 );
@@ -16994,7 +17232,7 @@ Tween.propHooks = {
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
 			} else if ( tween.elem.nodeType === 1 && (
-				jQuery.cssHooks[ tween.prop ] ||
+					jQuery.cssHooks[ tween.prop ] ||
 					tween.elem.style[ finalPropName( tween.prop ) ] != null ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
@@ -17239,7 +17477,7 @@ function defaultPrefilter( elem, props, opts ) {
 
 			anim.done( function() {
 
-				/* eslint-enable no-loop-func */
+			/* eslint-enable no-loop-func */
 
 				// The final step of a "hide" animation is actually hiding the element
 				if ( !hidden ) {
@@ -17359,7 +17597,7 @@ function Animation( elem, properties, options ) {
 			tweens: [],
 			createTween: function( prop, end ) {
 				var tween = jQuery.Tween( elem, animation.opts, prop, end,
-					animation.opts.specialEasing[ prop ] || animation.opts.easing );
+						animation.opts.specialEasing[ prop ] || animation.opts.easing );
 				animation.tweens.push( tween );
 				return tween;
 			},
@@ -17532,8 +17770,7 @@ jQuery.fn.extend( {
 					anim.stop( true );
 				}
 			};
-
-		doAnimation.finish = doAnimation;
+			doAnimation.finish = doAnimation;
 
 		return empty || optall.queue === false ?
 			this.each( doAnimation ) :
@@ -18173,8 +18410,8 @@ jQuery.fn.extend( {
 				if ( this.setAttribute ) {
 					this.setAttribute( "class",
 						className || value === false ?
-							"" :
-							dataPriv.get( this, "__className__" ) || ""
+						"" :
+						dataPriv.get( this, "__className__" ) || ""
 					);
 				}
 			}
@@ -18189,7 +18426,7 @@ jQuery.fn.extend( {
 		while ( ( elem = this[ i++ ] ) ) {
 			if ( elem.nodeType === 1 &&
 				( " " + stripAndCollapse( getClass( elem ) ) + " " ).indexOf( className ) > -1 ) {
-				return true;
+					return true;
 			}
 		}
 
@@ -18479,7 +18716,9 @@ jQuery.extend( jQuery.event, {
 				special.bindType || type;
 
 			// jQuery handler
-			handle = ( dataPriv.get( cur, "events" ) || Object.create( null ) )[ event.type ] &&
+			handle = (
+					dataPriv.get( cur, "events" ) || Object.create( null )
+				)[ event.type ] &&
 				dataPriv.get( cur, "handle" );
 			if ( handle ) {
 				handle.apply( cur, data );
@@ -18626,7 +18865,7 @@ var rquery = ( /\?/ );
 
 // Cross-browser xml parsing
 jQuery.parseXML = function( data ) {
-	var xml, parserErrorElem;
+	var xml;
 	if ( !data || typeof data !== "string" ) {
 		return null;
 	}
@@ -18635,17 +18874,12 @@ jQuery.parseXML = function( data ) {
 	// IE throws on parseFromString with invalid input.
 	try {
 		xml = ( new window.DOMParser() ).parseFromString( data, "text/xml" );
-	} catch ( e ) {}
+	} catch ( e ) {
+		xml = undefined;
+	}
 
-	parserErrorElem = xml && xml.getElementsByTagName( "parsererror" )[ 0 ];
-	if ( !xml || parserErrorElem ) {
-		jQuery.error( "Invalid XML: " + (
-			parserErrorElem ?
-				jQuery.map( parserErrorElem.childNodes, function( el ) {
-					return el.textContent;
-				} ).join( "\n" ) :
-				data
-		) );
+	if ( !xml || xml.getElementsByTagName( "parsererror" ).length ) {
+		jQuery.error( "Invalid XML: " + data );
 	}
 	return xml;
 };
@@ -18746,14 +18980,16 @@ jQuery.fn.extend( {
 			// Can add propHook for "elements" to filter or add form elements
 			var elements = jQuery.prop( this, "elements" );
 			return elements ? jQuery.makeArray( elements ) : this;
-		} ).filter( function() {
+		} )
+		.filter( function() {
 			var type = this.type;
 
 			// Use .is( ":disabled" ) so that fieldset[disabled] works
 			return this.name && !jQuery( this ).is( ":disabled" ) &&
 				rsubmittable.test( this.nodeName ) && !rsubmitterTypes.test( type ) &&
 				( this.checked || !rcheckableType.test( type ) );
-		} ).map( function( _i, elem ) {
+		} )
+		.map( function( _i, elem ) {
 			var val = jQuery( this ).val();
 
 			if ( val == null ) {
@@ -18806,8 +19042,7 @@ var
 
 	// Anchor tag for parsing the document origin
 	originAnchor = document.createElement( "a" );
-
-originAnchor.href = location.href;
+	originAnchor.href = location.href;
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
 function addToPrefiltersOrTransports( structure ) {
@@ -19188,8 +19423,8 @@ jQuery.extend( {
 			// Context for global events is callbackContext if it is a DOM node or jQuery collection
 			globalEventContext = s.context &&
 				( callbackContext.nodeType || callbackContext.jquery ) ?
-				jQuery( callbackContext ) :
-				jQuery.event,
+					jQuery( callbackContext ) :
+					jQuery.event,
 
 			// Deferreds
 			deferred = jQuery.Deferred(),
@@ -19501,10 +19736,8 @@ jQuery.extend( {
 				response = ajaxHandleResponses( s, jqXHR, responses );
 			}
 
-			// Use a noop converter for missing script but not if jsonp
-			if ( !isSuccess &&
-				jQuery.inArray( "script", s.dataTypes ) > -1 &&
-				jQuery.inArray( "json", s.dataTypes ) < 0 ) {
+			// Use a noop converter for missing script
+			if ( !isSuccess && jQuery.inArray( "script", s.dataTypes ) > -1 ) {
 				s.converters[ "text script" ] = function() {};
 			}
 
@@ -20242,6 +20475,12 @@ jQuery.offset = {
 			options.using.call( elem, props );
 
 		} else {
+			if ( typeof props.top === "number" ) {
+				props.top += "px";
+			}
+			if ( typeof props.left === "number" ) {
+				props.left += "px";
+			}
 			curElem.css( props );
 		}
 	}
@@ -20410,11 +20649,8 @@ jQuery.each( [ "top", "left" ], function( _i, prop ) {
 
 // Create innerHeight, innerWidth, height, width, outerHeight and outerWidth methods
 jQuery.each( { Height: "height", Width: "width" }, function( name, type ) {
-	jQuery.each( {
-		padding: "inner" + name,
-		content: type,
-		"": "outer" + name
-	}, function( defaultExtra, funcName ) {
+	jQuery.each( { padding: "inner" + name, content: type, "": "outer" + name },
+		function( defaultExtra, funcName ) {
 
 		// Margin is only for outerHeight, outerWidth
 		jQuery.fn[ funcName ] = function( margin, value ) {
@@ -20499,8 +20735,7 @@ jQuery.fn.extend( {
 	}
 } );
 
-jQuery.each(
-	( "blur focus focusin focusout resize scroll click dblclick " +
+jQuery.each( ( "blur focus focusin focusout resize scroll click dblclick " +
 	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
 	"change select submit keydown keypress keyup contextmenu" ).split( " " ),
 	function( _i, name ) {
@@ -20511,8 +20746,7 @@ jQuery.each(
 				this.on( name, null, data, fn ) :
 				this.trigger( name );
 		};
-	}
-);
+	} );
 
 
 
@@ -21264,15 +21498,14 @@ var LaravelVuePagination_component = normalizeComponent(
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.21';
+  var VERSION = '4.17.20';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
   /** Error message constants. */
   var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://npms.io/search?q=ponyfill.',
-      FUNC_ERROR_TEXT = 'Expected a function',
-      INVALID_TEMPL_VAR_ERROR_TEXT = 'Invalid `variable` option passed into `_.template`';
+      FUNC_ERROR_TEXT = 'Expected a function';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -21405,11 +21638,10 @@ var LaravelVuePagination_component = normalizeComponent(
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
 
-  /** Used to match leading whitespace. */
-  var reTrimStart = /^\s+/;
-
-  /** Used to match a single whitespace character. */
-  var reWhitespace = /\s/;
+  /** Used to match leading and trailing whitespace. */
+  var reTrim = /^\s+|\s+$/g,
+      reTrimStart = /^\s+/,
+      reTrimEnd = /\s+$/;
 
   /** Used to match wrap detail comments. */
   var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
@@ -21418,18 +21650,6 @@ var LaravelVuePagination_component = normalizeComponent(
 
   /** Used to match words composed of alphanumeric characters. */
   var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
-
-  /**
-   * Used to validate the `validate` option in `_.template` variable.
-   *
-   * Forbids characters which could potentially change the meaning of the function argument definition:
-   * - "()," (modification of function parameters)
-   * - "=" (default value)
-   * - "[]{}" (destructuring of function parameters)
-   * - "/" (beginning of a comment)
-   * - whitespace
-   */
-  var reForbiddenIdentifierChars = /[()=,{}\[\]\/\s]/;
 
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
@@ -22260,19 +22480,6 @@ var LaravelVuePagination_component = normalizeComponent(
   }
 
   /**
-   * The base implementation of `_.trim`.
-   *
-   * @private
-   * @param {string} string The string to trim.
-   * @returns {string} Returns the trimmed string.
-   */
-  function baseTrim(string) {
-    return string
-      ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
-      : string;
-  }
-
-  /**
    * The base implementation of `_.unary` without support for storing metadata.
    *
    * @private
@@ -22603,21 +22810,6 @@ var LaravelVuePagination_component = normalizeComponent(
     return hasUnicode(string)
       ? unicodeToArray(string)
       : asciiToArray(string);
-  }
-
-  /**
-   * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
-   * character of `string`.
-   *
-   * @private
-   * @param {string} string The string to inspect.
-   * @returns {number} Returns the index of the last non-whitespace character.
-   */
-  function trimmedEndIndex(string) {
-    var index = string.length;
-
-    while (index-- && reWhitespace.test(string.charAt(index))) {}
-    return index;
   }
 
   /**
@@ -33788,7 +33980,7 @@ var LaravelVuePagination_component = normalizeComponent(
       if (typeof value != 'string') {
         return value === 0 ? value : +value;
       }
-      value = baseTrim(value);
+      value = value.replace(reTrim, '');
       var isBinary = reIsBinary.test(value);
       return (isBinary || reIsOctal.test(value))
         ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
@@ -36160,12 +36352,6 @@ var LaravelVuePagination_component = normalizeComponent(
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
-      // Throw an error if a forbidden character was found in `variable`, to prevent
-      // potential command injection attacks.
-      else if (reForbiddenIdentifierChars.test(variable)) {
-        throw new Error(INVALID_TEMPL_VAR_ERROR_TEXT);
-      }
-
       // Cleanup code by stripping empty strings.
       source = (isEvaluating ? source.replace(reEmptyStringLeading, '') : source)
         .replace(reEmptyStringMiddle, '$1')
@@ -36279,7 +36465,7 @@ var LaravelVuePagination_component = normalizeComponent(
     function trim(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return baseTrim(string);
+        return string.replace(reTrim, '');
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -36314,7 +36500,7 @@ var LaravelVuePagination_component = normalizeComponent(
     function trimEnd(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.slice(0, trimmedEndIndex(string) + 1);
+        return string.replace(reTrimEnd, '');
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -47617,10 +47803,10 @@ var render = function() {
                   _c("strong", [_vm._v("اسم الكورس")]),
                   _vm._v(" "),
                   _vm.serviceObj == {}
-                    ? _c("div", [_c("p", [_vm._v(" aaaa")])])
+                    ? _c("div", [_c("p", [_vm._v("aaaa")])])
                     : _vm.serviceObj !== {}
                     ? _c("div", [
-                        _c("p", [_vm._v(" " + _vm._s(_vm.course_Obj.name_ar))])
+                        _c("p", [_vm._v(_vm._s(_vm.course_Obj.name_ar))])
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -47649,16 +47835,16 @@ var render = function() {
                   _vm.residence_Obj
                     ? _c("p", [
                         _vm._v(
-                          " \n                         العنوان : " +
+                          "\n                            العنوان : " +
                             _vm._s(_vm.residence_Obj.name_ar) +
-                            "  &&\n                        السعر   :   " +
+                            " && السعر : " +
                             _vm._s(_vm.residence_Obj.price) +
-                            "\n                          \n                          "
+                            "\n                        "
                         )
                       ])
                     : _c("p", [
                         _vm._v(
-                          "\n                              لا يوجد سكن\n                          "
+                          "\n                            لا يوجد سكن\n                        "
                         )
                       ]),
                   _vm._v(" "),
@@ -47671,16 +47857,16 @@ var render = function() {
                   _vm.airport_Obj
                     ? _c("p", [
                         _vm._v(
-                          " \n                         المطار : " +
+                          "\n                            المطار : " +
                             _vm._s(_vm.airport_Obj.name_ar) +
-                            "  &&\n                        السعر   :   " +
+                            " && السعر : " +
                             _vm._s(_vm.airport_Obj.price) +
-                            "\n                          \n                          "
+                            "\n                        "
                         )
                       ])
                     : _c("p", [
                         _vm._v(
-                          "\n                              لا يوجد مطار\n                          "
+                          "\n                            لا يوجد مطار\n                        "
                         )
                       ]),
                   _vm._v(" "),
@@ -47693,14 +47879,14 @@ var render = function() {
                   _vm.insurance_Obj
                     ? _c("p", [
                         _vm._v(
-                          " \n                        السعر   :   " +
+                          "\n                            السعر : " +
                             _vm._s(_vm.insurance_Obj.price) +
-                            "\n                          \n                          "
+                            "\n                        "
                         )
                       ])
                     : _c("p", [
                         _vm._v(
-                          "\n                              لا يوجد تامين\n                          "
+                          "\n                            لا يوجد تامين\n                        "
                         )
                       ]),
                   _vm._v(" "),
@@ -47954,7 +48140,7 @@ var render = function() {
                                 _c(
                                   "option",
                                   { attrs: { value: "حصل علي قبول" } },
-                                  [_vm._v("  حصل علي قبول ")]
+                                  [_vm._v(" حصل علي قبول ")]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -47992,7 +48178,7 @@ var render = function() {
                                     attrs: {
                                       href:
                                         _vm.dahsboard_url +
-                                        "/courses/" +
+                                        "/student-requests/" +
                                         request.id +
                                         "/edit"
                                     }
@@ -48016,7 +48202,7 @@ var render = function() {
                                     attrs: {
                                       action:
                                         _vm.dahsboard_url +
-                                        "/courses/" +
+                                        "/student-requests/" +
                                         request.id,
                                       method: "POST"
                                     }
@@ -48075,7 +48261,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                   Previos\n                               "
+                        "\n                                Previos\n                            "
                       )
                     ]
                   ),
@@ -48105,7 +48291,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                   Next\n                               "
+                        "\n                                Next\n                            "
                       )
                     ]
                   )
@@ -48304,13 +48490,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكورس ")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكورس")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("تفاصيل الطلب")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("رسالة المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v(" ملاحظات")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحالة")]),
         _vm._v(" "),
@@ -48318,6 +48504,653 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("تحكم")])
       ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=template&id=31b65d62&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=template&id=31b65d62& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4 p-3" }, [
+        _c("div", { staticClass: "row mb-3" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.student_name))])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.institute_name))])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [
+              _vm._v(_vm._s(_vm.course_name) + " "),
+              _c("span", { staticClass: "text-primary" }, [
+                _vm._v(
+                  "(" +
+                    _vm._s(
+                      Math.round(
+                        _vm.course_price * _vm.weeks * (1 - _vm.course_discount)
+                      )
+                    ) +
+                    " ريال سعودي)"
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.totalPrice()) + " ريال سعودي")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.paid_price) + " ريال سعودي")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [
+              _vm._v(_vm._s(_vm.totalPrice() - _vm.paid_price) + " ريال سعودي")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            staticClass: "form",
+            attrs: {
+              method: "post",
+              action: _vm.student_requests_url + "/" + _vm.student_request.id
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf_token }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_method", value: "put" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "price_per_week" },
+              domProps: { value: _vm.course_price * (1 - _vm.course_discount) }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "insurance_price" },
+              domProps: { value: _vm.insurance_price }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "course_discount" },
+              domProps: { value: _vm.course_discount }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "total_price" },
+              domProps: { value: _vm.totalPrice() }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v("الحاله")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control text-left",
+                        attrs: { name: "status" }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("اختر الحاله")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "جديد" },
+                            domProps: {
+                              selected: _vm.status == "جديد" ? true : false
+                            }
+                          },
+                          [_vm._v(" جديد")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "حصل علي قبول" },
+                            domProps: {
+                              selected:
+                                _vm.status == "حصل علي قبول" ? true : false
+                            }
+                          },
+                          [_vm._v(" حصل علي قبول ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "بداء الدراسة" },
+                            domProps: {
+                              selected:
+                                _vm.status == "بداء الدراسة" ? true : false
+                            }
+                          },
+                          [_vm._v(" بداء الدراسة")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "مرفوض" },
+                            domProps: {
+                              selected: _vm.status == "مرفوض" ? true : false
+                            }
+                          },
+                          [_vm._v(" مرفوض")]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" عدد الاسابيع ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.weeks,
+                          expression: "weeks"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        id: "projectinput1",
+                        min: "1",
+                        placeholder: "ادخل  عدد الاسابيع",
+                        name: "weeks"
+                      },
+                      domProps: { value: _vm.weeks },
+                      on: {
+                        change: function($event) {
+                          _vm.get_course_price()
+                          _vm.get_insurance_price()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.weeks = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v(
+                        " السكن (" +
+                          _vm._s(_vm.chosin_residence.price * _vm.weeks) +
+                          " ريال سعودي)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.chosin_residence,
+                            expression: "chosin_residence"
+                          }
+                        ],
+                        staticClass: "form-control text-left",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.chosin_residence = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { domProps: { value: { price: 0 } } }, [
+                          _vm._v("لا اريد سكن ")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.residences, function(residence_obj) {
+                          return _c(
+                            "option",
+                            {
+                              key: residence_obj.id,
+                              domProps: {
+                                selected:
+                                  residence_obj.id == _vm.chosin_residence.id
+                                    ? true
+                                    : false,
+                                value: residence_obj
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(residence_obj.price) +
+                                  " ريال - " +
+                                  _vm._s(residence_obj.name_ar) +
+                                  " "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "residence" },
+                      domProps: { value: JSON.stringify(_vm.chosin_residence) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v(
+                        " الاستقبال (" +
+                          _vm._s(_vm.chosin_airport.price) +
+                          " ريال سعودي)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.chosin_airport,
+                            expression: "chosin_airport"
+                          }
+                        ],
+                        staticClass: "form-control text-left",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.chosin_airport = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { domProps: { value: { price: 0 } } }, [
+                          _vm._v("لا اريد استقبال ")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.airports, function(airport_obj) {
+                          return _c(
+                            "option",
+                            {
+                              key: airport_obj.id,
+                              domProps: {
+                                selected:
+                                  airport_obj.id == _vm.chosin_airport.id
+                                    ? true
+                                    : false,
+                                value: airport_obj
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(airport_obj.price) +
+                                  " ريال - " +
+                                  _vm._s(airport_obj.name_ar) +
+                                  " "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "airport" },
+                      domProps: { value: JSON.stringify(_vm.chosin_airport) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" تاريخ البداية ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.started_date,
+                          expression: "started_date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "projectinput1",
+                        min: "1",
+                        name: "started_date"
+                      },
+                      domProps: { value: _vm.started_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.started_date = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v(" المدفوع ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.paid_price,
+                          expression: "paid_price"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        placeholder: "المدفوع",
+                        name: "paid_price"
+                      },
+                      domProps: { value: _vm.paid_price },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.paid_price = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput4" } }, [
+                      _vm._v(
+                        " اريد تامين (" +
+                          _vm._s(_vm.insurance_price * _vm.weeks) +
+                          " ريال سعودي)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.insurance_price_checker,
+                          expression: "insurance_price_checker"
+                        }
+                      ],
+                      staticClass: "switchery",
+                      attrs: {
+                        type: "checkbox",
+                        id: "switchery",
+                        name: "insurance_checker"
+                      },
+                      domProps: {
+                        value: _vm.insurance_val,
+                        checked: Array.isArray(_vm.insurance_price_checker)
+                          ? _vm._i(
+                              _vm.insurance_price_checker,
+                              _vm.insurance_val
+                            ) > -1
+                          : _vm.insurance_price_checker
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.insurance_price_checker,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = _vm.insurance_val,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.insurance_price_checker = $$a.concat([
+                                  $$v
+                                ]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.insurance_price_checker = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.insurance_price_checker = $$c
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput3" } }, [
+                      _vm._v("رساله المعهد ")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "ckeditor",
+                        rows: "20",
+                        placeholder: "  رساله المعهد ",
+                        name: "institute_message"
+                      },
+                      domProps: { innerHTML: _vm._s(_vm.institute_message) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput3" } }, [
+                      _vm._v("ملاحظات ")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        rows: "10",
+                        placeholder: "  ملاحظات ",
+                        name: "note"
+                      },
+                      domProps: { value: _vm.notes }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(6)
+            ])
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("اسم الطالب :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("اسم المعهد :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("اسم الدورة :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("السعر الكلي :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("المدفوع :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("المتبقي :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-actions center" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary w-100 test-btn",
+          attrs: { type: "submit" }
+        },
+        [_c("i", { staticClass: "la la-check-square-o" }), _vm._v(" حفظ")]
+      )
     ])
   }
 ]
@@ -48496,7 +49329,7 @@ var render = function() {
                 _vm._s(
                   Math.round(_vm.price_per_week * (1 - _vm.course.discount))
                 ) +
-                " دينار سعودي / الاسبوع"
+                " ريال سعودي / الاسبوع"
             )
           ]),
           _vm._v(" "),
@@ -48516,7 +49349,7 @@ var render = function() {
                     _vm.price_per_week * _vm.weeks * (1 - _vm.course.discount)
                   )
                 ) +
-                " دينار سعودي"
+                " ريال سعودي"
             )
           ]),
           _vm._v(" "),
@@ -48538,7 +49371,7 @@ var render = function() {
               _c("span", { staticClass: "text-main-color" }, [
                 _vm._v(
                   _vm._s(_vm.chosin_residence.price * _vm.weeks) +
-                    " دينار سعودي "
+                    " ريال سعودي "
                 )
               ]),
               _vm._v(" "),
@@ -48559,7 +49392,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "text-main-color" }, [
-                _vm._v(_vm._s(_vm.chosin_airport.price) + " دينار سعودي ")
+                _vm._v(_vm._s(_vm.chosin_airport.price) + " ريال سعودي ")
               ]),
               _vm._v(" "),
               _c("hr")
@@ -48571,9 +49404,7 @@ var render = function() {
               _vm._m(1),
               _vm._v(" "),
               _c("span", { staticClass: "text-main-color" }, [
-                _vm._v(
-                  _vm._s(_vm.insurance_price * _vm.weeks) + " دينار سعودي "
-                )
+                _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ريال سعودي ")
               ]),
               _vm._v(" "),
               _c("hr")
@@ -48584,7 +49415,7 @@ var render = function() {
           _vm._m(2),
           _vm._v(" "),
           _c("span", { staticClass: "text-main-color" }, [
-            _vm._v(_vm._s(_vm.total_price()) + " دينار سعودي ")
+            _vm._v(_vm._s(_vm.total_price()) + " ريال سعودي ")
           ])
         ])
       ])
@@ -48826,7 +49657,7 @@ var render = function() {
                     _vm._v(
                       "نعم (" +
                         _vm._s(_vm.insurance_price * _vm.weeks) +
-                        " دينار)"
+                        " ريال)"
                     )
                   ])
                 ]
@@ -61786,6 +62617,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/student/StudentComponent.vue */ "./resources/js/components/student/StudentComponent.vue");
 /* harmony import */ var _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/student/SuccesStoryComponent.vue */ "./resources/js/components/student/SuccesStoryComponent.vue");
 /* harmony import */ var _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestComponent.vue */ "./resources/js/components/studentRequest/StudentRequestComponent.vue");
+/* harmony import */ var _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestEditComponent.vue */ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -61804,6 +62636,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // Vue.use(require('vue-resource'));
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
+
 
 
 
@@ -61848,7 +62681,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
     StudentComponent: _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
     SuccesStoryComponent: _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
-    StudentRequestComponent: _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"]
+    StudentRequestComponent: _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"],
+    StudentRequestEditComponent: _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
   }
 });
 
@@ -63067,6 +63901,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestComponent_vue_vue_type_template_id_79d92139___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestComponent_vue_vue_type_template_id_79d92139___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/studentRequest/StudentRequestEditComponent.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _StudentRequestEditComponent_vue_vue_type_template_id_31b65d62___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./StudentRequestEditComponent.vue?vue&type=template&id=31b65d62& */ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=template&id=31b65d62&");
+/* harmony import */ var _StudentRequestEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./StudentRequestEditComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _StudentRequestEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _StudentRequestEditComponent_vue_vue_type_template_id_31b65d62___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _StudentRequestEditComponent_vue_vue_type_template_id_31b65d62___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/studentRequest/StudentRequestEditComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentRequestEditComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestEditComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=template&id=31b65d62&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=template&id=31b65d62& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestEditComponent_vue_vue_type_template_id_31b65d62___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./StudentRequestEditComponent.vue?vue&type=template&id=31b65d62& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/studentRequest/StudentRequestEditComponent.vue?vue&type=template&id=31b65d62&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestEditComponent_vue_vue_type_template_id_31b65d62___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_StudentRequestEditComponent_vue_vue_type_template_id_31b65d62___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

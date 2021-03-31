@@ -17,10 +17,11 @@ class AirportsController extends Controller
     {
         $department_name = 'services';
         $page_name = 'airports';
+        $page_title = 'المطارات';
         $useVue=true;
         $institutes = institute::get();
         
-        return view("admin.airports.index", compact('department_name', 'page_name','useVue','institutes'));
+        return view("admin.airports.index", compact('department_name', 'page_name', 'page_title','useVue','institutes'));
    
     }
     public function getAirports(){
@@ -39,7 +40,9 @@ class AirportsController extends Controller
         // 
         $department_name = 'services';
         $page_name = 'add-airport';
-        return view("admin.airports.create", compact('department_name', 'page_name', 'Institutes'));
+        $page_title = 'المطارات';
+
+        return view("admin.airports.create", compact('department_name', 'page_name','page_title', 'Institutes'));
     }
 
     /**
@@ -90,7 +93,8 @@ class AirportsController extends Controller
         $Institutes = institute::get();
         $department_name = 'services';
         $page_name = 'airports';
-        return view("admin.airports.edit", compact('department_name', 'page_name', 'Institutes','airport'));
+        $page_title = 'المطارات';
+        return view("admin.airports.edit", compact('department_name', 'page_name', 'Institutes','page_title','airport'));
     }
     /**
      * Update the specified resource in storage.

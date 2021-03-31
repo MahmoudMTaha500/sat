@@ -110,6 +110,9 @@ Route::resource('residences','ResidencesController');
 /**********************************   ************************************************************************************** */
 // Student Route  
 Route::get('/student-requests/getStudentRequests','StudentRequestsController@getStudentsRequest');   
+Route::get('/student-requests/getprice','StudentRequestsController@get_price_per_week');   
+Route::get('/student-requests/getinsurance','StudentRequestsController@get_price_insurance');   
+Route::get('/student-requests/calc_total','StudentRequestsController@calc_total');   
 Route::post('/student-requests/update-status','StudentRequestsController@updateStatus');   
 
 Route::resource('student-requests', "StudentRequestsController");

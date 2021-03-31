@@ -26,8 +26,9 @@ class InstituteController extends Controller
                 return response()->json(['institutes' => $institutes, 'countries' => $countries]);
             }
         }
-
-        return view('admin.institutes.index', ['institutes' => $institutes, "useVue" => $useVue, 'countries' => $countries]);
+        $page_title = 'Institutes';
+ 
+        return view('admin.institutes.index', ['institutes' => $institutes, "useVue" => $useVue, 'countries' => $countries,'page_title'=>$page_title]);
     }
     /************************************************************** */
     public function getInstitues(Request $request)

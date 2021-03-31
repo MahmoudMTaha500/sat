@@ -12,7 +12,9 @@ class countryController extends Controller
     public function index(Request $request)
     {
         $country = Country::get();
-        return view("admin.countries.index", ['country' => $country]);
+        $page_title = 'Country';
+
+        return view("admin.countries.index", ['country' => $country,$page_title]);
     }
 
     public function show(Request $request)
@@ -22,8 +24,9 @@ class countryController extends Controller
 
     public function create(Request $request)
     {
-
-        return view("admin.countries.create");
+        $page_title = 'Country';
+     
+        return view("admin.countries.create" ,compact('page_title'));
 
     }
     public function store(Request $request)
@@ -47,7 +50,9 @@ class countryController extends Controller
     {
 
         $country = Country::find($id);
-        return view("admin.countries.edit", ['country' => $country]);
+        $page_title = 'Country';
+
+        return view("admin.countries.edit", ['country' => $country,$page_title]);
 
     }
 
