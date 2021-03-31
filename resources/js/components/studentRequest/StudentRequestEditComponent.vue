@@ -109,7 +109,7 @@
             getPrice: function(){
 
 
-        this.get_courses_price();
+        // this.get_courses_price();
         // if(this.discount){
         // var disc = this.total_price_all  * this.discount;
         // this.total_price_all  = this.total_price_all  - disc;

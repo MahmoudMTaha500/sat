@@ -20,8 +20,9 @@ class ResidencesController extends Controller
         $page_name = 'residences';
         $useVue=true;
         $institutes = institute::get();
+        $page_title = 'السكن';
         
-        return view("admin.residences.index", compact('department_name', 'page_name','useVue','institutes'));
+        return view("admin.residences.index", compact('department_name', 'page_name','useVue','institutes','page_title'));
     }
 
 

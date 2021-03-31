@@ -20,7 +20,7 @@ class BlogController extends Controller
     {
         $department_name = 'blogs';
         $page_name = 'blogs';
-        $page_title = 'blogs';
+        $page_title = 'المقالات';
         $useVue = true;
         $users = User::get();
         $categories = BlogCategory::get();
@@ -41,7 +41,7 @@ class BlogController extends Controller
         $useVue = true;
         $department_name = 'blogs';
         $page_name = 'add-blog';
-        $page_title = 'blogs';
+        $page_title = 'المقالات';
 
         return view("admin.blogs.create", compact('countries', 'department_name', 'page_name', 'useVue', 'Institutes', 'BlogCategories' ,'page_title'));
     }
@@ -88,7 +88,7 @@ class BlogController extends Controller
 
         $department_name = 'blogs';
         $page_name = 'edit-blog';
-        $page_title = 'blogs';
+        $page_title = 'المقالات';
         return view("admin.blogs.edit", compact('useVue', 'blog', 'department_name', 'page_name', 'Institutes', 'BlogCategories', 'countries' ,'page_title'));
     }
     /***************************************************************/

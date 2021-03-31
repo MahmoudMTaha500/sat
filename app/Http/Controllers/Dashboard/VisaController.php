@@ -18,7 +18,9 @@ class VisaController extends Controller
         $visas = Visa::get();
        $department_name='visa';
         $page_name='visa';
-        return view('admin.visas.index' , compact('department_name' , 'page_name','visas'));
+        $page_title = ' التاشيرات';
+
+        return view('admin.visas.index' , compact('department_name' , 'page_name','visas','page_title'));
     }
 
  
@@ -28,7 +30,9 @@ class VisaController extends Controller
         $visaCategory = VisaCategory::get();
         $department_name='visa';
         $page_name='add-visa';
-        return view('admin.visas.create' , compact('department_name' , 'page_name','countries','visaCategory'));
+        $page_title = ' التاشيرات';
+
+        return view('admin.visas.create' , compact('department_name' , 'page_name','countries','visaCategory','page_title'));
     }
 
     public function store(Request $request)
@@ -73,7 +77,9 @@ class VisaController extends Controller
     {
         $department_name='visa';
         $page_name='visa';
-        return view('admin.visas.index' , compact('department_name' , 'page_name'));
+        $page_title = ' التاشيرات';
+
+        return view('admin.visas.index' , compact('department_name' , 'page_name','page_title'));
     }
 
 
@@ -83,11 +89,12 @@ class VisaController extends Controller
         $countries = Country::get();
         $visaCategory = VisaCategory::get();
         $VisaQuestion = VisaQuestion::where(['visa_id'=>$visa->id])->with('question_choices')->get();
+        $page_title = ' التاشيرات';
     
 
          $department_name='visa';
         $page_name='edit-visa';
-        return view('admin.visas.edit' , compact('department_name' , 'page_name','visa','countries','visaCategory','VisaQuestion'));
+        return view('admin.visas.edit' , compact('department_name' , 'page_name','visa','countries','visaCategory','VisaQuestion' ,'page_title'));
     }
 
 

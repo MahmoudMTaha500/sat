@@ -26,9 +26,11 @@ class StudentRequestsController extends Controller
         $countries = Country::get();
         $department_name = 'student-request';
         $page_name = 'student-request';
+        $page_title = 'الطلابات';
+
         $useVue = true;
 
-        return view("admin.students_requests.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'countries'));
+        return view("admin.students_requests.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'countries','page_title'));
 
     }
 
@@ -91,11 +93,13 @@ public function updateStatus(Request $request){
     $request_student = StudentRequest::with('student','course.institute.residence','course.institute.insurancePrice','course','airport','residence','insurance','course.coursesPrice')->find($id);
     $department_name = 'student-request';
     $page_name = 'student-request';
+    $page_title = 'الطلابات';
+    
     $useVue = true;
     $residence_obj = $request_student->residence;
     $airport_obj = $request_student->airport;
     $insurance_obj = $request_student->insurance;
-        return view("admin.students_requests.edit", compact('useVue', 'department_name', 'page_name', "request_student",'residence_obj','airport_obj','insurance_obj'));
+        return view("admin.students_requests.edit", compact('useVue', 'department_name', 'page_name', "request_student",'residence_obj','airport_obj','insurance_obj','page_title'));
            
 
     }

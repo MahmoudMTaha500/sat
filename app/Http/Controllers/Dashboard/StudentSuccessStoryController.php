@@ -16,9 +16,10 @@ class StudentSuccessStoryController extends Controller
     {
          $department_name = 'students';
         $page_name = 'sucess-story';
+        $page_title = 'قصص النجاح';
         $useVue = true;
            
-        return view('admin.students.success_story',compact('department_name','page_name','useVue'));
+        return view('admin.students.success_story',compact('department_name','page_name','useVue','page_title'));
         
     }
 
@@ -84,7 +85,9 @@ class StudentSuccessStoryController extends Controller
          $department_name = 'students';
          $page_name = 'sucess-story';
          $useVue = true;
-         return view('admin.students.edit_success',compact('department_name','page_name','useVue','story'));
+        $page_title = 'قصص النجاح';
+
+         return view('admin.students.edit_success',compact('department_name','page_name','useVue','story','page_title'));
     }
 
     /**

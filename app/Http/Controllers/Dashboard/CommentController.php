@@ -20,7 +20,7 @@ class CommentController extends Controller
            
         $department_name = 'comment';
         $page_name = 'comment';
-        $page_title = 'comment';
+        $page_title = 'التعليقات';
         $useVue = true;
 
   return  view("admin.institutes.comments.index", compact( 'useVue','comments','department_name','page_name','page_title'));
@@ -49,7 +49,7 @@ class CommentController extends Controller
         $department_name = 'comment';
         $page_name = 'blog-comment';
         $useVue = true;
-        $page_title = 'comment';
+        $page_title = 'التعليقات';
 
   return  view("admin.blogs.comments", compact( 'useVue','comments','department_name','page_name','page_title'));
     }
@@ -109,7 +109,7 @@ class CommentController extends Controller
               $comment = Comment::find($id);
               $department_name = 'comment';
               $page_name = 'comment';
-              $page_title = 'comment';
+              $page_title = 'التعليقات';
       
         return  view("admin.institutes.comments.edit", compact('comment','department_name','page_name','page_title'));
               
