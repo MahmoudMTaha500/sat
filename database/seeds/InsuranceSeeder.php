@@ -12,12 +12,48 @@ class InsuranceSeeder extends Seeder
      */
     public function run()
     {
+
         for ($x = 1; $x <= 30; $x++) {
-            $weeks = rand(1,30);
+            $weeks = 7;
             Insurances::create([
                 "weeks" => $weeks,
                 "institute_id" => $x,
-                "price" => $weeks*100,
+                "price" => 240,
+            ]);
+        }
+
+        for ($x = 1; $x <= 30; $x++) {
+            $weeks = 12;
+            Insurances::create([
+                "weeks" => $weeks,
+                "institute_id" => $x,
+                "price" => 200,
+            ]);
+        }
+        for ($x = 1; $x <= 30; $x++) {
+            $weeks = 18;
+            Insurances::create([
+                "weeks" => $weeks,
+                "institute_id" => $x,
+                "price" => 180,
+            ]);
+        }
+
+        for ($x = 1; $x <= 30; $x++) {
+            $weeks = 23;
+            Insurances::create([
+                "weeks" => $weeks,
+                "institute_id" => $x,
+                "price" => 170,
+            ]);
+        }
+
+        for ($x = 1; $x <= 30; $x++) {
+            $weeks = 26;
+            Insurances::create([
+                "weeks" => $weeks,
+                "institute_id" => $x,
+                "price" => 150,
             ]);
         }
     }

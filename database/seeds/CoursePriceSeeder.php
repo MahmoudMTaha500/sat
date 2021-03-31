@@ -11,14 +11,33 @@ class CoursePriceSeeder extends Seeder
      */
     public function run()
     {
-        $course_id = 1;
-        for ($x = 1; $x <= 200; $x++) {
+        for ($x = 1; $x <= 90; $x++) {
             CoursePrice::create([
-                "weeks" => rand(1,10),
-                "price" => 2000,
-                "course_id" => $course_id,
+                "weeks" => 7,
+                "price" => 550,
+                "course_id" => $x,
             ]);
-            if($course_id !=90){$course_id++;}else{$course_id=1;}
+        }
+        for ($x = 1; $x <= 90; $x++) {
+            CoursePrice::create([
+                "weeks" => 12,
+                "price" => 480,
+                "course_id" => $x,
+            ]);
+        }
+        for ($x = 1; $x <= 90; $x++) {
+            CoursePrice::create([
+                "weeks" => 20,
+                "price" => 300,
+                "course_id" => $x,
+            ]);
+        }
+        for ($x = 1; $x <= 90; $x++) {
+            CoursePrice::create([
+                "weeks" => 29,
+                "price" => 280,
+                "course_id" => $x,
+            ]);
         }
     }
 }

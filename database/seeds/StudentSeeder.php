@@ -23,8 +23,8 @@ class StudentSeeder extends Seeder
                 "email" => 'student@app.com'.$x,
                 "address" => 'عنوان الطالب , دبي , الامارات'.$x,
                 "nationality" => 'سعودي '.$x,
-                "country_id" => $country_id,
-                "city_id" => $city_id,
+                "country" => 'دولة'.$x,
+                "city" => 'مدينة'.$x,
                 "password" => bcrypt('123123')
             ]);
         }

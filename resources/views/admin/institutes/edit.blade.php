@@ -119,7 +119,7 @@
                                             <div class="col-md-6">
                                                 <show-images-component
                                                 :image_name="{{json_encode("logo")}}"
-                                                :image_label="{{json_encode("اختر الصورة")}}"
+                                                :image_label="{{json_encode("اختر لوجو المعهد")}}"
                                                 :old="{{json_encode(old('logo'))}}"
                                                 :path_image_edit="{{ json_encode( asset($institute->logo) )}}"
                                                 ></show-images-component>

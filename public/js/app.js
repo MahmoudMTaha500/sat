@@ -4547,26 +4547,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken"],
@@ -4591,7 +4571,7 @@ __webpack_require__.r(__webpack_exports__);
       institute_name: "",
       institute_message: "",
       editor: _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default.a,
-      editorData: '<p>Content of the editor.</p>',
+      editorData: "<p>Content of the editor.</p>",
       editorConfig: {// The configuration of the editor.
       },
       notes: ""
@@ -4662,24 +4642,24 @@ __webpack_require__.r(__webpack_exports__);
     },
     modelService: function modelService(obj) {
       this.serviceObj = obj; //  console.log(this.serviceObj);
-      //    $('#institute_email_modal').modal('show'); 
+      //    $('#institute_email_modal').modal('show');
 
       this.course_Obj = this.serviceObj.course;
       this.airport_Obj = this.serviceObj.airport;
       this.insurance_Obj = this.serviceObj.insurance;
       this.residence_Obj = this.serviceObj.residence;
       this.institute_name = this.course_Obj.institute.name_ar;
-      $('#request_details_modal').modal('show');
+      $("#request_details_modal").modal("show");
     },
     modelmessageInstitute: function modelmessageInstitute(obj) {
       this.institute_message = obj.institute_message;
       this.editorData = obj.institute_message; //  console.log(this.institute_message);
 
-      $('#institute_email_modal').modal('show');
+      $("#institute_email_modal").modal("show");
     },
     notes_request: function notes_request(obj) {
       this.notes = obj.note;
-      $('#notes').modal('show');
+      $("#notes").modal("show");
     }
   },
   beforeMount: function beforeMount() {
@@ -4698,8 +4678,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-build-classic */ "./node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_build_classic__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -4771,101 +4749,185 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["student_requests_url", "dahsboard_url", 'request_student2', 'residence_obj', 'airport_obj2', 'courses_price'],
+  props: ["csrf_token", "get_course_price_url", "get_insurance_price_url", "student_request", "student_requests_url"],
   data: function data() {
     return {
-      studentsRequests: {},
-      url: this.student_request_url,
-      name_ar: "",
-      request_id: 0,
-      request_student: this.request_student2,
-      residence_obj1: this.residence_obj,
-      residenece_model: 0,
-      airport_model: 0,
-      weeks: this.request_student2.weeks,
-      id: this.request_student2.id,
-      total_price: 0,
-      total_price_all: this.request_student2.total_price,
-      insurance: '',
-      insurance_val: 0,
-      institute_id: this.request_student2.course.institute_id,
-      total_insurance: 0,
-      price_per_week: this.request_student2.price_per_week,
-      discount: this.request_student2.course.discount
+      student_name: this.student_request.student.name,
+      institute_name: this.student_request.course.institute.name_ar,
+      course_name: this.student_request.course.name_ar,
+      course_discount: this.student_request.course.discount,
+      total_price: this.student_request.total_price,
+      paid_price: this.student_request.paid_price,
+      remaining_price: this.student_request.remaining_price,
+      status: this.student_request.status,
+      weeks: this.student_request.weeks,
+      notes: this.student_request.note,
+      institute_message: this.student_request.institute_message,
+      started_date: this.student_request.started_date,
+      residences: this.student_request.course.institute.residence,
+      chosin_residence: '',
+      airports: this.student_request.course.institute.airport,
+      chosin_airport: '',
+      insurance_price_checker: this.student_request.insurance_price == 0 ? false : true,
+      insurance_price: '',
+      course_price: ''
     };
   },
   methods: {
-    get_courses_price: function get_courses_price() {
+    set_chosin_residence: function set_chosin_residence() {
       var _this = this;
 
-      axios.get(this.student_requests_url + '/getprice', {
-        params: {
-          'weeks': this.weeks,
-          'id': this.id
+      this.residences.forEach(function (res) {
+        if (res.id == _this.student_request.residence_id) {
+          _this.chosin_residence = res;
         }
-      }).then(function (response) {
-        return _this.total_price_all = response.data.total_price;
       });
     },
-    get_insuranec_price: function get_insuranec_price() {
+    set_chosin_airport: function set_chosin_airport() {
       var _this2 = this;
 
-      axios.get(this.student_requests_url + '/getinsurance', {
-        params: {
-          'weeks': this.weeks,
-          'id': this.institute_id
+      this.airports.forEach(function (airp) {
+        if (airp.id == _this2.student_request.airport_id) {
+          _this2.chosin_airport = airp;
         }
-      }).then(function (response) {
-        return _this2.total_insurance = response.data.total_price;
       });
     },
-    getrequest_id: function getrequest_id(id) {
-      return this.request_id = id;
-    },
-    getPrice: function getPrice() {
+    get_insurance_price: function get_insurance_price() {
       var _this3 = this;
 
-      this.get_courses_price(); // if(this.discount){
-      // var disc = this.total_price_all  * this.discount;
-      // this.total_price_all  = this.total_price_all  - disc;
-      // // alert( this.total_price_all);
-      // }   
-      //  this.total_price_all =  this.total_price_all * this.weeks;
-
-      axios.get(this.student_requests_url + '/calc_total', {
+      axios.get(this.get_insurance_price_url, {
         params: {
-          'price_weeks': this.total_price_all,
-          "residenece": this.residenece_model,
-          "airport": this.airport_model,
-          "insurance": this.total_insurance,
-          "discount": this.discount,
-          'id': this.id
+          course_id: this.student_request.course_id,
+          weeks: this.weeks
         }
       }).then(function (response) {
-        return _this3.total_price_all2 = response.data.total_price;
-      }); //           this.total_price_all =   parseInt(this.total_price_all );
-      //         if(this.residenece_model){  
-      //              this.total_price_all +=  parseInt(this.residenece_model);
-      //               }
-      //   if(this.airport_model){
-      //        this.total_price_all +=    parseInt(this.airport_model);
-      //         }
-      //                  alert( this.total_price_all);
-      // die()
-      //        if(this.insurance ){
-      //                 axios.get(this.student_requests_url+'/getinsurance' , {params:{ 'weeks':this.weeks ,'id':this.institute_id}  })
-      //                 .then((response) => {
-      //                     this.total_insurance = response.data.total_price;
-      //                    var priceInsurance =this.total_insurance;
-      //             this.total_price_all +=    priceInsurance  ;
-      //                 });
-      //        } 
-      //   alert( this.total_price_all);
+        return _this3.insurance_price = response.data.insurance_price;
+      });
+    },
+    get_course_price: function get_course_price() {
+      var _this4 = this;
+
+      axios.get(this.get_course_price_url, {
+        params: {
+          course_id: this.student_request.course_id,
+          weeks: this.weeks
+        }
+      }).then(function (response) {
+        return _this4.course_price = response.data.price_per_week;
+      });
+    },
+    totalPrice: function totalPrice() {
+      var total_price = this.course_price * (1 - this.course_discount) * this.weeks;
+
+      if (this.insurance_price_checker) {
+        total_price += this.insurance_price * this.weeks;
+      }
+
+      if (!isNaN(this.chosin_airport.price)) {
+        total_price += this.chosin_airport.price;
+      }
+
+      if (!isNaN(this.chosin_residence.price)) {
+        total_price += this.chosin_residence.price * this.weeks;
+      }
+
+      return total_price;
     }
   },
-  beforeMount: function beforeMount() {}
+  beforeMount: function beforeMount() {
+    this.set_chosin_residence();
+    this.set_chosin_airport();
+    this.get_insurance_price();
+    this.get_course_price();
+  }
 });
 
 /***/ }),
@@ -5067,8 +5129,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
+  props: ["csrf_token", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
   data: function data() {
     return {
       course: JSON.parse(this.course_obj),
@@ -5107,6 +5176,19 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this2.insurance_price = response.data.insurance_price;
       });
+    },
+    total_price: function total_price() {
+      var totalPrice = (this.insurance_price + this.price_per_week * (1 - this.course.discount)) * this.weeks;
+
+      if (!isNaN(this.chosin_airport.price)) {
+        totalPrice += this.chosin_airport.price;
+      }
+
+      if (!isNaN(this.chosin_residence.price)) {
+        totalPrice += this.chosin_residence.price * this.weeks;
+      }
+
+      return totalPrice;
     }
   },
   beforeMount: function beforeMount() {
@@ -47721,10 +47803,10 @@ var render = function() {
                   _c("strong", [_vm._v("اسم الكورس")]),
                   _vm._v(" "),
                   _vm.serviceObj == {}
-                    ? _c("div", [_c("p", [_vm._v(" aaaa")])])
+                    ? _c("div", [_c("p", [_vm._v("aaaa")])])
                     : _vm.serviceObj !== {}
                     ? _c("div", [
-                        _c("p", [_vm._v(" " + _vm._s(_vm.course_Obj.name_ar))])
+                        _c("p", [_vm._v(_vm._s(_vm.course_Obj.name_ar))])
                       ])
                     : _vm._e(),
                   _vm._v(" "),
@@ -47753,16 +47835,16 @@ var render = function() {
                   _vm.residence_Obj
                     ? _c("p", [
                         _vm._v(
-                          " \n                         العنوان : " +
+                          "\n                            العنوان : " +
                             _vm._s(_vm.residence_Obj.name_ar) +
-                            "  &&\n                        السعر   :   " +
+                            " && السعر : " +
                             _vm._s(_vm.residence_Obj.price) +
-                            "\n                          \n                          "
+                            "\n                        "
                         )
                       ])
                     : _c("p", [
                         _vm._v(
-                          "\n                              لا يوجد سكن\n                          "
+                          "\n                            لا يوجد سكن\n                        "
                         )
                       ]),
                   _vm._v(" "),
@@ -47775,16 +47857,16 @@ var render = function() {
                   _vm.airport_Obj
                     ? _c("p", [
                         _vm._v(
-                          " \n                         المطار : " +
+                          "\n                            المطار : " +
                             _vm._s(_vm.airport_Obj.name_ar) +
-                            "  &&\n                        السعر   :   " +
+                            " && السعر : " +
                             _vm._s(_vm.airport_Obj.price) +
-                            "\n                          \n                          "
+                            "\n                        "
                         )
                       ])
                     : _c("p", [
                         _vm._v(
-                          "\n                              لا يوجد مطار\n                          "
+                          "\n                            لا يوجد مطار\n                        "
                         )
                       ]),
                   _vm._v(" "),
@@ -47797,14 +47879,14 @@ var render = function() {
                   _vm.insurance_Obj
                     ? _c("p", [
                         _vm._v(
-                          " \n                        السعر   :   " +
+                          "\n                            السعر : " +
                             _vm._s(_vm.insurance_Obj.price) +
-                            "\n                          \n                          "
+                            "\n                        "
                         )
                       ])
                     : _c("p", [
                         _vm._v(
-                          "\n                              لا يوجد تامين\n                          "
+                          "\n                            لا يوجد تامين\n                        "
                         )
                       ]),
                   _vm._v(" "),
@@ -48058,7 +48140,7 @@ var render = function() {
                                 _c(
                                   "option",
                                   { attrs: { value: "حصل علي قبول" } },
-                                  [_vm._v("  حصل علي قبول ")]
+                                  [_vm._v(" حصل علي قبول ")]
                                 ),
                                 _vm._v(" "),
                                 _c(
@@ -48179,7 +48261,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                   Previos\n                               "
+                        "\n                                Previos\n                            "
                       )
                     ]
                   ),
@@ -48209,7 +48291,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                   Next\n                               "
+                        "\n                                Next\n                            "
                       )
                     ]
                   )
@@ -48408,13 +48490,13 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكورس ")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكورس")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("تفاصيل الطلب")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("رسالة المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v(" ملاحظات")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحالة")]),
         _vm._v(" "),
@@ -48448,322 +48530,630 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput1" } }, [
-            _vm._v(" عدد الاسابيع ")
-          ]),
+      _c("div", { staticClass: "col-md-4 p-3" }, [
+        _c("div", { staticClass: "row mb-3" }, [
+          _vm._m(0),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.weeks,
-                expression: "weeks"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "number",
-              id: "projectinput1",
-              min: "1",
-              placeholder: "ادخل  عدد الاسابيع",
-              name: "weeks",
-              required: ""
-            },
-            domProps: { value: _vm.weeks },
-            on: {
-              change: function($event) {
-                return _vm.get_courses_price()
-              },
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.weeks = $event.target.value
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput1" } }, [
-            _vm._v(" سعر الاسبوع الواحد ")
-          ]),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.student_name))])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(1),
           _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.price_per_week,
-                expression: "price_per_week"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "number",
-              id: "projectinput1",
-              min: "1",
-              disabled: "",
-              placeholder: "   سعر الاسبوع الواحد",
-              name: "price_per_week",
-              required: ""
-            },
-            domProps: { value: _vm.price_per_week },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.price_per_week = $event.target.value
-              }
-            }
-          })
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput2" } }, [_vm._v(" السكن ")]),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.institute_name))])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(2),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.residenece_model,
-                  expression: "residenece_model"
-                }
-              ],
-              staticClass: "form-control text-left",
-              attrs: { name: "residence", required: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.residenece_model = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "0" } }, [_vm._v("لا اريد سكن ")]),
-              _vm._v(" "),
-              _vm._l(_vm.residence_obj1, function(obj) {
-                return _c(
-                  "option",
-                  { key: obj.id, domProps: { value: obj.price } },
-                  [
-                    _vm._v(
-                      _vm._s(obj.price) +
-                        " دينار -  " +
-                        _vm._s(obj.name_ar) +
-                        "  "
-                    )
-                  ]
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [
+              _vm._v(_vm._s(_vm.course_name) + " "),
+              _c("span", { staticClass: "text-primary" }, [
+                _vm._v(
+                  "(" +
+                    _vm._s(
+                      Math.round(
+                        _vm.course_price * _vm.weeks * (1 - _vm.course_discount)
+                      )
+                    ) +
+                    " ريال سعودي)"
                 )
-              })
-            ],
-            2
-          )
-        ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(3),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.totalPrice()) + " ريال سعودي")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(4),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [_vm._v(_vm._s(_vm.paid_price) + " ريال سعودي")])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
+        _c("div", { staticClass: "row my-3" }, [
+          _vm._m(5),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-7" }, [
+            _c("span", [
+              _vm._v(_vm._s(_vm.totalPrice() - _vm.paid_price) + " ريال سعودي")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("hr")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput2" } }, [
-            _vm._v(" المطارات ")
-          ]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.airport_model,
-                  expression: "airport_model"
-                }
-              ],
-              staticClass: "form-control text-left",
-              attrs: { name: "airport", required: "" },
-              on: {
-                change: function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            staticClass: "form",
+            attrs: {
+              method: "post",
+              action: _vm.student_requests_url + "/" + _vm.student_request.id
+            }
+          },
+          [
+            _c("input", {
+              attrs: { type: "hidden", name: "_token" },
+              domProps: { value: _vm.csrf_token }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "_method", value: "put" }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "price_per_week" },
+              domProps: { value: _vm.course_price * (1 - _vm.course_discount) }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "insurance_price" },
+              domProps: { value: _vm.insurance_price }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "course_discount" },
+              domProps: { value: _vm.course_discount }
+            }),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "total_price" },
+              domProps: { value: _vm.totalPrice() }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-body" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v("الحاله")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control text-left",
+                        attrs: { name: "status" }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("اختر الحاله")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "جديد" },
+                            domProps: {
+                              selected: _vm.status == "جديد" ? true : false
+                            }
+                          },
+                          [_vm._v(" جديد")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "حصل علي قبول" },
+                            domProps: {
+                              selected:
+                                _vm.status == "حصل علي قبول" ? true : false
+                            }
+                          },
+                          [_vm._v(" حصل علي قبول ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "بداء الدراسة" },
+                            domProps: {
+                              selected:
+                                _vm.status == "بداء الدراسة" ? true : false
+                            }
+                          },
+                          [_vm._v(" بداء الدراسة")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "مرفوض" },
+                            domProps: {
+                              selected: _vm.status == "مرفوض" ? true : false
+                            }
+                          },
+                          [_vm._v(" مرفوض")]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" عدد الاسابيع ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.weeks,
+                          expression: "weeks"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        id: "projectinput1",
+                        min: "1",
+                        placeholder: "ادخل  عدد الاسابيع",
+                        name: "weeks"
+                      },
+                      domProps: { value: _vm.weeks },
+                      on: {
+                        change: function($event) {
+                          _vm.get_course_price()
+                          _vm.get_insurance_price()
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.weeks = $event.target.value
+                        }
+                      }
                     })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v(
+                        " السكن (" +
+                          _vm._s(_vm.chosin_residence.price * _vm.weeks) +
+                          " ريال سعودي)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.chosin_residence,
+                            expression: "chosin_residence"
+                          }
+                        ],
+                        staticClass: "form-control text-left",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.chosin_residence = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { domProps: { value: { price: 0 } } }, [
+                          _vm._v("لا اريد سكن ")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.residences, function(residence_obj) {
+                          return _c(
+                            "option",
+                            {
+                              key: residence_obj.id,
+                              domProps: {
+                                selected:
+                                  residence_obj.id == _vm.chosin_residence.id
+                                    ? true
+                                    : false,
+                                value: residence_obj
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(residence_obj.price) +
+                                  " ريال - " +
+                                  _vm._s(residence_obj.name_ar) +
+                                  " "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "residence" },
+                      domProps: { value: JSON.stringify(_vm.chosin_residence) }
                     })
-                  _vm.airport_model = $event.target.multiple
-                    ? $$selectedVal
-                    : $$selectedVal[0]
-                }
-              }
-            },
-            [
-              _c("option", { attrs: { value: "0" } }, [
-                _vm._v("لا اريد مطار ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v(
+                        " الاستقبال (" +
+                          _vm._s(_vm.chosin_airport.price) +
+                          " ريال سعودي)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.chosin_airport,
+                            expression: "chosin_airport"
+                          }
+                        ],
+                        staticClass: "form-control text-left",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.chosin_airport = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { domProps: { value: { price: 0 } } }, [
+                          _vm._v("لا اريد استقبال ")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.airports, function(airport_obj) {
+                          return _c(
+                            "option",
+                            {
+                              key: airport_obj.id,
+                              domProps: {
+                                selected:
+                                  airport_obj.id == _vm.chosin_airport.id
+                                    ? true
+                                    : false,
+                                value: airport_obj
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(airport_obj.price) +
+                                  " ريال - " +
+                                  _vm._s(airport_obj.name_ar) +
+                                  " "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "airport" },
+                      domProps: { value: JSON.stringify(_vm.chosin_airport) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" تاريخ البداية ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.started_date,
+                          expression: "started_date"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "projectinput1",
+                        min: "1",
+                        name: "started_date"
+                      },
+                      domProps: { value: _vm.started_date },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.started_date = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput2" } }, [
+                      _vm._v(" المدفوع ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.paid_price,
+                          expression: "paid_price"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "number",
+                        placeholder: "المدفوع",
+                        name: "paid_price"
+                      },
+                      domProps: { value: _vm.paid_price },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.paid_price = $event.target.value
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput4" } }, [
+                      _vm._v(
+                        " اريد تامين (" +
+                          _vm._s(_vm.insurance_price * _vm.weeks) +
+                          " ريال سعودي)"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.insurance_price_checker,
+                          expression: "insurance_price_checker"
+                        }
+                      ],
+                      staticClass: "switchery",
+                      attrs: {
+                        type: "checkbox",
+                        id: "switchery",
+                        name: "insurance_checker"
+                      },
+                      domProps: {
+                        value: _vm.insurance_val,
+                        checked: Array.isArray(_vm.insurance_price_checker)
+                          ? _vm._i(
+                              _vm.insurance_price_checker,
+                              _vm.insurance_val
+                            ) > -1
+                          : _vm.insurance_price_checker
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.insurance_price_checker,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = _vm.insurance_val,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.insurance_price_checker = $$a.concat([
+                                  $$v
+                                ]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.insurance_price_checker = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.insurance_price_checker = $$c
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput3" } }, [
+                      _vm._v("رساله المعهد ")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "ckeditor",
+                        rows: "20",
+                        placeholder: "  رساله المعهد ",
+                        name: "institute_message"
+                      },
+                      domProps: { innerHTML: _vm._s(_vm.institute_message) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput3" } }, [
+                      _vm._v("ملاحظات ")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        rows: "10",
+                        placeholder: "  ملاحظات ",
+                        name: "note"
+                      },
+                      domProps: { value: _vm.notes }
+                    })
+                  ])
+                ])
               ]),
               _vm._v(" "),
-              _vm._l(_vm.airport_obj2, function(obj) {
-                return _c(
-                  "option",
-                  { key: obj.id, domProps: { value: obj.price } },
-                  [
-                    _vm._v(
-                      "  " +
-                        _vm._s(obj.price) +
-                        " دينار -  " +
-                        _vm._s(obj.name_ar) +
-                        " "
-                    )
-                  ]
-                )
-              })
-            ],
-            2
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput4" } }, [
-            _vm._v("  اريد تامين")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.insurance,
-                expression: "insurance"
-              }
-            ],
-            staticClass: "switchery",
-            attrs: { type: "checkbox", id: "switchery", name: "insurance_id" },
-            domProps: {
-              value: _vm.insurance_val,
-              checked: Array.isArray(_vm.insurance)
-                ? _vm._i(_vm.insurance, _vm.insurance_val) > -1
-                : _vm.insurance
-            },
-            on: {
-              change: [
-                function($event) {
-                  var $$a = _vm.insurance,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = _vm.insurance_val,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.insurance = $$a.concat([$$v]))
-                    } else {
-                      $$i > -1 &&
-                        (_vm.insurance = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
-                    }
-                  } else {
-                    _vm.insurance = $$c
-                  }
-                },
-                function($event) {
-                  return _vm.get_insuranec_price()
-                }
-              ]
-            }
-          })
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput2" } }, [
-            _vm._v(" الاجمالي ")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.total_price_all,
-                expression: "total_price_all"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: {
-              type: "number",
-              min: "1",
-              disabled: "",
-              placeholder: "   ",
-              name: "total_price"
-            },
-            domProps: { value: _vm.total_price_all },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.total_price_all = $event.target.value
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "projectinput2" } }, [
-            _vm._v(" احسب الاجمالي ")
-          ]),
-          _vm._v(" "),
-          _c("br"),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary",
-              on: {
-                click: function($event) {
-                  return _vm.getPrice()
-                }
-              }
-            },
-            [_vm._v(" احسب الاجمالي  ")]
-          )
-        ])
+              _vm._m(6)
+            ])
+          ]
+        )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("اسم الطالب :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("اسم المعهد :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("اسم الدورة :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("السعر الكلي :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("المدفوع :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("المتبقي :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-actions center" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary w-100 test-btn",
+          attrs: { type: "submit" }
+        },
+        [_c("i", { staticClass: "la la-check-square-o" }), _vm._v(" حفظ")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -48914,7 +49304,7 @@ var render = function() {
         _c("div", [
           _c("span", { staticClass: "font-weight-bold d-block" }, [
             _vm._v(
-              "\n                    اللغة الإنجليزية العامة : \n                    "
+              "\n                    اللغة الإنجليزية العامة :\n                    "
             ),
             _c(
               "span",
@@ -48935,11 +49325,11 @@ var render = function() {
               _vm._v(" " + _vm._s(_vm.price_per_week) + " ")
             ]),
             _vm._v(
-              "  " +
+              " " +
                 _vm._s(
                   Math.round(_vm.price_per_week * (1 - _vm.course.discount))
                 ) +
-                "  دينار سعودي / الاسبوع"
+                " ريال سعودي / الاسبوع"
             )
           ]),
           _vm._v(" "),
@@ -48959,7 +49349,7 @@ var render = function() {
                     _vm.price_per_week * _vm.weeks * (1 - _vm.course.discount)
                   )
                 ) +
-                "  دينار سعودي"
+                " ريال سعودي"
             )
           ]),
           _vm._v(" "),
@@ -48981,7 +49371,7 @@ var render = function() {
               _c("span", { staticClass: "text-main-color" }, [
                 _vm._v(
                   _vm._s(_vm.chosin_residence.price * _vm.weeks) +
-                    "  دينار سعودي / الاسبوع"
+                    " ريال سعودي "
                 )
               ]),
               _vm._v(" "),
@@ -48995,44 +49385,58 @@ var render = function() {
           ? _c("div", [
               _c("span", { staticClass: "d-block" }, [
                 _c("span", { staticClass: "font-weight-bold" }, [
-                  _vm._v(" خدمة الاستقبال  : ")
+                  _vm._v(" خدمة الاستقبال : ")
                 ]),
                 _vm._v(" "),
                 _c("span", [_vm._v(_vm._s(_vm.chosin_airport.name_ar))])
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "text-main-color" }, [
-                _vm._v(_vm._s(_vm.chosin_airport.price) + "  دينار سعودي ")
+                _vm._v(_vm._s(_vm.chosin_airport.price) + " ريال سعودي ")
               ]),
               _vm._v(" "),
               _c("hr")
             ])
           : _vm._e(),
         _vm._v(" "),
-        _vm.insurance_price_checker != 0 &&
-        _vm.insurance_price_checker != "" &&
-        !isNaN(_vm.insurance_price_checker)
+        _vm.insurance_price_checker != 0
           ? _c("div", [
               _vm._m(1),
               _vm._v(" "),
               _c("span", { staticClass: "text-main-color" }, [
-                _vm._v(
-                  _vm._s(_vm.insurance_price * _vm.weeks) + "  دينار سعودي "
-                )
+                _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ريال سعودي ")
               ]),
               _vm._v(" "),
               _c("hr")
             ])
-          : _vm._e()
+          : _vm._e(),
+        _vm._v(" "),
+        _c("div", [
+          _vm._m(2),
+          _vm._v(" "),
+          _c("span", { staticClass: "text-main-color" }, [
+            _vm._v(_vm._s(_vm.total_price()) + " ريال سعودي ")
+          ])
+        ])
       ])
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
-      _vm._m(2),
+      _vm._m(3),
       _vm._v(" "),
       _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
-        _c("form", { attrs: { action: "" } }, [
-          _vm._m(3),
+        _c("form", { attrs: { action: _vm.save_request_url, method: "get" } }, [
+          _c("input", {
+            attrs: { type: "hidden", name: "_token" },
+            domProps: { value: _vm.csrf_token }
+          }),
+          _vm._v(" "),
+          _c("input", {
+            attrs: { type: "hidden", name: "course_id" },
+            domProps: { value: _vm.course_id }
+          }),
+          _vm._v(" "),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c(
@@ -49047,7 +49451,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control selectpicker rounded-10 border",
-                attrs: { "data-live-search": "true" },
+                attrs: { name: "weeks", "data-live-search": "true" },
                 on: {
                   change: [
                     function($event) {
@@ -49145,7 +49549,12 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "residence" },
+              domProps: { value: JSON.stringify(_vm.chosin_residence) }
+            })
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
@@ -49202,76 +49611,109 @@ var render = function() {
                 })
               ],
               2
-            )
+            ),
+            _vm._v(" "),
+            _c("input", {
+              attrs: { type: "hidden", name: "airport" },
+              domProps: { value: JSON.stringify(_vm.chosin_airport) }
+            })
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.insurance_price_checker,
-                    expression: "insurance_price_checker"
-                  }
-                ],
-                staticClass: "form-control rounded-10  selectpicker border",
-                attrs: { "data-live-search": "true" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.insurance_price_checker = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c(
-                  "option",
-                  { attrs: { disabled: "" }, domProps: { value: 0 } },
-                  [_vm._v("التأمين الصحي")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "option",
-                  { attrs: { selected: "" }, domProps: { value: 0 } },
-                  [_vm._v(" لا احتاج لخدمة التأمين الصحي")]
-                ),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "insurance_price*weeks" } }, [
-                  _vm._v(
-                    "احتاج خدمة التامين الصحي - " +
-                      _vm._s(_vm.insurance_price * _vm.weeks)
-                  )
-                ])
-              ]
-            )
+          _c("div", { staticClass: "row" }, [
+            _vm._m(5),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                { staticClass: "form-check form-check-inline mr-0 ml-4" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.insurance_price_checker,
+                        expression: "insurance_price_checker"
+                      }
+                    ],
+                    staticClass: "form-check-input mr-0 ml-3 bg-secondary",
+                    attrs: {
+                      name: "insurance",
+                      type: "radio",
+                      id: "inlineCheckbox1",
+                      value: "1"
+                    },
+                    domProps: {
+                      checked: _vm._q(_vm.insurance_price_checker, "1")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.insurance_price_checker = "1"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "form-check-label" }, [
+                    _vm._v(
+                      "نعم (" +
+                        _vm._s(_vm.insurance_price * _vm.weeks) +
+                        " ريال)"
+                    )
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                { staticClass: "form-check form-check-inline mr-0 ml-4" },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.insurance_price_checker,
+                        expression: "insurance_price_checker"
+                      }
+                    ],
+                    staticClass: "form-check-input mr-0 ml-3 bg-secondary",
+                    attrs: {
+                      name: "insurance",
+                      type: "radio",
+                      id: "inlineCheckbox1",
+                      value: "0"
+                    },
+                    domProps: {
+                      checked: _vm._q(_vm.insurance_price_checker, "0")
+                    },
+                    on: {
+                      change: function($event) {
+                        _vm.insurance_price_checker = "0"
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "form-check-label" }, [
+                    _vm._v("لا")
+                  ])
+                ]
+              )
+            ])
           ]),
           _vm._v(" "),
           _c(
-            "a",
+            "button",
             {
               staticClass:
-                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
-              attrs: { href: "confirm-reservation.html" }
+                "btn rounded-10 bg-secondary-color text-white mb-2 w-100"
             },
             [_vm._v("حجز")]
           )
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c("button", { on: { click: _vm.get_insurance_price } }, [_vm._v("click")])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -49291,7 +49733,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("span", { staticClass: "d-block" }, [
       _c("span", { staticClass: "font-weight-bold" }, [
-        _vm._v(" التامين الصحي  : ")
+        _vm._v(" التامين الصحي : ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "d-block" }, [
+      _c("span", { staticClass: "font-weight-bold" }, [
+        _vm._v(" اجمالي السعر : ")
       ])
     ])
   },
@@ -49318,13 +49770,13 @@ var staticRenderFns = [
       { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
       [
         _c("input", {
-          staticClass: "form-control border-0 bg-transparent datepicker",
+          staticClass: "form-control border-0 bg-transparent",
           attrs: {
+            name: "started_date",
             type: "text",
-            "data-toggle": "datepicker",
-            disabled: "",
-            placeholder: "تاريخ البداية",
-            value: "03/02/2021"
+            onfocus: "return this.setAttribute('type', 'date')",
+            onfocusout: "return this.setAttribute('type', 'text')",
+            placeholder: "تاريخ البداية"
           }
         }),
         _vm._v(" "),
@@ -49341,6 +49793,16 @@ var staticRenderFns = [
         ])
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-12" }, [
+      _c("label", [_vm._v("هل تحتاج الي التامين الصحي")]),
+      _vm._v(" "),
+      _c("br")
+    ])
   }
 ]
 render._withStripped = true

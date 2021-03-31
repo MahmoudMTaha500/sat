@@ -53,13 +53,7 @@ function ArabicDate($date) {
 // return the price of selected week
 function price_per_week($prices_obj , $weeks){
     $price_per_week=0;
-
-
-//   $arr = json_decode( $prices_obj);
-//   $arr =sort( $arr);
     $prices_obj = $prices_obj->sort();
-    // dd($prices_obj);
-
     foreach($prices_obj as $week_price){
         $price_per_week = $week_price->price;
         if($weeks <= $week_price->weeks){

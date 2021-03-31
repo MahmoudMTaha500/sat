@@ -12,6 +12,7 @@ use App\Models\Student;
 use App\Models\StudentSuccessStory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 class WebsiteController extends Controller
 {
@@ -29,7 +30,7 @@ class WebsiteController extends Controller
     public function institutes_page()
     {
         $useVue = true;
-        return view('website.institutes', compact('useVue'));
+        return view('website.institute.institutes', compact('useVue'));
     }
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
@@ -42,7 +43,43 @@ class WebsiteController extends Controller
         $institute = $institute[0];
 
         $useVue = true;
-        return view('website.institute-profile', compact('useVue' , 'course' , 'institute'));
+        return view('website.institute.institute-profile', compact('useVue' , 'course' , 'institute'));
+    }
+    // confirm reservation page
+    public function confirm_reservation(Request $request)
+    {
+        $useVue = true;
+        $course_details = [];
+        $weeks = $request->weeks;
+        $started_date = $request->started_date;
+        $residence= json_decode($request->residence , true);
+        $airport = json_decode($request->airport , true);
+        $insurance = $request->insurance;
+        $course_id = $request->course_id;
+        $course = Course::where('id' , $course_id)->get()[0] ;
+        $insurance_price = price_per_week($course->institute->insurancePrice , $weeks);
+        $course_price_per_week = price_per_week($course->coursesPrice , $weeks);
+        $course_discount = $course->discount;
+        $totalPrice = ($insurance_price + $course_price_per_week*(1- $course_discount))*$weeks;
+        if($airport != 0){ $totalPrice += $airport['price'];}
+        if($residence != 0){$totalPrice += $residence['price']*$weeks;}
+        if($insurance == 0){$insurance_price = 0;}
+
+        $course_details['total_price'] = $totalPrice;
+        $course_details['institute_name'] = $course->institute->name_ar;
+        $course_details['course_name'] = $course->name_ar;
+        $course_details['country'] = $course->institute->country->name_ar;
+        $course_details['city'] = $course->institute->city->name_ar;
+        $course_details['started_date'] = $started_date;
+        $course_details['weeks'] = $weeks;
+        $course_details['lessons_per_week'] = $course->lessons_per_week;
+        $course_details['hours_per_week'] = $course->hours_per_week;
+        $course_details['insurance_price'] = $insurance_price;
+        $course_details['airport'] = $airport;
+        $course_details['residence'] = $residence;
+
+        return view('website.institute.confirm-reservation', compact('course_details' , 'useVue'));
+
     }
     // student login page : show login page of type student
     public function student_login_page()

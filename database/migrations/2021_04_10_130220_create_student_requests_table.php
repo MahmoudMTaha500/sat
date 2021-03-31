@@ -25,12 +25,11 @@ class CreateStudentRequestsTable extends Migration
             $table->bigInteger("airport_id")->unsigned()->nullable();
             $table->foreign('airport_id')->references('id')->on('airports');
             $table->bigInteger('airport_price')->default(0);
-            $table->bigInteger("insurance_id")->unsigned()->nullable();
-            $table->foreign('insurance_id')->references('id')->on('insurances');
             $table->bigInteger('insurance_price')->default(0);
             $table->bigInteger('total_price')->default(0);
             $table->bigInteger('paid_price')->default(0);
             $table->bigInteger('remaining_price')->default(0);
+            $table->string('started_date');
             $table->longText('note')->nullable();
             $table->timestamps();
         });
