@@ -88,6 +88,7 @@
                 <!-- Course Details -->
                 <div class="bg-white py-4 rounded-10 mb-4">
                     <div class="cost-heading border-bottom pb-2 px-3">
+                        <img src="{{asset('/website/imgs/logo.png')}}" alt="" srcset="">
                         <h5 class="font-weight-bold text-main-color">تفاصيل الكورس والحجز</h5>
                     </div>
                     <div class="cost-body px-3 pt-3">
@@ -147,7 +148,7 @@
                                 <div class="cheched-heading">
                                     <h3 class="text-main-color font-weight-bold">تم التسجيل بنجاح</h3>
                                     <p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك
-                                        لمراجعة طلبك و تأكيد الحجز <ins class="text-secondary-color"> طباعة العرض</ins></p>
+                                        لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="{{route('student_invoice')}}" class="text-secondary-color"> عرض السعر</a></p>
                                 </div>
                                 <div class="checked-btns">
                                     <a href="pay-now.html" class="btn bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>
