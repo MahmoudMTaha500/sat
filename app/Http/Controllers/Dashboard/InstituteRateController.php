@@ -13,6 +13,7 @@ class InstituteRateController extends Controller
           
     $department_name = 'institutes';
     $page_name = 'rate';
+    $page_title = 'التقيمات';
     $useVue = true;
     return  view("admin.institutes.rates.index", compact( 'useVue','rates','department_name','page_name'));
     

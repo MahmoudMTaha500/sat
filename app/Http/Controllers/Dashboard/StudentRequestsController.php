@@ -21,6 +21,8 @@ class StudentRequestsController extends Controller
         $countries = Country::get();
         $department_name = 'student-request';
         $page_name = 'student-request';
+        $page_title = 'الطلابات';
+
         $useVue = true;
         return view("admin.students_requests.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'countries'));
     }

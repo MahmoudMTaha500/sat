@@ -116,5 +116,5 @@ Route::get('/student-requests/calc_total','StudentRequestsController@calc_total'
 Route::post('/student-requests/update-status','StudentRequestsController@updateStatus');   
 
 Route::resource('student-requests', "StudentRequestsController");
-
+Route::resource('pdf', 'PdfController');
 

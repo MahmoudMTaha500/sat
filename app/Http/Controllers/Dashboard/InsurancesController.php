@@ -16,8 +16,10 @@ class InsurancesController extends Controller
         $page_name = 'insurances';
         $useVue = true;
         $institutes = institute::get();
+       $page_title = 'التامينات';
 
-        return view("admin.insurances.index", compact('department_name', 'page_name', 'useVue', 'institutes'));
+
+        return view("admin.insurances.index", compact('department_name', 'page_name', 'useVue', 'institutes' ,'page_title'));
     }
 
     public function getInsurances()
@@ -32,7 +34,9 @@ class InsurancesController extends Controller
         //
         $department_name = 'services';
         $page_name = 'add-insurances';
-        return view("admin.insurances.create", compact('department_name', 'page_name', 'Institutes'));
+       $page_title = 'التامينات';
+
+        return view("admin.insurances.create", compact('department_name', 'page_name', 'Institutes','page_title'));
     }
 
     public function store(InsurancesRequest $request)
@@ -69,7 +73,9 @@ class InsurancesController extends Controller
         $Institutes = institute::get();
         $department_name = 'services';
         $page_name = 'insurances';
-        return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes', 'insurance'));
+       $page_title = 'التامينات';
+
+        return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes', 'insurance','page_title'));
     }
 
     public function update(InsurancesRequest $request, Insurances $Insurances)

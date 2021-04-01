@@ -22,7 +22,7 @@ class CourseController extends Controller
         $count_courses = count($countercourse);
         $department_name = 'courses';
         $page_name = 'courses';
-        $page_title = 'courses';
+        $page_title = 'الدورات';
         $useVue = true;
 
         return view("admin.courses.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'count_courses', 'countries','page_title'));
@@ -40,7 +40,7 @@ class CourseController extends Controller
         $institutes = institute::get();
         $department_name = 'courses';
         $page_name = 'add-course';
-        $page_title = 'courses';
+        $page_title = 'الدورات';
 
         return view("admin.courses.create", compact('department_name', 'page_name', 'institutes','page_title'));
     }
@@ -99,7 +99,7 @@ class CourseController extends Controller
         $course_prices = CoursePrice::where(["course_id" => $course->id])->get();
         $department_name = 'courses';
         $page_name = 'courses';
-        $page_title = 'courses';
+        $page_title = 'الدورات';
 
         return view("admin.courses.edit", compact('course', 'institutes', 'department_name', 'page_name', 'course_prices','page_title'));
         // dd($course);

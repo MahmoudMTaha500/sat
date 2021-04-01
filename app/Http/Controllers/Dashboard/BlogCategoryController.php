@@ -15,7 +15,7 @@ class BlogCategoryController extends Controller
         $categories = BlogCategory::all();
         $department_name = 'blogs';
         $page_name = 'blog-categories';
-        $page_title = '';
+        $page_title = 'اقسام المقالات';
         return view("admin.blog_categories.index", compact('categories', 'department_name', 'page_title','page_name'));
     }
 
@@ -24,7 +24,7 @@ class BlogCategoryController extends Controller
     {
         $department_name = 'blogs';
         $page_name = 'add-blog-category';
-        $page_title = 'blog-categories';
+        $page_title = 'اقسام المقالات';
 
         return view("admin.blog_categories.create", compact('department_name', 'page_title','page_name'));
     }
@@ -49,7 +49,7 @@ class BlogCategoryController extends Controller
         $category = $blogCategory;
         $department_name = 'blogs';
         $page_name = 'edit-blog-category';
-        $page_title = 'blog-categories';
+        $page_title = 'اقسام المقالات';
 
         return view("admin.blog_categories.edit", compact( 'category' ,'department_name', 'page_title','page_name'));
     }

@@ -13,8 +13,9 @@ class StudentController extends Controller
         $department_name = 'students';
         $page_name = 'students';
         $useVue = true;
+        $page_title = 'الطلاب';
            
-        return view('admin.students.index',compact('department_name','page_name','useVue'));
+        return view('admin.students.index',compact('department_name','page_name','useVue' ,'page_title'));
             
     }
 

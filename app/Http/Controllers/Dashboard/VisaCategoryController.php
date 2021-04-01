@@ -14,14 +14,18 @@ class VisaCategoryController extends Controller
         $categories = VisaCategory::paginate(10);
         $department_name='visa';
         $page_name='visa-categories';
-        return view('admin.visa_categories.index' , compact('department_name' , 'page_name','categories'));
+        $page_title = ' التاشيرات';
+
+        return view('admin.visa_categories.index' , compact('department_name' , 'page_name','categories','page_title'));
     }
 
     public function create(Request $request)
     {
         $department_name='visa';
         $page_name='create-visa-category';
-        return view('admin.visa_categories.create' , compact('department_name' , 'page_name'));
+        $page_title = ' التاشيرات';
+
+        return view('admin.visa_categories.create' , compact('department_name' , 'page_name','page_title'));
     }
 
     public function store(Request $request)
@@ -40,7 +44,9 @@ class VisaCategoryController extends Controller
         $category = VisaCategory::find($visaCategory->id);
         $department_name='visa';
         $page_name='edit-visa-category';
-        return view('admin.visa_categories.edit' , compact('department_name' , 'page_name','category'));
+        $page_title = ' التاشيرات';
+
+        return view('admin.visa_categories.edit' , compact('department_name' , 'page_name','category','page_title'));
     }
 
     public function update(Request $request, VisaCategory $visaCategory)

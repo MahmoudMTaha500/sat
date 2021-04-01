@@ -26,7 +26,8 @@ class InstituteController extends Controller
                 return response()->json(['institutes' => $institutes, 'countries' => $countries]);
             }
         }
-        $page_title = 'Institutes';
+        $page_title = 'المعاهد';
+ 
         return view('admin.institutes.index', ['institutes' => $institutes, "useVue" => $useVue, 'countries' => $countries,'page_title'=>$page_title]);
     }
     /************************************************************** */
@@ -40,9 +41,11 @@ class InstituteController extends Controller
     {
         $department_name = 'institutes';
         $page_name = 'add-institute';
+        $page_title = 'المعاهد';
+
         $countries = Country::all();
         $useVue = true;
-        return view('admin.institutes.create', compact('useVue', 'department_name', 'page_name', 'countries'));
+        return view('admin.institutes.create', compact('useVue', 'department_name', 'page_name', 'countries','page_title'));
     }
     /************************************************************** */
     public function store(StoreInstituteRequest $request)
@@ -91,9 +94,11 @@ class InstituteController extends Controller
         $institute = Institute::find($institute->id);
         $department_name = 'institutes';
         $page_name = 'add-institute';
+        $page_title = 'المعاهد';
+
         $countries = Country::all();
         $useVue = true;
-        return view('admin.institutes.edit', compact('useVue', 'department_name', 'page_name', 'countries', 'institute'));
+        return view('admin.institutes.edit', compact('useVue', 'department_name', 'page_name', 'countries', 'institute','page_title'));
 
     }
     /************************************************************** */
