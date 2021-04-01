@@ -48,6 +48,17 @@ class WebsiteController extends Controller
     // confirm reservation page
     public function confirm_reservation(Request $request)
     {
+        $validated = $request->validate([
+            'weeks' => 'required|numeric',
+            'started_date' => 'required',
+        ],[
+            'started_date.required' => 'تاريخ البداية مطلوب',
+            'required.required' => 'عدد الاسابيع مطلوب',
+            'required.numeric' => 'عدد الاسابيع يجب ان يكون رقما',
+        ]);
+
+        
+        
         $useVue = true;
         $course_details = [];
         $weeks = $request->weeks;

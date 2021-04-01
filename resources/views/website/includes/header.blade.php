@@ -17,6 +17,7 @@
     <!-- Starrr -->
     <link rel="stylesheet" href="{{asset('website')}}/css/starrr.css" />
     <!-- Custom Css -->
+    <link rel="stylesheet" href="{{asset('website')}}/css/datepicker.min.css">
     <link rel="stylesheet" href="{{asset('website')}}/css/theme.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/index.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/institute.css">

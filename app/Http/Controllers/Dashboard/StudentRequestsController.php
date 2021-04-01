@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class StudentRequestsController extends Controller
 {
+
     public function index()
     {
         $institutes = institute::get();

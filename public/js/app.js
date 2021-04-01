@@ -49415,7 +49415,7 @@ var render = function() {
           _vm._m(2),
           _vm._v(" "),
           _c("span", { staticClass: "text-main-color" }, [
-            _vm._v(_vm._s(_vm.total_price()) + " ريال سعودي ")
+            _vm._v(_vm._s(Math.round(_vm.total_price())) + " ريال سعودي ")
           ])
         ])
       ])
@@ -49770,12 +49770,13 @@ var staticRenderFns = [
       { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
       [
         _c("input", {
-          staticClass: "form-control border-0 bg-transparent",
+          staticClass: "datepicker form-control border-0 bg-transparent",
           attrs: {
+            readonly: "readonly",
             name: "started_date",
+            autocomplete: "off",
             type: "text",
-            onfocus: "return this.setAttribute('type', 'date')",
-            onfocusout: "return this.setAttribute('type', 'text')",
+            "data-toggle": "datepicker",
             placeholder: "تاريخ البداية"
           }
         }),

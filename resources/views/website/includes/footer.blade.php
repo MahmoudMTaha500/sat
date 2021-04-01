@@ -73,5 +73,5 @@
 <script src="{{asset('website')}}/js/shared/owl.call.js"></script>
 <script src="{{asset('website')}}/js/shared/select-picker.call.js"></script>
 <script src="{{asset('website')}}/js/shared/sidemenu.js"></script>
-<script src="{{asset('website')}}/plugins/datepicker.min.js"></script>
-<script src="{{asset('website')}}/shared/date-picker.call.js"></script>
+<script src="{{asset('website')}}/js/plugins/datepicker.min.js"></script>
+<script src="{{asset('website')}}/js/shared/date-picker.call.js"></script>

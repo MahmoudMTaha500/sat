@@ -230,7 +230,7 @@
                 <!-- ./Tabs -->
             </div>
             <div class="col-lg-4">
-               
+                @include('admin.includes.errors')
                 <course-price-info-component
                     course_obj = '{{$course}}'
                     residence_obj = '{{$course->institute->residence}}'
