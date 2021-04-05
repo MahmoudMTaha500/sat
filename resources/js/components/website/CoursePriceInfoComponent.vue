@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <span class="d-block"><span class="font-weight-bold"> اجمالي السعر : </span> </span>
-                    <span class="text-main-color">{{total_price()}} ريال سعودي </span>
+                    <span class="text-main-color">{{Math.round(total_price())}} ريال سعودي </span>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <input type="hidden" name="_token" :value="csrf_token">
                     <input type="hidden" name="course_id" :value="course_id">
                     <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                        <input name="started_date" type="text" onfocus="return this.setAttribute('type', 'date')" onfocusout="return this.setAttribute('type', 'text')" placeholder="تاريخ البداية" class="form-control border-0 bg-transparent"/>
+                        <input readonly="readonly" name="started_date" autocomplete="off" type="text" class="datepicker form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية">
                         <div class="input-group-append">
                             <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
                         </div>

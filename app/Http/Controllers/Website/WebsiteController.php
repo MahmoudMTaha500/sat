@@ -12,7 +12,7 @@ use App\Models\Student;
 use App\Models\StudentSuccessStory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use PDF;
 
 class WebsiteController extends Controller
 {
@@ -35,35 +35,44 @@ class WebsiteController extends Controller
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
     {
-        $course = Course::with('coursesPrice' , 'coursesPricePerWeek')->where(['institute_id' => $institute_id , 'slug' => $course_slug])->get();
-        
-        $institute = Institute::where(['id' => $institute_id , 'slug' => $institute_slug])->get();
-        if(empty($course[0])){ return redirect()->route('website.home');}
+        $course = Course::with('coursesPrice', 'coursesPricePerWeek')->where(['institute_id' => $institute_id, 'slug' => $course_slug])->get();
+
+        $institute = Institute::where(['id' => $institute_id, 'slug' => $institute_slug])->get();
+        if (empty($course[0])) {return redirect()->route('website.home');}
         $course = $course[0];
         $institute = $institute[0];
 
         $useVue = true;
-        return view('website.institute.institute-profile', compact('useVue' , 'course' , 'institute'));
+        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute'));
     }
     // confirm reservation page
     public function confirm_reservation(Request $request)
     {
+        $validated = $request->validate([
+            'weeks' => 'required|numeric',
+            'started_date' => 'required',
+        ], [
+            'started_date.required' => 'تاريخ البداية مطلوب',
+            'required.required' => 'عدد الاسابيع مطلوب',
+            'required.numeric' => 'عدد الاسابيع يجب ان يكون رقما',
+        ]);
+
         $useVue = true;
         $course_details = [];
         $weeks = $request->weeks;
         $started_date = $request->started_date;
-        $residence= json_decode($request->residence , true);
-        $airport = json_decode($request->airport , true);
+        $residence = json_decode($request->residence, true);
+        $airport = json_decode($request->airport, true);
         $insurance = $request->insurance;
         $course_id = $request->course_id;
-        $course = Course::where('id' , $course_id)->get()[0] ;
-        $insurance_price = price_per_week($course->institute->insurancePrice , $weeks);
-        $course_price_per_week = price_per_week($course->coursesPrice , $weeks);
+        $course = Course::where('id', $course_id)->get()[0];
+        $insurance_price = price_per_week($course->institute->insurancePrice, $weeks);
+        $course_price_per_week = price_per_week($course->coursesPrice, $weeks);
         $course_discount = $course->discount;
-        $totalPrice = ($insurance_price + $course_price_per_week*(1- $course_discount))*$weeks;
-        if($airport != 0){ $totalPrice += $airport['price'];}
-        if($residence != 0){$totalPrice += $residence['price']*$weeks;}
-        if($insurance == 0){$insurance_price = 0;}
+        $totalPrice = ($insurance_price + $course_price_per_week * (1 - $course_discount)) * $weeks;
+        if ($airport != 0) {$totalPrice += $airport['price'];}
+        if ($residence != 0) {$totalPrice += $residence['price'] * $weeks;}
+        if ($insurance == 0) {$insurance_price = 0;}
 
         $course_details['total_price'] = $totalPrice;
         $course_details['institute_name'] = $course->institute->name_ar;
@@ -78,7 +87,7 @@ class WebsiteController extends Controller
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
 
-        return view('website.institute.confirm-reservation', compact('course_details' , 'useVue'));
+        return view('website.institute.confirm-reservation', compact('course_details', 'useVue'));
 
     }
     // student login page : show login page of type student
@@ -137,4 +146,19 @@ $blog = Blog::find($id);
         return view('website.blog.artical',compact('blog'));
         // dd($blogs); 
     } 
+    // student register request : create new user of type student
+    public function student_invoice(Request $request)
+    {
+        $data = [
+            // 'foo' => 'bar'
+        ];
+        $pdf = PDF::loadView('website.institute.student-pdf', $data);
+        // $pdf->autoScriptToLang = true;
+        // $pdf->autoLangToFont = true;
+        // $pdf->autoLangToFont = true;
+        // $pdf->useAdobeCJK = true;
+        return $pdf->stream('admin.pdf');
+        //     $pdf = PDF::loadView('pdf.invoice', $data);
+        // return $pdf->download('invoice.pdf');
+    }
 }

@@ -18,6 +18,8 @@ Route::get('/article/{id}','WebsiteController@article')->name('website.article')
 
 
 
+// invoice pdf route
+Route::get('student-invoice', 'WebsiteController@student_invoice')->name('student_invoice');
 
 
 /** Payment Routes *************************************/
@@ -38,6 +40,8 @@ Route::get('student/login', 'WebsiteController@student_login_page')->name('stude
 Route::post('student/login', 'WebsiteController@student_login_auth')->name('student.login');
 Route::get('student/register', 'WebsiteController@student_register_page')->name('student.register');
 Route::post('student/register', 'WebsiteController@student_register_auth')->name('student.register');
+
+
 
 
 
