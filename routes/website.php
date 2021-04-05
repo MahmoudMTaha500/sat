@@ -14,6 +14,8 @@ Route::get('/student-requests/confirm-reservation','WebsiteController@confirm_re
 
 // invoice pdf route
 Route::get('student-invoice', 'WebsiteController@student_invoice')->name('student_invoice');
+// create student request route
+Route::post('create-student-request', 'WebsiteController@create_student_request')->name('create_student_request');
 
 
 /** Payment Routes *************************************/

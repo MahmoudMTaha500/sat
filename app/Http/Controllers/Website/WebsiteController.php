@@ -10,8 +10,10 @@ use App\Models\Institute;
 use App\Models\Partner;
 use App\Models\Student;
 use App\Models\StudentSuccessStory;
+use App\Models\StudentRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Mail;
 use PDF;
 
 class WebsiteController extends Controller
@@ -74,6 +76,8 @@ class WebsiteController extends Controller
         if ($residence != 0) {$totalPrice += $residence['price'] * $weeks;}
         if ($insurance == 0) {$insurance_price = 0;}
 
+        $course_details['course_id'] = $course_id;
+        $course_details['price_per_week'] = $course_price_per_week;
         $course_details['total_price'] = $totalPrice;
         $course_details['institute_name'] = $course->institute->name_ar;
         $course_details['course_name'] = $course->name_ar;
@@ -139,5 +143,103 @@ class WebsiteController extends Controller
         return $pdf->stream('admin.pdf');
         //     $pdf = PDF::loadView('pdf.invoice', $data);
         // return $pdf->download('invoice.pdf');
+    }
+
+    // create student request and account if the student was new student
+    public function create_student_request(Request $request)
+    {
+
+        // configuer basic variables
+        $name = $request->name;
+        $email = $request->email;
+        $phone = $request->phone;
+        $address = $request->address;
+        $nationality = $request->nationality;
+        $country = $request->country;
+        $city = $request->city;
+        $note = $request->city;
+        $course_details = json_decode($request->course_details, true);
+
+
+        // form validation
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
+            'phone' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string'],
+            'nationality' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+        ], [
+            'name.required' => 'الاسم مطلوب',
+            'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
+            'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
+            'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
+            'phone.required' => 'رقم الجوال مطلوب',
+            'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
+            'address.required' => 'العنوان  مطلوب',
+            'nationality.required' => 'الجنسية مطلوبة',
+            'nationality.max' => 'يجب الا تتجاوز الجنسية  255 حرف',
+            'country.required' => 'الدولة مطلوبة',
+            'country.max' => 'يجب الا تتجاوز الدولة  255 حرف',
+            'city.required' => 'المدينة مطلوبة',
+            'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
+        ]);
+        
+
+        // configure student data
+        $unbcrypt_password = random_password();
+        $student_data = $request->except('_token', 'note' , 'course_details');
+        $student_data['password'] = bcrypt($unbcrypt_password);
+
+        // create student
+        $student = Student::create($student_data);
+        
+
+        // configure student request data
+        $student_request_data = [];
+        $student_request_data['student_id'] = $student->id;
+        $student_request_data['course_id'] = $course_details['course_id'];
+        $student_request_data['institute_message'] = Course::where('id' , $course_details['course_id'])->get()[0]->institute->institute_questions;
+        $student_request_data['status'] = 'جديد';
+        $student_request_data['weeks'] = $course_details['weeks'];
+        $student_request_data['price_per_week'] = $course_details['price_per_week'];
+        if($course_details['residence'] != 0){
+            $student_request_data['residence_id'] = $course_details['residence']['id'];
+            $student_request_data['residence_price'] = $course_details['residence']['price'];
+        }
+        if($course_details['airport'] != 0){
+            $student_request_data['airport_id'] = $course_details['airport']['id'];
+            $student_request_data['airport_price'] = $course_details['airport']['price'];
+        }
+        $student_request_data['insurance_price'] = $course_details['insurance_price'];
+        $student_request_data['total_price'] = $course_details['total_price'];
+        $student_request_data['paid_price'] = $course_details['total_price'];
+        $student_request_data['remaining_price'] = 0;
+        $student_request_data['started_date'] = $course_details['started_date'];
+        $student_request_data['note'] = $note;
+
+
+        // create student request
+        $student_request = StudentRequest::create($student_request_data);
+        $subject = 'Classat Request Confirmation';
+        $data = array(
+            'student_email' => $email,
+            'student_password' => $unbcrypt_password,
+        );
+
+
+        // send confirmation mail to student includes username and password
+        Mail::send('mail.student_request_registration', $data, function ($message) use ($name, $email, $subject) {
+            $message->to($email, $name)
+                ->subject($subject);
+            $message->from('no-reply@sat-edu.com', 'Classat');
+        });
+
+        session()->flash('alert_message', ['message' => 'تم ارسال طلبك بنجاح', 'icon' => 'success']);
+        return redirect()->back();
+
     }
 }
