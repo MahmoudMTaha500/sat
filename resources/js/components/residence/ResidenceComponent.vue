@@ -56,7 +56,7 @@
                             <tr>
                               <th class="border-top-0"> #</th>
                               <th class="border-top-0">اسم المعهد</th>
-                              <th class="border-top-0"> المطار</th>
+                              <th class="border-top-0"> السكن</th>
                               <th class="border-top-0">السعر</th>
                               <th class="border-top-0">تحكم</th>
                             </tr>

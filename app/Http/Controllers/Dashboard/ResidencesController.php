@@ -42,7 +42,9 @@ public function getResidences(){
         // 
         $department_name = 'services';
         $page_name = 'add-insurances';
-        return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes'));
+        $page_title = 'السكن';
+
+        return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes','page_title'));
     }
 
     /**
@@ -93,7 +95,9 @@ public function getResidences(){
         $Institutes = institute::get();
         $department_name = 'services';
         $page_name = 'residences';
-        return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence'));
+        $page_title = 'السكن';
+
+        return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title'));
     }
     /**
      * Update the specified resource in storage.

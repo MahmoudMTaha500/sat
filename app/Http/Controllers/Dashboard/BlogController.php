@@ -29,6 +29,7 @@ class BlogController extends Controller
     /***************************************************************/
     public function get_blogs_by_vue(Request $request)
     {
+        
         $blogs = Blog::with('creator', 'category', 'country', 'city', 'institute')->paginate(10);
         return response()->json($blogs);
     }

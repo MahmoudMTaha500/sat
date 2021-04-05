@@ -11,6 +11,12 @@ Route::get('/', 'WebsiteController@home_page')->name('website.home');
 Route::get('/institutes', 'WebsiteController@institutes_page')->name('website.institutes');
 Route::get('/institute/{institute_id?}/{institute_slug?}/{course_slug?}', 'WebsiteController@institute_page')->name('website.institute');
 Route::get('/student-requests/confirm-reservation','WebsiteController@confirm_reservation')->name('student_requests.confirm_reservation');   
+Route::get('/articles','WebsiteController@articles')->name('website.articles');
+Route::get('/article/{id}','WebsiteController@article')->name('website.article');
+
+
+
+
 
 // invoice pdf route
 Route::get('student-invoice', 'WebsiteController@student_invoice')->name('student_invoice');
@@ -43,3 +49,6 @@ Route::post('student/register', 'WebsiteController@student_register_auth')->name
 
 
 });
+
+
+

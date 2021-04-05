@@ -129,6 +129,27 @@ class WebsiteController extends Controller
             return back();
         }
     }
+
+
+
+    /*******************************/
+    public function articles(){
+
+
+        $blogs = Blog::paginate(8);
+        return view('website.blog.articals',compact('blogs'));
+        // dd($blogs); 
+    } 
+
+    public function article($id){
+
+// dd($id);
+$blog = Blog::find($id);
+
+        // $blogs = Blog::paginate(8);
+        return view('website.blog.artical',compact('blog'));
+        // dd($blogs); 
+    } 
     // student register request : create new user of type student
     public function student_invoice(Request $request)
     {

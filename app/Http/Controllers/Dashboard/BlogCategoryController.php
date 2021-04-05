@@ -12,7 +12,8 @@ class BlogCategoryController extends Controller
 
     public function index()
     {
-        $categories = BlogCategory::all();
+        $categories = BlogCategory::with('blogs')->get();
+        // dd($categories);
         $department_name = 'blogs';
         $page_name = 'blog-categories';
         $page_title = 'اقسام المقالات';

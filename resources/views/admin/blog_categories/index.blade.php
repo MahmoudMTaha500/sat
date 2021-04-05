@@ -62,7 +62,7 @@
                                         @foreach($categories as $cat)
                                         <tr>
                                             <td>{{$cat->name_ar}}</td>
-                                            <td><a href="#" class="btn btn-outline-primary round btn-min-width btn-sm">15 مقالة </a></td>
+                                            <td><a href="{{url('/dashboard/blogs?cat_id='.$cat->id)}}" class="btn btn-outline-primary round btn-min-width btn-sm">{{ count($cat->blogs)  }} مقالة </a></td>
 
                                             <td class="text-truncate">
                                                 <div class="btn-group" role="group" aria-label="Basic example">

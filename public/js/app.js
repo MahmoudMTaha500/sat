@@ -2522,9 +2522,18 @@ __webpack_require__.r(__webpack_exports__);
       status: true
     };
   },
-  mounted: function mounted() {
-    this.getBlogs();
+  beforeMount: function beforeMount() {
+    var urlParams = new URLSearchParams(window.location.search);
+    var myParam = urlParams.get('cat_id'); //    alert(myParam);
+
+    if (myParam) {
+      this.cat_id = myParam;
+      this.filter();
+    } else {
+      this.getBlogs();
+    }
   },
+  mounted: function mounted() {},
   methods: {
     getBlogs: function getBlogs() {
       var _this = this;
@@ -43077,7 +43086,24 @@ var render = function() {
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "heading-elements" }, [
-            _vm._m(1),
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("li", [
+                _c(
+                  "a",
+                  {
+                    staticClass:
+                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                    attrs: { href: _vm.url_dashboard + "/blogs/create" }
+                  },
+                  [
+                    _c("i", { staticClass: "ft-plus ft-md" }),
+                    _vm._v(" اضافة مقال جديد")
+                  ]
+                )
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -43367,8 +43393,6 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(blog.city.name_ar))]),
                       _vm._v(" "),
-                      _vm._m(4, true),
-                      _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(blog.created_at))]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
@@ -43573,36 +43597,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "list-inline mb-0" }, [
-      _c("li", [
-        _c(
-          "button",
-          {
-            staticClass:
-              "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
-            attrs: {
-              "data-toggle": "modal",
-              "data-target": "#exampleModalCenter"
-            }
-          },
-          [_c("i", { staticClass: "ft-filter ft-md" }), _vm._v(" فلتر")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("li", [
-        _c(
-          "a",
-          {
-            staticClass:
-              "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-            attrs: { href: "" }
-          },
-          [
-            _c("i", { staticClass: "ft-plus ft-md" }),
-            _vm._v(" اضافة معهد جديد")
-          ]
-        )
-      ])
+    return _c("li", [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#exampleModalCenter"
+          }
+        },
+        [_c("i", { staticClass: "ft-filter ft-md" }), _vm._v(" فلتر")]
+      )
     ])
   },
   function() {
@@ -43648,47 +43655,12 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("المدينه")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("التعليقات")]),
-        _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("التاريخ")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحاله")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اكشن")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c(
-        "div",
-        {
-          staticClass: "btn-group",
-          attrs: { role: "group", "aria-label": "Basic example" }
-        },
-        [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-outline-info btn-sm round",
-              attrs: { href: "" }
-            },
-            [_vm._v("حالي")]
-          ),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-outline-success btn-sm round",
-              attrs: { href: "" }
-            },
-            [_vm._v("جديد")]
-          )
-        ]
-      )
     ])
   }
 ]
@@ -44088,7 +44060,15 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-12", attrs: { id: "recent-transactions" } }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v(" كل التعليقات (" + _vm._s(_vm.comments.total) + ")")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._m(1)
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-content" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -44099,7 +44079,7 @@ var render = function() {
                 attrs: { id: "recent-orders" }
               },
               [
-                _vm._m(1),
+                _vm._m(2),
                 _vm._v(" "),
                 _c(
                   "tbody",
@@ -44199,7 +44179,7 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _vm._m(3, true)
                       ])
                     ])
                   }),
@@ -44218,50 +44198,50 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v(" كل التعليقات (15)")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "heading-elements-toggle" }, [
-        _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" }, [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
-                attrs: { href: "/sat/institutes/create.php" }
-              },
-              [_vm._v(" كل التعليقات")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn btn-sm btn-primary box-shadow-2 round btn-min-width pull-right",
-                attrs: { href: "/sat/institutes/create.php" }
-              },
-              [_vm._v(" الحالية")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                attrs: { href: "/sat/institutes/create.php" }
-              },
-              [_vm._v(" الجديدة")]
-            )
-          ])
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "heading-elements" }, [
+      _c("ul", { staticClass: "list-inline mb-0" }, [
+        _c("li", [
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
+              attrs: { href: "/sat/institutes/create.php" }
+            },
+            [_vm._v(" كل التعليقات")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn btn-sm btn-primary box-shadow-2 round btn-min-width pull-right",
+              attrs: { href: "/sat/institutes/create.php" }
+            },
+            [_vm._v(" الحالية")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", [
+          _c(
+            "a",
+            {
+              staticClass:
+                "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+              attrs: { href: "/sat/institutes/create.php" }
+            },
+            [_vm._v(" الجديدة")]
+          )
         ])
       ])
     ])
@@ -46242,7 +46222,15 @@ var render = function() {
   return _c("div", { staticClass: "row" }, [
     _c("div", { staticClass: "col-12", attrs: { id: "recent-transactions" } }, [
       _c("div", { staticClass: "card" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v(" كل التقييمات (" + _vm._s(_vm.rates.total) + ")")
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "heading-elements" })
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-content" }, [
           _c("div", { staticClass: "table-responsive" }, [
@@ -46311,14 +46299,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h4", { staticClass: "card-title" }, [_vm._v(" كل التقييمات (15)")]),
-      _vm._v(" "),
-      _c("a", { staticClass: "heading-elements-toggle" }, [
-        _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "heading-elements" })
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
     ])
   },
   function() {
@@ -46760,7 +46742,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v(" المطار")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v(" السكن")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
         _vm._v(" "),

@@ -62,7 +62,7 @@
                               <a class="nav-link text-main-color" alt="العروض" href="offers.html">العروض</a>
                           </li>
                           <li class="nav-item px-xl-2">
-                              <a class="nav-link text-main-color" alt="المقالات" href="articles.html">المقالات</a>
+                              <a class="nav-link text-main-color" alt="المقالات" href="{{route('website.articles')}}">المقالات</a>
                           </li>
                           <li class="nav-item px-xl-2">
                               <a class="nav-link text-main-color" alt="تواصل معنا" href="contact-us.html">تواصل معنا</a>
