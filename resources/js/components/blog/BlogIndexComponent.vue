@@ -11,7 +11,7 @@
                                 <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right"><i class="ft-filter ft-md"></i> فلتر</button>
                             </li>
                             <li>
-                                <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" href=""> <i class="ft-plus ft-md"></i> اضافة معهد جديد</a>
+                                <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" :href="url_dashboard+'/blogs/create'"> <i class="ft-plus ft-md"></i> اضافة مقال جديد</a>
                             </li>
                         </ul>
 
@@ -77,7 +77,7 @@
                                     <th class="border-top-0">الدوله</th>
                                     <th class="border-top-0">المدينه</th>
 
-                                    <th class="border-top-0">التعليقات</th>
+                                    <!-- <th class="border-top-0">التعليقات</th> -->
                                     <th class="border-top-0">التاريخ</th>
                                     <th class="border-top-0">الحاله</th>
                                     <th class="border-top-0">اكشن</th>
@@ -92,12 +92,12 @@
                                     <td>{{blog.country.name_ar}}</td>
                                     <td>{{blog.city.name_ar}}</td>
 
-                                    <td>
+                                    <!-- <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a href="" class="btn btn-outline-info btn-sm round">حالي</a>
                                             <a href="" class="btn btn-outline-success btn-sm round">جديد</a>
                                         </div>
-                                    </td>
+                                    </td> -->
                                     <td>{{blog.created_at}}</td>
                                     <td class="text-truncate">
                                         <input type="checkbox" id="checkbox" v-model="blog.approvement" @change="updateApprovement" @click="getblog_id(blog.id)" />
@@ -153,9 +153,25 @@
                 status: true,
             };
         },
-
-        mounted() {
+       beforeMount(){
+  const urlParams = new URLSearchParams(window.location.search);
+           const myParam = urlParams.get('cat_id');
+        //    alert(myParam);
+           if(myParam){
+               this.cat_id = myParam;
+               this.filter();
+           } else{
             this.getBlogs();
+
+           }
+            
+        },
+        mounted() {
+           
+        
+             
+
+         
         },
 
         methods: {
@@ -183,5 +199,7 @@
                 
             },
         },
+
+ 
     };
 </script>
