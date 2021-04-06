@@ -25,9 +25,9 @@ Route::post('create-student-request', 'WebsiteController@create_student_request'
 
 
 /** Payment Routes *************************************/
-
-Route::get('payment-checkout', 'PaymentController@payment_checkout')->name('payment_checkout');
-Route::get('payment-success', 'PaymentController@payment_success')->name('payment_success');
+Route::get('pay-now/{request_id}', 'WebsiteController@pay_now')->name('pay_now');
+Route::post('checkout', 'WebsiteController@checkout')->name('checkout');
+Route::get('payment-confirmation', 'WebsiteController@payment_confirmation')->name('payment_confirmation');
 
 
 Route::get('student-path', function(){

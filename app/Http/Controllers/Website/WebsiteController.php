@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\RegisterStudentRequest;
+use App\Models\Airports;
+use App\Models\residences;
 use App\Models\Blog;
 use App\Models\Course;
 use App\Models\Institute;
@@ -48,8 +50,9 @@ class WebsiteController extends Controller
         return view('website.institute.institute-profile', compact('useVue', 'course', 'institute'));
     }
     // confirm reservation page
-    public function confirm_reservation(Request $request)
+    public function confirm_reservation(Request $request , $pay_checker = null)
     {
+        // dd($pay_checker);
         $validated = $request->validate([
             'weeks' => 'required|numeric',
             'started_date' => 'required',
@@ -90,7 +93,6 @@ class WebsiteController extends Controller
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
-
         return view('website.institute.confirm-reservation', compact('course_details', 'useVue'));
 
     }
@@ -237,8 +239,8 @@ $blog = Blog::find($id);
         }
         $student_request_data['insurance_price'] = $course_details['insurance_price'];
         $student_request_data['total_price'] = $course_details['total_price'];
-        $student_request_data['paid_price'] = $course_details['total_price'];
-        $student_request_data['remaining_price'] = 0;
+        $student_request_data['paid_price'] = 0;
+        $student_request_data['remaining_price'] = $course_details['total_price'];
         $student_request_data['started_date'] = $course_details['started_date'];
         $student_request_data['note'] = $note;
 
@@ -259,8 +261,60 @@ $blog = Blog::find($id);
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
 
-        session()->flash('alert_message', ['message' => 'تم ارسال طلبك بنجاح', 'icon' => 'success']);
+        $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="'.route('student_invoice').'" class="text-secondary-color"> عرض السعر</a></p>
+        <a href="'.route('pay_now' , $student_request->id).'"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';
+        session()->flash('alert_message', ['title' => 'تم التسجيل بنجاح',  'body' => $notification_body,  'type' => 'success']);
         return redirect()->back();
 
+    }
+
+    public function pay_now($request_id){
+        $student_request = StudentRequest::find($request_id);
+        $course = Course::find($student_request->course_id);
+        $course_details= [];
+        $course_details['price_per_week'] = $student_request->price_per_week;
+        $course_details['total_price'] = $student_request->total_price;
+        $course_details['institute_name'] = $course->institute->name_ar;
+        $course_details['course_name'] = $course->name_ar;
+        $course_details['country'] = $course->institute->country->name_ar;
+        $course_details['city'] = $course->institute->city->name_ar;
+        $course_details['started_date'] = $student_request->started_date;
+        $course_details['weeks'] = $student_request->weeks;
+        $course_details['lessons_per_week'] = $course->lessons_per_week;
+        $course_details['hours_per_week'] = $course->hours_per_week;
+        $course_details['insurance_price'] = $student_request->insurance_price;
+        $course_details['airport'] = Airports::find($student_request->airport_id);
+        $course_details['residence'] = residences::find($student_request->residence_id);
+
+        return view('website.payment.pay-now', compact('course_details' , 'request_id'));
+    }
+
+    public function checkout(Request $request){
+         $validated = $request->validate([
+            'paid_price' => ['required'],
+            'refund_policy' => ['required'],
+        ], [
+            'paid_price.required' => 'يجب تحديد المبلغ المراد دفعه',
+            'refund_policy.required' => 'يجب الموافقة علي على الشروط والأحكام و سياسة الاسترداد',
+        ]);
+
+
+        
+
+        $student_request =  StudentRequest::find($request->request_id);
+
+        $student_request_data = [];
+        $student_request_data['total_price'] = $student_request->total_price;
+        $student_request_data['paid_price'] = $student_request->paid_price + $request->paid_price;
+        $student_request_data['remaining_price'] = $student_request_data['total_price'] - $student_request_data['paid_price'] ;
+
+
+        StudentRequest::where('id' , $request->request_id)->update($student_request_data);
+        return redirect()->back();
+
+    }
+    public function payment_confirmation(Request $request){
+        
+        return view('website.payment.payment-confirmation');
     }
 }

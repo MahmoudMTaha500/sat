@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="{{asset('website')}}/css/owl.theme.default.css" />
     <!-- Select Search -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css" />
-    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/sweetalert.css">
     <!-- Starrr -->
     <link rel="stylesheet" href="{{asset('website')}}/css/starrr.css" />
     <!-- Custom Css -->

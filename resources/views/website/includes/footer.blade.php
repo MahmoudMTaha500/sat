@@ -67,7 +67,6 @@
 <script src="{{asset('website')}}/js/plugins/starrr.js"></script>
 <!-- Select Search -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<script src="{{url('/admin')}}/app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
 <!-- Custom js -->
 <script src="{{asset('website')}}/js/plugins/uploadImg.js"></script>
 <script src="{{asset('website')}}/js/shared/starr.call.js"></script>
