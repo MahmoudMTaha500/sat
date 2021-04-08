@@ -97,21 +97,22 @@
         <div class="container">
             <div class="col text-right">
                 <h2 class="bold mb-2">عرض السعر</h2>
-                <p class="m-0"><span dir="ltr"> 29/11/2020 :التاریخ</span></p>
-                <p class="m-0"><span dir="ltr"> 4556 :رقم العرض</span></p>
+                <p class="m-0"><span dir="ltr"> {{date("d/m/Y",strtotime($data['date']))}} :التاریخ</span></p>
+                <p class="m-0"><span dir="ltr"> {{$data['request_id']}} :رقم العرض</span></p>
                 <h3>كلاسات</h3>
                 <p class="m-0"><span dir="ltr">+966 55 548 4931</span></p>
                 <p class="m-0">sat@sat-edu.com</p>
             </div>
             <div class="col text-center">
-                <img width="100%" src="https://classat.netlify.app/imgs/logo.png" />
+                {{-- <img width="100%" src="https://classat.netlify.app/imgs/logo.png" /> --}}
             </div>
             <div class="col text-left">
                 <h3 class="log">
-                    <img width="40%" src="https://kaplan.com/wp-content/uploads/2017/01/Kaplan_logo.png" />
+                    {{-- <img width="40%" src="https://kaplan.com/wp-content/uploads/2017/01/Kaplan_logo.png" /> --}}
+                    {{-- <img width="40%" src="{{asset($data['institute_logo'])}}" /> --}}
                 </h3>
-                <h3 class="mb-0">معهد كابلان</h3>
-                <p class="m-0">بريطانية, مانشيستر</p>
+                <h3 class="mb-0">{{$data['institute_name']}}</h3>
+                <p class="m-0"> {{$data['country']}}, {{$data['city']}}</p>
             </div>
             <div>
             <div class="sub mt-2 w-100">
@@ -120,8 +121,8 @@
             <table class="w-100 student-table">
                 <tbody>
                     <tr>
-                        <td class="student-id"><strong>رقم الطالب :</strong> 237038</td>
-                        <td class="student-name"><strong>اسم الطالب : </strong> محمود سامي</td>
+                        <td class="student-id"><strong>رقم الطالب :</strong> {{$data['student_id']}}</td>
+                        <td class="student-name"><strong>اسم الطالب : </strong> {{$data['student_name']}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -142,36 +143,47 @@
                         <td style="text-align: right">
                             انجليزي عام
                         </td>
-                        <td>14/12/2020</td>
-                        <td>18/12/2020</td>
-                        <td> 4 اسابيع</td>
-                        <td>900</td>
+                        <td>{{ArabicDate($data['from_date'])}}</td>
+                        <td>{{ArabicDate($data['to_date'])}}</td>
+                        <td> {{$data['weeks']}} اسابيع</td>
+                        <td>{{$data['course_price']*$data['weeks']}}</td>
                     </tr>
-                    <tr>
-                        <td colspan="4" style="text-align: right">
-                            السكن : سكن مع عائلة
-                        </td>
-                        <td>750</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="text-align: right">
-                            الاستقبال من مطار القاهرة
-                        </td>
-                        
-                        <td>120</td>
-                    </tr>
-                    <tr>
-                        <td colspan="4" style="text-align: right">
-                            التامين الصحي 
-                        </td>
-                        
-                        <td>450</td>
-                    </tr>
+                    @if (isset($data['airport']['name_ar']))
+
+                        <tr>
+                            <td colspan="4" style="text-align: right">
+                                {{$data['airport']['name_ar']}}
+                            </td>
+                            
+                            <td>{{$data['airport']['price']}}</td>
+                        </tr>
+                    @endif
+                    @if ( isset($data['residence']['name_ar']))
+                        <tr>
+                            <td colspan="4" style="text-align: right">
+                                السكن : {{$data['residence']['name_ar']}}
+                            </td>
+                            <td>{{$data['residence']['price']*$data['weeks']}}</td>
+                        </tr>
+                    @endif 
+
+
+                    @if ($data['insurance_price'] != 0)
+                        <tr>
+                            <td colspan="4" style="text-align: right">
+                                التامين الصحي 
+                            </td>
+                            
+                            <td>{{$data['insurance_price']*$data['weeks']}}</td>
+                        </tr>
+                    @endif
+                
+                    
                     <tr>
                         <td colspan="4" style="text-align: right">
                             الاجمالي 
                         </td>
-                        <td style="font-size:30px">2220</td>
+                        <td style="font-size:30px">{{$data['total_price']}}</td>
                     </tr>
                 </tbody>
             </table> 

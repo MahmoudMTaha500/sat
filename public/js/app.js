@@ -49752,10 +49752,11 @@ var staticRenderFns = [
       { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
       [
         _c("input", {
-          staticClass: "datepicker form-control border-0 bg-transparent",
+          staticClass:
+            "datepicker-active-monday form-control border-0 bg-transparent",
           attrs: {
             readonly: "readonly",
-            name: "started_date",
+            name: "from_date",
             autocomplete: "off",
             type: "text",
             "data-toggle": "datepicker",

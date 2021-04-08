@@ -122,7 +122,7 @@
                           <!-- ./Login & Register In Large Screen -->
                           @endif
                           @if(Auth::guard('student')->check()) Hello {{Auth::guard('student')->user()->name}} @else Hello there @endif
-                      </div>
+                        </div>
                   </div>
                   <!-- ./Nav Menu  -->
               </nav>

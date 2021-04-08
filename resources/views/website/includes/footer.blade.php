@@ -73,5 +73,15 @@
 <script src="{{asset('website')}}/js/shared/owl.call.js"></script>
 <script src="{{asset('website')}}/js/shared/select-picker.call.js"></script>
 <script src="{{asset('website')}}/js/shared/sidemenu.js"></script>
-<script src="{{asset('website')}}/js/plugins/datepicker.min.js"></script>
-<script src="{{asset('website')}}/js/shared/date-picker.call.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+$( ".datepicker-active-monday" ).datepicker({
+    beforeShowDay: function(date) {
+        var day = date.getDay();
+        return [(day != 2 && day != 3 && day != 4 && day != 5 && day != 6 && day != 0)];
+    }
+});
+
+</script>

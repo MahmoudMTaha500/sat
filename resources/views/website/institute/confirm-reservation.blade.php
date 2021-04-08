@@ -112,7 +112,8 @@
                         <p class="text-dark"><span class="font-weight-bold">أسم المعهد : </span> {{$course_details['institute_name']}}</p>
                         <p class="text-dark"><span class="font-weight-bold">اسم الكورس : </span> {{$course_details['course_name']}}</p>
                         <p class="text-dark"><span class="font-weight-bold">الموقع : </span> {{$course_details['country']}} - {{$course_details['city']}}</p>
-                        <p class="text-dark"><span class="font-weight-bold">تاريخ بداية الكورس : </span> {{$course_details['started_date']}}</p>
+                        <p class="text-dark"><span class="font-weight-bold">تاريخ بداية الكورس : </span> {{ArabicDate($course_details['from_date'])}}</p>
+                        <p class="text-dark"><span class="font-weight-bold">تاريخ نهاية الكورس : </span> {{ArabicDate($course_details['to_date'])}}</p>
                         @if ($course_details['airport'] != 0)
                         <p class="text-dark"><span class="font-weight-bold">الاستقبال : </span> {{$course_details['airport']['name_ar']}} - {{$course_details['airport']['price']}} ريال سعودي</p>
                         @endif @if ($course_details['residence'] != 0)

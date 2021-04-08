@@ -29,7 +29,8 @@ class CreateStudentRequestsTable extends Migration
             $table->bigInteger('total_price')->default(0);
             $table->bigInteger('paid_price')->default(0);
             $table->bigInteger('remaining_price')->default(0);
-            $table->string('started_date');
+            $table->string('from_date');
+            $table->string('to_date');
             $table->longText('note')->nullable();
             $table->timestamps();
         });

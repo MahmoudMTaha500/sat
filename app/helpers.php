@@ -75,3 +75,9 @@ function random_password() {
     }
     return implode($pass); //turn the array into a string
 }
+
+// return the to date of student request
+function to_date($from_date , $weeks) {
+    $to_date = date('m/d/Y' ,  strtotime($from_date." +$weeks week"));
+    return $to_date;
+}
