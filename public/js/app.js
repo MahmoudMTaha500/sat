@@ -5187,7 +5187,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     total_price: function total_price() {
-      var totalPrice = (this.insurance_price + this.price_per_week * (1 - this.course.discount)) * this.weeks;
+      var totalPrice = this.price_per_week * (1 - this.course.discount) * this.weeks;
 
       if (!isNaN(this.chosin_airport.price)) {
         totalPrice += this.chosin_airport.price;
@@ -5195,6 +5195,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!isNaN(this.chosin_residence.price)) {
         totalPrice += this.chosin_residence.price * this.weeks;
+      }
+
+      if (this.insurance_price_checker == '1') {
+        totalPrice += this.insurance_price * this.weeks;
       }
 
       return totalPrice;

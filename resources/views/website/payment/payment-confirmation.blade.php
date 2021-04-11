@@ -19,7 +19,7 @@
                                 يمكنك متابعة طلبك عن طريق حسابك الخاص علي موقعنا,
                                 يمكنك تصفح بريدك الالكتروني للحصول علي معلومات تسجيل الدخول لحسابك ,
                             </p>
-                            <a target="_blank" href="{{route('student_invoice')}}"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">عرض الفاتورة</a>
+                            <a target="_blank" href="{{route('student_invoice' , ['request_id' => $request_id ,  'student_id' => $student_id])}}"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">عرض الفاتورة</a>
                         </div>
                     </div>
                 </div>

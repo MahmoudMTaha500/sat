@@ -1,195 +1,274 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>Document</title>
-        <style>
-            html,
-            body {
-                direction: rtl;
-            }
-            .container {
-                width: 1280px;
-                margin: 0 auto;
-                padding: 0;
-                direction: rtl;
-                font-family: XB Riyaz;
-            }
-            table{
-                font-family: XB Riyaz;
-            }
-            .col {
-                width: 33%;
-                float: right;
-            }
-            .bold {
-                font-weight: bold;
-                margin: 0px;
-                padding: 0px;
-            }
-
-            .table {
-
-                width: 100%;
-                text-align: right;
-                margin-top: 20px;
-                border: 1px solid #000;
-            }
-
-            .table .thead th{
-                background: #c0c0c0;
-            }
-            .table .thead th , .table  tr td {
-                padding: 10px;
-                margin: 0px!important;
-                text-align: center
-            }
-            td , th {
-                padding: 10px;
-            }
-            .table  tr:nth-child(odd){
-                background-color:beige
-            }
-            .table  tr:nth-child(even){
-                background-color:#eee
-            }
-         
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice</title>
+</head>
+<body>
+    <style>
+        body, html , .haeder, p, th , td{
+            font-family: 'Cairo', sans-serif;
+        }
+        body, html{
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+        
+        .container{
+            padding-right: 50px;
+            padding-left: 50px;
+        }
+        .haeder{
+            padding: 40px 50px 70px 50px ;
+            background-color: #f2f2f2;
+            position: absolute;
+            width: 87.5%;
+            top: 0;
+            left: 0;
+        }
+        .left-section , .right-section{
+            width: 45%;
             
+        }
+        .left-section{
+            text-align: left;
+            float: left;
+        }
+        .right-section{
+            text-align: right;
+            float: right;
+        }
+        .classta-logo{
+            width: 50%;
+            margin-top: 25px;
+        }
+        p{
+            font-size: 18px;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+        .intro{
+            text-align: center;
+            padding: 30px 70px;
+        }
+        .student-info{
+            background-color: #f2f2f2;
+            border: 1px dotted #f4c20d;
+            border-width: 3px;
+            border-radius: 10px;
+            padding: 20px 50px;
+        }
 
-          
-            .m-0 {
-                margin: 0;
-            }
-            .mt-0 {
-                margin-top: 0;
-            }
-            .mb-0 {
-                margin-bottom: 0;
-            }
-            .mt-5 {
-                margin-top: 5rem;
-            }
-            .mt-2 {
-                margin-top: 2rem;
-            }
-            .mb-2 {
-                margin-bottom: 2rem;
-            }
-            .text-center {
-                text-align: center;
-            }
-            .text-right {
-                text-align: right;
-            }
-            .text-left {
-                text-align: left;
-            }
-            .w-100{
-                width: 100%;
-            }
-            .student-table{
-                font-size: 17px!important;
-                border: 2px solid #000
-            }
-        </style>
-    </head>
-    <body>
+        th , td{
+            font-size: 18px;
+            padding: 15px 7px;
+            text-align: center
+        }
+        .info-table-container{
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+        .info-table-container table{
+            width: 100%;
+        }
+        .info-table-container .thead{
+            background-color: #006fff;
+            
+        }
+        .info-table-container .thead th{
+            color: #fff;
+        }
+        tr:nth-child(odd){
+            background-color: #f2f2f2
+        }
+        .total-price-row td{
+            color: #f4c20d;
+            font-size: 25px;
+        }
+        .note{
+            color: #fc2222;
+            text-align: center;
+            margin : 30px 0 ;
+        }
+
+        .footer{
+            position: absolute;
+            bottom:0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background-color: #006fff;
+            text-align: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 70px;
+        }
+        .content{
+            padding-top: 200px;
+        }
+    </style>
+
+
+    <header class="haeder">
+        <div class="left-section">
+            <img class="classta-logo" src="https://classat.netlify.app/imgs/logo.png" alt="">
+        </div>
+
+        <div class="right-section">
+            <p class="m-0"><span dir="ltr"> {{$data['request_id']}} :رقم العرض</span></p>
+            <p class="m-0"><span>التاریخ :  {{ArabicDate($data['date'])}} </span></p>
+            <p class="m-0"> {{$data['institute_name']}} , {{$data['country']}}, {{$data['city']}}</p>
+        </div>
+    </header>
+
+    <section class="content">
         <div class="container">
-            <div class="col text-right">
-                <h2 class="bold mb-2">عرض السعر</h2>
-                <p class="m-0"><span dir="ltr"> {{date("d/m/Y",strtotime($data['date']))}} :التاریخ</span></p>
-                <p class="m-0"><span dir="ltr"> {{$data['request_id']}} :رقم العرض</span></p>
-                <h3>كلاسات</h3>
-                <p class="m-0"><span dir="ltr">+966 55 548 4931</span></p>
-                <p class="m-0">sat@sat-edu.com</p>
-            </div>
-            <div class="col text-center">
-                {{-- <img width="100%" src="https://classat.netlify.app/imgs/logo.png" /> --}}
-            </div>
-            <div class="col text-left">
-                <h3 class="log">
-                    {{-- <img width="40%" src="https://kaplan.com/wp-content/uploads/2017/01/Kaplan_logo.png" /> --}}
-                    {{-- <img width="40%" src="{{asset($data['institute_logo'])}}" /> --}}
-                </h3>
-                <h3 class="mb-0">{{$data['institute_name']}}</h3>
-                <p class="m-0"> {{$data['country']}}, {{$data['city']}}</p>
-            </div>
-            <div>
-            <div class="sub mt-2 w-100">
-                <span> شكرا لاستكمال الحجز في مركز اللغه معهد كابلان يرجي التاكد من تفاصيل الحجز المرفق بالفاتوره علي النحو التالي </span>
-            </div>
-            <table class="w-100 student-table">
-                <tbody>
-                    <tr>
-                        <td class="student-id"><strong>رقم الطالب :</strong> {{$data['student_id']}}</td>
-                        <td class="student-name"><strong>اسم الطالب : </strong> {{$data['student_name']}}</td>
-                    </tr>
-                </tbody>
-            </table>
-
-                
-            <table class="table">
-                <thead class="thead">
+            <p class="intro">
+                شكرا لاستكمال الحجز في مركز اللغة معهد {{$data['institute_name']}}
+    يرجي التأكد من تفاصيل الحجز المرفق بالفاتورة علي النحو التالي
+            </p>
+        </div>
+    
+        <div class="student-info container">
+             <div class="left-section">
+                <strong>اسم الطالب : </strong> {{$data['student_name']}}
+             </div>
+             <div class="right-section">
+                <strong>رقم الطالب :</strong> {{$data['student_id']}}
+             </div>
+        </div>
+    
+    
+        <div>
+            <div class="info-table-container">
+                <table>
                     <tr class="thead">
-                        <th style="text-align: right">تفاصيل الحجز</th>
+                        <th>تفاصيل الحجز</th>
                         <th>من</th>
                         <th>الي</th>
-                        <th>المده</th>
-                        <th>المبلغ  | ريال سعودي</th>
+                        <th>المدة</th>
+                        <th>المبلغ ر.س</th>
                     </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="text-align: right">
-                            انجليزي عام
-                        </td>
+                    <tr class="table-row">
+                        <td>{{$data['course_name']}}</td>
                         <td>{{ArabicDate($data['from_date'])}}</td>
                         <td>{{ArabicDate($data['to_date'])}}</td>
-                        <td> {{$data['weeks']}} اسابيع</td>
+                        <td>{{$data['weeks']}} اسابيع</td>
                         <td>{{$data['course_price']*$data['weeks']}}</td>
                     </tr>
                     @if (isset($data['airport']['name_ar']))
-
                         <tr>
-                            <td colspan="4" style="text-align: right">
+                            <td style="text-align: right">
                                 {{$data['airport']['name_ar']}}
                             </td>
-                            
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>{{$data['airport']['price']}}</td>
                         </tr>
                     @endif
                     @if ( isset($data['residence']['name_ar']))
                         <tr>
-                            <td colspan="4" style="text-align: right">
+                            <td style="text-align: right">
                                 السكن : {{$data['residence']['name_ar']}}
                             </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>{{$data['residence']['price']*$data['weeks']}}</td>
                         </tr>
                     @endif 
-
-
+    
+    
                     @if ($data['insurance_price'] != 0)
                         <tr>
-                            <td colspan="4" style="text-align: right">
+                            <td style="text-align: right">
                                 التامين الصحي 
                             </td>
-                            
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td>{{$data['insurance_price']*$data['weeks']}}</td>
                         </tr>
                     @endif
-                
-                    
-                    <tr>
-                        <td colspan="4" style="text-align: right">
+                    <tr class="total-price-row">
+                        <td style="text-align: right">
                             الاجمالي 
                         </td>
-                        <td style="font-size:30px">{{$data['total_price']}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>{{$data['total_price']}}</td>
                     </tr>
-                </tbody>
-            </table> 
-            <div class="sub mt-2 w-100">
-                <span style="font-weight: bold"> يرجى ملاحظة ان هذه الاسعار متغيرة بشكل دوري </span>
+                </table>
             </div>
         </div>
-    </body>
+
+
+        @if (isset($data['show_paid_price']))
+            <div class="student-info container" style="margin-top: 30px">
+                <div class="left-section">
+                <strong>المتبقي : </strong> {{$data['remaining_price']}}
+                </div>
+                <div class="right-section">
+                <strong>المدفوع :</strong> {{$data['paid_price']}}
+                </div>
+            </div>
+        @endif
+
+        
+    
+        <div>
+            <p class="note">
+                يرجي ملاحظة ان هذه الأسعار متغيرة بشكل دوري
+            </p>
+        </div>
+    </section>
+
+    <div class="footer" dir="ltr">
+        <span>Sat@sat-edu.com  </span>   	&nbsp;	&nbsp;	&nbsp;	&nbsp;
+        <img width="15px" src="https://icon-library.com/images/white-phone-icon-png/white-phone-icon-png-7.jpg" alt="">
+        {{-- <img width="15px" src="{{asset('websit/img/phone-icon.png')}}" alt=""> --}}
+        <span>0555484931 </span> 
+        <img width="15px" src="https://www.pngkey.com/png/full/45-455131_white-internet-icon-png-clipart-library-library-internet.png" alt=""> 
+        {{-- <img width="15px" src="{{asset('websit/img/earth-icon.png')}}" alt="">  --}}
+    </div>
+</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

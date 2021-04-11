@@ -1,9 +1,21 @@
 @extends('website.app') @section('website.content')
+
     <!-- Article Img -->
-    <div class="article-img position-relative">
+    {{-- <div class="article-img position-relative">
         <img src="{{asset($blog->banner)}}" alt="" class="w-100">
-    </div>
+    </div> --}}
     <!-- ./Article Img -->
+    <div class="article-img position-relative">
+        <img class="w-100" src="{{asset($blog->banner)}}" alt="" srcset="">
+        <div class="overlay"></div>
+        <div class="center-content" style="position: absolute;top:50%;left:50%" class="col-lg-4  align-self-center mx-auto text-center">
+            <h4 class="text-white mb-4">دراسة اللغة الانجليزية في بريطانية</h4>
+            <a href="institutes.html" class="btn bg-secondary-color text-white rounded-10">معاهد بريطانيا</a>
+        </div>
+        <!-- <img src="imgs/news/Bg.png" alt="" class="w-100"> -->
+    </div>
+
+
     <div class="article-info py-4 bg-sub-secondary-color">
         <div class="container-fluid">
             <div class="row px-xl-5">

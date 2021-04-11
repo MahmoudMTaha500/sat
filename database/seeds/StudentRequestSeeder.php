@@ -34,6 +34,7 @@ class StudentRequestSeeder extends Seeder
                 "status" => 'جديد',
                 "weeks" => $weeks,
                 "price_per_week" => $price_per_week*(1-$course->discount),
+                "course_discount" => $course->discount,
                 "residence_id" => $residence->id ,
                 "residence_price" => $residence->price,
                 "airport_id" => $airport->id,

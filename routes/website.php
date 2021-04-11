@@ -34,9 +34,7 @@ Route::get('student-path', function(){
     return 'student path';
 })->middleware('AuthStudent:student');
 
-Route::get('student/profile', function(){
-    return 'student profile';
-})->middleware('AuthStudent:student')->name('student.profile');
+Route::get('student/profile', 'WebsiteController@student_profile')->middleware('AuthStudent:student')->name('student.profile');
 
 Route::get('student/login', 'WebsiteController@student_login_page')->name('student.login');
 Route::post('student/login', 'WebsiteController@student_login_auth')->name('student.login');

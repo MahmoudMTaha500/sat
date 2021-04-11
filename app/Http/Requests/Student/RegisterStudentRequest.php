@@ -27,6 +27,8 @@ class RegisterStudentRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
             'phone' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string'],
+            'city' => ['required', 'string'],
             'address' => ['required', 'string'],
             'nationality' => ['required', 'string', 'max:255'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -37,7 +39,7 @@ class RegisterStudentRequest extends FormRequest
     {
         return [
             'name' => trans('website_lang.your name'),
-            'nationality' => trans('website_lang.nationality '),
+            'nationality' => trans('website_lang.nationality'),
         ];
     }
 
