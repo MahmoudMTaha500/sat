@@ -24,6 +24,9 @@ class StudentRequestSeeder extends Seeder
             $insurance = price_per_week(Institute::where('id' , $course->institute->id)->get()[0]->insurancePrice , $weeks);
             $price_per_week = price_per_week($course->coursesPrice , $weeks);
             $total_price = ($price_per_week*(1-$course->discount) + $insurance +$residence->price)*$weeks + $airport->price;
+
+            $timestamp = rand( strtotime("01 Jul 2021"), strtotime("01 Nov 2023") );
+            $from_date = date("m/d/Y", $timestamp );
             StudentRequest::create([
                 "student_id" => $x,
                 "course_id" => $x,
@@ -31,6 +34,7 @@ class StudentRequestSeeder extends Seeder
                 "status" => 'جديد',
                 "weeks" => $weeks,
                 "price_per_week" => $price_per_week*(1-$course->discount),
+                "course_discount" => $course->discount,
                 "residence_id" => $residence->id ,
                 "residence_price" => $residence->price,
                 "airport_id" => $airport->id,
@@ -39,7 +43,8 @@ class StudentRequestSeeder extends Seeder
                 "total_price" => $total_price,
                 "paid_price" => $total_price,
                 "remaining_price" => 0,
-                "started_date" => '2021-03-29',
+                "from_date" =>  $from_date,
+                "to_date" => to_date($from_date , $weeks),
                 "note" => 'هذه ملاحظة افتراضية',
             ]);
         }

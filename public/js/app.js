@@ -5188,7 +5188,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     total_price: function total_price() {
-      var totalPrice = (this.insurance_price + this.price_per_week * (1 - this.course.discount)) * this.weeks;
+      var totalPrice = this.price_per_week * (1 - this.course.discount) * this.weeks;
 
       if (!isNaN(this.chosin_airport.price)) {
         totalPrice += this.chosin_airport.price;
@@ -5196,6 +5196,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!isNaN(this.chosin_residence.price)) {
         totalPrice += this.chosin_residence.price * this.weeks;
+      }
+
+      if (this.insurance_price_checker == '1') {
+        totalPrice += this.insurance_price * this.weeks;
       }
 
       return totalPrice;
@@ -49800,10 +49804,11 @@ var staticRenderFns = [
       { staticClass: "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light" },
       [
         _c("input", {
-          staticClass: "datepicker form-control border-0 bg-transparent",
+          staticClass:
+            "datepicker-active-monday form-control border-0 bg-transparent",
           attrs: {
             readonly: "readonly",
-            name: "started_date",
+            name: "from_date",
             autocomplete: "off",
             type: "text",
             "data-toggle": "datepicker",

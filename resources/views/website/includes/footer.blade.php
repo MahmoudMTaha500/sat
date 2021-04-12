@@ -51,10 +51,14 @@
     </div>
 </footer>
 <!-- ./Footer -->
+<div class="support position-fixed p-3 d-md-none  d-block">
+    <p class="text-white mb-0"> <span class="close-support position-absolute"><i class="fas fa-times"></i></span> هل
+        تحتاج الي مساعدة؟ .. اطلب مستشارك <a href="support.html" class="float-left text-secondary-color bg-white"><i
+                class="fas fa-arrow-left"></i></a></p>
 
-@if (isset($useVue))
+{{-- @if (isset($useVue))
+@endif --}}
 <script src="{{asset('js/app.js')}}"></script>
-@endif
 <!-- Jquery, Popper and Bootstrap JS -->
 <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
 
@@ -67,12 +71,22 @@
 <script src="{{asset('website')}}/js/plugins/starrr.js"></script>
 <!-- Select Search -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
-<script src="{{url('/admin')}}/app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
 <!-- Custom js -->
 <script src="{{asset('website')}}/js/plugins/uploadImg.js"></script>
 <script src="{{asset('website')}}/js/shared/starr.call.js"></script>
 <script src="{{asset('website')}}/js/shared/owl.call.js"></script>
 <script src="{{asset('website')}}/js/shared/select-picker.call.js"></script>
 <script src="{{asset('website')}}/js/shared/sidemenu.js"></script>
-<script src="{{asset('website')}}/js/plugins/datepicker.min.js"></script>
-<script src="{{asset('website')}}/js/shared/date-picker.call.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{asset('website')}}/js/shared/support.js"></script>
+
+<script>
+$( ".datepicker-active-monday" ).datepicker({
+    beforeShowDay: function(date) {
+        var day = date.getDay();
+        return [(day == 1)];
+    }
+});
+
+</script>

@@ -4,17 +4,20 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\RegisterStudentRequest;
+use App\Models\Airports;
 use App\Models\Blog;
 use App\Models\Course;
 use App\Models\Institute;
 use App\Models\Partner;
+use App\Models\residences;
 use App\Models\Student;
-use App\Models\StudentSuccessStory;
 use App\Models\StudentRequest;
+use App\Models\StudentSuccessStory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Mail;
 use PDF;
+use Hash;
 
 class WebsiteController extends Controller
 {
@@ -48,21 +51,25 @@ class WebsiteController extends Controller
         return view('website.institute.institute-profile', compact('useVue', 'course', 'institute'));
     }
     // confirm reservation page
-    public function confirm_reservation(Request $request)
+    public function confirm_reservation(Request $request, $pay_checker = null)
     {
+
+        // dd($pay_checker);
         $validated = $request->validate([
             'weeks' => 'required|numeric',
-            'started_date' => 'required',
+            'from_date' => 'required',
         ], [
-            'started_date.required' => 'تاريخ البداية مطلوب',
+            'from_date.required' => 'تاريخ البداية مطلوب',
             'required.required' => 'عدد الاسابيع مطلوب',
             'required.numeric' => 'عدد الاسابيع يجب ان يكون رقما',
         ]);
 
+
         $useVue = true;
         $course_details = [];
         $weeks = $request->weeks;
-        $started_date = $request->started_date;
+        $from_date = $request->from_date;
+        $to_date = to_date($from_date , $weeks);
         $residence = json_decode($request->residence, true);
         $airport = json_decode($request->airport, true);
         $insurance = $request->insurance;
@@ -71,10 +78,13 @@ class WebsiteController extends Controller
         $insurance_price = price_per_week($course->institute->insurancePrice, $weeks);
         $course_price_per_week = price_per_week($course->coursesPrice, $weeks);
         $course_discount = $course->discount;
-        $totalPrice = ($insurance_price + $course_price_per_week * (1 - $course_discount)) * $weeks;
+        $totalPrice = ($course_price_per_week * (1 - $course_discount)) * $weeks;
         if ($airport != 0) {$totalPrice += $airport['price'];}
         if ($residence != 0) {$totalPrice += $residence['price'] * $weeks;}
-        if ($insurance == 0) {$insurance_price = 0;}
+        if ($insurance == 1) {$totalPrice += $insurance_price*$weeks;}else{
+            $insurance_price = 0;
+        }
+
 
         $course_details['course_id'] = $course_id;
         $course_details['price_per_week'] = $course_price_per_week;
@@ -83,14 +93,14 @@ class WebsiteController extends Controller
         $course_details['course_name'] = $course->name_ar;
         $course_details['country'] = $course->institute->country->name_ar;
         $course_details['city'] = $course->institute->city->name_ar;
-        $course_details['started_date'] = $started_date;
+        $course_details['from_date'] = $from_date;
+        $course_details['to_date'] = $to_date;
         $course_details['weeks'] = $weeks;
         $course_details['lessons_per_week'] = $course->lessons_per_week;
         $course_details['hours_per_week'] = $course->hours_per_week;
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
-
         return view('website.institute.confirm-reservation', compact('course_details', 'useVue'));
 
     }
@@ -102,11 +112,22 @@ class WebsiteController extends Controller
     // student login request : make login of type student
     public function student_login_auth(Request $request)
     {
+
+
+
+        $validated = $request->validate([
+            'email' => ['required'],
+            'password' => ['required'],
+        ]);
+
+        
+
+
         $remember = $request->has('remember') ? true : false;
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             return redirect()->route('student.profile');
         } else {
-            return back();
+            return back()->withErrors(['login_error' =>'البريد الالكتروني او كلمة المرور غير صحيحين']);
         }
     }
     // student register page  : show student register page of type student
@@ -130,40 +151,59 @@ class WebsiteController extends Controller
         }
     }
 
-
-
     /*******************************/
-    public function articles(){
-
-
+    public function articles()
+    {
         $blogs = Blog::paginate(8);
-        return view('website.blog.articals',compact('blogs'));
-        // dd($blogs); 
-    } 
+        return view('website.blog.articals', compact('blogs'));
+    }
 
-    public function article($id){
 
-// dd($id);
-$blog = Blog::find($id);
+    public function article($id)
+    {
+        $blog = Blog::find($id);
+        return view('website.blog.artical', compact('blog'));
+    }
 
-        // $blogs = Blog::paginate(8);
-        return view('website.blog.artical',compact('blog'));
-        // dd($blogs); 
-    } 
+
+
     // student register request : create new user of type student
     public function student_invoice(Request $request)
     {
-        $data = [
-            // 'foo' => 'bar'
-        ];
-        $pdf = PDF::loadView('website.institute.student-pdf', $data);
-        // $pdf->autoScriptToLang = true;
-        // $pdf->autoLangToFont = true;
-        // $pdf->autoLangToFont = true;
-        // $pdf->useAdobeCJK = true;
-        return $pdf->stream('admin.pdf');
-        //     $pdf = PDF::loadView('pdf.invoice', $data);
-        // return $pdf->download('invoice.pdf');
+        $student_request = StudentRequest::find($request->request_id);
+        $course = $student_request->course;
+        $institute = $student_request->course->institute;
+        $student = $student_request->student;
+
+        $data = [];
+        $data['date'] = $student_request->created_at;
+        $data['request_id'] = $student_request->id;
+        $data['paid_price'] = $student_request->paid_price;
+        $data['remaining_price'] = $student_request->remaining_price;
+        $data['student_id'] = $student->id;
+        $data['student_name'] = $student->name;
+        $data['institute_name'] = $institute->name_ar;
+        $data['institute_logo'] = $institute->name_ar;
+        $data['country'] = $institute->country->name_ar;
+        $data['city'] = $institute->city->name_ar;
+        $data['course_name'] = $course->name_ar;
+        $data['from_date'] = $student_request->from_date;
+        $data['to_date'] = $student_request->to_date;
+        $data['weeks'] = $student_request->weeks;
+        $data['total_price'] = $student_request->total_price;
+        $data['course_price'] = $student_request->price_per_week;
+        $data['insurance_price'] = $student_request->insurance_price;
+        $data['airport'] = Airports::find($student_request->airport_id);
+        $data['residence'] = residences::find($student_request->residence_id);
+
+        if($request->has('student_id')){
+            if($student_request->student_id == $request->student_id){
+                $data['show_paid_price'] = true;
+            }
+        }
+
+        $pdf = PDF::loadView('website.institute.student-pdf', compact('data'));
+        return $pdf->stream('student-id-'.$data['student_id'].'.pdf');
     }
 
     // create student request and account if the student was new student
@@ -180,7 +220,6 @@ $blog = Blog::find($id);
         $city = $request->city;
         $note = $request->city;
         $course_details = json_decode($request->course_details, true);
-
 
         // form validation
         $validated = $request->validate([
@@ -208,40 +247,41 @@ $blog = Blog::find($id);
             'city.required' => 'المدينة مطلوبة',
             'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
         ]);
-        
 
         // configure student data
         $unbcrypt_password = random_password();
-        $student_data = $request->except('_token', 'note' , 'course_details');
+        $student_data = $request->except('_token', 'note', 'course_details');
         $student_data['password'] = bcrypt($unbcrypt_password);
 
         // create student
         $student = Student::create($student_data);
-        
 
         // configure student request data
+
+        $course = Course::where('id', $course_details['course_id'])->get()[0];
         $student_request_data = [];
         $student_request_data['student_id'] = $student->id;
         $student_request_data['course_id'] = $course_details['course_id'];
-        $student_request_data['institute_message'] = Course::where('id' , $course_details['course_id'])->get()[0]->institute->institute_questions;
+        $student_request_data['institute_message'] = $course->institute->institute_questions;
         $student_request_data['status'] = 'جديد';
         $student_request_data['weeks'] = $course_details['weeks'];
-        $student_request_data['price_per_week'] = $course_details['price_per_week'];
-        if($course_details['residence'] != 0){
+        $student_request_data['price_per_week'] = $course_details['price_per_week']*(1-$course->discount);
+        $student_request_data['course_discount'] = $course->discount;
+        if ($course_details['residence'] != 0) {
             $student_request_data['residence_id'] = $course_details['residence']['id'];
             $student_request_data['residence_price'] = $course_details['residence']['price'];
         }
-        if($course_details['airport'] != 0){
+        if ($course_details['airport'] != 0) {
             $student_request_data['airport_id'] = $course_details['airport']['id'];
             $student_request_data['airport_price'] = $course_details['airport']['price'];
         }
         $student_request_data['insurance_price'] = $course_details['insurance_price'];
         $student_request_data['total_price'] = $course_details['total_price'];
-        $student_request_data['paid_price'] = $course_details['total_price'];
-        $student_request_data['remaining_price'] = 0;
-        $student_request_data['started_date'] = $course_details['started_date'];
+        $student_request_data['paid_price'] = 0;
+        $student_request_data['remaining_price'] = $course_details['total_price'];
+        $student_request_data['from_date'] = $course_details['from_date'];
+        $student_request_data['to_date'] = $course_details['to_date'];
         $student_request_data['note'] = $note;
-
 
         // create student request
         $student_request = StudentRequest::create($student_request_data);
@@ -250,17 +290,87 @@ $blog = Blog::find($id);
             'student_email' => $email,
             'student_password' => $unbcrypt_password,
         );
-
-
+        
         // send confirmation mail to student includes username and password
         Mail::send('mail.student_request_registration', $data, function ($message) use ($name, $email, $subject) {
             $message->to($email, $name)
+            ->subject($subject);
+            $message->from('no-reply@sat-edu.com', 'Classat');
+        });
+        
+        $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="' . route('student_invoice' , ['request_id' => $student_request->id]) . '" class="text-secondary-color"> عرض السعر</a></p>
+        <a href="' . route('pay_now', $student_request->id) . '"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';
+        session()->flash('alert_message', ['title' => 'تم التسجيل بنجاح', 'body' => $notification_body, 'type' => 'success']);
+        return redirect()->back();
+
+    }
+
+    public function pay_now($request_id)
+    {
+        $student_request = StudentRequest::find($request_id);
+        $course = Course::find($student_request->course_id);
+        $course_details = [];
+        $course_details['price_per_week'] = $student_request->price_per_week;
+        $course_details['total_price'] = $student_request->total_price;
+        $course_details['institute_name'] = $course->institute->name_ar;
+        $course_details['course_name'] = $course->name_ar;
+        $course_details['country'] = $course->institute->country->name_ar;
+        $course_details['city'] = $course->institute->city->name_ar;
+        $course_details['from_date'] = $student_request->from_date;
+        $course_details['to_date'] = $student_request->to_date;
+        $course_details['weeks'] = $student_request->weeks;
+        $course_details['lessons_per_week'] = $course->lessons_per_week;
+        $course_details['hours_per_week'] = $course->hours_per_week;
+        $course_details['insurance_price'] = $student_request->insurance_price;
+        $course_details['airport'] = Airports::find($student_request->airport_id);
+        $course_details['residence'] = residences::find($student_request->residence_id);
+
+        return view('website.payment.pay-now', compact('course_details', 'request_id'));
+    }
+
+    public function checkout(Request $request)
+    {
+        $validated = $request->validate([
+            'paid_price' => ['required'],
+            'refund_policy' => ['required'],
+        ], [
+            'paid_price.required' => 'يجب تحديد المبلغ المراد دفعه',
+            'refund_policy.required' => 'يجب الموافقة علي على الشروط والأحكام و سياسة الاسترداد',
+        ]);
+
+        $student_request = StudentRequest::find($request->request_id);
+
+        $student_request_data = [];
+        $student_request_data['total_price'] = $student_request->total_price;
+        $student_request_data['paid_price'] = $student_request->paid_price + $request->paid_price;
+        $student_request_data['remaining_price'] = $student_request_data['total_price'] - $student_request_data['paid_price'];
+
+        $subject = 'Classat Request Payment Confirmation';
+        $data = [
+            'request_id' => $student_request->id,
+            'student_id' => $student_request->student_id
+        ];
+        Mail::send('mail.student_request_payment_confirmation', $data, function ($message) use ($student_request, $subject) {
+            $message->to($student_request->student->email, $student_request->student->name)
                 ->subject($subject);
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
 
-        session()->flash('alert_message', ['message' => 'تم ارسال طلبك بنجاح', 'icon' => 'success']);
-        return redirect()->back();
+        StudentRequest::where('id', $request->request_id)->update($student_request_data);
+        return redirect()->route('payment_confirmation' , ['request_id' => $request->request_id , 'student_id' => $student_request->student_id]);
 
+    }
+
+    public function payment_confirmation(Request $request)
+    {
+        $request_id = $request->request_id;
+        $student_id = $request->student_id;
+        return view('website.payment.payment-confirmation' , compact('request_id' , 'student_id'));
+    }
+    public function student_profile()
+    {
+        $student = auth()->guard('student')->user();
+        $useVue = true;
+        return view('website.students.profile' , compact('student' , 'useVue'));
     }
 }

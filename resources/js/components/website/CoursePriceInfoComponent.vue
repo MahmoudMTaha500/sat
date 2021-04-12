@@ -51,7 +51,7 @@
                     <input type="hidden" name="_token" :value="csrf_token">
                     <input type="hidden" name="course_id" :value="course_id">
                     <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                        <input readonly="readonly" name="started_date" autocomplete="off" type="text" class="datepicker form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية">
+                        <input readonly="readonly" name="from_date" autocomplete="off" type="text" class="datepicker-active-monday form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية">
                         <div class="input-group-append">
                             <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
                         </div>
@@ -134,12 +134,15 @@
                     .then((response) => (this.insurance_price = response.data.insurance_price));
             },
             total_price() {
-                var totalPrice = (this.insurance_price + this.price_per_week*(1- this.course.discount))*this.weeks
+                var totalPrice = (this.price_per_week*(1- this.course.discount))*this.weeks
                 if(!isNaN(this.chosin_airport.price)){
                     totalPrice += this.chosin_airport.price
                 }
                 if(!isNaN(this.chosin_residence.price)){
                     totalPrice += this.chosin_residence.price*this.weeks
+                }
+                if(this.insurance_price_checker == '1'){
+                    totalPrice += this.insurance_price*this.weeks
                 }
                return totalPrice
             },
@@ -147,6 +150,7 @@
         beforeMount() {
             this.get_price_per_week();
             this.get_insurance_price();
+           
         },
     };
 </script>

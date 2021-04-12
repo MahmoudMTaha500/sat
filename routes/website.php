@@ -25,18 +25,16 @@ Route::post('create-student-request', 'WebsiteController@create_student_request'
 
 
 /** Payment Routes *************************************/
-
-Route::get('payment-checkout', 'PaymentController@payment_checkout')->name('payment_checkout');
-Route::get('payment-success', 'PaymentController@payment_success')->name('payment_success');
+Route::get('pay-now/{request_id}', 'WebsiteController@pay_now')->name('pay_now');
+Route::post('checkout', 'WebsiteController@checkout')->name('checkout');
+Route::get('payment-confirmation', 'WebsiteController@payment_confirmation')->name('payment_confirmation');
 
 
 Route::get('student-path', function(){
     return 'student path';
 })->middleware('AuthStudent:student');
 
-Route::get('student/profile', function(){
-    return 'student profile';
-})->middleware('AuthStudent:student')->name('student.profile');
+Route::get('student/profile', 'WebsiteController@student_profile')->middleware('AuthStudent:student')->name('student.profile');
 
 Route::get('student/login', 'WebsiteController@student_login_page')->name('student.login');
 Route::post('student/login', 'WebsiteController@student_login_auth')->name('student.login');
