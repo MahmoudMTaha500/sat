@@ -30,9 +30,12 @@
                                 <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                 <div class="heading-elements">
                                     <ul class="list-inline mb-0">
+                    @if(auth()->user()->hasPermission('cities-countries-create'))
+
                                         <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
                                                 href="{{url('/dashboard/addcountry')}}"> <i class="ft-plus ft-md"></i> اضافة دوله
                                                 جديد</a></li>
+                                                @endif
                                     </ul>
                                 </div>
                             </div>
@@ -52,9 +55,14 @@
                                                 <td> {{$coun->name_ar}}</td>
                                               
                                                 <td class="text-truncate">
+                    @if(auth()->user()->hasPermission('cities-countries-update'))
+
                                                         <a href="{{route('countries.edit', $coun->id)}}"><i class="la la-pencil"></i></a>
+                                                        @endif
+                    @if(auth()->user()->hasPermission('cities-countries-delete'))
+
                                                         <a    onclick="return confirm('Are you sure?')"  href="{{route('countries.destroy' ,$coun->id)}}" ><i class="la la-trash"></i></a>
-                                                    
+                                                    @endif
                                                     
                                                 </td>
                                             </tr>

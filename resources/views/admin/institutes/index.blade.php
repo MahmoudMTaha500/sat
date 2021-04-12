@@ -27,6 +27,11 @@
                 :countries_from_blade="{{ json_encode($countries) }}"
                 :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
                 :url_filtier="{{ json_encode(url('/dashboard/filter')) }}"
+                :create="{{  json_encode(auth()->user()->hasPermission('institutes-create') )}}"
+                :edit="{{  json_encode(auth()->user()->hasPermission('institutes-update') )}}"
+                :delete_pre="{{  json_encode(auth()->user()->hasPermission('institutes-delete') )}}"
+                :force_delete="{{  json_encode(auth()->user()->hasRole(['super-admin','admin']) )}}"
+                
             ></institutes-component>
         </div>
     </div>

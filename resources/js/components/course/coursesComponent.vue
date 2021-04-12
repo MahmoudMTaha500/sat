@@ -69,7 +69,7 @@
                                 <li>
                                     <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right"><i class="ft-filter ft-md"></i> فلتر</button>
                                 </li>
-                                <li>
+                                <li v-if="create">
                                     <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" :href="this.dahsboard_url+'/courses/create'"> <i class="ft-plus ft-md"></i> اضافة دورة جديدة</a>
                                 </li>
                             </ul>
@@ -103,13 +103,14 @@
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a :href="dahsboard_url+'/courses/'+course.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
+                                                
+                                                <a v-if="edit" :href="dahsboard_url+'/courses/'+course.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
                                                 <a href="#" class="btn btn-default btn-sm round">عرض</a>
 
                                                 <form :action="dahsboard_url+'/courses/'+course.id" method="POST" class="btn-group">
                                                     <input type="hidden" name="_token" :value="csrftoken" />
                                                     <input type="hidden" name="_method" value="delete" />
-                                                    <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذه الدورة')">حذف</button>
+                                                    <button v-if="delete_pre" class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذه الدورة')">حذف</button>
                                                 </form>
                                             </div>
                                         </td>
@@ -136,7 +137,7 @@
 
 <script>
     export default {
-        props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken"],
+        props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'delete_pre','create','edit'],
         data() {
             return {
                 courses: {},

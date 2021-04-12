@@ -2325,7 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['dahsboard_url', 'csrftoken', 'institutes'],
+  props: ['dahsboard_url', 'csrftoken', 'institutes', 'create', 'edit', 'delete_pre'],
   data: function data() {
     return {
       airports: {},
@@ -2510,7 +2510,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["aprove_route", "dahsboard_url", "get_blogs_url", "csrftoken", "categories", "users"],
+  props: ["aprove_route", "dahsboard_url", "get_blogs_url", "csrftoken", "categories", "users", 'create', 'edit', 'delete_pre'],
   data: function data() {
     return {
       blogs: {},
@@ -3148,8 +3148,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken"],
+  props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'delete_pre', 'create', 'edit'],
   data: function data() {
     return {
       courses: {},
@@ -3381,7 +3382,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["instutite_url", "instutite_url_edit", "csrftoken", "aprove_route", "path_logo", "route_create", "countries_from_blade", "dahsboard_url", "url_filtier", "show_instutite_url"],
+  props: ["instutite_url", "instutite_url_edit", "csrftoken", "aprove_route", "path_logo", "route_create", "countries_from_blade", "dahsboard_url", "url_filtier", "show_instutite_url", "create", "edit", "delete_pre", "force_delete"],
   data: function data() {
     return {
       institutes: {},
@@ -3628,7 +3629,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['dahsboard_url', 'csrftoken', 'institutes'],
+  props: ['dahsboard_url', 'csrftoken', 'institutes', 'create', 'edit', 'delete_pre'],
   data: function data() {
     return {
       insurances: {},
@@ -3888,7 +3889,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['dahsboard_url', 'csrftoken', 'institutes'],
+  props: ['dahsboard_url', 'csrftoken', 'institutes', 'create', 'edit', 'delete_pre'],
   data: function data() {
     return {
       residences: {},
@@ -42677,20 +42678,22 @@ var render = function() {
             _c("ul", { staticClass: "list-inline mb-0" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                    attrs: { href: _vm.dahsboard_url + "/airports/create" }
-                  },
-                  [
-                    _c("i", { staticClass: "ft-plus ft-md" }),
-                    _vm._v(" اضافة مطار جديد")
-                  ]
-                )
-              ])
+              _vm.create
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                        attrs: { href: _vm.dahsboard_url + "/airports/create" }
+                      },
+                      [
+                        _c("i", { staticClass: "ft-plus ft-md" }),
+                        _vm._v(" اضافة مطار جديد")
+                      ]
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -42870,57 +42873,61 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                _vm.dahsboard_url +
-                                "/airports/" +
-                                "edit/" +
-                                airport.id
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
+                        _vm.edit
+                          ? _c(
+                              "a",
                               {
-                                staticClass:
-                                  "btn btn-sm btn-outline-primary round",
-                                attrs: { type: "button" }
-                              },
-                              [_vm._v("تعديل")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                _vm.dahsboard_url +
-                                "/airports/" +
-                                "delete/" +
-                                airport.id
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-sm btn-outline-danger round",
                                 attrs: {
-                                  type: "button",
-                                  onclick:
-                                    "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/airports/" +
+                                    "edit/" +
+                                    airport.id
                                 }
                               },
-                              [_vm._v("حذف")]
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-primary round",
+                                    attrs: { type: "button" }
+                                  },
+                                  [_vm._v("تعديل")]
+                                )
+                              ]
                             )
-                          ]
-                        )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.delete_pre
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/airports/" +
+                                    "delete/" +
+                                    airport.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-danger round",
+                                    attrs: {
+                                      type: "button",
+                                      onclick:
+                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                    }
+                                  },
+                                  [_vm._v("حذف")]
+                                )
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ])
                   }),
@@ -42943,7 +42950,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                             Previos\n                         "
+                    "\n                          Previos\n                      "
                   )
                 ]
               ),
@@ -42971,7 +42978,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                             Next\n                         "
+                    "\n                          Next\n                      "
                   )
                 ]
               )
@@ -43089,20 +43096,22 @@ var render = function() {
             _c("ul", { staticClass: "list-inline mb-0" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                    attrs: { href: _vm.url_dashboard + "/blogs/create" }
-                  },
-                  [
-                    _c("i", { staticClass: "ft-plus ft-md" }),
-                    _vm._v(" اضافة مقال جديد")
-                  ]
-                )
-              ])
+              _vm.create
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                        attrs: { href: _vm.url_dashboard + "/blogs/create" }
+                      },
+                      [
+                        _c("i", { staticClass: "ft-plus ft-md" }),
+                        _vm._v(" اضافة مقال جديد")
+                      ]
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -43469,20 +43478,22 @@ var render = function() {
                             }
                           },
                           [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-info btn-sm round",
-                                attrs: {
-                                  href:
-                                    _vm.url_dashboard +
-                                    "/blogs/" +
-                                    blog.id +
-                                    "/edit"
-                                }
-                              },
-                              [_vm._v("تعديل")]
-                            ),
+                            _vm.edit
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-info btn-sm round",
+                                    attrs: {
+                                      href:
+                                        _vm.url_dashboard +
+                                        "/blogs/" +
+                                        blog.id +
+                                        "/edit"
+                                    }
+                                  },
+                                  [_vm._v("تعديل")]
+                                )
+                              : _vm._e(),
                             _vm._v(" "),
                             _c(
                               "form",
@@ -43508,17 +43519,20 @@ var render = function() {
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-danger btn-sm round",
-                                    attrs: {
-                                      onclick:
-                                        "return confirm('هل انت متاكد من حذف هذا المقال')"
-                                    }
-                                  },
-                                  [_vm._v("حذف")]
-                                )
+                                _vm.delete_pre
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm round",
+                                        attrs: {
+                                          onclick:
+                                            "return confirm('هل انت متاكد من حذف هذا المقال')"
+                                        }
+                                      },
+                                      [_vm._v("حذف")]
+                                    )
+                                  : _vm._e()
                               ]
                             )
                           ]
@@ -44800,20 +44814,24 @@ var render = function() {
                 _c("ul", { staticClass: "list-inline mb-0" }, [
                   _vm._m(2),
                   _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                        attrs: { href: this.dahsboard_url + "/courses/create" }
-                      },
-                      [
-                        _c("i", { staticClass: "ft-plus ft-md" }),
-                        _vm._v(" اضافة دورة جديدة")
-                      ]
-                    )
-                  ])
+                  _vm.create
+                    ? _c("li", [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                            attrs: {
+                              href: this.dahsboard_url + "/courses/create"
+                            }
+                          },
+                          [
+                            _c("i", { staticClass: "ft-plus ft-md" }),
+                            _vm._v(" اضافة دورة جديدة")
+                          ]
+                        )
+                      ])
+                    : _vm._e()
                 ])
               ])
             ]),
@@ -44931,20 +44949,23 @@ var render = function() {
                                 }
                               },
                               [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-info btn-sm round",
-                                    attrs: {
-                                      href:
-                                        _vm.dahsboard_url +
-                                        "/courses/" +
-                                        course.id +
-                                        "/edit"
-                                    }
-                                  },
-                                  [_vm._v(" تعديل")]
-                                ),
+                                _vm.edit
+                                  ? _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-info btn-sm round",
+                                        attrs: {
+                                          href:
+                                            _vm.dahsboard_url +
+                                            "/courses/" +
+                                            course.id +
+                                            "/edit"
+                                        }
+                                      },
+                                      [_vm._v(" تعديل")]
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c(
                                   "a",
@@ -44981,18 +45002,20 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "btn btn-danger btn-sm round",
-                                        attrs: {
-                                          onclick:
-                                            "return confirm('هل انت متاكد من حذف هذه الدورة')"
-                                        }
-                                      },
-                                      [_vm._v("حذف")]
-                                    )
+                                    _vm.delete_pre
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-danger btn-sm round",
+                                            attrs: {
+                                              onclick:
+                                                "return confirm('هل انت متاكد من حذف هذه الدورة')"
+                                            }
+                                          },
+                                          [_vm._v("حذف")]
+                                        )
+                                      : _vm._e()
                                   ]
                                 )
                               ]
@@ -45175,20 +45198,22 @@ var render = function() {
             _c("ul", { staticClass: "list-inline mb-0" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                    attrs: { href: _vm.route_create }
-                  },
-                  [
-                    _c("i", { staticClass: "ft-plus ft-md" }),
-                    _vm._v(" اضافة معهد جديد")
-                  ]
-                )
-              ])
+              _vm.create
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                        attrs: { href: _vm.route_create }
+                      },
+                      [
+                        _c("i", { staticClass: "ft-plus ft-md" }),
+                        _vm._v(" اضافة معهد جديد")
+                      ]
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -45530,20 +45555,22 @@ var render = function() {
                             }
                           },
                           [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-info btn-sm round",
-                                attrs: {
-                                  href:
-                                    _vm.instutite_url_edit +
-                                    "/" +
-                                    institute.id +
-                                    "/edit"
-                                }
-                              },
-                              [_vm._v("تعديل")]
-                            ),
+                            _vm.edit
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-info btn-sm round",
+                                    attrs: {
+                                      href:
+                                        _vm.instutite_url_edit +
+                                        "/" +
+                                        institute.id +
+                                        "/edit"
+                                    }
+                                  },
+                                  [_vm._v("تعديل")]
+                                )
+                              : _vm._e(),
                             _vm._v(" "),
                             _c(
                               "a",
@@ -45581,36 +45608,41 @@ var render = function() {
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-danger btn-sm round",
-                                    attrs: {
-                                      onclick:
-                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
-                                    }
-                                  },
-                                  [_vm._v("حذف")]
-                                )
+                                _vm.delete_pre
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm round",
+                                        attrs: {
+                                          onclick:
+                                            "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                        }
+                                      },
+                                      [_vm._v("حذف")]
+                                    )
+                                  : _vm._e()
                               ]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "btn btn-dark btn-sm round",
-                                staticStyle: { "margin-right": "3px" },
-                                attrs: {
-                                  href:
-                                    _vm.instutite_url_edit +
-                                    "/forceDelete/" +
-                                    institute.id,
-                                  onclick:
-                                    "return confirm('سوف يتم حذف المعهد نهائيا .هل انت متاكد؟')"
-                                }
-                              },
-                              [_vm._v("حذف نهائي")]
-                            )
+                            _vm.force_delete
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-dark btn-sm round",
+                                    staticStyle: { "margin-right": "3px" },
+                                    attrs: {
+                                      href:
+                                        _vm.instutite_url_edit +
+                                        "/forceDelete/" +
+                                        institute.id,
+                                      onclick:
+                                        "return confirm('سوف يتم حذف المعهد نهائيا .هل انت متاكد؟')"
+                                    }
+                                  },
+                                  [_vm._v("حذف نهائي")]
+                                )
+                              : _vm._e()
                           ]
                         )
                       ])
@@ -45821,20 +45853,24 @@ var render = function() {
             _c("ul", { staticClass: "list-inline mb-0" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                    attrs: { href: _vm.dahsboard_url + "/insurances/create" }
-                  },
-                  [
-                    _c("i", { staticClass: "ft-plus ft-md" }),
-                    _vm._v(" اضافة تامين جديد")
-                  ]
-                )
-              ])
+              _vm.create
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                        attrs: {
+                          href: _vm.dahsboard_url + "/insurances/create"
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "ft-plus ft-md" }),
+                        _vm._v(" اضافة تامين جديد")
+                      ]
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -46014,57 +46050,61 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                _vm.dahsboard_url +
-                                "/insurances/" +
-                                "edit/" +
-                                insurance.id
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
+                        _vm.edit
+                          ? _c(
+                              "a",
                               {
-                                staticClass:
-                                  "btn btn-sm btn-outline-primary round",
-                                attrs: { type: "button" }
-                              },
-                              [_vm._v("تعديل")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                _vm.dahsboard_url +
-                                "/insurances/" +
-                                "delete/" +
-                                insurance.id
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-sm btn-outline-danger round",
                                 attrs: {
-                                  type: "button",
-                                  onclick:
-                                    "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/insurances/" +
+                                    "edit/" +
+                                    insurance.id
                                 }
                               },
-                              [_vm._v("حذف")]
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-primary round",
+                                    attrs: { type: "button" }
+                                  },
+                                  [_vm._v("تعديل")]
+                                )
+                              ]
                             )
-                          ]
-                        )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.delete_pre
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/insurances/" +
+                                    "delete/" +
+                                    insurance.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-danger round",
+                                    attrs: {
+                                      type: "button",
+                                      onclick:
+                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                    }
+                                  },
+                                  [_vm._v("حذف")]
+                                )
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ])
                   }),
@@ -46374,20 +46414,24 @@ var render = function() {
             _c("ul", { staticClass: "list-inline mb-0" }, [
               _vm._m(1),
               _vm._v(" "),
-              _c("li", [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
-                    attrs: { href: _vm.dahsboard_url + "/residences/create" }
-                  },
-                  [
-                    _c("i", { staticClass: "ft-plus ft-md" }),
-                    _vm._v(" اضافة سكن جديد")
-                  ]
-                )
-              ])
+              _vm.create
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                        attrs: {
+                          href: _vm.dahsboard_url + "/residences/create"
+                        }
+                      },
+                      [
+                        _c("i", { staticClass: "ft-plus ft-md" }),
+                        _vm._v(" اضافة سكن جديد")
+                      ]
+                    )
+                  ])
+                : _vm._e()
             ]),
             _vm._v(" "),
             _c(
@@ -46567,57 +46611,61 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                _vm.dahsboard_url +
-                                "/residences/" +
-                                "edit/" +
-                                residence.id
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
+                        _vm.edit
+                          ? _c(
+                              "a",
                               {
-                                staticClass:
-                                  "btn btn-sm btn-outline-primary round",
-                                attrs: { type: "button" }
-                              },
-                              [_vm._v("تعديل")]
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            attrs: {
-                              href:
-                                _vm.dahsboard_url +
-                                "/residences/" +
-                                "delete/" +
-                                residence.id
-                            }
-                          },
-                          [
-                            _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "btn btn-sm btn-outline-danger round",
                                 attrs: {
-                                  type: "button",
-                                  onclick:
-                                    "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/residences/" +
+                                    "edit/" +
+                                    residence.id
                                 }
                               },
-                              [_vm._v("حذف")]
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-primary round",
+                                    attrs: { type: "button" }
+                                  },
+                                  [_vm._v("تعديل")]
+                                )
+                              ]
                             )
-                          ]
-                        )
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.delete_pre
+                          ? _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/residences/" +
+                                    "delete/" +
+                                    residence.id
+                                }
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-sm btn-outline-danger round",
+                                    attrs: {
+                                      type: "button",
+                                      onclick:
+                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                    }
+                                  },
+                                  [_vm._v("حذف")]
+                                )
+                              ]
+                            )
+                          : _vm._e()
                       ])
                     ])
                   }),
@@ -64252,8 +64300,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

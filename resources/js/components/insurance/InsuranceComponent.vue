@@ -11,7 +11,7 @@
    <li>
                                 <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right"><i class="ft-filter ft-md"></i> فلتر</button>
                             </li>
-                         <li>
+                         <li v-if="create">
                                 <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" :href="dahsboard_url+'/insurances/create'"> <i class="ft-plus ft-md"></i> اضافة تامين جديد</a>
                             </li>
                         </ul> 
@@ -74,8 +74,8 @@
                              
                               <td class="text-truncate">
 
-                                <a :href="dahsboard_url+'/insurances/'+'edit/'+insurance.id"><button type="button" class="btn btn-sm btn-outline-primary round">تعديل</button></a>
-                                <a :href="dahsboard_url+'/insurances/'+'delete/'+insurance.id"><button type="button" class="btn btn-sm btn-outline-danger round"  onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
+                                <a v-if="edit" :href="dahsboard_url+'/insurances/'+'edit/'+insurance.id"><button type="button" class="btn btn-sm btn-outline-primary round">تعديل</button></a>
+                                <a  v-if="delete_pre" :href="dahsboard_url+'/insurances/'+'delete/'+insurance.id"><button type="button" class="btn btn-sm btn-outline-danger round"  onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
                               </td>
                             </tr>
                             
@@ -106,7 +106,7 @@
 
 <script>
 export default {
-    props:['dahsboard_url','csrftoken','institutes'],
+    props:['dahsboard_url','csrftoken','institutes','create','edit','delete_pre'],
     data(){
         return{
         insurances:{},
