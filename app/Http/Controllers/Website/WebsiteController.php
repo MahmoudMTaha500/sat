@@ -112,17 +112,10 @@ class WebsiteController extends Controller
     // student login request : make login of type student
     public function student_login_auth(Request $request)
     {
-
-
-
         $validated = $request->validate([
             'email' => ['required'],
             'password' => ['required'],
         ]);
-
-        
-
-
         $remember = $request->has('remember') ? true : false;
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             return redirect()->route('student.profile');
@@ -224,7 +217,7 @@ class WebsiteController extends Controller
         // form validation
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:students'],
+            'required|string|max:255|unique:students,email',
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string'],
             'nationality' => ['required', 'string', 'max:255'],
@@ -372,5 +365,58 @@ class WebsiteController extends Controller
         $student = auth()->guard('student')->user();
         $useVue = true;
         return view('website.students.profile' , compact('student' , 'useVue'));
+    }
+    public function update_student_profile(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => 'required|string|max:255|unique:students,email,'.$request->student_id,
+            'phone' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string'],
+            'nationality' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ], [
+            'name.required' => 'الاسم مطلوب',
+            'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
+            'email.required' => 'البريد الإلكتروني مطلوب',
+            'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
+            'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
+            'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
+            'phone.required' => 'رقم الجوال مطلوب',
+            'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
+            'address.required' => 'العنوان  مطلوب',
+            'nationality.required' => 'الجنسية مطلوبة',
+            'nationality.max' => 'يجب الا تتجاوز الجنسية  255 حرف',
+            'country.required' => 'الدولة مطلوبة',
+            'country.max' => 'يجب الا تتجاوز الدولة  255 حرف',
+            'city.required' => 'المدينة مطلوبة',
+            'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
+            'profile_image.image' => 'يجب لا يسمح برفع ملفات غير الصور',
+            'profile_image.mimes' => 'يجب ان تكون الصورة الشخصية لها احد الامتدات الاتية jpeg,png,jpg,gif,svg',
+        ]);
+
+        $data = $request->except('_token' , 'profile_image');
+        return $request->profile_image;
+        
+        if ($request->profile_image) {
+            $data['profile_image'] ==
+            $validate_images = $request->validate([
+                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            ]);
+            $logoObject = $validate_images['logo'];
+            $logoName = time() . $logoObject->getClientOriginalName();
+            $pathLogo = public_path("\storage\institute\logos");
+            File::delete($institute->logo);
+            $request->logo->move($pathLogo, $logoName);
+            $logoNamePath = "storage/institute/logos" . '/' . $logoName;
+            $institute->logo = $logoNamePath;
+        }
+
+
+
+
     }
 }

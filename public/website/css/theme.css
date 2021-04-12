@@ -118,7 +118,7 @@ header .sidemenu {
   top: 0;
   right: 0;
   bottom: 0;
-  transform: translateX(-300px);
+  transform: translateX(-600px);
   transition: transform 1s ease-in-out;
   opacity: 0; }
   header .sidemenu-nav {

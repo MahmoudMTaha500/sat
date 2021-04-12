@@ -2160,41 +2160,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['image_name', 'image_label', 'old', 'path_image_edit'],
+  props: ["image_name", "image_label", "old", "path_image_edit"],
   data: function data() {
     return {
-      imageData: ""
+      imageData: this.old
     };
   },
   methods: {
     previewImage: function previewImage(event) {
       var _this = this;
 
-      // Reference to the DOM input element
-      var input = event.target; // Ensure that you have a file before attempting to read it
+      var input = event.target;
 
       if (input.files && input.files[0]) {
-        // create a new FileReader to read this image and convert to base64 format
-        var reader = new FileReader(); // Define a callback function to run, when FileReader finishes its job
+        var reader = new FileReader();
 
         reader.onload = function (e) {
-          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-          // Read image as base64 and set to imageData
           _this.imageData = e.target.result;
-        }; // Start the reader job - read file as a data url (base64 format)
-
+        };
 
         reader.readAsDataURL(input.files[0]);
       }
@@ -42617,7 +42601,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
+    _c("div", {}, [
       _c("label", { attrs: { for: "projectinput4" } }, [
         _vm._v(" " + _vm._s(this.image_label))
       ]),
