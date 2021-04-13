@@ -13,18 +13,7 @@
         <div class="row px-xl-5">
             <!-- Side Nav -->
             <div class="col-lg-3 mb-4 d-lg-block d-none">
-                <div class="bg-white rounded-10 py-4 shadow-sm">
-                    <div class="profile-img pt-4 text-center position-relative mx-auto">
-                        <img src="{{$student->profile_image == null ? asset('storage/default__user_image.jpg') : asset($student->profile_image)}}" alt="" class="img-fluid rounded-circle" />
-                        <h6 class="text-main-color font-weight-bold mt-2">{{$student->name}}</h6>
-                    </div>
-                    <ul class="list-group list-group-flush p-0 border-0">
-                        <li class="list-group-item py-3 border-bottom active"><a href="profile.html" class="text-dark">البيانات الشخصية</a></li>
-                        <li class="list-group-item py-3 border-bottom"><a href="favourite.html" class="text-dark">المفضلة</a></li>
-                        <li class="list-group-item py-3 border-bottom"><a href="reservation.html" class="text-dark">الحجوزات</a></li>
-                        <li class="list-group-item py-3"><a href="notification.html" class="text-dark">الاشعارات</a></li>
-                    </ul>
-                </div>
+                @include('website.students.student-sidebar')
             </div>
             <!-- ./Side Nav -->
             <div class="col-lg-9">
@@ -32,6 +21,11 @@
                 <h5 class="text-main-color font-weight-bold mb-4">البيانات الشخصية</h5>
                 <!-- ./Section Heading -->
                 <div class="bg-white shadow-sm p-xl-5 px-3 py-5 rounded-10">
+                    @if (session()->has('alert_message'))
+                        <div class="alert alert-success text-center">
+                            {{session()->get('alert_message')}}
+                        </div>
+                    @endif
                     <form action="{{route('update.student.profile')}}" method="post"  enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="student_id" value="{{$student->id}}">
@@ -110,6 +104,28 @@
                                             <label> العنوان</label>
                                             <input type="text" class="form-control rounded-10 @error('address') is-invalid @enderror" name="address" value="{{$student->address}}" />
                                             @error('address')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label> كلمة المرور</label>
+                                            <input type="password" class="form-control rounded-10 @error('password') is-invalid @enderror" name="password" />
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label> تاكيد كلمة المرور</label>
+                                            <input type="password" class="form-control rounded-10 @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{$student->password_confirmation}}" />
+                                            @error('password_confirmation')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>

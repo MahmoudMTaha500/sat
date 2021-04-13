@@ -21,6 +21,9 @@ Route::get('/article/{id}','WebsiteController@article')->name('website.article')
 
 /** Student Routes *************************************/
 Route::get('student/profile', 'WebsiteController@student_profile')->middleware('AuthStudent:student')->name('student.profile');
+Route::get('student/reservation', 'WebsiteController@student_reservation')->middleware('AuthStudent:student')->name('student.reservation');
+Route::get('student/favourite', 'WebsiteController@student_favourite')->middleware('AuthStudent:student')->name('student.favourite');
+Route::get('student/notification', 'WebsiteController@student_notification')->middleware('AuthStudent:student')->name('student.notification');
 Route::get('student/login', 'WebsiteController@student_login_page')->name('student.login');
 Route::post('student/login', 'WebsiteController@student_login_auth')->name('student.login');
 Route::get('student/register', 'WebsiteController@student_register_page')->name('student.register');

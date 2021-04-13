@@ -27,11 +27,14 @@
                 
             </div>
             <p style="color: #006fff;font-size:25px">تم اسلام طلبكم بنجاح ! </p>
-            <p style="margin-bottom: 20px; font-size:20px"> يمكنكم متابعة الطلب عن طريق موقع كلاسات</p>
-            <div>
-                <p><strong>اسم المستخدم : </strong> {{$student_email}}</p>
-                <p><strong>كلمة المرور : </strong> {{$student_password}}</p>
-            </div>
+            <p style="margin-bottom: 20px; font-size:20px"> يمكنكم متابعة الطلب عن طريق موقع كلاسات من خلال حسابك الخاص</p>
+            @if (!auth()->guard('student')->check())
+                <div>
+                    <p><strong>اسم المستخدم : </strong> {{$student_email}}</p>
+                    <p><strong>كلمة المرور : </strong> {{$student_password}}</p>
+                </div>
+            @endif
+            
         </div>
         
     </body>

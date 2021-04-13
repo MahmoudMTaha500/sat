@@ -15,6 +15,7 @@ use App\Models\StudentRequest;
 use App\Models\StudentSuccessStory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Mail;
 use PDF;
 use Hash;
@@ -54,7 +55,7 @@ class WebsiteController extends Controller
     public function confirm_reservation(Request $request, $pay_checker = null)
     {
 
-        // dd($pay_checker);
+        
         $validated = $request->validate([
             'weeks' => 'required|numeric',
             'from_date' => 'required',
@@ -202,7 +203,7 @@ class WebsiteController extends Controller
     // create student request and account if the student was new student
     public function create_student_request(Request $request)
     {
-
+       
         // configuer basic variables
         $name = $request->name;
         $email = $request->email;
@@ -214,40 +215,48 @@ class WebsiteController extends Controller
         $note = $request->city;
         $course_details = json_decode($request->course_details, true);
 
-        // form validation
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'required|string|max:255|unique:students,email',
-            'phone' => ['required', 'string', 'max:255'],
-            'address' => ['required', 'string'],
-            'nationality' => ['required', 'string', 'max:255'],
-            'country' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-        ], [
-            'name.required' => 'الاسم مطلوب',
-            'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
-            'email.required' => 'البريد الإلكتروني مطلوب',
-            'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
-            'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
-            'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
-            'phone.required' => 'رقم الجوال مطلوب',
-            'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
-            'address.required' => 'العنوان  مطلوب',
-            'nationality.required' => 'الجنسية مطلوبة',
-            'nationality.max' => 'يجب الا تتجاوز الجنسية  255 حرف',
-            'country.required' => 'الدولة مطلوبة',
-            'country.max' => 'يجب الا تتجاوز الدولة  255 حرف',
-            'city.required' => 'المدينة مطلوبة',
-            'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
-        ]);
+        if(!auth()->guard('student')->check()){
+            // form validation
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => 'required|string|max:255|unique:students,email',
+                'phone' => ['required', 'string', 'max:255'],
+                'address' => ['required', 'string'],
+                'nationality' => ['required', 'string', 'max:255'],
+                'country' => ['required', 'string', 'max:255'],
+                'city' => ['required', 'string', 'max:255'],
+            ], [
+                'name.required' => 'الاسم مطلوب',
+                'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
+                'email.required' => 'البريد الإلكتروني مطلوب',
+                'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
+                'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
+                'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
+                'phone.required' => 'رقم الجوال مطلوب',
+                'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
+                'address.required' => 'العنوان  مطلوب',
+                'nationality.required' => 'الجنسية مطلوبة',
+                'nationality.max' => 'يجب الا تتجاوز الجنسية  255 حرف',
+                'country.required' => 'الدولة مطلوبة',
+                'country.max' => 'يجب الا تتجاوز الدولة  255 حرف',
+                'city.required' => 'المدينة مطلوبة',
+                'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
+            ]);
+        }
+        
 
         // configure student data
         $unbcrypt_password = random_password();
         $student_data = $request->except('_token', 'note', 'course_details');
         $student_data['password'] = bcrypt($unbcrypt_password);
 
-        // create student
-        $student = Student::create($student_data);
+        if(auth()->guard('student')->check()){
+            $student = Student::find(auth()->guard('student')->user()->id);
+        }else{
+            $student = Student::create($student_data);
+        }
+
+        
 
         // configure student request data
 
@@ -364,20 +373,23 @@ class WebsiteController extends Controller
     {
         $student = auth()->guard('student')->user();
         $useVue = true;
-        return view('website.students.profile' , compact('student' , 'useVue'));
+        $page_title = 'student-profile';
+        return view('website.students.profile' , compact('student' , 'useVue' , 'page_title' ));
     }
     public function update_student_profile(Request $request)
     {
-
+        $student= Student::find($request->student_id);
+        // dd($request->all());
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => 'required|string|max:255|unique:students,email,'.$request->student_id,
+            'email' => 'required|string|max:255|unique:students,email,'.$student->id,
             'phone' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string'],
             'nationality' => ['required', 'string', 'max:255'],
             'country' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'profile_image' => 'image|mimes:jpeg,png,jpg,gif,svg',
+           
         ], [
             'name.required' => 'الاسم مطلوب',
             'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
@@ -396,27 +408,64 @@ class WebsiteController extends Controller
             'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
             'profile_image.image' => 'يجب لا يسمح برفع ملفات غير الصور',
             'profile_image.mimes' => 'يجب ان تكون الصورة الشخصية لها احد الامتدات الاتية jpeg,png,jpg,gif,svg',
-        ]);
-
-        $data = $request->except('_token' , 'profile_image');
-        return $request->profile_image;
-        
-        if ($request->profile_image) {
-            $data['profile_image'] ==
-            $validate_images = $request->validate([
-                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
-            $logoObject = $validate_images['logo'];
-            $logoName = time() . $logoObject->getClientOriginalName();
-            $pathLogo = public_path("\storage\institute\logos");
-            File::delete($institute->logo);
-            $request->logo->move($pathLogo, $logoName);
-            $logoNamePath = "storage/institute/logos" . '/' . $logoName;
-            $institute->logo = $logoNamePath;
+
+            
+            
+            $data = $request->except('_token' , 'profile_image' , 'student_id' , 'password_confirmation' , 'password');
+
+            if($request->password != null){
+                $request->validate([ 'password' => ['string', 'min:8', 'confirmed']]);
+                $data['password'] = bcrypt($request->password);
+            }
+            
+            if ($request->profile_image) {
+                $image_name = time() . $request->profile_image->getClientOriginalName();
+                $image_path = "storage/students/profile-images" . '/' . $image_name;
+                $data['profile_image'] = $image_path;
+                File::delete($student->profile_image);
+                $request->profile_image->move(public_path("\storage\students\profile-images"), $image_name);
+            }
+            Student::find($request->student_id)->update($data);
+            session()->flash('alert_message', 'تم تحديث بياناتك بنجاح');
+            return redirect()->back();
+            
+            
+            
+        }
+
+        public function student_reservation()
+        {
+            $student = auth()->guard('student')->user();
+            $requests = $student->all_courses_requests;
+            $page_title = 'student-reservation';
+            return view('website.students.reservation' , compact('student' , 'page_title' , 'requests' ));
+        }
+        public function student_favourite()
+        {
+            $student = auth()->guard('student')->user();
+            $favourites = $student->favourite_courses;
+            $page_title = 'student-favourite';
+            return view('website.students.favourite' , compact('student' , 'page_title' , 'favourites'));
+        }
+        public function student_notification()
+        {
+            $student = auth()->guard('student')->user();
+            $page_title = 'student-notification';
+            return view('website.students.notification' , compact('student' , 'page_title' ));
         }
 
 
 
 
+
+
+
+
+
+
+
+
+
     }
-}
+    

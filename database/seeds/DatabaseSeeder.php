@@ -32,5 +32,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ResidencesSeeder::class);
         $this->call(StudentRequestSeeder::class);
         $this->call(InstituteRateSeeder::class);
+        $this->call(FavouriteSeeder::class);
     }
 }

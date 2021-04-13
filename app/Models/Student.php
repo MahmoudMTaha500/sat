@@ -37,4 +37,8 @@ class Student extends Authenticatable
     {
         return $this->hasOne("App\Models\StudentRequest", 'student_id', 'id');
     }
+    public function favourite_courses()
+    {
+        return $this->hasMany("App\Models\Favourite", 'student_id', 'id');
+    }
 }
