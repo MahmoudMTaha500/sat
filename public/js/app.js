@@ -5373,7 +5373,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url"],
+  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_check"],
   data: function data() {
     var _ref;
 
@@ -5406,6 +5406,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     pagination: function pagination(url) {
       this.get_courses_url = url;
       this.get_courses();
+    },
+    favourite_type: function favourite_type(course_obj) {
+      return 'far';
     },
     institute_rate: function institute_rate(institute_obj) {
       if (institute_obj.rate_switch == 1) {
@@ -49934,7 +49937,23 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm._m(6, true),
+                          _vm.student_check
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "add-favourite position-absolute",
+                                  attrs: { "course-id": course.id }
+                                },
+                                [
+                                  _c("i", {
+                                    class:
+                                      _vm.favourite_type() +
+                                      " fa-heart favourite-icon"
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "a",
@@ -50319,14 +50338,6 @@ var staticRenderFns = [
           _c("option", { staticClass: "متقدم" }, [_vm._v("متقدم")])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "add-favourite position-absolute" }, [
-      _c("i", { staticClass: "far fa-heart" })
     ])
   }
 ]

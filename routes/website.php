@@ -31,6 +31,7 @@ Route::post('student/register', 'WebsiteController@student_register_auth')->name
 Route::post('update-student-profile','WebsiteController@update_student_profile')->name('update.student.profile');
 Route::post('create-student-request', 'WebsiteController@create_student_request')->name('create_student_request');
 Route::get('/student-requests/confirm-reservation','WebsiteController@confirm_reservation')->name('student_requests.confirm_reservation');   
+Route::get('/update-student-favorit', 'WebsiteController@update_student_favorit')->name('update.student.favorit');
 
 
 // invoice pdf route

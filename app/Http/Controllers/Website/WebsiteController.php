@@ -13,6 +13,7 @@ use App\Models\residences;
 use App\Models\Student;
 use App\Models\StudentRequest;
 use App\Models\StudentSuccessStory;
+use App\Models\Favourite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -457,7 +458,19 @@ class WebsiteController extends Controller
 
 
 
-
+        public function update_student_favorit(Request $request)
+        {
+             
+            $student =  auth()->guard('student')->user();
+            $favourite = Favourite::where(['student_id' => $student->id , 'course_id' => $request->course_id])->get();
+            if(empty($favourite[0])){
+                Favourite::create(['student_id' => $student->id , 'course_id' => $request->course_id]);
+                return 'added';
+            }else{
+                Favourite::where(['student_id' => $student->id , 'course_id' => $request->course_id])->delete();
+                return 'removed';
+            }
+        }
 
 
 

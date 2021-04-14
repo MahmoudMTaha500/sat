@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\Course;
+use App\Models\Favourite;
+use Illuminate\Support\Facades\Auth;
+
 
 
 class VueRequestsController extends Controller
@@ -47,7 +50,7 @@ class VueRequestsController extends Controller
             });
         }
 
-        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek')->paginate(9);
+        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek' , 'student_favourite')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 
@@ -90,4 +93,5 @@ class VueRequestsController extends Controller
         return response()->json(['status' => 'success' , 'insurance_price' => $price_per_week]);
 
     }
+    
 }

@@ -87,8 +87,8 @@
                                         </div>
                                         <!-- Offer Icon -->
                                         <!-- Add To Favourite Btn -->
-                                        <div class="add-favourite position-absolute">
-                                            <i class="far fa-heart"></i>
+                                        <div v-if="student_check" class="add-favourite position-absolute" :course-id="course.id">
+                                            <i :class="favourite_type() + ' fa-heart favourite-icon'"></i>
                                         </div>
                                         <!-- ./Add To Favourite Btn -->
                                         <!-- Institute Img -->
@@ -163,7 +163,7 @@
     import CityComponent from "../../components/website/CityComponent.vue";
     import CountryComponent from "../../components/website/CountryComponent.vue";
     export default {
-        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url"],
+        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url" , "student_check"],
         data() {
             return {
                 courses: {},
@@ -195,6 +195,9 @@
             pagination: function (url) {
                 this.get_courses_url = url;
                 this.get_courses();
+            },
+            favourite_type: function (course_obj) {
+                return 'far';
             },
             institute_rate: function (institute_obj) {
                 if (institute_obj.rate_switch == 1) {

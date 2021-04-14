@@ -38,4 +38,8 @@ class Course extends Model
     {
         return $this->hasMany('App\Models\CoursePrice', 'course_id', 'id')->orderByRaw("CAST(weeks as UNSIGNED) ASC")->select('weeks' , 'price');
     }
+    public function student_favourite()
+    {
+        return $this->belongsTo('App\Models\Favourite', 'id', 'course_id');
+    }
 }

@@ -24,73 +24,57 @@
                     <div class="row">
                         @foreach ($favourites as $favourite)
                         <div class="col-xl-4 col-md-6">
-                          <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5">
-                            <!-- Offer Icon -->
-                            <div class="offer-icon position-absolute bg-secondary-color text-white">
-                                - {{$favourite->course->discount*100}} %
-                            </div>
-                            <!-- Offer Icon -->
-                            <!-- Add To Favourite Btn -->
-                            <div class="add-favourite position-absolute">
-                                <i class="far fa-heart"></i>
-                            </div>
-                            <!-- ./Add To Favourite Btn -->
-                            <!-- Institute Img -->
-                            <a href="{{route('website.institute' , [$favourite->course->institute->id, $favourite->course->institute->slug , $favourite->course->slug])}}">
-                              <div class="institute-img d-inline-block position-relative">
-                                    <img src="../{{$favourite->course->institute->banner}}" alt="{{$favourite->course->institute->name_ar}}" class="card-img-top w-100"  />
+                            <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                <!-- Offer Icon -->
+                                <div class="offer-icon position-absolute bg-secondary-color text-white">
+                                    - {{$favourite->course->discount*100}} %
                                 </div>
-                            </a>
-                            <!-- ./Institute Img -->
-                            <div class="card-body rounded-10 bg-white">
-                                <!-- Institute Title -->
-                                <h5 class="card-title"><a href="{{route('website.institute' , [$favourite->course->institute->id, $favourite->course->institute->slug , $favourite->course->slug])}}" class="text-main-color"> معهد {{$favourite->course->institute->name_ar}} </a></h5>
-                                <!-- ./Institute Title -->
-                                <!-- Institute Rate -->
-                                <p class="mb-0"><span class="starrr" ratio="{{institute_rate($favourite->course->institute)}}"></span> {{institute_rate($favourite->course->institute)}}</p>
-                                <!-- ./Institute Rate -->
-                                <!-- Institute Location -->
-                                <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{$favourite->course->institute->country->name_ar}} , {{$favourite->course->institute->city->name_ar}}</p>
-                                <!-- ./Institute Location -->
-                                <!-- Course Name -->
-                                <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> {{$favourite->course->name_ar}}</p>
-                                <!-- ./Course Name -->
-                                <!-- Course Time And Level -->
-                                <p class="mb-0 overflow-hidden">
-                                    <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$favourite->course->study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
-                                    <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$favourite->course->required_level}}</span>
-                                </p>
-                                <!-- ./Course Time And Level -->
-                            </div>
-                            <!-- Course Price -->
-                            <div class="card-footer bg-white overflow-hidden">
-                                <del class="text-muted del">{{round($favourite->course->coursesPricePerWeek->price)}} ريال / أسبوع </del>
-                                <span class="float-left text-main-color">{{round($favourite->course->coursesPricePerWeek->price*(1-$favourite->course->discount)) }} ريال / أسبوع </span>
-                            </div>
-                            <!-- ./Course Price -->
-                        </div>
-                        </div>
-                       
-                        {{--
-                        <div class="col-xl-4 col-md-6">
-                            <div class="card mr-xl-4 shadow-lg offer border-0 rounded-10 institute-card mb-5">
-                                <div class="add-favourite position-absolute">
-                                    <i class="fas fa-heart"></i>
+                                <!-- Offer Icon -->
+                                <!-- Add To Favourite Btn -->
+                                <div class="add-favourite position-absolute" course-id="{{$favourite->course->id}}">
+                                    <i class="fas fa-heart favourite-icon"></i>
                                 </div>
-                                <img src="imgs/offers/offer1.png" class="card-img-top" alt="..." />
+                                <!-- ./Add To Favourite Btn -->
+                                <!-- Institute Img -->
+                                <a href="{{route('website.institute' , [$favourite->course->institute->id, $favourite->course->institute->slug , $favourite->course->slug])}}">
+                                    <div class="institute-img d-inline-block position-relative">
+                                        <img src="../{{$favourite->course->institute->banner}}" alt="{{$favourite->course->institute->name_ar}}" class="card-img-top w-100" />
+                                    </div>
+                                </a>
+                                <!-- ./Institute Img -->
                                 <div class="card-body rounded-10 bg-white">
-                                    <h5 class="card-title text-main-color">معهد كابلان</h5>
-                                    <p class="mb-0"><span class="starrr" ratio="4"></span> 4.5</p>
-                                    <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> لندن, بريطانيا</p>
-                                    <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> دورة انجليزي مكثف</p>
+                                    <!-- Institute Title -->
+                                    <h5 class="card-title">
+                                        <a href="{{route('website.institute' , [$favourite->course->institute->id, $favourite->course->institute->slug , $favourite->course->slug])}}" class="text-main-color">
+                                            معهد {{$favourite->course->institute->name_ar}}
+                                        </a>
+                                    </h5>
+                                    <!-- ./Institute Title -->
+                                    <!-- Institute Rate -->
+                                    <p class="mb-0"><span class="starrr" ratio="{{institute_rate($favourite->course->institute)}}"></span> {{institute_rate($favourite->course->institute)}}</p>
+                                    <!-- ./Institute Rate -->
+                                    <!-- Institute Location -->
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{$favourite->course->institute->country->name_ar}} , {{$favourite->course->institute->city->name_ar}}</p>
+                                    <!-- ./Institute Location -->
+                                    <!-- Course Name -->
+                                    <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> {{$favourite->course->name_ar}}</p>
+                                    <!-- ./Course Name -->
+                                    <!-- Course Time And Level -->
                                     <p class="mb-0 overflow-hidden">
-                                        <span class="float-right"><i class="fas fa-sun text-main-color"></i> صباحي</span> <span class="float-left"> <i class="fas fa-signal text-main-color"></i> مبتدأ</span>
+                                        <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$favourite->course->study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
+                                        <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$favourite->course->required_level}}</span>
                                     </p>
+                                    <!-- ./Course Time And Level -->
                                 </div>
-                                <div class="card-footer bg-white overflow-hidden"><del class="text-muted del">٤٥٦ ريال / أسبوع </del> <span class="float-left text-main-color">٤٥٦ ريال / أسبوع </span></div>
+                                <!-- Course Price -->
+                                <div class="card-footer bg-white overflow-hidden">
+                                    <del class="text-muted del">{{round($favourite->course->coursesPricePerWeek->price)}} ريال / أسبوع </del>
+                                    <span class="float-left text-main-color">{{round($favourite->course->coursesPricePerWeek->price*(1-$favourite->course->discount)) }} ريال / أسبوع </span>
+                                </div>
+                                <!-- ./Course Price -->
                             </div>
                         </div>
-                        --}} @endforeach
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -99,4 +83,5 @@
 </section>
 <!-- ./Profile -->
 
-@endsection
+
+@endsection 
