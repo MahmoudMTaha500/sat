@@ -24,7 +24,9 @@
             :countries_from_blade="{{ json_encode($countries) }}"
             :institutes="{{ json_encode($institutes) }}"
             :csrftoken="{{ json_encode(csrf_token()) }}"
-
+            :create="{{  json_encode(auth()->user()->hasPermission('student-requests-create') )}}"
+            :edit="{{  json_encode(auth()->user()->hasPermission('student-requests-update') )}}"
+            :delete_pre="{{  json_encode(auth()->user()->hasPermission('student-requests-delete') )}}"
 
             ></student-request-component>
             <!-- Recent Transactions -->

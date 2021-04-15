@@ -362,7 +362,7 @@
                 </ul>
             </li> --}}
             <li class="nav-item">
-                <a href="animation.html">
+                <a href="{{url('dashboard/logout')}}">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.animation.main">تسجيل الخروج</span>
                 </a>

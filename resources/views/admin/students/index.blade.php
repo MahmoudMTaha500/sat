@@ -24,6 +24,9 @@
           
             :csrftoken="{{ json_encode(csrf_token()) }}"
 
+            :create="{{  json_encode(auth()->user()->hasPermission('students-create') )}}"
+            :edit="{{  json_encode(auth()->user()->hasPermission('students-update') )}}"
+            :delete_pre="{{  json_encode(auth()->user()->hasPermission('students-delete') )}}"
 
             ></student-component>
             <!-- Recent Transactions -->
