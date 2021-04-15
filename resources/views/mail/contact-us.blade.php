@@ -26,14 +26,12 @@
                 <img width="150px" src="https://classat.netlify.app/imgs/logo.png">
                 
             </div>
-            <p style="color: #006fff;font-size:25px">تم اسلام طلبكم بنجاح ! </p>
-            <p style="margin-bottom: 20px; font-size:20px"> يمكنكم متابعة الطلب عن طريق موقع كلاسات من خلال حسابك الخاص</p>
-            @if (!auth()->guard('student')->check())
-                <div>
-                    <p><strong>اسم المستخدم : </strong> {{$student_email}}</p>
-                    <p><strong>كلمة المرور : </strong> {{$student_password}}</p>
-                </div>
-            @endif
+            <p style="color: #006fff;font-size:25px">رسالة من عميل ! </p>
+            <div>
+                <p><strong>اسم العميل : </strong> {{$name}}</p>
+                <p><strong>البريد الالكتروني : </strong> {{$email}}</p>
+                <p><strong>الرسالة : </strong> {{$body}}</p>
+            </div>
             
         </div>
         

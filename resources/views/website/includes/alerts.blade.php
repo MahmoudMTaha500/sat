@@ -1,4 +1,4 @@
-@if (session()->has('alert_message'))
+{{-- @if (session()->has('alert_message'))
 
 <div class="modal fade" id="website_notifications" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -23,4 +23,4 @@
     $("#website_notifications").modal("show");
 </script>
 
-{{ session()->forget('alert_message') }} @endif
+{{ session()->forget('alert_message') }} @endif --}}

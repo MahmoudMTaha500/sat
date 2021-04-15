@@ -87,8 +87,8 @@
                                         </div>
                                         <!-- Offer Icon -->
                                         <!-- Add To Favourite Btn -->
-                                        <div class="add-favourite position-absolute">
-                                            <i class="far fa-heart"></i>
+                                        <div v-if="student_check" class="add-favourite position-absolute" :course-id="course.id">
+                                            <i :class="heart_type(course) + ' fa-heart favourite-icon'"></i>
                                         </div>
                                         <!-- ./Add To Favourite Btn -->
                                         <!-- Institute Img -->
@@ -163,7 +163,7 @@
     import CityComponent from "../../components/website/CityComponent.vue";
     import CountryComponent from "../../components/website/CountryComponent.vue";
     export default {
-        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url"],
+        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url" , "student_id" , "student_check"],
         data() {
             return {
                 courses: {},
@@ -189,12 +189,23 @@
                 this.city_id = this.$refs.cities_component_ref.$refs.city_id_ref.value;
                 this.get_courses_url = this.courses.first_page_url;
                 this.keyword = this.$refs.keyword.value;
-                console.log(this.keyword);
                 this.get_courses();
             },
             pagination: function (url) {
                 this.get_courses_url = url;
                 this.get_courses();
+            },
+            heart_type: function (course_obj) {
+                var heart_type = 'far'
+                course_obj.student_favourite.forEach(favourite => {
+                    if(favourite.student_id == this.student_id){
+                        console.log(favourite.student_id)
+                        heart_type = 'fas'
+                        return false;
+                    }
+                });
+               
+                return heart_type
             },
             institute_rate: function (institute_obj) {
                 if (institute_obj.rate_switch == 1) {

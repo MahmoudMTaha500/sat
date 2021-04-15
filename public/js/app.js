@@ -2160,41 +2160,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['image_name', 'image_label', 'old', 'path_image_edit'],
+  props: ["image_name", "image_label", "old", "path_image_edit"],
   data: function data() {
     return {
-      imageData: ""
+      imageData: this.old
     };
   },
   methods: {
     previewImage: function previewImage(event) {
       var _this = this;
 
-      // Reference to the DOM input element
-      var input = event.target; // Ensure that you have a file before attempting to read it
+      var input = event.target;
 
       if (input.files && input.files[0]) {
-        // create a new FileReader to read this image and convert to base64 format
-        var reader = new FileReader(); // Define a callback function to run, when FileReader finishes its job
+        var reader = new FileReader();
 
         reader.onload = function (e) {
-          // Note: arrow function used here, so that "this.imageData" refers to the imageData of Vue component
-          // Read image as base64 and set to imageData
           _this.imageData = e.target.result;
-        }; // Start the reader job - read file as a data url (base64 format)
-
+        };
 
         reader.readAsDataURL(input.files[0]);
       }
@@ -5390,7 +5374,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url"],
+  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check"],
   data: function data() {
     var _ref;
 
@@ -5417,12 +5401,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.city_id = this.$refs.cities_component_ref.$refs.city_id_ref.value;
       this.get_courses_url = this.courses.first_page_url;
       this.keyword = this.$refs.keyword.value;
-      console.log(this.keyword);
       this.get_courses();
     },
     pagination: function pagination(url) {
       this.get_courses_url = url;
       this.get_courses();
+    },
+    heart_type: function heart_type(course_obj) {
+      var _this2 = this;
+
+      var heart_type = 'far';
+      course_obj.student_favourite.forEach(function (favourite) {
+        if (favourite.student_id == _this2.student_id) {
+          console.log(favourite.student_id);
+          heart_type = 'fas';
+          return false;
+        }
+      });
+      return heart_type;
     },
     institute_rate: function institute_rate(institute_obj) {
       if (institute_obj.rate_switch == 1) {
@@ -42618,7 +42614,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "form-group" }, [
+    _c("div", {}, [
       _c("label", { attrs: { for: "projectinput4" } }, [
         _vm._v(" " + _vm._s(this.image_label))
       ]),
@@ -50003,7 +49999,23 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm._m(6, true),
+                          _vm.student_check
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "add-favourite position-absolute",
+                                  attrs: { "course-id": course.id }
+                                },
+                                [
+                                  _c("i", {
+                                    class:
+                                      _vm.heart_type(course) +
+                                      " fa-heart favourite-icon"
+                                  })
+                                ]
+                              )
+                            : _vm._e(),
                           _vm._v(" "),
                           _c(
                             "a",
@@ -50388,14 +50400,6 @@ var staticRenderFns = [
           _c("option", { staticClass: "متقدم" }, [_vm._v("متقدم")])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "add-favourite position-absolute" }, [
-      _c("i", { staticClass: "far fa-heart" })
     ])
   }
 ]
@@ -64310,8 +64314,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

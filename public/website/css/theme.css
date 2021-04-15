@@ -118,7 +118,7 @@ header .sidemenu {
   top: 0;
   right: 0;
   bottom: 0;
-  transform: translateX(-300px);
+  transform: translateX(-600px);
   transition: transform 1s ease-in-out;
   opacity: 0; }
   header .sidemenu-nav {
@@ -378,9 +378,16 @@ form .btn {
   left: 20px;
   top: 20px;
   font-size: 21px;
-  z-index: 10; }
+  z-index: 10; 
+  cursor: pointer;
+}
   .institute-card .add-favourite i {
-    color: #F4C20D; }
+    color: #F4C20D; 
+    transition-duration: 0.7s;
+  }
+  .institute-card .add-favourite:hover i{
+    color: #007bff;
+  }
 .institute-card .offer-icon {
   width: 50px;
   height: 50px;
