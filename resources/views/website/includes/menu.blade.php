@@ -79,16 +79,16 @@
                                 <a class="nav-link text-main-color" alt="طلب تأشيرة" href="order-visa.html">طلب تأشيرة</a>
                             </li>
                             <li class="nav-item px-xl-2">
-                                <a class="nav-link text-main-color" alt="العروض" href="offers.html">العروض</a>
+                                <a class="nav-link text-main-color" alt="العروض" href="{{route('website.offers')}}">العروض</a>
                             </li>
                             <li class="nav-item px-xl-2">
                                 <a class="nav-link text-main-color" alt="المقالات" href="{{route('website.articles')}}">المقالات</a>
                             </li>
                             <li class="nav-item px-xl-2">
-                                <a class="nav-link text-main-color" alt="تواصل معنا" href="contact-us.html">تواصل معنا</a>
+                                <a class="nav-link text-main-color" alt="تواصل معنا" href="{{route('website.contact.us')}}">تواصل معنا</a>
                             </li>
                             <li class="nav-item px-xl-2">
-                                <a class="nav-link text-main-color" alt="من نحن" href="about-us.html">من نحن</a>
+                                <a class="nav-link text-main-color" alt="من نحن" href="{{route('website.about.us')}}">من نحن</a>
                             </li>
                             <li class="nav-item px-xl-2 social-links d-xl-block d-none">
                                 <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">

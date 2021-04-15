@@ -380,7 +380,6 @@ class WebsiteController extends Controller
     public function update_student_profile(Request $request)
     {
         $student= Student::find($request->student_id);
-        // dd($request->all());
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => 'required|string|max:255|unique:students,email,'.$student->id,
@@ -471,14 +470,55 @@ class WebsiteController extends Controller
                 return 'removed';
             }
         }
+        public function about_us()
+        {
+            return view('website.about-us');
+        }
+        public function contact_us()
+        {
+            return view('website.contact-us');
+        }
+        public function send_contact_us_mail(Request $request)
+        {
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => 'required|string|max:255|email',
+                'message' => 'required|string',
+                
+            ], [
+                'name.required' => 'الاسم مطلوب',
+                'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
+                'email.required' => 'البريد الإلكتروني مطلوب',
+                'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
+                'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
+                'message.required' => 'برجاء ادخال رسالتك',
+                ]);
+                
+                $data = [
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'body' => $request->message,
+                ];
+                Mail::send('mail.contact-us', $data, function ($message) use ($data) {
+                    $message->to('no-reply@sat-edu.com', 'Classat')
+                    ->subject('رسالة من عميل علي موقع كلاسات');
+                    $message->from($data['email'], $data['name']);
+                });
+                session()->flash('alert_message', 'تم ارسال رسالتك بنجاح , و سنقوم بالتواصل معكم قريبا');
+                return redirect()->back();
+                
+            }
+            public function offers()
+            {
+                $offers = Course::where('discount' , '!=' , 0)->get();
+                return view('website.offers' , compact('offers'));
+            }
+            
+            
+            
+            
+            
+            
 
-
-
-
-
-
-
-
-
-    }
-    
+        }
+        

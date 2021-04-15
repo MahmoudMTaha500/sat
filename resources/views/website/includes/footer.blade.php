@@ -91,7 +91,9 @@
             },
         });
 
-        $(".add-favourite").click(function () {
+    
+
+        $(document).on('click' , '.add-favourite' , function(){
             $favourite_obj = $(this);
             axios
                 .get('{{route("update.student.favorit")}}', {
@@ -108,6 +110,8 @@
                     }
                     console.log(response.data);
                 });
-        });
+        })
+
+           
     </script>
 </div>

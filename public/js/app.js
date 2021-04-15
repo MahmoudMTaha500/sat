@@ -5373,7 +5373,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_check"],
+  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check"],
   data: function data() {
     var _ref;
 
@@ -5400,15 +5400,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.city_id = this.$refs.cities_component_ref.$refs.city_id_ref.value;
       this.get_courses_url = this.courses.first_page_url;
       this.keyword = this.$refs.keyword.value;
-      console.log(this.keyword);
       this.get_courses();
     },
     pagination: function pagination(url) {
       this.get_courses_url = url;
       this.get_courses();
     },
-    favourite_type: function favourite_type(course_obj) {
-      return 'far';
+    heart_type: function heart_type(course_obj) {
+      var _this2 = this;
+
+      var heart_type = 'far';
+      course_obj.student_favourite.forEach(function (favourite) {
+        if (favourite.student_id == _this2.student_id) {
+          console.log(favourite.student_id);
+          heart_type = 'fas';
+          return false;
+        }
+      });
+      return heart_type;
     },
     institute_rate: function institute_rate(institute_obj) {
       if (institute_obj.rate_switch == 1) {
@@ -49948,7 +49957,7 @@ var render = function() {
                                 [
                                   _c("i", {
                                     class:
-                                      _vm.favourite_type() +
+                                      _vm.heart_type(course) +
                                       " fa-heart favourite-icon"
                                   })
                                 ]

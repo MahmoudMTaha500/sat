@@ -81,3 +81,13 @@ function to_date($from_date , $weeks) {
     $to_date = date('m/d/Y' ,  strtotime($from_date." +$weeks week"));
     return $to_date;
 }
+
+function heart_type($course_obj) {
+    $student_id = auth()->guard('student')->user()->id;
+    foreach($course_obj->student_favourite as $favourite){
+        if($favourite->student_id == $student_id){
+            return 'fas';
+        }
+    }
+    return 'far';
+}

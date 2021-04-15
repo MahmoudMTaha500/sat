@@ -40,6 +40,6 @@ class Course extends Model
     }
     public function student_favourite()
     {
-        return $this->belongsTo('App\Models\Favourite', 'id', 'course_id');
+        return $this->hasMany('App\Models\Favourite', 'course_id', 'id');
     }
 }
