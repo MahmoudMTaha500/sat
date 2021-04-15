@@ -1,6 +1,17 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
+
+
+
+Route::resource('login', "AdminController");
+
+
+
+Route::group(['middleware' => 'admins'] ,function(){
+
+
+    
 Route::get('/', function () {
     $department_name='dashboard';
     $page_name='dashboard';
@@ -8,12 +19,19 @@ Route::get('/', function () {
 })->name('dashboard');
 
 
+
 // Route::get("admin_login" , function(){
 //  return view('admin.login.login');
 
 // });
 
-Route::resource('login', "AdminController");
+Route::get('logout',function(){
+
+    \Auth::logout();
+  return redirect()->route('login.index');
+
+});
+
 Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::post('update-institute-aprovement', 'InstituteController@updateAprovement');
 Route::get('filter', 'InstituteController@filter');
@@ -123,3 +141,7 @@ Route::post('/student-requests/update-status','StudentRequestsController@updateS
 
 Route::resource('student-requests', "StudentRequestsController");
 Route::resource('employees', "EmployeesController");
+
+
+});
+

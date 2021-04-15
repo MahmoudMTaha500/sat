@@ -37,6 +37,8 @@ Route::post('create-student-request', 'WebsiteController@create_student_request'
 Route::get('/student-requests/confirm-reservation','WebsiteController@confirm_reservation')->name('student_requests.confirm_reservation');   
 Route::get('/update-student-favorit', 'WebsiteController@update_student_favorit')->name('update.student.favorit');
 
+Route::get('student/reset-password', 'WebsiteController@student_reset_password')->name('student.reset_password');
+Route::post('student/reset-password', 'WebsiteController@student_send_mail_reset_password')->name('student.reset_password');
 
 // invoice pdf route
 Route::get('student-invoice', 'WebsiteController@student_invoice')->name('student_invoice');

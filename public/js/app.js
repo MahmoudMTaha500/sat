@@ -4543,7 +4543,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken"],
+  props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'create', 'edit', 'delete_pre'],
   data: function data() {
     return {
       studentsRequests: {},
@@ -48204,20 +48204,23 @@ var render = function() {
                                 }
                               },
                               [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-info btn-sm round",
-                                    attrs: {
-                                      href:
-                                        _vm.dahsboard_url +
-                                        "/student-requests/" +
-                                        request.id +
-                                        "/edit"
-                                    }
-                                  },
-                                  [_vm._v(" تعديل")]
-                                ),
+                                _vm.edit
+                                  ? _c(
+                                      "a",
+                                      {
+                                        staticClass:
+                                          "btn btn-info btn-sm round",
+                                        attrs: {
+                                          href:
+                                            _vm.dahsboard_url +
+                                            "/student-requests/" +
+                                            request.id +
+                                            "/edit"
+                                        }
+                                      },
+                                      [_vm._v(" تعديل")]
+                                    )
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c(
                                   "a",
@@ -48254,18 +48257,20 @@ var render = function() {
                                       }
                                     }),
                                     _vm._v(" "),
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass:
-                                          "btn btn-danger btn-sm round",
-                                        attrs: {
-                                          onclick:
-                                            "return confirm('هل انت متاكد من حذف هذه الدورة')"
-                                        }
-                                      },
-                                      [_vm._v("حذف")]
-                                    )
+                                    _vm.delete_pre
+                                      ? _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-danger btn-sm round",
+                                            attrs: {
+                                              onclick:
+                                                "return confirm('هل انت متاكد من حذف هذه الدورة')"
+                                            }
+                                          },
+                                          [_vm._v("حذف")]
+                                        )
+                                      : _vm._e()
                                   ]
                                 )
                               ]

@@ -112,6 +112,8 @@ class WebsiteController extends Controller
     {
         return view('website.students.login');
     }
+
+
     // student login request : make login of type student
     public function student_login_auth(Request $request)
     {
@@ -145,6 +147,61 @@ class WebsiteController extends Controller
         } else {
             return back();
         }
+    }
+
+
+    public function student_reset_password(){
+        return view('website.students.reset_password');
+
+    }
+
+
+
+    public function student_send_mail_reset_password(Request $request){
+
+    $email = $request->email;
+
+
+    $student_mail = Student::where('email',$email)->first();
+if($student_mail){
+    $name = $student_mail->name;
+    
+    $new_password =  random_password();
+    $student_mail->password =  bcrypt($new_password) ;
+    $student_mail->save();
+
+
+    $subject = 'Classat  Reset Password!';
+    $data = array(
+        'email' => $email,
+        'password' => $new_password,
+        'name'=>$name
+    );
+
+   Mail::send('mail.reset_password', $data, function ($message) use ($name, $email, $subject) {
+            $message->to($email, $name)
+            ->subject($subject);
+            $message->from('no-reply@sat-edu.com', 'Classat');
+        });
+        session()->flash('alert_message', 'تم ارسال كلمه المرور اللي البريد الاليكتروني الخاص بك .');
+        return back();
+   
+
+}else{
+    return back()->withErrors(['email' =>'البريد الالكتروني  غير موجود']);
+}
+
+
+    
+    // dd(1236);
+    
+    
+    
+        // Mail::send('mail.student_request_registration', $data, function ($message) use ($name, $email, $subject) {
+        //     $message->to($email, $name)
+        //     ->subject($subject);
+        //     $message->from('no-reply@sat-edu.com', 'Classat');
+        // });
     }
 
     /*******************************/
