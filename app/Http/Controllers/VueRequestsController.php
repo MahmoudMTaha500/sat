@@ -35,9 +35,11 @@ class VueRequestsController extends Controller
     {
         $courses = new Course();
         if(!empty($request->keyword)){
-            $courses = $courses->whereHas('institute', function ($query) use ($request) {
-                $query->where('name_ar', $request->keyword);
-            })->orWhere("name_ar", 'LIKE', "%{$request->keyword}%");
+            $courses = $courses
+                        ->whereHas('institute', function ($query) use ($request) { $query->where('name_ar', $request->keyword); })
+                        ->orWhere("name_ar", 'LIKE', "%{$request->keyword}%")
+                        ->orWhereHas('institute', function ($query) use ($request) { $query->whereHas('country', function ($query) use ($request) { $query->where('name_ar', $request->keyword);});})
+                        ->orWhereHas('institute', function ($query) use ($request) { $query->whereHas('city', function ($query) use ($request) { $query->where('name_ar', $request->keyword);});});
         }
         if(!empty($request->country_id)){
             $courses = $courses->whereHas('institute', function ($query) use ($request) {

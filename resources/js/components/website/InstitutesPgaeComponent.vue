@@ -7,7 +7,7 @@
                 <div class="row px-xl-5">
                     <div class="col-12">
                         <div class="heading-institutes">
-                            <h3 class="text-main-color font-weight-bold">المعاهد</h3>
+                            <h3 class="text-main-color font-weight-bold">المعاهد ( {{courses.total}} )</h3>
                             <p>تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها</p>
                         </div>
                     </div>
@@ -40,7 +40,6 @@
                                                 <city-component :get_cities_url="get_cities_url" ref="cities_component_ref" :ele_class="'form-control rounded-10'"> </city-component>
                                             </div>
 
-                                            
                                             <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
                                                 <input type="text" class="datepicker form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية" />
                                                 <div class="input-group-append">
@@ -57,7 +56,7 @@
                                                     <option>5</option>
                                                 </select>
                                             </div>
-                                            
+
                                             <div class="form-group">
                                                 <select class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option value="" disabled selected>المستوي</option>
@@ -103,8 +102,8 @@
                                             <h5 class="card-title"><a :href="'/institute/'+course.institute.id+'/'+course.institute.slug+'/'+course.slug" class="text-main-color"> معهد {{course.institute.name_ar}}</a></h5>
                                             <!-- ./Institute Title -->
                                             <!-- Institute Rate -->
-                                            
-                                            <p class="mb-0 d-flex"><rate :length="5" :value="institute_rate(course.institute)" disabled/> <span style="line-height: 39px;">{{institute_rate(course.institute)}}</span></p>
+
+                                            <p class="mb-0 d-flex"><rate :length="5" :value="institute_rate(course.institute)" disabled /> <span style="line-height: 39px;">{{institute_rate(course.institute)}}</span></p>
                                             <!-- ./Institute Rate -->
                                             <!-- Institute Location -->
                                             <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{course.institute.country.name_ar}} , {{course.institute.city.name_ar}}</p>
@@ -163,7 +162,7 @@
     import CityComponent from "../../components/website/CityComponent.vue";
     import CountryComponent from "../../components/website/CountryComponent.vue";
     export default {
-        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url" , "student_id" , "student_check"],
+        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search"],
         data() {
             return {
                 courses: {},
@@ -196,16 +195,16 @@
                 this.get_courses();
             },
             heart_type: function (course_obj) {
-                var heart_type = 'far'
-                course_obj.student_favourite.forEach(favourite => {
-                    if(favourite.student_id == this.student_id){
-                        console.log(favourite.student_id)
-                        heart_type = 'fas'
+                var heart_type = "far";
+                course_obj.student_favourite.forEach((favourite) => {
+                    if (favourite.student_id == this.student_id) {
+                        console.log(favourite.student_id);
+                        heart_type = "fas";
                         return false;
                     }
                 });
-               
-                return heart_type
+
+                return heart_type;
             },
             institute_rate: function (institute_obj) {
                 if (institute_obj.rate_switch == 1) {
@@ -236,6 +235,10 @@
             },
         },
         beforeMount() {
+            
+            if(this.search.length != 0){
+                this.keyword = this.search.keyword
+            }
             this.get_courses();
         },
         components: {

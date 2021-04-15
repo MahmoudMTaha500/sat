@@ -614,5 +614,16 @@ body {
   @media (max-width: 575px) {
     .article-options {
       text-align: right !important; } }
+
+
+      .website-pagination .pagination{
+        display: inline-block!important;
+        text-align: center!important;
+        direction: ltr;
+        width: 100%;
+    }
+    .website-pagination .pagination .page-item{
+        display: inline-block!important;
+    }
   
   /*# sourceMappingURL=article.css.map */

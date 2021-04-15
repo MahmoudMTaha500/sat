@@ -5370,11 +5370,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check"],
+  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search"],
   data: function data() {
     var _ref;
 
@@ -5410,11 +5409,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     heart_type: function heart_type(course_obj) {
       var _this2 = this;
 
-      var heart_type = 'far';
+      var heart_type = "far";
       course_obj.student_favourite.forEach(function (favourite) {
         if (favourite.student_id == _this2.student_id) {
           console.log(favourite.student_id);
-          heart_type = 'fas';
+          heart_type = "fas";
           return false;
         }
       });
@@ -5452,6 +5451,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   beforeMount: function beforeMount() {
+    if (this.search.length != 0) {
+      this.keyword = this.search.keyword;
+    }
+
     this.get_courses();
   },
   components: {
@@ -49861,7 +49864,21 @@ var render = function() {
   return _c("div", { staticStyle: { display: "inline" } }, [
     _c("section", { staticClass: "institutes py-5 bg-sub-secondary-color" }, [
       _c("div", { staticClass: "container-fluid" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "row px-xl-5" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "heading-institutes" }, [
+              _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
+                _vm._v("المعاهد ( " + _vm._s(_vm.courses.total) + " )")
+              ]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها"
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "row px-xl-5 mb-5" }, [
           _c("div", { staticClass: "col-xl-3" }, [
@@ -49870,7 +49887,7 @@ var render = function() {
               { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
               [
                 _c("div", { staticClass: "card rounded-10 shadow-sm mb-4" }, [
-                  _vm._m(1),
+                  _vm._m(0),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -49899,7 +49916,7 @@ var render = function() {
                                 attrs: { type: "text", placeholder: "بحث" }
                               }),
                               _vm._v(" "),
-                              _vm._m(2)
+                              _vm._m(1)
                             ]
                           ),
                           _vm._v(" "),
@@ -49933,11 +49950,11 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
+                          _vm._m(2),
+                          _vm._v(" "),
                           _vm._m(3),
                           _vm._v(" "),
                           _vm._m(4),
-                          _vm._v(" "),
-                          _vm._m(5),
                           _vm._v(" "),
                           _c(
                             "button",
@@ -50250,26 +50267,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row px-xl-5" }, [
-      _c("div", { staticClass: "col-12" }, [
-        _c("div", { staticClass: "heading-institutes" }, [
-          _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
-            _vm._v("المعاهد")
-          ]),
-          _vm._v(" "),
-          _c("p", [
-            _vm._v(
-              "تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها"
-            )
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

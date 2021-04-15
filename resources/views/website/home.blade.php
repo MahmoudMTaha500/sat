@@ -1,6 +1,6 @@
 @extends('website.app') @section('website.content') 
 <!-- Intro  -->
-<section class="intro bg-primary">
+<section class="intro" style="background-image: url({{asset('website')}}/imgs/home_page_header.png)">
     <div class="container-fluid">
         <div class="row px-xl-5">
             <div class="col-lg-7 align-self-center py-5 order-lg-1 order-2">
@@ -10,10 +10,11 @@
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
-                <form class="form-inline row">
+                <form class="form-inline row" method="GET" action="{{route('website.institutes')}}">
+                    
                     <div class="col-md-9">
                         <!-- Search Field -->
-                        <input type="text" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد او المدينة او الدولة او اللغة لبدء البحث" />
+                        <input name="keyword" type="text" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد او المدينة او الدولة او الدورة لبدء البحث" />
                         <!-- ./Search Field -->
                     </div>
                     <div class="col-md-3">
@@ -26,7 +27,6 @@
             </div>
             <div class="col-lg-5 mx-auto order-lg-2 order-1 text-center">
                 <!-- Intro Img -->
-                <img src="{{asset('website')}}/imgs/introImg.svg" alt="" class="img-fluid img-intro" />
                 <!-- ./Intro Img -->
             </div>
         </div>

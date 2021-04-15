@@ -1,5 +1,10 @@
 .intro {
-  background-image: url("../../imgs/introBg.png"); }
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position:top;
+  padding: 150px 0;
+}
   .intro .img-intro {
     -webkit-filter: drop-shadow(-5px 5px 10px #ffffff25);
     filter: drop-shadow(-5px 5px 10px #ffffff25); }

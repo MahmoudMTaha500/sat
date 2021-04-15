@@ -34,10 +34,11 @@ class WebsiteController extends Controller
         return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners'));
     }
     // institutes page method : show all institutes with filter
-    public function institutes_page()
+    public function institutes_page(Request $request)
     {
         $useVue = true;
-        return view('website.institute.institutes', compact('useVue'));
+        $search = $request->all();
+        return view('website.institute.institutes', compact('useVue' , 'search'));
     }
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
@@ -48,7 +49,7 @@ class WebsiteController extends Controller
         if (empty($course[0])) {return redirect()->route('website.home');}
         $course = $course[0];
         $institute = $institute[0];
-
+        
         $useVue = true;
         return view('website.institute.institute-profile', compact('useVue', 'course', 'institute'));
     }
@@ -510,7 +511,7 @@ class WebsiteController extends Controller
             }
             public function offers()
             {
-                $offers = Course::where('discount' , '!=' , 0)->get();
+                $offers = Course::where('discount' , '!=' , 0)->paginate(12);
                 return view('website.offers' , compact('offers'));
             }
             
