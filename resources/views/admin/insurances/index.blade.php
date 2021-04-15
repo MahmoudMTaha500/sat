@@ -19,6 +19,9 @@
                 :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
                 :csrftoken="{{ json_encode(csrf_token()) }}"
                 :institutes="{{ json_encode($institutes) }}"
+                :create="{{  json_encode(auth()->user()->hasPermission('services-create') )}}"
+                :edit="{{  json_encode(auth()->user()->hasPermission('services-update') )}}"
+                :delete_pre="{{  json_encode(auth()->user()->hasPermission('services-delete') )}}"
             >
             <insurance-component>
                 

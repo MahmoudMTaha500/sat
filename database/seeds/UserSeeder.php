@@ -32,6 +32,7 @@ class UserSeeder extends Seeder
                 "email" => 'employee@app.com'.$x,
                 "password" => bcrypt('123123'),
             ]);
+            $employee->attachRole('employee');
             $employee->attachPermissions(['institutes-create','institutes-read','institutes-update']);
         }
         for ($x=4; $x <= 6 ; $x++) { 
@@ -40,6 +41,7 @@ class UserSeeder extends Seeder
                 "email" => 'employee@app.com'.$x,
                 "password" => bcrypt('123123'),
             ]);
+            $employee->attachRole('employee');
             $employee->attachPermissions(['courses-create','courses-read','courses-update' , 'courses-delete']);
         }
         for ($x=7; $x <= 9 ; $x++) { 
@@ -48,6 +50,7 @@ class UserSeeder extends Seeder
                 "email" => 'employee@app.com'.$x,
                 "password" => bcrypt('123123'),
             ]);
+            $employee->attachRole('employee');
             $employee->attachPermission('articals-create');
         }
     }

@@ -25,7 +25,9 @@
             :institutes="{{ json_encode($institutes) }}"
             :csrftoken="{{ json_encode(csrf_token()) }}"
 
-
+            :create="{{  json_encode(auth()->user()->hasPermission('courses-create') )}}"
+            :edit="{{  json_encode(auth()->user()->hasPermission('courses-update') )}}"
+            :delete_pre="{{  json_encode(auth()->user()->hasPermission('courses-delete') )}}"
             ></courses-component>
             <!-- Recent Transactions -->
        

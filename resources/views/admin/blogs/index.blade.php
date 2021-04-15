@@ -23,7 +23,9 @@
                 :users="{{ json_encode($users) }}"
                 :categories="{{ json_encode($categories) }}"
 
-
+                :create="{{  json_encode(auth()->user()->hasPermission('articals-create') )}}"
+                :edit="{{  json_encode(auth()->user()->hasPermission('articals-update') )}}"
+                :delete_pre="{{  json_encode(auth()->user()->hasPermission('articals-delete') )}}"
 
             >
 

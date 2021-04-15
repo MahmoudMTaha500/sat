@@ -66,11 +66,21 @@
 
                                             <td class="text-truncate">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
+                
+                                                    @if(auth()->user()->hasPermission('articals-update'))
+
                                                     <a href="{{route('blog_categories.edit' ,$cat->id)}}" class="btn btn-info btn-sm round">تعديل </a>
+                
+                                                    @endif
+
+                                                    @if(auth()->user()->hasPermission('articals-delete'))
+                                                 
                                                     <form action="{{route('blog_categories.destroy',$cat->id)}}" method="POST" class="btn-group">
                                                         @csrf @method("DELETE")
+                                                        
                                                         <button class="btn btn-danger btn-sm round" onclick="return confirm('Are you sure?')">حذف </button>
                                                     </form>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
