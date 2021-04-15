@@ -52,7 +52,7 @@
                         <!-- ./password Input -->
                         <!-- Forget Password Link -->
                         <div class="overflow-hidden mb-3">
-                            <a href="password-reset.html" class="text-secondary-color float-left @error('password') is-invalid @enderror">نسيت كلمة المرور؟</a>
+                            <a href="{{route('student.reset_password')}}" class="text-secondary-color float-left @error('password') is-invalid @enderror">نسيت كلمة المرور؟</a>
                         </div>
                         <!-- ./Forget Password Link -->
                         <!-- Submit Btn -->
