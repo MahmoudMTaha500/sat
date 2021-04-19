@@ -512,6 +512,12 @@ if($student_mail){
             $page_title = 'student-notification';
             return view('website.students.notification' , compact('student' , 'page_title' ));
         }
+        public function student_success_story()
+        {
+            $student = auth()->guard('student')->user();
+            $page_title = 'student-notification';
+            return view('website.students.notification' , compact('student' , 'page_title' ));
+        }
 
 
 

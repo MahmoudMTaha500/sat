@@ -47,7 +47,7 @@
             <div class="col-md-6 col-xl-5 mr-auto">
                 <!-- Search Institute Form -->
                 <div class="search-institute-form shadow-lg rounded-10 py-4 px-2 p-xl-5 mx-auto bg-white">
-                    <form class="my-4">
+                    <form class="my-4" method="GET" action="{{route('website.institutes')}}">
                         <!-- Country Field -->
                         <div class="form-group">
                             <country-component ref="countries_component_ref" get_countries_url="{{route('vue.get.countries')}}" ele_class="{{'form-control rounded-10'}}"> </country-component>
@@ -60,32 +60,14 @@
                         <!-- ./City Field -->
                         <!-- Weeks Count Field -->
                         <div class="form-group">
-                            <select class="form-control rounded-10" data-live-search="true">
+                            <select name="weeks" class="form-control rounded-10" data-live-search="true">
                                 <option value="" disabled selected>عدد الاسابيع</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
+                                @for ($i = 0; $i <= 45; $i++)
+                                    <option value="{{$i}}">{{$i}}</option>
+                                @endfor                                
                             </select>
                         </div>
                         <!-- ./Weeks Count Field -->
-                        <!-- Options  -->
-                        <div class="mb-4">
-                            <div class="form-check form-check-inline mr-0 ml-4">
-                                <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" value="option2" />
-                                <label class="form-check-label">افضل العروض</label>
-                            </div>
-                            <div class="form-check form-check-inline mr-0 ml-4">
-                                <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" value="option1" />
-                                <label class="form-check-label">الأعلى تقيما</label>
-                            </div>
-                            <div class="form-check form-check-inline mr-0 ml-4">
-                                <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" id="inlineCheckbox1" value="option1" />
-                                <label class="form-check-label">الاكثر انتشارا</label>
-                            </div>
-                        </div>
-                        <!-- ./Options  -->
                         <!-- Confirm Btn  -->
                         <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center text-white">ابحث عن معهد</button>
                         <!-- ./Confirm Btn  -->
@@ -137,7 +119,7 @@
                         <!-- ./Institute Img -->
                         <div class="card-body rounded-10 bg-white">
                             <!-- Institute Title -->
-                            <h5 class="card-title"><a href="{{url($offer->slug)}}" class="text-main-color"> معهد {{$offer->institute->name_ar}} </a></h5>
+                            <h5 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color"> معهد {{$offer->institute->name_ar}} </a></h5>
                             <!-- ./Institute Title -->
                             <!-- Institute Rate -->
                             <p class="mb-0"><span class="starrr" ratio="{{institute_rate($offer->institute)}}"></span> {{institute_rate($offer->institute)}}</p>
@@ -171,6 +153,104 @@
     </div>
 </section>
 <!-- ./Best Offers -->
+
+<!-- Studies -->
+<div class="studies py-5">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Background Img -->
+            <div class="col-md-6 bg-study-1" style="background-image: url({{$two_blogs[0]->banner == null ? asset('storage/default_images.png') : $two_blogs[0]->banner}})"></div>
+            <!-- ./Background Img -->
+            <div class="col-md-6 p-5 ">
+                <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
+                <p>{{ mb_substr(strip_tags($two_blogs[0]->content_ar)  ,0 , 300  , 'utf-8')}} ....</p>
+                <a href="{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
+                <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
+                <div class="overflow-hidden">
+                    {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 p-5 ">
+                <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
+                <p>{{ mb_substr(strip_tags($two_blogs[1]->content_ar)  ,0 , 300  , 'utf-8')}} ....</p>
+                <a href="{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
+                <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
+                <div class="overflow-hidden">
+                    {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
+                </div>
+            </div>
+            <!-- Background Img -->
+            <div class="col-md-6 bg-study-2" style="background-image: url({{$two_blogs[1]->banner == null ? asset('storage/default_images.png') : $two_blogs[1]->banner}})"></div>
+            <!-- ./Background Img -->
+        </div>
+    </div>
+</div>
+<!-- ./Studies -->
+<!-- Trusted Us -->
+{{-- <section class="trusted-us py-5">
+    <div class="container-fluid">
+        <!-- Section Heading -->
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <div class="heading-trusted-us text-center">
+                    <h3 class="text-main-color font-weight-bold">من وثقوا بنا</h3>
+                    <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
+                </div>
+            </div>
+        </div>
+        <!-- ./Section Heading -->
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <div class="trusted-list owl-carousel" id="trusted-list">
+                    @foreach ($partners as $partner)
+                    <div class="p-5"><img src="{{$partner->logo == null ? asset('storage/default_images.png') : $partner->logo}}" alt="{{$partner->name}}" class="img-fluid" /></div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+</section> --}}
+<!-- ./Trusted Us -->
+<!-- News -->
+<section class="news py-5 bg-sub-secondary-color">
+    <div class="container-fluid">
+        <!-- Section Heading -->
+        <div class="row px-xl-5 mb-4">
+            <div class="col-12">
+                <div class="heading-best-offers text-center">
+                    <h3 class="text-main-color font-weight-bold">أخر الأخبار و الموضوعات المهمة</h3>
+                    <p>اعرف اخر الأخبار و الموضوعات الجديده الخاص بالطالب السعودي بالخارج و الدراسه بشكل عام</p>
+                </div>
+            </div>
+        </div>
+        <!-- ./Section Heading -->
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <!-- News List -->
+                <div class="news-list owl-carousel position-relative px-xl-5" id="news-list">
+                    @foreach ($blogs as $blog)
+
+                    <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
+                        <a href="{{route('website.article',$blog->id)}}">
+                            <img src="{{$blog->banner == null ? asset('storage/default_images.png') : $blog->banner}}" alt="{{$blog->title_ar}}" class="card-img-top" />
+                        </a>
+                        <div class="card-body rounded-10 bg-white">
+                            <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>
+                            <p class="mb-0"><span>{{mb_substr(strip_tags($blog->content_ar)  ,0 , 150  , 'utf-8')}} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span></p>
+                            <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- ./News List -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ./News -->
 <!-- Success Stories -->
 <section class="success-stories pt-5 pb-0">
     <div class="container-fluid">
@@ -178,7 +258,7 @@
         <div class="row px-xl-5 mb-5">
             <div class="col-12">
                 <div class="heading-success-stories text-center">
-                    <h3 class="text-main-color font-weight-bold">قصص النجاح</h3>
+                    <h3 class="text-main-color font-weight-bold">آراء العملاء</h3>
                     <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
                 </div>
             </div>
@@ -227,103 +307,6 @@
     </div>
 </section>
 <!-- ./Success Stories -->
-<!-- Studies -->
-<div class="studies">
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Background Img -->
-            <div class="col-md-6 bg-study-1" style="background-image: url({{$two_blogs[0]->banner == null ? asset('storage/default_images.png') : $two_blogs[0]->banner}})"></div>
-            <!-- ./Background Img -->
-            <div class="col-md-6 p-5 bg-sub-secondary-color">
-                <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
-                <p>{{$two_blogs[0]->content_ar}}</p>
-                <a href="{{$two_blogs[0]->country->id}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
-                <a href="{{$two_blogs[0]->id}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
-                <div class="overflow-hidden">
-                    <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 p-5 bg-sub-secondary-color">
-                <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
-                <p>{{$two_blogs[1]->content_ar}}</p>
-                <a href="{{$two_blogs[1]->country->id}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
-                <a href="{{$two_blogs[1]->id}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
-                <div class="overflow-hidden">
-                    <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a>
-                </div>
-            </div>
-            <!-- Background Img -->
-            <div class="col-md-6 bg-study-2" style="background-image: url({{$two_blogs[1]->banner == null ? asset('storage/default_images.png') : $two_blogs[1]->banner}})"></div>
-            <!-- ./Background Img -->
-        </div>
-    </div>
-</div>
-<!-- ./Studies -->
-<!-- Trusted Us -->
-<section class="trusted-us py-5">
-    <div class="container-fluid">
-        <!-- Section Heading -->
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <div class="heading-trusted-us text-center">
-                    <h3 class="text-main-color font-weight-bold">من وثقوا بنا</h3>
-                    <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
-                </div>
-            </div>
-        </div>
-        <!-- ./Section Heading -->
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <div class="trusted-list owl-carousel" id="trusted-list">
-                    @foreach ($partners as $partner)
-                    <div class="p-5"><img src="{{$partner->logo == null ? asset('storage/default_images.png') : $partner->logo}}" alt="{{$partner->name}}" class="img-fluid" /></div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ./Trusted Us -->
-<!-- News -->
-<section class="news py-5 bg-sub-secondary-color">
-    <div class="container-fluid">
-        <!-- Section Heading -->
-        <div class="row px-xl-5 mb-4">
-            <div class="col-12">
-                <div class="heading-best-offers text-center">
-                    <h3 class="text-main-color font-weight-bold">أخر الأخبار و الموضوعات المهمة</h3>
-                    <p>اعرف اخر الأخبار و الموضوعات الجديده الخاص بالطالب السعودي بالخارج و الدراسه بشكل عام</p>
-                </div>
-            </div>
-        </div>
-        <!-- ./Section Heading -->
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <!-- News List -->
-                <div class="news-list owl-carousel position-relative px-xl-5" id="news-list">
-                    @foreach ($blogs as $blog)
-
-                    <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
-                        <a href="{{$blog->id}}">
-                            <img src="{{$blog->banner == null ? asset('storage/default_images.png') : $blog->banner}}" alt="{{$blog->title_ar}}" class="card-img-top" />
-                        </a>
-                        <div class="card-body rounded-10 bg-white">
-                            <a href="{{$blog->id}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>
-                            <p class="mb-0"><span>بواسطة {{$blog->creator->name}}</span></p>
-                            <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <!-- ./News List -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ./News -->
 <!-- Browse our institutes -->
 <section class="browse-our-institutes py-5">
     <div class="container-fluid">
@@ -332,11 +315,13 @@
             <div class="col-12 text-center">
                 <h3 class="text-main-color font-weight-bold">تصفح معاهدنا</h3>
                 <p>تصفح لائحة أفضل معاهد اللغات المعتمدة من أجلك لتطوير مهاراتك اللغوية</p>
-                <button class="btn rounded-10 bg-secondary-color text-white px-4">ابدأ الآن</button>
+                <a href="{{route('website.institutes')}}"><button class="btn rounded-10 bg-secondary-color text-white px-4">ابدأ الآن</button></a>
+                
             </div>
         </div>
         <!-- ./Section Heading -->
     </div>
 </section>
 <!-- ./Browse our institutes -->
+
 @endsection

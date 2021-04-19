@@ -7,6 +7,7 @@
         <li class="list-group-item py-3 border-bottom {{$page_title == 'student-profile' ? 'active' : ''}}"><a href="{{route('student.profile')}}" class="{{$page_title == 'student-profile' ? 'text-white' : ''}}">البيانات الشخصية</a></li>
         <li class="list-group-item py-3 border-bottom {{$page_title == 'student-favourite' ? 'active' : ''}}"><a href="{{route('student.favourite')}}" class="{{$page_title == 'student-favourite' ? 'text-white' : ''}}">المفضلة</a></li>
         <li class="list-group-item py-3 border-bottom {{$page_title == 'student-reservation' ? 'active' : ''}}"><a href="{{route('student.reservation')}}" class="{{$page_title == 'student-reservation' ? 'text-white' : ''}}">الحجوزات</a></li>
+        <li class="list-group-item py-3 {{$page_title == 'success-story' ? 'active' : ''}}"><a href="{{route('student.success.story')}}" class="{{$page_title == 'success-story' ? 'text-white' : ''}}">قصص النجاح</a></li>
         {{-- <li class="list-group-item py-3 {{$page_title == 'student-notification' ? 'active' : ''}}"><a href="{{route('student.notification')}}" class="{{$page_title == 'student-notification' ? 'text-white' : ''}}">الاشعارات</a></li> --}}
     </ul>
 </div>

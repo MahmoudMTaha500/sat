@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Course;
 use App\Models\Favourite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -34,13 +35,7 @@ class VueRequestsController extends Controller
     public function get_courses(Request $request)
     {
         $courses = new Course();
-        if(!empty($request->keyword)){
-            $courses = $courses
-                        ->whereHas('institute', function ($query) use ($request) { $query->where('name_ar', $request->keyword); })
-                        ->orWhere("name_ar", 'LIKE', "%{$request->keyword}%")
-                        ->orWhereHas('institute', function ($query) use ($request) { $query->whereHas('country', function ($query) use ($request) { $query->where('name_ar', $request->keyword);});})
-                        ->orWhereHas('institute', function ($query) use ($request) { $query->whereHas('city', function ($query) use ($request) { $query->where('name_ar', $request->keyword);});});
-        }
+        
         if(!empty($request->country_id)){
             $courses = $courses->whereHas('institute', function ($query) use ($request) {
                 $query->where('country_id', $request->country_id);
@@ -51,8 +46,22 @@ class VueRequestsController extends Controller
                 $query->where('city_id', $request->city_id);
             });
         }
+        if(!empty($request->keyword)){
+            $courses = $courses
+                        ->whereHas('institute', function ($query) use ($request) { $query->where('name_ar', $request->keyword); })
+                        ->orWhere("name_ar", 'LIKE', "%{$request->keyword}%")
+                        ->orWhereHas('institute', function ($query) use ($request) { $query->whereHas('country', function ($query) use ($request) { $query->where('name_ar', $request->keyword);});})
+                        ->orWhereHas('institute', function ($query) use ($request) { $query->whereHas('city', function ($query) use ($request) { $query->where('name_ar', $request->keyword);});});
+        }
+        if($request->best_offers == true){
+            $courses = $courses->orderBy('discount' , 'DESC');
+        }
+        if(!empty($request->course_level)){
+            $courses = $courses->where('required_level', $request->course_level);
+        }
+       
 
-        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPricePerWeek' , 'student_favourite')->paginate(9);
+        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPrice' , 'student_favourite')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 

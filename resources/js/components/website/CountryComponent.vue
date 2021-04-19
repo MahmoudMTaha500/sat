@@ -1,8 +1,8 @@
 <template>
     <div style="display:inline">
-        <select  v-model="country_id" @change="get_cities" ref = "country_id_ref" :class="ele_class">
+        <select name="country"  v-model="country_id" @change="get_cities" ref = "country_id_ref" :class="ele_class">
             <option hidden value="">الدولة</option>
-            <option value="all">كل الدول</option>
+            <option value="">كل الدول</option>
             <option v-for="country in countries" :key="country.id" :value="country.id">{{country.name}}</option>
             <option v-if="option_null" value="">اخرى</option>
         </select>

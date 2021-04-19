@@ -1,8 +1,8 @@
 <template>
     <div style="display:inline">
-        <select :class="ele_class" ref = "city_id_ref">
+        <select name="city" :class="ele_class" ref = "city_id_ref">
             <option hidden value="">المدينة</option>
-            <option value="all">كل المدن</option>
+            <option value="">كل المدن</option>
             <option v-for="city in cities" :key="city.id" :value="city.id">{{city.name}}</option>
             <option v-if="cities.length != null && cities.length != 0 && option_null" value=""> اخرى</option>
         </select>

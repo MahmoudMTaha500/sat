@@ -40,30 +40,26 @@
                                                 <city-component :get_cities_url="get_cities_url" ref="cities_component_ref" :ele_class="'form-control rounded-10'"> </city-component>
                                             </div>
 
-                                            <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                                                <input type="text" class="datepicker form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية" />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
-                                                </div>
-                                            </div>
                                             <div class="form-group">
-                                                <select class="form-control selectpicker rounded-10" data-live-search="true">
-                                                    <option value="" disabled selected>عدد الاسابيع</option>
-                                                    <option>1</option>
-                                                    <option>2</option>
-                                                    <option>3</option>
-                                                    <option>4</option>
-                                                    <option>5</option>
+                                                <select v-model="weeks" class="form-control selectpicker rounded-10" data-live-search="true">
+                                                    <option v-for="week in 45" :key="week" :value="week">{{week}}</option>
                                                 </select>
                                             </div>
 
                                             <div class="form-group">
-                                                <select class="form-control selectpicker rounded-10" data-live-search="true">
+                                                <select v-model="course_level" class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option value="" disabled selected>المستوي</option>
                                                     <option value="مبتدئ">مبتدئ</option>
                                                     <option value="متوسط">متوسط</option>
                                                     <option class="متقدم">متقدم</option>
                                                 </select>
+                                            </div>
+                                            <div class="mb-4">
+                                                <div class="form-check form-check-inline mr-0 ml-4">
+                                                    <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" v-model="best_offers" />
+                                                    <label class="form-check-label">افضل العروض</label>
+                                                </div>
+                                              
                                             </div>
                                             <button @click="filter_courses()" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">فلتر</button>
                                         </form>
@@ -120,8 +116,8 @@
                                         </div>
                                         <!-- Course Price -->
                                         <div class="card-footer bg-white overflow-hidden">
-                                            <del class="text-muted del">{{Math.round(course.courses_price_per_week.price)}} ريال / أسبوع </del>
-                                            <span class="float-left text-main-color">{{Math.round(course.courses_price_per_week.price*(1-course.discount)) }} ريال / أسبوع </span>
+                                            <del class="text-muted del">{{course_price_per_week(course.courses_price)}} ريال / أسبوع </del>
+                                            <span class="float-left text-main-color">{{Math.round(course_price_per_week(course.courses_price)*(1-course.discount)) }} ريال / أسبوع </span>
                                         </div>
                                         <!-- ./Course Price -->
                                     </div>
@@ -138,17 +134,25 @@
                         <nav aria-label="Page navigation  ">
                             <ul class="pagination d-flex justify-content-end">
                                 <li class="page-item">
-                                    <a @click="pagination(prev_page_url)" :disabled="!courses.prev_page_url" class="page-link rounded-10 mx-1 text-dark border-0" href="#">
+                                    <button :style="!courses.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"  @click="pagination(prev_page_url)" :disabled="!courses.prev_page_url" class="page-link rounded-10 mx-1 text-dark border-0" >
                                         <i class="fas fa-chevron-right"></i>
-                                    </a>
+                                    </button>
                                 </li>
                                 <li class="page-item">
-                                    <a @click="pagination(next_page_url)" :disabled="!courses.next_page_url" class="page-link rounded-10 mx-1 text-dark border-0" href="#">
+                                   
+                                    <span>
+                                        <span style="background:#F4C20D;" class="page-link rounded-10 mx-1 text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
+                                    </span>
+                                </li>
+                                
+                                <li class="page-item">
+                                    <button :style="!courses.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''" @click="pagination(next_page_url)" :disabled="!courses.next_page_url" class="page-link rounded-10 mx-1 text-dark border-0" >
                                         <i class="fas fa-chevron-left"></i>
-                                    </a>
+                                    </button>
                                 </li>
                             </ul>
                         </nav>
+
                     </div>
                 </div>
                 <!-- ./Pagination -->
@@ -166,13 +170,16 @@
         data() {
             return {
                 courses: {},
-                country_id: "",
                 next_page_url: "",
                 prev_page_url: "",
                 keyword: "",
                 country_id: "",
                 city_id: "",
+                weeks: 1,
+                best_offers: false,
+                high_rated: false,
                 use_params: false,
+                course_level: '',
             };
         },
         methods: {
@@ -224,11 +231,27 @@
                     }
                 }
             },
+            course_price_per_week(prices_obj){
+                var price_per_week = 0;
+                prices_obj.every(week_price => {
+                    price_per_week = week_price.price;
+                    if(this.weeks <= week_price.weeks){
+                        price_per_week = week_price.price;
+                        return false;
+                    }else{
+                            return true
+                    }
+                });
+                return price_per_week
+            },
             params: function () {
                 var filter_params = {
                     keyword: this.keyword,
                     country_id: this.country_id,
                     city_id: this.city_id,
+                    weeks: this.weeks,
+                    best_offers: this.best_offers,
+                    course_level: this.course_level,
                 };
                 var pagination_params = "&keyword=" + this.keyword;
                 return { filter_params: filter_params, pagination_params: pagination_params };
@@ -238,7 +261,11 @@
             
             if(this.search.length != 0){
                 this.keyword = this.search.keyword
+                if(this.search.country != undefined){this.country_id = this.search.country}
+                if(this.search.city != undefined){this.city_id = this.search.city}
+                if(this.search.weeks != undefined){this.weeks = this.search.weeks}
             }
+            
             this.get_courses();
         },
         components: {
