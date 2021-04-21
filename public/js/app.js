@@ -3720,12 +3720,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['get_rate_url', 'update_rate_url'],
+  props: ["csrftoken", "get_rate_url", "update_rate_url", 'delete_rate_url'],
   data: function data() {
     return {
-      rates: '',
-      RateID: ''
+      rates: "",
+      RateID: "",
+      status: true,
+      review: '',
+      approvement: 'all'
     };
   },
   methods: {
@@ -3736,24 +3756,52 @@ __webpack_require__.r(__webpack_exports__);
         return _this.rates = response.data.rates;
       });
     },
-    getid: function getid(id) {
-      return this.RateID = id;
+    update_rate: function update_rate(rate_obj) {
+      axios.post(this.update_rate_url, rate_obj, {
+        headers: {
+          "X-CSRFToken": this.csrftoken
+        }
+      }).then(alert('تم التعديل بنجاح'));
     },
-    onAfterRate: function onAfterRate(rate) {
-      axios.post(this.update_rate_url, {
-        'rate_id': this.RateID,
-        'rate': rate
+    delete_rate: function delete_rate(rate_id) {
+      axios.post(this.delete_rate_url, {
+        rate_id: rate_id
       }, {
         headers: {
-          "X-CSRFToken": "{{csrf_token()}}"
+          "X-CSRFToken": this.csrftoken
         }
-      }).then(function (response) {});
+      }).then(this.filter, alert('تم الحذف بنجاح'));
+    },
+    Pagination: function Pagination(url) {
+      this.get_rate_url = url + "&approvement=" + this.approvement;
+      this.getrates();
+    },
+    filter: function filter() {
+      var _this2 = this;
+
+      axios.get(this.get_rate_url, {
+        params: {
+          approvement: this.approvement
+        }
+      }).then(function (response) {
+        return _this2.rates = response.data.rates, _this2.rates.prev_page_url += "&approvement=" + _this2.approvement, _this2.rates.next_page_url += "&approvement=" + _this2.approvement;
+      });
     }
   },
   beforeMount: function beforeMount() {
     this.getrates();
   }
-});
+}); // beforeMount() {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const myParam = urlParams.get("cat_id");
+//     //    alert(myParam);
+//     if (myParam) {
+//         this.cat_id = myParam;
+//         this.filter();
+//     } else {
+//         this.getBlogs();
+//     }
+// },
 
 /***/ }),
 
@@ -46300,16 +46348,68 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-12", attrs: { id: "recent-transactions" } }, [
+    _c("div", { staticClass: "col-12" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("h4", { staticClass: "card-title" }, [
-            _vm._v(" كل التقييمات (" + _vm._s(_vm.rates.total) + ")")
+            _vm._v("كل التقييمات (" + _vm._s(_vm.rates.total) + ")")
           ]),
           _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "heading-elements" })
+          _c("div", { staticClass: "heading-elements" }, [
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _c("li", [
+                _c("div", { staticClass: "form-group mt-1" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.approvement,
+                          expression: "approvement"
+                        }
+                      ],
+                      attrs: { id: "" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.approvement = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          _vm.filter
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { selected: "", value: "all" } }, [
+                        _vm._v("الكل")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v("مقبول")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0" } }, [
+                        _vm._v("غير مقبول")
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "card-content" }, [
@@ -46325,12 +46425,8 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.rates, function(rate) {
+                  _vm._l(_vm.rates.data, function(rate) {
                     return _c("tr", { key: rate.id }, [
-                      _c("td", { staticClass: "text-truncate" }, [
-                        _vm._v(_vm._s(rate.id))
-                      ]),
-                      _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
                         _vm._v(_vm._s(rate.student.name))
                       ]),
@@ -46349,25 +46445,172 @@ var render = function() {
                               value: rate.rate,
                               disabled: "",
                               readonly: true
-                            },
-                            on: {
-                              "before-rate": function($event) {
-                                return _vm.getid(rate.id)
-                              },
-                              "after-rate": _vm.onAfterRate
                             }
                           })
                         ],
                         1
                       ),
                       _vm._v(" "),
-                      _vm._m(2, true)
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: rate.review,
+                              expression: "rate.review"
+                            }
+                          ],
+                          attrs: { rows: "7", cols: "50" },
+                          domProps: { value: rate.review },
+                          on: {
+                            change: function($event) {
+                              return _vm.update_rate(rate)
+                            },
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(rate, "review", $event.target.value)
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: rate.approvement,
+                              expression: "rate.approvement"
+                            }
+                          ],
+                          attrs: { type: "checkbox", id: "checkbox" },
+                          domProps: {
+                            checked: Array.isArray(rate.approvement)
+                              ? _vm._i(rate.approvement, null) > -1
+                              : rate.approvement
+                          },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$a = rate.approvement,
+                                  $$el = $event.target,
+                                  $$c = $$el.checked ? true : false
+                                if (Array.isArray($$a)) {
+                                  var $$v = null,
+                                    $$i = _vm._i($$a, $$v)
+                                  if ($$el.checked) {
+                                    $$i < 0 &&
+                                      _vm.$set(
+                                        rate,
+                                        "approvement",
+                                        $$a.concat([$$v])
+                                      )
+                                  } else {
+                                    $$i > -1 &&
+                                      _vm.$set(
+                                        rate,
+                                        "approvement",
+                                        $$a
+                                          .slice(0, $$i)
+                                          .concat($$a.slice($$i + 1))
+                                      )
+                                  }
+                                } else {
+                                  _vm.$set(rate, "approvement", $$c)
+                                }
+                              },
+                              function($event) {
+                                return _vm.update_rate(rate)
+                              }
+                            ]
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "checkbox" } }, [
+                          _vm._v(
+                            _vm._s(
+                              rate.approvement == 1 ? "مقبول" : "غير مقبول"
+                            )
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger btn-sm round",
+                            attrs: {
+                              onclick:
+                                "return confirm('هل انت متاكد من حذف هذا ')"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.delete_rate(rate.id)
+                              }
+                            }
+                          },
+                          [_vm._v("حذف")]
+                        )
+                      ])
                     ])
                   }),
                   0
                 )
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pagination" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.rates.prev_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.Pagination(_vm.rates.prev_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                            Previos\n                        "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  " page " +
+                    _vm._s(_vm.rates.current_page) +
+                    " of " +
+                    _vm._s(_vm.rates.last_page) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.rates.next_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.Pagination(_vm.rates.next_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                            Next\n                        "
+                  )
+                ]
+              )
+            ])
           ])
         ])
       ])
@@ -46389,32 +46632,17 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", { staticClass: "border-top-0" }, [_vm._v(" #")]),
-        _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم الطالب")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اسم المعهد")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("التقييم")]),
         _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("التعليق")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الحالة")]),
+        _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("حذف")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-truncate" }, [
-      _c("a", { attrs: { href: "#" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-sm btn-outline-danger round",
-            attrs: { type: "button" }
-          },
-          [_vm._v("حذف")]
-        )
       ])
     ])
   }

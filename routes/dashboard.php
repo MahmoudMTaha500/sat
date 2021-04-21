@@ -47,6 +47,7 @@ Route::resource('comment', 'CommentController');
 
 Route::get('getrate', 'InstituteRateController@getrates');
 Route::post('updaterate', 'InstituteRateController@updaterate');
+Route::post('delete-rate', 'InstituteRateController@destroy')->name('delete.rate');
 Route::resource('rate', 'InstituteRateController');
 
 /**********************************Axios Route city ************************************************************************************** */

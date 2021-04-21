@@ -28,6 +28,7 @@
             </div>
         </div>
         <div class="row px-xl-5 mt-5">
+      
             <div class="col-lg-8">
                 <!-- Tabs -->
                 <ul class="nav nav-tabs bg-white border-0 rounded-10 nav-justified p-0 mb-3" id="myTab" role="tablist">
@@ -53,6 +54,21 @@
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="rate-tab" data-toggle="tab" href="#rate" role="tab" aria-controls="rate" aria-selected="false">التقييمات</a>
                     </li>
                 </ul>
+                
+                @error('login_error')
+                    <div class="alert alert-danger text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
+                @if (auth()->guard('student')->check())
+                    @include('admin.includes.errors')
+                @endif
+                @if (session()->has('alert_message'))
+                    <div class="alert alert-success text-center">
+                        {{session()->get('alert_message')}}
+                    </div>
+                @endif
+                
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="about-course" role="tabpanel" aria-labelledby="about-course-tab">
                         <!-- About Course Tab -->
@@ -191,7 +207,7 @@
                         <!-- Course Rate Tab -->
                        
                         <div class="bg-white rounded-10 py-4 mb-4">
-                            @foreach ($institute->rats as $rate)
+                            @foreach ($institute->approved_rates as $rate)
                             <div class="border-bottom mt-3">
                                 <div class="row px-4">
                                     <div class="col-lg-2 col-4">
@@ -215,9 +231,12 @@
                         <div class="bg-white rounded-10 p-4 mb-4">
                             <h5 class="text-main-color font-weight-bold">أضف تقييم</h5>
                             <p class="starrr add-rate"></p>
-                            <form>
+                            <form method="POST" action="{{route('institutes.add.review')}}">
+                                @csrf
+                                <input type="hidden" name="institute_id" value="{{$institute->id}}">
+                                <input type="hidden" name="rate"  class="add-rate-field">
                                 <div class="form-group btn-light rounded-10">
-                                    <textarea class="form-control bg-transparent rounded-10" placeholder="اكتب تعليقك" rows="5"></textarea>
+                                    <textarea name="review" class="form-control bg-transparent rounded-10" placeholder="اكتب تعليقك" rows="5"></textarea>
                                 </div>
                                 <div class="text-left">
                                     <button class="btn bg-secondary-color text-white">أضافة التقييم</button>
@@ -230,7 +249,16 @@
                 <!-- ./Tabs -->
             </div>
             <div class="col-lg-4">
-                @include('admin.includes.errors')
+                @error('from_date')
+                    <div class="alert alert-danger text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
+                @error('weeks')
+                    <div class="alert alert-danger text-center">
+                        {{ $message }}
+                    </div>
+                @enderror
                 <course-price-info-component
                     course_obj = '{{$course}}'
                     residence_obj = '{{$course->institute->residence}}'

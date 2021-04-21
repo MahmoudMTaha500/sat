@@ -16,6 +16,7 @@ class CreateInstituteRatesTable extends Migration
         Schema::create('institute_rates', function (Blueprint $table) {
             $table->id();
             $table->integer("rate");
+            $table->integer("approvement");
             $table->longText("review")->nullable();
             $table->bigInteger("student_id")->unsigned();
             $table->foreign('student_id')->references('id')->on('students');

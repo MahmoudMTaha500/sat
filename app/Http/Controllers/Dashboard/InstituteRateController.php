@@ -19,20 +19,39 @@ class InstituteRateController extends Controller
     
 }
 
-   public function getrates(){
-    $rates  = InstituteRate::with('institute','student')->get();
+   public function getrates(Request $request){
+       if($request->has('approvement')){
+           if($request->approvement == '1'){
+                $rates  = InstituteRate::with('institute','student')->where('approvement' , 1)->paginate(10);
+            }
+            elseif($request->approvement == '0'){
+               $rates  = InstituteRate::with('institute','student')->where('approvement' , 0)->paginate(10);
+            }
+            else{
+                $rates  = InstituteRate::with('institute','student')->paginate(10);
+            }
+       }else{
+            $rates  = InstituteRate::with('institute','student')->paginate(10);
+       }
+   
 
     return response()->json(['rates'=>$rates]);
 
    }
 
 
-public function updaterate(Request $request){
-// dd($request->all());
-$rate = InstituteRate::find($request->rate_id);
-$rate->rate = $request->rate;
-$rate->save();
-}
+    public function updaterate(Request $request){
+
+        $request->id;
+        $data = [];
+        if($request->approvement == true){
+            $data['approvement'] = 1;
+        }else{
+            $data['approvement'] = 0;
+        }
+        $data['review'] = $request->review;
+        InstituteRate::where('id' , $request->id)->update($data);
+    }
 
 
     /**
@@ -96,8 +115,8 @@ $rate->save();
      * @param  \App\Models\InstituteRate  $instituteRate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(InstituteRate $instituteRate)
+    public function destroy(InstituteRate $instituteRate , Request $request)
     {
-        //
+        InstituteRate::find($request->rate_id)->delete();
     }
 }

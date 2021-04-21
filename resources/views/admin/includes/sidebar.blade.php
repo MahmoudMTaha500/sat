@@ -71,20 +71,7 @@
                 </ul>
             </li>
             @endif
-            {{-- <li class="nav-item">
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> العروض</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="navbar-light.html" data-i18n="nav.navbars.nav_light">كل العروض</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-dark.html" data-i18n="nav.navbars.nav_dark">اضافة عرض جديد</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
-                    </li>
-                </ul>
-            </li> --}}
+           
             <li class="nav-item">
                 <a href="#">
                     <i class="la la-institution"></i>
@@ -103,7 +90,7 @@
                 </ul>
             </li>
 
-            @if(auth()->user()->hasPermission('cities-countries-read'))
+           
 
             <li class="nav-item {{ $department_name == 'country' ? 'open' : '' }}">
                 <a href="#">
@@ -111,27 +98,23 @@
                     <span class="menu-title" data-i18n="nav.navbars.main"> الدول والمدن</span>
                 </a>
                 <ul class="menu-content">
+
                     <li>
                         <a class="menu-item" href="{{route('countries.index')}}" data-i18n="nav.navbars.nav_light">كل الدول</a>
                     </li>
-            @if(auth()->user()->hasPermission('cities-countries-creta'))
 
                     <li>
                         <a class="menu-item" href="{{route('countries.create')}}" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
                     </li>
-                    @endif
                     <li>
                         <a class="menu-item" href="{{route('cities.index')}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>
                     </li>
-            @if(auth()->user()->hasPermission('cities-countries-read'))
 
                     <li>
                         <a class="menu-item" href="{{route('cities.create')}}" data-i18n="nav.navbars.nav_semi">اضافة مدينه جديده </a>
                     </li>
-                    @endif
                 </ul>
             </li>
-            @endif
 
             @if(auth()->user()->hasPermission('articals-read'))
 

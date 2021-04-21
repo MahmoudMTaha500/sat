@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class InstituteRate extends Model
 {
     use SoftDeletes;
-    protected $fillable = [
-        'rate',
-        'student_id',
-        'institute_id',
-    ];
+    protected $guarded = [];
 
     protected $date = ['deleted_at'];
     public function institute()

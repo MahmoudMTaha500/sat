@@ -54,5 +54,9 @@ class Institute extends Model
     {
         return $this->hasMany("App\Models\InstituteRate", 'institute_id', 'id');
     }
+    public function approved_rates()
+    {
+        return $this->hasMany("App\Models\InstituteRate", 'institute_id', 'id')->where('approvement' , 1);
+    }
 
 }

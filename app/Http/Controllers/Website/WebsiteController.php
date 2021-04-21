@@ -13,6 +13,7 @@ use App\Models\residences;
 use App\Models\Student;
 use App\Models\StudentRequest;
 use App\Models\StudentSuccessStory;
+use App\Models\InstituteRate;
 use App\Models\Favourite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,8 +64,8 @@ class WebsiteController extends Controller
             'from_date' => 'required',
         ], [
             'from_date.required' => 'تاريخ البداية مطلوب',
-            'required.required' => 'عدد الاسابيع مطلوب',
-            'required.numeric' => 'عدد الاسابيع يجب ان يكون رقما',
+            'weeks.required' => 'عدد الاسابيع مطلوب',
+            'weeks.numeric' => 'عدد الاسابيع يجب ان يكون رقما',
         ]);
 
 
@@ -515,8 +516,22 @@ if($student_mail){
         public function student_success_story()
         {
             $student = auth()->guard('student')->user();
-            $page_title = 'student-notification';
-            return view('website.students.notification' , compact('student' , 'page_title' ));
+            $page_title = 'success-story';
+            return view('website.students.success-story' , compact('student' , 'page_title' ));
+        }
+        public function update_success_story(Request $request)
+        {
+            $validated = $request->validate([
+                'story' => ['required', 'string', 'max:500'],
+               
+            ], [
+                'story.required' => 'يجب عليك كتابة قصتك',
+                'story.max' => 'يجب الا تتجاوز القصة  ال 500 حرف',
+            ]);
+            $student = auth()->guard('student')->user();
+            StudentSuccessStory::where('student_id' , $student->id)->update(['story' => $request->story , 'approvement' => 0]);
+            session()->flash('alert_message', 'تم حفظ قصتك بنجاح و جاري مراجعتها من قبل فريق العمل');
+            return redirect()->back();
         }
 
 
@@ -576,6 +591,49 @@ if($student_mail){
             {
                 $offers = Course::where('discount' , '!=' , 0)->paginate(12);
                 return view('website.offers' , compact('offers'));
+            }
+            public function add_review(Request $request)
+            {
+                $student = auth()->guard('student')->user();
+                if(auth()->guard('student')->check()){
+
+                $any_student_request = StudentRequest::where(['student_id' => $student->id])
+                ->whereHas('course', function ($query) use ($request) { $query->where(['institute_id' => $request->institute_id]); })
+                ->get();
+
+                if(empty($any_student_request[0])){
+                    return back()->withErrors(['have_no_course' =>'يجب عليك ان تكون مسجل في دورة تابعة لهذا المعهد بالفعل']);
+                }
+
+
+                    $validated = $request->validate([
+                        'rate' => ['required', 'numeric' , 'min:0' , 'max:5'],
+                        'review' => 'max:500',
+                        
+                    ], [
+                        'rate.required' => 'التقييم مطلوب',
+                        'review.max' => 'يجب الا يتجاوز عدد الحروف 500 حرف',
+                    ]);
+                    $data=[];
+                    $data['student_id']=$student->id;
+                    $data['institute_id']=$request->institute_id;
+                    $data['rate']=$request->rate;
+                    $data['review']=$request->review;
+                    $data['approvement']=0;
+                    InstituteRate::where(['student_id' =>$student->id , 'institute_id' => $request->institute_id])->forceDelete();
+                    InstituteRate::create($data);
+                    session()->flash('alert_message', 'تم اضافة تقييمك بنجاح و سيتم مراجعته من قبل فريق العمل.');
+                    return back();
+                        
+                }
+                else{
+                    return back()->withErrors(['login_error' =>'يجب عليك تسجيل الدخول اولا']);
+                }
+
+
+                
+                
+                    // InstituteRate
             }
             
             

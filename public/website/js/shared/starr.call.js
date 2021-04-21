@@ -1,7 +1,8 @@
 // Starr Call Plugin
 $('.add-rate').starrr({
     change: function(e, value){
-      alert('new rating is ' + value)
+    //   alert('new rating is ' + value)
+      $('.add-rate-field').val(value)
     }
 })
 $(".starrr").each(function () {

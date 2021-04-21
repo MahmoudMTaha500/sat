@@ -22,8 +22,10 @@
        
           
            <rate-component
-           :get_rate_url="{{json_encode(url('dashboard/getrate'))}}"
-           :update_rate_url="{{json_encode(url('dashboard/updaterate'))}}"
+                :csrftoken="{{json_encode(csrf_token())}}"
+                :get_rate_url="{{json_encode(url('dashboard/getrate'))}}"
+                :update_rate_url="{{json_encode(url('dashboard/updaterate'))}}"
+                :delete_rate_url="{{json_encode(route('delete.rate'))}}"
            ></rate-component>
         
                
