@@ -4974,6 +4974,311 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/visa/VisaComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/visa/VisaComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", 'create', 'edit', 'delete_pre'],
+  data: function data() {
+    return {
+      visas: {},
+      visa_id: "",
+      url_dashboard: this.dahsboard_url,
+      price_status: "",
+      document_status: "",
+      request_status: "",
+      name_ar: "",
+      status: true,
+      note: '',
+      visa_note_id: ''
+    };
+  },
+  beforeMount: function beforeMount() {
+    this.getVisa();
+  },
+  methods: {
+    getVisa: function getVisa() {
+      var _this = this;
+
+      axios.get(this.get_visa).then(function (response) {
+        return _this.visas = response.data.visas;
+      });
+    },
+    Pagination: function Pagination(url) {
+      this.get_visa = url + '&user_id=' + this.user_id + '&cat_id=' + this.cat_id + '&keyword=' + this.keyword + '&status=' + this.status;
+      this.getVisa();
+    },
+    updateApprovement: function updateApprovement(e) {
+      var newValue = e.target.checked;
+      axios.post(this.aprove_route, {
+        blog_id: this.blog_id,
+        approvement: newValue
+      }, {
+        headers: {
+          "X-CSRFToken": "{{ csrf_token()}}"
+        }
+      }).then(function (response) {});
+    },
+    getvisa_id: function getvisa_id(id) {
+      return this.visa_id = id;
+    },
+    updateStatus: function updateStatus(type) {
+      // alert(type);
+      var newValue = event.target.value; // alert(newValue);
+
+      axios.post(this.dahsboard_url + "/simple-visa/update-status", {
+        visa_id: this.visa_id,
+        status: newValue,
+        type: type
+      }, {
+        headers: {
+          "X-CSRFToken": "{{ csrf_token()}}"
+        }
+      }).then(function (response) {});
+    },
+    filter: function filter() {
+      var _this2 = this;
+
+      axios.get(this.dahsboard_url + "/simple-visa/filter", {
+        params: {
+          price_status: this.price_status,
+          document_status: this.document_status,
+          request_status: this.request_status,
+          name_ar: this.name_ar
+        }
+      }).then(function (response) {
+        return _this2.visas = response.data.visas, _this2.visas.prev_page_url += '&price_status=' + _this2.price_status + '&document_status=' + _this2.document_status + '&document_status=' + _this2.document_status + '&name_ar=' + _this2.name_ar, _this2.visas.next_page_url += '&price_status=' + _this2.price_status + '&document_status=' + _this2.document_status + '&document_status=' + _this2.document_status + '&name_ar=' + _this2.name_ar;
+      });
+    },
+    modelmessageInstitute: function modelmessageInstitute(obj) {
+      this.note = obj.note;
+      this.visa_note_id = obj.id; // this.editorData = obj.institute_message;
+      //  console.log(this.institute_message);
+
+      $("#institute_email_modal").modal("show");
+    },
+    updatenote: function updatenote() {
+      // alert(type);
+      // alert(newValue);
+      axios.post(this.dahsboard_url + "/simple-visa/update-note", {
+        visa_note_id: this.visa_note_id,
+        note: this.note
+      }, {
+        headers: {
+          "X-CSRFToken": "{{ csrf_token()}}"
+        }
+      }).then(function (response) {
+        if (response.data == 'success') {
+          alert('تم تعديل الملاحظه ');
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CityComponent.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/CityComponent.vue?vue&type=script&lang=js& ***!
@@ -49463,6 +49768,875 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/visa/VisaComponent.vue?vue&type=template&id=77d9ea4e&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/visa/VisaComponent.vue?vue&type=template&id=77d9ea4e& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "row" }, [
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "exampleModalCenter",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalCenterTitle",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("حاله الدفع")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.price_status,
+                          expression: "price_status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "", id: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.price_status = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v(" اختر الحاله")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "لم يتم الدفع" } }, [
+                        _vm._v(" لم يتم الدفع")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "تم الدفع" } }, [
+                        _vm._v(" تم الدفع ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "option",
+                        { attrs: { value: "تم دفع جزء من المبلغ" } },
+                        [_vm._v(" تم دفع جزء من المبلغ")]
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("حاله الطلب")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.request_status,
+                          expression: "request_status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "", id: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.request_status = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v(" اختر الحاله")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: " تم التقديم" } }, [
+                        _vm._v("تم التقديم")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "تم التواصل" } }, [
+                        _vm._v(" تم التواصل ")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "الطلب مرفوض" } }, [
+                        _vm._v(" الطلب مرفوض  ")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "طلب ملغي" } }, [
+                        _vm._v(" طلب ملغي ")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "جديد" } }, [
+                        _vm._v("  جديد ")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("حاله المستندات")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.document_status,
+                          expression: "document_status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { name: "", id: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.document_status = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "", selected: "" } }, [
+                        _vm._v(" اختر الحاله")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "لم يتم الارسال" } }, [
+                        _vm._v(" لم يتم الارسال")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "تم الارسال" } }, [
+                        _vm._v(" تم الارسال ")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("البحث بكلمات مفتاحية")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.name_ar,
+                        expression: "name_ar"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      id: "projectinput1",
+                      placeholder: "ادخل كلمة مفتاحية",
+                      name: "name_ar"
+                    },
+                    domProps: { value: _vm.name_ar },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.name_ar = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary w-100",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.filter()
+                      }
+                    }
+                  },
+                  [_vm._v("بحث")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade text-left",
+        attrs: {
+          id: "institute_email_modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel1",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog ", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.note,
+                      expression: "note"
+                    }
+                  ],
+                  staticClass: "w-100",
+                  attrs: { cols: "30", rows: "15" },
+                  domProps: { value: _vm.note },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.note = $event.target.value
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.visa_note_id,
+                      expression: "visa_note_id"
+                    }
+                  ],
+                  attrs: { type: "hidden" },
+                  domProps: { value: _vm.visa_note_id },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.visa_note_id = $event.target.value
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info w-100",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.updatenote()
+                      }
+                    }
+                  },
+                  [_vm._v(" تعديل الملاحظه")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-header" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v("التاشيرات (" + _vm._s(_vm.visas.total) + ")")
+          ]),
+          _vm._v(" "),
+          _vm._m(2),
+          _vm._v(" "),
+          _c("div", { staticClass: "heading-elements" }, [
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _vm.create
+                ? _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right",
+                        attrs: { href: _vm.url_dashboard + "/visas/create" }
+                      },
+                      [
+                        _c("i", { staticClass: "ft-plus ft-md" }),
+                        _vm._v(" اضافة مقال جديد")
+                      ]
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-content" }, [
+          _c("div", { staticClass: "table-responsive" }, [
+            _c(
+              "table",
+              {
+                staticClass: "table table-hover table-xl mb-0",
+                attrs: { id: "recent-orders" }
+              },
+              [
+                _vm._m(4),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.visas.data, function(visa) {
+                    return _c("tr", { key: visa.id }, [
+                      _c("td", [_vm._v(_vm._s(visa.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.email))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.phone))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.country))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.visa_type))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.price))]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-truncate" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-sm btn-outline-info round",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.modelmessageInstitute(visa)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "la la-eye" })]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: visa.price_status,
+                                expression: "visa.price_status"
+                              }
+                            ],
+                            attrs: { name: "", id: "" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    visa,
+                                    "price_status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.updateStatus((_vm.type = "price"))
+                                }
+                              ],
+                              click: function($event) {
+                                return _vm.getvisa_id(visa.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "لم يتم الدفع" } }, [
+                              _vm._v(" لم يتم الدفع")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "تم الدفع" } }, [
+                              _vm._v(" تم الدفع ")
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              { attrs: { value: "تم دفع جزء من المبلغ" } },
+                              [_vm._v(" تم دفع جزء من المبلغ")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: visa.document_status,
+                                expression: "visa.document_status"
+                              }
+                            ],
+                            attrs: { name: "", id: "" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    visa,
+                                    "document_status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.updateStatus(
+                                    (_vm.type = "document")
+                                  )
+                                }
+                              ],
+                              click: function($event) {
+                                return _vm.getvisa_id(visa.id)
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "لم يتم الارسال" } },
+                              [_vm._v(" لم يتم الارسال")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "تم الارسال" } }, [
+                              _vm._v(" تم الارسال ")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: visa.request_status,
+                                expression: "visa.request_status"
+                              }
+                            ],
+                            attrs: { name: "", id: "" },
+                            on: {
+                              change: [
+                                function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    visa,
+                                    "request_status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                },
+                                function($event) {
+                                  return _vm.updateStatus(
+                                    (_vm.type = "request")
+                                  )
+                                }
+                              ],
+                              click: function($event) {
+                                return _vm.getvisa_id(visa.id)
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: " تم التقديم" } }, [
+                              _vm._v("تم التقديم")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "تم التواصل" } }, [
+                              _vm._v(" تم التواصل ")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "الطلب مرفوض" } }, [
+                              _vm._v(" الطلب مرفوض  ")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "طلب ملغي" } }, [
+                              _vm._v(" طلب ملغي ")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "جديد" } }, [
+                              _vm._v("  جديد ")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.created_at))]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              role: "group",
+                              "aria-label": "Basic example"
+                            }
+                          },
+                          [
+                            _vm.edit
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-info btn-sm round",
+                                    attrs: {
+                                      href:
+                                        _vm.url_dashboard +
+                                        "/visas/" +
+                                        visa.id +
+                                        "/edit"
+                                    }
+                                  },
+                                  [_vm._v("تعديل")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "form",
+                              {
+                                staticClass: "btn-group",
+                                attrs: {
+                                  action:
+                                    _vm.url_dashboard + "/visas/" + visa.id,
+                                  method: "POST"
+                                }
+                              },
+                              [
+                                _c("input", {
+                                  attrs: { type: "hidden", name: "_token" },
+                                  domProps: { value: _vm.csrftoken }
+                                }),
+                                _vm._v(" "),
+                                _c("input", {
+                                  attrs: {
+                                    type: "hidden",
+                                    name: "_method",
+                                    value: "delete"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _vm.delete_pre
+                                  ? _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm round",
+                                        attrs: {
+                                          onclick:
+                                            "return confirm('هل انت متاكد من حذف هذا المقال')"
+                                        }
+                                      },
+                                      [_vm._v("حذف")]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pagination" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.visas.prev_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.Pagination(_vm.visas.prev_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                                Previos\n                            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("span", [
+                _vm._v(
+                  " page " +
+                    _vm._s(_vm.visas.current_page) +
+                    " of " +
+                    _vm._s(_vm.visas.last_page) +
+                    " "
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-default",
+                  attrs: { disabled: !_vm.visas.next_page_url },
+                  on: {
+                    click: function($event) {
+                      return _vm.Pagination(_vm.visas.next_page_url)
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                                Next\n                            "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
+        [_vm._v("البحث في التاشيرات")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
+        _vm._v("   ملاحظه الطالب")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("a", { staticClass: "heading-elements-toggle" }, [
+      _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "button",
+        {
+          staticClass:
+            "btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right",
+          attrs: {
+            "data-toggle": "modal",
+            "data-target": "#exampleModalCenter"
+          }
+        },
+        [_c("i", { staticClass: "ft-filter ft-md" }), _vm._v(" فلتر")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الاسم")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [
+          _vm._v("البريد الاليكتروني")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الهاتف")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الدوله")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("نوع الفيزا")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("حاله الدفع")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("حاله المستندات")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("حاله الطلب")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("التاريخ")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("اكشن")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/website/CityComponent.vue?vue&type=template&id=3871f5fa&":
 /*!************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/website/CityComponent.vue?vue&type=template&id=3871f5fa& ***!
@@ -63022,6 +64196,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/student/SuccesStoryComponent.vue */ "./resources/js/components/student/SuccesStoryComponent.vue");
 /* harmony import */ var _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestComponent.vue */ "./resources/js/components/studentRequest/StudentRequestComponent.vue");
 /* harmony import */ var _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestEditComponent.vue */ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue");
+/* harmony import */ var _components_visa_VisaComponent_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/visa/VisaComponent.vue */ "./resources/js/components/visa/VisaComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -63040,6 +64215,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // Vue.use(require('vue-resource'));
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ "./node_modules/laravel-vue-pagination/dist/laravel-vue-pagination.common.js"));
+
 
 
 
@@ -63086,7 +64262,8 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
     StudentComponent: _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
     SuccesStoryComponent: _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
     StudentRequestComponent: _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"],
-    StudentRequestEditComponent: _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"]
+    StudentRequestEditComponent: _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
+    VisaComponent: _components_visa_VisaComponent_vue__WEBPACK_IMPORTED_MODULE_26__["default"]
   }
 });
 
@@ -64379,6 +65556,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/visa/VisaComponent.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/visa/VisaComponent.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _VisaComponent_vue_vue_type_template_id_77d9ea4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VisaComponent.vue?vue&type=template&id=77d9ea4e& */ "./resources/js/components/visa/VisaComponent.vue?vue&type=template&id=77d9ea4e&");
+/* harmony import */ var _VisaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VisaComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/visa/VisaComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _VisaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _VisaComponent_vue_vue_type_template_id_77d9ea4e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _VisaComponent_vue_vue_type_template_id_77d9ea4e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/visa/VisaComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/visa/VisaComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/visa/VisaComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./VisaComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/visa/VisaComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_VisaComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/visa/VisaComponent.vue?vue&type=template&id=77d9ea4e&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/visa/VisaComponent.vue?vue&type=template&id=77d9ea4e& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisaComponent_vue_vue_type_template_id_77d9ea4e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./VisaComponent.vue?vue&type=template&id=77d9ea4e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/visa/VisaComponent.vue?vue&type=template&id=77d9ea4e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisaComponent_vue_vue_type_template_id_77d9ea4e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_VisaComponent_vue_vue_type_template_id_77d9ea4e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/website/CityComponent.vue":
 /*!***********************************************************!*\
   !*** ./resources/js/components/website/CityComponent.vue ***!
@@ -64673,8 +65919,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

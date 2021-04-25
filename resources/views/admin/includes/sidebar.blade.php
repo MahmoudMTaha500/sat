@@ -271,12 +271,12 @@
                 <ul class="menu-content">
 
                     <li class="{{ $page_name == 'visa' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('visas.index')}}" data-i18n="nav.navbars.nav_light"> التاشيرات</a>
+                        <a class="menu-item" href="{{route('simple-visa.index')}}" data-i18n="nav.navbars.nav_light"> التاشيرات</a>
                     </li>
                     @if(auth()->user()->hasPermission('visas-create'))
 
-                    <li class="{{ $page_name == 'add-visa' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('visas.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تاشيرة جديدة </a>
+                    <li class="{{ $page_name == 'create-visa' ? 'active' : ''}}" >
+                        <a class="menu-item" href="{{route('simple-visa.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تاشيرة جديدة </a>
                     </li>
                     @endif
                     <li class="{{ $page_name == 'visa-categories' ? 'active' : ''}}" >

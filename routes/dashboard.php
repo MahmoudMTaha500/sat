@@ -142,6 +142,12 @@ Route::post('/student-requests/update-status','StudentRequestsController@updateS
 
 Route::resource('student-requests', "StudentRequestsController");
 Route::resource('employees', "EmployeesController");
+Route::get('simple-visa/get', "SimpleVisaController@get_simple_visa")->name('simple-visa.get');
+Route::post("simple-visa/update-status", "SimpleVisaController@update_status");
+Route::post("simple-visa/update-note", "SimpleVisaController@update_note");
+Route::get('simple-visa/filter', 'SimpleVisaController@filter');
+
+Route::resource('simple-visa', "SimpleVisaController");
 
 
 });

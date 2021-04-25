@@ -42,6 +42,7 @@ import StudentComponent from "./components/student/StudentComponent.vue";
 import SuccesStoryComponent from "./components/student/SuccesStoryComponent.vue";
 import StudentRequestComponent from "./components/studentRequest/StudentRequestComponent.vue";
 import StudentRequestEditComponent from "./components/studentRequest/StudentRequestEditComponent.vue";
+import VisaComponent from "./components/visa/VisaComponent.vue";
 
 const app = new Vue({
     el: '#sat_app_vue',
@@ -68,6 +69,7 @@ const app = new Vue({
         SuccesStoryComponent,
         StudentRequestComponent,
         StudentRequestEditComponent,
+        VisaComponent,
 
 
     }

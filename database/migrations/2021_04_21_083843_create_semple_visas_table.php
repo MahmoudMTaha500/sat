@@ -21,7 +21,11 @@ class CreateSempleVisasTable extends Migration
             $table->string('country');
             $table->string('visa_type');
             $table->string('price');
-            $table->string('status');
+            
+            $table->string('price_status');
+            $table->string('document_status');
+            $table->string('request_status');
+
             $table->longText('note');
             $table->timestamps();
         });

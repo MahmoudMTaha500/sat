@@ -26,7 +26,7 @@
                 <img width="150px" src="https://classat.netlify.app/imgs/logo.png">
                 
             </div>
-            <p style="color: #006fff;font-size:25px">رسالة من عميل ! </p>
+            <p style="color: #006fff;font-size:25px">اعاده تهئية كلمه السر </p>
             <div>
                 <p><strong>اسم الطالب : </strong> {{$name}}</p>
                 <p><strong>البريد الالكتروني : </strong> {{$email}}</p>

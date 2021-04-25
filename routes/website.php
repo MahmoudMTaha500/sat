@@ -56,6 +56,7 @@ Route::get('student-path', function(){
 
 
 
+Route::resource('order-visa', "simpleVisaController");
 
 
 

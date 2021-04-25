@@ -76,7 +76,7 @@
                                 <a class="nav-link text-main-color" alt="المعاهد" href="{{route('website.institutes')}}">المعاهد</a>
                             </li>
                             <li class="nav-item px-xl-2">
-                                <a class="nav-link text-main-color" alt="طلب تأشيرة" href="order-visa.html">طلب تأشيرة</a>
+                                <a class="nav-link text-main-color" alt="طلب تأشيرة" href="{{route('order-visa.create')}}">طلب تأشيرة</a>
                             </li>
                             <li class="nav-item px-xl-2">
                                 <a class="nav-link text-main-color" alt="العروض" href="{{route('website.offers')}}">العروض</a>
