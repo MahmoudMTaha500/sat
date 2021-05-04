@@ -18,8 +18,12 @@
         "laravel/ui": "2.4",
         "mcamara/laravel-localization": "^1.6",
         "niklasravnsborg/laravel-pdf": "^4.0",
+<<<<<<< HEAD
         "santigarcor/laratrust": "^6.3",
         "spacemudd/laravel-tap-payments": "^2.0"
+=======
+        "santigarcor/laratrust": "^6.3"
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     },
     "require-dev": {
         "facade/ignition": "^2.0",

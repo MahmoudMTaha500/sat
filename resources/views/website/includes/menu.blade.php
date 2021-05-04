@@ -69,15 +69,23 @@
                     <!-- Nav Menu  -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
+<<<<<<< HEAD
                             <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'home' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="الرئيسية" href="{{route('website.home')}}">الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'institutes' ? 'active' : '') : ''}}">
+=======
+                            <li class="nav-item px-xl-2 active">
+                                <a class="nav-link text-main-color" alt="الرئيسية" href="{{route('website.home')}}">الرئيسية <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item px-xl-2">
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                                 <a class="nav-link text-main-color" alt="المعاهد" href="{{route('website.institutes')}}">المعاهد</a>
                             </li>
                             <li class="nav-item px-xl-2">
                                 <a class="nav-link text-main-color" alt="طلب تأشيرة" href="{{route('order-visa.create')}}">طلب تأشيرة</a>
                             </li>
+<<<<<<< HEAD
                             <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'offers' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="العروض" href="{{route('website.offers')}}">العروض</a>
                             </li>
@@ -101,6 +109,29 @@
                                 </a>
                                 <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
                                     <span class="text-white font-weight-bold"><i class="fab fa-instagram"></i></span>
+=======
+                            <li class="nav-item px-xl-2">
+                                <a class="nav-link text-main-color" alt="العروض" href="{{route('website.offers')}}">العروض</a>
+                            </li>
+                            <li class="nav-item px-xl-2">
+                                <a class="nav-link text-main-color" alt="المقالات" href="{{route('website.articles')}}">المقالات</a>
+                            </li>
+                            <li class="nav-item px-xl-2">
+                                <a class="nav-link text-main-color" alt="تواصل معنا" href="{{route('website.contact.us')}}">تواصل معنا</a>
+                            </li>
+                            <li class="nav-item px-xl-2">
+                                <a class="nav-link text-main-color" alt="من نحن" href="{{route('website.about.us')}}">من نحن</a>
+                            </li>
+                            <li class="nav-item px-xl-2 social-links d-xl-block d-none">
+                                <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">
+                                    <span class="text-white"><i class="fab fa-facebook-f"></i></span>
+                                </a>
+                                <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">
+                                    <span class="text-white"><i class="fab fa-twitter"></i></span>
+                                </a>
+                                <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">
+                                    <span class="text-white"><i class="fab fa-instagram"></i></span>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                                 </a>
                             </li>
                             {{-- @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)

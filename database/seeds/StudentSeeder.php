@@ -18,7 +18,11 @@ class StudentSeeder extends Seeder
             $city_id = rand(1,30);
             $country_id = City::where('id' , $city_id)->get('country_id')[0]->country_id;
             Student::create([
+<<<<<<< HEAD
                 "name" => 'محمود سامي'.$x,
+=======
+                "name" => 'طالب'.$x,
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "phone" => '0123456'.$x,
                 "email" => 'student@app.com'.$x,
                 "address" => 'عنوان الطالب , دبي , الامارات'.$x,

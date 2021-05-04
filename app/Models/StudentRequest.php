@@ -31,7 +31,11 @@ class StudentRequest extends Model
 
     public function residence()
     {
+<<<<<<< HEAD
         return $this->belongsTo('App\Models\residences', 'residence_id', 'id');
+=======
+        return $this->belongsTo("App\Models\Residences", 'residence_id', 'id');
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     }
 
     public function insurance()

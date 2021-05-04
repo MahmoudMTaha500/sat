@@ -51,8 +51,8 @@ Route::get('pay-now/{request_id}', 'WebsiteController@pay_now')->name('pay_now')
 Route::post('checkout', 'WebsiteController@checkout')->name('checkout');
 Route::get('payment-confirmation', 'WebsiteController@payment_confirmation')->name('payment_confirmation');
 Route::get('student-path', function(){
-    return __DIR__;
-});
+    return 'student path';
+})->middleware('AuthStudent:student');
 
 
 

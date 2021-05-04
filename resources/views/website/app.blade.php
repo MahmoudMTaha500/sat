@@ -20,7 +20,11 @@
         @include('website.includes.menu')
         <!-- ./Header -->
 
+<<<<<<< HEAD
         <div style="min-height: 52vh;" id="sat_app_vue">
+=======
+        <div id="sat_app_vue">
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
             @yield('website.content')
         </div>
 

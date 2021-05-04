@@ -26,8 +26,13 @@
                 <img width="150px" src="https://classat.netlify.app/imgs/logo.png">
                 
             </div>
+<<<<<<< HEAD
             <p style="color: #006fff;font-size:25px">تم استلام طلبكم بنجاح!</p>
             <p style="margin-bottom: 20px; font-size:20px"> يُمكنكم متابعة الطلب عن طريق موقع "كلاسات".</p>
+=======
+            <p style="color: #006fff;font-size:25px">تم اسلام طلبكم بنجاح ! </p>
+            <p style="margin-bottom: 20px; font-size:20px"> يمكنكم متابعة الطلب عن طريق موقع كلاسات من خلال حسابك الخاص</p>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
             @if (!auth()->guard('student')->check())
                 <div>
                     <p><strong>اسم المستخدم : </strong> {{$student_email}}</p>

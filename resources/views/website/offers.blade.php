@@ -73,9 +73,15 @@
                         @endforeach
                         
           </div>
+<<<<<<< HEAD
             <div class="website-pagination">
                 {{ $offers->links() }}
             </div>
+=======
+          <div class="website-pagination">
+            {{ $offers->links() }}
+        </div>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
           <!-- ./Institute List -->
     
         </div>

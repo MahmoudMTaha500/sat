@@ -13,7 +13,10 @@
                     <span class="menu-title" data-i18n="nav.animation.main">الموقع</span>
                 </a>
             </li>
+<<<<<<< HEAD
            
+=======
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 
             @if(auth()->user()->hasPermission('institutes-read'))
             <li class="nav-item {{ $department_name == 'institutes' ? 'open' : '' }}">
@@ -73,7 +76,11 @@
             </li>
             @endif
            
+<<<<<<< HEAD
             {{-- <li class="nav-item">
+=======
+            <li class="nav-item">
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main"> الفواتير</span>
@@ -89,7 +96,11 @@
                         <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
+<<<<<<< HEAD
             </li> --}}
+=======
+            </li>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 
            
 

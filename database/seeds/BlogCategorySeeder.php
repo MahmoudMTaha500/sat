@@ -14,7 +14,11 @@ class BlogCategorySeeder extends Seeder
     {
         for ($x = 1; $x <= 10; $x++) {
             BlogCategory::create([
+<<<<<<< HEAD
                 "name_ar" => 'اللغات في الخارج'.$x,
+=======
+                "name_ar" => 'تصنيف'.$x,
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "creator_id" => 1,
             ]);
         }

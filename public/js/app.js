@@ -5166,8 +5166,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", "create", "edit", "delete_pre"],
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", 'create', 'edit', 'delete_pre'],
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
   data: function data() {
     return {
       visas: {},
@@ -5178,8 +5195,13 @@ __webpack_require__.r(__webpack_exports__);
       request_status: "",
       name_ar: "",
       status: true,
+<<<<<<< HEAD
       note: "",
       visa_note_id: ""
+=======
+      note: '',
+      visa_note_id: ''
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     };
   },
   beforeMount: function beforeMount() {
@@ -5194,7 +5216,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     Pagination: function Pagination(url) {
+<<<<<<< HEAD
       this.get_visa = url + "&user_id=" + this.user_id + "&cat_id=" + this.cat_id + "&keyword=" + this.keyword + "&status=" + this.status;
+=======
+      this.get_visa = url + '&user_id=' + this.user_id + '&cat_id=' + this.cat_id + '&keyword=' + this.keyword + '&status=' + this.status;
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
       this.getVisa();
     },
     updateApprovement: function updateApprovement(e) {
@@ -5236,7 +5262,11 @@ __webpack_require__.r(__webpack_exports__);
           name_ar: this.name_ar
         }
       }).then(function (response) {
+<<<<<<< HEAD
         return _this2.visas = response.data.visas, _this2.visas.prev_page_url += "&price_status=" + _this2.price_status + "&document_status=" + _this2.document_status + "&document_status=" + _this2.document_status + "&name_ar=" + _this2.name_ar, _this2.visas.next_page_url += "&price_status=" + _this2.price_status + "&document_status=" + _this2.document_status + "&document_status=" + _this2.document_status + "&name_ar=" + _this2.name_ar;
+=======
+        return _this2.visas = response.data.visas, _this2.visas.prev_page_url += '&price_status=' + _this2.price_status + '&document_status=' + _this2.document_status + '&document_status=' + _this2.document_status + '&name_ar=' + _this2.name_ar, _this2.visas.next_page_url += '&price_status=' + _this2.price_status + '&document_status=' + _this2.document_status + '&document_status=' + _this2.document_status + '&name_ar=' + _this2.name_ar;
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
       });
     },
     modelmessageInstitute: function modelmessageInstitute(obj) {
@@ -5257,8 +5287,13 @@ __webpack_require__.r(__webpack_exports__);
           "X-CSRFToken": "{{ csrf_token()}}"
         }
       }).then(function (response) {
+<<<<<<< HEAD
         if (response.data == "success") {
           alert("تم تعديل الملاحظه ");
+=======
+        if (response.data == 'success') {
+          alert('تم تعديل الملاحظه ');
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
         }
       });
     }
@@ -49891,7 +49926,11 @@ var render = function() {
                         _vm._v(" اختر الحاله")
                       ]),
                       _vm._v(" "),
+<<<<<<< HEAD
                       _c("option", { attrs: { value: "تم التقديم" } }, [
+=======
+                      _c("option", { attrs: { value: " تم التقديم" } }, [
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                         _vm._v("تم التقديم")
                       ]),
                       _vm._v(" "),
@@ -49900,7 +49939,11 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "الطلب مرفوض" } }, [
+<<<<<<< HEAD
                         _vm._v(" الطلب مرفوض ")
+=======
+                        _vm._v(" الطلب مرفوض  ")
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "طلب ملغي" } }, [
@@ -49908,7 +49951,11 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "جديد" } }, [
+<<<<<<< HEAD
                         _vm._v(" جديد ")
+=======
+                        _vm._v("  جديد ")
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                       ])
                     ]
                   )
@@ -50038,7 +50085,11 @@ var render = function() {
       [
         _c(
           "div",
+<<<<<<< HEAD
           { staticClass: "modal-dialog", attrs: { role: "document" } },
+=======
+          { staticClass: "modal-dialog ", attrs: { role: "document" } },
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(1),
@@ -50104,7 +50155,11 @@ var render = function() {
                       }
                     }
                   },
+<<<<<<< HEAD
                   [_vm._v("تعديل الملاحظه")]
+=======
+                  [_vm._v(" تعديل الملاحظه")]
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 )
               ])
             ])
@@ -50352,7 +50407,11 @@ var render = function() {
                             }
                           },
                           [
+<<<<<<< HEAD
                             _c("option", { attrs: { value: "تم التقديم" } }, [
+=======
+                            _c("option", { attrs: { value: " تم التقديم" } }, [
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                               _vm._v("تم التقديم")
                             ]),
                             _vm._v(" "),
@@ -50361,7 +50420,11 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "الطلب مرفوض" } }, [
+<<<<<<< HEAD
                               _vm._v(" الطلب مرفوض ")
+=======
+                              _vm._v(" الطلب مرفوض  ")
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "طلب ملغي" } }, [
@@ -50369,7 +50432,11 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "جديد" } }, [
+<<<<<<< HEAD
                               _vm._v(" جديد ")
+=======
+                              _vm._v("  جديد ")
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                             ])
                           ]
                         )
@@ -50469,7 +50536,11 @@ var render = function() {
                 },
                 [
                   _vm._v(
+<<<<<<< HEAD
                     "\n                            Previos\n                        "
+=======
+                    "\n                                Previos\n                            "
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                   )
                 ]
               ),
@@ -50497,7 +50568,11 @@ var render = function() {
                 },
                 [
                   _vm._v(
+<<<<<<< HEAD
                     "\n                            Next\n                        "
+=======
+                    "\n                                Next\n                            "
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                   )
                 ]
               )
@@ -50540,7 +50615,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
+<<<<<<< HEAD
         _vm._v("ملاحظه الطالب")
+=======
+        _vm._v("   ملاحظه الطالب")
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
       ]),
       _vm._v(" "),
       _c(
@@ -51624,8 +51703,12 @@ var render = function() {
                             {
                               attrs: {
                                 href:
+<<<<<<< HEAD
                                   _vm.public_path +
                                   "institute/" +
+=======
+                                  "/institute/" +
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                                   course.institute.id +
                                   "/" +
                                   course.institute.slug +
@@ -51666,8 +51749,12 @@ var render = function() {
                                     staticClass: "text-main-color",
                                     attrs: {
                                       href:
+<<<<<<< HEAD
                                         _vm.public_path +
                                         "institute/" +
+=======
+                                        "/institute/" +
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                                         course.institute.id +
                                         "/" +
                                         course.institute.slug +
@@ -65909,8 +65996,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 
 
 /***/ })

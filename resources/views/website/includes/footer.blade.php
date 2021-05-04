@@ -11,22 +11,36 @@
                 <div class="col-xl-2 col-6">
                     <h6 class="text-secondary-color">الخدمات</h6>
                     <ul class="p-0">
+<<<<<<< HEAD
                         <li><a href="{{route('website.institutes')}}" class="text-white">المعاهد</a></li>
                         <li><a href="{{route('order-visa.create')}}" class="text-white">طلب تأشيرة</a></li>
                         <li><a href="{{route('website.offers')}}" class="text-white">العروض</a></li>
                         <li><a href="{{route('website.articles')}}" class="text-white">المقالات</a></li>
+=======
+                        <li><a href="institutes.html" class="text-white">المعاهد</a></li>
+                        <li><a href="order-visa.html" class="text-white">طلب تأشيرة</a></li>
+                        <li><a href="offers.html" class="text-white">العروض</a></li>
+                        <li><a href="articles.html" class="text-white">المقالات</a></li>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                     </ul>
                 </div>
                 <div class="col-xl-2 col-6">
                     <h6 class="text-secondary-color">الشركة</h6>
                     <ul class="p-0">
+<<<<<<< HEAD
                         <li><a href="{{route('website.about.us')}}" class="text-white">عن الشركة</a></li>
                         <li><a href="{{route('website.contact.us')}}" class="text-white">اتصل بنا</a></li>
+=======
+                        <li><a href="about-us.html" class="text-white">عن الشركة</a></li>
+                        <li><a href="about-us.html#team" class="text-white">عن الفريق</a></li>
+                        <li><a href="about-us.html#trusted-us" class="text-white">الشركاء</a></li>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                     </ul>
                 </div>
                 <div class="col-xl-3 col-12">
                     <h6 class="text-secondary-color">تواصل معنا</h6>
                     <ul class="p-0">
+<<<<<<< HEAD
                         <li class="text-white"><i class="fas fa-envelope"></i> <a href="mailto:admission@sat-edu.com" class="text-white">admission@sat-edu.com</a></li>
                         <li class="text-white"><i class="fas fa-phone"></i> <a href="tel:966555484931" class="text-white">+966 55 548 4931</a></li>
                         <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> المملكة العربية السعودية والمملكة المتحدة (نيوكاسل, يورك).                        </li>
@@ -38,6 +52,19 @@
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-twitter"></i></span>
                             </a>
                             <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
+=======
+                        <li class="text-white"><i class="fas fa-envelope"></i> arabic@SAT.com</li>
+                        <li class="text-white"><i class="fas fa-phone"></i> 920023418 / 920023418</li>
+                        <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> الطابق الثاني، مكتب B54 الرياض, السعودية</li>
+                        <li class="social-links-sm">
+                            <a class="bg-white d-inline-block text-center ml-3" href="#">
+                                <span class="text-main-color font-weight-bold"><i class="fab fa-facebook-f"></i></span>
+                            </a>
+                            <a class="bg-white d-inline-block text-center ml-3" href="#">
+                                <span class="text-main-color font-weight-bold"><i class="fab fa-twitter"></i></span>
+                            </a>
+                            <a class="bg-white d-inline-block text-center ml-3" href="#">
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-instagram"></i></span>
                             </a>
                         </li>
@@ -56,9 +83,14 @@
         <span class="close-support position-absolute"><i class="fas fa-times"></i></span> هل تحتاج الي مساعدة؟ .. اطلب مستشارك <a href="support.html" class="float-left text-secondary-color bg-white"><i class="fas fa-arrow-left"></i></a>
     </p>
 
+<<<<<<< HEAD
     @if (!isset($notUseVue)) 
     <script src="{{asset('js/app.js')}}"></script>
     @endif
+=======
+    {{-- @if (isset($useVue)) @endif --}}
+    <script src="{{asset('js/app.js')}}"></script>
+>>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
     <!-- Jquery, Popper and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -20,7 +20,10 @@ Route::get('/', function () {
 
 
 
+// Route::get("admin_login" , function(){
+//  return view('admin.login.login');
 
+// });
 
 Route::get('logout',function(){
 
