@@ -1,0 +1,40 @@
+.intro {
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position:top;
+  padding: 150px 0;
+}
+  .intro .img-intro {
+    -webkit-filter: drop-shadow(-5px 5px 10px #ffffff25);
+    filter: drop-shadow(-5px 5px 10px #ffffff25); }
+
+@media (max-width: 575px) {
+  .search-institute-form {
+    width: 100% !important; } }
+.success-stories h6 {
+  font-size: 14px; }
+.success-stories span {
+  font-size: 13px; }
+
+.bg-study-1 {
+  background-image: url("/imgs/london.png");
+  background-size: cover;
+  background-position: center; 
+  object-fit: fill; }
+
+.bg-study-2 {
+  background-image: url("/imgs/Switzerland.png");
+  background-size: cover;
+  background-position: center; 
+  object-fit: fill; }
+
+.trusted-us img {
+  width: 150px  !important;
+  margin: 0 auto; }
+
+.browse-our-institutes {
+  background-image: url("../../imgs/browse-bg.png");
+  background-size: cover; }
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,13 @@
+.profile .list-group-item.active {
+  border-top: 0; }
+  .profile .list-group-item.active a {
+    color: #F4C20D !important; }
+.profile .list-group-item {
+  background: #fff; }
+  .profile .list-group-item a {
+    text-decoration: none;
+    transition: all ease-in-out; }
+  .profile .list-group-item:hover a {
+    color: #F4C20D !important; }
+
+/*# sourceMappingURL=profile.css.map */

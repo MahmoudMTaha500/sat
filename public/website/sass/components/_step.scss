@@ -1,0 +1,101 @@
+
+// Steps
+.wizard{
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    label{
+        margin-bottom: 0 !important;
+    }
+    .content{
+        background: white !important;
+        border-radius: 10px !important;
+        min-height: auto !important;
+        padding-bottom: 60px;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        margin-left: 0;
+        margin-right: 0;
+        .body{
+            width: 100%;
+            height: auto !important;
+            float: initial;
+            position: static;
+        }
+    }
+    .steps{
+        width: 80%;
+        margin: 0 auto;
+        li{
+            float: right !important;
+            text-align: center;
+            position: relative;
+            width: 33.333333333333336% !important;
+            a{
+                background: transparent !important;
+                padding: 1em 0 !important;
+                color: #D2D2D2 !important;
+            }
+            .step{
+                display: block;
+                text-align: center;
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+                font-weight: bold;
+                margin: 0 auto;
+                font-size: 22px;
+                line-height: 37px;
+                color: #fff;
+                background: #D2D2D2;
+               
+        
+                
+            }
+            &:not(:last-of-type){
+                &::after{
+                    content: '';
+                    position: absolute;
+                    width: 87%;
+                    height: 2px;
+                    right: 57%;
+                    top: 34px;
+                    background: #D2D2D2;
+                }
+            }
+            
+        }
+        .current{
+            a{
+                color:$secondaryColor !important;
+            }
+            .step{
+                
+                background: $secondaryColor;
+                line-height: 34px;
+                border: 2px solid #fff;
+                box-shadow: 0 0 0 2px $secondaryColor;
+                
+            }
+            &::after{
+                background: $secondaryColor !important;
+            }
+        }
+    }
+    .actions{
+        top: -80px;
+        left: 26px;
+        @media (max-width: 575px) {
+            left: 0px;
+        }
+        text-align: left;
+        ul{
+            width: 95%;
+            @media (max-width: 575px) {
+                width: 100%;
+            }
+            li:first-of-type{
+                float: right !important;
+            }
+        }
+    }
+}

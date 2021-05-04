@@ -1,0 +1,804 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Cairo Font  -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="css/datepicker.min.css">
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.css">
+    <!-- Select Search -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+    <!-- Starrr -->
+    <link rel="stylesheet" href="css/starrr.css">
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="css/theme.css">
+    <link rel="stylesheet" href="css/pages/institute.css">
+
+    <title>Classat</title>
+</head>
+
+<body class="bg-sub-secondary-color min-vh-100">
+    <!-- Header -->
+  <header class="bg-white shadow-sm">
+    <div class="container-fluid">
+      <div class="row px-lg-0 px-xl-5 ">
+        <div class="col-12">
+          <!-- NavBar -->
+          <nav class="navbar navbar-expand-lg navbar-light py-3 px-0 ">
+            <a class="navbar-brand mb-3" href="#"><img src="imgs/logo.png" alt="" class="img-fluid"></a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Login & Register In Mobile Screen -->
+            <div class="mobile-log-in-out d-lg-none d-block ">
+
+              <a href="signin.html" class="btn rounded-10 text-secondary-color  ">تسجيل الدخول</a>
+              <a href="sign-out.html" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>
+            </div>
+            <!-- ./Login & Register In Mobile Screen -->
+            <!-- User Logged In Mobile Screen -->
+            <!-- <div class="loged position-relative mt-1 d-lg-none d-block">
+
+              <a class="text-main-color text-decoration-none notification align-middle" href="notification-full.html">
+                <i class="text-main-color fas fa-bell"></i> <span
+                  class="badge badge-primary badge-pill rounded-circle bg-secondary-color text-center font-weight-bold p-0 position-absolute">14</span></a>
+              <div class="dropdown open-sidemenu d-inline-block">
+                <a class="btn bg-transparent " href="#">
+                  <img src="imgs/users/user2.png" alt="" class="rounded-circle">
+
+                </a>
+                <div class="sidemenu position-fixed">
+                  <div class="sidemenu-nav bg-white">
+                    <div class="profile-img py-4 text-center position-relative mx-auto">
+                      <input type="file" class="d-none upload">
+                      <div class="overlay text-center text-white position-absolute"><i class="far fa-image"></i></div>
+                      <img src="imgs/users/user2.png" alt="" class="img-fluid rounded-circle img-uploaded">
+                      <h6 class="text-main-color font-weight-bold mt-2">احمد مجدي</h6>
+                    </div>
+                    <ul class="list-group list-group-flush p-0 border-0">
+                      <li class="list-group-item py-3  border-bottom text-center"><a href="profile.html"
+                          class="text-dark">البيانات الشخصية</a></li>
+                      <li class="list-group-item py-3 border-bottom text-center"><a href="favourite.html"
+                          class="text-dark">المفضلة</a></li>
+                      <li class="list-group-item py-3 border-bottom text-center"><a href="reservation.html"
+                          class="text-dark">الحجوزات</a></li>
+                      <li class="list-group-item py-3 text-center border-bottom"><a href="notification.html"
+                          class="text-dark">الاشعارات</a></li>
+                      <li class="list-group-item py-3 text-center"><a href="#" class="text-dark">تسجيل الخروج</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <!-- ./User Logged In Mobile Screen -->
+            <!-- Nav Menu  -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item px-xl-2 ">
+                  <a class="nav-link text-main-color" alt="الرئيسية" href="index.html">الرئيسية <span
+                      class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item px-xl-2 active">
+                  <a class="nav-link text-main-color" alt="المعاهد" href="institutes.html">المعاهد</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="طلب تأشيرة" href="order-visa.html">طلب تأشيرة</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="العروض" href="offers.html">العروض</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="المقالات" href="articles.html">المقالات</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="تواصل معنا" href="contact-us.html">تواصل معنا</a>
+                </li>
+                <li class="nav-item px-xl-2">
+                  <a class="nav-link text-main-color" alt="من نحن" href="about-us.html">من نحن</a>
+                </li>
+                <li class="nav-item px-xl-2 social-links d-xl-block  d-none">
+                  <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#"><span class="text-white"><i
+                        class="fab fa-facebook-f"></i></span></a>
+                  <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#"><span class="text-white"><i
+                        class="fab fa-twitter"></i></span></a>
+                  <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#"><span class="text-white"><i
+                        class="fab fa-instagram"></i></span></a>
+
+                </li>
+              </ul>
+
+
+              <div class=" my-2 my-xl-0">
+
+                <!-- Login & Register In Large Screen -->
+                <div class="not-logged d-lg-block d-none">
+                  <a href="signin.html" class="btn rounded-10 text-secondary-color  ">تسجيل الدخول</a>
+                  <a href="sign-out.html" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>
+                </div>
+                <!-- ./Login & Register In Large Screen -->
+                <!-- User Loged in Large Screen-->
+                <!-- <div class="loged position-relative mt-1 d-lg-block d-none">
+
+                  <a class="text-main-color text-decoration-none notification align-middle"
+                    href="notification-full.html"> <i class="text-main-color fas fa-bell"></i> <span
+                      class="badge badge-primary badge-pill rounded-circle bg-secondary-color text-center font-weight-bold p-0 position-absolute">14</span></a>
+                  <div class="dropdown d-inline-block">
+                    <a class="btn bg-transparent dropdown-toggle " href="#" role="button" id="dropdownMenuLink"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <img src="imgs/users/user2.png" alt="" class="rounded-circle">
+                      احمد مجدي
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="profile.html">الصفحة الشخصية</a>
+                      <a class="dropdown-item" href="#">تسجيل الخروج</a>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- User Loged in Large Screen-->
+
+              </div>
+            </div>
+            <!-- ./Nav Menu  -->
+          </nav>
+          <!-- ./NavBar -->
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ./Header -->
+    <!-- Institute Info -->
+    <section class="institute-info py-4">
+        <div class="container-fluid">
+            <!-- Section Heading -->
+            <div class="row px-xl-5 mb-4">
+                <div class="col-12">
+                    <div class="heading-institutes">
+
+                        <h3 class="text-main-color font-weight-bold">معهد نيويورك لتعليم اللغة</h3>
+                        <p class="mb-1"> <i class="fas fa-map-marker-alt text-main-color"></i> معهد نيويورك - أبو ظبي
+                        </p>
+                        <!-- Institute Rate -->
+                        <p class="mb-0"><span class="starrr " ratio="4"></span> 4.5</p>
+                        <!-- ./Institute Rate -->
+                    </div>
+                </div>
+            </div>
+            <!-- ./Section Heading -->
+            <div class="row px-xl-5 mx-xl-2">
+                <div class="col-12 px-0">
+                    <!-- Institute Imgs -->
+                    <div class="institute-imgs owl-carousel" id="institute-imgs">
+                        <div class="profile-institute-img"><img src="imgs/bg.jpg" alt="" class="img-fluid w-100 d-block"></div>
+                        <div class="profile-institute-img"><img src="imgs/bg.jpg" alt="" class="img-fluid w-100 d-block"></div>
+                        <div class="profile-institute-img"><img src="imgs/bg.jpg" alt="" class="img-fluid w-100 d-block"></div>
+                        <div class="profile-institute-img"><img src="imgs/bg.jpg" alt="" class="img-fluid w-100 d-block"></div>
+                        <div class="profile-institute-img"><img src="imgs/bg.jpg" alt="" class="img-fluid w-100 d-block"></div>
+                    </div>
+                    <!-- ./Institute Imgs -->
+                </div>
+            </div>
+            <div class="row px-xl-5">
+                <div class="col-lg-8">
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs bg-white border-0 rounded-10  nav-justified p-0 my-3" id="myTab"
+                        role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0  px-5  active"
+                                id="about-course-tab" data-toggle="tab" href="#about-course" role="tab"
+                                aria-controls="about-course" aria-selected="true">تفاصيل الكورس</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0  px-5 "
+                                id="brief-institute-tab" data-toggle="tab" href="#brief-institute" role="tab"
+                                aria-controls="brief-institute" aria-selected="false">نبذه عن المعهد</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0  px-5 " id="living-tab"
+                                data-toggle="tab" href="#living" role="tab" aria-controls="living"
+                                aria-selected="false">المعيشة</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0  px-5 " id="training-tab"
+                                data-toggle="tab" href="#training" role="tab" aria-controls="training"
+                                aria-selected="false">الدورات التدريبية</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0  px-5 " id="rate-tab"
+                                data-toggle="tab" href="#rate" role="tab" aria-controls="rate"
+                                aria-selected="false">التقييمات</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="about-course" role="tabpanel" aria-labelledby="about-course-tab">
+                            <!-- About Course Tab -->
+                            <div class="bg-white rounded-10 p-4">
+                                <h5 class="text-main-color font-weight-bold mb-3">لغة انجليزية عام <small><span
+                                            class="starrr " ratio="4"></span> 4.5</small></h5>
+                                <p class="mb-3">كورس اللغة الأنجليزية العامة يمنحك الجرأة للتكلم باللغة الأنجليزية مع
+                                    الاخرين من دون الشعور بالتوتر أو الأحراج . أن هذه الدوره ستجعلك تتكلم اللغة بأحتراف
+                                    حتى بدون تعلم قواعد اللغة بشكل مفصل بحيث أنها ستغير مسار حياتك كلياً من خلال تحسين
+                                    مهاراتك في التكلم والاستماع وستجعلك تتواصل بشكل أكثر فاعلية وثقة مطلقة في مواقف
+                                    الحياة اليومية الخاصة بك .</p>
+                                <h5 class="text-main-color font-weight-bold mb-3">: الكورس يشمل </h5>
+                                <div>
+
+                                    <div class="course-include d-inline-block ml-4 mb-4">
+                                        <div class="include-img d-inline-block">
+
+                                            <i class="fas fa-user text-main-color fa-lg position-relative"></i>
+                                        </div>
+                                        <div class="include-info d-inline-block pr-3">
+                                            <p class="mb-2">الحد الأدنى للعمر</p>
+                                            <p class="text-main-color font-weight-bold">16</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="course-include d-inline-block ml-4 mb-4">
+                                        <div class="include-img d-inline-block">
+                                            <i class="fas fa-clock text-main-color fa-lg position-relative"></i>
+                                        </div>
+                                        <div class="include-info d-inline-block pr-3">
+                                            <p class="mb-2">ساعات/أسبوع</p>
+                                            <p class="text-main-color font-weight-bold">21</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="course-include d-inline-block ml-4 mb-4">
+                                        <div class="include-img d-inline-block">
+                                            <i class="fas fa-calendar-plus text-main-color fa-lg position-relative"></i>
+                                        </div>
+                                        <div class="include-info d-inline-block pr-3">
+                                            <p class="mb-2">يبدأ الكورس كل</p>
+                                            <p class="text-main-color font-weight-bold">الاثنين</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="course-include d-inline-block ml-4 mb-4">
+                                        <div class="include-img d-inline-block">
+                                            <i class="fas fa-signal text-main-color fa-lg position-relative"></i>
+                                        </div>
+                                        <div class="include-info d-inline-block pr-3">
+                                            <p class="mb-2">المستوى المطلوب</p>
+                                            <p class="text-main-color font-weight-bold">مبتدأ</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="course-include d-inline-block ml-4 mb-4">
+                                        <div class="include-img d-inline-block">
+                                            <i class="fas fa-sun text-main-color fa-lg position-relative"></i>
+                                        </div>
+                                        <div class="include-info d-inline-block pr-3">
+                                            <p class="mb-2">وقت الدراسة</p>
+                                            <p class="text-main-color font-weight-bold">صباحي</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="course-include d-inline-block ml-4 mb-4">
+                                        <div class="include-img d-inline-block">
+                                            <i class="fas fa-book-open text-main-color fa-lg position-relative"></i>
+                                        </div>
+                                        <div class="include-info d-inline-block pr-3">
+                                            <p class="mb-2">درس/الأسبوع</p>
+                                            <p class="text-main-color font-weight-bold">27</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- ./About Course Tab -->
+                        </div>
+                        <div class="tab-pane fade" id="brief-institute" role="tabpanel"
+                            aria-labelledby="brief-institute-tab">
+                            <!-- Brief Institute Tab -->
+                            <div class="bg-white rounded-10 p-4 mb-4">
+                                <h5 class="text-main-color font-weight-bold mb-3">معهد نيويورك</h5>
+                                <p class="mb-3">مع أكثر من 80 عاماً من الخبرة في مجال تعليم اللغات، تدير مجموعة كابلن
+                                    الدولية الآن مدارس للغات التي تخدم 40.000 طالب سنويا من 150 دولة مختلفة، فأصبح اسم
+                                    "كابلان" مرادفا للتميز الأكاديمي. في كل مدرسة من مدارس كابلان، يقوم المعلمون ذوو
+                                    الخبرة بتوجيه الطلاب من خلال الأنشطة الفصلية وكذلك الرحلات الثقافية من أجل جعل
+                                    التعلم نشطا بينما يسعى الطلاب للوصول إلى أهدافهم اللغوية. من خلال المشاريع التي تؤكد
+                                    على التطبيق في العالم الحقيقي، <a href="" class="text-secondary-color">.. قراءة
+                                        المزيد</a></p>
+
+                            </div>
+                            <!-- Map -->
+                            <div class="bg-white rounded-10 p-4 mb-4">
+                                <h5 class="text-main-color font-weight-bold mb-3">موقع المعهد</h5>
+                                <p class="mb-3"><i class="fas fa-map-marker-alt text-main-color ml-3"></i> معهد نيويورك
+                                    - أبو ظبي - الأمارات </p>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13809.8056215688!2d31.251190199999996!3d30.081255799999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2seg!4v1614708155515!5m2!1sar!2seg"
+                                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                    class="rounded-10"></iframe>
+
+                            </div>
+                            <!-- ./Brief Institute Tab -->
+                        </div>
+                        <div class="tab-pane fade" id="living" role="tabpanel" aria-labelledby="living-tab">
+                            <!-- Living Tab -->
+                            <div class="bg-white rounded-10 p-4 mb-4">
+                                <img src="imgs/living.png" alt="" class="w-100 rounded-10">
+                                <h5 class="text-main-color font-weight-bold my-3">معلومات عن المعيشة في نيويورك</h5>
+                                <p class="mb-3">مع أكثر من 80 عاماً من الخبرة في مجال تعليم اللغات، تدياسأل سكان أبو ظبي
+                                    عن الأشياء التي يفضلونها، وستحصل على عشرات الإجابات المختلفة، وهذا يتوقف على الحي
+                                    الذي يعيشون فيه وطبيعة الطقس في ذاك اليوم. ومن الصعب قليلًا تحديد سمات سكان ابوظبي
+                                    لأن لديهم الكثير من الأنشطة التي يقومون بها، مثل التجول في الشوارع ذات التراث
+                                    الاستعماري المرصوفة بالحصى، وتشجيع الفرق الرياضية، وغيرها من الأنشطة المجانية.وتعتبر
+                                    بوسطن واحدة من أقدم المدن في الولايات المتحدة الأمريكية، وقد أسسها المستعمرون
+                                    البيوريتان الإنجليز البروتستانت عام 1630، وتشتهر عمارتها بمزيج من الهندسة الحديثة
+                                    والطرز القديمة. علاوة على <a href="" class="text-secondary-color">.. قراءة
+                                        المزيد</a></p>
+
+                                <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض
+                                    جميع معاهد نيويورك</a>
+                                <a href=""
+                                    class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول
+                                    أخــرى</a>
+
+                            </div>
+                            <!-- ./Living Tab -->
+                        </div>
+                        <div class="tab-pane fade  " id="training" role="tabpanel"
+                            aria-labelledby="training-tab">
+                            <!-- Other Courses -->
+                            <div class="row">
+                                <div class="col-lg-4 px-0">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <img src="imgs/offers/offer1.png" class="card-img-top" alt="...">
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10  bg-white ">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title "><a href="#"
+                                                    class="text-main-color"> دورة فرنساوي مكثف</a></h5>
+                                            <!-- ./Course Title -->
+
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden"><span class="float-right"><i
+                                                        class="fas fa-sun text-main-color"></i> صباحي</span> <span
+                                                    class="float-left"> <i class="fas fa-signal text-main-color"></i>
+                                                    مبتدأ</span></p>
+                                            <!-- ./Course Time And Level -->
+
+                                        </div>
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden ">
+                                             <span
+                                                class="float-left text-main-color">٤٥٦ ريال / أسبوع </span>
+                                        </div>
+                                        <!-- ./Course Price -->
+                                    </div>
+                                    <!-- ./Course -->
+                                </div>
+                                <div class="col-lg-4 px-0">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <img src="imgs/offers/offer1.png" class="card-img-top" alt="...">
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10  bg-white ">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title "><a href="#"
+                                                    class="text-main-color"> دورة فرنساوي مكثف</a></h5>
+                                            <!-- ./Course Title -->
+
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden"><span class="float-right"><i
+                                                        class="fas fa-sun text-main-color"></i> صباحي</span> <span
+                                                    class="float-left"> <i class="fas fa-signal text-main-color"></i>
+                                                    مبتدأ</span></p>
+                                            <!-- ./Course Time And Level -->
+
+                                        </div>
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden ">
+                                             <span
+                                                class="float-left text-main-color">٤٥٦ ريال / أسبوع </span>
+                                        </div>
+                                        <!-- ./Course Price -->
+                                    </div>
+                                    <!-- ./Course -->
+                                </div>
+                                <div class="col-lg-4 px-0">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <img src="imgs/offers/offer1.png" class="card-img-top" alt="...">
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10  bg-white ">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title "><a href="#"
+                                                    class="text-main-color"> دورة فرنساوي مكثف</a></h5>
+                                            <!-- ./Course Title -->
+
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden"><span class="float-right"><i
+                                                        class="fas fa-sun text-main-color"></i> صباحي</span> <span
+                                                    class="float-left"> <i class="fas fa-signal text-main-color"></i>
+                                                    مبتدأ</span></p>
+                                            <!-- ./Course Time And Level -->
+
+                                        </div>
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden ">
+                                             <span
+                                                class="float-left text-main-color">٤٥٦ ريال / أسبوع </span>
+                                        </div>
+                                        <!-- ./Course Price -->
+                                    </div>
+                                    <!-- ./Course -->
+                                </div>
+                                <div class="col-lg-4 px-0">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <img src="imgs/offers/offer1.png" class="card-img-top" alt="...">
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10  bg-white ">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title "><a href="#"
+                                                    class="text-main-color"> دورة فرنساوي مكثف</a></h5>
+                                            <!-- ./Course Title -->
+
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden"><span class="float-right"><i
+                                                        class="fas fa-sun text-main-color"></i> صباحي</span> <span
+                                                    class="float-left"> <i class="fas fa-signal text-main-color"></i>
+                                                    مبتدأ</span></p>
+                                            <!-- ./Course Time And Level -->
+
+                                        </div>
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden ">
+                                             <span
+                                                class="float-left text-main-color">٤٥٦ ريال / أسبوع </span>
+                                        </div>
+                                        <!-- ./Course Price -->
+                                    </div>
+                                    <!-- ./Course -->
+                                </div>
+                                <div class="col-lg-4 px-0">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <img src="imgs/offers/offer1.png" class="card-img-top" alt="...">
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10  bg-white ">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title "><a href="#"
+                                                    class="text-main-color"> دورة فرنساوي مكثف</a></h5>
+                                            <!-- ./Course Title -->
+
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden"><span class="float-right"><i
+                                                        class="fas fa-sun text-main-color"></i> صباحي</span> <span
+                                                    class="float-left"> <i class="fas fa-signal text-main-color"></i>
+                                                    مبتدأ</span></p>
+                                            <!-- ./Course Time And Level -->
+
+                                        </div>
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden ">
+                                             <span
+                                                class="float-left text-main-color">٤٥٦ ريال / أسبوع </span>
+                                        </div>
+                                        <!-- ./Course Price -->
+                                    </div>
+                                    <!-- ./Course -->
+                                </div>
+                                <div class="col-lg-4 px-0">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <img src="imgs/offers/offer1.png" class="card-img-top" alt="...">
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10  bg-white ">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title "><a href="#"
+                                                    class="text-main-color"> دورة فرنساوي مكثف</a></h5>
+                                            <!-- ./Course Title -->
+
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden"><span class="float-right"><i
+                                                        class="fas fa-sun text-main-color"></i> صباحي</span> <span
+                                                    class="float-left"> <i class="fas fa-signal text-main-color"></i>
+                                                    مبتدأ</span></p>
+                                            <!-- ./Course Time And Level -->
+
+                                        </div>
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden ">
+                                             <span
+                                                class="float-left text-main-color">٤٥٦ ريال / أسبوع </span>
+                                        </div>
+                                        <!-- ./Course Price -->
+                                    </div>
+                                    <!-- ./Course -->
+                                </div>
+                            </div>
+                            <!-- ./Other Courses -->
+                        </div>
+                        <div class="tab-pane fade " id="rate" role="tabpanel" aria-labelledby="rate-tab">
+                            <!-- Course Rate Tab -->
+                            <form action="" class="mb-4">
+                                <select
+                                    class="form-control bg-transparent text-secondary-color filter-select border-secondary-color ">
+                                    <option>اسم الدورة </option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </form>
+                            <div class="bg-white rounded-10 py-4 mb-4">
+                                <div class="border-bottom mt-3">
+                                    <div class="row px-4">
+                                        <div class="col-lg-2 col-4">
+                                            <img src="imgs/users/user2.png" alt="" class="img-fluid rounded-pill img-user ">
+                                        </div>
+                                        <div class="col-lg-10 col-8">
+                                            <h5 class="text-main-color ">أحمد مجدى</h5>
+                                            <p><span class="starrr " ratio="4"></span> <small class="text-muted pr-3">مايو 2020</small> <small class="text-muted pr-3">دورة اللغة الانجليزية مكثف </small></p>
+                                            <p>شكراً لكل العاملين فى كابلان على حسن الاستضافه وحسن التعامل ونخص بالشكر فريق الإستقبال تحت
+                                                إشراف الأستاذ عبد الفتاح أيضاً العاملين بالتدريس تحت اشراف الأستاذ شريف ونشكر أيضاً العاملين بالمطعم
+                                                والمسئولين عن البوفيه اليومى المتميز دائماً</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="border-bottom mt-3">
+                                    <div class="row px-4">
+                                        <div class="col-lg-2 col-4">
+                                            <img src="imgs/users/user2.png" alt="" class="img-fluid rounded-pill img-user">
+                                        </div>
+                                        <div class="col-lg-10 col-8">
+                                            <h5 class="text-main-color ">أحمد مجدى</h5>
+                                            <p><span class="starrr " ratio="4"></span> <small class="text-muted pr-3">مايو 2020</small> <small class="text-muted pr-3">دورة اللغة الانجليزية مكثف </small></p>
+                                            <p>شكراً لكل العاملين فى كابلان على حسن الاستضافه وحسن التعامل ونخص بالشكر فريق الإستقبال تحت
+                                                إشراف الأستاذ عبد الفتاح أيضاً العاملين بالتدريس تحت اشراف الأستاذ شريف ونشكر أيضاً العاملين بالمطعم
+                                                والمسئولين عن البوفيه اليومى المتميز دائماً</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="mt-3">
+                                    <div class="row px-4">
+                                        <div class="col-lg-2 col-4">
+                                            <img src="imgs/users/user2.png" alt="" class="img-fluid rounded-pill img-user">
+                                        </div>
+                                        <div class="col-lg-10 col-8">
+                                            <h5 class="text-main-color ">أحمد مجدى</h5>
+                                            <p><span class="starrr " ratio="4"></span> <small class="text-muted pr-3">مايو 2020</small> <small class="text-muted pr-3">دورة اللغة الانجليزية مكثف </small></p>
+                                            <p>شكراً لكل العاملين فى كابلان على حسن الاستضافه وحسن التعامل ونخص بالشكر فريق الإستقبال تحت
+                                                إشراف الأستاذ عبد الفتاح أيضاً العاملين بالتدريس تحت اشراف الأستاذ شريف ونشكر أيضاً العاملين بالمطعم
+                                                والمسئولين عن البوفيه اليومى المتميز دائماً</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="text-center p-3">
+
+                                    <a href="" class=" text-secondary-color font-weight-bold">المزيد من التقيمات</a>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-10 p-4 mb-4">
+                                <h5 class="text-main-color font-weight-bold">أضف تقييم</h5>
+                                <p class="starrr add-rate"></p>
+                                <form>
+                                    <div class="form-group btn-light rounded-10">
+                                    
+                                        <textarea class="form-control bg-transparent rounded-10" placeholder="اكتب تعليقك"  rows="5"></textarea>
+                                      </div>
+                                      <div class="text-left">
+
+                                          <button class="btn bg-secondary-color text-white ">أضافة التقييم</button>
+                                      </div>
+                                </form>
+                            </div>
+                            <!-- ./Course Rate Tab -->
+                        </div>
+                    </div>
+                    <!-- ./Tabs -->
+                </div>
+                <div class="col-lg-4">
+                    <!-- Cost -->
+                    <div class="bg-white py-4 rounded-10 mb-4">
+                        <div class="cost-heading border-bottom pb-2 px-3">
+                            <h5 class="font-weight-bold text-main-color">التكاليف</h5>
+                        </div>
+                        <div class="cost-body px-3 pt-3">
+                            <p class="text-dark"><span class="font-weight-bold">اللغة الإنجليزية العامة : </span> ٤٦
+                                دولار أمريكي</p>
+                            <p class="text-dark"><span class="font-weight-bold">تأمين الطلاب (في الأسبوع) : </span> ٤٦
+                                دولار أمريكي</p>
+                            <p class="text-dark"><span class="font-weight-bold">رسوم التسجيل : </span> ٤٦ دولار أمريكي
+                            </p>
+                            <p class="text-main-color"><span class="font-weight-bold">إجمالي تكاليف الحجز : </span> ٤٦
+                                دولار أمريكي</p>
+                        </div>
+                    </div>
+                    <!-- ./Cost -->
+                    <!-- Reservation -->
+                    <div class="bg-white py-4 rounded-10">
+                        <div class="reservation-heading border-bottom pb-2 px-3">
+                            <h5 class="font-weight-bold text-main-color">الحجز والتقديم</h5>
+                        </div>
+                        <div class="reservation-body px-3 pt-3">
+                            <form action="">
+                                <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
+                                    <input type="text" class="form-control border-0 bg-transparent datepicker"
+                                        data-toggle="datepicker" disabled placeholder="تاريخ البداية"
+                                        value="03/02/2021">
+                                    <div class="input-group-append ">
+                                        <span class="input-group-text border-0 bg-white p-0 bg-transparent"
+                                            id="basic-addon2"><i class="far fa-calendar"></i></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+
+                                    <select class="form-control selectpicker rounded-10 border" data-live-search="true"
+                                        disabled>
+                                        <option value="" disabled>عدد الاسابيع</option>
+                                        <option selected>3 اسابيع</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <select class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                        <option value="" disabled>هل ترغب في السكن؟</option>
+                                        <option selected>لا احتاج خدمة سكن</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <select class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                        <option value="" disabled>المستوي</option>
+                                        <option selected> الاستقبال في مطار هيثرو - 240 دولار امريكي</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+
+                                    <select class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                        <option value="" disabled>التأمين الصحي</option>
+                                        <option selected> لا احتاج لخدمة التأمين الصحي</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                                <!-- Redirect to Confirm Reservation -->
+                                <a href="confirm-reservation.html"class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">حجز</a>
+                                <!-- Remove Comment  -->
+                                <!-- <button type="submit"
+                                    class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">حجز</button> -->
+                            </form>
+                        </div>
+                    </div>
+                    <!-- ./Reservation -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ./Institute Info -->
+    <!-- Footer -->
+    <footer>
+        <div class="top-footer bg-main-color py-5">
+            <div class="container-fluid">
+                <div class="row px-xl-5">
+                    <div class="col-xl-5 col-12 ">
+                        <img src="imgs/logo-white.png" alt="" class="img-fluid">
+                        <p class="text-white mt-4">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد و مع أمهر المعلمين حول
+                            العالم نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى
+                            التعاون
+                        </p>
+                    </div>
+                    <div class="col-xl-2 col-6">
+                        <h6 class="text-secondary-color ">الخدمات</h6>
+                        <ul class="p-0">
+                            <li><a href="institutes.html" class="text-white">المعاهد</a></li>
+                            <li><a href="order-visa.html" class="text-white">طلب تأشيرة</a></li>
+                            <li><a href="offers.html" class="text-white">العروض</a></li>
+                            <li><a href="articles.html" class="text-white">المقالات</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-2 col-6">
+                        <h6 class="text-secondary-color">الشركة</h6>
+                        <ul class="p-0">
+                            <li><a href="about-us.html" class="text-white">عن الشركة</a></li>
+                            <li><a href="about-us.html#team" class="text-white">عن الفريق</a></li>
+                            <li><a href="about-us.html#trusted-us" class="text-white">الشركاء</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-xl-3 col-12">
+                        <h6 class="text-secondary-color ">تواصل معنا </h6>
+                        <ul class="p-0">
+                            <li class="text-white"><i class="fas fa-envelope"></i> arabic@SAT.com </li>
+                            <li class="text-white"><i class="fas fa-phone"></i> 920023418 / 920023418</li>
+                            <li class="text-white mb-4"><i class="fas fa-map-marker-alt "></i> الطابق الثاني، مكتب B54
+                                الرياض, السعودية</li>
+                            <li class="social-links">
+                                <a class="bg-white d-inline-block text-center ml-3" href="#"><span
+                                        class="text-main-color font-weight-bold"><i
+                                            class="fab fa-facebook-f"></i></span></a>
+                                <a class="bg-white d-inline-block text-center ml-3" href="#"><span
+                                        class="text-main-color font-weight-bold"><i
+                                            class="fab fa-twitter"></i></span></a>
+                                <a class="bg-white d-inline-block text-center ml-3" href="#"><span
+                                        class="text-main-color font-weight-bold"><i
+                                            class="fab fa-instagram"></i></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer py-2 bg-sub-main-color">
+            <p class="text-center text-white">Copyright &copy; All rights reserve 2021</p>
+        </div>
+    </footer>
+    <!-- ./Footer -->
+
+
+    <!-- Jquery, Popper and Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+        crossorigin="anonymous"></script>
+    <!-- Starrr  -->
+    <script src="js/plugins/starrr.js"></script>
+    <!-- OWl slider  -->
+    <script src="js/plugins/owl.carousel.min.js"></script>
+    <!-- Select Search -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <!-- Date Picker -->
+    <script src="js/plugins/datepicker.min.js"></script>
+    <!-- Custom Js -->
+    <script src="js/shared/starr.call.js"></script>
+    <script src="js/shared/select-picker.call.js"></script>
+    <script src="js/shared/date-picker.call.js"></script>
+    <script src="js/shared/owl.call.js"></script>
+    <script src="js/plugins/uploadImg.js"></script>
+    <script src="js/shared/sidemenu.js"></script>
+
+</body>
+
+</html>
