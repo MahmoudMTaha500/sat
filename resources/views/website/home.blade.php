@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 @extends('website.app') @section('website.content')
-=======
-@extends('website.app') @section('website.content') 
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 <!-- Intro  -->
 <section class="intro" style="background-image: url({{asset('website')}}/imgs/home_page_header.png)">
     <div class="container-fluid">
@@ -15,10 +11,6 @@
 
                 <!-- Search Form -->
                 <form class="form-inline row" method="GET" action="{{route('website.institutes')}}">
-<<<<<<< HEAD
-=======
-                    
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                     <div class="col-md-9">
                         <!-- Search Field -->
                         <input name="keyword" type="text" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد او المدينة او الدولة او الدورة لبدء البحث" />
@@ -86,11 +78,8 @@
     </div>
 </section>
 <!-- ./Search Institute-->
-<<<<<<< HEAD
 
 @if (isset($best_offers[0]))
-=======
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 <!-- Best Offers -->
 <section class="best-offers py-5 bg-sub-secondary-color">
     <div class="container-fluid">
@@ -118,17 +107,11 @@
                         </div>
                         <!-- Offer Icon -->
                         <!-- Add To Favourite Btn -->
-<<<<<<< HEAD
                         @if(auth()->guard('student')->check())
                             <div class="add-favourite position-absolute" course-id="{{$offer->id}}">
                                 <i class="{{heart_type($offer)}} fa-heart favourite-icon"></i>
                             </div>
                         @endif
-=======
-                        <div class="add-favourite position-absolute">
-                            <i class="far fa-heart"></i>
-                        </div>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                         <!-- ./Add To Favourite Btn -->
                         <!-- Institute Img -->
                         <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
@@ -173,27 +156,18 @@
     </div>
 </section>
 <!-- ./Best Offers -->
-<<<<<<< HEAD
-@endif @if (isset($two_blogs[0]))
-=======
-
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
+@endif 
 <!-- Studies -->
 <div class="studies py-5">
     <div class="container-fluid">
+        @if (isset($two_blogs[0]))
         <div class="row">
             <!-- Background Img -->
             <div class="col-md-6 bg-study-1" style="background-image: url({{$two_blogs[0]->banner == null ? asset('storage/default_images.png') : $two_blogs[0]->banner}})"></div>
             <!-- ./Background Img -->
-<<<<<<< HEAD
             <div class="col-md-6 p-5">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
                 <p>{{ mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8')}} ....</p>
-=======
-            <div class="col-md-6 p-5 ">
-                <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
-                <p>{{ mb_substr(strip_tags($two_blogs[0]->content_ar)  ,0 , 300  , 'utf-8')}} ....</p>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 <a href="{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
                 <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
                 <div class="overflow-hidden">
@@ -201,17 +175,13 @@
                 </div>
             </div>
         </div>
+        @endif
+        @if (isset($two_blogs[1]))
 
         <div class="row">
-<<<<<<< HEAD
             <div class="col-md-6 p-5">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
                 <p>{{ mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8')}} ....</p>
-=======
-            <div class="col-md-6 p-5 ">
-                <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
-                <p>{{ mb_substr(strip_tags($two_blogs[1]->content_ar)  ,0 , 300  , 'utf-8')}} ....</p>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 <a href="{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
                 <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
                 <div class="overflow-hidden">
@@ -222,19 +192,16 @@
             <div class="col-md-6 bg-study-2" style="background-image: url({{$two_blogs[1]->banner == null ? asset('storage/default_images.png') : $two_blogs[1]->banner}})"></div>
             <!-- ./Background Img -->
         </div>
+        @endif
+
     </div>
 </div>
 <!-- ./Studies -->
-<<<<<<< HEAD
-@endif
+
 
 <!-- Trusted Us -->
 {{--
 <section class="trusted-us py-5">
-=======
-<!-- Trusted Us -->
-{{-- <section class="trusted-us py-5">
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="row px-xl-5">
@@ -256,16 +223,11 @@
             </div>
         </div>
     </div>
-<<<<<<< HEAD
 </section>
 --}}
 <!-- ./Trusted Us -->
 
 @if (isset($blogs[0]))
-=======
-</section> --}}
-<!-- ./Trusted Us -->
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 <!-- News -->
 <section class="news py-5 bg-sub-secondary-color">
     <div class="container-fluid">
@@ -291,13 +253,9 @@
                         </a>
                         <div class="card-body rounded-10 bg-white">
                             <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>
-<<<<<<< HEAD
                             <p class="mb-0">
                                 <span>{{mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8')}} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
                             </p>
-=======
-                            <p class="mb-0"><span>{{mb_substr(strip_tags($blog->content_ar)  ,0 , 150  , 'utf-8')}} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span></p>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                             <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
                         </div>
                     </div>
@@ -309,10 +267,7 @@
     </div>
 </section>
 <!-- ./News -->
-<<<<<<< HEAD
 @endif @if (isset($blogs[0]))
-=======
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 <!-- Success Stories -->
 <section class="success-stories pt-5 pb-0">
     <div class="container-fluid">
@@ -369,10 +324,7 @@
     </div>
 </section>
 <!-- ./Success Stories -->
-<<<<<<< HEAD
 @endif @if (isset($blogs[0]))
-=======
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 <!-- Browse our institutes -->
 <section class="browse-our-institutes py-5">
     <div class="container-fluid">
@@ -382,19 +334,10 @@
                 <h3 class="text-main-color font-weight-bold">تصفح معاهدنا</h3>
                 <p>تصفح لائحة أفضل معاهد اللغات المعتمدة من أجلك لتطوير مهاراتك اللغوية</p>
                 <a href="{{route('website.institutes')}}"><button class="btn rounded-10 bg-secondary-color text-white px-4">ابدأ الآن</button></a>
-<<<<<<< HEAD
-=======
-                
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
             </div>
         </div>
         <!-- ./Section Heading -->
     </div>
 </section>
 <!-- ./Browse our institutes -->
-<<<<<<< HEAD
 @endif @endsection
-=======
-
-@endsection
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea

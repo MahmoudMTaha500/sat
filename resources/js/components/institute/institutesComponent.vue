@@ -67,7 +67,6 @@
                                     <th class="border-top-0">التقييم</th>
                                     <th class="border-top-0">التقييم بواسطة</th>
                                     <th class="border-top-0">الحاله</th>
-                                    <th class="border-top-0">التعليقات</th>
                                     <th class="border-top-0">اكشن</th>
                                 </tr>
                             </thead>
@@ -95,10 +94,7 @@
                                         <input type="checkbox" id="checkbox" v-model="institute.approvement" @change="updateApprovement" @click="getInstitute_id(institute.id)" />
                                         <label for="checkbox">{{ (institute.approvement == 1) ? "مقبول":"غير مقبول" }}</label>
                                     </td>
-                                    <td class="text-truncate">
-                                        <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-success round">حالي (15)</button></a>
-                                        <a href="/sat/institutes/comments.php"><button type="button" class="btn btn-sm btn-outline-info round">جديد (10)</button></a>
-                                    </td>
+                                    
                                     <td class="text-truncate">
                                         <div class="btn-group" role="group" aria-label="Basic example">
                                             <a v-if="edit" :href="instutite_url_edit +'/'+ institute.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>

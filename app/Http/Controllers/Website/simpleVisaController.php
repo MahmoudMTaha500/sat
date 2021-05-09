@@ -69,11 +69,7 @@ class simpleVisaController extends Controller
             'request_status'=>'جديد',
             
             ]);
-<<<<<<< HEAD
             session()->flash('alert_message', ' تم ارسال بياناتك بنجاح و سنقوم بالتواصل معك قريبا');
-=======
-            session()->flash('alert_message', ' تم حفظ بيانات التاشيره بنجاح');
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
             return redirect()->back();
 
 

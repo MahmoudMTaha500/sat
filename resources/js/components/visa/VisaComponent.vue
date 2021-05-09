@@ -1,14 +1,6 @@
 <template>
-<<<<<<< HEAD
     <div class="row">
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-=======
-
-
-
-    <div class="row">
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -20,26 +12,16 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="projectinput1">حاله الدفع</label>
-<<<<<<< HEAD
                             <select class="form-control" v-model="price_status" name="" id="">
                                 <option value="" selected> اختر الحاله</option>
                                 <option value="لم يتم الدفع"> لم يتم الدفع</option>
                                 <option value="تم الدفع"> تم الدفع </option>
                                 <option value="تم دفع جزء من المبلغ"> تم دفع جزء من المبلغ</option>
                             </select>
-=======
-                             <select class="form-control" v-model="price_status" name="" id="">
-                                 <option value="" selected> اختر الحاله</option>
-                                    <option value="لم يتم الدفع"> لم يتم الدفع</option>
-                                    <option value="تم الدفع"> تم الدفع </option>
-                                    <option value="تم دفع جزء من المبلغ"> تم دفع جزء من المبلغ</option>
-                                    </select>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                         </div>
 
                         <div class="form-group">
                             <label for="projectinput1">حاله الطلب</label>
-<<<<<<< HEAD
                             <select class="form-control" v-model="request_status" name="" id="">
                                 <option value="" selected> اختر الحاله</option>
 
@@ -49,22 +31,10 @@
                                 <option value="طلب ملغي"> طلب ملغي </option>
                                 <option value="جديد"> جديد </option>
                             </select>
-=======
-                                      <select   class="form-control" v-model="request_status" name="" id="">
-                                 <option value="" selected> اختر الحاله</option>
-
-                                     <option value=" تم التقديم">تم التقديم</option>
-                                    <option value="تم التواصل"> تم التواصل </option>
-                                    <option value="الطلب مرفوض"> الطلب مرفوض  </option>
-                                    <option value="طلب ملغي"> طلب ملغي </option>
-                                    <option value="جديد">  جديد </option>
-                                    </select>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                         </div>
                         <div class="form-group">
                             <label for="projectinput1">حاله المستندات</label>
 
-<<<<<<< HEAD
                             <select class="form-control" v-model="document_status" name="" id="">
                                 <option value="" selected> اختر الحاله</option>
 
@@ -73,16 +43,6 @@
                             </select>
                         </div>
 
-=======
-                            <select class="form-control" v-model="document_status"   name="" id="">
-                                 <option value="" selected> اختر الحاله</option>
-
-                                    <option value="لم يتم الارسال"> لم يتم الارسال</option>
-                                    <option value="تم الارسال"> تم الارسال </option>
-                                    </select>
-                        </div>
-             
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                         <div class="form-group">
                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
                             <input v-model="name_ar" type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="name_ar" />
@@ -95,41 +55,21 @@
             </div>
         </div>
 
-<<<<<<< HEAD
         <div class="modal fade text-left" id="institute_email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel1">ملاحظه الطالب</h4>
-=======
-
-
-                <div class="modal fade text-left" id="institute_email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-            <div class="modal-dialog " role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">   ملاحظه الطالب</h4>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-<<<<<<< HEAD
                         <textarea v-model="note" class="w-100" cols="30" rows="15"> </textarea>
                         <input type="hidden" v-model="visa_note_id" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info w-100" data-dismiss="modal" aria-label="Close" @click="updatenote()">تعديل الملاحظه</button>
-=======
-                        <textarea v-model="note"   class="w-100"  cols="30" rows="15" >
-                             
-                    </textarea>
-                    <input type="hidden" v-model="visa_note_id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info w-100"   data-dismiss="modal" aria-label="Close"  @click="updatenote()"> تعديل الملاحظه</button>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                     </div>
                 </div>
             </div>
@@ -143,13 +83,7 @@
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
                             <li>
-<<<<<<< HEAD
                                 <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right"><i class="ft-filter ft-md"></i> فلتر</button>
-=======
-                                    <button data-toggle="modal" data-target="#exampleModalCenter" class="btn btn-sm btn-info box-shadow-2 round btn-min-width pull-right"><i class="ft-filter ft-md"></i> فلتر</button>
-                               
-                               
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                             </li>
                             <li v-if="create">
                                 <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" :href="url_dashboard+'/visas/create'"> <i class="ft-plus ft-md"></i> اضافة مقال جديد</a>
@@ -157,10 +91,6 @@
                         </ul>
 
                         <!-- Modal -->
-<<<<<<< HEAD
-=======
-       
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                     </div>
                 </div>
                 <div class="card-content">
@@ -192,7 +122,6 @@
                                     <td>{{visa.country}}</td>
                                     <td>{{visa.visa_type}}</td>
                                     <td>{{visa.price}}</td>
-<<<<<<< HEAD
                                     <td class="text-truncate">
                                         <button type="button" class="btn btn-sm btn-outline-info round" @click="modelmessageInstitute(visa)">
                                             <i class="la la-eye"></i>
@@ -220,47 +149,12 @@
                                             <option value="جديد"> جديد </option>
                                         </select>
                                     </td>
-=======
-                                       <td class="text-truncate">
-                                            <button type="button" class="btn btn-sm btn-outline-info round" @click="modelmessageInstitute(visa)">
-                                                <i class="la la-eye"></i>
-                                            </button>
-                                        </td>
-                                    <td>
-                                    <select v-model="visa.price_status" @change="updateStatus(type='price')" @click="getvisa_id(visa.id)" name="" id="">
-                                    <option value="لم يتم الدفع"> لم يتم الدفع</option>
-                                    <option value="تم الدفع"> تم الدفع </option>
-                                    <option value="تم دفع جزء من المبلغ"> تم دفع جزء من المبلغ</option>
-                                    </select>
-                                    </td>
-                                    <td>
-                                    <select v-model="visa.document_status" @change="updateStatus(type='document')" @click="getvisa_id(visa.id)" name="" id="">
-                                    <option value="لم يتم الارسال"> لم يتم الارسال</option>
-                                    <option value="تم الارسال"> تم الارسال </option>
-                                    </select>
-                                    </td>
-                                    <td>
-                                    <select v-model="visa.request_status" @change="updateStatus(type='request')" @click="getvisa_id(visa.id)" name="" id="">
-                                     <option value=" تم التقديم">تم التقديم</option>
-                                    <option value="تم التواصل"> تم التواصل </option>
-                                    <option value="الطلب مرفوض"> الطلب مرفوض  </option>
-                                    <option value="طلب ملغي"> طلب ملغي </option>
-                                    <option value="جديد">  جديد </option>
-                                    </select>
-                                    </td>
-                              
-                             
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
 
                                     <td>{{visa.created_at}}</td>
 
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
-<<<<<<< HEAD
                                             <a v-if="edit" :href="url_dashboard+'/visas/'+visa.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
-=======
-                                            <a  v-if="edit" :href="url_dashboard+'/visas/'+visa.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                                             <form :action="url_dashboard+'/visas/'+visa.id" method="POST" class="btn-group">
                                                 <input type="hidden" name="_token" :value="csrftoken" />
                                                 <input type="hidden" name="_method" value="delete" />
@@ -272,7 +166,6 @@
                             </tbody>
                         </table>
                         <div class="pagination">
-<<<<<<< HEAD
                             <button class="btn btn-default" @click="Pagination(visas.prev_page_url)" :disabled="!visas.prev_page_url">
                                 Previos
                             </button>
@@ -281,16 +174,6 @@
                                 Next
                             </button>
                         </div>
-=======
-                                <button class="btn btn-default" @click="Pagination(visas.prev_page_url)" :disabled="!visas.prev_page_url">
-                                    Previos
-                                </button>
-                                <span> page {{visas.current_page}} of {{visas.last_page }} </span>
-                                <button class="btn btn-default" @click="Pagination(visas.next_page_url)" :disabled="!visas.next_page_url">
-                                    Next
-                                </button>
-                            </div>
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                     </div>
                 </div>
             </div>
@@ -300,18 +183,7 @@
 
 <script>
     export default {
-<<<<<<< HEAD
         props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", "create", "edit", "delete_pre"],
-=======
-        props: [
-                "aprove_route", 
-                "dahsboard_url", 
-                "get_visa", 
-                "csrftoken", 
-                "categories", 
-                "users",'create','edit','delete_pre'
-                ],
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
         data() {
             return {
                 visas: {},
@@ -322,7 +194,6 @@
                 request_status: "",
                 name_ar: "",
                 status: true,
-<<<<<<< HEAD
                 note: "",
                 visa_note_id: "",
             };
@@ -337,22 +208,6 @@
             },
             Pagination: function (url) {
                 this.get_visa = url + "&user_id=" + this.user_id + "&cat_id=" + this.cat_id + "&keyword=" + this.keyword + "&status=" + this.status;
-=======
-                note:'',
-                visa_note_id:'',
-            };
-        },
-       beforeMount(){
-            this.getVisa();
-        },
-      
-      methods: {
-            getVisa() {
-                 axios.get(this.get_visa).then((response) => (this.visas = response.data.visas));
-            },
-            Pagination: function (url) {
-                this.get_visa = url+'&user_id='+this.user_id+'&cat_id='+this.cat_id+'&keyword='+this.keyword+'&status='+this.status;
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 this.getVisa();
             },
             updateApprovement: function (e) {
@@ -366,7 +221,6 @@
                 // alert(type);
                 const newValue = event.target.value;
                 // alert(newValue);
-<<<<<<< HEAD
                 axios.post(this.dahsboard_url + "/simple-visa/update-status", { visa_id: this.visa_id, status: newValue, type: type }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
             },
             filter: function () {
@@ -383,28 +237,11 @@
             modelmessageInstitute: function (obj) {
                 this.note = obj.note;
                 this.visa_note_id = obj.id;
-=======
-                axios.post(this.dahsboard_url + "/simple-visa/update-status", { visa_id: this.visa_id, status: newValue ,type:type}, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
-            },
-            filter: function () {
-                axios.get(this.dahsboard_url + "/simple-visa/filter", { params: { price_status: this.price_status, document_status: this.document_status, request_status: this.request_status, name_ar:this.name_ar} })
-                .then((response) => (
-                    this.visas = response.data.visas,
-                    this.visas.prev_page_url += '&price_status='+this.price_status+'&document_status='+this.document_status+'&document_status='+this.document_status+'&name_ar='+this.name_ar,
-                    this.visas.next_page_url += '&price_status='+this.price_status+'&document_status='+this.document_status+'&document_status='+this.document_status+'&name_ar='+this.name_ar
-                ));
-                
-            },
-              modelmessageInstitute: function (obj) {
-                this.note = obj.note;
-                this.visa_note_id=obj.id;
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 // this.editorData = obj.institute_message;
                 //  console.log(this.institute_message);
 
                 $("#institute_email_modal").modal("show");
             },
-<<<<<<< HEAD
             updatenote: function () {
                 // alert(type);
                 // alert(newValue);
@@ -415,21 +252,5 @@
                 });
             },
         },
-=======
-             updatenote: function () {
-                // alert(type);
-                // alert(newValue);
-                axios.post(this.dahsboard_url + "/simple-visa/update-note", { visa_note_id: this.visa_note_id, note: this.note }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {
-
-                    if(response.data == 'success'){
-                        alert('تم تعديل الملاحظه ');
-                    }
-                });
-            },
-
-        },
-
- 
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     };
 </script>

@@ -37,14 +37,13 @@
                             <div class="row">
                                 <div class="col-6">
                                     <label for="projectinput1">تخفيضات</label> <br />
-                                    <input type="checkbox"  data-size="sm" checked class="switchery" v-model="discount_offers"/>
+                                    <input type="checkbox" data-size="sm" checked class="switchery" v-model="discount_offers" />
                                 </div>
                                 <div class="col-6">
                                     <label for="projectinput1">بدون تخفيضات</label> <br />
-                                    <input type="checkbox"  data-size="sm" checked class="switchery" v-model="non_discount_offers"/>
+                                    <input type="checkbox" data-size="sm" checked class="switchery" v-model="non_discount_offers" />
                                 </div>
                             </div>
-                            
                         </div>
                         <div class="form-group">
                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
@@ -103,7 +102,6 @@
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                
                                                 <a v-if="edit" :href="dahsboard_url+'/courses/'+course.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
                                                 <a href="#" class="btn btn-default btn-sm round">عرض</a>
 
@@ -137,7 +135,7 @@
 
 <script>
     export default {
-        props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'delete_pre','create','edit'],
+        props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
         data() {
             return {
                 courses: {},
@@ -176,30 +174,21 @@
             },
             filterCoureses: function () {
                 var filter_params = {
-                    institute_id: this.institute_id, 
-                    country_id: this.country_id, 
-                    city_id: this.city_id, 
-                    name_ar: this.name_ar, 
-                    discount_offers: this.discount_offers, 
-                    non_discount_offers: this.non_discount_offers
-                }
-                var pagination_params = "&institute_id=" + this.institute_id + 
-                                        "&country_id=" + this.country_id + 
-                                        "&city_id=" + this.city_id + 
-                                        "&name_ar=" + this.name_ar
-                                        "&discount_offers=" + this.discount_offers
-                                        "&non_discount_offers=" + this.non_discount_offers
+                    institute_id: this.institute_id,
+                    country_id: this.country_id,
+                    city_id: this.city_id,
+                    name_ar: this.name_ar,
+                    discount_offers: this.discount_offers,
+                    non_discount_offers: this.non_discount_offers,
+                };
+                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
+                "&discount_offers=" + this.discount_offers;
+                "&non_discount_offers=" + this.non_discount_offers;
                 axios
                     .get(this.dahsboard_url + "/filtercourses", {
                         params: filter_params,
                     })
-                    .then(
-                        (response) => (
-                            (this.courses = response.data.courses),
-                            (this.courses.prev_page_url += pagination_params),
-                            (this.courses.next_page_url += pagination_params)
-                        )
-                    );
+                    .then((response) => ((this.courses = response.data.courses), (this.courses.prev_page_url += pagination_params), (this.courses.next_page_url += pagination_params)));
             },
             updateApprovment: function (e) {
                 const newValue = e.target.checked;
