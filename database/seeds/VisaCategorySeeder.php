@@ -14,11 +14,7 @@ class VisaCategorySeeder extends Seeder
     {
         for ($x = 1; $x <= 5; $x++) {
             VisaCategory::create([
-<<<<<<< HEAD
                 "name_ar" => 'سياحية 6 شهور'.$x,
-=======
-                "name_ar" => 'تصنيف التاشيرة'.$x,
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "creator_id" => 1,
             ]);
         }

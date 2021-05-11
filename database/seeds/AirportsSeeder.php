@@ -13,11 +13,7 @@ class AirportsSeeder extends Seeder
     {
         for ($x = 1; $x <= 30; $x++) {
             Airports::create([
-<<<<<<< HEAD
                 "name_ar" => '1الاستقبال من مطار جدة'.$x,
-=======
-                "name_ar" => '1مطار'.$x,
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -25,11 +21,7 @@ class AirportsSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             Airports::create([
-<<<<<<< HEAD
                 "name_ar" => '2الاستقبال من مطار جدة'.$x,
-=======
-                "name_ar" => '2مطار'.$x,
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -37,11 +29,7 @@ class AirportsSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             Airports::create([
-<<<<<<< HEAD
                 "name_ar" => '3الاستقبال من مطار جدة'.$x,
-=======
-                "name_ar" => '3مطار'.$x,
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -49,11 +37,7 @@ class AirportsSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             Airports::create([
-<<<<<<< HEAD
                 "name_ar" => '4الاستقبال من مطار جدة'.$x,
-=======
-                "name_ar" => '4مطار'.$x,
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -61,11 +45,7 @@ class AirportsSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             Airports::create([
-<<<<<<< HEAD
                 "name_ar" => '5الاستقبال من مطار جدة'.$x,
-=======
-                "name_ar" => '5مطار'.$x,
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                

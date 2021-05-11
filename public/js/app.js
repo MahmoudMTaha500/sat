@@ -45564,7 +45564,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("h4", { staticClass: "card-title" }, [
-            _vm._v("المعاهد (" + _vm._s(this.institutes.total) + ")")
+            _vm._v("الكورسات (" + _vm._s(this.institutes.total) + ")")
           ]),
           _vm._v(" "),
           _vm._m(0),

@@ -27,11 +27,7 @@ class StoreCoursesRequest extends FormRequest
         return [
             'name_ar' => 'required',
             'institute_id' => 'required',
-            'min_age' => 'required',
-            'study_period' => 'required',
-            'lessons_per_week' => 'required',
             'desc' => 'required',
-            'required_level' => 'required',
             'coures_price' => array(
                 "num_of_weeks"=>"required",
                 "preice_per_week"=>"required"
@@ -45,11 +41,7 @@ class StoreCoursesRequest extends FormRequest
         return [
             'name_ar.required' => 'اسم الدورة مطلوب',
             'institute_id.required' => '  المعهد مطلوب',
-            'min_age.required' => '   الحد الادني للعمر مطلوب  ',
-            'study_period.required' => ' وقت الدورة مطلوب',
-            'lessons_per_week.required' => '  درس كل اسبوع مطلوب',
             'desc.required' => ' وصف الدورة مطلوب',
-            'required_level.required' => ' المستوي مطلوب',
             'coures_price.required' => ' سعر الدورة مطلوب',
             // 'coures_price.numeric' => ' سعر الدورة يجب ان يكون رقم ',
         ];

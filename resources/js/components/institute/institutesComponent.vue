@@ -3,7 +3,7 @@
         <div id="recent-transactions" class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">المعاهد ({{this.institutes.total}})</h4>
+                    <h4 class="card-title">الكورسات ({{this.institutes.total}})</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
