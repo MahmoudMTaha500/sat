@@ -15,7 +15,7 @@ class InsurancesController extends Controller
         $department_name = 'services';
         $page_name = 'insurances';
         $useVue = true;
-        $institutes = institute::get();
+        $institutes = Institute::get();
        $page_title = 'التامينات';
 
 
@@ -30,7 +30,7 @@ class InsurancesController extends Controller
 
     public function create()
     {
-        $Institutes = institute::get();
+        $Institutes = Institute::get();
         //
         $department_name = 'services';
         $page_name = 'add-insurances';
@@ -50,7 +50,7 @@ class InsurancesController extends Controller
         // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
         session()->flash('alert_message', ['message' => "تم اضافه الخدمه بنجاح", 'icon' => 'success']);
-        return back();
+        return redirect()->route('insurances.index');
     }
 
     public function show(Insurances $Insurances)
@@ -70,7 +70,7 @@ class InsurancesController extends Controller
     {
 
         $insurance = Insurances::find($id);
-        $Institutes = institute::get();
+        $Institutes = Institute::get();
         $department_name = 'services';
         $page_name = 'insurances';
        $page_title = 'التامينات';

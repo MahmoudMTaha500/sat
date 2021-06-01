@@ -95,6 +95,7 @@ class BlogController extends Controller
     /***************************************************************/
     public function update(blogEditRequest $request, Blog $blog)
     {
+        // dd($request->all());
         $validated = $request->validated();
         $blog = Blog::find($blog->id);
         $slug = str_replace(' ', '-', $request->title_ar);
@@ -179,5 +180,15 @@ class BlogController extends Controller
         session()->flash('alert_message', ['message' => 'تم ارجاع المقال بنجاح', 'icon' => 'success']);
         return back();
     }
+
+
+    public function forceDelete($id){
+
+    // dd($id);
+    $forceDelete = Blog::where(['id' => $id])->forceDelete();
+    session()->flash('alert_message', ['message' => 'تم  حذف المقال نهائيا بنجاح', 'icon' => 'error']);
+    return back();
+
+}
 
 }

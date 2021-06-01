@@ -111,6 +111,8 @@
                                                 <input type="hidden" name="_method" value="delete" />
                                                 <button v-if="delete_pre" class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المقال')">حذف</button>
                                             </form>
+                                            <a  v-if="edit" :href="url_dashboard+'/blogs/forceDelete/'+blog.id" class="btn btn-dark btn-sm round">حذف نهائي</a>
+
                                         </div>
                                     </td>
                                 </tr>

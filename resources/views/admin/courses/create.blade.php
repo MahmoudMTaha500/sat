@@ -44,18 +44,18 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">اسم الدورة</label>
-                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل اسم الدورة" name="name_ar" />
+                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل اسم الدورة" name="name_ar" value="{{old('name_ar')}}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left" name="institute_id">
+                                                    <select class="select2 form-control text-left" name="institute_id" value="{{old('institute_id')}}">
                                                         <option value=""  >اختر المعهد</option>
 
                                                         @foreach($institutes as $institute)
 
-                                                        <option value="{{$institute->id}}">{{$institute->name_ar}}</option>
+                                                        <option value="{{$institute->id}}">{{$institute->name_ar .'-'. $institute->city->name_ar}}</option>
 
                                                         @endforeach
                                                     </select>
@@ -66,7 +66,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">الحد الأدنى للعمر </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="min_age" />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="min_age"  value="{{old('min_age')}}"/>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -84,7 +84,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">وقت الدراسة</label>
-                                                    <select class="form-control text-left" name="study_period">
+                                                    <select class="form-control text-left" name="study_period" value="{{old('study_period')}}">
                                                         <option value=" صباحي">صباحي</option>
                                                         <option value="مسائي">مسائي</option>
                                                     </select>
@@ -93,7 +93,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">درس/الأسبوع </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week"  value="{{old('lessons_per_week')}}" />
                                                 </div>
                                             </div>
                                         </div>
@@ -102,13 +102,13 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">ساعات/أسبوع </label>
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week" />
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  value="{{old('hours_per_week')}}"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المستوى المطلوب</label>
-                                                    <select class="form-control text-left " name="required_level">
+                                                    <select class="form-control text-left " name="required_level"  value="{{old('required_level')}}" >
                                                         <option value=" مبتدئ ">مبتدئ</option>
                                                         <option value=  "     متوسط "   >متوسط</option>
                                                         <option value="  متقدم  ">متقدم</option>
@@ -124,7 +124,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" ></textarea>
+                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" > {{old('desc')}} </textarea>
                                                 </div>
                                             </div>
                                           

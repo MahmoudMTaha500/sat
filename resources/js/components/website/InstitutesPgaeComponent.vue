@@ -77,7 +77,7 @@
                                     <!-- Institute -->
                                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                         <!-- Offer Icon -->
-                                        <div class="offer-icon position-absolute bg-secondary-color text-white">
+                                        <div v-if="course.discount!=0"  class="offer-icon position-absolute bg-secondary-color text-white">
                                             - {{Math.round(course.discount*100)}} %
                                         </div>
                                         <!-- Offer Icon -->

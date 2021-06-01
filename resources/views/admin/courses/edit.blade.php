@@ -55,7 +55,7 @@
 
                                                         @foreach($institutes as $institute)
 
-                                                        <option value="{{$institute->id}}" @if($institute->id == $course->institute_id) echo selected @endif>{{$institute->name_ar}}</option>
+                                                        <option value="{{$institute->id}}" @if($institute->id == $course->institute_id) echo selected @endif>{{$institute->name_ar .'-'. $institute->city->name_ar}}</option>
 
                                                         @endforeach
                                                     </select>

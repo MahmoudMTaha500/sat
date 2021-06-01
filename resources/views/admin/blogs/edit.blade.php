@@ -86,20 +86,29 @@
 
                                                         @foreach($Institutes as $institute)
 
-                                                        <option value="{{$institute->id}}"   @if($institute->id == $blog->institute_id)  selected @endif>{{$institute->name_ar}}</option>
+                                                        <option value="{{$institute->id}}"   @if($institute->id == $blog->institute_id)  selected @endif>{{$institute->name_ar .'-'. $institute->city->name_ar}}</option>
 
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="projectinput4">صورة المقال</label>
+                                                    {{-- <label for="projectinput4">صورة المقال</label>
                                                     <div class="custom-file">
                                                         <input type="file" class="custom-file-input" id="inputGroupFile01"  name="banner" value="{{$blog->banner}}"/>
                                                         <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
                                                     </div>
                                                     <div class="mt-3">
                                                         <img class="w-100" src="{{asset($blog->banner)}}" alt="" />
-                                                    </div>
+                                                    </div> --}}
+
+                                                    <show-images-component
+                                                    :image_name="{{json_encode("banner")}}"
+                                                    :image_label="{{json_encode("اختر الصورة")}}"
+                                                    :old="{{json_encode(old('banner'))}}"
+                                                    :path_image_edit="{{ json_encode( asset($blog->banner) )}}"
+    
+    
+                                                    ></show-images-component>
                                                 </div>
                                             </div>
                                         </div>

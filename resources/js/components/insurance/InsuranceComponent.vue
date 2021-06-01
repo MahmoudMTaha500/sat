@@ -73,9 +73,12 @@
 
                              
                               <td class="text-truncate">
+                             <div class="btn-group" role="group" aria-label="Basic example">
 
-                                <a v-if="edit" :href="dahsboard_url+'/insurances/'+'edit/'+insurance.id"><button type="button" class="btn btn-sm btn-outline-primary round">تعديل</button></a>
-                                <a  v-if="delete_pre" :href="dahsboard_url+'/insurances/'+'delete/'+insurance.id"><button type="button" class="btn btn-sm btn-outline-danger round"  onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
+
+                                <a v-if="edit" :href="dahsboard_url+'/insurances/'+'edit/'+insurance.id"><button type="button" class="btn btn-info btn-sm round">تعديل</button></a>
+                                <a  v-if="delete_pre" :href="dahsboard_url+'/insurances/'+'delete/'+insurance.id"><button type="button" class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
+                             </div>
                               </td>
                             </tr>
                             

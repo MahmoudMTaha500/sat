@@ -24,9 +24,9 @@ class CreateInstitutesTable extends Migration
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->bigInteger("country_id")->unsigned();
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->bigInteger("city_id")->unsigned();
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->integer("sat_rate");
             $table->integer("rate_switch");
             $table->integer("approvement");

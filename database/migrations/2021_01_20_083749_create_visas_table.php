@@ -17,7 +17,7 @@ class CreateVisasTable extends Migration
             $table->id();
             $table->bigInteger("category_id")->nullable();
             $table->bigInteger("country_id")->unsigned();
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->string("price");

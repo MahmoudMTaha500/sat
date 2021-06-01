@@ -26,10 +26,10 @@ class blogRequest extends FormRequest
         return [
             'title_ar'=>'required',
             'content_ar'=>'required',
-            'category_id'=>'required',
-            'country_id'=>'required',
-            'city_id'=>'required',
-            'institute_id'=>'required',
+            // 'category_id'=>'required',
+            // 'country_id'=>'required',
+            // 'city_id'=>'required',
+            // 'institute_id'=>'required',
             'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
 
         ];
@@ -40,10 +40,10 @@ class blogRequest extends FormRequest
         return [
             'title_ar.required'=>" عنوان المقال مطلوب",
             'content_ar.required'=>"محتوي المقال مطلوب",
-            'category_id.required'=>"تصنيف المقال مطلوب",
-            'country_id.required'=>" الدوله مطلوب",
-            'city_id.required'=>"المدينه مطلوبه",
-            'institute_id.required'=>"المعهد مطلوب",
+            // 'category_id.required'=>"تصنيف المقال مطلوب",
+            // 'country_id.required'=>" الدوله مطلوب",
+            // 'city_id.required'=>"المدينه مطلوبه",
+            // 'institute_id.required'=>"المعهد مطلوب",
             'banner.required' => 'صورة المقال مطلوبة',
             'banner.image' => 'صورة المقال يجب ان يكون صورة',
             'banner.mimes' => 'صورة المقال يجب ان يكون بالصيغ الاتية (jpeg , png , jpg , gif , svg)',

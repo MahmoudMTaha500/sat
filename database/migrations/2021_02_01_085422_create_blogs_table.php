@@ -22,11 +22,11 @@ class CreateBlogsTable extends Migration
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->bigInteger("country_id")->unsigned();
-            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->bigInteger("city_id")->unsigned();
             $table->foreign('city_id')->references('id')->on('cities');
             $table->bigInteger("institute_id")->unsigned();
-            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');;
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->bigInteger("category_id")->unsigned();
             $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('cascade');
             $table->integer("approvement");

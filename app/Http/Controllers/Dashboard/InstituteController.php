@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Course;
 use App\Models\CoursePrice;
+use App\Models\Favourite;
+use App\Models\StudentRequest;
 class InstituteController extends Controller
 {
 
@@ -169,7 +171,10 @@ class InstituteController extends Controller
         $courses = Course::where('institute_id', $id)->get();
         foreach($courses as $course){
             $courses_price = CoursePrice::where('course_id',$course->id)->forceDelete();
+            $Favourite = Favourite::where('course_id',$course->id)->forceDelete();
+            $StudentRequest = StudentRequest::where('course_id',$course->id)->forceDelete();
         }
+        // Favourite::where('')
         Course::where('institute_id', $id)->forceDelete();
         $institute = Institute::find($id);
         File::delete($institute->logo);

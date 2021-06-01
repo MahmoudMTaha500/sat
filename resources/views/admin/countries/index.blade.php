@@ -61,8 +61,15 @@
                                                         @endif
                     @if(auth()->user()->hasPermission('cities-countries-delete'))
 
-                                                        <a    onclick="return confirm('Are you sure?')"  href="{{route('countries.destroy' ,$coun->id)}}" ><i class="la la-trash"></i></a>
-                                                    @endif
+
+                    <form action="{{route('countries.destroy' ,$coun->id)}}" method="POST">
+                        @csrf
+                        @method('delete')
+
+                                                        <button    onclick="return confirm('Are you sure?')"  ><i class="la la-trash"></i></button>
+                                                    </form>
+
+                                                        @endif
                                                     
                                                 </td>
                                             </tr>

@@ -2308,6 +2308,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['dahsboard_url', 'csrftoken', 'institutes', 'create', 'edit', 'delete_pre'],
   data: function data() {
@@ -2359,6 +2363,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -3612,6 +3618,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['dahsboard_url', 'csrftoken', 'institutes', 'create', 'edit', 'delete_pre'],
   data: function data() {
@@ -3814,6 +3823,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
 //
 //
 //
@@ -43266,61 +43278,73 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _vm.edit
-                          ? _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.dahsboard_url +
-                                    "/airports/" +
-                                    "edit/" +
-                                    airport.id
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              role: "group",
+                              "aria-label": "Basic example"
+                            }
+                          },
+                          [
+                            _vm.edit
+                              ? _c(
+                                  "a",
                                   {
-                                    staticClass:
-                                      "btn btn-sm btn-outline-primary round",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("تعديل")]
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.delete_pre
-                          ? _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.dahsboard_url +
-                                    "/airports/" +
-                                    "delete/" +
-                                    airport.id
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-sm btn-outline-danger round",
                                     attrs: {
-                                      type: "button",
-                                      onclick:
-                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                      href:
+                                        _vm.dahsboard_url +
+                                        "/airports/" +
+                                        "edit/" +
+                                        airport.id
                                     }
                                   },
-                                  [_vm._v("حذف")]
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-info btn-sm round",
+                                        attrs: { type: "button" }
+                                      },
+                                      [_vm._v("تعديل")]
+                                    )
+                                  ]
                                 )
-                              ]
-                            )
-                          : _vm._e()
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.delete_pre
+                              ? _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        _vm.dahsboard_url +
+                                        "/airports/" +
+                                        "delete/" +
+                                        airport.id
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm round",
+                                        attrs: {
+                                          type: "button",
+                                          onclick:
+                                            "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                        }
+                                      },
+                                      [_vm._v("حذف")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
                       ])
                     ])
                   }),
@@ -43927,7 +43951,23 @@ var render = function() {
                                     )
                                   : _vm._e()
                               ]
-                            )
+                            ),
+                            _vm._v(" "),
+                            _vm.edit
+                              ? _c(
+                                  "a",
+                                  {
+                                    staticClass: "btn btn-dark btn-sm round",
+                                    attrs: {
+                                      href:
+                                        _vm.url_dashboard +
+                                        "/blogs/forceDelete/" +
+                                        blog.id
+                                    }
+                                  },
+                                  [_vm._v("حذف نهائي")]
+                                )
+                              : _vm._e()
                           ]
                         )
                       ])
@@ -46443,61 +46483,73 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _vm.edit
-                          ? _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.dahsboard_url +
-                                    "/insurances/" +
-                                    "edit/" +
-                                    insurance.id
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              role: "group",
+                              "aria-label": "Basic example"
+                            }
+                          },
+                          [
+                            _vm.edit
+                              ? _c(
+                                  "a",
                                   {
-                                    staticClass:
-                                      "btn btn-sm btn-outline-primary round",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("تعديل")]
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.delete_pre
-                          ? _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.dahsboard_url +
-                                    "/insurances/" +
-                                    "delete/" +
-                                    insurance.id
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-sm btn-outline-danger round",
                                     attrs: {
-                                      type: "button",
-                                      onclick:
-                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                      href:
+                                        _vm.dahsboard_url +
+                                        "/insurances/" +
+                                        "edit/" +
+                                        insurance.id
                                     }
                                   },
-                                  [_vm._v("حذف")]
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-info btn-sm round",
+                                        attrs: { type: "button" }
+                                      },
+                                      [_vm._v("تعديل")]
+                                    )
+                                  ]
                                 )
-                              ]
-                            )
-                          : _vm._e()
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.delete_pre
+                              ? _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        _vm.dahsboard_url +
+                                        "/insurances/" +
+                                        "delete/" +
+                                        insurance.id
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm round",
+                                        attrs: {
+                                          type: "button",
+                                          onclick:
+                                            "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                        }
+                                      },
+                                      [_vm._v("حذف")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
                       ])
                     ])
                   }),
@@ -47184,61 +47236,73 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _vm.edit
-                          ? _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.dahsboard_url +
-                                    "/residences/" +
-                                    "edit/" +
-                                    residence.id
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
+                        _c(
+                          "div",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              role: "group",
+                              "aria-label": "Basic example"
+                            }
+                          },
+                          [
+                            _vm.edit
+                              ? _c(
+                                  "a",
                                   {
-                                    staticClass:
-                                      "btn btn-sm btn-outline-primary round",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("تعديل")]
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.delete_pre
-                          ? _c(
-                              "a",
-                              {
-                                attrs: {
-                                  href:
-                                    _vm.dahsboard_url +
-                                    "/residences/" +
-                                    "delete/" +
-                                    residence.id
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-sm btn-outline-danger round",
                                     attrs: {
-                                      type: "button",
-                                      onclick:
-                                        "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                      href:
+                                        _vm.dahsboard_url +
+                                        "/residences/" +
+                                        "edit/" +
+                                        residence.id
                                     }
                                   },
-                                  [_vm._v("حذف")]
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-info btn-sm round",
+                                        attrs: { type: "button" }
+                                      },
+                                      [_vm._v("تعديل")]
+                                    )
+                                  ]
                                 )
-                              ]
-                            )
-                          : _vm._e()
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.delete_pre
+                              ? _c(
+                                  "a",
+                                  {
+                                    attrs: {
+                                      href:
+                                        _vm.dahsboard_url +
+                                        "/residences/" +
+                                        "delete/" +
+                                        residence.id
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass:
+                                          "btn btn-danger btn-sm round",
+                                        attrs: {
+                                          type: "button",
+                                          onclick:
+                                            "return confirm('هل انت متاكد من حذف هذا المعهد')"
+                                        }
+                                      },
+                                      [_vm._v("حذف")]
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
                       ])
                     ])
                   }),
@@ -51598,20 +51662,24 @@ var render = function() {
                             "card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5"
                         },
                         [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "offer-icon position-absolute bg-secondary-color text-white"
-                            },
-                            [
-                              _vm._v(
-                                "\n                                        - " +
-                                  _vm._s(Math.round(course.discount * 100)) +
-                                  " %\n                                    "
+                          course.discount != 0
+                            ? _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "offer-icon position-absolute bg-secondary-color text-white"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                        - " +
+                                      _vm._s(
+                                        Math.round(course.discount * 100)
+                                      ) +
+                                      " %\n                                    "
+                                  )
+                                ]
                               )
-                            ]
-                          ),
+                            : _vm._e(),
                           _vm._v(" "),
                           _vm.student_check
                             ? _c(

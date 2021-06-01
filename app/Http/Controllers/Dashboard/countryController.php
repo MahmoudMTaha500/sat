@@ -82,12 +82,12 @@ class countryController extends Controller
 
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
-
+// dd($id);
         $country = Country::find($id);
         $country->delete();
-        return redirect("/dashboard/getcountries");
+        return back();
 
     }
 

@@ -73,9 +73,13 @@
 
                              
                               <td class="text-truncate">
+                             <div class="btn-group" role="group" aria-label="Basic example">
 
-                                <a  v-if="edit" :href="dahsboard_url+'/airports/'+'edit/'+airport.id"><button type="button" class="btn btn-sm btn-outline-primary round">تعديل</button></a>
-                                <a   v-if="delete_pre" :href="dahsboard_url+'/airports/'+'delete/'+airport.id"><button type="button" class="btn btn-sm btn-outline-danger round"  onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
+                                <a  v-if="edit" :href="dahsboard_url+'/airports/'+'edit/'+airport.id"><button type="button" class="btn btn-info btn-sm round">تعديل</button></a>
+                                <a   v-if="delete_pre" :href="dahsboard_url+'/airports/'+'delete/'+airport.id"><button type="button" class="btn btn-danger btn-sm round"  onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
+                             
+                             </div>
+                             
                               </td>
                             </tr>
                             

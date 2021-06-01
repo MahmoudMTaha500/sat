@@ -16,7 +16,7 @@ class CreateVisaQuestionsTable extends Migration
         Schema::create('visa_questions', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("visa_id")->unsigned();
-            $table->foreign('visa_id')->references('id')->on('visas');
+            $table->foreign('visa_id')->references('id')->on('visas')->onDelete('cascade');
             $table->string("question_ar");
             $table->integer("priority");
             $table->string("field_type");

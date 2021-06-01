@@ -19,7 +19,7 @@ class ResidencesController extends Controller
         $department_name = 'services';
         $page_name = 'residences';
         $useVue=true;
-        $institutes = institute::get();
+        $institutes = Institute::get();
         $page_title = 'السكن';
         
         return view("admin.residences.index", compact('department_name', 'page_name','useVue','institutes','page_title'));
@@ -38,7 +38,7 @@ public function getResidences(){
      */
     public function create()
     {
-        $Institutes = institute::get();
+        $Institutes = Institute::get();
         // 
         $department_name = 'services';
         $page_name = 'add-insurances';
@@ -63,7 +63,8 @@ public function getResidences(){
             // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
             session()->flash('alert_message', ['message'=>"تم اضافه السكن بنجاح", 'icon'=>'success']);
-            return back();
+            return redirect()->route('residences.index');
+
     }
 
     /**
@@ -92,7 +93,7 @@ public function getResidences(){
         // $insurances = Insurances::where('id' , 1)->get()[0];
         // dd();
         $residence= residences::find($id);
-        $Institutes = institute::get();
+        $Institutes = Institute::get();
         $department_name = 'services';
         $page_name = 'residences';
         $page_title = 'السكن';

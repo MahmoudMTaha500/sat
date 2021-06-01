@@ -61,7 +61,7 @@ class AirportsController extends Controller
             // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
             session()->flash('alert_message', ['message'=>"تم اضافه المطار بنجاح", 'icon'=>'success']);
-            return back();
+            return redirect()->route('airports.index');
     }
 
     /**

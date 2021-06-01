@@ -7,7 +7,7 @@ use App\Http\Requests\Courses\StoreCoursesRequest;
 use App\Models\Country;
 use App\Models\Course;
 use App\Models\CoursePrice;
-use App\Models\institute;
+use App\Models\Institute;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -15,7 +15,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $institutes = institute::get();
+        $institutes = Institute::get();
         $courses = Course::get();
         $countercourse = Course::get();
         $countries = Country::get();
@@ -37,7 +37,8 @@ class CourseController extends Controller
     /************************************************************** */
     public function create()
     {
-        $institutes = institute::get();
+        $institutes = Institute::with('city')->get();
+        // dd($institutes);
         $department_name = 'courses';
         $page_name = 'add-course';
         $page_title = 'الدورات';
@@ -94,7 +95,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function edit(Course $course)
     {
-        $institutes = institute::get();
+        $institutes = Institute::get();
         $course = Course::find($course->id);
         $course_prices = CoursePrice::where(["course_id" => $course->id])->get();
         $department_name = 'courses';

@@ -60,7 +60,7 @@ Route::resource('institute', 'InstituteController');
 /**********************************   ************************************************************************************** */
 
 // Country Route
-Route::resource('countries', 'CountryController');
+Route::resource('countries', 'countryController');
 
 // City Route
 /**********************************   ************************************************************************************** */
@@ -96,6 +96,7 @@ Route::get('blogs/comment', 'CommentController@blog');
 Route::get('blogs/getcomment', 'CommentController@getcommentBlog');
 Route::get('blogs/archive', 'BlogController@archive');
 Route::get('blogs/restor/{id}', 'BlogController@restor');
+Route::get('blogs/forceDelete/{id}', 'BlogController@forceDelete');
 
 Route::resource('blogs', 'BlogController');
 Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blogs_by_vue');

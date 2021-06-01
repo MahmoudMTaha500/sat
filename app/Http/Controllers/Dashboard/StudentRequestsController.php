@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Country;
 use App\Models\Course;
-use App\Models\institute;
+use App\Models\Institute;
 use App\Models\Insurances;
 use App\Models\StudentRequest;
 use Illuminate\Http\Request;
@@ -15,7 +15,7 @@ class StudentRequestsController extends Controller
 
     public function index()
     {
-        $institutes = institute::get();
+        $institutes = Institute::get();
         $courses = Course::get();
         $countercourse = Course::get();
         $countries = Country::get();
