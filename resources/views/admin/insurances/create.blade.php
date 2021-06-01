@@ -50,7 +50,7 @@
 
                                                         @foreach($Institutes   as $institute)
 
-                                                        <option value="{{$institute->id}}">{{$institute->name_ar}}</option>
+                                                        <option value="{{$institute->id}}">{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>

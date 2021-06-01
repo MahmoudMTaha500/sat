@@ -31,7 +31,7 @@ class StudentRequest extends Model
 
     public function residence()
     {
-        return $this->belongsTo("App\Models\Residences", 'residence_id', 'id');
+        return $this->belongsTo('App\Models\residences', 'residence_id', 'id');
     }
 
     public function insurance()

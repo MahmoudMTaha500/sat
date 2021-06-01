@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\institute\StoreInstituteRequest;
+use App\Http\Requests\Institute\StoreInstituteRequest;
 use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Institute;
@@ -52,15 +52,16 @@ class InstituteController extends Controller
     /************************************************************** */
     public function store(StoreInstituteRequest $request)
     {
+        // return public_path("storage/institute/banners");
         $validated = $request->validated();
         $logoObject = $validated['logo'];
         $logoName = time() . $logoObject->getClientOriginalName();
-        $pathLogo = public_path("\storage\institute\logos");
+        $pathLogo = public_path("storage/institute/logos");
         $request->logo->move($pathLogo, $logoName);
         $logoNamePath = "storage/institute/logos" . '/' . $logoName;
         $pannerObject = $validated['panner'];
         $PannerName = time() . $pannerObject->getClientOriginalName();
-        $pathPanner = public_path("\storage\institute\banners");
+        $pathPanner = public_path("storage/institute/banners");
         $request->panner->move($pathPanner, $PannerName);
         $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
         $slug = str_replace(' ', '-', $request->name_ar);
@@ -120,7 +121,7 @@ class InstituteController extends Controller
             ]);
             $logoObject = $validate_images['logo'];
             $logoName = time() . $logoObject->getClientOriginalName();
-            $pathLogo = public_path("\storage\institute\logos");
+            $pathLogo = public_path("storage/institute/logos");
             File::delete($institute->logo);
             $request->logo->move($pathLogo, $logoName);
             $logoNamePath = "storage/institute/logos" . '/' . $logoName;
@@ -133,7 +134,7 @@ class InstituteController extends Controller
 
             $pannerObject = $validate_images['panner'];
             $PannerName = time() . $pannerObject->getClientOriginalName();
-            $pathPanner = public_path("\storage\institute\banners");
+            $pathPanner = public_path("storage/institute/banners");
             File::delete($institute->panner);
 
             $request->panner->move($pathPanner, $PannerName);

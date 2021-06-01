@@ -13,6 +13,7 @@
                     <span class="menu-title" data-i18n="nav.animation.main">الموقع</span>
                 </a>
             </li>
+           
 
             @if(auth()->user()->hasPermission('institutes-read'))
             <li class="nav-item {{ $department_name == 'institutes' ? 'open' : '' }}">
@@ -72,7 +73,7 @@
             </li>
             @endif
            
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main"> الفواتير</span>
@@ -88,7 +89,7 @@
                         <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
            
 
@@ -202,6 +203,15 @@
                     </li>
                 </ul>
             </li> --}}
+            @if(auth()->user()->hasPermission('visas-read'))
+                <li class="nav-item">
+                    <a href="{{route('simple-visa.index')}}">
+                        <i class="la la-institution"></i>
+                        <span class="menu-title" data-i18n="nav.animation.main">التاشيرات</span>
+                    </a>
+                </li>
+            @endif
+            
             @if(auth()->user()->hasPermission('students-read'))
 
             <li class="nav-item {{ $department_name == 'students' ? 'open' : '' }}">
@@ -263,7 +273,7 @@
 
             @if(auth()->user()->hasPermission('visas-read'))
 
-            <li class="nav-item {{ $department_name == 'visa' ? 'open' : '' }}">
+            {{-- <li class="nav-item {{ $department_name == 'visa' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main"> التاشيرات</span>
@@ -295,9 +305,9 @@
                     @endif
 
                 </ul>
-            </li>
+            </li> --}}
             @endif
-            <li class="nav-item {{ $department_name == 'visa-requests' ? 'open' : '' }}">
+            {{-- <li class="nav-item {{ $department_name == 'visa-requests' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
                     <span class="menu-title" data-i18n="nav.navbars.main"> طلبات التاشيرات</span>
@@ -310,7 +320,7 @@
                         <a class="menu-item" href="/sat/visa/archivesRequests.php?page=visa" data-i18n="nav.navbars.nav_semi">ارشيف الطلابات</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
             {{-- <li class="nav-item">
                 <a href="animation.html">
                     <i class="la la-institution"></i>

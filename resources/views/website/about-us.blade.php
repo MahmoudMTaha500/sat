@@ -36,7 +36,7 @@
                     <p>موقع سات هو نظام عالمي مختص بالبحث والحجز المباشر لكورسات اللغة ودورات التدريب والتقديم على
                         الجامعات حول العالم ويعد الأفضل لاحتوائه على أقوى المؤسسات التعليمية في نطاق واسع، بحيث يضم
                         أكثر من 350 معهد لتعليم اللغة الإنجليزية و 1,100 جامعة في اكثر من 20 دولة حول العالم </p>
-                    <a href="institutes.html"
+                    <a href="{{route('website.institutes')}}"
                         class="btn rounded-10 bg-secondary-color text-center mb-3 text-white">تصفح المعاهد</a>
                 </div>
             </div>
@@ -59,7 +59,7 @@
             </div>
         </div>
         <!-- ./Section Heading -->
-        <div class="row px-xl-4">
+        {{-- <div class="row px-xl-4">
             <div class="col-12">
                 <!-- Team List -->
                 <div class="team-list owl-carousel" id="team-list">
@@ -274,7 +274,7 @@
                 </div>
                 <!-- ./Team List -->
             </div>
-        </div>
+        </div> --}}
     </div>
 
 </section>

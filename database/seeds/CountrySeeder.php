@@ -14,7 +14,7 @@ class CountrySeeder extends Seeder
     {
         for ($x = 1; $x <= 10; $x++) {
             Country::create([
-                "name_ar" => 'دولة'.$x
+                "name_ar" => 'بريطانيا'.$x
             ]);
         }
     }

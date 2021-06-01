@@ -40,7 +40,7 @@ class Institute extends Model
     }
     public function residence()
     {
-        return $this->hasMany("App\Models\Residences", 'institute_id', 'id');
+        return $this->hasMany('App\Models\residences', 'institute_id', 'id');
     }
     public function airport()
     {

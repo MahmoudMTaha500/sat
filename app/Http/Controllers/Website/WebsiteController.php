@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\File;
 use Mail;
 use PDF;
 use Hash;
+use Tap\TapPayment\Facade\TapPayment;
+
 
 class WebsiteController extends Controller
 {
@@ -32,14 +34,16 @@ class WebsiteController extends Controller
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
-        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners'));
+        $page_name = 'home';
+        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_name'));
     }
     // institutes page method : show all institutes with filter
     public function institutes_page(Request $request)
     {
         $useVue = true;
         $search = $request->all();
-        return view('website.institute.institutes', compact('useVue' , 'search'));
+        $page_name = 'institutes';
+        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_name'));
     }
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
@@ -209,14 +213,16 @@ if($student_mail){
     public function articles()
     {
         $blogs = Blog::paginate(8);
-        return view('website.blog.articals', compact('blogs'));
+        $page_name = 'articles';
+        return view('website.blog.articles', compact('blogs' , 'page_name'));
     }
 
 
     public function article($id)
     {
         $blog = Blog::find($id);
-        return view('website.blog.artical', compact('blog'));
+        $page_name = 'articles';
+        return view('website.blog.article', compact('blog' , 'page_name'));
     }
 
 
@@ -387,7 +393,9 @@ if($student_mail){
         $course_details['airport'] = Airports::find($student_request->airport_id);
         $course_details['residence'] = residences::find($student_request->residence_id);
 
-        return view('website.payment.pay-now', compact('course_details', 'request_id'));
+        $notUseVue = true;
+
+        return view('website.payment.pay-now', compact('course_details', 'request_id' , 'notUseVue'));
     }
 
     public function checkout(Request $request)
@@ -412,12 +420,53 @@ if($student_mail){
             'request_id' => $student_request->id,
             'student_id' => $student_request->student_id
         ];
+        $charge_data = [
+            "amount"=> $request->paid_price ,
+            "currency"=>"SAR",
+            "customer"=>[
+                "first_name"=>$student_request->student->name,
+                "email"=>$student_request->student->email,
+                "phone"=>[
+                        "country_code"=>"965",
+                        "number"=>$student_request->student->phone,
+                    ]
+                ],
+            "source"=>["id"=>$request->token_id],
+            "redirect" => [
+                "url" => "http://your_website.com/redirect_url"
+                ]
+        ];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.tap.company/v2/charges",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($charge_data),
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer sk_test_GMqKXx6FZoambuvwASV8r4yp",
+            "content-type: application/json"
+        ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            return  "cURL Error #:" . $err;
+        }
+
+        $data = [
+            'request_id' => $student_request->id,
+            'student_id' => $student_request->student_id
+        ];
         Mail::send('mail.student_request_payment_confirmation', $data, function ($message) use ($student_request, $subject) {
             $message->to($student_request->student->email, $student_request->student->name)
                 ->subject($subject);
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
-
         StudentRequest::where('id', $request->request_id)->update($student_request_data);
         return redirect()->route('payment_confirmation' , ['request_id' => $request->request_id , 'student_id' => $student_request->student_id]);
 
@@ -551,11 +600,13 @@ if($student_mail){
         }
         public function about_us()
         {
-            return view('website.about-us');
+            $page_name = 'about-us';
+            return view('website.about-us' , compact('page_name'));
         }
         public function contact_us()
         {
-            return view('website.contact-us');
+            $page_name = 'contact-us';
+            return view('website.contact-us' , compact('page_name') );
         }
         public function send_contact_us_mail(Request $request)
         {
@@ -590,7 +641,8 @@ if($student_mail){
             public function offers()
             {
                 $offers = Course::where('discount' , '!=' , 0)->paginate(12);
-                return view('website.offers' , compact('offers'));
+                $page_name = 'offers';
+                return view('website.offers' , compact('offers' , 'page_name'));
             }
             public function add_review(Request $request)
             {
@@ -643,4 +695,5 @@ if($student_mail){
             
 
         }
-        
+
+       

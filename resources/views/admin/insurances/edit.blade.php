@@ -53,7 +53,7 @@
 
                                                         <option value="{{$institute->id}}"  
                                                             @if($insurance->institute_id == $institute->id) selected @endif
-                                                            >{{$institute->name_ar}}</option>
+                                                            >{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
 
                                                         @endforeach
                                                     </select>

@@ -13,7 +13,7 @@ class ResidencesSeeder extends Seeder
     {
         for ($x = 1; $x <= 30; $x++) {
             residences::create([
-                "name_ar" => '1سكن'.$x,
+                "name_ar" => '1السكن مع عائلة '.$x,
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -21,7 +21,7 @@ class ResidencesSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             residences::create([
-                "name_ar" => '2سكن'.$x,
+                "name_ar" => '2السكن مع عائلة '.$x,
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -29,7 +29,7 @@ class ResidencesSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             residences::create([
-                "name_ar" => '3سكن'.$x,
+                "name_ar" => '3السكن مع عائلة '.$x,
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                
@@ -37,7 +37,7 @@ class ResidencesSeeder extends Seeder
         }
         for ($x = 1; $x <= 30; $x++) {
             residences::create([
-                "name_ar" => '4سكن'.$x,
+                "name_ar" => '4السكن مع عائلة '.$x,
                 "institute_id" => $x,
                 "price" => rand(1,9)*100,
                

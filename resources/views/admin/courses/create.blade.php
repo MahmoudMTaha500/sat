@@ -50,41 +50,42 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
+<<<<<<< HEAD
                                                     <select class="select2 form-control text-left" name="institute_id" value="{{old('institute_id')}}">
                                                         <option value=""  >اختر المعهد</option>
 
                                                         @foreach($institutes as $institute)
 
                                                         <option value="{{$institute->id}}">{{$institute->name_ar .'-'. $institute->city->name_ar}}</option>
+=======
+                                                    <select class="select2 form-control text-left" name="institute_id">
+                                                        <option value="">اختر المعهد</option>
+
+                                                        @foreach($institutes as $institute)
+
+                                                        <option value="{{$institute->id}}">{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
+>>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
 
                                                         @endforeach
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">الحد الأدنى للعمر </label>
                                                     <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ادخل الحد الادني" name="min_age"  value="{{old('min_age')}}"/>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    {{-- <startdate-component></startdate-component>
-                                                         --}}
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                          
-
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">وقت الدراسة</label>
+<<<<<<< HEAD
                                                     <select class="form-control text-left" name="study_period" value="{{old('study_period')}}">
+=======
+                                                    <select class="form-control text-left" name="study_period">
+                                                        <option value="">اختر</option>
+>>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                         <option value=" صباحي">صباحي</option>
                                                         <option value="مسائي">مسائي</option>
                                                     </select>
@@ -93,65 +94,72 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">درس/الأسبوع </label>
+<<<<<<< HEAD
                                                     <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week"  value="{{old('lessons_per_week')}}" />
+=======
+                                                    <input type="number"  id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" />
+>>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">ساعات/أسبوع </label>
+<<<<<<< HEAD
                                                     <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  value="{{old('hours_per_week')}}"  />
+=======
+                                                    <input type="number" step="any" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week" />
+>>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المستوى المطلوب</label>
+<<<<<<< HEAD
                                                     <select class="form-control text-left " name="required_level"  value="{{old('required_level')}}" >
+=======
+                                                    <select class="form-control text-left" name="required_level">
+                                                        <option value="">اختر</option>
+>>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                         <option value=" مبتدئ ">مبتدئ</option>
-                                                        <option value=  "     متوسط "   >متوسط</option>
+                                                        <option value="     متوسط ">متوسط</option>
                                                         <option value="  متقدم  ">متقدم</option>
                                                     </select>
                                                 </div>
-                                        </div>
-                                        <div class="row">
-                                          
-                                          
                                             </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
+<<<<<<< HEAD
                                                     <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" > {{old('desc')}} </textarea>
+=======
+                                                    <textarea type="text" id="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc"></textarea>
+>>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                 </div>
                                             </div>
-                                          
-                                        </div>
-                                        <div class="form-group col-12 mb-2 contact-repeater">
-                                            <label for="projectinput3">سعر الكورس</label>
-                                            <div data-repeater-list="coures_price">
-                                                <div class="input-group mb-1" data-repeater-item>
-                                                    <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input"  name="num_of_weeks" />
-                                                    <input type="tel" placeholder="السعر لكل اسبوع" class="form-control   vaildate" id="example-tel-input" name="preice_per_week"  />
-                                                    <span class="input-group-append" id="button-addon2">
-                                                        <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="projectinput3">التخفيض</label>
-                                                        <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount" />
+                                            <div class="form-group col-12 mb-2 contact-repeater">
+                                                <label for="projectinput3">سعر الكورس</label>
+                                                <div data-repeater-list="coures_price">
+                                                    <div class="input-group mb-1" data-repeater-item>
+                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks" />
+                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week" />
+                                                        <span class="input-group-append" id="button-addon2">
+                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                        </span>
                                                     </div>
                                                 </div>
-                                            </div>
+                                                <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="projectinput3">التخفيض</label>
+                                                            <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount" />
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                            <div class="form-actions center">
-                                                <button type="submit" class="btn btn-primary w-100 test-btn"  ><i class="la la-check-square-o"></i> حفظ</button>
+                                                <div class="form-actions center">
+                                                    <button type="submit" class="btn btn-primary w-100 test-btn"><i class="la la-check-square-o"></i> حفظ</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -165,30 +173,26 @@
     </div>
 </div>
 
-
-
-@endsection
-
-@section('admin.custom-js-scripts')
-    <script>
-         function vaildate(){
-$('form').submit(function(e) {
-      var err = 0;
-      $('.vaildate').each(function(e){
-            // alert(this.value);
-            if (!$(this).val()) {
-              err = 1;
+@endsection @section('admin.custom-js-scripts')
+<script>
+    function vaildate() {
+        $("form").submit(function (e) {
+            var err = 0;
+            $(".vaildate").each(function (e) {
+                // alert(this.value);
+                if (!$(this).val()) {
+                    err = 1;
+                }
+            });
+            if (err != 0) {
+                alert("يرجي ادخل اسعار الدورة");
+                return false;
             }
+            //   console.log('submitted');
         });
-      if (err != 0) {
-alert("يرجي ادخل اسعار الدورة");
-        return false;
-      }
-    //   console.log('submitted');
-    });
     }
-    $(document).on('click' , '.test-btn' , function(){
-      vaildate()
-    })
-    </script>
+    $(document).on("click", ".test-btn", function () {
+        vaildate();
+    });
+</script>
 @endsection

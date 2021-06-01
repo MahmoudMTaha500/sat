@@ -29,7 +29,7 @@ class BlogController extends Controller
     /***************************************************************/
     public function get_blogs_by_vue(Request $request)
     {
-        
+
         $blogs = Blog::with('creator', 'category', 'country', 'city', 'institute')->paginate(10);
         return response()->json($blogs);
     }
@@ -44,7 +44,7 @@ class BlogController extends Controller
         $page_name = 'add-blog';
         $page_title = 'المقالات';
 
-        return view("admin.blogs.create", compact('countries', 'department_name', 'page_name', 'useVue', 'Institutes', 'BlogCategories' ,'page_title'));
+        return view("admin.blogs.create", compact('countries', 'department_name', 'page_name', 'useVue', 'Institutes', 'BlogCategories', 'page_title'));
     }
     /***************************************************************/
     public function store(blogRequest $request)
@@ -52,7 +52,7 @@ class BlogController extends Controller
         $validated = $request->validated();
         $bannerObj = $validated['banner'];
         $bannerName = time() . $bannerObj->getClientOriginalName();
-        $pathBanner = public_path("\storage\blogs");
+        $pathBanner = public_path("storage/blogs");
         $bannerObj->move($pathBanner, $bannerName);
         $pannerNamePath = "storage/blogs" . '/' . $bannerName;
         $slug = str_replace(' ', '-', $request->title_ar);
@@ -90,7 +90,7 @@ class BlogController extends Controller
         $department_name = 'blogs';
         $page_name = 'edit-blog';
         $page_title = 'المقالات';
-        return view("admin.blogs.edit", compact('useVue', 'blog', 'department_name', 'page_name', 'Institutes', 'BlogCategories', 'countries' ,'page_title'));
+        return view("admin.blogs.edit", compact('useVue', 'blog', 'department_name', 'page_name', 'Institutes', 'BlogCategories', 'countries', 'page_title'));
     }
     /***************************************************************/
     public function update(blogEditRequest $request, Blog $blog)
@@ -109,7 +109,7 @@ class BlogController extends Controller
         if ($request->banner) {
             $bannerObj = $request->banner;
             $bannerName = time() . $bannerObj->getClientOriginalName();
-            $pathBanner = public_path("\storage\blogs");
+            $pathBanner = public_path("storage/blogs");
             File::delete($blog->banner);
             $bannerObj->move($pathBanner, $bannerName);
             $pannerNamePath = "storage/blogs" . '/' . $bannerName;

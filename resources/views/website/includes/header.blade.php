@@ -21,5 +21,6 @@
     <link rel="stylesheet" href="{{asset('website')}}/css/theme.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/index.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/institute.css">
+    <link rel="icon" href="{{asset('website/imgs/logo-icon.png')}}">
     <title>Classat</title>
 </head>

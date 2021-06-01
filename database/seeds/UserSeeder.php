@@ -17,13 +17,13 @@ class UserSeeder extends Seeder
             "password" => bcrypt('123123'),
         ]);
         $super_admin->attachRole('super-admin');
-        
 
         $admin = User::create([
             "name" => 'مدير',
             "email" => 'admin@app.com',
             "password" => bcrypt('123123'),
         ]);
+        
         $admin->attachRole('admin');
 
         for ($x=1; $x <= 3 ; $x++) { 

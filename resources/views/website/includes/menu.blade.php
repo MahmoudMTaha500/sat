@@ -17,7 +17,7 @@
             <div class="col-12">
                 <!-- NavBar -->
                 <nav class="navbar navbar-expand-lg navbar-light py-3 px-0">
-                    <a class="navbar-brand mb-3" href="#"><img src="{{asset('website')}}/imgs/logo.png" alt="" class="img-fluid" /></a>
+                    <a class="navbar-brand mb-3" href="{{route('website.home')}}"><img src="{{asset('website')}}/imgs/logo.png" alt="" class="img-fluid" /></a>
 
                     <button class="navbar-toggler" type="button"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -69,36 +69,38 @@
                     <!-- Nav Menu  -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item px-xl-2 active">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'home' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="الرئيسية" href="{{route('website.home')}}">الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item px-xl-2">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'institutes' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="المعاهد" href="{{route('website.institutes')}}">المعاهد</a>
                             </li>
                             <li class="nav-item px-xl-2">
                                 <a class="nav-link text-main-color" alt="طلب تأشيرة" href="{{route('order-visa.create')}}">طلب تأشيرة</a>
                             </li>
-                            <li class="nav-item px-xl-2">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'offers' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="العروض" href="{{route('website.offers')}}">العروض</a>
                             </li>
-                            <li class="nav-item px-xl-2">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'articles' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="المقالات" href="{{route('website.articles')}}">المقالات</a>
                             </li>
-                            <li class="nav-item px-xl-2">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'contact-us' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="تواصل معنا" href="{{route('website.contact.us')}}">تواصل معنا</a>
                             </li>
-                            <li class="nav-item px-xl-2">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'about-us' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="من نحن" href="{{route('website.about.us')}}">من نحن</a>
                             </li>
+                            
+                          
                             <li class="nav-item px-xl-2 social-links d-xl-block d-none">
-                                <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">
-                                    <span class="text-white"><i class="fab fa-facebook-f"></i></span>
+                                <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
+                                    <span class="text-white font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>
                                 </a>
-                                <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">
-                                    <span class="text-white"><i class="fab fa-twitter"></i></span>
+                                <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
+                                    <span class="text-white font-weight-bold"><i class="fab fa-twitter"></i></span>
                                 </a>
-                                <a class="nav-link d-inline-block bg-main-color text-center ml-2" href="#">
-                                    <span class="text-white"><i class="fab fa-instagram"></i></span>
+                                <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
+                                    <span class="text-white font-weight-bold"><i class="fab fa-instagram"></i></span>
                                 </a>
                             </li>
                             {{-- @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)

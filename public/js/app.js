@@ -3137,10 +3137,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'delete_pre', 'create', 'edit'],
+  props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
   data: function data() {
     return {
       courses: {},
@@ -3235,10 +3233,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
 //
 //
 //
@@ -5178,20 +5172,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", 'create', 'edit', 'delete_pre'],
+  props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", "create", "edit", "delete_pre"],
   data: function data() {
     return {
       visas: {},
@@ -5202,8 +5184,8 @@ __webpack_require__.r(__webpack_exports__);
       request_status: "",
       name_ar: "",
       status: true,
-      note: '',
-      visa_note_id: ''
+      note: "",
+      visa_note_id: ""
     };
   },
   beforeMount: function beforeMount() {
@@ -5218,7 +5200,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     Pagination: function Pagination(url) {
-      this.get_visa = url + '&user_id=' + this.user_id + '&cat_id=' + this.cat_id + '&keyword=' + this.keyword + '&status=' + this.status;
+      this.get_visa = url + "&user_id=" + this.user_id + "&cat_id=" + this.cat_id + "&keyword=" + this.keyword + "&status=" + this.status;
       this.getVisa();
     },
     updateApprovement: function updateApprovement(e) {
@@ -5260,7 +5242,7 @@ __webpack_require__.r(__webpack_exports__);
           name_ar: this.name_ar
         }
       }).then(function (response) {
-        return _this2.visas = response.data.visas, _this2.visas.prev_page_url += '&price_status=' + _this2.price_status + '&document_status=' + _this2.document_status + '&document_status=' + _this2.document_status + '&name_ar=' + _this2.name_ar, _this2.visas.next_page_url += '&price_status=' + _this2.price_status + '&document_status=' + _this2.document_status + '&document_status=' + _this2.document_status + '&name_ar=' + _this2.name_ar;
+        return _this2.visas = response.data.visas, _this2.visas.prev_page_url += "&price_status=" + _this2.price_status + "&document_status=" + _this2.document_status + "&document_status=" + _this2.document_status + "&name_ar=" + _this2.name_ar, _this2.visas.next_page_url += "&price_status=" + _this2.price_status + "&document_status=" + _this2.document_status + "&document_status=" + _this2.document_status + "&name_ar=" + _this2.name_ar;
       });
     },
     modelmessageInstitute: function modelmessageInstitute(obj) {
@@ -5281,8 +5263,8 @@ __webpack_require__.r(__webpack_exports__);
           "X-CSRFToken": "{{ csrf_token()}}"
         }
       }).then(function (response) {
-        if (response.data == 'success') {
-          alert('تم تعديل الملاحظه ');
+        if (response.data == "success") {
+          alert("تم تعديل الملاحظه ");
         }
       });
     }
@@ -45622,7 +45604,7 @@ var render = function() {
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("h4", { staticClass: "card-title" }, [
-            _vm._v("المعاهد (" + _vm._s(this.institutes.total) + ")")
+            _vm._v("الكورسات (" + _vm._s(this.institutes.total) + ")")
           ]),
           _vm._v(" "),
           _vm._m(0),
@@ -45975,8 +45957,6 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _vm._m(4, true),
-                      _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
                         _c(
                           "div",
@@ -46216,37 +46196,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحاله")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("التعليقات")]),
-        _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("اكشن")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "text-truncate" }, [
-      _c("a", { attrs: { href: "/sat/institutes/comments.php" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-sm btn-outline-success round",
-            attrs: { type: "button" }
-          },
-          [_vm._v("حالي (15)")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("a", { attrs: { href: "/sat/institutes/comments.php" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-sm btn-outline-info round",
-            attrs: { type: "button" }
-          },
-          [_vm._v("جديد (10)")]
-        )
       ])
     ])
   }
@@ -49967,7 +49917,7 @@ var render = function() {
                         _vm._v(" اختر الحاله")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: " تم التقديم" } }, [
+                      _c("option", { attrs: { value: "تم التقديم" } }, [
                         _vm._v("تم التقديم")
                       ]),
                       _vm._v(" "),
@@ -49976,7 +49926,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "الطلب مرفوض" } }, [
-                        _vm._v(" الطلب مرفوض  ")
+                        _vm._v(" الطلب مرفوض ")
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "طلب ملغي" } }, [
@@ -49984,7 +49934,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "جديد" } }, [
-                        _vm._v("  جديد ")
+                        _vm._v(" جديد ")
                       ])
                     ]
                   )
@@ -50114,7 +50064,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog ", attrs: { role: "document" } },
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _vm._m(1),
@@ -50180,7 +50130,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v(" تعديل الملاحظه")]
+                  [_vm._v("تعديل الملاحظه")]
                 )
               ])
             ])
@@ -50428,7 +50378,7 @@ var render = function() {
                             }
                           },
                           [
-                            _c("option", { attrs: { value: " تم التقديم" } }, [
+                            _c("option", { attrs: { value: "تم التقديم" } }, [
                               _vm._v("تم التقديم")
                             ]),
                             _vm._v(" "),
@@ -50437,7 +50387,7 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "الطلب مرفوض" } }, [
-                              _vm._v(" الطلب مرفوض  ")
+                              _vm._v(" الطلب مرفوض ")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "طلب ملغي" } }, [
@@ -50445,7 +50395,7 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "جديد" } }, [
-                              _vm._v("  جديد ")
+                              _vm._v(" جديد ")
                             ])
                           ]
                         )
@@ -50545,7 +50495,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                                Previos\n                            "
+                    "\n                            Previos\n                        "
                   )
                 ]
               ),
@@ -50573,7 +50523,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                                Next\n                            "
+                    "\n                            Next\n                        "
                   )
                 ]
               )
@@ -50616,7 +50566,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
-        _vm._v("   ملاحظه الطالب")
+        _vm._v("ملاحظه الطالب")
       ]),
       _vm._v(" "),
       _c(
@@ -51704,7 +51654,8 @@ var render = function() {
                             {
                               attrs: {
                                 href:
-                                  "/institute/" +
+                                  _vm.public_path +
+                                  "institute/" +
                                   course.institute.id +
                                   "/" +
                                   course.institute.slug +
@@ -51745,7 +51696,8 @@ var render = function() {
                                     staticClass: "text-main-color",
                                     attrs: {
                                       href:
-                                        "/institute/" +
+                                        _vm.public_path +
+                                        "institute/" +
                                         course.institute.id +
                                         "/" +
                                         course.institute.slug +
