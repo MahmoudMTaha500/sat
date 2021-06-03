@@ -37,12 +37,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function create()
     {
-<<<<<<< HEAD
-        $institutes = Institute::with('city')->get();
-        // dd($institutes);
-=======
         $institutes = Institute::get();
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
         $department_name = 'courses';
         $page_name = 'add-course';
         $page_title = 'الدورات';

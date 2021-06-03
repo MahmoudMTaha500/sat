@@ -83,8 +83,6 @@ class countryController extends Controller
     }
 
     public function destroy($id)
-<<<<<<< HEAD
-=======
     {
         $country = Country::find($id);
         $country->delete();
@@ -93,7 +91,6 @@ class countryController extends Controller
     }
 
     public function delete($id)
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
     {
 // dd($id);
         $country = Country::find($id);
