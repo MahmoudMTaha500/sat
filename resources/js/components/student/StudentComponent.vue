@@ -101,7 +101,7 @@
 
 <script>
     export default {
-        props: ["student_url", "dahsboard_url", "csrftoken"],
+        props: ["student_url", "dahsboard_url", "csrftoken",'create','edit','delete_pre'],
         data() {
             return {
                 students: {},

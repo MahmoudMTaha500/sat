@@ -59,24 +59,24 @@
                             @enderror
                         </div>
                         <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror">
+                            <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
                                 <option value="" selected disabled>اختر التاشيرة</option>
-                                <option visa-price="820" class="uk" value=" سياحي 6 شهور-السعر-820   ">سياحي 6 شهور-السعر-820 </option>
-                                <option visa-price="820" class="uk" value=" دراسي 6 شهور-السعر-820   ">دراسي 6 شهور-السعر-820 </option>
-                                <option visa-price="2480" class="uk" value="  سياحي سنتين -السعر-2480"> سياحي سنتين -السعر-2480</option>
-                                <option visa-price="4310" class="uk" value="  سياحي 5 سنوات-4310"> سياحي 5 سنوات-4310</option>
-                                <option visa-price="5350" class="uk" value="  سياحي 10 سنوات-5350"> سياحي 10 سنوات-5350</option>
-                                <option visa-price="2260" class="uk" value=" تاشيره طالب اقل من سته شهور-السعر-2260 ">تاشيره طالب اقل من سته شهور-السعر-2260 </option>
-                                <option visa-price="4900" class="uk" value=" تاشيره طالب سنه-السعر-السعر-4900 ">تاشيره طالب سنه-السعر-السعر-4900 </option>
-                                <option visa-price="8960" class="uk" value="  تاشيره طالب سنتين-السعر-8960"> تاشيره طالب سنتين-السعر-8960 </option>
-                                <option visa-price="11640" class="uk" value=" تاشيره طالب ثلاث سنوات-السعر-11640"> تاشيره طالب ثلاث سنوات-السعر-11640</option>
-                                <option visa-price="14250" class="uk" value="  تاشيره طالب اربع سنوات-السعر-14250"> تاشيره طالب اربع سنوات-السعر-14250</option>
-                                <option visa-price="3940" class="uk" value="  دراسي 11 شهر-السعر-3940"> دراسي 11 شهر-السعر-3940 </option>
+                                <option visa-price="820"   onclick="price(820)" class="uk" value=" سياحي 6 شهور-السعر-820   ">سياحي 6 شهور </option>
+                                <option visa-price="820"   onclick="price(820)"  class="uk" value=" دراسي 6 شهور-السعر-820   ">دراسي 6 شهور </option>
+                                <option visa-price="2480"  onclick="price(2480)"   class="uk" value="  سياحي سنتين -السعر-2480"> سياحي سنتين</option>
+                                <option visa-price="4310"   onclick="price(4310)"  class="uk" value="  سياحي 5 سنوات-4310"> سياحي 5 سنوات </option>
+                                <option visa-price="5350"   onclick="price(5350)"  class="uk" value="  سياحي 10 سنوات-5350"> سياحي 10 سنوات </option>
+                                <option visa-price="2260"  onclick="price(2260)"  class="uk" value=" تاشيره طالب اقل من سته شهور-السعر-2260 ">تاشيره طالب اقل من سته شهور  </option>
+                                <option visa-price="4900"  onclick="price(4900)"  class="uk" value=" تاشيره طالب سنه-السعر-السعر-4900 ">تاشيره طالب سنه  </option>
+                                <option visa-price="8960"  onclick="price(8960)"  class="uk" value="  تاشيره طالب سنتين-السعر-8960"> تاشيره طالب سنتين  </option>
+                                <option visa-price="11640"  onclick="price(11640)"  class="uk" value=" تاشيره طالب ثلاث سنوات-السعر-11640"> تاشيره طالب ثلاث سنوات </option>
+                                <option visa-price="14250"  onclick="price(14250)"  class="uk" value="  تاشيره طالب اربع سنوات-السعر-14250"> تاشيره طالب اربع سنوات </option>
+                                <option visa-price="3940"  onclick="price(3940)"  class="uk" value="  دراسي 11 شهر-السعر-3940"> دراسي 11 شهر </option>
 
-                                <option visa-price="2220" class="usa" value="  دراسي شامل السفيس-السعر-2220"> دراسي شامل السفيس-السعر-2220</option>
-                                <option visa-price="838" class="usa" value=" مرافق-السعر-838"> مرافق-السعر-838</option>
-                                <option visa-price="838" class="usa" value=" سياحي-السعر-838"> سياحي-السعر-838</option>
-                                <option visa-price="730" class="schengen" value=" سياحي-السعر-730"> سياحي-السعر-730</option>
+                                <option visa-price="2220" onclick="price(2220)"  class="usa" value="  دراسي شامل السفيس-السعر-2220"> دراسي شامل السفيس </option>
+                                <option visa-price="838"  onclick="price(838)"  class="usa" value=" مرافق-السعر-838"> مرافق</option>
+                                <option visa-price="838"  onclick="price(838)"  class="usa" value=" سياحي-السعر-838"> سياحي</option>
+                                <option visa-price="730"  onclick="price(730)"  class="schengen" value=" سياحي-السعر-730"> سياحي</option>
                             </select>
                             <input type="hidden" id="price_visa" name="price" />
 
@@ -86,6 +86,11 @@
                             </span>
                             @enderror
                         </div>
+                        <span id="text_hidden" style="display: none; color:#212529; margin:0; padding:0;">
+                            السعر :
+                            <b id="price_text" style="color:#006FFF"></b>  
+                             
+                        </span>
                         <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                             <textarea name="notes" value="{{ old('notes') }}" type="text" class="form-control border-0 bg-transparent @error('notes') is-invalid @enderror" placeholder="ملاحظات"> </textarea>
                             @error('notes')
@@ -111,7 +116,9 @@
 
 <script>
     function visatype22(event) {
+
         var visa = event.target.value;
+        // alert(visa);
         if (visa == "England") {
             $("#visID").removeAttr("disabled");
             $(".usa").css("display", "none");
@@ -137,6 +144,17 @@
         var selectedVisaType = $(this).children("option:selected");
         var value = (document.getElementById("price_visa").value = selectedVisaType.attr('visa-price'));
     });
+
+    function price(x){
+        // alert(x);
+
+        $("#price_text").text(x);
+        $('#text_hidden').css('display','block')
+        // $('#visID option:selected').attr('visa-price')
+        // alert();
+
+    }
+    
 
 </script>
 @endsection

@@ -77,7 +77,8 @@
 
 
                                 <a v-if="edit" :href="dahsboard_url+'/residences/'+'edit/'+residence.id"><button type="button"  class="btn btn-info btn-sm round">تعديل</button></a>
-                                <a  v-if="delete_pre" :href="dahsboard_url+'/residences/'+'delete/'+residence.id"><button type="button"  class="btn btn-danger btn-sm round"  onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
+                                <a  v-if="delete_pre" :href="dahsboard_url+'/residences/'+'delete/'+residence.id"><button type="button"  class="btn btn-danger btn-sm round" 
+                                 onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button></a>
                              </div>
                               </td>
                             </tr>

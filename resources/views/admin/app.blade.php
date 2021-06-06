@@ -12,3 +12,5 @@
         @yield('admin.custom-js-scripts')
     </body>
 </html>
+
+

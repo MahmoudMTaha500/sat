@@ -3926,6 +3926,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['dahsboard_url', 'csrftoken', 'institutes', 'create', 'edit', 'delete_pre'],
   data: function data() {
@@ -4106,7 +4107,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["student_url", "dahsboard_url", "csrftoken"],
+  props: ["student_url", "dahsboard_url", "csrftoken", 'create', 'edit', 'delete_pre'],
   data: function data() {
     return {
       students: {},
