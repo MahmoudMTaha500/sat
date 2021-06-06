@@ -9,6 +9,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Country;
 use App\Models\Institute;
+use App\Models\Course;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -65,6 +66,7 @@ class BlogController extends Controller
                 'city_id' => $request->city_id,
                 'category_id' => $request->category_id,
                 'institute_id' => $request->institute_id,
+                'course_id' => $request->course_id,
                 'banner' => $pannerNamePath,
                 'creator_id' => 1,
                 'approvement' => 1,
@@ -184,11 +186,33 @@ class BlogController extends Controller
 
     public function forceDelete($id){
 
-    // dd($id);
-    $forceDelete = Blog::where(['id' => $id])->forceDelete();
-    session()->flash('alert_message', ['message' => 'تم  حذف المقال نهائيا بنجاح', 'icon' => 'error']);
-    return back();
+        // dd($id);
+        $forceDelete = Blog::where(['id' => $id])->forceDelete();
+        session()->flash('alert_message', ['message' => 'تم  حذف المقال نهائيا بنجاح', 'icon' => 'error']);
+        return back();
 
-}
+    }
+
+    public function get_institutes_vue(Request $request){
+        $institutes = new Institute();
+        if(!empty($request->country_id)){
+            $institutes = $institutes->where(['country_id' => $request->country_id]);
+        }
+        if(!empty($request->city_id)){
+            $institutes = $institutes->where(['city_id' => $request->city_id]);
+        }
+        $institutes = $institutes->with('city')->get();
+        return response()->json($institutes);
+    }
+
+
+    public function get_courses_vue(Request $request){
+        $courses = new Course();
+        if(!empty($request->institute_id)){
+            $courses = $courses->where(['institute_id' => $request->institute_id]);
+        }
+        $courses = $courses->get();
+        return response()->json($courses);
+    }
 
 }

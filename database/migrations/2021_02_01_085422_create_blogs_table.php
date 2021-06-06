@@ -27,6 +27,8 @@ class CreateBlogsTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities');
             $table->bigInteger("institute_id")->unsigned();
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
+            $table->bigInteger("course_id")->unsigned()->nullable();
+            $table->foreign('course_id')->references('id')->on('courses');
             $table->bigInteger("category_id")->unsigned();
             $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('cascade');
             $table->integer("approvement");

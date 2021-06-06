@@ -19,7 +19,7 @@ class CreateCoursesTable extends Migration
             $table->string("slug");
             $table->text("about_ar");
             $table->bigInteger("institute_id")->unsigned();
-            $table->foreign('institute_id')->references('id')->on('institutes');
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->integer("min_age")->nullable();

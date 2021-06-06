@@ -21,7 +21,7 @@ class CreateInstituteRatesTable extends Migration
             $table->bigInteger("student_id")->unsigned();
             $table->foreign('student_id')->references('id')->on('students');
             $table->bigInteger("institute_id")->unsigned();
-            $table->foreign('institute_id')->references('id')->on('institutes');
+            $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

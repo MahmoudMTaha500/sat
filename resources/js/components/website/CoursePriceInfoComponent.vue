@@ -50,6 +50,7 @@
                 <form :action="save_request_url" method="get">
                     <input type="hidden" name="_token" :value="csrf_token">
                     <input type="hidden" name="course_id" :value="course_id">
+                    <label>تاريخ البداية</label>
                     <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
                         <input readonly="readonly" name="from_date" autocomplete="off" type="text" class="datepicker-active-monday form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية">
                         <div class="input-group-append">
@@ -57,12 +58,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>عدد الاسابيع</label>
                         <select name="weeks" @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option value="">عدد الاسابيع</option>
                             <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>السكن</label>
                         <select v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option :value="0" disabled>هل ترغب في السكن؟</option>
                             <option :value="0" selected>لا احتاج خدمة سكن</option>
@@ -71,6 +74,7 @@
                         <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
                     </div>
                     <div class="form-group">
+                        <label>الاستقبال من المطار</label>
                         <select v-model="chosin_airport" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option value="" disabled>الاستقبال من المطار</option>
                             <option selected :value="0"> لا احتاج خدمة الاستقبال</option>

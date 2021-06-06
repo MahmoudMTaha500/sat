@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Models\residences;
+use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\Institute;
 
@@ -28,7 +29,7 @@ class ResidencesController extends Controller
 
     
 public function getResidences(){
-    $residences = residences::with('institute')->paginate(10);
+    $residences = residences::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
     return response()->json(['residences'=>$residences]);
 }
     /**
@@ -43,8 +44,10 @@ public function getResidences(){
         $department_name = 'services';
         $page_name = 'add-insurances';
         $page_title = 'السكن';
+        $useVue = true;
+        $countries = Country::all();
 
-        return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes','page_title'));
+        return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue'));
     }
 
     /**
@@ -152,7 +155,7 @@ public function getResidences(){
         }
     
     
-        $residences = $residences->with('institute')->paginate(10);
+        $residences = $residences->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['residences' => $residences]);
         
         // dd($request->all());

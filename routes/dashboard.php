@@ -51,7 +51,7 @@ Route::post('delete-rate', 'InstituteRateController@destroy')->name('delete.rate
 Route::resource('rate', 'InstituteRateController');
 
 /**********************************Axios Route city ************************************************************************************** */
-Route::get("getcities", "CityController@getCities");
+Route::get("getcities", "CityController@getCities")->name('getcities');
 Route::post("addCity", "CityController@addCity");
 
 // Institute Route
@@ -99,6 +99,8 @@ Route::get('blogs/restor/{id}', 'BlogController@restor');
 Route::get('blogs/forceDelete/{id}', 'BlogController@forceDelete');
 
 Route::resource('blogs', 'BlogController');
+Route::get('blog/get_institutes_vue', 'BlogController@get_institutes_vue')->name('blog.get.institutes.vue');
+Route::get('blog/get_courses_vue', 'BlogController@get_courses_vue')->name('blog.get.courses.vue');
 Route::get('get_blogs_by_vue', 'BlogController@get_blogs_by_vue')->name('get_blogs_by_vue');
 // Blog Category Route
 Route::resource('blog_categories', 'BlogCategoryController');
