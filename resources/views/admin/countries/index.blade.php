@@ -48,20 +48,6 @@
                                         <tr>
                                             <td>{{$coun->name_ar}}</td>
 
-<<<<<<< HEAD
-
-                    <form action="{{route('countries.destroy' ,$coun->id)}}" method="POST">
-                        @csrf
-                        @method('delete')
-
-                                                        <button    onclick="return confirm('Are you sure?')"  ><i class="la la-trash"></i></button>
-                                                    </form>
-
-                                                        @endif
-                                                    
-                                                </td>
-                                            </tr>
-=======
                                             <td class="text-truncate">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     @if(auth()->user()->hasPermission('cities-countries-update'))
@@ -81,7 +67,6 @@
                                                 </div>
                                             </td>
                                         </tr>
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                         @endforeach
                                     </tbody>
                                 </table>

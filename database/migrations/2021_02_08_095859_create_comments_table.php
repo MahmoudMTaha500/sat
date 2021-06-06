@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->longText("comment");
             $table->bigInteger("commenter_id")->unsigned();
-            $table->foreign('commenter_id')->references('id')->on('students');
+            $table->foreign('commenter_id')->references('id')->on('students')->onDelete('cascade');
             $table->string("element_type");
             $table->bigInteger("element_id")->unsigned();
             $table->integer("approvement");

@@ -4,6 +4,7 @@ use App\Models\Institute;
 use  App\Http\Requests\services\AirportRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Airports ;
+use App\Models\Country ;
 use Illuminate\Http\Request;
 
 class AirportsController extends Controller
@@ -25,7 +26,7 @@ class AirportsController extends Controller
    
     }
     public function getAirports(){
-        $airports = Airports::with('institute')->paginate(10);
+        $airports = Airports::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['airports'=>$airports]);
     }
     /**
@@ -41,8 +42,10 @@ class AirportsController extends Controller
         $department_name = 'services';
         $page_name = 'add-airport';
         $page_title = 'المطارات';
+        $useVue = true;
+        $countries = Country::all();
 
-        return view("admin.airports.create", compact('department_name', 'page_name','page_title', 'Institutes'));
+        return view("admin.airports.create", compact('department_name', 'page_name','page_title', 'Institutes'  , 'countries' , 'useVue'));
     }
 
     /**
@@ -148,7 +151,7 @@ public function filter(Request $request)
     }
 
 
-    $Airports = $Airports->with('institute')->paginate(10);
+    $Airports = $Airports->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
     return response()->json(['airports' => $Airports]);
     
     // dd($request->all());

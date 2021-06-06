@@ -41,11 +41,21 @@
                             نبذه عن المعهد
                         </a>
                     </li>
-                    {{--
-                    <li class="nav-item">
-                        <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="living-tab" data-toggle="tab" href="#living" role="tab" aria-controls="living" aria-selected="false">المعيشة</a>
-                    </li>
-                    --}}
+
+                    @if (!empty($course->blogs[0]))
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#course_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات عن الدورة</a>
+                        </li>
+                    @endif
+                    @if (!empty($institute->blogs[0]))
+                    
+                        <li class="nav-item">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#institute_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات عن المعهد</a>
+                        </li>
+                    @endif
+
+
+                   
                     <li class="nav-item">
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="training-tab" data-toggle="tab" href="#training" role="tab" aria-controls="training" aria-selected="false">الدورات التدريبية</a>
                     </li>
@@ -154,25 +164,57 @@
                         </div>
                         <!-- ./Brief Institute Tab -->
                     </div>
-                    {{--
-                    <div class="tab-pane fade" id="living" role="tabpanel" aria-labelledby="living-tab">
-                        <!-- Living Tab -->
-                        <div class="bg-white rounded-10 p-4 mb-4">
-                            <img src="imgs/living.png" alt="" class="w-100 rounded-10" />
-                            <h5 class="text-main-color font-weight-bold my-3">معلومات عن المعيشة في نيويورك</h5>
-                            <p class="mb-3">
-                                مع أكثر من 80 عاماً من الخبرة في مجال تعليم اللغات، تدياسأل سكان أبو ظبي عن الأشياء التي يفضلونها، وستحصل على عشرات الإجابات المختلفة، وهذا يتوقف على الحي الذي يعيشون فيه وطبيعة الطقس في ذاك اليوم. ومن الصعب
-                                قليلًا تحديد سمات سكان ابوظبي لأن لديهم الكثير من الأنشطة التي يقومون بها، مثل التجول في الشوارع ذات التراث الاستعماري المرصوفة بالحصى، وتشجيع الفرق الرياضية، وغيرها من الأنشطة المجانية.وتعتبر بوسطن واحدة من
-                                أقدم المدن في الولايات المتحدة الأمريكية، وقد أسسها المستعمرون البيوريتان الإنجليز البروتستانت عام 1630، وتشتهر عمارتها بمزيج من الهندسة الحديثة والطرز القديمة. علاوة على
-                                <a href="" class="text-secondary-color">.. قراءة المزيد</a>
-                            </p>
+                    
 
-                            <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a>
-                            <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a>
+                    @if (!empty($course->blogs[0]))
+                        <div class="tab-pane fade" id="course_blogs" role="tabpanel" aria-labelledby="living-tab">
+
+                            @foreach ($course->blogs as $blog)
+                                <!-- Living Tab -->
+                                <div class="bg-white rounded-10 p-4 mb-4">
+                                    <img src="imgs/living.png" alt="" class="w-100 rounded-10" />
+                                    <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
+                                    <p class="mb-3">
+                                        {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
+                                        <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
+                                    </p>
+
+                                    {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
+                                    {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
+                                </div>
+                                <!-- ./Living Tab -->
+                            @endforeach
+                            
+
+
                         </div>
-                        <!-- ./Living Tab -->
-                    </div>
-                    --}}
+                    @endif
+
+                    @if (!empty($institute->blogs[0]))
+                        <div class="tab-pane fade" id="institute_blogs" role="tabpanel" aria-labelledby="living-tab">
+
+                            @foreach ($institute->blogs as $blog)
+                                <!-- Living Tab -->
+                                <div class="bg-white rounded-10 p-4 mb-4">
+                                    <img src="imgs/living.png" alt="" class="w-100 rounded-10" />
+                                    <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
+                                    <p class="mb-3">
+                                        {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
+                                        <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
+                                    </p>
+
+                                    {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
+                                    {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
+                                </div>
+                                <!-- ./Living Tab -->
+                            @endforeach
+                        </div>
+                    @endif
+
+                    
+                   
+                    
+                    
                     <div class="tab-pane fade" id="training" role="tabpanel" aria-labelledby="training-tab">
                         <!-- Other Courses -->
                         <div class="row">

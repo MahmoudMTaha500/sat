@@ -17,7 +17,7 @@ class CreateStudentSuccessStoriesTable extends Migration
             $table->id();
             $table->longText("story");
             $table->bigInteger("student_id")->unsigned();
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->integer("approvement");
             $table->timestamps();
         });

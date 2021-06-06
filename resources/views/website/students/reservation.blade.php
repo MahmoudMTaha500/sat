@@ -75,7 +75,12 @@
                                                         </div>
                                                         <div class="border-top py-3">
                                                             <h5 class="text-main-color font-weight-bold mb-3">حالة الطلب</h5>
-                                                            <p><span class="font-weight-bold">{{$request->status == 'جديد' ? 'قيد المراجعة' : $request->status}}</span> </p>
+                                                            <p><span class="font-weight-bold">
+                                                                {{$request->status == 'جديد' ? 'طلبك قيد المراجعة' : ''}}
+                                                                {!! $request->status == 'حصل علي قبول' ? '<span class="text-success">تم قبول طلبك</span>' : '' !!} 
+                                                                {!! $request->status == 'بداء الدراسة' ? '<span class="text-success">تم بداء دراستك</span>' : '' !!} 
+                                                                {!! $request->status == 'مرفوض' ? '<span class="text-danger">تم رفض طلبك</span>' : '' !!} 
+                                                            </span> </p>
                                                         </div>
                                                         
                                                     </div>

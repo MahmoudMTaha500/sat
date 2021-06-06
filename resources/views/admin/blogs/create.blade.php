@@ -51,48 +51,28 @@
                                                     <label for="projectinput4">المحتوى</label>
                                                     <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor"> </textarea>
                                                 </div>
-                                                
-                                              
+
+
                                             </div>
-                                          
+
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="projectinput2">التصنيف</label>
-                                                    <select  name="category_id" class="select2 form-control text-left">
+                                                    <select name="category_id" class="select2 form-control text-left">
                                                         <option value="" selected="" disabled="">اختر التصنيف</option>
-                                                       
-                                                          
-    
                                                             @foreach($BlogCategories as $category)
-    
                                                             <option value="{{$category->id}}">{{$category->name_ar}}</option>
-    
                                                             @endforeach
-                                                        
                                                     </select>
                                                 </div>
-                                                <country-city-blog-component 
-                                            :countries_from_blade="{{ json_encode($countries) }}"
-                                            :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
-                                        >
-                                        </country-city-blog-component>
-                                                <div class="form-group">
-                                                    <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left" name="institute_id">
-                                                        <option value=""  >اختر المعهد</option>
-
-                                                        @foreach($Institutes as $institute)
-
-                                                        <option value="{{$institute->id}}">{{$institute->name_ar  .'-'. $institute->city->name_ar}}</option>
-
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                              <show-images-component
-                                              :image_name="{{json_encode("banner")}}"
-                                              :image_label="{{json_encode("اختر الصورة")}}"
-
-                                              ></show-images-component>
+                                                <create-blog-component 
+                                                    :countries_from_blade="{{ json_encode($countries) }}" 
+                                                    :getcities_url="{{ json_encode(route('getcities')) }}"
+                                                    :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
+                                                    :get_courses_url="{{ json_encode(route('blog.get.courses.vue')) }}"
+                                                >
+                                                </create-blog-component>
+                                                <show-images-component :image_name="{{json_encode("banner")}}" :image_label="{{json_encode(" اختر الصورة ")}}"></show-images-component>
                                             </div>
                                         </div>
                                         <div class="form-actions center">

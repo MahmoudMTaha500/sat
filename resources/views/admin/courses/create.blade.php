@@ -50,21 +50,12 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
-<<<<<<< HEAD
-                                                    <select class="select2 form-control text-left" name="institute_id" value="{{old('institute_id')}}">
-                                                        <option value=""  >اختر المعهد</option>
-
-                                                        @foreach($institutes as $institute)
-
-                                                        <option value="{{$institute->id}}">{{$institute->name_ar .'-'. $institute->city->name_ar}}</option>
-=======
                                                     <select class="select2 form-control text-left" name="institute_id">
                                                         <option value="">اختر المعهد</option>
 
                                                         @foreach($institutes as $institute)
 
                                                         <option value="{{$institute->id}}">{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
 
                                                         @endforeach
                                                     </select>
@@ -80,12 +71,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">وقت الدراسة</label>
-<<<<<<< HEAD
-                                                    <select class="form-control text-left" name="study_period" value="{{old('study_period')}}">
-=======
                                                     <select class="form-control text-left" name="study_period">
                                                         <option value="">اختر</option>
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                         <option value=" صباحي">صباحي</option>
                                                         <option value="مسائي">مسائي</option>
                                                     </select>
@@ -94,32 +81,20 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">درس/الأسبوع </label>
-<<<<<<< HEAD
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week"  value="{{old('lessons_per_week')}}" />
-=======
                                                     <input type="number"  id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" />
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">ساعات/أسبوع </label>
-<<<<<<< HEAD
-                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  value="{{old('hours_per_week')}}"  />
-=======
                                                     <input type="number" step="any" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week" />
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المستوى المطلوب</label>
-<<<<<<< HEAD
-                                                    <select class="form-control text-left " name="required_level"  value="{{old('required_level')}}" >
-=======
                                                     <select class="form-control text-left" name="required_level">
                                                         <option value="">اختر</option>
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                         <option value=" مبتدئ ">مبتدئ</option>
                                                         <option value="     متوسط ">متوسط</option>
                                                         <option value="  متقدم  ">متقدم</option>
@@ -129,11 +104,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-<<<<<<< HEAD
-                                                    <textarea type="text" id="projectinput3" rows="20" class="form-control" placeholder="اضف وصف للدورة" name="desc" > {{old('desc')}} </textarea>
-=======
                                                     <textarea type="text" id="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc"></textarea>
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
                                                 </div>
                                             </div>
                                             <div class="form-group col-12 mb-2 contact-repeater">

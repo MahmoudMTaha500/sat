@@ -12,9 +12,9 @@ class CreateStudentRequestsTable extends Migration
         Schema::create('student_requests', function (Blueprint $table) {
             $table->id();
             $table->bigInteger("student_id")->unsigned();
-            $table->foreign('student_id')->references('id')->on('students');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->bigInteger("course_id")->unsigned();
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->longText('institute_message')->nullable();
             $table->string('status');
             $table->integer('weeks')->default(1);

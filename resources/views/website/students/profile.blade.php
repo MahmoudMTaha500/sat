@@ -110,6 +110,10 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <hr>
+                                        <h4>وضع كلمة مرور جديدة</h4>
+                                    </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label> كلمة المرور</label>

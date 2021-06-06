@@ -54,11 +54,7 @@
 
                                                         @foreach($institutes as $institute)
 
-<<<<<<< HEAD
-                                                        <option value="{{$institute->id}}" @if($institute->id == $course->institute_id) echo selected @endif>{{$institute->name_ar .'-'. $institute->city->name_ar}}</option>
-=======
                                                         <option value="{{$institute->id}}" @if($institute->id == $course->institute_id) echo selected @endif>{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
->>>>>>> 50658f85d8460d53c376139464b81d3ca4150f0f
 
                                                         @endforeach
                                                     </select>

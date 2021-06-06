@@ -570,6 +570,7 @@ if($student_mail){
         }
         public function update_success_story(Request $request)
         {
+           
             $validated = $request->validate([
                 'story' => ['required', 'string', 'max:500'],
                
@@ -578,7 +579,14 @@ if($student_mail){
                 'story.max' => 'يجب الا تتجاوز القصة  ال 500 حرف',
             ]);
             $student = auth()->guard('student')->user();
-            StudentSuccessStory::where('student_id' , $student->id)->update(['story' => $request->story , 'approvement' => 0]);
+            
+            $student_success_story = StudentSuccessStory::where('student_id' , $student->id)->get();
+            if(empty($student_success_story[0])){
+                StudentSuccessStory::create(['story' => $request->story , 'student_id' => $student->id , 'approvement' => 0]);
+            }else{
+                StudentSuccessStory::where('student_id' , $student->id)->update(['story' => $request->story , 'approvement' => 0]);
+            }
+
             session()->flash('alert_message', 'تم حفظ قصتك بنجاح و جاري مراجعتها من قبل فريق العمل');
             return redirect()->back();
         }

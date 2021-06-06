@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\services\InsurancesRequest;
 use App\Models\Institute;
 use App\Models\Insurances;
+use App\Models\Country;
 use Illuminate\Http\Request;
 
 class InsurancesController extends Controller
@@ -24,7 +25,7 @@ class InsurancesController extends Controller
 
     public function getInsurances()
     {
-        $insurances = Insurances::with('institute')->paginate(10);
+        $insurances = Insurances::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['insurances' => $insurances]);
     }
 
@@ -34,9 +35,11 @@ class InsurancesController extends Controller
         //
         $department_name = 'services';
         $page_name = 'add-insurances';
-       $page_title = 'التامينات';
+        $page_title = 'التامينات';
+        $useVue = true;
+        $countries = Country::all();
 
-        return view("admin.insurances.create", compact('department_name', 'page_name', 'Institutes','page_title'));
+        return view("admin.insurances.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue'));
     }
 
     public function store(InsurancesRequest $request)
@@ -114,8 +117,8 @@ class InsurancesController extends Controller
             $Insurances = $Insurances->with('institute')->paginate(10);
             return response()->json(['insurances' => $Insurances]);
         }
-
-        $Insurances = $Insurances->with('institute')->paginate(10);
+ 
+        $Insurances = $Insurances->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['insurances' => $Insurances]);
 
     }
