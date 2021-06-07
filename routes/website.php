@@ -57,6 +57,7 @@ Route::get('student-path', function(){
 
 
 Route::resource('order-visa', "simpleVisaController");
+Route::post('order-visa-checkout', "order_visa_checkout@simpleVisaController")->name('order-visa-checkout');
 
 
 

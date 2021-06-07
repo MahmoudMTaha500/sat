@@ -7,32 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\SempleVisa;
 class simpleVisaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         //
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+
       return view('website.visa.simple_visa');
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         // dd($request->all());
@@ -42,7 +26,7 @@ class simpleVisaController extends Controller
             'phone' => ['required', 'string', 'max:255'],
             'country' => ['required'],
             'visatype' => ['required'],
-            'notes' => ['required'],
+            'payment_method' => ['required'],
         ], [
             'name.required' => 'الاسم مطلوب',
             'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
@@ -53,70 +37,100 @@ class simpleVisaController extends Controller
             'phone.required' => 'رقم الجوال مطلوب',
             'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
             'country.required' => 'الدولة مطلوبة',
-            'notes.required' => ' الملاحظات مطلوبه',
+            'payment_method.required' => ' برجاء اختيار وسيلة الدفع المناسبة لك',
         ]);
-   
-        SempleVisa::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'phone'=>$request->phone,
-            'country'=>$request->country,
-            'visa_type'=>$request->visatype,
-            'price'=>$request->price,
-            'note'=>$request->notes,
-            'price_status'=>'لم يتم الدفع',
-            'document_status'=>'لم يتم الارسال',
-            'request_status'=>'جديد',
-            
-            ]);
+
+        $data = [
+                'name'=>$request->name,
+                'email'=>$request->email,
+                'phone'=>$request->phone,
+                'country'=>$request->country,
+                'visa_type'=>$request->visatype,
+                'price'=>$request->price,
+                'note'=>$request->notes,
+                'price_status'=>'لم يتم الدفع',
+                'document_status'=>'لم يتم الارسال',
+                'request_status'=>'جديد',
+                'payment_method'=>$request->payment_method,
+        ];
+        $visa = SempleVisa::create($data);
+        if($request->payment_method == 'online'){
+            session()->flash('alert_message', ' تم ارسال بياناتك بنجاح , يرجى استكمال الدفع الالكتروني');
+            session()->flash('visa_id', $visa->id);
+            return redirect()->back();
+        }else{
             session()->flash('alert_message', ' تم ارسال بياناتك بنجاح و سنقوم بالتواصل معك قريبا');
             return redirect()->back();
+        }
+            
 
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        SempleVisa::find($id)->delete();
+        session()->flash("alert_message", ['message' => "تم حذف طلب التاشيرة بنجاح", 'icon' => 'success']);
+        return back();
     }
+
+    public function order_visa_checkout(Request $request)
+    {
+        $visa = SempleVisa::find($request->visa_id);
+
+        $charge_data = [
+            "amount"=> $visa->price ,
+            "currency"=>"SAR",
+            "customer"=>[
+                "first_name"=>$visa->name,
+                "email"=>$visa->email,
+                "phone"=>[
+                        "country_code"=>"965",
+                        "number"=>$visa->phone,
+                    ]
+                ],
+            "source"=>["id"=>$request->token_id],
+            "redirect" => [
+                "url" => "http://your_website.com/redirect_url"
+                ]
+        ];
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://api.tap.company/v2/charges",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "POST",
+        CURLOPT_POSTFIELDS => json_encode($charge_data),
+        CURLOPT_HTTPHEADER => array(
+            "authorization: Bearer sk_test_GMqKXx6FZoambuvwASV8r4yp",
+            "content-type: application/json"
+        ),
+        ));
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            return  "cURL Error #:" . $err;
+        }
+
+       
+        session()->flash('alert_message', ' تم دفع المبلغ بنجاح و سوف نقوم بالتواصل معكم قريبا');
+        return redirect()->back();
+    }
+
+
 }

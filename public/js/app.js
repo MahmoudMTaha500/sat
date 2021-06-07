@@ -5305,6 +5305,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["aprove_route", "dahsboard_url", "get_visa", "csrftoken", "categories", "users", "create", "edit", "delete_pre"],
   data: function data() {
@@ -50759,6 +50761,8 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(visa.payment_method))]),
+                      _vm._v(" "),
                       _c("td", [
                         _c(
                           "select",
@@ -50951,37 +50955,20 @@ var render = function() {
                         _c(
                           "div",
                           {
-                            staticClass: "btn-group",
                             attrs: {
                               role: "group",
                               "aria-label": "Basic example"
                             }
                           },
                           [
-                            _vm.edit
-                              ? _c(
-                                  "a",
-                                  {
-                                    staticClass: "btn btn-info btn-sm round",
-                                    attrs: {
-                                      href:
-                                        _vm.url_dashboard +
-                                        "/visas/" +
-                                        visa.id +
-                                        "/edit"
-                                    }
-                                  },
-                                  [_vm._v("تعديل")]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
                             _c(
                               "form",
                               {
-                                staticClass: "btn-group",
                                 attrs: {
                                   action:
-                                    _vm.url_dashboard + "/visas/" + visa.id,
+                                    _vm.url_dashboard +
+                                    "/../order-visa/" +
+                                    visa.id,
                                   method: "POST"
                                 }
                               },
@@ -51175,6 +51162,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "border-top-0" }, [_vm._v("السعر")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("طريقة الدفع")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("حاله الدفع")]),
         _vm._v(" "),
@@ -66635,8 +66624,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
