@@ -2021,11 +2021,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["countries_from_blade", "getcities_url", "get_institutes_url", "get_courses_url"],
+  props: ["countries_from_blade", "getcities_url", "get_institutes_url", "get_courses_url", 'old_country', 'old_city', 'old_institute', 'old_course'],
   data: function data() {
     return {
-      country_id: "",
-      city_id: "",
+      country_id: '',
+      city_id: '',
       course_id: "",
       countries: this.countries_from_blade,
       cities: {},
@@ -2069,11 +2069,32 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this3.courses = response.data;
       });
+    },
+    get_old_values: function get_old_values() {
+      if (this.old_country) {
+        this.country_id = this.old_country;
+        this.getcities();
+        this.get_institutes();
+      }
+
+      if (this.old_city) {
+        this.city_id = this.old_city;
+        this.get_institutes();
+      }
+
+      if (this.old_institute) {
+        this.institute_id = this.old_institute;
+        this.get_courses();
+      }
+
+      if (this.old_course) {
+        this.course_id = this.old_course;
+      }
     }
   },
   beforeMount: function beforeMount() {
-    this.returnCountryCity();
     this.get_institutes();
+    this.get_old_values();
   }
 });
 
@@ -4386,8 +4407,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url_story', 'comment_route', 'aprove_route'],
+  props: ['url_story', 'comment_route', 'aprove_route', "csrftoken"],
   data: function data() {
     return {
       StudentSuccessStory: {},
@@ -48452,7 +48478,48 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _c(
+                          "form",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              action: _vm.url_story + "/" + story.id,
+                              method: "post"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: _vm.csrftoken }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "_method",
+                                value: "delete"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", name: "id" },
+                              domProps: { value: story.id }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-danger round",
+                                attrs: {
+                                  onclick:
+                                    "return confirm('هل انت متاكد من حذف هذه القصه')"
+                                }
+                              },
+                              [_vm._v("حذف")]
+                            )
+                          ]
+                        )
                       ])
                     ])
                   }),
@@ -48543,21 +48610,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("حذف")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm btn-outline-danger round",
-          attrs: { type: "button" }
-        },
-        [_vm._v("حذف")]
-      )
     ])
   }
 ]

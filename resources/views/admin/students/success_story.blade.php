@@ -24,7 +24,7 @@
             <succes-story-component
             :url_story="{{ json_encode(url('/dashboard/success-story')) }}"  
             :aprove_route="{{json_encode(url('/dashboard/comment/updateAprovement'))}}"
-            
+            :csrftoken="{{json_encode(csrf_token())}}"
             > 
         </succes-story-component>
         

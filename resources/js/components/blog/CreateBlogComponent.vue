@@ -33,11 +33,11 @@
 
 <script>
     export default {
-        props: ["countries_from_blade", "getcities_url", "get_institutes_url", "get_courses_url"],
+        props: ["countries_from_blade", "getcities_url", "get_institutes_url", "get_courses_url",'old_country','old_city','old_institute','old_course'],
         data() {
             return {
-                country_id: "",
-                city_id: "",
+                country_id: '',
+                city_id: '',
                 course_id: "",
                 countries: this.countries_from_blade,
                 cities: {},
@@ -48,7 +48,9 @@
         },
         methods: {
             getcities: function () {
+
                 var country_id = this.country_id;
+            
                 axios
                     .get(this.getcities_url, {
                         params: {
@@ -76,10 +78,31 @@
                     })
                     .then((response) => (this.courses = response.data));
             },
+            get_old_values() {
+                if(this.old_country){
+                    this.country_id = this.old_country;
+                    this.getcities();
+                    this.get_institutes();
+                }
+                if(this.old_city){
+                    this.city_id = this.old_city;
+                    this.get_institutes();
+                }
+                if(this.old_institute){
+                    this.institute_id= this.old_institute;
+                    this.get_courses();
+                }
+                if(this.old_course){
+                    this.course_id = this.old_course;
+                }
+
+            },
         },
         beforeMount() {
-            this.returnCountryCity();
             this.get_institutes();
+            this.get_old_values();
+
+            
         },
     };
 </script>
