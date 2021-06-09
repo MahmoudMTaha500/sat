@@ -14,7 +14,7 @@
                             <label for="projectinput1">المعهد</label>
                             <select v-model="institute_id" id="" class="form-control" name="institute_id" required>
                                 <option value="">حدد المعهد</option>
-                                <option v-for="institute in institutes" :key="institute.id" :value="institute.id"> {{institute.name_ar}} </option>
+                                <option v-for="institute in institutes" :key="institute.id" :value="institute.id"> {{institute.name_ar +' | '+ institute.city.name_ar}} </option>
                             </select>
                         </div>
 

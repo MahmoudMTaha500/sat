@@ -15,7 +15,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $institutes = Institute::get();
+        $institutes = Institute::with('city')->get();
         $courses = Course::get();
         $countercourse = Course::get();
         $countries = Country::get();
