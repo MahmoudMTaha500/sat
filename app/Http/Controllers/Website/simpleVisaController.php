@@ -14,8 +14,9 @@ class simpleVisaController extends Controller
     }
     public function create()
     {
-
-      return view('website.visa.simple_visa');
+        $notUseVue = true;
+        $page_name = 'visa';
+        return view('website.visa.simple_visa' , compact('notUseVue' , 'page_name'));
     }
     public function store(Request $request)
     {

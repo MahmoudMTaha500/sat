@@ -30,7 +30,7 @@ class WebsiteController extends Controller
     {
         $useVue = true;
         $best_offers = Course::orderBy('discount', 'DESC')->take(10)->get();
-        $success_stories = StudentSuccessStory::inRandomOrder()->take(10)->get();
+        $success_stories = StudentSuccessStory::where('approvement' , 1)->inRandomOrder()->take(10)->get();
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();

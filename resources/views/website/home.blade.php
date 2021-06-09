@@ -116,7 +116,7 @@
                         <!-- Institute Img -->
                         <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                             <div class="institute-img d-inline-block position-relative">
-                                <img src="{{$offer->institute->banner}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" alt="..." />
+                                <img src="{{asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" alt="..." />
                             </div>
                         </a>
                         <!-- ./Institute Img -->
@@ -163,11 +163,11 @@
         @if (isset($two_blogs[0]))
         <div class="row">
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-1" style="background-image: url({{$two_blogs[0]->banner == null ? asset('storage/default_images.png') : $two_blogs[0]->banner}})"></div>
+            <div class="col-md-6 bg-study-1" style="background-image:url('{{$two_blogs[0]->banner == null ? asset('storage/default_images.png') : asset($two_blogs[0]->banner)}}')"> </div>
             <!-- ./Background Img -->
             <div class="col-md-6 p-5">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
-                <p>{{ mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8')}} ....</p>
+                <p>{!! mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
                 <a href="{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
                 <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
                 <div class="overflow-hidden">
@@ -181,7 +181,7 @@
         <div class="row">
             <div class="col-md-6 p-5">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
-                <p>{{ mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8')}} ....</p>
+                <p>{!! mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
                 <a href="{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
                 <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
                 <div class="overflow-hidden">
@@ -189,7 +189,7 @@
                 </div>
             </div>
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-2" style="background-image: url({{$two_blogs[1]->banner == null ? asset('storage/default_images.png') : $two_blogs[1]->banner}})"></div>
+            <div class="col-md-6 bg-study-2" style="background-image:url('{{$two_blogs[1]->banner == null ? asset('storage/default_images.png') : asset($two_blogs[1]->banner)}}')"></div>
             <!-- ./Background Img -->
         </div>
         @endif
@@ -254,7 +254,7 @@
                         <div class="card-body rounded-10 bg-white">
                             <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>
                             <p class="mb-0">
-                                <span>{{mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8')}} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
+                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
                             </p>
                             <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
                         </div>

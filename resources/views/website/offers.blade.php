@@ -34,7 +34,7 @@
                                 <!-- Institute Img -->
                                 <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                                     <div class="institute-img d-inline-block position-relative">
-                                        <img src="../{{$offer->institute->banner}}" alt="{{$offer->institute->name_ar}}" class="card-img-top w-100" />
+                                        <img src="{{asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top w-100" />
                                     </div>
                                 </a>
                                 <!-- ./Institute Img -->
