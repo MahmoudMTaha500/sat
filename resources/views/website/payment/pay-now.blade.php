@@ -41,7 +41,6 @@
 
                             <div id="element-container" class="w-100"></div>
                             <div id="error-handler" role="alert"></div>
-                            <div id="success" style="display: none; position: relative; float: left;">Success! Your token is <span id="token"></span></div>
 
                             <div class="col-12 mb-4">
                                 <div class="custom-control custom-checkbox">

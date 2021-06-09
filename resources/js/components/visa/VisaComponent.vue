@@ -106,6 +106,7 @@
                                     <th class="border-top-0">السعر</th>
 
                                     <th class="border-top-0">ملاحظات</th>
+                                    <th class="border-top-0">طريقة الدفع</th>
                                     <th class="border-top-0">حاله الدفع</th>
                                     <th class="border-top-0">حاله المستندات</th>
                                     <th class="border-top-0">حاله الطلب</th>
@@ -127,6 +128,7 @@
                                             <i class="la la-eye"></i>
                                         </button>
                                     </td>
+                                    <td>{{visa.payment_method}}</td>
                                     <td>
                                         <select v-model="visa.price_status" @change="updateStatus(type='price')" @click="getvisa_id(visa.id)" name="" id="">
                                             <option value="لم يتم الدفع"> لم يتم الدفع</option>
@@ -153,9 +155,9 @@
                                     <td>{{visa.created_at}}</td>
 
                                     <td>
-                                        <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a v-if="edit" :href="url_dashboard+'/visas/'+visa.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
-                                            <form :action="url_dashboard+'/visas/'+visa.id" method="POST" class="btn-group">
+                                        <div class="" role="group" aria-label="Basic example">
+                                            <!-- <a v-if="edit" :href="url_dashboard+'/visas/'+visa.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a> -->
+                                            <form :action="url_dashboard+'/../order-visa/'+visa.id" method="POST" class="">
                                                 <input type="hidden" name="_token" :value="csrftoken" />
                                                 <input type="hidden" name="_method" value="delete" />
                                                 <button v-if="delete_pre" class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المقال')">حذف</button>
