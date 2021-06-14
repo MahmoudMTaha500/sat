@@ -79,7 +79,7 @@
                                     <td>{{institute.name_ar}}</td>
                                     <td>{{institute.country.name_ar}}</td>
                                     <td>{{institute.city.name_ar}}</td>
-                                    <td class="text-truncate">5 كورسات</td>
+                                    <td class="text-truncate"> <a :href="dahsboard_url+'/courses?institute_id='+institute.id" target="_blank" >   {{ institute.courses.length }} كورسات   </a></td>
                                     <td  class="text-truncate"> 
                                           <rate :length="5"     :value="institute_rate(institute)"    disabled    />
                                     </td> 

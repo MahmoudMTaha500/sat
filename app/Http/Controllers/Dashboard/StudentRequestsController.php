@@ -15,7 +15,7 @@ class StudentRequestsController extends Controller
 
     public function index()
     {
-        $institutes = Institute::get();
+        $institutes = Institute::with('city')->get();
         $courses = Course::get();
         $countercourse = Course::get();
         $countries = Country::get();
@@ -111,5 +111,69 @@ class StudentRequestsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function filter(Request $request){
+        // dd($request->all());
+
+        $institute_id = $request->institute_id;
+        $country_id = $request->country_id;
+        $city_id = $request->city_id;
+        $course_id = $request->course_id;
+        $name_ar = $request->name_ar;
+
+        $new = $request->new;
+        $got_accepted = $request->got_accepted;
+        $study_started = $request->study_started;
+        $rejected = $request->rejected;
+ 
+        $student_request = new StudentRequest();
+
+        if ($institute_id != null) {
+            // $student_request = $student_request->where("institute_id", $institute_id);
+            $student_request = $student_request->with('course')->whereHas('course', function ($query) use ($institute_id) {
+                $query->where('institute_id', $institute_id);
+            });
+        }
+        if ($country_id != null) {
+            $student_request = $student_request->with('course')->whereHas('course', function ($query) use ($institute_id ,$country_id)   {
+                $query->whereHas('institute',function($query2) use ($country_id) {
+                    $query2->where('country_id',$country_id);
+                });
+            });
+        }
+        if ($city_id != null) {
+            $student_request = $student_request->with('course')->whereHas('course', function ($query) use ($institute_id ,$city_id)   {
+                $query->whereHas('institute',function($query2) use ($city_id) {
+                    $query2->where('city_id',$city_id);
+                });
+          
+            });
+        }
+        if ($course_id != null) {
+            $student_request = $student_request->where("course_id", $course_id);
+        
+        }
+    
+        
+        if ($new == 'true') {
+            $student_request = $student_request->orWhere("status", "جديد");
+        }
+        if ($got_accepted == 'true' ) {
+            $student_request = $student_request->orWhere("status", "حصل علي قبول");
+        }
+        if ($study_started == 'true' ) {
+            $student_request = $student_request->orWhere("status", 'LIKE', "%بداء الدراسة%");
+        }
+        if ($rejected == 'true' ) {
+            $student_request = $student_request->orWhere("status", 'LIKE',"%مرفوض%");
+        }
+
+      
+
+
+        $student_request = $student_request->with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->paginate(10);
+        return response()->json(['studentsRequests' => $student_request]);
+
     }
 }

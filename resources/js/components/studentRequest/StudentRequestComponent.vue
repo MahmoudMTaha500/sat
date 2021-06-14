@@ -10,45 +10,60 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                       
                         <div class="form-group">
-                            <label for="projectinput1">المعهد</label>
-                            <select v-model="institute_id" id="" class="form-control" name="institute_id" required>
-                                <option value="">حدد المعهد</option>
-                                <option v-for="institute in institutes" :key="institute.id" :value="institute.id"> {{institute.name_ar}} </option>
+                        <label for="projectinput1">الدولة</label>
+                            <select v-model="country_id" v-on:change="getcities(); get_institutes(); " id="country" class="form-control" name="country_id" required>
+                            <option value="">حدد الدولة</option>
+                            <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                        <label for="projectinput1">المدينة</label>
+
+                            <select v-model="city_id" id="city"  v-on:change="get_institutes();"  class="form-control" name="city_id" required>
+                            <option value="">حدد المدينة</option>
+                            <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                             </select>
                         </div>
 
-                        <div class="form-group">
-                            <label for="projectinput1">الدولة</label>
-                            <select v-model="country_id" v-on:change="getcities()" id="country" class="form-control" name="country_id" required>
-                                <option value="">حدد الدولة</option>
-                                <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="projectinput1">المدينة</label>
 
-                            <select v-model="city_id" id="city" class="form-control" name="city_id" required>
-                                <option value="">حدد المدينة</option>
-                                <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
+                        <div class="form-group">
+                        <label for="projectinput1">المعهد</label>
+                            <select v-model="institute_id" id="" class="form-control"  v-on:change="get_filter_courses();" name="institute_id" required>
+                            <option value="">حدد المعهد</option>
+                            <option v-for="institute in institutes" :key="institute.id" :value="institute.id">  {{institute.name_ar +' | '+ institute.city.name_ar}} </option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="projectinput1">تخفيضات</label> <br />
-                                    <input type="checkbox" data-size="sm" checked class="switchery" v-model="discount_offers" />
-                                </div>
-                                <div class="col-6">
-                                    <label for="projectinput1">بدون تخفيضات</label> <br />
-                                    <input type="checkbox" data-size="sm" checked class="switchery" v-model="non_discount_offers" />
-                                </div>
-                            </div>
+                        <label for="projectinput2">الدورات</label>
+                            <select v-model="course_id" class="form-control t" name="course_id">
+                            <option value="">اختر الدورة</option>
+                            <option v-for="course in courses" :key="course.id" :value="course.id"> {{course.name_ar}}</option>
+                            </select>
                         </div>
-                        <div class="form-group">
+
+             <div class="form-group">
                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
                             <input v-model="name_ar" type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="name_ar" />
                         </div>
+                        <div class="form-group" style="direction:rtl" >
+                            <label for="projectinput1"> جديد</label>
+                                <input v-model="news" type="checkbox" id="projectinput1" class="form-control"   value="جديد"/>
+                            <label for="">  حصل علي قبول</label> 
+
+                            <input v-model="got_accepted" type="checkbox" id="projectinput1" class="form-control"   value="حصل علي قبول"/>
+                            <label for="">    بداء الدراسه</label> 
+
+                            <input v-model="study_started" type="checkbox" id="projectinput1" class="form-control"   value="بداء الدراسة"/>
+                            <label for="">    مرفوض</label> 
+
+                            <input v-model="rejected" type="checkbox" id="projectinput1" class="form-control"   value="مرفوض"/>
+                     
+                        </div>
+                     
+          
+                       
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary w-100" @click="filterCoureses()" data-dismiss="modal" aria-label="Close">بحث</button>
@@ -285,18 +300,27 @@
 <script>
     import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
     export default {
-        props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'create','edit','delete_pre'],
+        props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'get_courses_url','create','edit','delete_pre','get_institutes_url'],
         data() {
             return {
                 studentsRequests: {},
                 url: this.student_request_url,
+                  url_course: this.course_url,
                 country_id: "",
                 city_id: "",
                 countries: this.countries_from_blade,
                 cities: {},
+                courses: {},
                 institute_id: "",
+                course_id:'',
+            
                 name_ar: "",
-                request_id: 0,
+            news:'',
+            got_accepted:'',
+            study_started:'',
+            rejected:'',
+
+request_id: 0,
                 discount_offers: true,
                 non_discount_offers: true,
                 serviceObj: {},
@@ -322,6 +346,16 @@
                 this.url = url1;
                 this.getstudentsRequests();
             },
+             get_institutes() {
+                axios
+                    .get(this.get_institutes_url, {
+                        params: {
+                            country_id: this.country_id,
+                            city_id: this.city_id,
+                        },
+                    })
+                    .then((response) => (this.institutes = response.data));
+            },
             getcities: function () {
                 var country_id = this.country_id;
                 axios
@@ -335,22 +369,26 @@
                     this.city_id = "";
                 }
             },
+            
             filterCoureses: function () {
+                // alert(this.news);
                 var filter_params = {
                     institute_id: this.institute_id,
+                    course_id: this.course_id,
                     country_id: this.country_id,
                     city_id: this.city_id,
-                    name_ar: this.name_ar,
-                    discount_offers: this.discount_offers,
-                    non_discount_offers: this.non_discount_offers,
+                    name_ar:this.name_ar,
+                    new:this.news,
+                    got_accepted:this.got_accepted,
+                    study_started:this.study_started,
+                    rejected:this.rejected,
+                 
                 };
-                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
-                "&discount_offers=" + this.discount_offers;
-                "&non_discount_offers=" + this.non_discount_offers;
+                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id ;
                 axios
-                    .get(this.dahsboard_url + "/filterstudentsRequests", {
+                    .get(this.dahsboard_url + "/student-requests/filterstudentsRequests", {
                         params: filter_params,
-                    })
+                    } )
                     .then((response) => ((this.studentsRequests = response.data.studentsRequests), (this.studentsRequests.prev_page_url += pagination_params), (this.studentsRequests.next_page_url += pagination_params)));
             },
             updateStatus: function (e) {
@@ -385,9 +423,35 @@
 
                 $("#notes").modal("show");
             },
+               getcourses: function () {
+                axios.get(this.url_course).then((response) => (this.courses = response.data.courses.data));
+            },
+             get_filter_courses() {
+                axios
+                    .get(this.get_courses_url, {
+                        params: {
+                            institute_id: this.institute_id,
+                        },
+                    })
+                    .then((response) => (this.courses = response.data));
+            },
         },
         beforeMount() {
+             const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const course_id_url = urlParams.get('course_id');
+        // alert(course_id_url);
+
+          if(course_id_url){
+            this.course_id = course_id_url;
+             this.filterCoureses();
+            //  alert(institute_id_url);
+        } else{
             this.getstudentsRequests();
+            this.get_filter_courses();
+
+
+          }
         },
     };
 </script>
