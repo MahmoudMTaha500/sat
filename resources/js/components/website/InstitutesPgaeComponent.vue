@@ -7,7 +7,7 @@
                 <div class="row px-xl-5">
                     <div class="col-12">
                         <div class="heading-institutes">
-                            <h3 class="text-main-color font-weight-bold">المعاهد ( {{courses.total}} )</h3>
+                            <h3 class="text-main-color font-weight-bold">الدورات ( {{courses.total}} )</h3>
                             <p>تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها</p>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                                         </div>
                                         <!-- Course Price -->
                                         <div class="card-footer bg-white overflow-hidden">
-                                            <del class="text-muted del">{{course_price_per_week(course.courses_price)}} ريال / أسبوع </del>
+                                            <del v-if="course.discount != 0" class="text-muted del">{{course_price_per_week(course.courses_price)}} ريال / أسبوع </del>
                                             <span class="float-left text-main-color">{{Math.round(course_price_per_week(course.courses_price)*(1-course.discount)) }} ريال / أسبوع </span>
                                         </div>
                                         <!-- ./Course Price -->

@@ -22,5 +22,5 @@
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/index.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/institute.css">
     <link rel="icon" href="{{asset('website/imgs/logo-icon.png')}}">
-    <title>Classat</title>
+    <title>{{isset($page_title) ? $page_title : 'كلاسات' }}</title>
 </head>

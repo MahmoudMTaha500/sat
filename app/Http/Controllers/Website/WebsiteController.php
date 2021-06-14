@@ -29,13 +29,14 @@ class WebsiteController extends Controller
     public function home_page()
     {
         $useVue = true;
-        $best_offers = Course::orderBy('discount', 'DESC')->take(10)->get();
+        $best_offers = Course::orderBy('discount', 'DESC')->take(10)->where('discount' , '!=' , 0)->get();
         $success_stories = StudentSuccessStory::where('approvement' , 1)->inRandomOrder()->take(10)->get();
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
         $page_name = 'home';
-        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_name'));
+        $page_title = 'كلاسات | الصفحة الرئيسية';
+        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_name' ,'page_title'));
     }
     // institutes page method : show all institutes with filter
     public function institutes_page(Request $request)
@@ -43,7 +44,8 @@ class WebsiteController extends Controller
         $useVue = true;
         $search = $request->all();
         $page_name = 'institutes';
-        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_name'));
+        $page_title = 'المعاهد';
+        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_name' , 'page_title'));
     }
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
@@ -54,9 +56,10 @@ class WebsiteController extends Controller
         if (empty($course[0])) {return redirect()->route('website.home');}
         $course = $course[0];
         $institute = $institute[0];
-        
+        $page_name = 'institutes';
         $useVue = true;
-        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute'));
+        $page_title = $institute->name_ar.' | '.$course->name_ar;
+        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_title' , 'page_name'));
     }
     // confirm reservation page
     public function confirm_reservation(Request $request, $pay_checker = null)
@@ -115,7 +118,8 @@ class WebsiteController extends Controller
     // student login page : show login page of type student
     public function student_login_page()
     {
-        return view('website.students.login');
+        $page_title = 'تسجيل دخول';
+        return view('website.students.login' , compact('page_title') );
     }
 
 
@@ -137,7 +141,8 @@ class WebsiteController extends Controller
     public function student_register_page(Request $request)
     {
         $useVue = true;
-        return view('website.students.register', compact('useVue'));
+        $page_title = 'انشاء حساب جديد';
+        return view('website.students.register', compact('useVue' , 'page_title'));
     }
     // student register request : create new user of type student
     public function student_register_auth(RegisterStudentRequest $request)
@@ -214,7 +219,8 @@ if($student_mail){
     {
         $blogs = Blog::paginate(8);
         $page_name = 'articles';
-        return view('website.blog.articles', compact('blogs' , 'page_name'));
+        $page_title = 'المقالات';
+        return view('website.blog.articles', compact('blogs' , 'page_name' , 'page_title'));
     }
 
 
@@ -609,12 +615,14 @@ if($student_mail){
         public function about_us()
         {
             $page_name = 'about-us';
-            return view('website.about-us' , compact('page_name'));
+            $page_title = 'من نحن';
+            return view('website.about-us' , compact('page_name' , 'page_title'));
         }
         public function contact_us()
         {
             $page_name = 'contact-us';
-            return view('website.contact-us' , compact('page_name') );
+            $page_title = 'تواصل معنا';
+            return view('website.contact-us' , compact('page_name' , 'page_title') );
         }
         public function send_contact_us_mail(Request $request)
         {
@@ -650,7 +658,8 @@ if($student_mail){
             {
                 $offers = Course::where('discount' , '!=' , 0)->paginate(12);
                 $page_name = 'offers';
-                return view('website.offers' , compact('offers' , 'page_name'));
+                $page_title = 'العروض';
+                return view('website.offers' , compact('offers' , 'page_name' , 'page_title'));
             }
             public function add_review(Request $request)
             {

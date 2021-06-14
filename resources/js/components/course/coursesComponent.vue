@@ -97,8 +97,8 @@
                                         <td class="text-truncate">5 طلابات</td>
                                         <td class="text-truncate">{{ (course.discount != null) ? course.discount : "-" }}</td>
                                         <td class="text-truncate">
-                                            <input type="checkbox" id="checkbox" v-model="course.approvment" @change="updateApprovment" @click="getCourse_id(course.id)" />
-                                            <label for="checkbox">{{ (course.approvment == 1) ? "مقبول":"غير مقبول" }}</label>
+                                            <input type="checkbox" v-model="course.approvement" @change="updateApprovment" @click="getCourse_id(course.id)" />
+                                            <label>{{ (course.approvement == 1) ? "مقبول":"غير مقبول" }}</label>
                                         </td>
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -192,7 +192,7 @@
             },
             updateApprovment: function (e) {
                 const newValue = e.target.checked;
-                axios.post(this.dahsboard_url + "/update-course-aprovement", { course_id: this.course_id, approvment: newValue }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
+                axios.post(this.dahsboard_url + "/update-course-aprovement", { course_id: this.course_id, approvement: newValue }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
             },
             getCourse_id: function (id) {
                 return (this.course_id = id);

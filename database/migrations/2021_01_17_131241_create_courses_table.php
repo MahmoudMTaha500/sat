@@ -27,7 +27,7 @@ class CreateCoursesTable extends Migration
             $table->string("study_period")->nullable();
             $table->integer("lessons_per_week")->nullable();
             $table->integer("hours_per_week")->nullable();
-            $table->integer("approvment")->default(0);
+            $table->integer("approvement")->default(0);
             $table->string("required_level")->nullable();
             $table->decimal("discount")->default('0');
             $table->softDeletes();

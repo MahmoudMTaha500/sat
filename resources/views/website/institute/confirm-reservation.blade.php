@@ -26,6 +26,31 @@
                             <h3 class="text-main-color font-weight-bold">{{session()->get('alert_message')['title']}}</h3>
                             <div class="cheched-heading">
                                 {!! session()->get('alert_message')['body'] !!}
+                                <button type="button" class="btn bg-main-color text-white w-100 rounded-10" data-toggle="modal" data-target="#office_numbers">
+                                    الدفع عن طريق المكتب
+                                </button>
+                                <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body py-5 px-4 text-center">
+                                            <div class="cheched-img ">
+                                                <img src="imgs/checked.png" alt="" class="img-fluid">
+                                            </div>
+                                            <div class="cheched-heading">
+                                                <h3 class="text-main-color font-weight-bold">كلاسات</h3>
+                                                <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
+                                            </div>
+                                            <ul class="p-0">
+                                                <li><hr>+966 55 548 4931 <hr></li>
+                                                <li>+966 55 548 4931 <hr></li>
+                                                <li>+966 55 548 4931 <hr></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                
                             </div>
                         </div>
                     @else

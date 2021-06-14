@@ -34,7 +34,8 @@ class VueRequestsController extends Controller
     // get course
     public function get_courses(Request $request)
     {
-        $courses = new Course();
+        $courses = Course::where('approvement' , 1);
+
         
         if(!empty($request->country_id)){
             $courses = $courses->whereHas('institute', function ($query) use ($request) {

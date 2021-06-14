@@ -38,6 +38,12 @@ class StudentRequestsController extends Controller
         $request_student->save();
 
     }
+    public function update_classat_note(Request $request)
+    {
+        $request_student = StudentRequest::find($request->request_id);
+        $request_student->classat_note = $request->classat_notes;
+        $request_student->save();
+    }
     public function create()
     {
         //

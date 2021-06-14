@@ -33,6 +33,7 @@ class CreateStudentRequestsTable extends Migration
             $table->string('from_date');
             $table->string('to_date');
             $table->longText('note')->nullable();
+            $table->longText('classat_note')->nullable();
             $table->timestamps();
         });
     }

@@ -625,5 +625,13 @@ body {
     .website-pagination .pagination .page-item{
         display: inline-block!important;
     }
+
+    .overlay{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
   
   /*# sourceMappingURL=article.css.map */

@@ -25,7 +25,12 @@ class BlogSeeder extends Seeder
                 $institute_id = Institute::where('country_id' , $country_id)->get('id')[0]->id;
             }
             
-            $course_id = Course::where('institute_id' , $institute_id)->inRandomOrder()->get('id')[0]->id;
+            $course_id = Course::where('institute_id' , $institute_id)->inRandomOrder()->get('id');
+            if(empty($course_id[0])){
+                $course_id = 1;
+            }else{
+                $course_id = Course::where('institute_id' , $institute_id)->inRandomOrder()->get('id')[0]->id;
+            }
             
 
 
