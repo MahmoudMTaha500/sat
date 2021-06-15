@@ -46,8 +46,13 @@
                                     </td>
                                 <td class="text-truncate">
                                <a :href="url_story+'/'+story.id+'/edit' "     ><i  class="btn btn-sm btn-outline-primary round">تعديل</i></a>
-
-                                  <a href="#"><button type="button" class="btn btn-sm btn-outline-danger round">حذف</button></a>
+                                    <form :action="url_story +'/'+ story.id" method="post" class="btn-group">
+                                                <input type="hidden" name="_token" :value="csrftoken" />
+                                                <input type="hidden" name="_method" value="delete" />
+                                                <input type="hidden" name="id" :value="story.id" />
+                                                <button   class="btn btn-sm btn-outline-danger round" onclick="return confirm('هل انت متاكد من حذف هذه القصه')">حذف</button>
+                                            </form>
+                                  <!-- <a href="#"><button type="button" class="btn btn-sm btn-outline-danger round">حذف</button></a> -->
                                 </td>
                               </tr>
                         
@@ -76,7 +81,9 @@
 
 <script>
 export default {
-    props: ['url_story','comment_route','aprove_route'],
+    props: ['url_story','comment_route','aprove_route',
+                "csrftoken", 
+    ],
   
     data() {
             return {

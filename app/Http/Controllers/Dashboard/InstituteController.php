@@ -19,7 +19,7 @@ class InstituteController extends Controller
 
     public function index(Request $request)
     {
-        $institutes = Institute::with('country', 'city')->paginate(5);
+        $institutes = Institute::with('country', 'city','courses')->paginate(5);
         $useVue = true;
         $countries = Country::all();
 
@@ -35,7 +35,7 @@ class InstituteController extends Controller
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-        $institutes = Institute::with('country', 'city','rats')->paginate(10);
+        $institutes = Institute::with('country', 'city','rats','courses')->paginate(10);
         return response()->json(['institutes' => $institutes]);
     }
     /************************************************************** */

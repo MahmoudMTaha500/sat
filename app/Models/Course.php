@@ -46,4 +46,7 @@ class Course extends Model
     {
         return $this->hasMany('App\Models\Blog', 'course_id', 'id');
     }
+    public function student_request(){
+        return  $this->hasMany("App\Models\StudentRequest",'course_id','id');
+    }
 }

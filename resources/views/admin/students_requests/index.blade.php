@@ -20,6 +20,7 @@
 
             <student-request-component
             update_classat_note_route = "{{  route('update_classat_note') }}"
+            :course_url="{{json_encode(url('/dashboard/getcourses'))}}"
             :student_request_url="{{json_encode(url('/dashboard/student-requests/getStudentRequests'))}}"
             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"   
             :countries_from_blade="{{ json_encode($countries) }}"
@@ -28,6 +29,8 @@
             :create="{{  json_encode(auth()->user()->hasPermission('student-requests-create') )}}"
             :edit="{{  json_encode(auth()->user()->hasPermission('student-requests-update') )}}"
             :delete_pre="{{  json_encode(auth()->user()->hasPermission('student-requests-delete') )}}"
+            :get_courses_url="{{ json_encode(route('blog.get.courses.vue')) }}"
+            :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
 
             ></student-request-component>
             <!-- Recent Transactions -->

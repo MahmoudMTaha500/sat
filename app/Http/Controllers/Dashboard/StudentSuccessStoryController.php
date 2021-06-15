@@ -113,8 +113,13 @@ class StudentSuccessStoryController extends Controller
      * @param  \App\StudentSuccessStory  $studentSuccessStory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StudentSuccessStory $studentSuccessStory)
+    public function destroy(Request $request)
     {
-        //
+        
+        $story = StudentSuccessStory::find($request->id);
+        $story->delete();
+        session()->flash('alert_message',['message'=>'تم حذف القصه ','icon'=>"error"]);
+        return back();
+        
     }
 }

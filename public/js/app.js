@@ -2021,11 +2021,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["countries_from_blade", "getcities_url", "get_institutes_url", "get_courses_url"],
+  props: ["countries_from_blade", "getcities_url", "get_institutes_url", "get_courses_url", 'old_country', 'old_city', 'old_institute', 'old_course'],
   data: function data() {
     return {
-      country_id: "",
-      city_id: "",
+      country_id: '',
+      city_id: '',
       course_id: "",
       countries: this.countries_from_blade,
       cities: {},
@@ -2069,11 +2069,32 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         return _this3.courses = response.data;
       });
+    },
+    get_old_values: function get_old_values() {
+      if (this.old_country) {
+        this.country_id = this.old_country;
+        this.getcities();
+        this.get_institutes();
+      }
+
+      if (this.old_city) {
+        this.city_id = this.old_city;
+        this.get_institutes();
+      }
+
+      if (this.old_institute) {
+        this.institute_id = this.old_institute;
+        this.get_courses();
+      }
+
+      if (this.old_course) {
+        this.course_id = this.old_course;
+      }
     }
   },
   beforeMount: function beforeMount() {
-    this.returnCountryCity();
     this.get_institutes();
+    this.get_old_values();
   }
 });
 
@@ -3373,7 +3394,16 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    this.getcourses();
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var institute_id_url = urlParams.get('institute_id'); // alert(institute_id_url);
+
+    if (institute_id_url) {
+      this.institute_id = institute_id_url;
+      this.filterCoureses(); //  alert(institute_id_url);
+    } else {
+      this.getcourses();
+    }
   }
 });
 
@@ -4386,8 +4416,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['url_story', 'comment_route', 'aprove_route'],
+  props: ['url_story', 'comment_route', 'aprove_route', "csrftoken"],
   data: function data() {
     return {
       StudentSuccessStory: {},
@@ -4754,19 +4789,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'create', 'edit', 'delete_pre', 'update_classat_note_route'],
+  props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'create', 'edit', 'delete_pre', 'update_classat_note_route', 'get_courses_url', 'get_institutes_url'],
   data: function data() {
     return {
       studentsRequests: {},
       url: this.student_request_url,
+      url_course: this.course_url,
       country_id: "",
       city_id: "",
       countries: this.countries_from_blade,
       cities: {},
+      courses: {},
       institute_id: "",
+      course_id: '',
       name_ar: "",
+      news: '',
+      got_accepted: '',
+      study_started: '',
+      rejected: '',
       request_id: 0,
       discount_offers: true,
       non_discount_offers: true,
@@ -4809,8 +4866,20 @@ __webpack_require__.r(__webpack_exports__);
       this.url = url1;
       this.getstudentsRequests();
     },
-    getcities: function getcities() {
+    get_institutes: function get_institutes() {
       var _this2 = this;
+
+      axios.get(this.get_institutes_url, {
+        params: {
+          country_id: this.country_id,
+          city_id: this.city_id
+        }
+      }).then(function (response) {
+        return _this2.institutes = response.data;
+      });
+    },
+    getcities: function getcities() {
+      var _this3 = this;
 
       var country_id = this.country_id;
       axios.get(this.dahsboard_url + "/getcities", {
@@ -4818,7 +4887,7 @@ __webpack_require__.r(__webpack_exports__);
           countryID: country_id
         }
       }).then(function (response) {
-        return _this2.cities = response.data.cities;
+        return _this3.cities = response.data.cities;
       });
 
       if (this.country_id == "") {
@@ -4826,23 +4895,25 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     filterCoureses: function filterCoureses() {
-      var _this3 = this;
+      var _this4 = this;
 
+      // alert(this.news);
       var filter_params = {
         institute_id: this.institute_id,
+        course_id: this.course_id,
         country_id: this.country_id,
         city_id: this.city_id,
         name_ar: this.name_ar,
-        discount_offers: this.discount_offers,
-        non_discount_offers: this.non_discount_offers
+        "new": this.news,
+        got_accepted: this.got_accepted,
+        study_started: this.study_started,
+        rejected: this.rejected
       };
-      var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
-      "&discount_offers=" + this.discount_offers;
-      "&non_discount_offers=" + this.non_discount_offers;
-      axios.get(this.dahsboard_url + "/filterstudentsRequests", {
+      var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id;
+      axios.get(this.dahsboard_url + "/student-requests/filterstudentsRequests", {
         params: filter_params
       }).then(function (response) {
-        return _this3.studentsRequests = response.data.studentsRequests, _this3.studentsRequests.prev_page_url += pagination_params, _this3.studentsRequests.next_page_url += pagination_params;
+        return _this4.studentsRequests = response.data.studentsRequests, _this4.studentsRequests.prev_page_url += pagination_params, _this4.studentsRequests.next_page_url += pagination_params;
       });
     },
     updateStatus: function updateStatus(e) {
@@ -4882,10 +4953,38 @@ __webpack_require__.r(__webpack_exports__);
       this.classat_notes = obj.classat_note;
       this.request_id = obj.id;
       $("#classat_notes").modal("show");
+    },
+    getcourses: function getcourses() {
+      var _this5 = this;
+
+      axios.get(this.url_course).then(function (response) {
+        return _this5.courses = response.data.courses.data;
+      });
+    },
+    get_filter_courses: function get_filter_courses() {
+      var _this6 = this;
+
+      axios.get(this.get_courses_url, {
+        params: {
+          institute_id: this.institute_id
+        }
+      }).then(function (response) {
+        return _this6.courses = response.data;
+      });
     }
   },
   beforeMount: function beforeMount() {
-    this.getstudentsRequests();
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var course_id_url = urlParams.get('course_id'); // alert(course_id_url);
+
+    if (course_id_url) {
+      this.course_id = course_id_url;
+      this.filterCoureses(); //  alert(institute_id_url);
+    } else {
+      this.getstudentsRequests();
+      this.get_filter_courses();
+    }
   }
 });
 
@@ -45489,7 +45588,17 @@ var render = function() {
                             key: institute.id,
                             domProps: { value: institute.id }
                           },
-                          [_vm._v(" " + _vm._s(institute.name_ar) + " ")]
+                          [
+                            _vm._v(
+                              " " +
+                                _vm._s(
+                                  institute.name_ar +
+                                    " | " +
+                                    institute.city.name_ar
+                                ) +
+                                " "
+                            )
+                          ]
                         )
                       })
                     ],
@@ -45842,7 +45951,24 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v("5 طلابات")
+                            _c(
+                              "a",
+                              {
+                                attrs: {
+                                  href:
+                                    _vm.dahsboard_url +
+                                    "/student-requests?course_id=" +
+                                    course.id,
+                                  target: "_blank"
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(course.student_request.length) +
+                                    " طلابات "
+                                )
+                              ]
+                            )
                           ]),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
@@ -46435,7 +46561,25 @@ var render = function() {
                       _c("td", [_vm._v(_vm._s(institute.city.name_ar))]),
                       _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
-                        _vm._v("5 كورسات")
+                        _c(
+                          "a",
+                          {
+                            attrs: {
+                              href:
+                                _vm.dahsboard_url +
+                                "/courses?institute_id=" +
+                                institute.id,
+                              target: "_blank"
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "   " +
+                                _vm._s(institute.courses.length) +
+                                " كورسات   "
+                            )
+                          ]
+                        )
                       ]),
                       _vm._v(" "),
                       _c(
@@ -48497,7 +48641,48 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(2, true)
+                        _c(
+                          "form",
+                          {
+                            staticClass: "btn-group",
+                            attrs: {
+                              action: _vm.url_story + "/" + story.id,
+                              method: "post"
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "_token" },
+                              domProps: { value: _vm.csrftoken }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "_method",
+                                value: "delete"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", name: "id" },
+                              domProps: { value: story.id }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-danger round",
+                                attrs: {
+                                  onclick:
+                                    "return confirm('هل انت متاكد من حذف هذه القصه')"
+                                }
+                              },
+                              [_vm._v("حذف")]
+                            )
+                          ]
+                        )
                       ])
                     ])
                   }),
@@ -48589,21 +48774,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "border-top-0" }, [_vm._v("حذف")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-sm btn-outline-danger round",
-          attrs: { type: "button" }
-        },
-        [_vm._v("حذف")]
-      )
-    ])
   }
 ]
 render._withStripped = true
@@ -48654,60 +48824,6 @@ var render = function() {
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _c("label", { attrs: { for: "projectinput1" } }, [
-                    _vm._v("المعهد")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.institute_id,
-                          expression: "institute_id"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: { id: "", name: "institute_id", required: "" },
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.institute_id = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
-                      }
-                    },
-                    [
-                      _c("option", { attrs: { value: "" } }, [
-                        _vm._v("حدد المعهد")
-                      ]),
-                      _vm._v(" "),
-                      _vm._l(_vm.institutes, function(institute) {
-                        return _c(
-                          "option",
-                          {
-                            key: institute.id,
-                            domProps: { value: institute.id }
-                          },
-                          [_vm._v(" " + _vm._s(institute.name_ar) + " ")]
-                        )
-                      })
-                    ],
-                    2
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "projectinput1" } }, [
                     _vm._v("الدولة")
                   ]),
                   _vm._v(" "),
@@ -48744,7 +48860,8 @@ var render = function() {
                               : $$selectedVal[0]
                           },
                           function($event) {
-                            return _vm.getcities()
+                            _vm.getcities()
+                            _vm.get_institutes()
                           }
                         ]
                       }
@@ -48785,19 +48902,24 @@ var render = function() {
                       staticClass: "form-control",
                       attrs: { id: "city", name: "city_id", required: "" },
                       on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.city_id = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        }
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.city_id = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            return _vm.get_institutes()
+                          }
+                        ]
                       }
                     },
                     [
@@ -48818,111 +48940,123 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-6" }, [
-                      _c("label", { attrs: { for: "projectinput1" } }, [
-                        _vm._v("تخفيضات")
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("المعهد")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.institute_id,
+                          expression: "institute_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "", name: "institute_id", required: "" },
+                      on: {
+                        change: [
+                          function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.institute_id = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          },
+                          function($event) {
+                            return _vm.get_filter_courses()
+                          }
+                        ]
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("حدد المعهد")
                       ]),
                       _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
+                      _vm._l(_vm.institutes, function(institute) {
+                        return _c(
+                          "option",
                           {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.discount_offers,
-                            expression: "discount_offers"
-                          }
-                        ],
-                        staticClass: "switchery",
-                        attrs: {
-                          type: "checkbox",
-                          "data-size": "sm",
-                          checked: ""
-                        },
-                        domProps: {
-                          checked: Array.isArray(_vm.discount_offers)
-                            ? _vm._i(_vm.discount_offers, null) > -1
-                            : _vm.discount_offers
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.discount_offers,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = null,
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  (_vm.discount_offers = $$a.concat([$$v]))
-                              } else {
-                                $$i > -1 &&
-                                  (_vm.discount_offers = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
-                              }
-                            } else {
-                              _vm.discount_offers = $$c
-                            }
-                          }
-                        }
+                            key: institute.id,
+                            domProps: { value: institute.id }
+                          },
+                          [
+                            _vm._v(
+                              "  " +
+                                _vm._s(
+                                  institute.name_ar +
+                                    " | " +
+                                    institute.city.name_ar
+                                ) +
+                                " "
+                            )
+                          ]
+                        )
                       })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-6" }, [
-                      _c("label", { attrs: { for: "projectinput1" } }, [
-                        _vm._v("بدون تخفيضات")
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput2" } }, [
+                    _vm._v("الدورات")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.course_id,
+                          expression: "course_id"
+                        }
+                      ],
+                      staticClass: "form-control t",
+                      attrs: { name: "course_id" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.course_id = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("اختر الدورة")
                       ]),
                       _vm._v(" "),
-                      _c("br"),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.non_discount_offers,
-                            expression: "non_discount_offers"
-                          }
-                        ],
-                        staticClass: "switchery",
-                        attrs: {
-                          type: "checkbox",
-                          "data-size": "sm",
-                          checked: ""
-                        },
-                        domProps: {
-                          checked: Array.isArray(_vm.non_discount_offers)
-                            ? _vm._i(_vm.non_discount_offers, null) > -1
-                            : _vm.non_discount_offers
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.non_discount_offers,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = null,
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  (_vm.non_discount_offers = $$a.concat([$$v]))
-                              } else {
-                                $$i > -1 &&
-                                  (_vm.non_discount_offers = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
-                              }
-                            } else {
-                              _vm.non_discount_offers = $$c
-                            }
-                          }
-                        }
+                      _vm._l(_vm.courses, function(course) {
+                        return _c(
+                          "option",
+                          { key: course.id, domProps: { value: course.id } },
+                          [_vm._v(" " + _vm._s(course.name_ar))]
+                        )
                       })
-                    ])
-                  ])
+                    ],
+                    2
+                  )
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
@@ -48956,7 +49090,202 @@ var render = function() {
                       }
                     }
                   })
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "form-group",
+                    staticStyle: { direction: "rtl" }
+                  },
+                  [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" جديد")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.news,
+                          expression: "news"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "checkbox",
+                        id: "projectinput1",
+                        value: "جديد"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.news)
+                          ? _vm._i(_vm.news, "جديد") > -1
+                          : _vm.news
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.news,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "جديد",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.news = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.news = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.news = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("  حصل علي قبول")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.got_accepted,
+                          expression: "got_accepted"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "checkbox",
+                        id: "projectinput1",
+                        value: "حصل علي قبول"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.got_accepted)
+                          ? _vm._i(_vm.got_accepted, "حصل علي قبول") > -1
+                          : _vm.got_accepted
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.got_accepted,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "حصل علي قبول",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.got_accepted = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.got_accepted = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.got_accepted = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "" } }, [
+                      _vm._v("    بداء الدراسه")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.study_started,
+                          expression: "study_started"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "checkbox",
+                        id: "projectinput1",
+                        value: "بداء الدراسة"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.study_started)
+                          ? _vm._i(_vm.study_started, "بداء الدراسة") > -1
+                          : _vm.study_started
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.study_started,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "بداء الدراسة",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.study_started = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.study_started = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.study_started = $$c
+                          }
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "" } }, [_vm._v("    مرفوض")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.rejected,
+                          expression: "rejected"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "checkbox",
+                        id: "projectinput1",
+                        value: "مرفوض"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.rejected)
+                          ? _vm._i(_vm.rejected, "مرفوض") > -1
+                          : _vm.rejected
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.rejected,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "مرفوض",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 && (_vm.rejected = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.rejected = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.rejected = $$c
+                          }
+                        }
+                      }
+                    })
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [

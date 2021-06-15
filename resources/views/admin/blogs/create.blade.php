@@ -45,11 +45,11 @@
                                             <div class="col-lg-8">
                                                 <div class="form-group">
                                                     <label for="projectinput1">العنوان</label>
-                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل اسم المعهد" name="title_ar" />
+                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل اسم المعهد" name="title_ar" value="{{old('title_ar')}}" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="projectinput4">المحتوى</label>
-                                                    <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor"> </textarea>
+                                                    <textarea name="content_ar" id="ckeditor" cols="30" rows="20" class="ckeditor"> {{old('content_ar')}} </textarea>
                                                 </div>
 
 
@@ -58,10 +58,10 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <label for="projectinput2">التصنيف</label>
-                                                    <select name="category_id" class="select2 form-control text-left">
+                                                    <select name="category_id" class="select2 form-control text-left"  >
                                                         <option value="" selected="" disabled="">اختر التصنيف</option>
                                                             @foreach($BlogCategories as $category)
-                                                            <option value="{{$category->id}}">{{$category->name_ar}}</option>
+                                                            <option value="{{$category->id}}" @if($category->id == old('category_id')) selected @endif>{{$category->name_ar}}</option>
                                                             @endforeach
                                                     </select>
                                                 </div>
@@ -70,9 +70,16 @@
                                                     :getcities_url="{{ json_encode(route('getcities')) }}"
                                                     :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
                                                     :get_courses_url="{{ json_encode(route('blog.get.courses.vue')) }}"
+                                                    :old_country="{{json_encode(old('country_id'))}}"
+                                                    :old_city="{{json_encode(old('city_id'))}}"
+                                                    :old_institute="{{json_encode(old('institute_id'))}}"
+                                                    :old_course="{{json_encode(old('course_id'))}}"
                                                 >
                                                 </create-blog-component>
-                                                <show-images-component :image_name="{{json_encode("banner")}}" :image_label="{{json_encode(" اختر الصورة ")}}"></show-images-component>
+                                                <show-images-component :image_name="{{json_encode("banner")}}" 
+                                                :image_label="{{json_encode(" اختر الصورة ")}}"
+                                                :old="{{json_encode(old('banner'))}}"
+                                                ></show-images-component>
                                             </div>
                                         </div>
                                         <div class="form-actions center">

@@ -15,7 +15,7 @@ class CourseController extends Controller
 
     public function index()
     {
-        $institutes = Institute::get();
+        $institutes = Institute::with('city')->get();
         $courses = Course::get();
         $countercourse = Course::get();
         $countries = Country::get();
@@ -30,7 +30,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function getCourses()
     {
-        $courses = Course::with('institute', 'institute.city')->paginate(10);
+        $courses = Course::with('institute', 'institute.city','student_request')->paginate(10);
         return response()->json(['courses' => $courses]);
 
     }

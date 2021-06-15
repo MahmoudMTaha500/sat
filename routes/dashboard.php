@@ -143,6 +143,7 @@ Route::get('/student-requests/getinsurance','StudentRequestsController@get_price
 Route::get('/student-requests/calc_total','StudentRequestsController@calc_total');   
 Route::post('/student-requests/update-status','StudentRequestsController@updateStatus');   
 Route::post('/student-requests/update-classat-note','StudentRequestsController@update_classat_note')->name('update_classat_note');   
+Route::get('/student-requests/filterstudentsRequests','StudentRequestsController@filter');   
 
 Route::resource('student-requests', "StudentRequestsController");
 Route::resource('employees', "EmployeesController");
