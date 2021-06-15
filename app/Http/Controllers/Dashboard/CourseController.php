@@ -187,7 +187,7 @@ class CourseController extends Controller
             $courses = $courses->where("discount" , '!=' , 0);
         }
 
-        $courses = $courses->with('institute', 'institute.city')->paginate(10);
+        $courses = $courses->with('institute', 'institute.city','student_request')->paginate(10);
         return response()->json(['courses' => $courses]);
 
     }
