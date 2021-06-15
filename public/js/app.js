@@ -3396,7 +3396,7 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
-    var institute_id_url = urlParams.get('institute_id'); // alert(institute_id_url);
+    var institute_id_url = urlParams.get('institute_id');
 
     if (institute_id_url) {
       this.institute_id = institute_id_url;

@@ -94,7 +94,7 @@
                                         <td class="text-truncate">{{course.institute.name_ar}}</td>
                                         <td class="text-truncate">{{course.institute.city.name_ar}}</td>
 
-                                        <td class="text-truncate">  <a :href="dahsboard_url+'/student-requests?course_id='+course.id" target="_blank">{{ course.student_request.length}} طلابات </a> </td>
+                                        <td class="text-truncate">  <a :href="dahsboard_url+'/student-requests?course_id='+course.id" target="_blank">{{ course.student_request.length  }} طلابات </a> </td>
                                         <td class="text-truncate">{{ (course.discount != null) ? course.discount : "-" }}</td>
                                         <td class="text-truncate">
                                             <input type="checkbox" v-model="course.approvement" @change="updateApprovment" @click="getCourse_id(course.id)" />
@@ -203,13 +203,14 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
         const institute_id_url = urlParams.get('institute_id');
-        // alert(institute_id_url);
         if(institute_id_url){
+
             this.institute_id = institute_id_url;
+
              this.filterCoureses();
             //  alert(institute_id_url);
         } else{
-  this.getcourses();
+              this.getcourses();
         }
         },
     };
