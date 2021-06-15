@@ -186,7 +186,7 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <textarea v-model="classat_notes"  class="w-100">{{ classat_notes }}</textarea>
+                            <textarea v-model="classat_notes"  class="w-100"></textarea>
                             <hr />
                         </div>
                     </div>

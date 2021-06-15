@@ -49214,30 +49214,26 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", [
-                  _c(
-                    "textarea",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.classat_notes,
-                          expression: "classat_notes"
-                        }
-                      ],
-                      staticClass: "w-100",
-                      domProps: { value: _vm.classat_notes },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.classat_notes = $event.target.value
-                        }
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.classat_notes,
+                        expression: "classat_notes"
                       }
-                    },
-                    [_vm._v(_vm._s(_vm.classat_notes))]
-                  ),
+                    ],
+                    staticClass: "w-100",
+                    domProps: { value: _vm.classat_notes },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.classat_notes = $event.target.value
+                      }
+                    }
+                  }),
                   _vm._v(" "),
                   _c("hr")
                 ])
