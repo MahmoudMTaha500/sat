@@ -45,18 +45,20 @@
                                             <create-service-component
                                                 :countries_from_blade="{{ json_encode($countries) }}" 
                                                 :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
+                                                :old_country_id="{{json_encode(old('country_id'))}}"
+                                                :old_institute_id="{{json_encode(old('institute_id'))}}"
                                             >
                                             </create-service-component>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> السكن</label>
-                                                    <input type="text" class="form-control" placeholder="ادخل  السكن" name="name_ar"  />
+                                                    <input type="text" class="form-control" placeholder="ادخل  السكن" name="name_ar"  value="{{old('name_ar')}}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> السعر</label>
-                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"  />
+                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"  value="{{old('price')}}" />
                                                 </div>
                                             </div>
                                         </div>

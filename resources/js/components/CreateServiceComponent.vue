@@ -26,12 +26,12 @@
 
 <script>
     export default {
-        props: ["countries_from_blade", "get_institutes_url"],
+        props: ["countries_from_blade", "get_institutes_url",'old_country_id','old_institute_id'],
         data() {
             return {
-                country_id: "",
+                country_id: this.old_country_id,
                 countries: this.countries_from_blade,
-                institute_id: "",
+                institute_id: this.old_institute_id ,
                 institutes: {},
             };
         },
