@@ -76,7 +76,6 @@ class WebsiteController extends Controller
         ]);
 
 
-        $useVue = true;
         $course_details = [];
         $weeks = $request->weeks;
         $from_date = $request->from_date;
@@ -112,13 +111,16 @@ class WebsiteController extends Controller
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
-        return view('website.institute.confirm-reservation', compact('course_details', 'useVue'));
+        return view('website.institute.confirm-reservation', compact('course_details'));
 
     }
     // student login page : show login page of type student
     public function student_login_page()
     {
         $page_title = 'تسجيل دخول';
+        if(Auth::guard('student')->check()){
+            return redirect()->route('student.profile');
+        }
         return view('website.students.login' , compact('page_title') );
     }
 
@@ -132,7 +134,7 @@ class WebsiteController extends Controller
         ]);
         $remember = $request->has('remember') ? true : false;
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
-            return redirect()->route('student.profile');
+            return back();
         } else {
             return back()->withErrors(['login_error' =>'البريد الالكتروني او كلمة المرور غير صحيحين']);
         }
@@ -142,6 +144,9 @@ class WebsiteController extends Controller
     {
         $useVue = true;
         $page_title = 'انشاء حساب جديد';
+        if(Auth::guard('student')->check()){
+            return redirect()->route('student.profile');
+        }
         return view('website.students.register', compact('useVue' , 'page_title'));
     }
     // student register request : create new user of type student
@@ -295,24 +300,18 @@ if($student_mail){
                 'phone' => ['required', 'string', 'max:255'],
                 'address' => ['required', 'string'],
                 'nationality' => ['required', 'string', 'max:255'],
-                'country' => ['required', 'string', 'max:255'],
-                'city' => ['required', 'string', 'max:255'],
             ], [
                 'name.required' => 'الاسم مطلوب',
                 'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
                 'email.required' => 'البريد الإلكتروني مطلوب',
                 'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
                 'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
-                'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
+                'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل <a data-toggle="modal" data-target="#student_login" href="">قم بتسجيل الدخول لاكمال الطلب</a> او قم بادخال بريد إلكتروني جديد ',
                 'phone.required' => 'رقم الجوال مطلوب',
                 'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
                 'address.required' => 'العنوان  مطلوب',
                 'nationality.required' => 'الجنسية مطلوبة',
                 'nationality.max' => 'يجب الا تتجاوز الجنسية  255 حرف',
-                'country.required' => 'الدولة مطلوبة',
-                'country.max' => 'يجب الا تتجاوز الدولة  255 حرف',
-                'city.required' => 'المدينة مطلوبة',
-                'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
             ]);
         }
         
