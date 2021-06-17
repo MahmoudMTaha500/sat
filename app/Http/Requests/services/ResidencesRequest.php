@@ -13,7 +13,7 @@ class ResidencesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,20 @@ class ResidencesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            "name_ar"=>'required',
+            "institute_id"=>'required',
+            "price"=>'required',
+        ];
+    }
+
+
+    public function messages()
+    {
+        return[
+            "name_ar.required"=>'اسم المطار مطلوب',
+            "institute_id.required"=>'المعهد  مطلوب',
+            "price.required"=>' السعر مطلوب',
+
         ];
     }
 }

@@ -50,12 +50,12 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left" name="institute_id">
+                                                    <select class="select2 form-control text-left" name="institute_id" value="{{old('institute_id')}}">
                                                         <option value="">اختر المعهد</option>
 
                                                         @foreach($institutes as $institute)
 
-                                                        <option value="{{$institute->id}}">{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
+                                                        <option value="{{$institute->id}}"    @if($institute->id == old('institute_id') )selected @endif>{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
 
                                                         @endforeach
                                                     </select>
@@ -73,21 +73,21 @@
                                                     <label for="projectinput2">وقت الدراسة</label>
                                                     <select class="form-control text-left" name="study_period">
                                                         <option value="">اختر</option>
-                                                        <option value=" صباحي">صباحي</option>
-                                                        <option value="مسائي">مسائي</option>
+                                                        <option  @if("صباحي" == old('study_period') )selected @endif  value=" صباحي">صباحي</option>
+                                                        <option @if( "مسائي"== old('study_period') )selected @endif value="مسائي">مسائي</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">درس/الأسبوع </label>
-                                                    <input type="number"  id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week" />
+                                                    <input type="number"  id="projectinput1" min="1" class="form-control" placeholder="درس/الأسبوع" name="lessons_per_week"  value="{{old('lessons_per_week')}}"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">ساعات/أسبوع </label>
-                                                    <input type="number" step="any" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week" />
+                                                    <input type="number" step="any" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  value="{{old('hours_per_week')}}"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -95,24 +95,24 @@
                                                     <label for="projectinput2">المستوى المطلوب</label>
                                                     <select class="form-control text-left" name="required_level">
                                                         <option value="">اختر</option>
-                                                        <option value=" مبتدئ ">مبتدئ</option>
-                                                        <option value="     متوسط ">متوسط</option>
-                                                        <option value="  متقدم  ">متقدم</option>
+                                                        <option    @if("مبتدئ" == old('required_level') )selected @endif  value=" مبتدئ ">مبتدئ</option>
+                                                        <option   @if("متوسط" == old('required_level') )selected @endif value="     متوسط ">متوسط</option>
+                                                        <option    @if("متقدم" == old('required_level') )selected @endif value="  متقدم  ">متقدم</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-                                                    <textarea type="text" id="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc"></textarea>
+                                                    <textarea type="text" id="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc">{{old('desc')}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group col-12 mb-2 contact-repeater">
                                                 <label for="projectinput3">سعر الكورس</label>
                                                 <div data-repeater-list="coures_price">
                                                     <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks" />
-                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week" />
+                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks"  value="{{old('num_of_weeks')}}"/>
+                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week"   value="{{old('preice_per_week')}}"/>
                                                         <span class="input-group-append" id="button-addon2">
                                                             <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                         </span>
@@ -123,7 +123,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label for="projectinput3">التخفيض</label>
-                                                            <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount" />
+                                                            <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount"   value="{{old('discount')}}" />
                                                         </div>
                                                     </div>
                                                 </div>

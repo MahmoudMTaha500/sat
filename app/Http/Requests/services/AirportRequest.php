@@ -26,6 +26,7 @@ class AirportRequest extends FormRequest
         return [
             "name_ar"=>'required',
             "institute_id"=>'required',
+
             "price"=>'required',
         ];
     }
@@ -34,8 +35,9 @@ class AirportRequest extends FormRequest
     public function messages()
     {
         return[
-            "name_ar.required"=>'اسم الخدمه مطلوب',
+            "name_ar.required"=>'اسم المطار مطلوب',
             "institute_id.required"=>'المعهد  مطلوب',
+
             "price.required"=>' السعر مطلوب',
 
         ];

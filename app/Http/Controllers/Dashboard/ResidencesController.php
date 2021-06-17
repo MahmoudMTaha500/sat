@@ -7,6 +7,8 @@ use App\Models\residences;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\Institute;
+use  App\Http\Requests\services\ResidencesRequest;
+
 
 class ResidencesController extends Controller
 {
@@ -56,7 +58,7 @@ public function getResidences(){
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ResidencesRequest $request)
     {
         $residences = residences::create([
             'name_ar'=>$request->name_ar,
