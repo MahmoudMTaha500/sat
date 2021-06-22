@@ -1,0 +1,51 @@
+ @import '../helpers/variables';
+//Intro
+.intro{
+    background-image: url('../../imgs/introBg.png');
+    .img-intro{
+        -webkit-filter: drop-shadow(-5px 5px 10px #ffffff25);
+        filter: drop-shadow(-5px 5px 10px #ffffff25);
+    }
+}
+// Search Institute 
+@media (max-width: 575px) {
+
+    .search-institute-form{
+        width: 100% !important;
+    }
+}
+// Offers
+
+// Success Stories
+.success-stories{
+    h6{
+        font-size: $defaultFontSize - 2;
+    }
+    span{
+        font-size: $defaultFontSize - 3;
+    }
+}
+// Studies
+.bg-study-1{
+    background-image: url('/imgs/london.png');
+    background-size: cover;
+    object-fit: fill;
+}
+.bg-study-2{
+    background-image: url('/imgs/Switzerland.png');
+    background-size: cover;
+    object-fit: fill;
+}
+// Trusted Us
+.trusted-us{
+    img{
+        width: 150px  !important;
+        margin: 0 auto;
+    }
+}
+
+// Browse our institutes
+.browse-our-institutes{
+    background-image: url('../../imgs/browse-bg.png');
+    background-size: cover;
+}

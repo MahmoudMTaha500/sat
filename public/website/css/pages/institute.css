@@ -1,0 +1,25 @@
+.nav-tabs .nav-item a.active {
+  background: #F4C20D !important;
+  color: #fff !important; }
+.nav-tabs .nav-item:first-of-type a.active {
+  background: #F4C20D !important;
+  color: #fff !important;
+  border-top-right-radius: 10px !important;
+  border-bottom-right-radius: 10px !important; }
+.nav-tabs .nav-item:last-of-type a.active {
+  background: #F4C20D !important;
+  color: #fff !important;
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important; }
+
+.course-include .include-img i {
+  top: -20px; }
+
+#rate .img-user {
+  width: 100px;
+  height: 100px;
+  object-fit: cover; }
+#rate .add-rate a {
+  font-size: 25px; }
+
+/*# sourceMappingURL=institute.css.map */

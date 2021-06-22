@@ -1,0 +1,16 @@
+// Pagination
+.pagination{
+    .page-link{
+        background:#E1E1E1;
+        &:hover{
+            background:$secondaryColor;
+            color: white !important;
+        }
+    }
+    .active{
+        .page-link{
+            background:$secondaryColor;
+            color: white !important;
+        }
+    }
+}
