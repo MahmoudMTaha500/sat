@@ -27,6 +27,7 @@
                                         <!-- Filter Form -->
 
                                         <form action="">
+                                                <label>ادخل كلمة مفتاحية</label>
                                             <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
                                                 <input ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
                                                 <div class="input-group-append">
@@ -34,21 +35,26 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label>اختر الدولة</label>
                                                 <country-component :get_countries_url="get_countries_url" ref="countries_component_ref" :ele_class="'form-control rounded-10'"> </country-component>
                                             </div>
                                             <div class="form-group">
+                                                <label>اختر المدينة</label>
                                                 <city-component :get_cities_url="get_cities_url" ref="cities_component_ref" :ele_class="'form-control rounded-10'"> </city-component>
                                             </div>
 
                                             <div class="form-group">
+                                                <label>عدد الاسابيع</label>
                                                 <select v-model="weeks" class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option v-for="week in 45" :key="week" :value="week">{{week}}</option>
                                                 </select>
                                             </div>
 
                                             <div class="form-group">
+                                                <label>المستوى المطلوب</label>
                                                 <select v-model="course_level" class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option value="" disabled selected>المستوي</option>
+                                                    <option value="">الكل</option>
                                                     <option value="مبتدئ">مبتدئ</option>
                                                     <option value="متوسط">متوسط</option>
                                                     <option class="متقدم">متقدم</option>

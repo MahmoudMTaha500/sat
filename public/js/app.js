@@ -5998,6 +5998,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52384,6 +52390,8 @@ var render = function() {
                     [
                       _c("div", { staticClass: "card-body border-top" }, [
                         _c("form", { attrs: { action: "" } }, [
+                          _c("label", [_vm._v("ادخل كلمة مفتاحية")]),
+                          _vm._v(" "),
                           _c(
                             "div",
                             {
@@ -52406,6 +52414,8 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
+                              _c("label", [_vm._v("اختر الدولة")]),
+                              _vm._v(" "),
                               _c("country-component", {
                                 ref: "countries_component_ref",
                                 attrs: {
@@ -52421,6 +52431,8 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
+                              _c("label", [_vm._v("اختر المدينة")]),
+                              _vm._v(" "),
                               _c("city-component", {
                                 ref: "cities_component_ref",
                                 attrs: {
@@ -52433,6 +52445,8 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("عدد الاسابيع")]),
+                            _vm._v(" "),
                             _c(
                               "select",
                               {
@@ -52476,6 +52490,8 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("المستوى المطلوب")]),
+                            _vm._v(" "),
                             _c(
                               "select",
                               {
@@ -52519,6 +52535,10 @@ var render = function() {
                                   },
                                   [_vm._v("المستوي")]
                                 ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("الكل")
+                                ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "مبتدئ" } }, [
                                   _vm._v("مبتدئ")
