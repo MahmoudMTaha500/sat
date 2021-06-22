@@ -34,7 +34,7 @@ class ResidencesRequest extends FormRequest
     public function messages()
     {
         return[
-            "name_ar.required"=>'اسم المطار مطلوب',
+            "name_ar.required"=>'اسم السكن مطلوب',
             "institute_id.required"=>'المعهد  مطلوب',
             "price.required"=>' السعر مطلوب',
 
