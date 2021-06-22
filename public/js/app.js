@@ -3313,6 +3313,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
   data: function data() {
@@ -3327,7 +3338,8 @@ __webpack_require__.r(__webpack_exports__);
       name_ar: "",
       course_id: "",
       discount_offers: true,
-      non_discount_offers: true
+      non_discount_offers: true,
+      status: ""
     };
   },
   methods: {
@@ -3367,11 +3379,13 @@ __webpack_require__.r(__webpack_exports__);
         city_id: this.city_id,
         name_ar: this.name_ar,
         discount_offers: this.discount_offers,
-        non_discount_offers: this.non_discount_offers
+        non_discount_offers: this.non_discount_offers,
+        status: this.status
       };
       var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
       "&discount_offers=" + this.discount_offers;
       "&non_discount_offers=" + this.non_discount_offers;
+      "&status=" + this.status;
       axios.get(this.dahsboard_url + "/filtercourses", {
         params: filter_params
       }).then(function (response) {
@@ -45662,6 +45676,67 @@ var render = function() {
                     [
                       _c("option", { attrs: { value: "" } }, [
                         _vm._v("حدد المدينة")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.cities, function(city) {
+                        return _c(
+                          "option",
+                          { key: city.id, domProps: { value: city.id } },
+                          [_vm._v(" " + _vm._s(city.name_ar))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("الحالة")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.status,
+                          expression: "status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "city", name: "city_id", required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.status = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("حدد الحالة")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [_vm._v(" الكل")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v(" مقبول")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0" } }, [
+                        _vm._v(" غير مقبول")
                       ]),
                       _vm._v(" "),
                       _vm._l(_vm.cities, function(city) {

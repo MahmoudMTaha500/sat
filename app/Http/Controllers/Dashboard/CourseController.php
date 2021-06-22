@@ -152,6 +152,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function filtercourses(Request $request)
     {
+        // dd($request->all());
 
         $institute_id = $request->institute_id;
         $country_id = $request->country_id;
@@ -159,6 +160,7 @@ class CourseController extends Controller
         $name_ar = $request->name_ar;
         $discount_offers = $request->discount_offers;
         $non_discount_offers = $request->non_discount_offers;
+        $status = $request->status;
 
         $courses = new Course();
 
@@ -185,6 +187,10 @@ class CourseController extends Controller
         }
         if ($non_discount_offers == 'false') {
             $courses = $courses->where("discount" , '!=' , 0);
+        }
+
+        if ($status) {
+            $courses = $courses->where("approvment" , "$status" );
         }
 
         $courses = $courses->with('institute', 'institute.city','student_request')->paginate(10);

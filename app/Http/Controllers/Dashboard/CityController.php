@@ -42,8 +42,8 @@ class CityController extends Controller
                 'country_id' => $country_id,
                 'name_ar' => $city_name,
             ]);
-            return back()->with("success", 'تم اضافه المدينه');
-    
+            session()->flash('alert_message', ['message' => 'تم اضافة المدينه بنجاح', 'icon' => 'success']);
+            return redirect()->route('cities.index'); 
     
 
         } else{
@@ -81,8 +81,8 @@ class CityController extends Controller
             $city->country_id = $country_id;
             $city->name_ar = $city_name;
             $city->save();
-            return back()->with("success", "تم تعديل المدينه");
-    
+            session()->flash('alert_message', ['message' => 'تم تعديل المدينه بنجاح', 'icon' => 'success']);
+            return redirect()->route('cities.index'); 
     
 
         } else{
@@ -99,7 +99,8 @@ class CityController extends Controller
     {
         $city_delete = City::find($city->id);
         $city_delete->delete();
-        return back()->with("success", "تم مسح المدينه");
+        session()->flash('alert_message', ['message' => 'تم حذف المدينه بنجاح', 'icon' => 'error']);
+            return redirect()->route('cities.index'); 
     }
 
 /****************************************************************************** */
