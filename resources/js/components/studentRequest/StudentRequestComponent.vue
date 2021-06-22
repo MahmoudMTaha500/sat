@@ -173,20 +173,40 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">تفاصيل الطلب</h4>
+                        <h4 class="modal-title" id="myModalLabel1">ملاحظات الطالب</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div>
-                            <strong>الملاحظات</strong>
                             <p>{{notes}}</p>
                             <hr />
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn grey btn-outline-secondary w-100" data-dismiss="modal">غلق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade text-left" id="classat_notes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel1">ملاحظات كلاسات</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <textarea v-model="classat_notes"  class="w-100"></textarea>
+                            <hr />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" @click="update_classat_note()" class="btn grey btn-outline-success w-100" data-dismiss="modal">حفظ </button>
                     </div>
                 </div>
             </div>
@@ -222,7 +242,8 @@
                                         <th class="border-top-0">الكورس</th>
                                         <th class="border-top-0">تفاصيل الطلب</th>
                                         <th class="border-top-0">رسالة المعهد</th>
-                                        <th class="border-top-0">ملاحظات</th>
+                                        <th class="border-top-0">ملاحظات الطالب</th>
+                                        <th class="border-top-0">ملاحظات كلاسات</th>
 
                                         <th class="border-top-0">الحالة</th>
                                         <th class="border-top-0">التاريخ</th>
@@ -248,6 +269,11 @@
                                         </td>
                                         <td class="text-truncate">
                                             <button type="button" class="btn btn-sm btn-outline-info round" @click="notes_request(request)">
+                                                <i class="la la-eye"></i>
+                                            </button>
+                                        </td>
+                                        <td class="text-truncate">
+                                            <button type="button" class="btn btn-sm btn-outline-info round" @click="classat_notes_request(request)">
                                                 <i class="la la-eye"></i>
                                             </button>
                                         </td>
@@ -300,7 +326,7 @@
 <script>
     import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
     export default {
-        props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'get_courses_url','create','edit','delete_pre','get_institutes_url'],
+        props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'create','edit','delete_pre' , 'update_classat_note_route' , 'get_courses_url' ,'get_institutes_url'],
         data() {
             return {
                 studentsRequests: {},
@@ -336,9 +362,13 @@ request_id: 0,
                     // The configuration of the editor.
                 },
                 notes: "",
+                classat_notes: "",
             };
         },
         methods: {
+            update_classat_note: function () {
+                axios.post(this.update_classat_note_route, { request_id: this.request_id, classat_notes: this.classat_notes }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {alert('تم حفظ الملاحظة بنجاح')});
+            },
             getstudentsRequests: function () {
                 axios.get(this.url).then((response) => (this.studentsRequests = response.data.studentsRequests));
             },
@@ -393,7 +423,6 @@ request_id: 0,
             },
             updateStatus: function (e) {
                 const newValue = e.target.value;
-                // alert(newValue);
                 axios.post(this.dahsboard_url + "/student-requests/update-status", { request_id: this.request_id, status: newValue }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
             },
             getrequest_id: function (id) {
@@ -402,8 +431,6 @@ request_id: 0,
 
             modelService: function (obj) {
                 this.serviceObj = obj;
-                //  console.log(this.serviceObj);
-                //    $('#institute_email_modal').modal('show');
                 this.course_Obj = this.serviceObj.course;
                 this.airport_Obj = this.serviceObj.airport;
                 this.insurance_Obj = this.serviceObj.insurance;
@@ -423,7 +450,13 @@ request_id: 0,
 
                 $("#notes").modal("show");
             },
-               getcourses: function () {
+            classat_notes_request: function (obj) {
+                this.classat_notes = obj.classat_note;
+                this.request_id = obj.id;
+
+                $("#classat_notes").modal("show");
+            },
+            getcourses: function () {
                 axios.get(this.url_course).then((response) => (this.courses = response.data.courses.data));
             },
              get_filter_courses() {

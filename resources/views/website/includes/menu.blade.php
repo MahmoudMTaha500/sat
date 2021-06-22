@@ -75,7 +75,7 @@
                             <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'institutes' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="المعاهد" href="{{route('website.institutes')}}">المعاهد</a>
                             </li>
-                            <li class="nav-item px-xl-2">
+                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'visa' ? 'active' : '') : ''}}" >
                                 <a class="nav-link text-main-color" alt="طلب تأشيرة" href="{{route('order-visa.create')}}">طلب تأشيرة</a>
                             </li>
                             <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'offers' ? 'active' : '') : ''}}">

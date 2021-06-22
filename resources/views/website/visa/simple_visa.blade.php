@@ -31,16 +31,15 @@
                     @if (session()->has('visa_id'))
                         
 
-                        <form action="" method="post" action="{{route('order-visa-checkout')}}">
+                        <form id="form-container" method="post" action="{{route('order-visa-checkout')}}">
                             @csrf
                             <input type="hidden" name="token_id" id="token_input" />
                             <input type="hidden" name="visa_id" value="{{session()->get('visa_id')}}" />
                             <div id="element-container" class="w-100"></div>
                             <div id="error-handler" role="alert"></div>
-                            <button type="button" class="btn bg-main-color text-white w-100 rounded-10"
-                                data-toggle="modal" data-target="#office_numbers">
-                            ادفع الان
-                        </button>
+                            <button id="tap-btn" type="submit" class="btn bg-main-color text-white w-100 rounded-10">
+                                دفع
+                            </button>
                         </form>
                     @else
                         <form class="my-4" method="POST" action="{{ route('order-visa.store') }}">
@@ -165,9 +164,7 @@
                                                 <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
                                             </div>
                                             <ul class="p-0">
-                                                <li><hr>+966 55 548 4931 <hr></li>
-                                                <li>+966 55 548 4931 <hr></li>
-                                                <li>+966 55 548 4931 <hr></li>
+                                                <li><hr><a href="tel:966555484931">+966 55 548 4931</a> <hr></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -242,27 +239,6 @@
             displayError.textContent = "";
         }
     });
-    // Handle form submission
-    var form = document.getElementById("form-container");
-    form.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        tap.createToken(card).then(function (result) {
-            console.log(result);
-            if (result.error) {
-                // Inform the user if there was an error
-                var errorElement = document.getElementById("error-handler");
-                errorElement.textContent = result.error.message;
-            } else {
-                // Send the token to your server
-                function get_token_id(result , form_submition){
-                    document.getElementById("token_input").value = result.id;
-                    form_submition(form)
-                }
-                get_token_id(result , function(form){form.submit();})
-            }
-        });
-    });
 </script>
 
 
@@ -275,6 +251,38 @@
 @section('website.includes.page_scripts')
 
 <script>
+
+var form = $("#form-container")
+
+form.submit(function(e){
+            e.preventDefault();
+            
+            
+         tap.createToken(card).then(function (result) {
+            
+            console.log(result);
+            if (result.error) {
+                // Inform the user if there was an error
+                var errorElement = document.getElementById("error-handler");
+                errorElement.textContent = result.error.message;
+            } else {
+                console.log(result.id)
+                // Send the token to your server
+                function get_token_id(result , form_submition){
+                    document.getElementById("token_input").value = result.id;
+                    form_submition(form)
+                }
+                get_token_id(result , function(form){form.unbind('submit').submit();})
+            }
+        });
+    });
+
+
+
+
+
+
+
     function visatype22(event) {
 
         var visa = event.target.value;

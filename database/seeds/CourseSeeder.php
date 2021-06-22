@@ -25,6 +25,7 @@ class CourseSeeder extends Seeder
                 "lessons_per_week" => 5,
                 "hours_per_week" => 20,
                 "required_level" => 'مبتدئ',
+                "approvement" => rand(0,1),
                 "discount" => rand(0,95)/100,
             ]);
         }

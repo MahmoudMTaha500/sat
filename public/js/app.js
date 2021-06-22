@@ -3396,7 +3396,7 @@ __webpack_require__.r(__webpack_exports__);
       var newValue = e.target.checked;
       axios.post(this.dahsboard_url + "/update-course-aprovement", {
         course_id: this.course_id,
-        approvment: newValue
+        approvement: newValue
       }, {
         headers: {
           "X-CSRFToken": "{{ csrf_token()}}"
@@ -4792,9 +4792,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'get_courses_url', 'create', 'edit', 'delete_pre', 'get_institutes_url'],
+  props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", 'create', 'edit', 'delete_pre', 'update_classat_note_route', 'get_courses_url', 'get_institutes_url'],
   data: function data() {
     return {
       studentsRequests: {},
@@ -4826,10 +4852,23 @@ __webpack_require__.r(__webpack_exports__);
       editorData: "<p>Content of the editor.</p>",
       editorConfig: {// The configuration of the editor.
       },
-      notes: ""
+      notes: "",
+      classat_notes: ""
     };
   },
   methods: {
+    update_classat_note: function update_classat_note() {
+      axios.post(this.update_classat_note_route, {
+        request_id: this.request_id,
+        classat_notes: this.classat_notes
+      }, {
+        headers: {
+          "X-CSRFToken": "{{ csrf_token()}}"
+        }
+      }).then(function (response) {
+        alert('تم حفظ الملاحظة بنجاح');
+      });
+    },
     getstudentsRequests: function getstudentsRequests() {
       var _this = this;
 
@@ -4892,8 +4931,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     updateStatus: function updateStatus(e) {
-      var newValue = e.target.value; // alert(newValue);
-
+      var newValue = e.target.value;
       axios.post(this.dahsboard_url + "/student-requests/update-status", {
         request_id: this.request_id,
         status: newValue
@@ -4907,9 +4945,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.request_id = id;
     },
     modelService: function modelService(obj) {
-      this.serviceObj = obj; //  console.log(this.serviceObj);
-      //    $('#institute_email_modal').modal('show');
-
+      this.serviceObj = obj;
       this.course_Obj = this.serviceObj.course;
       this.airport_Obj = this.serviceObj.airport;
       this.insurance_Obj = this.serviceObj.insurance;
@@ -4926,6 +4962,11 @@ __webpack_require__.r(__webpack_exports__);
     notes_request: function notes_request(obj) {
       this.notes = obj.note;
       $("#notes").modal("show");
+    },
+    classat_notes_request: function classat_notes_request(obj) {
+      this.classat_notes = obj.classat_note;
+      this.request_id = obj.id;
+      $("#classat_notes").modal("show");
     },
     getcourses: function getcourses() {
       var _this5 = this;
@@ -5807,6 +5848,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/website/CityComponent.vue */ "./resources/js/components/website/CityComponent.vue");
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -46019,20 +46066,20 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: course.approvment,
-                                  expression: "course.approvment"
+                                  value: course.approvement,
+                                  expression: "course.approvement"
                                 }
                               ],
-                              attrs: { type: "checkbox", id: "checkbox" },
+                              attrs: { type: "checkbox" },
                               domProps: {
-                                checked: Array.isArray(course.approvment)
-                                  ? _vm._i(course.approvment, null) > -1
-                                  : course.approvment
+                                checked: Array.isArray(course.approvement)
+                                  ? _vm._i(course.approvement, null) > -1
+                                  : course.approvement
                               },
                               on: {
                                 change: [
                                   function($event) {
-                                    var $$a = course.approvment,
+                                    var $$a = course.approvement,
                                       $$el = $event.target,
                                       $$c = $$el.checked ? true : false
                                     if (Array.isArray($$a)) {
@@ -46042,21 +46089,21 @@ var render = function() {
                                         $$i < 0 &&
                                           _vm.$set(
                                             course,
-                                            "approvment",
+                                            "approvement",
                                             $$a.concat([$$v])
                                           )
                                       } else {
                                         $$i > -1 &&
                                           _vm.$set(
                                             course,
-                                            "approvment",
+                                            "approvement",
                                             $$a
                                               .slice(0, $$i)
                                               .concat($$a.slice($$i + 1))
                                           )
                                       }
                                     } else {
-                                      _vm.$set(course, "approvment", $$c)
+                                      _vm.$set(course, "approvement", $$c)
                                     }
                                   },
                                   _vm.updateApprovment
@@ -46067,10 +46114,12 @@ var render = function() {
                               }
                             }),
                             _vm._v(" "),
-                            _c("label", { attrs: { for: "checkbox" } }, [
+                            _c("label", [
                               _vm._v(
                                 _vm._s(
-                                  course.approvment == 1 ? "مقبول" : "غير مقبول"
+                                  course.approvement == 1
+                                    ? "مقبول"
+                                    : "غير مقبول"
                                 )
                               )
                             ])
@@ -49540,8 +49589,6 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", [
-                  _c("strong", [_vm._v("الملاحظات")]),
-                  _vm._v(" "),
                   _c("p", [_vm._v(_vm._s(_vm.notes))]),
                   _vm._v(" "),
                   _c("hr")
@@ -49549,6 +49596,74 @@ var render = function() {
               ]),
               _vm._v(" "),
               _vm._m(6)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade text-left",
+        attrs: {
+          id: "classat_notes",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "myModalLabel1",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(7),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", [
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.classat_notes,
+                        expression: "classat_notes"
+                      }
+                    ],
+                    staticClass: "w-100",
+                    domProps: { value: _vm.classat_notes },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.classat_notes = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("hr")
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn grey btn-outline-success w-100",
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: {
+                      click: function($event) {
+                        return _vm.update_classat_note()
+                      }
+                    }
+                  },
+                  [_vm._v("حفظ ")]
+                )
+              ])
             ])
           ]
         )
@@ -49566,9 +49681,9 @@ var render = function() {
                 _vm._v("الدورات (" + _vm._s(this.studentsRequests.total) + ")")
               ]),
               _vm._v(" "),
-              _vm._m(7),
+              _vm._m(8),
               _vm._v(" "),
-              _vm._m(8)
+              _vm._m(9)
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-content" }, [
@@ -49580,7 +49695,7 @@ var render = function() {
                     attrs: { id: "recent-orders" }
                   },
                   [
-                    _vm._m(9),
+                    _vm._m(10),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -49650,6 +49765,23 @@ var render = function() {
                                 on: {
                                   click: function($event) {
                                     return _vm.notes_request(request)
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "la la-eye" })]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", { staticClass: "text-truncate" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-sm btn-outline-info round",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.classat_notes_request(request)
                                   }
                                 }
                               },
@@ -49981,7 +50113,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "modal-header" }, [
       _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
-        _vm._v("تفاصيل الطلب")
+        _vm._v("ملاحظات الطالب")
       ]),
       _vm._v(" "),
       _c(
@@ -50010,6 +50142,29 @@ var staticRenderFns = [
           attrs: { type: "button", "data-dismiss": "modal" }
         },
         [_vm._v("غلق")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
+        _vm._v("ملاحظات كلاسات")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
       )
     ])
   },
@@ -50068,7 +50223,9 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("رسالة المعهد")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات الطالب")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("ملاحظات كلاسات")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحالة")]),
         _vm._v(" "),
@@ -51750,9 +51907,11 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "text-main-color" }, [
-            _c("del", { staticClass: "text-danger ml-2" }, [
-              _vm._v(" " + _vm._s(_vm.price_per_week) + " ")
-            ]),
+            _vm.course.discount != 0
+              ? _c("del", { staticClass: "text-danger ml-2" }, [
+                  _vm._v(" " + _vm._s(_vm.price_per_week) + " ")
+                ])
+              : _vm._e(),
             _vm._v(
               " " +
                 _vm._s(
@@ -52272,7 +52431,7 @@ var render = function() {
           _c("div", { staticClass: "col-12" }, [
             _c("div", { staticClass: "heading-institutes" }, [
               _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
-                _vm._v("المعاهد ( " + _vm._s(_vm.courses.total) + " )")
+                _vm._v("الدورات ( " + _vm._s(_vm.courses.total) + " )")
               ]),
               _vm._v(" "),
               _c("p", [
@@ -52306,6 +52465,8 @@ var render = function() {
                     [
                       _c("div", { staticClass: "card-body border-top" }, [
                         _c("form", { attrs: { action: "" } }, [
+                          _c("label", [_vm._v("ادخل كلمة مفتاحية")]),
+                          _vm._v(" "),
                           _c(
                             "div",
                             {
@@ -52328,6 +52489,8 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
+                              _c("label", [_vm._v("اختر الدولة")]),
+                              _vm._v(" "),
                               _c("country-component", {
                                 ref: "countries_component_ref",
                                 attrs: {
@@ -52343,6 +52506,8 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
+                              _c("label", [_vm._v("اختر المدينة")]),
+                              _vm._v(" "),
                               _c("city-component", {
                                 ref: "cities_component_ref",
                                 attrs: {
@@ -52355,6 +52520,8 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("عدد الاسابيع")]),
+                            _vm._v(" "),
                             _c(
                               "select",
                               {
@@ -52398,6 +52565,8 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("المستوى المطلوب")]),
+                            _vm._v(" "),
                             _c(
                               "select",
                               {
@@ -52441,6 +52610,10 @@ var render = function() {
                                   },
                                   [_vm._v("المستوي")]
                                 ),
+                                _vm._v(" "),
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("الكل")
+                                ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "مبتدئ" } }, [
                                   _vm._v("مبتدئ")
@@ -52741,15 +52914,17 @@ var render = function() {
                                 "card-footer bg-white overflow-hidden"
                             },
                             [
-                              _c("del", { staticClass: "text-muted del" }, [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.course_price_per_week(
-                                      course.courses_price
+                              course.discount != 0
+                                ? _c("del", { staticClass: "text-muted del" }, [
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm.course_price_per_week(
+                                          course.courses_price
+                                        )
+                                      ) + " ريال / أسبوع "
                                     )
-                                  ) + " ريال / أسبوع "
-                                )
-                              ]),
+                                  ])
+                                : _vm._e(),
                               _vm._v(" "),
                               _c(
                                 "span",
@@ -67028,8 +67203,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

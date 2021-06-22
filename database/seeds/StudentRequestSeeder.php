@@ -46,6 +46,7 @@ class StudentRequestSeeder extends Seeder
                 "from_date" =>  $from_date,
                 "to_date" => to_date($from_date , $weeks),
                 "note" => 'هذه ملاحظة افتراضية',
+                "classat_note" => 'هذه ملاحظة افتراضية لموقع كلاسات',
             ]);
         }
     }

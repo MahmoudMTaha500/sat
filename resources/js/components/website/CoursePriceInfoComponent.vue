@@ -11,7 +11,7 @@
                         اللغة الإنجليزية العامة :
                         <span class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} -</span>
                     </span>
-                    <span class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del> {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الاسبوع</span>
+                    <span class="text-main-color"><del v-if="course.discount !=0" class="text-danger ml-2"> {{price_per_week}} </del> {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الاسبوع</span>
                     <hr />
                 </div>
                 <div>

@@ -29,13 +29,14 @@ class WebsiteController extends Controller
     public function home_page()
     {
         $useVue = true;
-        $best_offers = Course::orderBy('discount', 'DESC')->take(10)->get();
-        $success_stories = StudentSuccessStory::inRandomOrder()->take(10)->get();
+        $best_offers = Course::orderBy('discount', 'DESC')->take(10)->where('discount' , '!=' , 0)->get();
+        $success_stories = StudentSuccessStory::where('approvement' , 1)->inRandomOrder()->take(10)->get();
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
         $page_name = 'home';
-        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_name'));
+        $page_title = 'كلاسات | الصفحة الرئيسية';
+        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_name' ,'page_title'));
     }
     // institutes page method : show all institutes with filter
     public function institutes_page(Request $request)
@@ -43,7 +44,8 @@ class WebsiteController extends Controller
         $useVue = true;
         $search = $request->all();
         $page_name = 'institutes';
-        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_name'));
+        $page_title = 'المعاهد';
+        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_name' , 'page_title'));
     }
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
@@ -54,9 +56,10 @@ class WebsiteController extends Controller
         if (empty($course[0])) {return redirect()->route('website.home');}
         $course = $course[0];
         $institute = $institute[0];
-        
+        $page_name = 'institutes';
         $useVue = true;
-        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute'));
+        $page_title = $institute->name_ar.' | '.$course->name_ar;
+        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_title' , 'page_name'));
     }
     // confirm reservation page
     public function confirm_reservation(Request $request, $pay_checker = null)
@@ -73,7 +76,6 @@ class WebsiteController extends Controller
         ]);
 
 
-        $useVue = true;
         $course_details = [];
         $weeks = $request->weeks;
         $from_date = $request->from_date;
@@ -109,13 +111,17 @@ class WebsiteController extends Controller
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
-        return view('website.institute.confirm-reservation', compact('course_details', 'useVue'));
+        return view('website.institute.confirm-reservation', compact('course_details'));
 
     }
     // student login page : show login page of type student
     public function student_login_page()
     {
-        return view('website.students.login');
+        $page_title = 'تسجيل دخول';
+        if(Auth::guard('student')->check()){
+            return redirect()->route('student.profile');
+        }
+        return view('website.students.login' , compact('page_title') );
     }
 
 
@@ -128,7 +134,7 @@ class WebsiteController extends Controller
         ]);
         $remember = $request->has('remember') ? true : false;
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
-            return redirect()->route('student.profile');
+            return back();
         } else {
             return back()->withErrors(['login_error' =>'البريد الالكتروني او كلمة المرور غير صحيحين']);
         }
@@ -137,7 +143,11 @@ class WebsiteController extends Controller
     public function student_register_page(Request $request)
     {
         $useVue = true;
-        return view('website.students.register', compact('useVue'));
+        $page_title = 'انشاء حساب جديد';
+        if(Auth::guard('student')->check()){
+            return redirect()->route('student.profile');
+        }
+        return view('website.students.register', compact('useVue' , 'page_title'));
     }
     // student register request : create new user of type student
     public function student_register_auth(RegisterStudentRequest $request)
@@ -214,7 +224,8 @@ if($student_mail){
     {
         $blogs = Blog::paginate(8);
         $page_name = 'articles';
-        return view('website.blog.articles', compact('blogs' , 'page_name'));
+        $page_title = 'المقالات';
+        return view('website.blog.articles', compact('blogs' , 'page_name' , 'page_title'));
     }
 
 
@@ -289,24 +300,18 @@ if($student_mail){
                 'phone' => ['required', 'string', 'max:255'],
                 'address' => ['required', 'string'],
                 'nationality' => ['required', 'string', 'max:255'],
-                'country' => ['required', 'string', 'max:255'],
-                'city' => ['required', 'string', 'max:255'],
             ], [
                 'name.required' => 'الاسم مطلوب',
                 'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
                 'email.required' => 'البريد الإلكتروني مطلوب',
                 'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
                 'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
-                'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
+                'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل <a data-toggle="modal" data-target="#student_login" href="">قم بتسجيل الدخول لاكمال الطلب</a> او قم بادخال بريد إلكتروني جديد ',
                 'phone.required' => 'رقم الجوال مطلوب',
                 'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
                 'address.required' => 'العنوان  مطلوب',
                 'nationality.required' => 'الجنسية مطلوبة',
                 'nationality.max' => 'يجب الا تتجاوز الجنسية  255 حرف',
-                'country.required' => 'الدولة مطلوبة',
-                'country.max' => 'يجب الا تتجاوز الدولة  255 حرف',
-                'city.required' => 'المدينة مطلوبة',
-                'city.max' => 'يجب الا تتجاوز المدينة  255 حرف',
             ]);
         }
         
@@ -609,12 +614,14 @@ if($student_mail){
         public function about_us()
         {
             $page_name = 'about-us';
-            return view('website.about-us' , compact('page_name'));
+            $page_title = 'من نحن';
+            return view('website.about-us' , compact('page_name' , 'page_title'));
         }
         public function contact_us()
         {
             $page_name = 'contact-us';
-            return view('website.contact-us' , compact('page_name') );
+            $page_title = 'تواصل معنا';
+            return view('website.contact-us' , compact('page_name' , 'page_title') );
         }
         public function send_contact_us_mail(Request $request)
         {
@@ -650,7 +657,8 @@ if($student_mail){
             {
                 $offers = Course::where('discount' , '!=' , 0)->paginate(12);
                 $page_name = 'offers';
-                return view('website.offers' , compact('offers' , 'page_name'));
+                $page_title = 'العروض';
+                return view('website.offers' , compact('offers' , 'page_name' , 'page_title'));
             }
             public function add_review(Request $request)
             {

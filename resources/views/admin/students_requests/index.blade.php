@@ -19,8 +19,8 @@
 
 
             <student-request-component
+            update_classat_note_route = "{{  route('update_classat_note') }}"
             :course_url="{{json_encode(url('/dashboard/getcourses'))}}"
-
             :student_request_url="{{json_encode(url('/dashboard/student-requests/getStudentRequests'))}}"
             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"   
             :countries_from_blade="{{ json_encode($countries) }}"

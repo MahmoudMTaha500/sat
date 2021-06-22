@@ -341,11 +341,9 @@ form .btn {
 
 .institute-imgs .owl-item {
   padding: 0 !important; }
-.institute-imgs .profile-institute-img {
-  height: 600px; }
+.institute-imgs .profile-institute-img { }
   @media (max-width: 575px) {
-    .institute-imgs .profile-institute-img {
-      height: 320px; } }
+    .institute-imgs .profile-institute-img {} }
   .institute-imgs .profile-institute-img img {
     height: inherit;
     object-fit: fill; }
@@ -624,6 +622,14 @@ body {
     }
     .website-pagination .pagination .page-item{
         display: inline-block!important;
+    }
+
+    .overlay{
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
     }
   
   /*# sourceMappingURL=article.css.map */

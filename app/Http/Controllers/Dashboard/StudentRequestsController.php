@@ -9,6 +9,7 @@ use App\Models\Institute;
 use App\Models\Insurances;
 use App\Models\StudentRequest;
 use Illuminate\Http\Request;
+use Mail;
 
 class StudentRequestsController extends Controller
 {
@@ -36,7 +37,34 @@ class StudentRequestsController extends Controller
         $request_student = StudentRequest::find($request->request_id);
         $request_student->status = $request->status;
         $request_student->save();
+        if($request->status == 'جديد'){return 'new';}
 
+        $data = array(
+            'course_name' => $request_student->course->name_ar,
+            'institute_name' => $request_student->course->institute->name_ar,
+            'country_name' => $request_student->course->institute->country->name_ar,
+            'city_name' => $request_student->course->institute->city->name_ar,
+        );
+
+        
+        if($request->status == 'حصل علي قبول'){$data['request_status'] = 'تم قبولك بنجاح';}
+        if($request->status == 'بداء الدراسة'){$data['request_status'] = 'لقد تم بداء دراستك';}
+        if($request->status == 'مرفوض'){$data['request_status'] = 'تم رفضك';}
+
+
+        $subject = 'حالة الطلب الخاص بكم في موقع كلاسات';
+        Mail::send('mail.student_request_status', $data, function ($message) use ($request_student, $subject) {
+            $message->to($request_student->student->email, $request_student->student->name)
+            ->subject($subject);
+            $message->from('no-reply@sat-edu.com', 'Classat');
+        });
+
+    }
+    public function update_classat_note(Request $request)
+    {
+        $request_student = StudentRequest::find($request->request_id);
+        $request_student->classat_note = $request->classat_notes;
+        $request_student->save();
     }
     public function create()
     {

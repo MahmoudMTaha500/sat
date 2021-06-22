@@ -65,7 +65,7 @@ class CourseController extends Controller
                 'hours_per_week' => $request->hours_per_week,
                 'required_level' => $request->required_level,
                 'discount' => $request->discount/100,
-                'approvment' => 0,
+                'approvement' => 0,
 
             ]);
             $coures_price = $request->coures_price;
@@ -201,7 +201,7 @@ class CourseController extends Controller
     public function updateAprovement(Request $request)
     {
         $institute = Course::find($request->course_id);
-        $institute->approvment = $request->approvment;
+        $institute->approvement = $request->approvement;
         $institute->save();
     }
     /************************************************************** */
