@@ -36,7 +36,6 @@ class VueRequestsController extends Controller
     {
         $courses = Course::where('approvement' , 1);
 
-        
         if(!empty($request->country_id)){
             $courses = $courses->whereHas('institute', function ($query) use ($request) {
                 $query->where('country_id', $request->country_id);
@@ -61,6 +60,30 @@ class VueRequestsController extends Controller
             $courses = $courses->where('required_level', $request->course_level);
         }
        
+ 
+
+
+        
+
+                $weeks = [];
+                $selected_weeks = DB::select('(SELECT MAX(weeks) as weeks FROM course_prices WHERE weeks < 25 OR weeks = 25 GROUP BY course_id)');
+                foreach($selected_weeks as $index => $selected_week){
+                    $weeks[$index]=$selected_week->weeks;
+                }
+                
+                return DB::table('courses')
+                        ->join('course_prices', 'courses.id', '=', 'course_prices.course_id')
+                        ->join('institutes', 'institutes.id', '=', 'courses.institute_id')
+                        ->select(
+                                'courses.id AS course_id' ,  
+                                'courses.discount AS discount' ,  
+                                'course_prices.weeks' , 
+                                'course_prices.price' , 
+                                'course_prices.id' , 
+                                DB::raw("course_prices.price*courses.discount as real_price"))
+                        ->WhereIn('course_prices.weeks' , $weeks)
+                        ->get();
+
 
         $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPrice' , 'student_favourite')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
@@ -71,6 +94,7 @@ class VueRequestsController extends Controller
     {
         return $request->course_id;
         $courses = new Course();
+        
         if(!empty($request->keyword)){
             $courses = $courses->where("name_ar", 'LIKE', "%{$request->keyword}%");
         }

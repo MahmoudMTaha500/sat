@@ -6004,6 +6004,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -52866,7 +52868,9 @@ var render = function() {
                                     ) + " ريال / أسبوع "
                                   )
                                 ]
-                              )
+                              ),
+                              _vm._v(" "),
+                              _c("p")
                             ]
                           )
                         ]
@@ -52954,7 +52958,19 @@ var render = function() {
           ])
         ])
       ])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "button",
+      {
+        on: {
+          click: function($event) {
+            return _vm.test_price()
+          }
+        }
+      },
+      [_vm._v("click")]
+    )
   ])
 }
 var staticRenderFns = [

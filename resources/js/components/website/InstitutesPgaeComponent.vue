@@ -123,7 +123,8 @@
                                         <!-- Course Price -->
                                         <div class="card-footer bg-white overflow-hidden">
                                             <del v-if="course.discount != 0" class="text-muted del">{{course_price_per_week(course.courses_price)}} ريال / أسبوع </del>
-                                            <span class="float-left text-main-color">{{Math.round(course_price_per_week(course.courses_price)*(1-course.discount)) }} ريال / أسبوع </span>
+                                            <span class="float-left text-main-color">{{Math.round(course_price_per_week(course.courses_price)*(1-course.discount))}} ريال / أسبوع </span>
+                                            <p></p>
                                         </div>
                                         <!-- ./Course Price -->
                                     </div>
@@ -165,6 +166,7 @@
             </div>
         </section>
         <!-- Institutes -->
+        <button @click="test_price()">click</button>
     </div>
 </template>
 
