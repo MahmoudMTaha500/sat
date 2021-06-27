@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\Course;
+use App\Models\Institute;
 use App\Models\Favourite;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -34,6 +35,7 @@ class VueRequestsController extends Controller
     // get course
     public function get_courses(Request $request)
     {
+        // dd($request->all());
         $courses = Course::where('approvement' , 1);
 
         
@@ -60,7 +62,16 @@ class VueRequestsController extends Controller
         if(!empty($request->course_level)){
             $courses = $courses->where('required_level', $request->course_level);
         }
-       
+       if($request->rate_filter){
+
+            $courses = $courses->whereHas('institute', function ($query) use ($request) {
+                $query->where('sat_rate', $request->rate_filter);
+            });
+               
+          
+
+
+       }
 
         $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPrice' , 'student_favourite')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);

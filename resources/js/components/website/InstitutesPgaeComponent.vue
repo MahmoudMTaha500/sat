@@ -60,6 +60,27 @@
                                                     <option class="متقدم">متقدم</option>
                                                 </select>
                                             </div>
+                                        <div class="form-group">
+                                                <label> ترتيب حسب التقيم</label>
+                                                <select v-model="rate_filter" class="form-control  rounded-10" data-live-search="true">
+                                                    <option value="">الكل</option>
+                                                    <option value="1">  نجمه    </option>
+                                                    <option value="2">  نجمتين    </option>
+                                                    <option value="3">   ثلاث نجوم    </option>
+                                                    <option value="4">  اربعه نجوم    </option>
+                                                    <option value="5">  خمس نجوم    </option>
+                                                 
+                                                </select>
+                                            </div>
+                                        <div class="form-group">
+                                                <label> ترتيب حسب السعر</label>
+                                                <select v-model="price_filter" class="form-control  rounded-10" data-live-search="true">
+                                                    <option value="">الكل</option>
+                                                    <option value="price_high"> السعر من الاعلي الي الاقل </option>
+                                                    <option value="price_low">السعر من الاقل اللي الاعلي </option>
+                                                 
+                                                </select>
+                                            </div>
                                             <div class="mb-4">
                                                 <div class="form-check form-check-inline mr-0 ml-4">
                                                     <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" v-model="best_offers" />
@@ -127,10 +148,11 @@
                                         </div>
                                         <!-- ./Course Price -->
                                     </div>
-                                    <!-- ./Institute -->
+                                    <!-- ./Institute -->  
+
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
                 <!-- ./Institute List -->
@@ -186,6 +208,8 @@
                 high_rated: false,
                 use_params: false,
                 course_level: '',
+                rate_filter:"",
+                price_filter:"",
             };
         },
         methods: {
@@ -258,10 +282,16 @@
                     weeks: this.weeks,
                     best_offers: this.best_offers,
                     course_level: this.course_level,
+                    rate_filter:this.rate_filter,
+                    price_filter :this.price_filter,
+
                 };
                 var pagination_params = "&keyword=" + this.keyword;
                 return { filter_params: filter_params, pagination_params: pagination_params };
             },
+        },
+        computed:{
+
         },
         beforeMount() {
             
