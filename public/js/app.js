@@ -6006,10 +6006,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search"],
+  props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search", "get_student_favourite_courses_url"],
   data: function data() {
     return {
       courses: {},
@@ -6022,7 +6034,8 @@ __webpack_require__.r(__webpack_exports__);
       best_offers: false,
       high_rated: false,
       use_params: false,
-      course_level: ''
+      course_level: "",
+      student_favourite_courses: {}
     };
   },
   methods: {
@@ -6046,19 +6059,6 @@ __webpack_require__.r(__webpack_exports__);
       this.get_courses_url = url;
       this.get_courses();
     },
-    heart_type: function heart_type(course_obj) {
-      var _this2 = this;
-
-      var heart_type = "far";
-      course_obj.student_favourite.forEach(function (favourite) {
-        if (favourite.student_id == _this2.student_id) {
-          console.log(favourite.student_id);
-          heart_type = "fas";
-          return false;
-        }
-      });
-      return heart_type;
-    },
     institute_rate: function institute_rate(institute_obj) {
       if (institute_obj.rate_switch == 1) {
         return institute_obj.sat_rate;
@@ -6078,13 +6078,13 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     course_price_per_week: function course_price_per_week(prices_obj) {
-      var _this3 = this;
+      var _this2 = this;
 
       var price_per_week = 0;
       prices_obj.every(function (week_price) {
         price_per_week = week_price.price;
 
-        if (_this3.weeks <= week_price.weeks) {
+        if (_this2.weeks <= week_price.weeks) {
           price_per_week = week_price.price;
           return false;
         } else {
@@ -6100,7 +6100,8 @@ __webpack_require__.r(__webpack_exports__);
         city_id: this.city_id,
         weeks: this.weeks,
         best_offers: this.best_offers,
-        course_level: this.course_level
+        course_level: this.course_level,
+        student_id: this.student_id
       };
       var pagination_params = "&keyword=" + this.keyword;
       return {
@@ -6128,6 +6129,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.get_courses();
   },
+  computed: {},
   components: {
     CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -52648,7 +52650,7 @@ var render = function() {
                 _vm._l(_vm.courses.data, function(course) {
                   return _c(
                     "div",
-                    { key: course.id, staticClass: "col-lg-4 col-md-6" },
+                    { key: course.course_id, staticClass: "col-lg-4 col-md-6" },
                     [
                       _c(
                         "div",
@@ -52682,14 +52684,18 @@ var render = function() {
                                 {
                                   staticClass:
                                     "add-favourite position-absolute",
-                                  attrs: { "course-id": course.id }
+                                  attrs: { "course-id": course.course_id }
                                 },
                                 [
-                                  _c("i", {
-                                    class:
-                                      _vm.heart_type(course) +
-                                      " fa-heart favourite-icon"
-                                  })
+                                  course.favourite_course_id != null
+                                    ? _c("i", {
+                                        staticClass:
+                                          "fas fa-heart favourite-icon"
+                                      })
+                                    : _c("i", {
+                                        staticClass:
+                                          "far fa-heart favourite-icon"
+                                      })
                                 ]
                               )
                             : _vm._e(),
@@ -52701,11 +52707,11 @@ var render = function() {
                                 href:
                                   _vm.public_path +
                                   "institute/" +
-                                  course.institute.id +
+                                  course.institute_id +
                                   "/" +
-                                  course.institute.slug +
+                                  course.institute_sulg +
                                   "/" +
-                                  course.slug
+                                  course.course_sulg
                               }
                             },
                             [
@@ -52721,8 +52727,8 @@ var render = function() {
                                     attrs: {
                                       src:
                                         _vm.public_path +
-                                        course.institute.banner,
-                                      alt: course.institute.name_ar
+                                        course.institute_banner,
+                                      alt: course.institute_name
                                     }
                                   })
                                 ]
@@ -52743,17 +52749,16 @@ var render = function() {
                                       href:
                                         _vm.public_path +
                                         "institute/" +
-                                        course.institute.id +
+                                        course.institute_id +
                                         "/" +
-                                        course.institute.slug +
+                                        course.institute_sulg +
                                         "/" +
-                                        course.slug
+                                        course.course_sulg
                                     }
                                   },
                                   [
                                     _vm._v(
-                                      " معهد " +
-                                        _vm._s(course.institute.name_ar)
+                                      " معهد " + _vm._s(course.institute_name)
                                     )
                                   ]
                                 )
@@ -52766,9 +52771,7 @@ var render = function() {
                                   _c("rate", {
                                     attrs: {
                                       length: 5,
-                                      value: _vm.institute_rate(
-                                        course.institute
-                                      ),
+                                      value: Math.round(course.institute_rate),
                                       disabled: ""
                                     }
                                   }),
@@ -52779,7 +52782,9 @@ var render = function() {
                                     [
                                       _vm._v(
                                         _vm._s(
-                                          _vm.institute_rate(course.institute)
+                                          Math.round(
+                                            course.institute_rate * 10
+                                          ) / 10
                                         )
                                       )
                                     ]
@@ -52795,9 +52800,9 @@ var render = function() {
                                 }),
                                 _vm._v(
                                   " " +
-                                    _vm._s(course.institute.country.name_ar) +
+                                    _vm._s(course.country_name) +
                                     " , " +
-                                    _vm._s(course.institute.city.name_ar)
+                                    _vm._s(course.city_name)
                                 )
                               ]),
                               _vm._v(" "),
@@ -52806,7 +52811,7 @@ var render = function() {
                                   staticClass:
                                     "fas fa-graduation-cap text-main-color"
                                 }),
-                                _vm._v(" " + _vm._s(course.name_ar))
+                                _vm._v(" " + _vm._s(course.course_name))
                               ]),
                               _vm._v(" "),
                               _c("p", { staticClass: "mb-0 overflow-hidden" }, [
@@ -52817,7 +52822,7 @@ var render = function() {
                                   _vm._v(
                                     " " +
                                       _vm._s(
-                                        course.study_period == "morning"
+                                        course.courses_study_period == "morning"
                                           ? "صباحي"
                                           : "مسائي"
                                       )
@@ -52828,7 +52833,9 @@ var render = function() {
                                   _c("i", {
                                     staticClass: "fas fa-signal text-main-color"
                                   }),
-                                  _vm._v(" " + _vm._s(course.required_level))
+                                  _vm._v(
+                                    " " + _vm._s(course.courses_required_level)
+                                  )
                                 ])
                               ])
                             ]
@@ -52844,11 +52851,8 @@ var render = function() {
                               course.discount != 0
                                 ? _c("del", { staticClass: "text-muted del" }, [
                                     _vm._v(
-                                      _vm._s(
-                                        _vm.course_price_per_week(
-                                          course.courses_price
-                                        )
-                                      ) + " ريال / أسبوع "
+                                      _vm._s(course.real_price) +
+                                        " ريال / أسبوع "
                                     )
                                   ])
                                 : _vm._e(),
@@ -52859,12 +52863,7 @@ var render = function() {
                                 [
                                   _vm._v(
                                     _vm._s(
-                                      Math.round(
-                                        _vm.course_price_per_week(
-                                          course.courses_price
-                                        ) *
-                                          (1 - course.discount)
-                                      )
+                                      Math.round(course.discounted_price)
                                     ) + " ريال / أسبوع "
                                   )
                                 ]
@@ -52918,7 +52917,7 @@ var render = function() {
                         {
                           staticClass:
                             "page-link rounded-10 mx-1 text-white border-0",
-                          staticStyle: { background: "#F4C20D" }
+                          staticStyle: { background: "#f4c20d" }
                         },
                         [
                           _vm._v(

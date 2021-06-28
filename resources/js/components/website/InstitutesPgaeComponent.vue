@@ -27,7 +27,7 @@
                                         <!-- Filter Form -->
 
                                         <form action="">
-                                                <label>ادخل كلمة مفتاحية</label>
+                                            <label>ادخل كلمة مفتاحية</label>
                                             <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
                                                 <input ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
                                                 <div class="input-group-append">
@@ -65,7 +65,6 @@
                                                     <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" v-model="best_offers" />
                                                     <label class="form-check-label">افضل العروض</label>
                                                 </div>
-                                              
                                             </div>
                                             <button @click="filter_courses()" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">فلتر</button>
                                         </form>
@@ -79,54 +78,59 @@
                     <div class="col-xl-9">
                         <div class="institutes-list pt-4">
                             <div class="row">
-                                <div v-for="course in courses.data" :key="course.id" class="col-lg-4 col-md-6">
+                                <div v-for="course in courses.data" :key="course.course_id" class="col-lg-4 col-md-6">
                                     <!-- Institute -->
                                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                         <!-- Offer Icon -->
-                                        <div v-if="course.discount!=0"  class="offer-icon position-absolute bg-secondary-color text-white">
+                                        <div v-if="course.discount!=0" class="offer-icon position-absolute bg-secondary-color text-white">
                                             - {{Math.round(course.discount*100)}} %
                                         </div>
                                         <!-- Offer Icon -->
                                         <!-- Add To Favourite Btn -->
-                                        <div v-if="student_check" class="add-favourite position-absolute" :course-id="course.id">
-                                            <i :class="heart_type(course) + ' fa-heart favourite-icon'"></i>
+                                        <div v-if="student_check" class="add-favourite position-absolute" :course-id="course.course_id">
+                                            <i v-if="course.favourite_course_id != null" class="fas fa-heart favourite-icon"></i>
+                                            <i v-else class="far fa-heart favourite-icon"></i>
                                         </div>
-                                        <!-- ./Add To Favourite Btn -->
+                                         <!-- ./Add To Favourite Btn -->
                                         <!-- Institute Img -->
-                                        <a :href="public_path+'institute/'+course.institute.id+'/'+course.institute.slug+'/'+course.slug">
+                                        <a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg">
                                             <div class="institute-img d-inline-block position-relative">
-                                                <img :src="public_path+course.institute.banner" :alt="course.institute.name_ar" class="card-img-top" />
+                                                <img :src="public_path+course.institute_banner" :alt="course.institute_name" class="card-img-top" />
                                             </div>
                                         </a>
+                                        
+
+
                                         <!-- ./Institute Img -->
                                         <div class="card-body rounded-10 bg-white">
                                             <!-- Institute Title -->
-                                            <h5 class="card-title"><a :href="public_path+'institute/'+course.institute.id+'/'+course.institute.slug+'/'+course.slug" class="text-main-color"> معهد {{course.institute.name_ar}}</a></h5>
+                                            <h5 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg" class="text-main-color"> معهد {{course.institute_name}}</a></h5>
                                             <!-- ./Institute Title -->
                                             <!-- Institute Rate -->
 
-                                            <p class="mb-0 d-flex"><rate :length="5" :value="institute_rate(course.institute)" disabled /> <span style="line-height: 39px;">{{institute_rate(course.institute)}}</span></p>
+                                            <p class="mb-0 d-flex"><rate :length="5" :value="Math.round(course.institute_rate)" disabled /> <span style="line-height: 39px;">{{Math.round(course.institute_rate*10)/10}}</span></p>
                                             <!-- ./Institute Rate -->
                                             <!-- Institute Location -->
-                                            <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{course.institute.country.name_ar}} , {{course.institute.city.name_ar}}</p>
+                                            <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{course.country_name}} , {{course.city_name}}</p>
                                             <!-- ./Institute Location -->
                                             <!-- Course Name -->
-                                            <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> {{course.name_ar}}</p>
+                                            <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> {{course.course_name}}</p>
                                             <!-- ./Course Name -->
                                             <!-- Course Time And Level -->
                                             <p class="mb-0 overflow-hidden">
-                                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{course.study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
-                                                <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{course.required_level}}</span>
+                                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{course.courses_study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
+                                                <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{course.courses_required_level}}</span>
                                             </p>
                                             <!-- ./Course Time And Level -->
                                         </div>
                                         <!-- Course Price -->
                                         <div class="card-footer bg-white overflow-hidden">
-                                            <del v-if="course.discount != 0" class="text-muted del">{{course_price_per_week(course.courses_price)}} ريال / أسبوع </del>
-                                            <span class="float-left text-main-color">{{Math.round(course_price_per_week(course.courses_price)*(1-course.discount))}} ريال / أسبوع </span>
+                                            <del v-if="course.discount != 0" class="text-muted del">{{course.real_price}} ريال / أسبوع </del>
+                                            <span class="float-left text-main-color">{{Math.round(course.discounted_price)}} ريال / أسبوع </span>
                                             <p></p>
                                         </div>
                                         <!-- ./Course Price -->
+                                        
                                     </div>
                                     <!-- ./Institute -->
                                 </div>
@@ -141,25 +145,33 @@
                         <nav aria-label="Page navigation  ">
                             <ul class="pagination d-flex justify-content-end">
                                 <li class="page-item">
-                                    <button :style="!courses.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"  @click="pagination(prev_page_url)" :disabled="!courses.prev_page_url" class="page-link rounded-10 mx-1 text-dark border-0" >
+                                    <button
+                                        :style="!courses.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                        @click="pagination(prev_page_url)"
+                                        :disabled="!courses.prev_page_url"
+                                        class="page-link rounded-10 mx-1 text-dark border-0"
+                                    >
                                         <i class="fas fa-chevron-right"></i>
                                     </button>
                                 </li>
                                 <li class="page-item">
-                                   
                                     <span>
-                                        <span style="background:#F4C20D;" class="page-link rounded-10 mx-1 text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
+                                        <span style="background: #f4c20d;" class="page-link rounded-10 mx-1 text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
                                     </span>
                                 </li>
-                                
+
                                 <li class="page-item">
-                                    <button :style="!courses.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''" @click="pagination(next_page_url)" :disabled="!courses.next_page_url" class="page-link rounded-10 mx-1 text-dark border-0" >
+                                    <button
+                                        :style="!courses.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                        @click="pagination(next_page_url)"
+                                        :disabled="!courses.next_page_url"
+                                        class="page-link rounded-10 mx-1 text-dark border-0"
+                                    >
                                         <i class="fas fa-chevron-left"></i>
                                     </button>
                                 </li>
                             </ul>
                         </nav>
-
                     </div>
                 </div>
                 <!-- ./Pagination -->
@@ -174,7 +186,7 @@
     import CityComponent from "../../components/website/CityComponent.vue";
     import CountryComponent from "../../components/website/CountryComponent.vue";
     export default {
-        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search"],
+        props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search", "get_student_favourite_courses_url"],
         data() {
             return {
                 courses: {},
@@ -187,7 +199,8 @@
                 best_offers: false,
                 high_rated: false,
                 use_params: false,
-                course_level: '',
+                course_level: "",
+                student_favourite_courses: {},
             };
         },
         methods: {
@@ -209,18 +222,7 @@
                 this.get_courses_url = url;
                 this.get_courses();
             },
-            heart_type: function (course_obj) {
-                var heart_type = "far";
-                course_obj.student_favourite.forEach((favourite) => {
-                    if (favourite.student_id == this.student_id) {
-                        console.log(favourite.student_id);
-                        heart_type = "fas";
-                        return false;
-                    }
-                });
-
-                return heart_type;
-            },
+     
             institute_rate: function (institute_obj) {
                 if (institute_obj.rate_switch == 1) {
                     return institute_obj.sat_rate;
@@ -239,18 +241,18 @@
                     }
                 }
             },
-            course_price_per_week(prices_obj){
+            course_price_per_week(prices_obj) {
                 var price_per_week = 0;
-                prices_obj.every(week_price => {
+                prices_obj.every((week_price) => {
                     price_per_week = week_price.price;
-                    if(this.weeks <= week_price.weeks){
+                    if (this.weeks <= week_price.weeks) {
                         price_per_week = week_price.price;
                         return false;
-                    }else{
-                            return true
+                    } else {
+                        return true;
                     }
                 });
-                return price_per_week
+                return price_per_week;
             },
             params: function () {
                 var filter_params = {
@@ -260,21 +262,30 @@
                     weeks: this.weeks,
                     best_offers: this.best_offers,
                     course_level: this.course_level,
+                    student_id: this.student_id,
                 };
                 var pagination_params = "&keyword=" + this.keyword;
                 return { filter_params: filter_params, pagination_params: pagination_params };
             },
         },
         beforeMount() {
-            
-            if(this.search.length != 0){
-                this.keyword = this.search.keyword
-                if(this.search.country != undefined){this.country_id = this.search.country}
-                if(this.search.city != undefined){this.city_id = this.search.city}
-                if(this.search.weeks != undefined){this.weeks = this.search.weeks}
+            if (this.search.length != 0) {
+                this.keyword = this.search.keyword;
+                if (this.search.country != undefined) {
+                    this.country_id = this.search.country;
+                }
+                if (this.search.city != undefined) {
+                    this.city_id = this.search.city;
+                }
+                if (this.search.weeks != undefined) {
+                    this.weeks = this.search.weeks;
+                }
             }
-            
+
             this.get_courses();
+        },
+        computed:{
+            
         },
         components: {
             CityComponent,

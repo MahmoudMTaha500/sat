@@ -63,29 +63,46 @@ class VueRequestsController extends Controller
  
 
 
-        
 
                 $weeks = [];
-                $selected_weeks = DB::select('(SELECT MAX(weeks) as weeks FROM course_prices WHERE weeks < 25 OR weeks = 25 GROUP BY course_id)');
+                $selected_weeks = DB::select('(SELECT MAX(weeks) as weeks FROM course_prices WHERE weeks < 23 OR weeks = 23 GROUP BY course_id)');
                 foreach($selected_weeks as $index => $selected_week){
                     $weeks[$index]=$selected_week->weeks;
                 }
                 
-                return DB::table('courses')
+               $courses = DB::table('courses')
                         ->join('course_prices', 'courses.id', '=', 'course_prices.course_id')
                         ->join('institutes', 'institutes.id', '=', 'courses.institute_id')
+                        ->join('countries', 'institutes.country_id', '=', 'countries.id')
+                        ->join('cities', 'institutes.city_id', '=', 'cities.id')
+                        ->leftJoin(DB::raw('(SELECT * , AVG(rate) AS student_rates FROM institute_rates GROUP BY institute_id) AS institute_rates'), 'institute_rates.institute_id', '=', 'institutes.id')
+                        ->leftJoin(DB::raw('(SELECT *  FROM favourites WHERE student_id = '.$request->student_id.') AS student_favourites'), 'student_favourites.course_id', '=', 'courses.id')
                         ->select(
                                 'courses.id AS course_id' ,  
+                                'courses.slug AS course_sulg' ,  
+                                'institutes.id AS institute_id' ,  
+                                'institutes.slug AS institute_sulg' ,  
                                 'courses.discount AS discount' ,  
+                                'institutes.banner AS institute_banner' , 
+                                'institutes.name_ar AS institute_name' , 
+                                DB::raw("IF(institutes.rate_switch = 1, institutes.sat_rate, institute_rates.student_rates) AS institute_rate"),
+                                'countries.name_ar AS country_name' ,  
+                                'cities.name_ar AS city_name' ,  
+                                'courses.name_ar AS courses_name' ,  
+                                'courses.study_period AS courses_study_period' ,  
+                                'courses.required_level AS courses_required_level' ,  
                                 'course_prices.weeks' , 
-                                'course_prices.price' , 
-                                'course_prices.id' , 
-                                DB::raw("course_prices.price*courses.discount as real_price"))
+                                'course_prices.price AS real_price' , 
+                                DB::raw("course_prices.price*(1-courses.discount) as discounted_price"),
+                                'student_favourites.course_id AS favourite_course_id' , 
+                                )
                         ->WhereIn('course_prices.weeks' , $weeks)
-                        ->get();
+                        ->Where('courses.approvement' , 1)
+                        ->orderBy('discounted_price' , 'DESC')
+                        ->paginate(9);
 
 
-        $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPrice' , 'student_favourite')->paginate(9);
+        // $courses = $courses->latest()->with('institute', 'institute.city' , 'institute.country' , 'institute.rats' , 'coursesPrice' , 'student_favourite')->paginate(9);
         return response()->json(['status' => 'success' , 'courses' => $courses]);
     }
 
@@ -127,6 +144,14 @@ class VueRequestsController extends Controller
         $institute = Course::where(['id' => $request->course_id])->get()[0]->institute;
         $price_per_week = price_per_week($institute->insurancePrice, $request->weeks);
         return response()->json(['status' => 'success' , 'insurance_price' => $price_per_week]);
+
+    }
+
+    // get price per week in institute profile
+    public function get_student_favourite_courses(Request $request)
+    {
+        $student_favourite_courses = Favourite::where(['course_id' => $request->course_id])->get();
+        return response()->json(['status' => 'success' , 'student_favourite_courses' => $student_favourite_courses] );
 
     }
     

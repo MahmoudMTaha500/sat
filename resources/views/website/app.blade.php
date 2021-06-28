@@ -25,7 +25,8 @@
         </div>
 
         <!-- Footer -->
-        @include('website.includes.footer') @yield('website.includes.page_scripts')
+        @include('website.includes.footer') 
+        @yield('website.includes.page_scripts')
         @include('website.includes.alerts')
     </body>
 </html>
