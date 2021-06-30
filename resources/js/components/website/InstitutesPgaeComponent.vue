@@ -27,7 +27,7 @@
                                         <!-- Filter Form -->
 
                                         <form action="">
-                                            <label>ادخل كلمة مفتاحية</label>
+                                            <label>ادخل اسم المعهد</label>
                                             <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
                                                 <input ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
                                                 <div class="input-group-append">
@@ -60,6 +60,18 @@
                                                     <option class="متقدم">متقدم</option>
                                                 </select>
                                             </div>
+                                        <div class="form-group">
+                                                <label> ترتيب حسب </label>
+                                                <select v-model="arrange_as" class="form-control  rounded-10" data-live-search="true">
+                                                    <option value="">الكل</option>
+                                                    <option value="highest_rates">التقيم من الاعلى الي الاقل</option>
+                                                    <option value="lowest_rates">  التقييم من الاقل للاعلي    </option>
+                                                    <option value="highest_prices">   السعر من الاعلي للاقل    </option>
+                                                    <option value="lowest_prices">  السعر من الاقل للاعلي    </option>
+                                                 
+                                                </select>
+                                            </div>
+                                     
                                             <div class="mb-4">
                                                 <div class="form-check form-check-inline mr-0 ml-4">
                                                     <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" v-model="best_offers" />
@@ -132,10 +144,11 @@
                                         <!-- ./Course Price -->
                                         
                                     </div>
-                                    <!-- ./Institute -->
+                                    <!-- ./Institute -->  
+
                                 </div>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
                 <!-- ./Institute List -->
@@ -178,7 +191,6 @@
             </div>
         </section>
         <!-- Institutes -->
-        <button @click="test_price()">click</button>
     </div>
 </template>
 
@@ -201,6 +213,7 @@
                 use_params: false,
                 course_level: "",
                 student_favourite_courses: {},
+                arrange_as: "",
             };
         },
         methods: {
@@ -263,10 +276,14 @@
                     best_offers: this.best_offers,
                     course_level: this.course_level,
                     student_id: this.student_id,
+                    arrange_as: this.arrange_as,
                 };
                 var pagination_params = "&keyword=" + this.keyword;
                 return { filter_params: filter_params, pagination_params: pagination_params };
             },
+        },
+        computed:{
+
         },
         beforeMount() {
             if (this.search.length != 0) {

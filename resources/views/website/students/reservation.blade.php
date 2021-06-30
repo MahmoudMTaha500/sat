@@ -44,6 +44,16 @@
                                     <p><span class="font-weight-bold">الدولة :</span>{{$request->course->institute->country->name_ar}}</p>
                                     <p><span class="font-weight-bold">المدينة :</span>{{$request->course->institute->city->name_ar}}</p>
                                     <p><span class="font-weight-bold">تاريخ الحجز :</span>{{ArabicDate($request->created_at)}}</p>
+                                    <div class="border-top py-3">
+
+                                    <h5 class="text-main-color font-weight-bold mb-3">حالة الطلب</h5>
+                                    <p><span class="font-weight-bold">
+                                        {{$request->status == 'جديد' ? 'طلبك قيد المراجعة' : ''}}
+                                        {!! $request->status == 'حصل علي قبول' ? '<span class="text-success">تم قبول طلبك</span>' : '' !!} 
+                                        {!! $request->status == 'بداء الدراسة' ? '<span class="text-success">تم بداء دراستك</span>' : '' !!} 
+                                        {!! $request->status == 'مرفوض' ? '<span class="text-danger">تم رفض طلبك</span>' : '' !!} 
+                                    </span> </p>
+                                    </div>
                                     <div class="overflow-hidden">
                                         <button data-toggle="modal" data-target="#request{{$request->id}}" class="btn float-left bg-secondary-color text-white rounded-10">تفاصيل الدورة</button>
                                     </div>

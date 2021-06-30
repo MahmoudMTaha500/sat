@@ -3313,6 +3313,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
   data: function data() {
@@ -3327,7 +3338,8 @@ __webpack_require__.r(__webpack_exports__);
       name_ar: "",
       course_id: "",
       discount_offers: true,
-      non_discount_offers: true
+      non_discount_offers: true,
+      status: ""
     };
   },
   methods: {
@@ -3367,11 +3379,13 @@ __webpack_require__.r(__webpack_exports__);
         city_id: this.city_id,
         name_ar: this.name_ar,
         discount_offers: this.discount_offers,
-        non_discount_offers: this.non_discount_offers
+        non_discount_offers: this.non_discount_offers,
+        status: this.status
       };
       var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
       "&discount_offers=" + this.discount_offers;
       "&non_discount_offers=" + this.non_discount_offers;
+      "&status=" + this.status;
       axios.get(this.dahsboard_url + "/filtercourses", {
         params: filter_params
       }).then(function (response) {
@@ -5834,6 +5848,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../components/website/CityComponent.vue */ "./resources/js/components/website/CityComponent.vue");
 /* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
+var _props$data$methods$c;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6020,7 +6050,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_props$data$methods$c = {
   props: ["get_courses_url", "public_path", "get_countries_url", "get_cities_url", "student_id", "student_check", "search", "get_student_favourite_courses_url"],
   data: function data() {
     return {
@@ -6035,7 +6065,8 @@ __webpack_require__.r(__webpack_exports__);
       high_rated: false,
       use_params: false,
       course_level: "",
-      student_favourite_courses: {}
+      student_favourite_courses: {},
+      arrange_as: ""
     };
   },
   methods: {
@@ -6101,7 +6132,8 @@ __webpack_require__.r(__webpack_exports__);
         weeks: this.weeks,
         best_offers: this.best_offers,
         course_level: this.course_level,
-        student_id: this.student_id
+        student_id: this.student_id,
+        arrange_as: this.arrange_as
       };
       var pagination_params = "&keyword=" + this.keyword;
       return {
@@ -6110,6 +6142,7 @@ __webpack_require__.r(__webpack_exports__);
       };
     }
   },
+  computed: {},
   beforeMount: function beforeMount() {
     if (this.search.length != 0) {
       this.keyword = this.search.keyword;
@@ -6128,13 +6161,11 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.get_courses();
-  },
-  computed: {},
-  components: {
-    CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
-});
+}, _defineProperty(_props$data$methods$c, "computed", {}), _defineProperty(_props$data$methods$c, "components", {
+  CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+}), _props$data$methods$c);
 
 /***/ }),
 
@@ -45728,6 +45759,67 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "projectinput1" } }, [
+                    _vm._v("الحالة")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.status,
+                          expression: "status"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "city", name: "city_id", required: "" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.status = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    },
+                    [
+                      _c("option", { attrs: { value: "" } }, [
+                        _vm._v("حدد الحالة")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "" } }, [_vm._v(" الكل")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "1" } }, [
+                        _vm._v(" مقبول")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0" } }, [
+                        _vm._v(" غير مقبول")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.cities, function(city) {
+                        return _c(
+                          "option",
+                          { key: city.id, domProps: { value: city.id } },
+                          [_vm._v(" " + _vm._s(city.name_ar))]
+                        )
+                      })
+                    ],
+                    2
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-6" }, [
                       _c("label", { attrs: { for: "projectinput1" } }, [
@@ -52394,7 +52486,7 @@ var render = function() {
                     [
                       _c("div", { staticClass: "card-body border-top" }, [
                         _c("form", { attrs: { action: "" } }, [
-                          _c("label", [_vm._v("ادخل كلمة مفتاحية")]),
+                          _c("label", [_vm._v("ادخل اسم المعهد")]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -52555,6 +52647,71 @@ var render = function() {
                                 _c("option", { staticClass: "متقدم" }, [
                                   _vm._v("متقدم")
                                 ])
+                              ]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v(" ترتيب حسب ")]),
+                            _vm._v(" "),
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.arrange_as,
+                                    expression: "arrange_as"
+                                  }
+                                ],
+                                staticClass: "form-control  rounded-10",
+                                attrs: { "data-live-search": "true" },
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return val
+                                      })
+                                    _vm.arrange_as = $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  }
+                                }
+                              },
+                              [
+                                _c("option", { attrs: { value: "" } }, [
+                                  _vm._v("الكل")
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "highest_rates" } },
+                                  [_vm._v("التقيم من الاعلى الي الاقل")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "lowest_rates" } },
+                                  [_vm._v("  التقييم من الاقل للاعلي    ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "highest_prices" } },
+                                  [_vm._v("   السعر من الاعلي للاقل    ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "option",
+                                  { attrs: { value: "lowest_prices" } },
+                                  [_vm._v("  السعر من الاقل للاعلي    ")]
+                                )
                               ]
                             )
                           ]),
@@ -52957,19 +53114,7 @@ var render = function() {
           ])
         ])
       ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "button",
-      {
-        on: {
-          click: function($event) {
-            return _vm.test_price()
-          }
-        }
-      },
-      [_vm._v("click")]
-    )
+    ])
   ])
 }
 var staticRenderFns = [

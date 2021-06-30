@@ -36,8 +36,8 @@ class countryController extends Controller
         if($get_country == array()){
 
             $country = country::create(['name_ar' => $name_ar]);
-            return back()->with('success', 'تم اضافة الدولة!');
-    
+            session()->flash('alert_message', ['message' => 'تم اضافة الدوله بنجاح', 'icon' => 'success']);
+            return redirect()->route('countries.index');    
         } else{
             return back()->with('error', ' هذه الدوله موجوده بالفعل');
 
@@ -68,7 +68,8 @@ class countryController extends Controller
 
             $country->name_ar = $countryname;
             $country->save();
-            return back()->with('success', 'تم تعديل  الدولة!');
+            session()->flash('alert_message', ['message' => 'تم تعديل الدوله بنجاح', 'icon' => 'success']);
+            return redirect()->route('countries.index'); 
            
     
         } else{

@@ -34,6 +34,17 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="projectinput1">الحالة</label>
+
+                            <select v-model="status" id="city" class="form-control" name="city_id" required>
+                                <option value="">حدد الحالة</option>
+                                <option value=""> الكل</option>
+                                <option value="1"> مقبول</option>
+                                <option value="0"> غير مقبول</option>
+                                <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <div class="row">
                                 <div class="col-6">
                                     <label for="projectinput1">تخفيضات</label> <br />
@@ -149,6 +160,7 @@
                 course_id: "",
                 discount_offers: true,
                 non_discount_offers: true,
+                status:""
             };
         },
         methods: {
@@ -180,10 +192,12 @@
                     name_ar: this.name_ar,
                     discount_offers: this.discount_offers,
                     non_discount_offers: this.non_discount_offers,
+                    status:this.status
                 };
                 var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
                 "&discount_offers=" + this.discount_offers;
                 "&non_discount_offers=" + this.non_discount_offers;
+                "&status=" + this.status;
                 axios
                     .get(this.dahsboard_url + "/filtercourses", {
                         params: filter_params,

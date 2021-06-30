@@ -42,9 +42,9 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <input type="password" name="password" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="كلمة المرور">
+                            <input type="password" name="password" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror"  id='password' placeholder="كلمة المرور">
                             <div class="input-group-append ">
-                                <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-eye"></i></span>
+                                <span class="input-group-text border-0 bg-white p-0 bg-transparent  toggle-password"  toggle="#password-field"><i class="far fa-eye" id="togglePassword"></i></span>
                             </div>
                             
                         </div>
@@ -72,7 +72,21 @@
 
 
 @endsection
+@section('website.includes.page_scripts')
+<script>
+$("#togglePassword").click(function() {
+    var x = document.getElementById("password");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+});
 
+
+</script>
+
+@endsection 
 
 
 
