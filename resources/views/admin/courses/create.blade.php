@@ -61,6 +61,8 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                        
+                                  
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1">الحد الأدنى للعمر </label>
@@ -105,6 +107,24 @@
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
                                                     <textarea type="text" id="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc">{{old('desc')}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="projectinput2">اختر العمله</label>
+                                                    <select class=" form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
+                                                        <option value="">اختر العمله</option>
+                                                        <option value="GBP"> الجنيه الاسترليني</option>
+                                                        <option value="USD"> الدولار</option>
+
+                                                  
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="projectinput1"> سعر الصرافه</label>
+                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0.21" />
                                                 </div>
                                             </div>
                                             <div class="form-group col-12 mb-2 contact-repeater">

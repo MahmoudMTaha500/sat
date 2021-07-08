@@ -155,5 +155,7 @@ Route::get('simple-visa/filter', 'SimpleVisaController@filter');
 Route::resource('simple-visa', "SimpleVisaController");
 
 
+
+
 });
 

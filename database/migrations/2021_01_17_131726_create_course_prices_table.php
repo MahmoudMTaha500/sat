@@ -16,7 +16,7 @@ class CreateCoursePricesTable extends Migration
         Schema::create('course_prices', function (Blueprint $table) {
             $table->id();
             $table->integer("weeks");
-            $table->integer("price");
+            $table->double('price', 15, 2);
             $table->bigInteger("course_id")->unsigned();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->softDeletes();
