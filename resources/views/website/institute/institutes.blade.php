@@ -7,6 +7,7 @@
 
 <institutes-pgae-component
     :get_courses_url="{{ json_encode(route('vue.get.courses')) }}"
+    :get_student_favourite_courses_url="{{ json_encode(route('vue.get.student.favourite.courses')) }}"
     :public_path="{{ json_encode(asset('/')) }}"
     :search="{{ json_encode($search) }}"
     :student_check = "{{ json_encode(auth()->guard('student')->check()) }}"
