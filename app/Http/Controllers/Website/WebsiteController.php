@@ -623,6 +623,12 @@ if($student_mail){
             $page_title = 'تواصل معنا';
             return view('website.contact-us' , compact('page_name' , 'page_title') );
         }
+        public function terms_conditions()
+        {
+            $page_name = 'terms-conditions';
+            $page_title = 'الشروط و الاحكام';
+            return view('website.terms-conditions' , compact('page_name' , 'page_title') );
+        }
         public function send_contact_us_mail(Request $request)
         {
             $validated = $request->validate([

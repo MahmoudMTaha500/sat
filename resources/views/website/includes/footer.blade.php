@@ -22,6 +22,7 @@
                     <ul class="p-0">
                         <li><a href="{{route('website.about.us')}}" class="text-white">عن الشركة</a></li>
                         <li><a href="{{route('website.contact.us')}}" class="text-white">اتصل بنا</a></li>
+                        <li><a href="{{route('website.terms_conditions')}}" class="text-white">الشروط و الاحكام</a></li>
                     </ul>
                 </div>
                 <div class="col-xl-3 col-12">

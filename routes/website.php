@@ -11,6 +11,7 @@ Route::get('/about-us', 'WebsiteController@about_us')->name('website.about.us');
 Route::get('/contact-us', 'WebsiteController@contact_us')->name('website.contact.us');
 Route::post('/send-contact-us-mail', 'WebsiteController@send_contact_us_mail')->name('send.contact.us.mail');
 Route::get('/offers', 'WebsiteController@offers')->name('website.offers');
+Route::get('/terms_conditions', 'WebsiteController@terms_conditions')->name('website.terms_conditions');
 
 
 /** institute Routes *************************************/

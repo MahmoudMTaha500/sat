@@ -112,8 +112,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">اختر العمله</label>
-                                                    <select class=" form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
-                                                        <option value="">اختر العمله</option>
+                                                    <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
+                                                        <option value="">الريال السعودي</option>
                                                         <option value="GBP"> الجنيه الاسترليني</option>
                                                         <option value="USD"> الدولار</option>
 
@@ -124,7 +124,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput1"> سعر الصرافه</label>
-                                                    <input type="text" id="projectinput1" class="form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0.21" />
+                                                    <input type="text" id="projectinput1" class="currency_exchange_rate form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0" />
                                                 </div>
                                             </div>
                                             <div class="form-group col-12 mb-2 contact-repeater">
@@ -166,6 +166,11 @@
 
 @endsection @section('admin.custom-js-scripts')
 <script>
+    $('.currency_exchange').change(function(){
+        if($(this).val() == 'GBP'){ $('.currency_exchange_rate').val('0.21')}
+        else if($(this).val() == 'USD'){ $('.currency_exchange_rate').val('0')}
+        else{ $('.currency_exchange_rate').val('0')}
+    })
     function vaildate() {
         $("form").submit(function (e) {
             var err = 0;
