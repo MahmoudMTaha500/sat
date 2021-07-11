@@ -9,6 +9,8 @@ use App\Models\Course;
 use App\Models\CoursePrice;
 use App\Models\Institute;
 use Illuminate\Http\Request;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+
 
 class CourseController extends Controller
 {
@@ -49,7 +51,17 @@ class CourseController extends Controller
     {
         $validate = $request->validated();
         $name_ar = $request->name_ar;
-        $name_ar = $request->name_ar;
+        $currency =    Currency::convert()
+        ->from("$request->currency_exchange")
+        ->to('SAR')
+        ->amount(1)
+        ->get();
+        $calc_currency =  $currency + $request->exchange_money;
+        
+               
+
+        
+
         $getcourse = Course::where(['institute_id' => $request->institute_id, 'name_ar' => $name_ar])->first();
         if ($getcourse == []) {
             $course = Course::create([
@@ -69,10 +81,12 @@ class CourseController extends Controller
 
             ]);
             $coures_price = $request->coures_price;
-            foreach ($coures_price as $price) {
+            foreach ($coures_price as $price) { 
+            $total_currency_price = $price["preice_per_week"] *   $calc_currency;
+
                 CoursePrice::create([
                     'weeks' => $price["num_of_weeks"],
-                    'price' => $price["preice_per_week"],
+                    'price' =>$total_currency_price,
                     'course_id' => $course->id,
                     'approvement' => 1,
                 ]);
@@ -109,6 +123,13 @@ class CourseController extends Controller
     {
         $validate = $request->validated();
 
+        $currency =    Currency::convert()
+        ->from("$request->currency_exchange")
+        ->to('SAR')
+        ->amount(1)
+        ->get();
+        $calc_currency =  $currency + $request->exchange_money;
+
         $updateCourse = Course::find($course->id);
         $updateCourse->name_ar = $request->name_ar;
         $updateCourse->about_ar = $request->desc;
@@ -125,10 +146,10 @@ class CourseController extends Controller
         CoursePrice::where(["course_id" => $course->id])->delete();
         $coures_price = $request->coures_price;
         foreach ($coures_price as $price) {
-
+            $total_currency_price = $price["preice_per_week"] *   $calc_currency;
             CoursePrice::create([
                 'weeks' => $price["num_of_weeks"],
-                'price' => $price["preice_per_week"],
+                'price' => $total_currency_price,
                 'course_id' => $course->id,
             ]);
 
