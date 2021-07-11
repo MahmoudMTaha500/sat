@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "c535627f2979ae9418fa1d10bbd5c3ce",
-=======
-    "content-hash": "04cd628db4828a50a7e1318ded6d01c6",
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3130,7 +3126,6 @@
             "time": "2021-02-11T11:37:01+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "spacemudd/laravel-tap-payments",
             "version": "2.0.1",
             "source": {
@@ -3187,8 +3182,6 @@
             "time": "2020-11-03T13:20:41+00:00"
         },
         {
-=======
->>>>>>> e9858ac392546c1502337bc64f10143489fac1ea
             "name": "swiftmailer/swiftmailer",
             "version": "v6.2.7",
             "source": {
