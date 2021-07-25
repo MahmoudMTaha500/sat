@@ -8,6 +8,8 @@ use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\Institute;
 use  App\Http\Requests\services\ResidencesRequest;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+
 
 
 class ResidencesController extends Controller
@@ -60,10 +62,22 @@ public function getResidences(){
      */
     public function store(ResidencesRequest $request)
     {
+        $price_amount = $request->price;
+        $price = $request->price;
+        if(!empty($request->currency_exchange)){
+            $converted_price = Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount($price_amount)
+            ->withoutVerifying()
+            ->get();
+            $price = $converted_price + $request->exchange_money*$price_amount;
+        }
+
         $residences = residences::create([
             'name_ar'=>$request->name_ar,
             'institute_id'=>$request->institute_id,
-            'price'=>$request->price,
+            'price'=>$price,
             ]);
             // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
@@ -102,8 +116,10 @@ public function getResidences(){
         $department_name = 'services';
         $page_name = 'residences';
         $page_title = 'السكن';
+        $useVue = true;
+        $countries = Country::all();
 
-        return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title'));
+        return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title' , 'useVue' , 'countries'));
     }
     /**
      * Update the specified resource in storage.
@@ -114,10 +130,24 @@ public function getResidences(){
      */
     public function update(Request $request, residences $residences)
     {
+
+        $price_amount = $request->price;
+        $price = $request->price;
+        if(!empty($request->currency_exchange)){
+            $converted_price = Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount($price_amount)
+            ->withoutVerifying()
+            ->get();
+            $price = $converted_price + $request->exchange_money*$price_amount;
+        }
+
+
         $residence= residences::find($request->id);
       $residence->name_ar=$request->name_ar;
       $residence->institute_id=$request->institute_id;
-      $residence->price=$request->price;
+      $residence->price=$price;
       $residence->save();
       session()->flash('alert_message',['message'=>'تم تعديل السكن','icon'=>'success']);
       return back();  

@@ -77,18 +77,24 @@
                                             <div class="col-md-6">
                                                 <show-images-component
                                                 :image_name="{{json_encode("logo")}}"
-                                                :image_label="{{json_encode("اختر اللوجو")}}"
+                                                :image_label="{{json_encode("اللوجو")}}"
                                                 :old="{{json_encode(old('logo'))}}"
                                                 ></show-images-component>
+                                                <div class="form-group">
+                                                    <label for="projectinput1">بديل اللوجو</label> 
+                                                    <input type="text" placeholder="ادخل اسم بديل للوجو " name="img_alt" value="{{old('img_alt')}}" class="form-control">
+                                                </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <show-images-component
                                                 :image_name="{{json_encode("panner")}}"
-                                                :image_label="{{json_encode("اختر الصورة")}}"
+                                                :image_label="{{json_encode("صورة الباننر")}}"
                                                 :old="{{json_encode(old('panner'))}}"
-
-
                                                 ></show-images-component>
+                                                <div class="form-group">
+                                                    <label for="projectinput1">بديل صورة الباننر</label> 
+                                                    <input type="text" placeholder="ادخل اسم بديل لصورة الباننر " name="img_alt" value="{{old('img_alt')}}" class="form-control">
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="row">

@@ -9,3 +9,4 @@ $(window).on('scroll',function(){
         $('.support').removeClass('open')
     }
 })
+

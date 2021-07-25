@@ -67,6 +67,10 @@ class BlogController extends Controller
                 'category_id' => $request->category_id,
                 'institute_id' => $request->institute_id,
                 'course_id' => $request->course_id,
+                'img_alt' => $request->img_alt,
+                'title_tag' => $request->title_tag,
+                'meta_keywords' => $request->meta_keywords,
+                'meta_description' => $request->meta_description,
                 'banner' => $pannerNamePath,
                 'creator_id' => 1,
                 'approvement' => 1,
@@ -108,6 +112,11 @@ class BlogController extends Controller
         $blog->city_id = $request->city_id;
         $blog->institute_id = $request->institute_id;
         $blog->category_id = $request->category_id;
+        $blog->img_alt = $request->img_alt;
+        $blog->title_tag = $request->title_tag;
+        $blog->meta_keywords = $request->meta_keywords;
+        $blog->meta_description = $request->meta_description;
+        
         if ($request->banner) {
             $bannerObj = $request->banner;
             $bannerName = time() . $bannerObj->getClientOriginalName();

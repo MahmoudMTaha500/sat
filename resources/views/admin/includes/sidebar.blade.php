@@ -105,7 +105,7 @@
                     </li>
 
                     <li>
-                        <a class="menu-item" href="{{route('countries.create')}}" data-i18n="nav.navbars.nav_dark">انشاء دوله جديدة</a>
+                        <a class="menu-item" href="{{route('countries.create')}}" data-i18n="nav.navbars.nav_dark">اضافة دوله جديدة</a>
                     </li>
                     <li>
                         <a class="menu-item" href="{{route('cities.index')}}" data-i18n="nav.navbars.nav_semi">كل المدن</a>

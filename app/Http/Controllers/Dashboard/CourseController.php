@@ -52,12 +52,18 @@ class CourseController extends Controller
         dd($request->all());
         $validate = $request->validated();
         $name_ar = $request->name_ar;
-        $currency =    Currency::convert()
-        ->from("$request->currency_exchange")
-        ->to('SAR')
-        ->amount(1)
-        ->get();
-        $calc_currency =  $currency + $request->exchange_money;
+        if(!empty($request->currency_exchange)){
+            $currency =    Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount(1)
+            ->withoutVerifying()
+            ->get();
+            $calc_currency =  $currency + $request->exchange_money;
+        }else{
+            $calc_currency =  1;
+        }
+       
         
                
 
@@ -124,12 +130,18 @@ class CourseController extends Controller
     {
         $validate = $request->validated();
 
-        $currency =    Currency::convert()
-        ->from("$request->currency_exchange")
-        ->to('SAR')
-        ->amount(1)
-        ->get();
-        $calc_currency =  $currency + $request->exchange_money;
+        if(!empty($request->currency_exchange)){
+            $currency =    Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount(1)
+            ->withoutVerifying()
+            ->get();
+            $calc_currency =  $currency + $request->exchange_money;
+        }else{
+            $calc_currency =  1;
+        }
+
 
         $updateCourse = Course::find($course->id);
         $updateCourse->name_ar = $request->name_ar;
@@ -144,7 +156,7 @@ class CourseController extends Controller
         $updateCourse->discount = $request->discount/100;
         $updateCourse->save();
 
-        CoursePrice::where(["course_id" => $course->id])->delete();
+        CoursePrice::where(["course_id" => $course->id])->forcedelete();
         $coures_price = $request->coures_price;
         foreach ($coures_price as $price) {
             $total_currency_price = $price["preice_per_week"] *   $calc_currency;

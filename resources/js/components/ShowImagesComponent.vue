@@ -2,9 +2,8 @@
     <div>
         <div class="">
             <label for="projectinput4"> {{this.image_label}}</label>
-            <div class="custom-file">
-                <input type="file" class="custom-file-input" @change="previewImage" :name="this.image_name" />
-                <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
+            <div class="form-group">
+                <input type="file" class="form-control" @change="previewImage" :name="this.image_name" />
             </div>
             <div class="mt-3">
                 <img class="w-100" :src="imageData" />

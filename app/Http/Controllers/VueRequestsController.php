@@ -39,15 +39,15 @@ class VueRequestsController extends Controller
         $course_ids = [];
 
         if ($request->weeks == 1) {
-            $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MIN(weeks) as selected_weeks FROM course_prices  GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
+            $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MIN(weeks) as selected_weeks FROM course_prices WHERE deleted_at IS NULL   GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
             foreach ($selected_weeks_query as $selected_week) {
                 array_push($course_prices_ids, $selected_week->course_prices_id);
                 array_push($course_ids, $selected_week->course_id);
             }
         } else {
-            $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MAX(weeks) as selected_weeks FROM course_prices WHERE weeks < ' . $request->weeks . ' OR weeks = ' . $request->weeks . ' GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
+            $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MAX(weeks) as selected_weeks FROM course_prices WHERE deleted_at IS NULL AND   weeks < ' . $request->weeks . ' OR weeks = ' . $request->weeks . ' GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
             if(empty($selected_weeks_query)){
-                $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MIN(weeks) as selected_weeks FROM course_prices  GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
+                $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MIN(weeks) as selected_weeks FROM course_prices WHERE deleted_at IS NULL  GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
                 foreach ($selected_weeks_query as $selected_week) {
                     array_push($course_prices_ids, $selected_week->course_prices_id);
                     array_push($course_ids, $selected_week->course_id);
@@ -58,7 +58,7 @@ class VueRequestsController extends Controller
                     array_push($course_ids, $selected_week->course_id);
                 }
     
-                $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MIN(weeks) as selected_weeks FROM course_prices WHERE course_id NOT IN (' . implode(",", $course_ids) . ') GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
+                $selected_weeks_query = DB::select('(SELECT course_prices.id AS course_prices_id , course_prices.course_id , joined_course_prices.selected_weeks FROM course_prices Join (SELECT  course_id , MIN(weeks) as selected_weeks FROM course_prices WHERE deleted_at IS NULL AND  course_id NOT IN (' . implode(",", $course_ids) . ') GROUP BY course_id) AS joined_course_prices ON joined_course_prices.selected_weeks = course_prices.weeks AND joined_course_prices.course_id = course_prices.course_id)');
                 foreach ($selected_weeks_query as $selected_week) {
                     array_push($course_prices_ids, $selected_week->course_prices_id);
                     array_push($course_ids, $selected_week->course_id);
@@ -66,14 +66,13 @@ class VueRequestsController extends Controller
             }
             
         }
-
         $courses = DB::table('courses')
             ->join('course_prices', 'courses.id', '=', 'course_prices.course_id')
             ->join('institutes', 'institutes.id', '=', 'courses.institute_id')
             ->join('countries', 'institutes.country_id', '=', 'countries.id')
             ->join('cities', 'institutes.city_id', '=', 'cities.id')
-            ->leftJoin(DB::raw('(SELECT * , AVG(rate) AS student_rates FROM institute_rates GROUP BY institute_id) AS institute_rates'), 'institute_rates.institute_id', '=', 'institutes.id')
-            ->leftJoin(DB::raw('(SELECT *  FROM favourites WHERE student_id = ' . $student_id . ') AS student_favourites'), 'student_favourites.course_id', '=', 'courses.id')
+            ->leftJoin(DB::raw('(SELECT * , AVG(rate) AS student_rates FROM institute_rates WHERE deleted_at = NULL GROUP BY institute_id) AS institute_rates'), 'institute_rates.institute_id', '=', 'institutes.id')
+            ->leftJoin(DB::raw('(SELECT *  FROM favourites WHERE student_id = ' . $student_id . ' )  AS student_favourites'), 'student_favourites.course_id', '=', 'courses.id')
             ->select(
                 'courses.id AS course_id',
                 'courses.name_ar AS course_name',
@@ -97,7 +96,12 @@ class VueRequestsController extends Controller
                 'cities.id AS city_id',
             )
             ->WhereIn('course_prices.id', $course_prices_ids)
-            ->Where('courses.approvement', 1);
+            ->Where([
+                    'courses.approvement' => 1 , 
+                    'courses.deleted_at' => NULL , 
+                    'course_prices.deleted_at' => NULL,
+                    'institutes.deleted_at' => NULL,
+                ]);
 
         if(!empty($request->country_id)){
             $courses = $courses->where('countries.id' , $request->country_id);

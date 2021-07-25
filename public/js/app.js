@@ -2347,7 +2347,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["image_name", "image_label", "old", "path_image_edit"],
   data: function data() {
@@ -43703,21 +43702,12 @@ var render = function() {
         _vm._v(" " + _vm._s(this.image_label))
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "custom-file" }, [
+      _c("div", { staticClass: "form-group" }, [
         _c("input", {
-          staticClass: "custom-file-input",
+          staticClass: "form-control",
           attrs: { type: "file", name: this.image_name },
           on: { change: _vm.previewImage }
-        }),
-        _vm._v(" "),
-        _c(
-          "label",
-          {
-            staticClass: "custom-file-label",
-            attrs: { for: "inputGroupFile01" }
-          },
-          [_vm._v("اختر الصورة")]
-        )
+        })
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "mt-3" }, [

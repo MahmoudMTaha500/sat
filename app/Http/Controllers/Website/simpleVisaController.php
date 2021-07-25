@@ -15,9 +15,13 @@ class simpleVisaController extends Controller
     public function create()
     {
         $notUseVue = true;
-        $page_name = 'visa';
-        $page_title = 'التاشيرة';
-        return view('website.visa.simple_visa' , compact('notUseVue' , 'page_name' , 'page_title'));
+        $page_identity = [
+            'title_tag' => 'كلاسات | التاشيرة',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => 'visa',
+        ];
+        return view('website.visa.simple_visa' , compact('notUseVue' , 'page_identity'));
     }
     public function store(Request $request)
     {

@@ -32,8 +32,11 @@ class CreateBlogsTable extends Migration
             $table->bigInteger("category_id")->unsigned();
             $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('cascade');
             $table->integer("approvement");
+            $table->text("img_alt")->nullable();
+            $table->text("title_tag")->nullable();
+            $table->text("meta_keywords")->nullable();
+            $table->longText("meta_description")->nullable();
             $table->softDeletes();
-
             $table->timestamps();
         });
     }
