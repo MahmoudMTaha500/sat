@@ -46,6 +46,10 @@ class BlogSeeder extends Seeder
                 "course_id" => $course_id,
                 "category_id" => rand(1 , 10),
                 "approvement" => 1,
+                "img_alt" => "صورة معهد بريطانيا",
+                "title_tag" => 'تعرف علي المعيشة في بريطانيا'.$x,
+                "meta_keywords" => "بريطانيا, التعلم عن بعد, الدراسة في الخارج",
+                "meta_description" => "تعرف علي المعيشة في بريطانيا ك افضل عيشة في جميع دول العالم",
             ]);
         }
     }

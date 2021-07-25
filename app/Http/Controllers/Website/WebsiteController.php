@@ -34,18 +34,26 @@ class WebsiteController extends Controller
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
-        $page_name = 'home';
-        $page_title = 'كلاسات | الصفحة الرئيسية';
-        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_name' ,'page_title'));
+        $page_identity = [
+            'title_tag' => 'كلاسات | الصفحة الرئيسية',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => 'home',
+        ];
+        return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_identity'));
     }
     // institutes page method : show all institutes with filter
     public function institutes_page(Request $request)
     {
         $useVue = true;
         $search = $request->all();
-        $page_name = 'institutes';
-        $page_title = 'المعاهد';
-        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_name' , 'page_title'));
+        $page_identity = [
+            'title_tag' => 'كلاسات | المعاهد',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => 'institutes',
+        ];
+        return view('website.institute.institutes', compact('useVue' , 'search' , 'page_identity'));
     }
     // institute page method : show the course info through institute profile
     public function institute_page($institute_id, $institute_slug, $course_slug)
@@ -56,10 +64,14 @@ class WebsiteController extends Controller
         if (empty($course[0])) {return redirect()->route('website.home');}
         $course = $course[0];
         $institute = $institute[0];
-        $page_name = 'institutes';
         $useVue = true;
-        $page_title = $institute->name_ar.' | '.$course->name_ar;
-        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_title' , 'page_name'));
+        $page_identity = [
+            'title_tag' => $institute->name_ar.' | '.$course->name_ar,
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => 'institutes',
+        ];
+        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_identity'));
     }
     // confirm reservation page
     public function confirm_reservation(Request $request, $pay_checker = null)
@@ -117,11 +129,16 @@ class WebsiteController extends Controller
     // student login page : show login page of type student
     public function student_login_page()
     {
-        $page_title = 'تسجيل دخول';
+        $page_identity = [
+            'title_tag' => 'تسجيل دخول',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
         if(Auth::guard('student')->check()){
             return redirect()->route('student.profile');
         }
-        return view('website.students.login' , compact('page_title') );
+        return view('website.students.login' , compact('page_identity') );
     }
 
 
@@ -143,11 +160,16 @@ class WebsiteController extends Controller
     public function student_register_page(Request $request)
     {
         $useVue = true;
-        $page_title = 'انشاء حساب جديد';
+        $page_identity = [
+            'title_tag' => 'انشاء حساب جديد',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
         if(Auth::guard('student')->check()){
             return redirect()->route('student.profile');
         }
-        return view('website.students.register', compact('useVue' , 'page_title'));
+        return view('website.students.register', compact('useVue' , 'page_identity'));
     }
     // student register request : create new user of type student
     public function student_register_auth(RegisterStudentRequest $request)
@@ -166,7 +188,13 @@ class WebsiteController extends Controller
 
 
     public function student_reset_password(){
-        return view('website.students.reset_password');
+        $page_identity = [
+            'title_tag' => 'اعادة تعيين كلمة المرور',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
+        return view('website.students.reset_password' , compact('page_identity'));
 
     }
 
@@ -232,8 +260,13 @@ if($student_mail){
     public function article($id)
     {
         $blog = Blog::find($id);
-        $page_name = 'articles';
-        return view('website.blog.article', compact('blog' , 'page_name'));
+        $page_identity = [
+            'title_tag' => $blog->title_tag,
+            'meta_keywords' => $blog->meta_keywords,
+            'meta_description' => $blog->meta_description,
+            'page_name' => '',
+        ];
+        return view('website.blog.article', compact('blog' , 'page_identity'));
     }
 
 
@@ -662,9 +695,13 @@ if($student_mail){
             public function offers()
             {
                 $offers = Course::where('discount' , '!=' , 0)->paginate(12);
-                $page_name = 'offers';
-                $page_title = 'العروض';
-                return view('website.offers' , compact('offers' , 'page_name' , 'page_title'));
+                $page_identity = [
+                    'title_tag' => 'كلاسات | العروض',
+                    'meta_keywords' => '',
+                    'meta_description' => '',
+                    'page_name' => 'offers',
+                ];
+                return view('website.offers' , compact('offers' , 'page_identity'));
             }
             public function add_review(Request $request)
             {

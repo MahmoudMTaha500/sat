@@ -2,6 +2,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="{{(isset($page_identity) ? ($page_identity['meta_description'] == '' ? 'كلاسات'  : $page_identity['meta_description'] ) : 'كلاسات')}}" />
+    <meta name="keywords" content="{{(isset($page_identity) ? ($page_identity['meta_keywords'] == '' ? 'كلاسات'  : $page_identity['meta_keywords'] ) : 'كلاسات')}}" />
     <!-- Cairo Font  -->
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet" />
@@ -22,5 +24,5 @@
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/index.css" />
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/institute.css">
     <link rel="icon" href="{{asset('website/imgs/logo-icon.png')}}">
-    <title>{{isset($page_title) ? $page_title : 'كلاسات' }}</title>
+    <title>{{(isset($page_identity) ? ($page_identity['title_tag'] == '' ? 'كلاسات'  : $page_identity['title_tag'] ) : 'كلاسات')}}</title>
 </head>

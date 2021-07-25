@@ -77,10 +77,45 @@
                                                 >
                                                 </create-blog-component>
                                                 <show-images-component :image_name="{{json_encode("banner")}}" 
-                                                :image_label="{{json_encode(" اختر الصورة ")}}"
+                                                :image_label="{{json_encode(" صورة المقال ")}}"
                                                 :old="{{json_encode(old('banner'))}}"
                                                 ></show-images-component>
                                             </div>
+
+                                            <div class="col-12">
+                                                <hr>
+                                                <h4 class="mt-5 mb-2 text-black">حقول ال SEO</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">بديل صورة المقال</label> 
+                                                            <input type="text" placeholder="ادخل اسم بديل للصورة " name="img_alt" value="{{old('img_alt')}}" class="form-control">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">title tage</label> 
+                                                            <input type="text" placeholder="ادخل title tage " name="title_tag" value="{{old('title_tag')}}" class="form-control">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">الكلمات  المفتاحية</label> 
+                                                            <input type="text" placeholder="ادخل الكلمات المفتاحية " name="meta_keywords" value="{{old('meta_keywords')}}" class="form-control">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">وصف الصفحة</label> 
+                                                            <input type="text" placeholder="ادخل meta description" name="meta_description" value="{{old('meta_description')}}" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
                                         </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>

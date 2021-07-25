@@ -166,11 +166,7 @@
 
 @endsection @section('admin.custom-js-scripts')
 <script>
-    $('.currency_exchange').change(function(){
-        if($(this).val() == 'GBP'){ $('.currency_exchange_rate').val('0.21')}
-        else if($(this).val() == 'USD'){ $('.currency_exchange_rate').val('0')}
-        else{ $('.currency_exchange_rate').val('0')}
-    })
+    
     function vaildate() {
         $("form").submit(function (e) {
             var err = 0;

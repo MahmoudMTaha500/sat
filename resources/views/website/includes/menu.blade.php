@@ -69,25 +69,25 @@
                     <!-- Nav Menu  -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'home' ? 'active' : '') : ''}}">
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'home' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="الرئيسية" href="{{route('website.home')}}">الرئيسية <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'institutes' ? 'active' : '') : ''}}">
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'institutes' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="المعاهد" href="{{route('website.institutes')}}">المعاهد</a>
                             </li>
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'visa' ? 'active' : '') : ''}}" >
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'visa' ? 'active' : '') : ''}}" >
                                 <a class="nav-link text-main-color" alt="طلب تأشيرة" href="{{route('order-visa.create')}}">طلب تأشيرة</a>
                             </li>
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'offers' ? 'active' : '') : ''}}">
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'offers' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="العروض" href="{{route('website.offers')}}">العروض</a>
                             </li>
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'articles' ? 'active' : '') : ''}}">
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'articles' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="المقالات" href="{{route('website.articles')}}">المقالات</a>
                             </li>
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'contact-us' ? 'active' : '') : ''}}">
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'contact-us' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="تواصل معنا" href="{{route('website.contact.us')}}">تواصل معنا</a>
                             </li>
-                            <li class="nav-item px-xl-2 {{isset($page_name) ? ($page_name== 'about-us' ? 'active' : '') : ''}}">
+                            <li class="nav-item px-xl-2 {{isset($page_identity) ? ($page_identity['page_name'] == 'about-us' ? 'active' : '') : ''}}">
                                 <a class="nav-link text-main-color" alt="من نحن" href="{{route('website.about.us')}}">من نحن</a>
                             </li>
                             
