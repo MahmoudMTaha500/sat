@@ -49,7 +49,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function store(StoreCoursesRequest $request)
     {
-        dd($request->all());
+        // dd($request->all()); 
         $validate = $request->validated();
         $name_ar = $request->name_ar;
         if(!empty($request->currency_exchange)){
@@ -92,6 +92,8 @@ class CourseController extends Controller
             $total_currency_price = $price["preice_per_week"] *   $calc_currency;
 
                 CoursePrice::create([
+                    "currency_code" => $request->currency_exchange,
+                    "currency_amount" =>  $price["preice_per_week"],
                     'weeks' => $price["num_of_weeks"],
                     'price' =>$total_currency_price,
                     'course_id' => $course->id,
@@ -161,6 +163,8 @@ class CourseController extends Controller
         foreach ($coures_price as $price) {
             $total_currency_price = $price["preice_per_week"] *   $calc_currency;
             CoursePrice::create([
+                "currency_code" => $request->currency_exchange,
+                "currency_amount" =>  $price["preice_per_week"],
                 'weeks' => $price["num_of_weeks"],
                 'price' => $total_currency_price,
                 'course_id' => $course->id,

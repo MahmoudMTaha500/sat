@@ -17,6 +17,8 @@ class CreateCoursePricesTable extends Migration
             $table->id();
             $table->integer("weeks");
             $table->double('price', 15, 2);
+            $table->string('currency_code');
+            $table->integer('currency_amount');
             $table->bigInteger("course_id")->unsigned();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->softDeletes();
