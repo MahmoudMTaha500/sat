@@ -49,6 +49,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function store(StoreCoursesRequest $request)
     {
+        dd($request->all());
         $validate = $request->validated();
         $name_ar = $request->name_ar;
         $currency =    Currency::convert()
