@@ -52962,19 +52962,23 @@ var render = function() {
                               ]),
                               _vm._v(" "),
                               _c("p", { staticClass: "mb-0 overflow-hidden" }, [
-                                _c("span", { staticClass: "float-right" }, [
-                                  _c("i", {
-                                    staticClass: "fas fa-sun text-main-color"
-                                  }),
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(
-                                        course.courses_study_period == "morning"
-                                          ? "صباحي"
-                                          : "مسائي"
+                                course.courses_study_period
+                                  ? _c("span", { staticClass: "float-right" }, [
+                                      _c("i", {
+                                        staticClass:
+                                          "fas fa-sun text-main-color"
+                                      }),
+                                      _vm._v(
+                                        " " +
+                                          _vm._s(
+                                            course.courses_study_period ==
+                                              "morning"
+                                              ? "صباحي"
+                                              : "مسائي"
+                                          )
                                       )
-                                  )
-                                ]),
+                                    ])
+                                  : _vm._e(),
                                 _vm._v(" "),
                                 _c("span", { staticClass: "float-left" }, [
                                   _c("i", {
@@ -67278,8 +67282,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

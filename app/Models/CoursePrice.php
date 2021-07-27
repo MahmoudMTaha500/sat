@@ -12,6 +12,8 @@ class CoursePrice extends Model
     protected $fillable = [
         'weeks',
         'price',
+        "currency_code",
+        'currency_amount',
         'course_id',
     ];
     protected $date = ['deleted_at'];

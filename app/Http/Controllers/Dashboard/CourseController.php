@@ -49,6 +49,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function store(StoreCoursesRequest $request)
     {
+        // dd($request->all()); 
         $validate = $request->validated();
         $name_ar = $request->name_ar;
         if(!empty($request->currency_exchange)){
@@ -86,17 +87,27 @@ class CourseController extends Controller
                 'approvement' => 0,
 
             ]);
-            $coures_price = $request->coures_price;
-            foreach ($coures_price as $price) { 
-            $total_currency_price = $price["preice_per_week"] *   $calc_currency;
 
+            $exchange = $request->currency_exchange;
+            $coures_price = $request->coures_price;
+            // dump($exchange);
+            // dd($coures_price);
+            foreach ($coures_price as $price) { 
+            // dump($price);
+                
+            $total_currency_price = $price["preice_per_week"] *   $calc_currency;
+             $original_price=$price["preice_per_week"];
                 CoursePrice::create([
+                    
                     'weeks' => $price["num_of_weeks"],
                     'price' =>$total_currency_price,
+                    "currency_code" => $exchange,
+                    "currency_amount" =>  $original_price,
                     'course_id' => $course->id,
                     'approvement' => 1,
                 ]);
             }
+            // dd($request->all());
             session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
             return redirect()->route('courses.index');
 
@@ -160,6 +171,8 @@ class CourseController extends Controller
         foreach ($coures_price as $price) {
             $total_currency_price = $price["preice_per_week"] *   $calc_currency;
             CoursePrice::create([
+                "currency_code" => $request->currency_exchange,
+                "currency_amount" =>  $price["preice_per_week"],
                 'weeks' => $price["num_of_weeks"],
                 'price' => $total_currency_price,
                 'course_id' => $course->id,

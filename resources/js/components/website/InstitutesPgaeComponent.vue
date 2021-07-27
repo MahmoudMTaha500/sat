@@ -130,7 +130,7 @@
                                             <!-- ./Course Name -->
                                             <!-- Course Time And Level -->
                                             <p class="mb-0 overflow-hidden">
-                                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{course.courses_study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
+                                                <span   v-if="course.courses_study_period " class="float-right"><i class="fas fa-sun text-main-color"></i> {{course.courses_study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
                                                 <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{course.courses_required_level}}</span>
                                             </p>
                                             <!-- ./Course Time And Level -->

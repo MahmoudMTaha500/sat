@@ -115,8 +115,8 @@
                                                     <label for="projectinput2">اختر العمله</label>
                                                     <select class=" form-control text-left currency_exchange" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                         <option value="">الريال السعودي</option>
-                                                        <option value="GBP"> الجنيه الاسترليني</option>
-                                                        <option value="USD"> الدولار</option>
+                                                        <option  @if($course->coursesPrice[0]->currency_code == "GBP") selected @endif value="GBP"> الجنيه الاسترليني</option>
+                                                        <option   @if($course->coursesPrice[0]->currency_code == "USD") selected @endif  value="USD"> الدولار</option>
 
                                                   
                                                     </select>
@@ -135,7 +135,7 @@
                                                     @foreach($course_prices as $price)
                                                     <div class="input-group mb-1" data-repeater-item>
                                                         <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks" value="{{$price->weeks}}" />
-                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week" value="{{$price->price}}" />
+                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week" value="{{$price->currency_amount}}" />
                                                         <span class="input-group-append" id="button-addon2">
                                                             <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
                                                         </span>
@@ -185,8 +185,7 @@
             //   console.log('submitted');
         });
     }
-    $(document).on("click", ".test-btn", function () {
-        vaildate();
-    });
+
+    
 </script>
 @endsection
