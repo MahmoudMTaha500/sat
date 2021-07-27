@@ -185,11 +185,7 @@
             //   console.log('submitted');
         });
     }
-    $(document).on("click", ".test-btn", function () {
-        vaildate();
-    });
-    $(document).on("load", ".test-btn", function () {
-        vaildate();
-    });
+
+    
 </script>
 @endsection
