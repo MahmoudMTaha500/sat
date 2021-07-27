@@ -123,7 +123,16 @@ class WebsiteController extends Controller
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
-        return view('website.institute.confirm-reservation', compact('course_details'));
+
+        $page_identity = [
+            'title_tag' => 'تاكيد الحجز',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
+
+
+        return view('website.institute.confirm-reservation', compact('course_details' , 'page_identity'));
 
     }
     // student login page : show login page of type student
@@ -251,9 +260,13 @@ if($student_mail){
     public function articles()
     {
         $blogs = Blog::paginate(8);
-        $page_name = 'articles';
-        $page_title = 'المقالات';
-        return view('website.blog.articles', compact('blogs' , 'page_name' , 'page_title'));
+        $page_identity = [
+            'title_tag' => 'المقالات',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => 'articles',
+        ];
+        return view('website.blog.articles', compact('blogs'  , 'page_identity'));
     }
 
 
@@ -433,7 +446,14 @@ if($student_mail){
 
         $notUseVue = true;
 
-        return view('website.payment.pay-now', compact('course_details', 'request_id' , 'notUseVue'));
+        $page_identity = [
+            'title_tag' => 'ادفع الان',
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
+
+        return view('website.payment.pay-now', compact('course_details', 'request_id' , 'notUseVue' , 'page_identity'));
     }
 
     public function checkout(Request $request)
@@ -514,14 +534,28 @@ if($student_mail){
     {
         $request_id = $request->request_id;
         $student_id = $request->student_id;
-        return view('website.payment.payment-confirmation' , compact('request_id' , 'student_id'));
+        $page_identity = [
+            'title_tag' => 'تم الدفع بنجاح' ,
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
+        return view('website.payment.payment-confirmation' , compact('request_id' , 'student_id' , 'page_identity'));
     }
     public function student_profile()
     {
         $student = auth()->guard('student')->user();
         $useVue = true;
-        $page_title = 'student-profile';
-        return view('website.students.profile' , compact('student' , 'useVue' , 'page_title' ));
+        $page_identity = [
+            'title_tag' => 'الصفحة الشخصية | '.$student->name ,
+            'meta_keywords' => '',
+            'meta_description' => '',
+            'page_name' => '',
+        ];
+
+
+
+        return view('website.students.profile' , compact('student' , 'useVue' , 'page_identity' ));
     }
     public function update_student_profile(Request $request)
     {
@@ -584,27 +618,48 @@ if($student_mail){
         {
             $student = auth()->guard('student')->user();
             $requests = $student->all_courses_requests;
-            $page_title = 'student-reservation';
-            return view('website.students.reservation' , compact('student' , 'page_title' , 'requests' ));
+            $page_identity = [
+                'title_tag' => 'الحجوزات' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => '',
+            ];
+            return view('website.students.reservation' , compact('student' , 'page_identity' , 'requests' ));
         }
         public function student_favourite()
         {
             $student = auth()->guard('student')->user();
             $favourites = $student->favourite_courses;
-            $page_title = 'student-favourite';
-            return view('website.students.favourite' , compact('student' , 'page_title' , 'favourites'));
+            $page_identity = [
+                'title_tag' => 'المفضلة' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => '',
+            ];
+            return view('website.students.favourite' , compact('student' , 'page_identity' , 'favourites'));
         }
         public function student_notification()
         {
             $student = auth()->guard('student')->user();
-            $page_title = 'student-notification';
-            return view('website.students.notification' , compact('student' , 'page_title' ));
+            $page_identity = [
+                'title_tag' => 'الاشعارات' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => '',
+            ];
+            return view('website.students.notification' , compact('student' , 'page_identity' ));
         }
         public function student_success_story()
         {
             $student = auth()->guard('student')->user();
             $page_title = 'success-story';
-            return view('website.students.success-story' , compact('student' , 'page_title' ));
+            $page_identity = [
+                'title_tag' => 'قصة النجاح' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => '',
+            ];
+            return view('website.students.success-story' , compact('student' , 'page_identity' ));
         }
         public function update_success_story(Request $request)
         {
@@ -646,21 +701,33 @@ if($student_mail){
         }
         public function about_us()
         {
-            $page_name = 'about-us';
-            $page_title = 'من نحن';
-            return view('website.about-us' , compact('page_name' , 'page_title'));
+            $page_identity = [
+                'title_tag' => 'من نحن' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => 'about-us',
+            ];
+            return view('website.about-us' , compact('page_identity'));
         }
         public function contact_us()
         {
-            $page_name = 'contact-us';
-            $page_title = 'تواصل معنا';
-            return view('website.contact-us' , compact('page_name' , 'page_title') );
+            $page_identity = [
+                'title_tag' => 'تواصل معنا' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => 'contact-us',
+            ];
+            return view('website.contact-us' , compact('page_identity') );
         }
         public function terms_conditions()
         {
-            $page_name = 'terms-conditions';
-            $page_title = 'الشروط و الاحكام';
-            return view('website.terms-conditions' , compact('page_name' , 'page_title') );
+            $page_identity = [
+                'title_tag' => 'الشروط و الاحكام' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => 'terms-conditions',
+            ];
+            return view('website.terms-conditions' , compact('page_identity') );
         }
         public function send_contact_us_mail(Request $request)
         {

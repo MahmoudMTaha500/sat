@@ -632,4 +632,64 @@ body {
       height: 100%;
     }
   
+    .blog-sidebar{
+      border: 2px solid #006fff;
+      padding: 20px;
+      border-radius: 5px;
+  }
+  .blog-sidebar .sidebar-row{
+      border-bottom: 1px solid #9c9c9c;
+      margin-bottom: 20px;
+  }
+  .blog-sidebar .sidebar-row:last-child{
+      border-bottom: none
+  }
+
+  .blog-sidebar .sidebar-row .sidebar-row-title{
+      color: #006fff;
+      font-size: 20px;
+      margin-bottom: 20px;
+  }
+
+  .blog-sidebar .sidebar-row .sidebar-row-ul{
+      padding: 0
+  }
+  .blog-sidebar .sidebar-row .sidebar-row-ul li{
+      margin-bottom: 10px
+  }
+  .blog-sidebar .sidebar-row a{
+      color: #000;
+  }
+  .blog-sidebar .sidebar-row a:hover{
+      color: #f4c20d
+  }
+
+  .article-img {
+      height: 500px;
+      background: no-repeat center;
+      background-size: cover!important;
+      
+  }
+
+
+  @media(max-width:500px){
+      .article-img{
+          height: 300px;
+      }
+  }
+
+
+  .select2-container--default .select2-selection--single{
+    border: 1px solid #dee2e6;
+    height: 35px;
+    padding-top: 2px;
+}
+  .select2-container--default .select2-selection--single:focus{
+      outline: #F4C20D !important;
+      box-shadow: 0 0 0 0.2rem rgba(244, 194, 13, 0.4) !important;
+  }
+  .select2-container--default .select2-search--dropdown .select2-search__field:focus{
+      outline: 0
+  }
+
   /*# sourceMappingURL=article.css.map */
