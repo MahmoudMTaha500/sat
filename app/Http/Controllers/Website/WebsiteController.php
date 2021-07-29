@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Student\RegisterStudentRequest;
 use App\Models\Airports;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Course;
 use App\Models\Institute;
 use App\Models\Partner;
@@ -259,7 +260,13 @@ if($student_mail){
     /*******************************/
     public function articles()
     {
-        $blogs = Blog::paginate(8);
+
+        if(request('cat_id')){
+            $blogs = Blog::where('category_id',request('cat_id'))->paginate(8);
+        } else{
+            $blogs = Blog::paginate(8);
+
+        }
         $page_identity = [
             'title_tag' => 'المقالات',
             'meta_keywords' => '',
@@ -273,13 +280,28 @@ if($student_mail){
     public function article($id)
     {
         $blog = Blog::find($id);
+        $category_id =$blog->category_id;
+        $country_id= $blog->country_id;
+        $city_id= $blog->city_id;
+        $institute_id= $blog->institute_id;
+        $course_id= $blog->course_id;
+
+        $categories_spiesific_blog= Blog::where('category_id',$category_id)->orderBy('id', 'DESC')->take(5)->get();
+        $countries_spiesific_blog= Blog::where('country_id',$country_id)->orderBy('id', 'DESC')->take(5)->get();
+        $cities_spiesific_blog= Blog::where('city_id',$city_id)->orderBy('id', 'DESC')->take(5)->get();
+        $institutes_spiesific_blog= Blog::where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
+        $courses_spiesific_blog= Blog::where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
+
+        $categories = BlogCategory::orderBy('id', 'DESC')->take(5)->get();
+        // dd($cities_spiesific_blog);
+
         $page_identity = [
             'title_tag' => $blog->title_tag,
             'meta_keywords' => $blog->meta_keywords,
             'meta_description' => $blog->meta_description,
             'page_name' => '',
         ];
-        return view('website.blog.article', compact('blog' , 'page_identity'));
+        return view('website.blog.article', compact('blog' , 'page_identity','categories','categories_spiesific_blog','countries_spiesific_blog','cities_spiesific_blog','institutes_spiesific_blog','courses_spiesific_blog'));
     }
 
 

@@ -5,7 +5,19 @@
         <div class="overlay"></div>
         <div class="center-content" class="col-lg-4  align-self-center mx-auto text-center">
             <h4 class="text-white mb-4">دراسة اللغة الانجليزية في {{$blog->country->name_ar}} </h4>
-            <a href="{{route('website.institutes' , ['country' => $blog->country->id])}}" class="btn bg-main-color text-white rounded-10">معاهد {{$blog->country->name_ar}}</a>
+            @if($blog->institute_id)
+            <a href="{{route('website.institutes' , ['institute_name' => $blog->institute->name_ar])}}" class="btn bg-main-color text-white rounded-10">
+                
+                تصفح دورات معهد  {{$blog->institute->name_ar}} 
+            </a>
+            @else  
+            <a href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}" class="btn bg-main-color text-white rounded-10">
+                
+                معاهد {{$blog->country->name_ar}} 
+            </a>
+            @endif
+
+          
         </div>
         <!-- <img src="imgs/news/Bg.png" alt="" class="w-100"> -->
     </div>
@@ -21,8 +33,8 @@
                         <i class="fas fa-eye"></i> 
                         تصفح
                         (
-                            <a href="#">معاهد بريطانيا</a> - 
-                            <a href="#">دورات معهد كابلان</a>
+                            <a  href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}">معاهد {{$blog->country->name_ar}}</a> - 
+                            <a href="{{route('website.institutes' , ['institute_name' => $blog->institute->name_ar])}}" >دورات معهد {{$blog->institute->name_ar}}</a>
                         )
                     </div>
                     <p>  {!! $blog->content_ar !!}  </p>
@@ -34,11 +46,10 @@
                             <h3 class="sidebar-row-title">التصنيفات</h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    <li><a href="#"> تصنيف  1 </a></li>
-                                    <li><a href="#"> تصنيف  2 </a></li>
-                                    <li><a href="#"> تصنيف  3 </a></li>
-                                    <li><a href="#"> تصنيف  4 </a></li>
-                                    <li><a href="#"> تصنيف  5 </a></li>
+                                    @foreach($categories as $cat)
+                                    <li><a href="{{route('website.articles',['cat_id'=> $cat->id])}}">  {{$cat->name_ar}} </a></li>
+                                    @endforeach
+                                 
                                 </li>
                             </ul>
                         </div>
@@ -46,59 +57,52 @@
                             <h3 class="sidebar-row-title">مقالات ذات صلة</h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    <li><a href="#"> مقال 1 </a></li>
-                                    <li><a href="#"> مقال 2 </a></li>
-                                    <li><a href="#"> مقال 3 </a></li>
-                                    <li><a href="#"> مقال 4 </a></li>
-                                    <li><a href="#"> مقال 5 </a></li>
+    
+                                    @foreach($categories_spiesific_blog as $blog_1)
+                                    <li><a href="{{route('website.article',$blog_1->id)}}">  {{$blog_1->title_ar}} </a></li>
+                                    @endforeach
+                                  
                                 </li>
                             </ul>
                         </div>
                         <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بدولة (بريطانيا)</h3>
+                            <h3 class="sidebar-row-title">مقالات مرتبطة بدولة {{$blog->country->name_ar}}</h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    <li><a href="#"> مقال 1 </a></li>
-                                    <li><a href="#"> مقال 2 </a></li>
-                                    <li><a href="#"> مقال 3 </a></li>
-                                    <li><a href="#"> مقال 4 </a></li>
-                                    <li><a href="#"> مقال 5 </a></li>
+                                    @foreach($countries_spiesific_blog as $country)
+                                    <li><a href="{{route('website.article',$country->id)}}">  {{$country->title_ar}} </a></li>
+                                    @endforeach
                                 </li>
                             </ul>
                         </div>
                         <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بمدينة (مانشيستر)</h3>
+                            <h3 class="sidebar-row-title">مقالات مرتبطة بمدينة {{$blog->city->name_ar}}</h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    <li><a href="#"> مقال 1 </a></li>
-                                    <li><a href="#"> مقال 2 </a></li>
-                                    <li><a href="#"> مقال 3 </a></li>
-                                    <li><a href="#"> مقال 4 </a></li>
-                                    <li><a href="#"> مقال 5 </a></li>
+                                    @foreach($cities_spiesific_blog as $city)
+                                    <li><a href="{{route('website.article',$city->id)}}">  {{$city->title_ar}} </a></li>
+                                    @endforeach
+                                </li>
                                 </li>
                             </ul>
                         </div>
                         <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بمعهد (كابلان)</h3>
+                            <h3 class="sidebar-row-title">مقالات مرتبطة بمعهد {{$blog->institute->name_ar}}</h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    <li><a href="#"> مقال 1 </a></li>
-                                    <li><a href="#"> مقال 2 </a></li>
-                                    <li><a href="#"> مقال 3 </a></li>
-                                    <li><a href="#"> مقال 4 </a></li>
-                                    <li><a href="#"> مقال 5 </a></li>
+                                    @foreach($institutes_spiesific_blog as $institute)
+                                    <li><a href="{{route('website.article',$institute->id)}}">  {{$institute->title_ar}} </a></li>
+                                    @endforeach
                                 </li>
                             </ul>
                         </div>
                         <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بدورة (تعليم لغة انجليزية صباحي)</h3>
+                            <h3 class="sidebar-row-title">مقالات مرتبطة بدورة {{$blog->course->name_ar}}</h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    <li><a href="#"> مقال 1 </a></li>
-                                    <li><a href="#"> مقال 2 </a></li>
-                                    <li><a href="#"> مقال 3 </a></li>
-                                    <li><a href="#"> مقال 4 </a></li>
-                                    <li><a href="#"> مقال 5 </a></li>
+                                    @foreach($courses_spiesific_blog as $course)
+                                    <li><a href="{{route('website.article',$course->id)}}">  {{$course->title_ar}} </a></li>
+                                    @endforeach
                                 </li>
                             </ul>
                         </div>

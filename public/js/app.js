@@ -5648,6 +5648,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   beforeMount: function beforeMount() {
     this.get_countries();
+    this.get_cities();
+    var queryString = window.location.search;
+    var urlParams = new URLSearchParams(queryString);
+    var course_id_url = urlParams.get('country_id');
+    this.country_id = course_id_url;
   }
 });
 
@@ -6065,7 +6070,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       use_params: false,
       course_level: "",
       student_favourite_courses: {},
-      arrange_as: ""
+      arrange_as: "",
+      keyword_institute: ''
     };
   },
   methods: {
@@ -6142,12 +6148,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: {},
+  mounted: function mounted() {},
   beforeMount: function beforeMount() {
     if (this.search.length != 0) {
       this.keyword = this.search.keyword;
 
-      if (this.search.country != undefined) {
-        this.country_id = this.search.country;
+      if (this.search.country_id != undefined) {
+        this.country_id = this.search.country_id;
       }
 
       if (this.search.city != undefined) {
@@ -6156,6 +6163,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (this.search.weeks != undefined) {
         this.weeks = this.search.weeks;
+      }
+
+      if (this.search.institute_name) {
+        this.keyword = this.search.institute_name;
+        this.keyword_institute = this.search.institute_name;
       }
     }
 
@@ -52489,7 +52501,8 @@ var render = function() {
                                 ref: "keyword",
                                 staticClass:
                                   "form-control border-0 bg-transparent pr-1",
-                                attrs: { type: "text", placeholder: "بحث" }
+                                attrs: { type: "text", placeholder: "بحث" },
+                                domProps: { value: _vm.keyword_institute }
                               }),
                               _vm._v(" "),
                               _vm._m(1)

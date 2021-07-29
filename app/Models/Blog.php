@@ -34,4 +34,9 @@ class Blog extends Model
     {
         return $this->belongsTo('App\Models\Institute', 'institute_id', 'id');
     }
+    public function course()
+    {
+        return $this->belongsTo('App\Models\Course', 'course_id', 'id');
+    }
+  
 }
