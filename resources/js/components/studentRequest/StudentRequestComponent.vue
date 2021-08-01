@@ -470,9 +470,9 @@ request_id: 0,
             },
         },
         beforeMount() {
-             const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        const course_id_url = urlParams.get('course_id');
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const course_id_url = urlParams.get('course_id');
         // alert(course_id_url);
 
           if(course_id_url){
