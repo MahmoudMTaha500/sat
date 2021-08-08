@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class VisaCategory extends Model
 {
 
-    protected $fillable = [
-        'creator_id',
-        'name_ar',
-    ];
+    protected $guarded = [];
 
     public function creator()
     {

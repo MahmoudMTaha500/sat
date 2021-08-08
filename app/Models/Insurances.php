@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Insurances extends Model
 {
-    // protected $guarded = [];  
     protected $table='insurances';
-    protected $fillable=['price','institute_id' , 'weeks'];
+    protected $guarded = [];
 
     public function institute()
     {

@@ -6,13 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Visa extends Model
 {
-    protected $fillable = [
-        'category_id',
-        'country_id',
-        'creator_id',
-        'price',
-        'approvement',
-    ];
+    protected $guarded = [];
 
     public function category()
     {

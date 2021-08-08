@@ -17,6 +17,8 @@ class CreateInsurancesTable extends Migration
             $table->id();
             $table->string('weeks');
             $table->integer('price');
+            $table->string('currency_code');
+            $table->integer('currency_amount');
             $table->bigInteger("institute_id")->unsigned();
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->timestamps();

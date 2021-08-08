@@ -29,7 +29,7 @@
                                         <form action="">
                                             <label>ادخل اسم المعهد</label>
                                             <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                                                <input ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
+                                                <input  :value="keyword_institute" ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text border-0 p-0 bg-transparent" id="basic-addon2"><i class="fas fa-search"></i></span>
                                                 </div>
@@ -214,6 +214,7 @@
                 course_level: "",
                 student_favourite_courses: {},
                 arrange_as: "",
+                keyword_institute:''
             };
         },
         methods: {
@@ -285,17 +286,26 @@
         computed:{
 
         },
+        mounted(){
+            
+        },
         beforeMount() {
             if (this.search.length != 0) {
                 this.keyword = this.search.keyword;
-                if (this.search.country != undefined) {
-                    this.country_id = this.search.country;
+                if (this.search.country_id != undefined) {
+                    this.country_id = this.search.country_id;
+                    
                 }
                 if (this.search.city != undefined) {
                     this.city_id = this.search.city;
                 }
                 if (this.search.weeks != undefined) {
                     this.weeks = this.search.weeks;
+                }
+                if(this.search.institute_name){
+                    this.keyword = this.search.institute_name;
+                    this.keyword_institute = this.search.institute_name;
+          
                 }
             }
 

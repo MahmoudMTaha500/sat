@@ -60,7 +60,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> السعر</label>
-                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"   value="{{$residence->price}}" />
+                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"   value="{{$residence->currency_amount}}" />
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -68,10 +68,8 @@
                                                             <label for="projectinput2">اختر العمله</label>
                                                             <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                                 <option value="">الريال السعودي</option>
-                                                                <option value="GBP"> الجنيه الاسترليني</option>
-                                                                <option value="USD"> الدولار</option>
-        
-                                                          
+                                                                <option {{$residence->currency_code == "GBP" ? "selected" : ''}} value="GBP"> الجنيه الاسترليني</option>
+                                                                <option {{$residence->currency_code == "USD" ? "selected" : ''}} value="USD"> الدولار</option>
                                                             </select>
                                                         </div>
                                                     </div>
