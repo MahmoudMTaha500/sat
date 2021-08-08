@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Airports extends Model
 {
     protected $guarded = [];  
-    protected $fillable=['name_ar','price','institute_id'];
 
     public function institute()
     {

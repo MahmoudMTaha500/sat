@@ -151,6 +151,33 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-12">
+                                                    <hr>
+                                                    <h4 class="mt-5 mb-2 text-black">حقول ال SEO</h4>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="projectinput1">title tage</label> 
+                                                                <input type="text" placeholder="ادخل title tage " name="title_tag" value="{{old('title_tag')}}" class="form-control">
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="projectinput1">الكلمات  المفتاحية</label> 
+                                                                <input type="text" placeholder="ادخل الكلمات المفتاحية " name="meta_keywords" value="{{old('meta_keywords')}}" class="form-control">
+                                                            </div>
+                                                            
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="projectinput1">وصف الصفحة</label> 
+                                                                <input type="text" placeholder="ادخل meta description" name="meta_description" value="{{old('meta_description')}}" class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-actions center">
                                                     <button type="submit" class="btn btn-primary w-100 test-btn"><i class="la la-check-square-o"></i> حفظ</button>
                                                 </div>

@@ -87,41 +87,13 @@
                                             </div>
                                             </div>
                                         </div>
-
-                                        {{-- <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectinput4">لوجو المعهد</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01"  name="logo"  value="{{asset($institute->logo)}}"/>
-                                                        <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
-                                                    </div>
-                                                    <div class="mt-1">
-                                                        <img class="w-100" src="{{asset($institute->logo)}}" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group image-box-input">
-                                                    <label for="projectinput4">صورة المعهد</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input image-input" id="inputGroupFile01" name="panner" value="{{asset($institute->banner)}}" />
-                                                        <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
-                                                    </div>
-                                                    <div class="mt-1 image-box">
-<img class="w-100" src="{{asset($institute->banner)}}" alt="">
-                                                        
-</div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <show-images-component
                                                 :image_name="{{json_encode("logo")}}"
                                                 :image_label="{{json_encode("اختر لوجو المعهد")}}"
                                                 :old="{{json_encode(old('logo'))}}"
-                                                :path_image_edit="{{ json_encode( asset($institute->logo) )}}"
+                                                :path_image_edit="{{ json_encode( asset($institute->logo == 'null' ? 'storage/default_images.png' : $institute->logo) )}}"
                                                 ></show-images-component>
                                             </div>
                                             <div class="col-md-6">
@@ -129,7 +101,7 @@
                                                 :image_name="{{json_encode("panner")}}"
                                                 :image_label="{{json_encode("اختر الصورة")}}"
                                                 :old="{{json_encode(old('panner'))}}"
-                                                :path_image_edit="{{ json_encode( asset($institute->banner) )}}"
+                                                :path_image_edit="{{ json_encode( asset($institute->banner == 'null' ? 'storage/default_images.png' : $institute->banner) )}}"
 
 
                                                 ></show-images-component>
@@ -142,7 +114,45 @@
                                                     <input type="text" id="institute-map" class="form-control" placeholder="ادخل  الموقع" name="map"  value="{{$institute->map}}" />
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <hr>
+                                            <h4 class="mt-5 mb-2 text-black">حقول ال SEO</h4>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">بديل صورة اللوجو</label> 
+                                                        <input type="text" placeholder="ادخل اسم بديل للصورة " name="logo_alt" value="{{$institute->logo_alt}}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">بديل صورة الباننر</label> 
+                                                        <input type="text" placeholder="ادخل اسم بديل للصورة " name="banner_alt" value="{{$institute->banner_alt}}" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">title tage</label> 
+                                                        <input type="text" placeholder="ادخل title tage " name="title_tag" value="{{$institute->title_tag}}" class="form-control">
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">الكلمات  المفتاحية</label> 
+                                                        <input type="text" placeholder="ادخل الكلمات المفتاحية " name="meta_keywords" value="{{$institute->meta_keywords}}" class="form-control">
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label for="projectinput1">وصف الصفحة</label> 
+                                                        <input type="text" placeholder="ادخل meta description" name="meta_description" value="{{$institute->meta_description}}" class="form-control">
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
                                         <div class="form-actions center">
                                             <button type="submit" class="btn btn-primary w-100"><i class="la la-check-square-o"></i> حفظ</button>
                                         </div>

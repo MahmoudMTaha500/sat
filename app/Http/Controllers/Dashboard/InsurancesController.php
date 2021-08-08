@@ -7,6 +7,8 @@ use App\Models\Institute;
 use App\Models\Insurances;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+
 
 class InsurancesController extends Controller
 {
@@ -17,7 +19,7 @@ class InsurancesController extends Controller
         $page_name = 'insurances';
         $useVue = true;
         $institutes = Institute::get();
-       $page_title = 'التامينات';
+        $page_title = 'التامينات';
 
 
         return view("admin.insurances.index", compact('department_name', 'page_name', 'useVue', 'institutes' ,'page_title'));
@@ -44,13 +46,27 @@ class InsurancesController extends Controller
 
     public function store(InsurancesRequest $request)
     {
-        // dd($request->all());
+        $price_amount = $request->price;
+        $price = $request->price;
+        if(!empty($request->currency_exchange)){
+            $converted_price = Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount($price_amount)
+            ->withoutVerifying()
+            ->get();
+            $price = $converted_price + $request->exchange_money*$price_amount;
+        }
+
+
+
         $insurances = Insurances::create([
             'weeks' => $request->weeks,
             'institute_id' => $request->institute_id,
-            'price' => $request->price,
+            'price'=>$price,
+            'currency_code'=>$request->currency_exchange,
+            'currency_amount'=>$price_amount,
         ]);
-        // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
         session()->flash('alert_message', ['message' => "تم اضافه الخدمه بنجاح", 'icon' => 'success']);
         return redirect()->route('insurances.index');
@@ -76,17 +92,36 @@ class InsurancesController extends Controller
         $Institutes = Institute::get();
         $department_name = 'services';
         $page_name = 'insurances';
-       $page_title = 'التامينات';
+        $page_title = 'التامينات';
+        $countries = Country::all();
+        $useVue = true;
 
-        return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes', 'insurance','page_title'));
+
+        return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes', 'insurance','page_title' , 'countries' , 'useVue'));
     }
 
     public function update(InsurancesRequest $request, Insurances $Insurances)
     {
+
+        $price_amount = $request->price;
+        $price = $request->price;
+        if(!empty($request->currency_exchange)){
+            $converted_price = Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount($price_amount)
+            ->withoutVerifying()
+            ->get();
+            $price = $converted_price + $request->exchange_money*$price_amount;
+        }
+
+
         $insurance = Insurances::find($request->id);
         $insurance->weeks = $request->weeks;
         $insurance->institute_id = $request->institute_id;
-        $insurance->price = $request->price;
+        $insurance->price=$price;
+        $insurance->currency_code=$request->currency_exchange;
+        $insurance->currency_amount=$price_amount;
         $insurance->save();
         session()->flash('alert_message', ['message' => 'تم تعديل التامين', 'icon' => 'success']);
         return back();

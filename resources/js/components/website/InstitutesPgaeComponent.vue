@@ -107,7 +107,7 @@
                                         <!-- Institute Img -->
                                         <a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg">
                                             <div class="institute-img d-inline-block position-relative">
-                                                <img :src="public_path+course.institute_banner" :alt="course.institute_name" class="card-img-top" />
+                                                <img :src="course.institute_banner == 'null' ? public_path+'storage/default_images.png' : public_path+course.institute_banner" :alt="course.institute_name" class="card-img-top" />
                                             </div>
                                         </a>
                                         

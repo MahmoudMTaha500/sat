@@ -64,12 +64,10 @@
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput2">اختر العمله</label>
-                                                            <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
+                                                            <select class="currency_exchange form-control text-left" name="currency_exchange">
                                                                 <option value="">الريال السعودي</option>
-                                                                <option value="GBP"> الجنيه الاسترليني</option>
-                                                                <option value="USD"> الدولار</option>
-        
-                                                          
+                                                                <option {{old('currency_exchange') == 'GBP' ? 'selected' : ''}} value="GBP"> الجنيه الاسترليني</option>
+                                                                <option {{old('currency_exchange') == 'USD' ? 'selected' : ''}} value="USD"> الدولار</option>
                                                             </select>
                                                         </div>
                                                     </div>

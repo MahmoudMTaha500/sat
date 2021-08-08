@@ -25,6 +25,9 @@ class CourseSeeder extends Seeder
                 "lessons_per_week" => 5,
                 "hours_per_week" => 20,
                 "required_level" => 'مبتدئ',
+                "title_tag" => 'لغة انجليزية عام'.$x,
+                "meta_keywords" => 'كابلان, الدراسة في الخارج اللغة الانجليزية',
+                "meta_description" => 'كابلان, الدراسة في الخارج اللغة الانجليزية',
                 "approvement" => rand(0,1),
                 "discount" => rand(0,95)/100,
             ]);

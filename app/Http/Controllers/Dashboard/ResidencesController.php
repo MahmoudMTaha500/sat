@@ -91,7 +91,7 @@ public function getResidences(){
 
         return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title' , 'useVue' , 'countries'));
     }
-    public function update(Request $request, residences $residences)
+    public function update(ResidencesRequest $request, residences $residences)
     {
 
         $price_amount = $request->price;

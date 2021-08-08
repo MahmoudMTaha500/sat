@@ -22,7 +22,7 @@
             <div class="col-12 px-0">
                 <!-- Institute Imgs -->
                 <div class="institute-imgs owl-carousel" id="institute-imgs">
-                    <div class="profile-institute-img"><img src="{{asset($institute->banner)}}" alt="{{asset($institute->name_ar)}}" class="img-fluid w-100 d-block" /></div>
+                    <div class="profile-institute-img"><img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" alt="{{asset($institute->banner_alt)}}" class="img-fluid w-100 d-block" /></div>
                 </div>
                 <!-- ./Institute Imgs -->
             </div>
@@ -169,21 +169,25 @@
                     @if (!empty($course->blogs[0]))
                         <div class="tab-pane fade" id="course_blogs" role="tabpanel" aria-labelledby="living-tab">
 
-                            @foreach ($course->blogs as $blog)
-                                <!-- Living Tab -->
-                                <div class="bg-white rounded-10 p-4 mb-4">
-                                    <img src="imgs/living.png" alt="" class="w-100 rounded-10" />
-                                    <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
-                                    <p class="mb-3">
-                                        {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
-                                        <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
-                                    </p>
+                            <div class="row">
+                                @foreach ($course->blogs as $blog)
+                                    <div class="col-md-6">
+                                        <!-- Living Tab -->
+                                        <div class="bg-white rounded-10 p-4 mb-4">
+                                            <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png')  : asset($blog->banner)}}" alt="{{$blog->img_alt}}" class="w-100 rounded-10" />
+                                            <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
+                                            <p class="mb-3">
+                                                {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
+                                                <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
+                                            </p>
 
-                                    {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
-                                    {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
-                                </div>
-                                <!-- ./Living Tab -->
-                            @endforeach
+                                            {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
+                                            {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
+                                        </div>
+                                        <!-- ./Living Tab -->
+                                    </div>
+                                @endforeach
+                            </div>
                             
 
 
@@ -192,22 +196,25 @@
 
                     @if (!empty($institute->blogs[0]))
                         <div class="tab-pane fade" id="institute_blogs" role="tabpanel" aria-labelledby="living-tab">
+                            <div class="row">
+                                @foreach ($institute->blogs as $blog)
+                                    <div class="col-md-6">
+                                        <!-- Living Tab -->
+                                        <div class="bg-white rounded-10 p-4 mb-4">
+                                            <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png')  : asset($blog->banner)}}" alt="{{$blog->img_alt}}" class="w-100 rounded-10" />
+                                            <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
+                                            <p class="mb-3">
+                                                {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
+                                                <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
+                                            </p>
 
-                            @foreach ($institute->blogs as $blog)
-                                <!-- Living Tab -->
-                                <div class="bg-white rounded-10 p-4 mb-4">
-                                    <img src="imgs/living.png" alt="" class="w-100 rounded-10" />
-                                    <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
-                                    <p class="mb-3">
-                                        {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
-                                        <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
-                                    </p>
-
-                                    {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
-                                    {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
-                                </div>
-                                <!-- ./Living Tab -->
-                            @endforeach
+                                            {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
+                                            {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
+                                        </div>
+                                        <!-- ./Living Tab -->
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     @endif
 

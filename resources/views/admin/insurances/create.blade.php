@@ -46,18 +46,38 @@
                                             <create-service-component
                                                 :countries_from_blade="{{ json_encode($countries) }}" 
                                                 :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
+                                                :old_country_id="{{json_encode(old('country_id'))}}"
+                                                :old_institute_id="{{json_encode(old('institute_id'))}}"
                                             >
                                             </create-service-component>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> عدد الاسابيع</label>
-                                                    <input type="number" class="form-control" placeholder="ادخل  عدد الاسابيع" name="weeks"  />
+                                                    <input type="number" class="form-control" placeholder="ادخل  عدد الاسابيع" value="{{old('weeks')}}" name="weeks"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> السعر</label>
-                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"  />
+                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" value="{{old('price')}}" name="price"  />
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput2">اختر العمله</label>
+                                                            <select class="currency_exchange form-control text-left" name="currency_exchange">
+                                                                <option value="">الريال السعودي</option>
+                                                                <option {{old('currency_exchange') == 'GBP' ? 'selected' : ''}} value="GBP"> الجنيه الاسترليني</option>
+                                                                <option {{old('currency_exchange') == 'USD' ? 'selected' : ''}} value="USD"> الدولار</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> سعر الصرافه</label>
+                                                            <input type="text" id="projectinput1" class="currency_exchange_rate form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

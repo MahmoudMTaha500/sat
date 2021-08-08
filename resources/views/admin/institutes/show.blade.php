@@ -20,11 +20,11 @@
               <div class="row">
                 <div class="col-12">
                   <div class="card profile-with-cover">
-                    <div class="card-img-top img-fluid bg-cover height-300" style="background: url('{{asset($institute->banner)}}') 50%;"></div>
+                    <div class="card-img-top img-fluid bg-cover height-300" style="background: url('{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}') 50%;"></div>
                     <div class="media profil-cover-details w-100">
                       <div class="media-left pl-2 pt-2">
                         <a href="#" class="profile-image">
-                          <img src="{{asset($institute->logo)}}" class="rounded-circle img-border height-100"
+                          <img src="{{$institute->logo == 'null' ? asset('storage/default_images.png') : asset($institute->logo)}}" class="rounded-circle img-border height-100"
                           alt="Card image">
                         </a>
                       </div>

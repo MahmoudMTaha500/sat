@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Airports ;
 use App\Models\Country ;
 use Illuminate\Http\Request;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+
 
 class AirportsController extends Controller
 {
@@ -56,12 +58,26 @@ class AirportsController extends Controller
      */
     public function store(AirportRequest $request)
     {
+
+        $price_amount = $request->price;
+        $price = $request->price;
+        if(!empty($request->currency_exchange)){
+            $converted_price = Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount($price_amount)
+            ->withoutVerifying()
+            ->get();
+            $price = $converted_price + $request->exchange_money*$price_amount;
+        }
+
         $airports = Airports::create([
             'name_ar'=>$request->name_ar,
             'institute_id'=>$request->institute_id,
-            'price'=>$request->price,
+            'price'=>$price,
+            'currency_code'=>$request->currency_exchange,
+            'currency_amount'=>$price_amount,
             ]);
-            // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
             session()->flash('alert_message', ['message'=>"تم اضافه المطار بنجاح", 'icon'=>'success']);
             return redirect()->route('airports.index');
@@ -97,7 +113,9 @@ class AirportsController extends Controller
         $department_name = 'services';
         $page_name = 'airports';
         $page_title = 'المطارات';
-        return view("admin.airports.edit", compact('department_name', 'page_name', 'Institutes','page_title','airport'));
+        $countries = Country::all();
+        $useVue = true;
+        return view("admin.airports.edit", compact('department_name', 'page_name', 'Institutes','page_title','airport' , 'countries' , 'useVue'));
     }
     /**
      * Update the specified resource in storage.
@@ -108,10 +126,26 @@ class AirportsController extends Controller
      */
     public function update(AirportRequest $request, airports $airports)
     {
+
+        $price_amount = $request->price;
+        $price = $request->price;
+        if(!empty($request->currency_exchange)){
+            $converted_price = Currency::convert()
+            ->from("$request->currency_exchange")
+            ->to('SAR')
+            ->amount($price_amount)
+            ->withoutVerifying()
+            ->get();
+            $price = $converted_price + $request->exchange_money*$price_amount;
+        }
+
+
         $airport= Airports::find($request->id);
         $airport->name_ar=$request->name_ar;
         $airport->institute_id=$request->institute_id;
-        $airport->price=$request->price;
+        $airport->price=$price;
+        $airport->currency_code=$request->currency_exchange;
+        $airport->currency_amount=$price_amount;
         $airport->save();
         session()->flash('alert_message',['message'=>'تم تعديل المطار','icon'=>'success']);
         return back();  

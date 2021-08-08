@@ -60,6 +60,24 @@
                                                     <label for="institute-name"> السعر</label>
                                                     <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"   value="{{old('price')}}"/>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput2">اختر العمله</label>
+                                                            <select class="currency_exchange form-control text-left" name="currency_exchange">
+                                                                <option value="">الريال السعودي</option>
+                                                                <option {{old('currency_exchange') == 'GBP' ? 'selected' : ''}} value="GBP"> الجنيه الاسترليني</option>
+                                                                <option {{old('currency_exchange') == 'USD' ? 'selected' : ''}} value="USD"> الدولار</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> سعر الصرافه</label>
+                                                            <input type="text" id="projectinput1" class="currency_exchange_rate form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0" />
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
 

@@ -46654,7 +46654,12 @@ var render = function() {
                       _c("td", [
                         _c("img", {
                           staticStyle: { "max-width": "100px" },
-                          attrs: { src: _vm.path_logo + institute.logo }
+                          attrs: {
+                            src:
+                              institute.logo == "null"
+                                ? _vm.path_logo + "storage/default_images.png"
+                                : _vm.path_logo + institute.logo
+                          }
                         })
                       ]),
                       _vm._v(" "),
@@ -52886,8 +52891,11 @@ var render = function() {
                                     staticClass: "card-img-top",
                                     attrs: {
                                       src:
-                                        _vm.public_path +
-                                        course.institute_banner,
+                                        course.institute_banner == "null"
+                                          ? _vm.public_path +
+                                            "storage/default_images.png"
+                                          : _vm.public_path +
+                                            course.institute_banner,
                                       alt: course.institute_name
                                     }
                                   })
