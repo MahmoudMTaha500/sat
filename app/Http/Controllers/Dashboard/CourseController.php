@@ -83,6 +83,9 @@ class CourseController extends Controller
                 'lessons_per_week' => $request->lessons_per_week,
                 'hours_per_week' => $request->hours_per_week,
                 'required_level' => $request->required_level,
+                "title_tag" => $request->title_tag,
+                "meta_keywords" => $request->meta_keywords,
+                "meta_description" => $request->meta_description,
                 'discount' => $request->discount/100,
                 'approvement' => 0,
 
@@ -98,13 +101,11 @@ class CourseController extends Controller
             $total_currency_price = $price["preice_per_week"] *   $calc_currency;
              $original_price=$price["preice_per_week"];
                 CoursePrice::create([
-                    
                     'weeks' => $price["num_of_weeks"],
                     'price' =>$total_currency_price,
                     "currency_code" => $exchange,
                     "currency_amount" =>  $original_price,
                     'course_id' => $course->id,
-                    'approvement' => 1,
                 ]);
             }
             // dd($request->all());
@@ -163,6 +164,9 @@ class CourseController extends Controller
         $updateCourse->lessons_per_week = $request->lessons_per_week;
         $updateCourse->hours_per_week = $request->hours_per_week;
         $updateCourse->required_level = $request->required_level;
+        $updateCourse->title_tag = $request->title_tag;
+        $updateCourse->meta_keywords = $request->meta_keywords;
+        $updateCourse->meta_description = $request->meta_description;
         $updateCourse->discount = $request->discount/100;
         $updateCourse->save();
 

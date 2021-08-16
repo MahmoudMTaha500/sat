@@ -12,35 +12,45 @@ class ResidencesSeeder extends Seeder
     public function run()
     {
         for ($x = 1; $x <= 30; $x++) {
+            $currency_amount = rand(1,9)*100;
             residences::create([
                 "name_ar" => '1السكن مع عائلة '.$x,
                 "institute_id" => $x,
-                "price" => rand(1,9)*100,
-               
+                "price" => ($currency_amount*5.21 + 0.21*$currency_amount),
+                "currency_code" => 'GBP',
+                "currency_amount" => $currency_amount,
             ]);
         }
         for ($x = 1; $x <= 30; $x++) {
+            $currency_amount = rand(1,9)*100;
             residences::create([
                 "name_ar" => '2السكن مع عائلة '.$x,
                 "institute_id" => $x,
-                "price" => rand(1,9)*100,
+                "price" => ($currency_amount*5.21 + 0.21*$currency_amount),
+                "currency_code" => 'GBP',
+                "currency_amount" => $currency_amount,
                
             ]);
         }
         for ($x = 1; $x <= 30; $x++) {
+            $currency_amount = rand(1,9)*100;
             residences::create([
                 "name_ar" => '3السكن مع عائلة '.$x,
                 "institute_id" => $x,
-                "price" => rand(1,9)*100,
+                "price" => ($currency_amount*5.21 + 0.21*$currency_amount),
+                "currency_code" => 'GBP',
+                "currency_amount" => $currency_amount,
                
             ]);
         }
         for ($x = 1; $x <= 30; $x++) {
+            $currency_amount = rand(1,9)*100;
             residences::create([
                 "name_ar" => '4السكن مع عائلة '.$x,
                 "institute_id" => $x,
-                "price" => rand(1,9)*100,
-               
+                "price" => ($currency_amount*5.21 + 0.21*$currency_amount),
+                "currency_code" => 'GBP',
+                "currency_amount" => $currency_amount,
             ]);
         }
     }

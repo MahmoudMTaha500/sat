@@ -43,32 +43,41 @@
                                     <input type="hidden" name="id" value="{{$insurance->id}}">
                                     <div class="form-body">
                                         <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="form-group">
-                                                    <label for="projectinput2">المعهد</label>
-                                                    <select class="select2 form-control text-left" name="institute_id">
-                                                        <option value=""  >اختر المعهد</option>
-
-                                                        @foreach($Institutes   as $institute)
-
-                                                        <option value="{{$institute->id}}"  
-                                                            @if($insurance->institute_id == $institute->id) selected @endif
-                                                            >{{$institute->name_ar.' | '.$institute->city->name_ar}}</option>
-
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4">
+                                            <create-service-component
+                                                :countries_from_blade="{{ json_encode($countries) }}" 
+                                                :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
+                                                :old_country_id="{{json_encode($insurance->institute->country->id)}}"
+                                                :old_institute_id="{{json_encode($insurance->institute_id)}}"
+                                            >
+                                            </create-service-component>
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> عدد الاسابيع</label>
                                                     <input type="number" class="form-control" placeholder="ادخل  عدد الاسابيع" name="weeks" value="{{$insurance->weeks}}" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-name"> السعر</label>
-                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"   value="{{$insurance->price}}" />
+                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" name="price"   value="{{$insurance->currency_amount}}" />
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput2">اختر العمله</label>
+                                                            <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
+                                                                <option value="">الريال السعودي</option>
+                                                                <option {{$insurance->currency_code == "GBP" ? "selected" : ''}} value="GBP"> الجنيه الاسترليني</option>
+                                                                <option {{$insurance->currency_code == "USD" ? "selected" : ''}} value="USD"> الدولار</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> سعر الصرافه</label>
+                                                            <input type="text" id="projectinput1" class="currency_exchange_rate form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

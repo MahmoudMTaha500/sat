@@ -45,7 +45,7 @@
                                             <div class="col-lg-8">
                                                 <div class="form-group">
                                                     <label for="projectinput1">العنوان</label>
-                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل اسم المعهد" name="title_ar" value="{{old('title_ar')}}" />
+                                                    <input type="text" id="eventRegInput1" class="form-control" placeholder="ادخل عنوان المقال" name="title_ar" value="{{old('title_ar')}}" />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="projectinput4">المحتوى</label>

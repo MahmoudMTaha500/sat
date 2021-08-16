@@ -67,9 +67,9 @@ class WebsiteController extends Controller
         $institute = $institute[0];
         $useVue = true;
         $page_identity = [
-            'title_tag' => $institute->name_ar.' | '.$course->name_ar,
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => $institute->title_tag.' | '.$course->title_tag,
+            'meta_keywords' => $institute->meta_keywords.','.$course->meta_keywords,
+            'meta_description' => $institute->meta_keywords.','.$course->meta_keywords,
             'page_name' => 'institutes',
         ];
         return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_identity'));

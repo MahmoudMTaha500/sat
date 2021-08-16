@@ -14,11 +14,6 @@ use AmrShawky\LaravelCurrency\Facade\Currency;
 
 class ResidencesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $department_name = 'services';
@@ -36,11 +31,6 @@ public function getResidences(){
     $residences = residences::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
     return response()->json(['residences'=>$residences]);
 }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $Institutes = Institute::get();
@@ -54,12 +44,6 @@ public function getResidences(){
         return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ResidencesRequest $request)
     {
         $price_amount = $request->price;
@@ -78,6 +62,8 @@ public function getResidences(){
             'name_ar'=>$request->name_ar,
             'institute_id'=>$request->institute_id,
             'price'=>$price,
+            'currency_code'=>$request->currency_exchange,
+            'currency_amount'=>$price_amount,
             ]);
             // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
 
@@ -85,32 +71,16 @@ public function getResidences(){
             return redirect()->route('residences.index');
 
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\residences  $residences
-     * @return \Illuminate\Http\Response
-     */
     public function show(residences $residences)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\residences  $residences
-     * @return \Illuminate\Http\Response
-     */
     public function edit(residences $residences)
     {
         //
     }
     public function editResidences($id)
     {
-        // $insurances = Insurances::where('id' , 1)->get()[0];
-        // dd();
         $residence= residences::find($id);
         $Institutes = Institute::get();
         $department_name = 'services';
@@ -121,14 +91,7 @@ public function getResidences(){
 
         return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title' , 'useVue' , 'countries'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\residences  $residences
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, residences $residences)
+    public function update(ResidencesRequest $request, residences $residences)
     {
 
         $price_amount = $request->price;
@@ -145,21 +108,16 @@ public function getResidences(){
 
 
         $residence= residences::find($request->id);
-      $residence->name_ar=$request->name_ar;
-      $residence->institute_id=$request->institute_id;
-      $residence->price=$price;
-      $residence->save();
-      session()->flash('alert_message',['message'=>'تم تعديل السكن','icon'=>'success']);
-      return back();  
+        $residence->name_ar=$request->name_ar;
+        $residence->institute_id=$request->institute_id;
+        $residence->price=$price;
+        $residence->currency_code=$request->currency_exchange;
+        $residence->currency_amount=$price_amount;
+        $residence->save();
+        session()->flash('alert_message',['message'=>'تم تعديل السكن','icon'=>'success']);
+        return back();  
            
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\residences  $residences
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(residences $residences,$id)
     {
         $residences= residences::find($id);
@@ -190,7 +148,6 @@ public function getResidences(){
         $residences = $residences->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['residences' => $residences]);
         
-        // dd($request->all());
     }
 
 }

@@ -21,6 +21,11 @@ class CreateInstitutesTable extends Migration
             $table->longText("institute_questions");
             $table->string("logo");
             $table->string("banner");
+            $table->text("logo_alt")->nullable();
+            $table->text("banner_alt")->nullable();
+            $table->text("title_tag")->nullable();
+            $table->text("meta_keywords")->nullable();
+            $table->text("meta_description")->nullable();
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
             $table->bigInteger("country_id")->unsigned();

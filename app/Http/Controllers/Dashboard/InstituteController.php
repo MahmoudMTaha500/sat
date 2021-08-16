@@ -59,11 +59,11 @@ class InstituteController extends Controller
         $pathLogo = public_path("storage/institute/logos");
         $request->logo->move($pathLogo, $logoName);
         $logoNamePath = "storage/institute/logos" . '/' . $logoName;
-        $pannerObject = $validated['panner'];
-        $PannerName = time() . $pannerObject->getClientOriginalName();
+        $bannerObject = $validated['banner'];
+        $PannerName = time() . $bannerObject->getClientOriginalName();
         $pathPanner = public_path("storage/institute/banners");
-        $request->panner->move($pathPanner, $PannerName);
-        $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
+        $request->banner->move($pathPanner, $PannerName);
+        $bannerNamePath = "storage/institute/banners" . '/' . $PannerName;
         $slug = str_replace(' ', '-', $request->name_ar);
             $institute = Institute::create([
                 "name_ar" => $request->name_ar,
@@ -73,11 +73,15 @@ class InstituteController extends Controller
                 "country_id" => $request->country_id,
                 "city_id" => $request->city_id,
                 "logo" => $logoNamePath,
-                "banner" => $pannerNamePath,
+                "banner" => $bannerNamePath,
+                "logo_alt" => $request->logo_alt,
+                "banner_alt" => $request->banner_alt,
+                "title_tag" => $request->title_tag,
+                "meta_keywords" => $request->meta_keywords,
+                "meta_description" => $request->meta_description,
                 "creator_id" => 1,
                 "sat_rate" => 1,
                 "rate_switch" => 1,
-                "active" => 1,
                 "approvement" => 1,
                 "map" => $request->map,
             ]);
@@ -114,6 +118,11 @@ class InstituteController extends Controller
         $institute->institute_questions = $request->institute_questions;
         $institute->country_id = $request->country_id;
         $institute->city_id = $request->city_id;
+        $institute->logo_alt = $request->logo_alt;
+        $institute->banner_alt = $request->banner_alt;
+        $institute->title_tag = $request->title_tag;
+        $institute->meta_keywords = $request->meta_keywords;
+        $institute->meta_description = $request->meta_description;
         $institute->map = $request->map;
         if ($request->logo) {
             $validate_images = $request->validate([
@@ -127,20 +136,20 @@ class InstituteController extends Controller
             $logoNamePath = "storage/institute/logos" . '/' . $logoName;
             $institute->logo = $logoNamePath;
         }
-        if ($request->panner) {
+        if ($request->banner) {
             $validate_images = $request->validate([
-                'panner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+                'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
 
-            $pannerObject = $validate_images['panner'];
-            $PannerName = time() . $pannerObject->getClientOriginalName();
+            $bannerObject = $validate_images['banner'];
+            $PannerName = time() . $bannerObject->getClientOriginalName();
             $pathPanner = public_path("storage/institute/banners");
-            File::delete($institute->panner);
+            File::delete($institute->banner);
 
-            $request->panner->move($pathPanner, $PannerName);
+            $request->banner->move($pathPanner, $PannerName);
 
-            $pannerNamePath = "storage/institute/banners" . '/' . $PannerName;
-            $institute->banner = $pannerNamePath;
+            $bannerNamePath = "storage/institute/banners" . '/' . $PannerName;
+            $institute->banner = $bannerNamePath;
         }
    $rateSwitch = 0;
    if($request->rate_switch =="on"){
@@ -179,7 +188,7 @@ class InstituteController extends Controller
         Course::where('institute_id', $id)->forceDelete();
         $institute = Institute::find($id);
         File::delete($institute->logo);
-        File::delete($institute->panner);
+        File::delete($institute->banner);
 $institute->forceDelete();
         // Institute::where('id', $id)->forceDelete();
         session()->flash('alert_message', ['message' => 'تم حذف  المعهد  نهائيا بنجاح', 'icon' => 'error']);

@@ -6,10 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class VisaQuestionChoices extends Model
 {
-    protected $fillable = [
-        'choice_ar',
-        'question_id',
-    ];
+    protected $guarded = [];
 
     public function question()
     {

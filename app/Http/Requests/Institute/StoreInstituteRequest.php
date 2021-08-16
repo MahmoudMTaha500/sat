@@ -31,7 +31,7 @@ class StoreInstituteRequest extends FormRequest
             'country_id' => 'required',
             'city_id' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'panner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ];
     }
     
@@ -47,9 +47,9 @@ class StoreInstituteRequest extends FormRequest
             'logo.required' => 'لوجو المعهد مطلوب',
             'logo.image' => 'لوجو المعهد يجب ان يكون صورة',
             'logo.mimes' => 'لوجو المعهد يجب ان يكون بالصيغ الاتية (jpeg , png , jpg , gif , svg)',
-            'panner.required' => 'صورة المعهد مطلوبة',
-            'panner.image' => 'صورة المعهد يجب ان يكون صورة',
-            'panner.mimes' => 'صورة المعهد يجب ان يكون بالصيغ الاتية (jpeg , png , jpg , gif , svg)',
+            'banner.required' => 'صورة المعهد مطلوبة',
+            'banner.image' => 'صورة المعهد يجب ان يكون صورة',
+            'banner.mimes' => 'صورة المعهد يجب ان يكون بالصيغ الاتية (jpeg , png , jpg , gif , svg)',
         ];
     }
 }

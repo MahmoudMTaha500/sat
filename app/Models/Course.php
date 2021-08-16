@@ -9,21 +9,7 @@ class Course extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = [
-        'name_ar',
-        'about_ar',
-        'institute_id',
-        'creator_id',
-        'min_age',
-        'start_day',
-        'study_period',
-        'lessons_per_week',
-        'hours_per_week',
-        'required_level',
-        'discount',
-        'approvment',
-        'slug',
-    ];
+    protected $guarded = [];
     protected $date = ['deleted_at'];
 
     public function institute()

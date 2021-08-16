@@ -74,7 +74,7 @@
                                 <tr v-for="institute in institutes.data" :key="institute.id">
                                     <td>{{institute.id}}</td>
                                     <td>
-                                        <img style="max-width: 100px;" :src="path_logo+institute.logo" />
+                                        <img style="max-width: 100px;" :src="institute.logo == 'null' ? path_logo+'storage/default_images.png' : path_logo+institute.logo" />
                                     </td>
                                     <td>{{institute.name_ar}}</td>
                                     <td>{{institute.country.name_ar}}</td>
