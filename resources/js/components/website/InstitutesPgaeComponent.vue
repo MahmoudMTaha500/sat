@@ -130,7 +130,7 @@
                                             <!-- ./Course Name -->
                                             <!-- Course Time And Level -->
                                             <p class="mb-0 overflow-hidden">
-                                                <span   v-if="course.courses_study_period " class="float-right"><i class="fas fa-sun text-main-color"></i> {{course.courses_study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
+                                                <span   v-if="course.courses_study_period " class="float-right"><i class="fas fa-sun text-main-color"></i> {{ (course.courses_study_period == 'مسائي')? 'مسائي' : 'صباحي'}}</span>
                                                 <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{course.courses_required_level}}</span>
                                             </p>
                                             <!-- ./Course Time And Level -->
@@ -171,6 +171,9 @@
                                     <span>
                                         <span style="background: #f4c20d;" class="page-link rounded-10 mx-1 text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
                                     </span>
+                                </li>
+                                <li class="page-item" v-for="(page, index) in courses.last_page" :key="index" :class="courses.current_page == page ? 'active' : ''">
+                                <a class="page-link" @click="pagination(courses.path+'?page='+page)">{{ page }}</a>
                                 </li>
 
                                 <li class="page-item">
@@ -214,7 +217,8 @@
                 course_level: "",
                 student_favourite_courses: {},
                 arrange_as: "",
-                keyword_institute:''
+                keyword_institute:'',
+                total_linkes: 0,
             };
         },
         methods: {
@@ -234,6 +238,8 @@
             },
             pagination: function (url) {
                 this.get_courses_url = url;
+
+                
                 this.get_courses();
             },
      
@@ -290,6 +296,9 @@
             
         },
         beforeMount() {
+
+                 this.total_linkes = this.courses.last_page - this.courses.current_page;
+
             if (this.search.length != 0) {
                 this.keyword = this.search.keyword;
                 if (this.search.country_id != undefined) {

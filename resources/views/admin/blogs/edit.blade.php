@@ -72,7 +72,21 @@
                                                         
                                                     </select>
                                                 </div>
-                                                <country-city-blog-component 
+
+                                                <create-blog-component 
+                                                :countries_from_blade="{{ json_encode($countries) }}" 
+                                                :getcities_url="{{ json_encode(route('getcities')) }}"
+                                                :get_institutes_url="{{ json_encode(route('blog.get.institutes.vue')) }}"
+                                                :get_courses_url="{{ json_encode(route('blog.get.courses.vue')) }}"
+                                                :old_country="{{json_encode($blog->country_id)}}"
+                                                :old_city="{{json_encode($blog->city_id)}}"
+                                                :old_institute="{{json_encode($blog->institute_id)}}"
+                                                :old_course="{{json_encode($blog->course_id)}}"
+                                            >
+                                            </create-blog-component>
+
+
+                                                {{-- <country-city-blog-component 
                                             :countries_from_blade="{{ json_encode($countries) }}"
                                             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
                                             :country_id2="{{ json_encode($blog->country_id) }}"
@@ -90,16 +104,9 @@
 
                                                         @endforeach
                                                     </select>
-                                                </div>
+                                                </div> --}}
                                                 <div class="form-group">
-                                                    {{-- <label for="projectinput4">صورة المقال</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" id="inputGroupFile01"  name="banner" value="{{$blog->banner}}"/>
-                                                        <label class="custom-file-label" for="inputGroupFile01">اختر الصورة</label>
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <img class="w-100" src="{{asset($blog->banner)}}" alt="" />
-                                                    </div> --}}
+                                                   
 
                                                     <show-images-component
                                                     :image_name="{{json_encode("banner")}}"

@@ -17,6 +17,13 @@
             </a>
             @endif
 
+            @if($blog->course) 
+            <a href="{{route('website.institute',[$blog->institute->id , $blog->institute->slug , $blog->course->slug])}}" class="btn bg-main-color text-white rounded-10">
+                
+                قدم الان في دورة  {{$blog->course->name_ar}} 
+            </a>
+            @endif
+
           
         </div>
         <!-- <img src="imgs/news/Bg.png" alt="" class="w-100"> -->
@@ -97,7 +104,9 @@
                             </ul>
                         </div>
                         <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بدورة {{$blog->course->name_ar}}</h3>
+                            <h3 class="sidebar-row-title">مقالات مرتبطة بدورة 
+                             @if($blog->course)    {{$blog->course->name_ar}} @endif
+                            </h3>
                             <ul class="sidebar-row-ul">
                                 <li>
                                     @foreach($courses_spiesific_blog as $course)

@@ -45,6 +45,10 @@
                         <!-- Submit Btn -->
                         <button type="submit"
                             class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white"> ارسال</button>
+                            @if (session()->has('alert_message'))
+                            <p class="text-center">لتسجيل الدخول <a href="{{route('student.login')}}" class="text-secondary-color">  اضغط هنا</a></p>
+
+                            @endif
                         <!-- ./Submit Btn -->
                         <!-- Register Link -->
                         <!-- Register Link -->

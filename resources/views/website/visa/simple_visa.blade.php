@@ -72,9 +72,9 @@
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <select class="form-control border-0 bg-transparent @error('country') is-invalid @enderror" onchange="visatype22(event)" name="country" required>
                                     <option value="" selected disabled>اختر الدوله</option>
-                                    <option value="England"> انجلترا </option>
+                                    <option value="England"> بريطانايا  </option>
                                     <option value="USA"> امريكا </option>
-                                    <option value="Schengen"> شنغن </option>
+                                    <option   value="Schengen" onclick="show_sheingen()"> شنغن </option>
                                 </select>
 
                                 {{-- <input name="country" value="{{ old('country') }}" type="text" class="form-control border-0 bg-transparent @error('country') is-invalid @enderror" placeholder="الدولة" /> --}} @error('country')
@@ -82,6 +82,33 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>   
+                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light" style="display:none;"   id="sheingen">
+                                <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror"   name="country_sheingen" required>
+                                    <option value="" selected disabled> اختر من دول شنغن</option>
+                                    <option value="Germany"> المانيا  </option>
+                                    <option value="France"> فرنسا </option>
+                                    <option   value="Italy"> ايطاليا </option>
+                                    <option   value="Spain"> اسبانيا </option>
+                                    <option   value="Estonia"> إستونيا </option>
+                                    <option   value="Belgium"> بلجيكا </option>
+                                    <option   value="Greece"> اليونان </option>
+                                    <option   value="Denmark"> الدنمارك </option>
+                                    <option   value="Finland"> فنلندا </option>
+                                    <option   value="Portugal"> البرتغال </option>
+                                    <option   value="Malta"> 	مالطا </option>
+                                    <option   value="Switzerland"> سويسرا </option>
+                                    <option   value="Sweden"> السويد </option>
+                                    <option   value="Slovakia"> سلوفاكيا </option>
+                                    <option   value="Poland"> بولندا </option>
+                                    <option   value="Iceland"> 	آيسلندا </option>
+                                    <option   value="Netherlands"> هولندا </option>
+                                    <option   value="Norway"> النرويج </option>
+                                </select>
+
+                                <span class="invalid-feedback" role="alert">
+                                </span>
+                             
                             </div>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
@@ -239,6 +266,11 @@
             displayError.textContent = "";
         }
     });
+
+
+    function show_sheingen(){
+       $('#sheingen').css('display','block');
+    }
 </script>
 
 
