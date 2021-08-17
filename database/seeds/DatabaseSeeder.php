@@ -33,5 +33,6 @@ class DatabaseSeeder extends Seeder
         $this->call(StudentRequestSeeder::class);
         $this->call(InstituteRateSeeder::class);
         $this->call(FavouriteSeeder::class);
+        $this->call(WebsiteSettingsSeeder::class);
     }
 }

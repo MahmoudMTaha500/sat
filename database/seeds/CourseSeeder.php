@@ -21,7 +21,7 @@ class CourseSeeder extends Seeder
                 "creator_id" => 1,
                 "min_age" => rand(12 , 27),
                 "start_day" => date("Y-m-d H:i:s",$int),
-                "study_period" => 'morning',
+                "study_period" => 'صباحي',
                 "lessons_per_week" => 5,
                 "hours_per_week" => 20,
                 "required_level" => 'مبتدئ',

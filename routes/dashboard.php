@@ -157,5 +157,11 @@ Route::resource('simple-visa', "SimpleVisaController");
 
 
 
+// Website Settings Route
+Route::get('/refund-policy','WebsiteSettingsController@refund_policy')->name('website_settings.refund_policy');
+Route::post('/update-refund-policy','WebsiteSettingsController@update_refund_policy')->name('website_settings.update_refund_policy');
+Route::get('/terms-conditions','WebsiteSettingsController@terms_conditions')->name('website_settings.terms_conditions');
+Route::post('/update-terms-conditions','WebsiteSettingsController@update_terms_conditions')->name('website_settings.update_terms_conditions');
+
 });
 

@@ -3,6 +3,42 @@
 <section class="confirm-reservation py-4 bg-sub-secondary-color">
     <div class="container-fluid">
         <!-- Section Heading -->
+        <button disabled type="button" class="btn bg-main-color text-white w-100 rounded-10" data-toggle="modal" data-target="#office_numbers">
+            ادفع الان
+        </button>
+        <div class="row">
+            <div class="col-auto">
+                <input type="checkbox" class="refund-policy">
+            </div>
+            <div class="col-auto">
+                اقبل سياسة الاسترجاع للاستمرار في عملية الدفع <br>
+                <a href="#">اضغط هنا لعرض سياسة الاسترجاع</a>
+            </div>
+        </div>
+        <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body py-5 px-4 text-center">
+                        <div class="cheched-img">
+                            <img src="imgs/checked.png" alt="" class="img-fluid" />
+                        </div>
+                        <div class="cheched-heading">
+                            <h3 class="text-main-color font-weight-bold">كلاسات</h3>
+                            <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
+                        </div>
+                        <ul class="p-0">
+                            <li>
+                                <hr />
+                                    <a href="tel:966555484931">+966555484931</a>
+                                <hr />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row px-xl-5 mb-4">
             <div class="col-12">
                 <div class="heading-institutes">
@@ -23,9 +59,12 @@
                         </div>
                         <h3 class="text-main-color font-weight-bold">{{session()->get('alert_message')['title']}}</h3>
                         <div class="cheched-heading">
-                            {!! session()->get('alert_message')['body'] !!}
+                            <p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز </p>
+                            <a target="_blank" href="{{route('student_invoice' , ['request_id' => session()->get('alert_message')['request_id'] ])}}" class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">
+                                عرض السعر
+                            </a>
                             <button type="button" class="btn bg-main-color text-white w-100 rounded-10" data-toggle="modal" data-target="#office_numbers">
-                                الدفع عن طريق المكتب
+                                ادفع الان
                             </button>
                             <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">

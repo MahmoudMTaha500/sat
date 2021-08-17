@@ -116,7 +116,7 @@
                         <!-- Institute Img -->
                         <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                             <div class="institute-img d-inline-block position-relative">
-                                <img src="{{asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" alt="..." />
+                                <img src="{{$offer->institute->banner == 'null' ? asset('storage/default_images.png') :  asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" alt="..." />
                             </div>
                         </a>
                         <!-- ./Institute Img -->
@@ -163,7 +163,7 @@
         @if (isset($two_blogs[0]))
         <div class="row">
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-1" style="background-image:url('{{$two_blogs[0]->banner == null ? asset('storage/default_images.png') : asset($two_blogs[0]->banner)}}')"> </div>
+            <div class="col-md-6 bg-study-1" style="background-image:url('{{$two_blogs[0]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[0]->banner)}}')"> </div>
             <!-- ./Background Img -->
             <div class="col-md-6 p-5">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
@@ -189,7 +189,7 @@
                 </div>
             </div>
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-2" style="background-image:url('{{$two_blogs[1]->banner == null ? asset('storage/default_images.png') : asset($two_blogs[1]->banner)}}')"></div>
+            <div class="col-md-6 bg-study-2" style="background-image:url('{{$two_blogs[1]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[1]->banner)}}')"></div>
             <!-- ./Background Img -->
         </div>
         @endif
@@ -249,7 +249,7 @@
 
                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
                         <a href="{{route('website.article',$blog->id)}}">
-                            <img src="{{$blog->banner == null ? asset('storage/default_images.png') : $blog->banner}}" alt="{{$blog->title_ar}}" class="card-img-top" />
+                            <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png') :  asset($blog->banner)}}" alt="{{$blog->title_ar}}" class="card-img-top" />
                         </a>
                         <div class="card-body rounded-10 bg-white">
                             <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>

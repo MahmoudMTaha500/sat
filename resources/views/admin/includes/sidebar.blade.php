@@ -354,6 +354,23 @@
                     </li>
                 </ul>
             </li> --}}
+            @if(auth()->user()->hasRole('super-admin') ||  auth()->user()->hasRole('admin'))
+                <li class="nav-item {{ $department_name == 'website-setting' ? 'open' : '' }}">
+                    <a href="#">
+                        <i class="la la-institution"></i>
+                        <span class="menu-title" data-i18n="nav.navbars.main"> اعدادات الموقع</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li   class="{{ $page_name== 'refund-policy' ? 'active' : "" }}">
+                            <a class="menu-item" href="{{route('website_settings.refund_policy')}}" data-i18n="nav.navbars.nav_dark">سياسة الاسترداد</a>
+                        </li>
+                        <li   class="{{ $page_name=='terms-conditions' ? 'active' : "" }}"   >
+                            <a class="menu-item" href="{{route('website_settings.terms_conditions')}}" data-i18n="nav.navbars.nav_light">الشروط و الاحكام</a>
+                        </li>
+                    </ul>
+                </li>
+
+            @endif
             <li class="nav-item">
                 <a href="{{url('dashboard/logout')}}">
                     <i class="la la-institution"></i>

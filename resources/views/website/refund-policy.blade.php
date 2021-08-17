@@ -7,7 +7,7 @@
             <div class="row px-xl-5">
                 <div class="col-lg-2 mx-auto text-center"></div>
                 <div class="col-lg-8 py-5 text-center">
-                    <h1 style="font-size: 70px;color: #f4c20d!important;" class="text-white font-weight-bold mb-4">الشروط و الاحكام</h1>
+                    <h1 style="font-size: 70px;color: #f4c20d!important;" class="text-white font-weight-bold mb-4">شروط الاستردات</h1>
                 </div>
                 <div class="col-lg-2 mx-auto text-center"></div>
             </div>
@@ -16,7 +16,7 @@
 
     <section class="brief bg-white py-5">
         <div class="container from-backend">
-           {!! $terms_conditions !!}
+           {!! $refund_policy !!}
         </div>
     </section>
     <!-- ./Brief -->

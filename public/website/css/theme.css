@@ -1,6 +1,12 @@
 ul {
-  list-style: none; }
-
+  list-style: none; 
+}
+.from-backend ul {
+  list-style:disc; 
+}
+ul li{
+  margin-bottom: 15px;
+}
 @media (min-width: 1600px) {
   .container-fluid {
     width: 1530px; } }

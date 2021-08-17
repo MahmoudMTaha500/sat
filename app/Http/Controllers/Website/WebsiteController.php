@@ -23,6 +23,8 @@ use Mail;
 use PDF;
 use Hash;
 use Tap\TapPayment\Facade\TapPayment;
+use App\Models\WebsiteSettings;
+
 
 
 class WebsiteController extends Controller
@@ -36,9 +38,9 @@ class WebsiteController extends Controller
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
         $page_identity = [
-            'title_tag' => 'كلاسات | الصفحة الرئيسية',
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => 'كلاسات Classat للدراسة بالخارج',
+            'meta_keywords' => 'تعلم اللغة في أكبر المعاهد، الدراسة بالخارج، دورة اللغة المناسبة لك، معاهد بريطانيا، مدينة برايتون، كلاسات، Studying abroad',
+            'meta_description' => 'أبدا رحلتك و تعلم اللغة في أكبر المعاهد و أمهر المعلمين حول العالم نسعى في كلاسات (Classat)  من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون',
             'page_name' => 'home',
         ];
         return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_identity'));
@@ -49,9 +51,9 @@ class WebsiteController extends Controller
         $useVue = true;
         $search = $request->all();
         $page_identity = [
-            'title_tag' => 'كلاسات | المعاهد',
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => 'كلاسات Classat جميع المعاهد الخاصة بدراسة اللغة حول العالم',
+            'meta_keywords' => 'معهد "برايتون كوليدج" Brighton Language College، معهد (كاسل) Castle School Brighton، معهد (إل إس آي) LSI Language Studies International، تعلم اللغة في، أكبر المعاهد، الدراسة بالخارج ، دورة اللغة المناسبة لك ، معاهد بريطانيا ، مدينة برايتون، كلاسات       ,Studying abroad',
+            'meta_description' => 'كلاسات (Classat) منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
             'page_name' => 'institutes',
         ];
         return view('website.institute.institutes', compact('useVue' , 'search' , 'page_identity'));
@@ -439,9 +441,9 @@ if($student_mail){
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
         
-        $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="' . route('student_invoice' , ['request_id' => $student_request->id]) . '" class="text-secondary-color"> عرض السعر</a></p>
-        <a href="' . route('pay_now', $student_request->id) . '"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';
-        session()->flash('alert_message', ['title' => 'تم التسجيل بنجاح', 'body' => $notification_body, 'type' => 'success']);
+        // $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="' . route('student_invoice' , ['request_id' => $student_request->id]) . '" class="text-secondary-color"> عرض السعر</a></p>
+        // <a href="' . route('pay_now', $student_request->id) . '"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';
+        session()->flash('alert_message', ['title' => 'تم التسجيل بنجاح' ,'request_id' => $student_request->id, 'type' => 'success']);
         return redirect()->back();
 
     }
@@ -572,7 +574,7 @@ if($student_mail){
             'title_tag' => 'الصفحة الشخصية | '.$student->name ,
             'meta_keywords' => '',
             'meta_description' => '',
-            'page_name' => '',
+            'page_name' => 'student-profile',
         ];
 
 
@@ -749,7 +751,19 @@ if($student_mail){
                 'meta_description' => '',
                 'page_name' => 'terms-conditions',
             ];
-            return view('website.terms-conditions' , compact('page_identity') );
+            $terms_conditions = WebsiteSettings::get()[0]->terms_conditions_ar;
+            return view('website.terms-conditions' , compact('page_identity' , 'terms_conditions') );
+        }
+        public function refund_policy()
+        {
+            $page_identity = [
+                'title_tag' => 'شروط الاستردات' ,
+                'meta_keywords' => '',
+                'meta_description' => '',
+                'page_name' => 'refund policy',
+            ];
+            $refund_policy = WebsiteSettings::get()[0]->refund_policy_ar;
+            return view('website.refund-policy' , compact('page_identity' , 'refund_policy') );
         }
         public function send_contact_us_mail(Request $request)
         {
