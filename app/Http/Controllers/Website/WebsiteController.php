@@ -71,7 +71,7 @@ class WebsiteController extends Controller
         $page_identity = [
             'title_tag' => $institute->title_tag.' | '.$course->title_tag,
             'meta_keywords' => $institute->meta_keywords.','.$course->meta_keywords,
-            'meta_description' => $institute->meta_keywords.','.$course->meta_keywords,
+            'meta_description' => $institute->meta_description.','.$course->meta_description,
             'page_name' => 'institutes',
         ];
         return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_identity'));
@@ -133,8 +133,6 @@ class WebsiteController extends Controller
             'meta_description' => '',
             'page_name' => '',
         ];
-
-
         return view('website.institute.confirm-reservation', compact('course_details' , 'page_identity'));
 
     }
@@ -336,6 +334,7 @@ if($student_mail){
         $data['insurance_price'] = $student_request->insurance_price;
         $data['airport'] = Airports::find($student_request->airport_id);
         $data['residence'] = residences::find($student_request->residence_id);
+        $data['base_url'] = url('/');
 
         if($request->has('student_id')){
             if($student_request->student_id == $request->student_id){
@@ -343,14 +342,13 @@ if($student_mail){
             }
         }
 
-        $pdf = PDF::loadView('website.institute.student-pdf', compact('data'));
+        $pdf = PDF::loadView('website.institute.student-price-offer-pdf', compact('data'));
         return $pdf->stream('student-id-'.$data['student_id'].'.pdf');
     }
 
     // create student request and account if the student was new student
     public function create_student_request(Request $request)
-    {
-       
+    {       
         // configuer basic variables
         $name = $request->name;
         $email = $request->email;
@@ -443,9 +441,23 @@ if($student_mail){
         
         // $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="' . route('student_invoice' , ['request_id' => $student_request->id]) . '" class="text-secondary-color"> عرض السعر</a></p>
         // <a href="' . route('pay_now', $student_request->id) . '"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';
-        session()->flash('alert_message', ['title' => 'تم التسجيل بنجاح' ,'request_id' => $student_request->id, 'type' => 'success']);
-        return redirect()->back();
+        session()->put('course_payment_session', ['course_details' => $course_details ,'request_id' => $student_request->id]);
+        return redirect()->route('student_requests.chose_payment_method');
 
+    }
+
+    public function chose_payment_method(Request $request){
+        $course_details = session()->get('course_payment_session')['course_details'];
+        $request_id = session()->get('course_payment_session')['request_id'];
+
+        $page_identity = [
+            'title_tag' => 'تم استلام طلبكم بنجاح',
+            'meta_keywords' => 'كلاسات',
+            'meta_description' => 'كلاسات لدراسة اللغة بالخارج',
+            'page_name' => '',
+        ];
+        $refund_policy = WebsiteSettings::find(1)->get()[0]->refund_policy_ar;
+        return view('website.payment.chose-payment-method', compact('course_details', 'request_id' , 'page_identity' , 'refund_policy'));
     }
 
     public function pay_now($request_id)

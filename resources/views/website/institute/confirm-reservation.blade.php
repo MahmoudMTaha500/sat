@@ -3,42 +3,7 @@
 <section class="confirm-reservation py-4 bg-sub-secondary-color">
     <div class="container-fluid">
         <!-- Section Heading -->
-        <button disabled type="button" class="btn bg-main-color text-white w-100 rounded-10" data-toggle="modal" data-target="#office_numbers">
-            ادفع الان
-        </button>
-        <div class="row">
-            <div class="col-auto">
-                <input type="checkbox" class="refund-policy">
-            </div>
-            <div class="col-auto">
-                اقبل سياسة الاسترجاع للاستمرار في عملية الدفع <br>
-                <a href="#">اضغط هنا لعرض سياسة الاسترجاع</a>
-            </div>
-        </div>
-        <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body py-5 px-4 text-center">
-                        <div class="cheched-img">
-                            <img src="imgs/checked.png" alt="" class="img-fluid" />
-                        </div>
-                        <div class="cheched-heading">
-                            <h3 class="text-main-color font-weight-bold">كلاسات</h3>
-                            <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
-                        </div>
-                        <ul class="p-0">
-                            <li>
-                                <hr />
-                                    <a href="tel:966555484931">+966555484931</a>
-                                <hr />
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
+    
         <div class="row px-xl-5 mb-4">
             <div class="col-12">
                 <div class="heading-institutes">
@@ -52,240 +17,201 @@
             <div class="col-lg-8">
                 <!-- Confirm Reservation Form -->
                 <div class="bg-white p-xl-5 p-3 rounded-10 mb-4">
-                    @if (session()->has('alert_message'))
-                    <div class="text-center">
-                        <div class="cheched-img">
-                            <img src="{{asset('website/imgs/checked.png')}}" alt="" class="img-fluid" />
-                        </div>
-                        <h3 class="text-main-color font-weight-bold">{{session()->get('alert_message')['title']}}</h3>
-                        <div class="cheched-heading">
-                            <p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز </p>
-                            <a target="_blank" href="{{route('student_invoice' , ['request_id' => session()->get('alert_message')['request_id'] ])}}" class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">
-                                عرض السعر
-                            </a>
-                            <button type="button" class="btn bg-main-color text-white w-100 rounded-10" data-toggle="modal" data-target="#office_numbers">
-                                ادفع الان
-                            </button>
-                            <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-body py-5 px-4 text-center">
-                                            <div class="cheched-img">
-                                                <img src="imgs/checked.png" alt="" class="img-fluid" />
-                                            </div>
-                                            <div class="cheched-heading">
-                                                <h3 class="text-main-color font-weight-bold">كلاسات</h3>
-                                                <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
-                                            </div>
-                                            <ul class="p-0">
-                                                <li>
-                                                    <hr />
-                                                    <a href="tel:966555484931">+966 55 548 4931</a>
-                                                    <hr />
-                                                </li>
-                                            </ul>
-                                        </div>
+                    @if(auth()->guard('student')->check())
+                        <form action="{{route('create_student_request')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="course_details" value="{{json_encode($course_details)}}" />
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input readonly value="{{auth()->guard('student')->user()->name}}" type="text" name="name" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم كاملا *" />
+                                    </div>
+                                    @error('name') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input
+                                            readonly
+                                            value="{{auth()->guard('student')->user()->email}}"
+                                            type="email"
+                                            name="email"
+                                            class="form-control border-0 bg-transparent @error('email') is-invalid @enderror"
+                                            placeholder="البريد الإلكتروني *"
+                                        />
+                                    </div>
+                                    @error('email') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input readonly value="{{auth()->guard('student')->user()->phone}}" type="text" name="phone" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال *" />
+                                    </div>
+                                    @error('phone') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input
+                                            readonly
+                                            value="{{auth()->guard('student')->user()->nationality}}"
+                                            type="text"
+                                            name="nationality"
+                                            class="form-control border-0 bg-transparent @error('nationality') is-invalid @enderror"
+                                            placeholder="الجنسية *"
+                                        />
+                                    </div>
+                                    @error('nationality') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input
+                                            readonly
+                                            value="{{auth()->guard('student')->user()->address}}"
+                                            type="text"
+                                            name="address"
+                                            class="form-control border-0 bg-transparent @error('address') is-invalid @enderror"
+                                            placeholder="العنوان *"
+                                        />
+                                    </div>
+                                    @error('address') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group btn-light rounded-10">
+                                        <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    @else @if(auth()->guard('student')->check())
-                    <form action="{{route('create_student_request')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="course_details" value="{{json_encode($course_details)}}" />
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input readonly value="{{auth()->guard('student')->user()->name}}" type="text" name="name" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم كاملا *" />
-                                </div>
-                                @error('name') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input
-                                        readonly
-                                        value="{{auth()->guard('student')->user()->email}}"
-                                        type="email"
-                                        name="email"
-                                        class="form-control border-0 bg-transparent @error('email') is-invalid @enderror"
-                                        placeholder="البريد الإلكتروني *"
-                                    />
-                                </div>
-                                @error('email') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input readonly value="{{auth()->guard('student')->user()->phone}}" type="text" name="phone" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال *" />
-                                </div>
-                                @error('phone') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input
-                                        readonly
-                                        value="{{auth()->guard('student')->user()->nationality}}"
-                                        type="text"
-                                        name="nationality"
-                                        class="form-control border-0 bg-transparent @error('nationality') is-invalid @enderror"
-                                        placeholder="الجنسية *"
-                                    />
-                                </div>
-                                @error('nationality') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input
-                                        readonly
-                                        value="{{auth()->guard('student')->user()->address}}"
-                                        type="text"
-                                        name="address"
-                                        class="form-control border-0 bg-transparent @error('address') is-invalid @enderror"
-                                        placeholder="العنوان *"
-                                    />
-                                </div>
-                                @error('address') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group btn-light rounded-10">
-                                    <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
+                                <div class="col-12">
+                                    <button class="btn bg-secondary-color text-white w-100 rounded-10" type="submit">
+                                        تأكيد الحجز
+                                    </button>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <button class="btn bg-secondary-color text-white w-100 rounded-10" type="submit">
-                                    تأكيد الحجز
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                        </form>
                     @else
-                    <form action="{{route('create_student_request')}}" method="post">
-                        @csrf
-                        <input type="hidden" name="course_details" value="{{json_encode($course_details)}}" />
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label>الاسم </label>
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input value="{{old('name')}}" type="text" name="name" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم كاملا *" />
-                                </div>
-                                @error('name') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-lg-6">
-                                <label>البريد الإلكتروني </label>
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input
-                                        autocomplete="off"
-                                        value="{{old('email')}}"
-                                        type="email"
-                                        name="email"
-                                        class="form-control border-0 bg-transparent @error('email') is-invalid @enderror @error('login_error') is-invalid @enderror"
-                                        placeholder="البريد الإلكتروني *"
-                                    />
-                                </div>
-                                @error('login_error')
-                                <span class="invalid-feedback d-block mb-3" role="alert">
-                                    <strong>هذا البريد الإلكتروني موجود بالفعل <a data-toggle="modal" data-target="#student_login" href="">قم بتسجيل الدخول لاكمال الطلب</a> او قم بادخال بريد إلكتروني جديد </strong>
-                                </span>
-                                @enderror @error('email') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{!! $message !!}</strong> </span> @enderror
-                            </div>
-                            <div class="col-lg-6">
-                                <label>رقم الجوال </label>
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input value="{{old('phone')}}" type="text" name="phone" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال *" />
-                                </div>
-                                @error('phone') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-lg-6">
-                                <label>الجنسية </label>
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input value="{{old('nationality')}}" type="text" name="nationality" class="form-control border-0 bg-transparent @error('nationality') is-invalid @enderror" placeholder="الجنسية *" />
-                                </div>
-                                @error('nationality') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-12">
-                                <label>العنوان </label>
-                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                    <input value="{{old('address')}}" type="text" name="address" class="form-control border-0 bg-transparent @error('address') is-invalid @enderror" placeholder="العنوان *" />
-                                </div>
-                                @error('address') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
-                            </div>
-
-                            <div class="col-12">
-                                <label>ملاحظاتك </label>
-                                <div class="form-group btn-light rounded-10">
-                                    <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn bg-secondary-color text-white w-100 rounded-10" type="submit">
-                                    تأكيد الحجز
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="modal fade" id="student_login" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body py-5 px-4 text-center">
-                                    <div class="cheched-heading">
-                                        <h3 class="text-main-color font-weight-bold">تسجيل الدخول</h3>
+                        <form action="{{route('create_student_request')}}" method="post">
+                            @csrf
+                            <input type="hidden" name="course_details" value="{{json_encode($course_details)}}" />
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>الاسم </label>
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input value="{{old('name')}}" type="text" name="name" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم كاملا *" />
                                     </div>
-                                    <!-- Sign In Form -->
-                                    <div class="sign-in-form shadow-lg rounded-10 py-4 px-2 p-xl-5 mx-auto bg-white">
-                                        @error('login_error')
-                                        <div class="alert alert-danger text-cnter">
-                                            {{ $message }}
+                                    @error('name') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label>البريد الإلكتروني </label>
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input
+                                            value="{{old('email')}}"
+                                            type="email"
+                                            name="email"
+                                            class="form-control border-0 bg-transparent @error('email') is-invalid @enderror @error('login_error') is-invalid @enderror"
+                                            placeholder="البريد الإلكتروني *"
+                                        />
+                                    </div>
+                                    @error('login_error')
+                                    <span class="invalid-feedback d-block mb-3" role="alert">
+                                        <strong>هذا البريد الإلكتروني موجود بالفعل <a data-toggle="modal" data-target="#student_login" href="">قم بتسجيل الدخول لاكمال الطلب</a> او قم بادخال بريد إلكتروني جديد </strong>
+                                    </span>
+                                    @enderror @error('email') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{!! $message !!}</strong> </span> @enderror
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>رقم الجوال </label>
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input value="{{old('phone')}}" type="text" name="phone" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال *" />
+                                    </div>
+                                    @error('phone') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label>الجنسية </label>
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input value="{{old('nationality')}}" type="text" name="nationality" class="form-control border-0 bg-transparent @error('nationality') is-invalid @enderror" placeholder="الجنسية *" />
+                                    </div>
+                                    @error('nationality') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <label>العنوان </label>
+                                    <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                        <input value="{{old('address')}}" type="text" name="address" class="form-control border-0 bg-transparent @error('address') is-invalid @enderror" placeholder="العنوان *" />
+                                    </div>
+                                    @error('address') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
+                                </div>
+
+                                <div class="col-12">
+                                    <label>ملاحظاتك </label>
+                                    <div class="form-group btn-light rounded-10">
+                                        <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button class="btn bg-secondary-color text-white w-100 rounded-10" type="submit">
+                                        تأكيد الحجز
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal fade" id="student_login" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-body py-5 px-4 text-center">
+                                        <div class="cheched-heading">
+                                            <h3 class="text-main-color font-weight-bold">تسجيل الدخول</h3>
                                         </div>
-                                        @enderror
-
-                                        <form class="my-4" method="POST" action="{{ route('student.login') }}">
-                                            @csrf
-                                            <!-- Email Input -->
-                                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                                <input name="email" type="email" class="form-control border-0 bg-transparent" placeholder="البريد الألكتروني" />
+                                        <!-- Sign In Form -->
+                                        <div class="sign-in-form shadow-lg rounded-10 py-4 px-2 p-xl-5 mx-auto bg-white">
+                                            @error('login_error')
+                                            <div class="alert alert-danger text-cnter">
+                                                {{ $message }}
                                             </div>
+                                            @enderror
 
-                                            <!-- ./Email Input -->
-                                            <!-- password Input -->
-                                            <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                                                @error('password')
-                                                <span class="invalid-feedback d-block" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                                @enderror
-                                                <input type="password" name="password" class="form-control border-0 bg-transparent" placeholder="كلمة المرور" />
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-eye"></i></span>
+                                            <form class="my-4" method="POST" action="{{ route('student.login') }}">
+                                                @csrf
+                                                <!-- Email Input -->
+                                                <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                                                    <input name="email" type="email" class="form-control border-0 bg-transparent" placeholder="البريد الألكتروني" />
                                                 </div>
-                                            </div>
 
-                                            <!-- ./password Input -->
-                                            <!-- Forget Password Link -->
-                                            <div class="overflow-hidden mb-3">
-                                                <a href="{{route('student.reset_password')}}" class="text-secondary-color float-left @error('password') is-invalid @enderror">نسيت كلمة المرور؟</a>
-                                            </div>
-                                            <!-- ./Forget Password Link -->
-                                            <!-- Submit Btn -->
-                                            <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">تسجيل الدخول</button>
-                                            <!-- ./Submit Btn -->
-                                            <!-- Register Link -->
-                                            <p class="text-center">ليس لديك حساب؟ <a href="{{route('student.register')}}" class="text-secondary-color">انشاء حساب جديد</a></p>
-                                            <!-- Register Link -->
-                                        </form>
+                                                <!-- ./Email Input -->
+                                                <!-- password Input -->
+                                                <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
+                                                    @error('password')
+                                                    <span class="invalid-feedback d-block" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                    <input type="password" name="password" class="form-control border-0 bg-transparent" placeholder="كلمة المرور" />
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-eye"></i></span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- ./password Input -->
+                                                <!-- Forget Password Link -->
+                                                <div class="overflow-hidden mb-3">
+                                                    <a href="{{route('student.reset_password')}}" class="text-secondary-color float-left @error('password') is-invalid @enderror">نسيت كلمة المرور؟</a>
+                                                </div>
+                                                <!-- ./Forget Password Link -->
+                                                <!-- Submit Btn -->
+                                                <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">تسجيل الدخول</button>
+                                                <!-- ./Submit Btn -->
+                                                <!-- Register Link -->
+                                                <p class="text-center">ليس لديك حساب؟ <a href="{{route('student.register')}}" class="text-secondary-color">انشاء حساب جديد</a></p>
+                                                <!-- Register Link -->
+                                            </form>
+                                        </div>
+                                        <!-- ./Sign In Form -->
                                     </div>
-                                    <!-- ./Sign In Form -->
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    @endif @endif
+                    @endif 
                 </div>
                 <!-- ./Confirm Reservation Form -->
             </div>
@@ -320,10 +246,22 @@
 </section>
 
 <!-- ./Confirm Reservation -->
-@endsection @section('website.includes.page_scripts') @error('login_error')
+@endsection 
+@section('website.includes.page_scripts') 
+    @error('login_error')
+        <button class="student_login_btn d-none" data-toggle="modal" data-target="#student_login">click</button>
+        <script>
+            $(".student_login_btn").trigger("click");
+        </script>
+    @enderror 
+    <script>
+        $('.refund-policy').change(function(){
+            if($(this).prop('checked') == true){
+                $('.pay-now-btn').prop('disabled', false)
+            }else{
+                $('.pay-now-btn').prop('disabled', true)
+            }
+        })
+    </script>
+@endsection
 
-<button class="student_login_btn d-none" data-toggle="modal" data-target="#student_login">click</button>
-<script>
-    $(".student_login_btn").trigger("click");
-</script>
-@enderror @endsection

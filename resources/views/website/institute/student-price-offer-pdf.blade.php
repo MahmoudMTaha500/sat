@@ -6,13 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
+    <title>عرض السعر</title>
 </head>
 <body>
     <style>
-        body, html , .haeder, p, th , td{
-            font-family: 'Cairo', sans-serif;
-        }
+
         body, html{
             margin: 0;
             font-family: 'Cairo', sans-serif;
@@ -44,7 +42,7 @@
             float: right;
         }
         .classta-logo{
-            width: 50%;
+            width: 70%;
             margin-top: 25px;
         }
         p{
@@ -54,14 +52,15 @@
         }
         .intro{
             text-align: center;
-            padding: 30px 70px;
+            padding: 30px 10px;
         }
         .student-info{
-            background-color: #f2f2f2;
-            border: 1px dotted #f4c20d;
+            background-color: #f4c20d;
             border-width: 3px;
             border-radius: 10px;
             padding: 20px 50px;
+            color: #000;
+            font-size: 16px
         }
 
         th , td{
@@ -101,29 +100,38 @@
             bottom:0;
             left: 0;
             width: 100%;
-            height: 70px;
-            background-color: #006fff;
+            height: 170px;
+            background-color: #f2f2f2;
             text-align: center;
             color: #fff;
             font-weight: bold;
             font-size: 20px;
             line-height: 70px;
+            padding-top: 20px
         }
         .content{
             padding-top: 200px;
+        }
+        .pb-1{
+            padding-bottom: 1rem
+        }
+        .main-color{
+            color: #006fff
         }
     </style>
 
 
     <header class="haeder">
         <div class="left-section">
-            <img class="classta-logo" src="https://classat.netlify.app/imgs/logo.png" alt="">
+            <a href="{{route('website.home')}}" target="_blank">
+                <img class="classta-logo" src="{{$data['base_url'].'/website/imgs/logo.png'}}" alt="">
+            </a>
         </div>
 
         <div class="right-section">
-            <p class="m-0"><span dir="ltr"> {{$data['request_id']}} :رقم العرض</span></p>
-            <p class="m-0"><span>التاریخ :  {{ArabicDate($data['date'])}} </span></p>
-            <p class="m-0"> {{$data['institute_name']}} , {{$data['country']}}, {{$data['city']}}</p>
+            <p class="pb-1"><span style="font-weight: bold">رقم العرض: </span> <span dir="ltr" >{{$data['request_id']}}</span></p>
+            <p class="pb-1"><span style="font-weight: bold">التاریخ: </span> <span dir="ltr" >{{ArabicDate($data['date'])}}</span></p>
+            <p class="pb-1"><span style="font-weight: bold">المعهد: </span>   <span dir="ltr">{{$data['institute_name']}} , {{$data['country']}}, {{$data['city']}}</span></p>
         </div>
     </header>
 
@@ -131,8 +139,9 @@
         <div class="container">
             <p class="intro">
 
-
-                شكراً لاستكمال إجراءات الحجز في معهد "{{$data['institute_name']}}".
+                <img width="30%" src="{{$data['base_url'].'/website/imgs/logo.png'}}" alt=""> <br><br><br>
+                شكراً لاستكمال إجراءات الحجز في معهد <br><br>
+                {{$data['institute_name']}}<br><br>
                 يُرجي التأكد من تفاصيل بيانات الحجز المرفقة بالفاتورة المبينة أدناه:
                 
 
@@ -236,16 +245,26 @@
     </section>
 
     <div class="footer" dir="ltr">
-        <span>Sat@sat-edu.com  </span>   	&nbsp;	&nbsp;	&nbsp;	&nbsp;
-        <img width="15px" src="https://icon-library.com/images/white-phone-icon-png/white-phone-icon-png-7.jpg" alt="">
-        {{-- <img width="15px" src="{{asset('websit/img/phone-icon.png')}}" alt=""> --}}
-        <span>0555484931 </span> 
-        <img width="15px" src="https://www.pngkey.com/png/full/45-455131_white-internet-icon-png-clipart-library-library-internet.png" alt=""> 
-        {{-- <img width="15px" src="{{asset('websit/img/earth-icon.png')}}" alt="">  --}}
+        <a style="text-decoration: none" href="https://www.snapchat.com/add/classat"><img width="40px" src="{{$data['base_url'].'/storage/icons/snapchat.png'}}" alt=""> </a>&nbsp;&nbsp;
+        <a style="text-decoration: none" href="https://twitter.com/classat?s=21"><img width="40px" src="{{$data['base_url'].'/storage/icons/twitter.png'}}" alt=""> </a>&nbsp;&nbsp;
+        <a style="text-decoration: none" href="https://www.instagram.com/class_at/"><img width="40px" src="{{$data['base_url'].'/storage/icons/instegram.png'}}" alt=""> </a>
+
+        <div>
+            <p class="main-color">
+                <a class="main-color" style="text-decoration: none" href="https://www.google.com">5562694654456</a> | 
+                <a class="main-color" style="text-decoration: none" href="https://www.google.com">5562694654456</a>
+            </p>
+            <p class="main-color">
+                <a class="main-color" style="text-decoration: none" href="{{route('website.terms_conditions')}}">الشروط و الاحكام </a> | 
+                <a class="main-color" style="text-decoration: none" href="{{route('website.refund_policy')}}">سياسة الاسترجاع</a>
+            </p>
+        </div>
+
     </div>
 </body>
 </html>
 
+3
 
 
 

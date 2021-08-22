@@ -70,7 +70,7 @@
                 </div>
                 @enderror @if (auth()->guard('student')->check()) @include('admin.includes.errors') @endif @if (session()->has('alert_message'))
                 <div class="alert alert-success text-center">
-                    {{session()->get('alert_message')}}
+                    {{print_r(session()->get('alert_message'))}}
                 </div>
                 @endif
 

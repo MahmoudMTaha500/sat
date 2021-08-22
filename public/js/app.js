@@ -3640,7 +3640,8 @@ __webpack_require__.r(__webpack_exports__);
     filterInstitute: function filterInstitute() {
       var _this3 = this;
 
-      axios.get(this.url_filtier, {
+      var pagination_params = "&country_id=" + this.selected + "&city_id=" + this.selected_city + "&name_ar=" + this.name_ar;
+      axios.get(this.dahsboard_url + '/filter', {
         params: {
           country_id: this.selected,
           city_id: this.selected_city,
@@ -3651,8 +3652,8 @@ __webpack_require__.r(__webpack_exports__);
           "X-CSRFToken": "{{csrf_token()}}"
         }
       }).then(function (response) {
-        _this3.institutes = response.data.institute;
-      });
+        return _this3.institutes = response.data.institutes;
+      }, this.institutes.prev_page_url += pagination_params, this.institutes.next_page_url += pagination_params);
     },
     avargae: function avargae(obj) {
       //  console.dir(obj);
@@ -6052,6 +6053,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_props$data$methods$c = {
@@ -6071,7 +6075,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       course_level: "",
       student_favourite_courses: {},
       arrange_as: "",
-      keyword_institute: ''
+      keyword_institute: '',
+      total_linkes: 0
     };
   },
   methods: {
@@ -6150,6 +6155,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: {},
   mounted: function mounted() {},
   beforeMount: function beforeMount() {
+    this.total_linkes = this.courses.last_page - this.courses.current_page;
+
     if (this.search.length != 0) {
       this.keyword = this.search.keyword;
 
@@ -51920,32 +51927,34 @@ var render = function() {
             _vm._v(
               "\n                    اللغة الإنجليزية العامة :\n                    "
             ),
-            _c(
-              "span",
-              {
-                staticClass:
-                  "float-left bg-main-color p-2 round text-white rounded-10"
-              },
-              [
-                _vm._v(
-                  "%" + _vm._s(Math.round(_vm.course.discount * 100)) + " -"
+            _vm.course.discount != 0
+              ? _c(
+                  "span",
+                  {
+                    staticClass:
+                      "float-left bg-main-color p-2 round text-white rounded-10"
+                  },
+                  [
+                    _vm._v(
+                      "%" +
+                        _vm._s(Math.round(_vm.course.discount * 100)) +
+                        " - "
+                    )
+                  ]
                 )
-              ]
-            )
+              : _vm._e()
           ]),
           _vm._v(" "),
           _c("span", { staticClass: "text-main-color" }, [
-            _vm.course.discount != 0
-              ? _c("del", { staticClass: "text-danger ml-2" }, [
-                  _vm._v(" " + _vm._s(_vm.price_per_week) + " ")
-                ])
-              : _vm._e(),
+            _c("del", { staticClass: "text-danger ml-2" }, [
+              _vm._v(" " + _vm._s(_vm.price_per_week) + " ")
+            ]),
             _vm._v(
-              " " +
+              "   " +
                 _vm._s(
                   Math.round(_vm.price_per_week * (1 - _vm.course.discount))
                 ) +
-                " ريال سعودي / الاسبوع"
+                " ريال سعودي / الاسبوع "
             )
           ]),
           _vm._v(" "),
@@ -51987,7 +51996,9 @@ var render = function() {
               _c("span", { staticClass: "text-main-color" }, [
                 _vm._v(
                   _vm._s(_vm.chosin_residence.price * _vm.weeks) +
-                    " ريال سعودي "
+                    " ريال سعودي  (سعر الاسبوع الواحد : " +
+                    _vm._s(_vm.chosin_residence.price) +
+                    ") "
                 )
               ]),
               _vm._v(" "),
@@ -52993,9 +53004,9 @@ var render = function() {
                                         " " +
                                           _vm._s(
                                             course.courses_study_period ==
-                                              "morning"
-                                              ? "صباحي"
-                                              : "مسائي"
+                                              "مسائي"
+                                              ? "مسائي"
+                                              : "صباحي"
                                           )
                                       )
                                     ])
@@ -53104,6 +53115,33 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
+                  _vm._l(_vm.courses.last_page, function(page, index) {
+                    return _c(
+                      "li",
+                      {
+                        key: index,
+                        staticClass: "page-item",
+                        class: _vm.courses.current_page == page ? "active" : ""
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "page-link",
+                            on: {
+                              click: function($event) {
+                                return _vm.pagination(
+                                  _vm.courses.path + "?page=" + page
+                                )
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(page))]
+                        )
+                      ]
+                    )
+                  }),
+                  _vm._v(" "),
                   _c("li", { staticClass: "page-item" }, [
                     _c(
                       "button",
@@ -53123,7 +53161,8 @@ var render = function() {
                       [_c("i", { staticClass: "fas fa-chevron-left" })]
                     )
                   ])
-                ]
+                ],
+                2
               )
             ])
           ])

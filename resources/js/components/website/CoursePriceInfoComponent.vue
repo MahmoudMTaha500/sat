@@ -9,9 +9,9 @@
                 <div>
                     <span class="font-weight-bold d-block">
                         اللغة الإنجليزية العامة :
-                        <span class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} -</span>
+                        <span  v-if="course.discount !=0" class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} - </span>
                     </span>
-                    <span class="text-main-color"><del v-if="course.discount !=0" class="text-danger ml-2"> {{price_per_week}} </del> {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الاسبوع</span>
+                    <span   class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الاسبوع </span>
                     <hr />
                 </div>
                 <div>
@@ -21,7 +21,7 @@
                 </div>
                 <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
-                    <span class="text-main-color">{{chosin_residence.price*weeks}} ريال سعودي </span>
+                    <span class="text-main-color">{{chosin_residence.price*weeks}} ريال سعودي  (سعر الاسبوع الواحد : {{  chosin_residence.price   }}) </span>
                     <hr />
                 </div>
                 <div v-if="chosin_airport.price !=0 && chosin_airport.price != '' && !isNaN(chosin_airport.price) ">

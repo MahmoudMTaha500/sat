@@ -234,8 +234,8 @@ $institute->forceDelete();
         if($name_ar){
             $name_ar = $institute->where('name_ar',$name_ar);
         }
-        $institute = $institute->with('country', 'city' , 'rats')->paginate(10);
-        return response()->json(['institute' => $institute]);
+        $institute = $institute->with('country', 'city' , 'rats','courses')->paginate(10);
+        return response()->json(['institutes' => $institute]);
     }
 
 }

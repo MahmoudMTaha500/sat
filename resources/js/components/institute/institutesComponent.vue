@@ -217,10 +217,12 @@
                 }
             },
             filterInstitute: function () {
-                axios.get(this.url_filtier, {  params:{  country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar }}, { headers: { "X-CSRFToken": "{{csrf_token()}}" } }).then((response) => {
-                    this.institutes = response.data.institute;
-                });
-            },
+
+ var pagination_params = "&country_id=" + this.selected + "&city_id=" + this.selected_city + "&name_ar=" + this.name_ar;
+                
+                axios.get(this.dahsboard_url+'/filter', {  params:{  country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar }}, { headers: { "X-CSRFToken": "{{csrf_token()}}" } })
+                .then((response) =>  (this.institutes = response.data.institutes),  (this.institutes.prev_page_url += pagination_params), (this.institutes.next_page_url += pagination_params)
+                )},
             avargae:function(obj){
                     //  console.dir(obj);
 var  str = JSON.stringify(obj);

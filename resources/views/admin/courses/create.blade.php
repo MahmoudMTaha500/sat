@@ -97,12 +97,12 @@
                                                     <label for="projectinput2">المستوى المطلوب</label>
                                                     <select class="form-control text-left" name="required_level">
                                                         <option value="">اختر</option>
-                                                        <option    @if("مبتدئ" == old('required_level') )selected @endif  value=" مبتدئ A1 ">مبتدئ A1</option>
-                                                        <option    @if("مبتدئ" == old('required_level') )selected @endif  value=" مبتدئ A2 ">مبتدئ A2</option>
-                                                        <option   @if("متوسط" == old('required_level') )selected @endif value="     المتوسط B1 ">المتوسط B1</option>
-                                                        <option   @if("متوسط" == old('required_level') )selected @endif value="     المتوسط B2 ">المتوسط B2</option>
-                                                        <option    @if("متقدم" == old('required_level') )selected @endif value="  متقدم C1  ">متقدم C1</option>
-                                                        <option    @if("متقدم" == old('required_level') )selected @endif value="  متقدم C2  ">متقدم C2</option>
+                                                        <option    @if("مبتدئ A1" == old('required_level') )selected @endif  value="مبتدئ A1">مبتدئ A1</option>
+                                                        <option    @if("مبتدئ A2" == old('required_level') )selected @endif  value="مبتدئ A2">مبتدئ A2</option>
+                                                        <option   @if("المتوسط B1" == old('required_level') )selected @endif value="المتوسط B1">المتوسط B1</option>
+                                                        <option   @if("المتوسط B2" == old('required_level') )selected @endif value="المتوسط B2">المتوسط B2</option>
+                                                        <option    @if("متقدم C1" == old('required_level') )selected @endif value="متقدم C1">متقدم C1</option>
+                                                        <option    @if("متقدم C2" == old('required_level') )selected @endif value="متقدم C2">متقدم C2</option>
                                                     </select>
                                                 </div>
                                             </div>

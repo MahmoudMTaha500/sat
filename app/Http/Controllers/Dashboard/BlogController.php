@@ -111,6 +111,7 @@ class BlogController extends Controller
         $blog->country_id = $request->country_id;
         $blog->city_id = $request->city_id;
         $blog->institute_id = $request->institute_id;
+        $blog->course_id = $request->course_id;
         $blog->category_id = $request->category_id;
         $blog->img_alt = $request->img_alt;
         $blog->title_tag = $request->title_tag;

@@ -95,9 +95,17 @@
                                                     <label for="projectinput2">المستوى المطلوب</label>
                                                     <select class="form-control text-left" name="required_level">
                                                         <option value="">اختر</option>
-                                                        <option @if($course->required_level == "مبتدئ") echo selected @endif value=" مبتدئ ">مبتدئ</option>
+                                                        <option    @if($course->required_level == "مبتدئ A1" )selected @endif  value="مبتدئ A1">مبتدئ A1</option>
+                                                        <option    @if($course->required_level == "مبتدئ A2" )selected @endif  value="مبتدئ A2">مبتدئ A2</option>
+                                                        <option   @if($course->required_level == "المتوسط B1" )selected @endif value="المتوسط B1">المتوسط B1</option>
+                                                        <option   @if($course->required_level == "المتوسط B2" )selected @endif value="المتوسط B2">المتوسط B2</option>
+                                                        <option    @if($course->required_level == "متقدم C1" )selected @endif value="متقدم C1">متقدم C1</option>
+                                                        <option    @if($course->required_level == "متقدم C2" )selected @endif value="متقدم C2">متقدم C2</option>
+
+
+                                                        {{-- <option @if($course->required_level == "مبتدئ") echo selected @endif value=" مبتدئ ">مبتدئ</option>
                                                         <option @if($course->required_level == "متوسط") echo selected @endif value= " متوسط " >متوسط</option>
-                                                        <option @if($course->required_level == "متقدم") echo selected @endif value=" متقدم ">متقدم</option>
+                                                        <option @if($course->required_level == "متقدم") echo selected @endif value=" متقدم ">متقدم</option> --}}
                                                     </select>
                                                 </div>
                                             </div>
