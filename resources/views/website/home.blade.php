@@ -11,11 +11,16 @@
 
                 <!-- Search Form -->
                 <form class="form-inline row" method="GET" action="{{route('website.institutes')}}">
-                    <div class="col-md-9">
+                    {{-- <div class="col-md-9">
                         <!-- Search Field -->
-                        <input name="keyword" type="text" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد او المدينة او الدولة او الدورة لبدء البحث" />
+                        <input  id='searchform' name="keyword" type="text" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد او المدينة او الدولة او الدورة لبدء البحث" />
                         <!-- ./Search Field -->
-                    </div>
+                    </div> --}}
+
+                    <search-component  
+                    :public_path="{{ json_encode(url('/')) }}"    
+                    >
+                </search-component>
                     <div class="col-md-3">
                         <!-- Confirm Btn -->
                         <button type="submit" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">ابدأ الان</button>
@@ -341,3 +346,16 @@
 </section>
 <!-- ./Browse our institutes -->
 @endif @endsection
+
+@section('website.includes.page_scripts')
+<script>
+
+
+    // $("#searchform").keyup(function(){
+    //     if(this.value.length >= 2){
+    //         alert(this.value);
+
+    //     }
+    // })
+</script>
+@endsection

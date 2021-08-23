@@ -70,11 +70,11 @@
                                 @enderror
                             </div>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select class="form-control border-0 bg-transparent @error('country') is-invalid @enderror" onchange="visatype22(event)" name="country" required>
+                                <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country" required>
                                     <option value="" selected disabled>اختر الدوله</option>
                                     <option value="England"> بريطانايا  </option>
                                     <option value="USA"> امريكا </option>
-                                    <option   value="Schengen" onclick="show_sheingen()"> شنغن </option>
+                                    <option value="Schengen"> شنغن </option>
                                 </select>
 
                                 {{-- <input name="country" value="{{ old('country') }}" type="text" class="form-control border-0 bg-transparent @error('country') is-invalid @enderror" placeholder="الدولة" /> --}} @error('country')
@@ -268,9 +268,7 @@
     });
 
 
-    function show_sheingen(){
-       $('#sheingen').css('display','block');
-    }
+   
 </script>
 
 
@@ -309,16 +307,9 @@ form.submit(function(e){
         });
     });
 
-
-
-
-
-
-
-    function visatype22(event) {
-
+    $('.visa-country').change(function(){
         var visa = event.target.value;
-        // alert(visa);
+        $('#sheingen').css('display','none');
         if (visa == "England") {
             $("#visID").removeAttr("disabled");
             $(".usa").css("display", "none");
@@ -333,13 +324,12 @@ form.submit(function(e){
         }
         if (visa == "Schengen") {
             $("#visID").removeAttr("disabled");
-
             $(".uk").css("display", "none");
             $(".usa").css("display", "none");
             $(".schengen").css("display", "");
+            $('#sheingen').css('display','block');
         }
-    }
-
+    })
     $(".visatype").change(function(){
         var selectedVisaType = $(this).children("option:selected");
         var value = (document.getElementById("price_visa").value = selectedVisaType.attr('visa-price'));
@@ -347,9 +337,6 @@ form.submit(function(e){
         $("#price_text").text(value);
         $('#text_hidden').show()
     });
-
     
-    
-
 </script>
 @endsection

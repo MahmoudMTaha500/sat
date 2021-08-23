@@ -43,6 +43,17 @@ class WebsiteController extends Controller
         ];
         return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_identity'));
     }
+
+// search form institute in home page 
+        public function search_form_institute(Request  $request)
+        {
+    //    dd($request->all());
+            $institutes = Institute::where('name_ar','like',"%$request->search%")->take(6)->get(['id','name_ar']);
+
+        return response()->json(['institutes'=>$institutes]);
+        }
+
+
     // institutes page method : show all institutes with filter
     public function institutes_page(Request $request)
     {
@@ -286,11 +297,11 @@ if($student_mail){
         $institute_id= $blog->institute_id;
         $course_id= $blog->course_id;
 
-        $categories_spiesific_blog= Blog::where('category_id',$category_id)->orderBy('id', 'DESC')->take(5)->get();
-        $countries_spiesific_blog= Blog::where('country_id',$country_id)->orderBy('id', 'DESC')->take(5)->get();
-        $cities_spiesific_blog= Blog::where('city_id',$city_id)->orderBy('id', 'DESC')->take(5)->get();
-        $institutes_spiesific_blog= Blog::where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
-        $courses_spiesific_blog= Blog::where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
+        $categories_spiesific_blog= Blog::where('id','!=',$id)->where('category_id',$category_id)->orderBy('id', 'DESC')->take(5)->get();
+        $countries_spiesific_blog= Blog::where('id','!=',$id)->where('country_id',$country_id)->orderBy('id', 'DESC')->take(5)->get();
+        $cities_spiesific_blog= Blog::where('id','!=',$id)->where('city_id',$city_id)->orderBy('id', 'DESC')->take(5)->get();
+        $institutes_spiesific_blog= Blog::where('id','!=',$id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
+        $courses_spiesific_blog= Blog::where('id','!=',$id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
 
         $categories = BlogCategory::orderBy('id', 'DESC')->take(5)->get();
         // dd($cities_spiesific_blog);

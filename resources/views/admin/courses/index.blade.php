@@ -21,6 +21,8 @@
             <courses-component
             :course_url="{{json_encode(url('/dashboard/getcourses'))}}"
             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"   
+            :public_url="{{ json_encode(url('/')) }}"
+
             :countries_from_blade="{{ json_encode($countries) }}"
             :institutes="{{ json_encode($institutes) }}"
             :csrftoken="{{ json_encode(csrf_token()) }}"
