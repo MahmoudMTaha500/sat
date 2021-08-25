@@ -93,6 +93,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @if(is_numeric($blog->institute_id) != 0 && !$institutes_spiesific_blog->isEmpty())
                         <div class="sidebar-row">
                             <h3 class="sidebar-row-title">مقالات مرتبطة بمعهد {{$blog->institute->name_ar}}</h3>
                             <ul class="sidebar-row-ul">
@@ -103,7 +104,8 @@
                                 </li>
                             </ul>
                         </div>
-                        @if(is_numeric($blog->course_id) != 0)
+                        @endif
+                        @if(is_numeric($blog->course_id) != 0 && !$courses_spiesific_blog->isEmpty())
                         <div class="sidebar-row">
                             <h3 class="sidebar-row-title">مقالات مرتبطة بدورة 
                              @if($blog->course)    {{$blog->course->name_ar}} @endif

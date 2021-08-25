@@ -304,7 +304,7 @@ if($student_mail){
         $courses_spiesific_blog= Blog::where('id','!=',$id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
 
         $categories = BlogCategory::orderBy('id', 'DESC')->take(5)->get();
-        // dd($cities_spiesific_blog);
+        // dd($courses_spiesific_blog);
 
         $page_identity = [
             'title_tag' => $blog->title_tag,
