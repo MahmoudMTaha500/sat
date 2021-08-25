@@ -103,6 +103,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @if(is_numeric($blog->course_id) != 0)
                         <div class="sidebar-row">
                             <h3 class="sidebar-row-title">مقالات مرتبطة بدورة 
                              @if($blog->course)    {{$blog->course->name_ar}} @endif
@@ -115,6 +116,7 @@
                                 </li>
                             </ul>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

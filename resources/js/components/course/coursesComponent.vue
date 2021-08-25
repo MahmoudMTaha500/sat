@@ -114,7 +114,7 @@
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a v-if="edit" :href="dahsboard_url+'/courses/'+course.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
-                                                <a href="#" class="btn btn-default btn-sm round">عرض</a>
+                                                <a :href="public_url+'/institute/'+course.institute.id+'/'+course.institute.slug+'/'+course.slug" class="btn btn-default btn-sm round">عرض</a>
 
                                                 <form :action="dahsboard_url+'/courses/'+course.id" method="POST" class="btn-group">
                                                     <input type="hidden" name="_token" :value="csrftoken" />
@@ -146,7 +146,7 @@
 
 <script>
     export default {
-        props: ["course_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
+        props: ["course_url", "dahsboard_url", "public_url","course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
         data() {
             return {
                 courses: {},

@@ -19,6 +19,7 @@
                 :get_blogs_url="{{ json_encode(route('get_blogs_by_vue')) }}"
                 :aprove_route="{{json_encode(url('/dashboard/update-blog-aprovement'))}}"
                 :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
+                :public_url="{{ json_encode(url('/')) }}"
                 :csrftoken="{{ json_encode(csrf_token()) }}"
                 :users="{{ json_encode($users) }}"
                 :categories="{{ json_encode($categories) }}"

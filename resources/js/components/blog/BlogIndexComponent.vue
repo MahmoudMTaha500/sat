@@ -105,7 +105,10 @@
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">
+
                                             <a  v-if="edit" :href="url_dashboard+'/blogs/'+blog.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
+                                            <a :href="public_url +'/article/'+ blog.id" class="btn btn-default btn-sm round" target="_blank">عرض</a>
+
                                             <form :action="url_dashboard+'/blogs/'+blog.id" method="POST" class="btn-group">
                                                 <input type="hidden" name="_token" :value="csrftoken" />
                                                 <input type="hidden" name="_method" value="delete" />
@@ -139,6 +142,7 @@
         props: [
                 "aprove_route", 
                 "dahsboard_url", 
+                'public_url',
                 "get_blogs_url", 
                 "csrftoken", 
                 "categories", 
