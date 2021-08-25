@@ -57,7 +57,7 @@
                                                         <a class="bg-main-color d-inline-block text-center ml-3" href="tel:966555484931">
                                                             <span class="text-white font-weight-bold"><i class="fa fa-phone" aria-hidden="true"></i></span>
                                                         </a>
-                                                        <a dir="ltr" href="tel:966555484931">+966 55 548 4931</a>
+                                                        <a dir="ltr" href="tel:+966555484931">+966 55 548 4931</a>
                                                     </div>
                                                     <hr />
                                                     <div class="social-links">

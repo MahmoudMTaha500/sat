@@ -139,7 +139,9 @@
         <div class="container">
             <p class="intro">
 
-                <img width="30%" src="{{$data['base_url'].'/website/imgs/logo.png'}}" alt=""> <br><br><br>
+                @if ($data['institute_logo'] != "null")
+                    <img width="30%" src="{{$data['base_url'].'/'.$data['institute_logo']}}" alt=""> <br><br><br>
+                @endif
                 شكراً لاستكمال إجراءات الحجز في معهد <br><br>
                 {{$data['institute_name']}}<br><br>
                 يُرجي التأكد من تفاصيل بيانات الحجز المرفقة بالفاتورة المبينة أدناه:
@@ -251,8 +253,10 @@
 
         <div>
             <p class="main-color">
-                <a class="main-color" style="text-decoration: none" href="https://www.google.com">5562694654456</a> | 
-                <a class="main-color" style="text-decoration: none" href="https://www.google.com">5562694654456</a>
+                
+                
+                <a class="main-color" style="text-decoration: none" href="tel:+966555484931"> <span dir="ltr">+966 55 548 4931 <img style="margin-bottom: -7px" width="30px" src="{{$data['base_url'].'/storage/icons/phone.png'}}" alt=""> </span> </a> | 
+                <a class="main-color" style="text-decoration: none" href="https://wa.me/+966555484931">  <span dir="ltr">+966 55 548 4931 <img style="margin-bottom: -7px" width="30px" src="{{$data['base_url'].'/storage/icons/whatsapp.png'}}" alt=""></span>  </a>
             </p>
             <p class="main-color">
                 <a class="main-color" style="text-decoration: none" href="{{route('website.terms_conditions')}}">الشروط و الاحكام </a> | 

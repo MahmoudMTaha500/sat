@@ -309,6 +309,7 @@ if($student_mail){
     // student register request : create new user of type student
     public function student_invoice(Request $request)
     {
+        
         $student_request = StudentRequest::find($request->request_id);
         $course = $student_request->course;
         $institute = $student_request->course->institute;
@@ -322,7 +323,7 @@ if($student_mail){
         $data['student_id'] = $student->id;
         $data['student_name'] = $student->name;
         $data['institute_name'] = $institute->name_ar;
-        $data['institute_logo'] = $institute->name_ar;
+        $data['institute_logo'] = $institute->logo;
         $data['country'] = $institute->country->name_ar;
         $data['city'] = $institute->city->name_ar;
         $data['course_name'] = $course->name_ar;
@@ -335,13 +336,13 @@ if($student_mail){
         $data['airport'] = Airports::find($student_request->airport_id);
         $data['residence'] = residences::find($student_request->residence_id);
         $data['base_url'] = url('/');
-
+        
         if($request->has('student_id')){
             if($student_request->student_id == $request->student_id){
                 $data['show_paid_price'] = true;
             }
         }
-
+        
         $pdf = PDF::loadView('website.institute.student-price-offer-pdf', compact('data'));
         return $pdf->stream('student-id-'.$data['student_id'].'.pdf');
     }
