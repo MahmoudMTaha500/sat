@@ -577,7 +577,7 @@ if($student_mail){
     }
     public function student_profile()
     {
-        $student = auth()->guard('student')->user();
+            $student = auth()->guard('student')->user();
         $useVue = true;
         $page_identity = [
             'title_tag' => 'الصفحة الشخصية | '.$student->name ,
@@ -685,6 +685,9 @@ if($student_mail){
         public function student_success_story()
         {
             $student = auth()->guard('student')->user();
+            $student_request= StudentRequest::where('student_id',$student->id)->with('course.institute')->get();
+
+            // dd($student_request);
             $page_title = 'success-story';
             $page_identity = [
                 'title_tag' => 'قصة النجاح' ,
@@ -692,7 +695,7 @@ if($student_mail){
                 'meta_description' => '',
                 'page_name' => '',
             ];
-            return view('website.students.success-story' , compact('student' , 'page_identity' ));
+            return view('website.students.success-story' , compact('student' , 'page_identity' ,'student_request'));
         }
         public function update_success_story(Request $request)
         {

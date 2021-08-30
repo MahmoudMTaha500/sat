@@ -46,7 +46,14 @@
                             @csrf
                             
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <input name="name" value="{{ old('name') }}" type="text" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم بالكامل" />
+                                <input name="name"
+                                @if($student)
+                                value="{{ $student->name }}"   
+                                disabled  
+                                @else
+                                value="{{ old('name') }}" 
+                                @endif                           
+                                type="text" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم بالكامل" />
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -54,7 +61,17 @@
                                 @enderror
                             </div>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <input name="email" value="{{ old('email') }}" type="email" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الألكتروني" />
+                                <input name="email"
+                                @if($student)
+                                value="{{ $student->email }}" 
+                                disabled    
+                                @else
+                                value="{{ old('email') }}"
+                                @endif      
+
+
+                                
+                                 type="email" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الألكتروني" />
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -62,7 +79,15 @@
                                 @enderror
                             </div>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <input name="phone" value="{{ old('phone') }}" type="tel" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال" />
+                                <input name="phone" 
+                                @if($student)
+                                value="{{ $student->phone }}"  
+                                disabled   
+                                @else
+                                value="{{ old('phone') }}"
+                                @endif      
+                                
+                                type="tel" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال" />
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

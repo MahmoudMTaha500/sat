@@ -57,13 +57,16 @@
                         <input type="hidden" name="course_details" value="{{json_encode($course_details)}}" />
                         <div class="row">
                             <div class="col-lg-6">
+                                <label>الاسم </label>
                                 <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                             
                                     <input readonly value="{{auth()->guard('student')->user()->name}}" type="text" name="name" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم كاملا *" />
                                 </div>
                                 @error('name') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                             </div>
 
                             <div class="col-lg-6">
+                                <label>البريد الإلكتروني    </label>
                                 <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                     <input
                                         readonly
@@ -77,6 +80,7 @@
                                 @error('email') <span class="invalid-feedback d-block mb-3" role="alert"> <strong>{{ $message }}</strong> </span> @enderror
                             </div>
                             <div class="col-lg-6">
+                                <label>رقم الجوال  </label>
                                 <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                     <input readonly value="{{auth()->guard('student')->user()->phone}}" type="text" name="phone" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال *" />
                                 </div>
@@ -84,6 +88,7 @@
                             </div>
 
                             <div class="col-lg-6">
+                                <label>الجنسيه </label>
                                 <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                     <input
                                         readonly
@@ -98,6 +103,7 @@
                             </div>
 
                             <div class="col-12">
+                                <label>العنوان </label>
                                 <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                     <input
                                         readonly
@@ -112,6 +118,7 @@
                             </div>
 
                             <div class="col-12">
+                                <label>ملاحظاتك </label>
                                 <div class="form-group btn-light rounded-10">
                                     <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
                                 </div>
