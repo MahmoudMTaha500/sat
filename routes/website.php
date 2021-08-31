@@ -63,6 +63,23 @@ Route::get('student-path', function(){
 Route::resource('order-visa', "simpleVisaController");
 Route::post('order-visa-checkout', "simpleVisaController@order_visa_checkout")->name('order-visa-checkout');
 
+Route::get('test-send-mail', function(){
+    $name = "mahmoud samy" ;
+    $email = "mahmoud.samy.ag@gmail.com" ;
+    $subject = "test mail";
+
+
+    $data = [
+        'request_id' => '71',
+        'student_id' => '71',
+    ];
+    Mail::send('mail.student_request_payment_confirmation', $data, function ($message) use ($name, $email, $subject) {
+        $message->to($email, $name)
+            ->subject($subject);
+        $message->from('no-reply@sat-edu.com', 'Classat');
+    });
+});
+
 
 
 

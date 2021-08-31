@@ -15,6 +15,7 @@
             margin: 0;
             font-family: 'Cairo', sans-serif;
             direction: rtl;
+            padding: 0;
         }
         
         .container{
@@ -97,9 +98,8 @@
 
         .footer{
             position: absolute;
-            bottom:0;
-            left: 0;
             width: 100%;
+            left: 0;
             height: 170px;
             background-color: #f2f2f2;
             text-align: center;
@@ -107,7 +107,7 @@
             font-weight: bold;
             font-size: 20px;
             line-height: 70px;
-            padding-top: 20px
+            padding-top: 20px;
         }
         .content{
             padding-top: 200px;
@@ -117,6 +117,17 @@
         }
         .main-color{
             color: #006fff
+        }
+        .refund-policy .title{
+            margin-top: 50px;
+            padding-bottom: 20px;
+            text-align: center;
+            font-size: 30px;
+            color: #006fff
+        }
+
+        .refund-policy .refund-policy-content{
+            padding-bottom: 60px;
         }
     </style>
 
@@ -243,6 +254,15 @@
             <p class="note">
                 يُرجي ملاحظة أن هذه الأسعار متغيرة بشكل دوري.
             </p>
+        </div>
+    </section>
+
+    <section class="refund-policy">
+        <h2 class="title">
+            سياسة الاستردات
+        </h2>
+        <div class="refund-policy-content">
+            {!! $data['refund_policy'] !!}
         </div>
     </section>
 

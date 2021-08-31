@@ -154,7 +154,7 @@
                         <!-- Brief Institute Tab -->
                         <div class="bg-white rounded-10 p-4 mb-4">
                             <h5 class="text-main-color font-weight-bold mb-3">{{$institute->name_ar}}</h5>
-                            <p class="mb-3">{{$institute->about_ar}}</p>
+                            <p class="mb-3">{!! $institute->about_ar !!}</p>
                         </div>
                         <!-- Map -->
                         <div class="bg-white rounded-10 p-4 mb-4">
@@ -230,7 +230,7 @@
                                 <!-- Course -->
                                 <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                     <!-- Institute Img -->
-                                    <img src="{{asset($institute->banner)}}" class="card-img-top" alt="..." />
+                                    <img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : $institute->banner}}" class="card-img-top" alt="..." />
                                     <!-- ./Institute Img -->
                                     <div class="card-body rounded-10 bg-white">
                                         <!-- Course Title -->

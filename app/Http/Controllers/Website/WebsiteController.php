@@ -242,7 +242,7 @@ if($student_mail){
         'name'=>$name
     );
 
-   Mail::send('mail.reset_password', $data, function ($message) use ($name, $email, $subject) {
+        Mail::send('mail.reset_password', $data, function ($message) use ($name, $email, $subject) {
             $message->to($email, $name)
             ->subject($subject);
             $message->from('no-reply@sat-edu.com', 'Classat');
@@ -347,6 +347,7 @@ if($student_mail){
         $data['airport'] = Airports::find($student_request->airport_id);
         $data['residence'] = residences::find($student_request->residence_id);
         $data['base_url'] = url('/');
+        $data['refund_policy'] = WebsiteSettings::find(1)->refund_policy_ar;
         
         if($request->has('student_id')){
             if($student_request->student_id == $request->student_id){
@@ -440,16 +441,23 @@ if($student_mail){
         $student_request = StudentRequest::create($student_request_data);
         $subject = 'Classat Request Confirmation';
         $data = array(
+            'request_id' => $student_request->id,
+            'course_name' => $course->name_ar,
+            'institute_name' => $course->institute->name_ar,
+            'country_name' => $course->institute->country->name_ar,
+            'city_name' => $course->institute->city->name_ar,
+            'institute_logo' => $course->institute->logo,
             'student_email' => $email,
             'student_password' => $unbcrypt_password,
         );
-        
+
         // send confirmation mail to student includes username and password
         Mail::send('mail.student_request_registration', $data, function ($message) use ($name, $email, $subject) {
             $message->to($email, $name)
             ->subject($subject);
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
+        
         
         // $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="' . route('student_invoice' , ['request_id' => $student_request->id]) . '" class="text-secondary-color"> عرض السعر</a></p>
         // <a href="' . route('pay_now', $student_request->id) . '"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';

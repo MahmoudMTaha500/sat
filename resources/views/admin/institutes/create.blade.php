@@ -51,7 +51,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="institute-about">نبذة عن المعهد</label>
-                                                    <textarea type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" >{{old('about_ar')}}</textarea>
+                                                    <textarea class="ckeditor" type="text" id="institute-about" class="form-control" placeholder="نبذة عن المعهد" name="about_ar" >{{old('about_ar')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +68,7 @@
 
                                             <div class="form-group">
                                                 <label for="projectinput4">الاسئله</label>
-                                                <textarea name="institute_questions" id="ckeditor" cols="30" rows="20" class="ckeditor">{{old('institute_questions')}} </textarea>
+                                                <textarea name="institute_questions"  cols="30" rows="20" class="ckeditor">{{old('institute_questions')}} </textarea>
                                             </div>
                                             </div>
                                         </div>
