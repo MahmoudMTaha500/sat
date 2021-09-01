@@ -98,7 +98,7 @@
                             class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">انشاء </button>
                         <!-- ./Submit Btn -->
                         <!-- Sign In Link -->
-                        <p class="text-center">لديك حساب  بالفعل؟ <a href="signin.html" class="text-secondary-color">تسجيل الدخول</a></p>
+                        <p class="text-center">لديك حساب  بالفعل؟ <a href="{{route('student.login')}}" class="text-secondary-color">تسجيل الدخول</a></p>
                         <!-- ./Sign In Link -->
                     </form>
 

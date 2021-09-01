@@ -30,6 +30,7 @@ class StudentRequestSeeder extends Seeder
             StudentRequest::create([
                 "student_id" => $x,
                 "course_id" => $x,
+                "institute_id" => Course::where('id' , $x)->get()[0]->institute_id,
                 "institute_message" => $course->institute->institute_questions,
                 "status" => 'جديد',
                 "weeks" => $weeks,

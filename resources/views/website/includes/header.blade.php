@@ -25,4 +25,4 @@
     <link rel="stylesheet" href="{{asset('website')}}/css/pages/institute.css">
     <link rel="icon" href="{{asset('website/imgs/logo-icon.png')}}">
     <title>{{(isset($page_identity) ? ($page_identity['title_tag'] == '' ? 'كلاسات'  : $page_identity['title_tag'] ) : 'كلاسات')}}</title>
-</head>
+</head> 

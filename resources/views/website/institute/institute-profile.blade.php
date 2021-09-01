@@ -31,35 +31,35 @@
             <div class="col-lg-8">
                 <!-- Tabs -->
                 <ul class="nav nav-tabs bg-white border-0 rounded-10 nav-justified p-0 mb-3" id="myTab" role="tablist">
-                    <li class="nav-item">
+                    <li class="nav-item mb-0">
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5 active" id="about-course-tab" data-toggle="tab" href="#about-course" role="tab" aria-controls="about-course" aria-selected="true">
                             تفاصيل الكورس
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mb-0">
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="brief-institute-tab" data-toggle="tab" href="#brief-institute" role="tab" aria-controls="brief-institute" aria-selected="false">
                             نبذه عن المعهد
                         </a>
                     </li>
 
                     @if (!empty($course->blogs[0]))
-                        <li class="nav-item">
+                        <li class="nav-item mb-0">
                             <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#course_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات عن الدورة</a>
                         </li>
                     @endif
                     @if (!empty($institute->blogs[0]))
                     
-                        <li class="nav-item">
-                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#institute_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات عن المعهد</a>
+                        <li class="nav-item mb-0">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#institute_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات مرتبطة بالمعهد </a>
                         </li>
                     @endif
 
 
                    
-                    <li class="nav-item">
+                    <li class="nav-item mb-0">
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="training-tab" data-toggle="tab" href="#training" role="tab" aria-controls="training" aria-selected="false">الدورات التدريبية</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mb-0">
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="rate-tab" data-toggle="tab" href="#rate" role="tab" aria-controls="rate" aria-selected="false">التقييمات</a>
                     </li>
                 </ul>
@@ -194,10 +194,10 @@
                         </div>
                     @endif
 
-                    @if (!empty($institute->blogs[0]))
+                    @if (!empty($institute_blogs))
                         <div class="tab-pane fade" id="institute_blogs" role="tabpanel" aria-labelledby="living-tab">
                             <div class="row">
-                                @foreach ($institute->blogs as $blog)
+                                @foreach ($institute_blogs as $blog)
                                     <div class="col-md-6">
                                         <!-- Living Tab -->
                                         <div class="bg-white rounded-10 p-4 mb-4">

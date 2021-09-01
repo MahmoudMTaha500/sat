@@ -88,9 +88,9 @@
                                     <td>{{blog.title_ar}}</td>
                                     <td>{{blog.creator.name}}</td>
                                     <td>{{blog.category.name_ar}}</td>
-                                    <td>{{blog.institute.name_ar}}</td>
-                                    <td>{{blog.country.name_ar}}</td>
-                                    <td>{{blog.city.name_ar}}</td>
+                                    <td>{{blog.institute == undefined ? 'لا يوجد' : blog.institute.name_ar}}</td>
+                                    <td>{{blog.country == undefined ? 'لا يوجد' : blog.country.name_ar}}</td>
+                                    <td>{{blog.city == undefined ? 'لا يوجد' : blog.city.name_ar}}</td>
 
                                     <!-- <td>
                                         <div class="btn-group" role="group" aria-label="Basic example">

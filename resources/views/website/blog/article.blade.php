@@ -4,17 +4,20 @@
     <div class="article-img position-relative" style="background-image: url({{$blog->banner == 'null' ? asset('storage/default_images.png') : asset($blog->banner)}}" alt="{{$blog->title_tag}})">
         <div class="overlay"></div>
         <div class="center-content" class="col-lg-4  align-self-center mx-auto text-center">
-            <h4 class="text-white mb-4">دراسة اللغة الانجليزية في {{$blog->country->name_ar}} </h4>
+            @if (isset($blog->country))
+                <h4 class="text-white mb-4">دراسة اللغة الانجليزية في {{$blog->country->name_ar}} </h4>
+            @endif
             @if($blog->institute_id)
             <a href="{{route('website.institutes' , ['institute_name' => $blog->institute->name_ar])}}" class="btn bg-main-color text-white rounded-10">
                 
                 تصفح دورات معهد  {{$blog->institute->name_ar}} 
             </a>
             @else  
-            <a href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}" class="btn bg-main-color text-white rounded-10">
-                
-                معاهد {{$blog->country->name_ar}} 
-            </a>
+                @isset($blog->country)
+                    <a href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}" class="btn bg-main-color text-white rounded-10">
+                        معاهد {{$blog->country->name_ar}} 
+                    </a>
+                @endisset
             @endif
 
             @if($blog->course) 
@@ -36,14 +39,20 @@
                 
                 <div class="col-lg-9 col-md-8">
                     <h4 class="text-main-color">{{$blog->title_ar}}</h4>
-                    <div>
-                        <i class="fas fa-eye"></i> 
-                        تصفح
-                        (
-                            <a  href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}">معاهد {{$blog->country->name_ar}}</a> - 
-                            <a href="{{route('website.institutes' , ['institute_name' => $blog->institute->name_ar])}}" >دورات معهد {{$blog->institute->name_ar}}</a>
-                        )
-                    </div>
+                    @if (isset($blog->country) || isset($blog->institute))
+                        <div>
+                            <i class="fas fa-eye"></i> 
+                            تصفح
+                            (
+                                @isset($blog->country)
+                                    <a  href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}">معاهد {{$blog->country->name_ar}}</a>
+                                @endisset
+                                @isset($blog->institute)
+                                    - <a href="{{route('website.institutes' , ['institute_name' => $blog->institute->name_ar])}}" >دورات معهد {{$blog->institute->name_ar}}</a>
+                                @endisset
+                            )
+                        </div>
+                    @endif
                     <p>  {!! $blog->content_ar !!}  </p>
                 </div>
                
@@ -72,27 +81,32 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بدولة {{$blog->country->name_ar}}</h3>
-                            <ul class="sidebar-row-ul">
-                                <li>
-                                    @foreach($countries_spiesific_blog as $country)
-                                    <li><a href="{{route('website.article',$country->id)}}">  {{$country->title_ar}} </a></li>
-                                    @endforeach
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="sidebar-row">
-                            <h3 class="sidebar-row-title">مقالات مرتبطة بمدينة {{$blog->city->name_ar}}</h3>
-                            <ul class="sidebar-row-ul">
-                                <li>
-                                    @foreach($cities_spiesific_blog as $city)
-                                    <li><a href="{{route('website.article',$city->id)}}">  {{$city->title_ar}} </a></li>
-                                    @endforeach
-                                </li>
-                                </li>
-                            </ul>
-                        </div>
+                        @isset($blog->country)
+                            <div class="sidebar-row">
+                                <h3 class="sidebar-row-title">مقالات مرتبطة بدولة {{$blog->country->name_ar}}</h3>
+                                <ul class="sidebar-row-ul">
+                                    <li>
+                                        @foreach($countries_spiesific_blog as $country)
+                                        <li><a href="{{route('website.article',$country->id)}}">  {{$country->title_ar}} </a></li>
+                                        @endforeach
+                                    </li>
+                                </ul>
+                            </div>
+                        @endisset
+                        @isset($blog->city)
+                            <div class="sidebar-row">
+                                <h3 class="sidebar-row-title">مقالات مرتبطة بمدينة {{$blog->city->name_ar}}</h3>
+                                <ul class="sidebar-row-ul">
+                                    <li>
+                                        @foreach($cities_spiesific_blog as $city)
+                                        <li><a href="{{route('website.article',$city->id)}}">  {{$city->title_ar}} </a></li>
+                                        @endforeach
+                                    </li>
+                                    </li>
+                                </ul>
+                            </div>
+                        @endisset
+                        @if(is_numeric($blog->institute_id) != 0 && !$institutes_spiesific_blog->isEmpty())
                         <div class="sidebar-row">
                             <h3 class="sidebar-row-title">مقالات مرتبطة بمعهد {{$blog->institute->name_ar}}</h3>
                             <ul class="sidebar-row-ul">
@@ -103,7 +117,8 @@
                                 </li>
                             </ul>
                         </div>
-                        @if(is_numeric($blog->course_id) != 0)
+                        @endif
+                        @if(is_numeric($blog->course_id) != 0 && !$courses_spiesific_blog->isEmpty())
                         <div class="sidebar-row">
                             <h3 class="sidebar-row-title">مقالات مرتبطة بدورة 
                              @if($blog->course)    {{$blog->course->name_ar}} @endif

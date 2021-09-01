@@ -31,8 +31,6 @@ class BlogSeeder extends Seeder
             }else{
                 $course_id = Course::where('institute_id' , $institute_id)->inRandomOrder()->get('id')[0]->id;
             }
-            
-
 
             Blog::create([
                 "title_ar" => 'تعرف علي المعيشة في بريطانيا'.$x,

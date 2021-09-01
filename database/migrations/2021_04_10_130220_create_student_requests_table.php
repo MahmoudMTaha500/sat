@@ -15,6 +15,8 @@ class CreateStudentRequestsTable extends Migration
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->bigInteger("course_id")->unsigned();
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->bigInteger("institute_id")->unsigned();
+            $table->foreign('institute_id')->references('id')->on('courses')->onDelete('cascade');
             $table->longText('institute_message')->nullable();
             $table->string('status');
             $table->integer('weeks')->default(1);

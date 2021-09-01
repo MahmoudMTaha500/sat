@@ -14,7 +14,7 @@ class StudentSuccessStoryController extends Controller
      */
     public function index()
     {
-         $department_name = 'students';
+        $department_name = 'students';
         $page_name = 'sucess-story';
         $page_title = 'قصص النجاح';
         $useVue = true;

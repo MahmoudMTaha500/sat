@@ -14,6 +14,8 @@ class simpleVisaController extends Controller
     }
     public function create()
     {
+        $student = auth()->guard('student')->user();
+
         $notUseVue = true;
         $page_identity = [
             'title_tag' => 'كلاسات | التاشيرة',
@@ -21,7 +23,7 @@ class simpleVisaController extends Controller
             'meta_description' => '',
             'page_name' => 'visa',
         ];
-        return view('website.visa.simple_visa' , compact('notUseVue' , 'page_identity'));
+        return view('website.visa.simple_visa' , compact('student','notUseVue' , 'page_identity'));
     }
     public function store(Request $request)
     {

@@ -21,11 +21,11 @@ class CreateBlogsTable extends Migration
             $table->string("banner");
             $table->bigInteger("creator_id")->unsigned();
             $table->foreign('creator_id')->references('id')->on('users');
-            $table->bigInteger("country_id")->unsigned();
+            $table->bigInteger("country_id")->unsigned()->nullable();
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->bigInteger("city_id")->unsigned();
+            $table->bigInteger("city_id")->unsigned()->nullable();
             $table->foreign('city_id')->references('id')->on('cities');
-            $table->bigInteger("institute_id")->unsigned();
+            $table->bigInteger("institute_id")->unsigned()->nullable();
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->bigInteger("course_id")->unsigned()->nullable();
             $table->foreign('course_id')->references('id')->on('courses');

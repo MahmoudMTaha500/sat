@@ -99,9 +99,9 @@
                                         </div>
                                         <!-- Offer Icon -->
                                         <!-- Add To Favourite Btn -->
-                                        <div v-if="student_check" class="add-favourite position-absolute" :course-id="course.course_id">
+                                        <div class="add-favourite position-absolute" :course-id="course.course_id">
                                             <i v-if="course.favourite_course_id != null" class="fas fa-heart favourite-icon"></i>
-                                            <i v-else class="far fa-heart favourite-icon"></i>
+                                            <i @click="student_login_message()" v-else class="far fa-heart favourite-icon"></i>
                                         </div>
                                          <!-- ./Add To Favourite Btn -->
                                         <!-- Institute Img -->
@@ -241,6 +241,11 @@
 
                 
                 this.get_courses();
+            },
+            student_login_message:function(){
+                if(!this.student_check){
+                    alert('يجب عليك تسجيل الدخول اولا')
+                }
             },
      
             institute_rate: function (institute_obj) {

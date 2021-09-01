@@ -78,6 +78,11 @@ class WebsiteController extends Controller
         if (empty($course[0])) {return redirect()->route('website.home');}
         $course = $course[0];
         $institute = $institute[0];
+        $institute_blogs = Blog::latest()
+                                        ->where('country_id' , $institute->country_id)
+                                        ->orWhere('city_id' , $institute->city_id)
+                                        ->orWhere('institute_id' , $institute->id)
+                                        ->get();
         $useVue = true;
         $page_identity = [
             'title_tag' => $institute->title_tag.' | '.$course->title_tag,
@@ -85,12 +90,11 @@ class WebsiteController extends Controller
             'meta_description' => $institute->meta_description.','.$course->meta_description,
             'page_name' => 'institutes',
         ];
-        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_identity'));
+        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_identity' , 'institute_blogs'));
     }
     // confirm reservation page
     public function confirm_reservation(Request $request, $pay_checker = null)
     {
-
         
         $validated = $request->validate([
             'weeks' => 'required|numeric',
@@ -144,6 +148,7 @@ class WebsiteController extends Controller
             'meta_description' => '',
             'page_name' => '',
         ];
+        session()->put('confirm_reservation_link' , url()->full());
         return view('website.institute.confirm-reservation', compact('course_details' , 'page_identity'));
 
     }
@@ -304,7 +309,7 @@ if($student_mail){
         $courses_spiesific_blog= Blog::where('id','!=',$id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
 
         $categories = BlogCategory::orderBy('id', 'DESC')->take(5)->get();
-        // dd($cities_spiesific_blog);
+        // dd($courses_spiesific_blog);
 
         $page_identity = [
             'title_tag' => $blog->title_tag,
@@ -416,6 +421,7 @@ if($student_mail){
         $student_request_data = [];
         $student_request_data['student_id'] = $student->id;
         $student_request_data['course_id'] = $course_details['course_id'];
+        $student_request_data['institute_id'] = $course->institute_id;
         $student_request_data['institute_message'] = $course->institute->institute_questions;
         $student_request_data['status'] = 'جديد';
         $student_request_data['weeks'] = $course_details['weeks'];
@@ -600,7 +606,7 @@ if($student_mail){
     }
     public function student_profile()
     {
-        $student = auth()->guard('student')->user();
+            $student = auth()->guard('student')->user();
         $useVue = true;
         $page_identity = [
             'title_tag' => 'الصفحة الشخصية | '.$student->name ,
@@ -708,6 +714,7 @@ if($student_mail){
         public function student_success_story()
         {
             $student = auth()->guard('student')->user();
+            $student_request= StudentRequest::where('student_id',$student->id)->with('course')->groupBy(['institute_id'])->get();
             $page_title = 'success-story';
             $page_identity = [
                 'title_tag' => 'قصة النجاح' ,
@@ -715,7 +722,7 @@ if($student_mail){
                 'meta_description' => '',
                 'page_name' => '',
             ];
-            return view('website.students.success-story' , compact('student' , 'page_identity' ));
+            return view('website.students.success-story' , compact('student' , 'page_identity' ,'student_request'));
         }
         public function update_success_story(Request $request)
         {
@@ -754,6 +761,14 @@ if($student_mail){
                 Favourite::where(['student_id' => $student->id , 'course_id' => $request->course_id])->delete();
                 return 'removed';
             }
+        }
+        public function prev_step_form_chose_payment_method(Request $request)
+        {
+            $student_request = StudentRequest::where('id' , $request->request_id)->get()[0];
+            $student = Student::where('id' , $student_request->student_id)->get()[0];
+            StudentRequest::where('id' , $request->request_id)->delete();
+            Auth::guard('student')->login($student);
+            return redirect(session()->get('confirm_reservation_link'));
         }
         public function about_us()
         {

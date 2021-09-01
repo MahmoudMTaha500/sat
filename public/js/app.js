@@ -6103,6 +6103,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.get_courses_url = url;
       this.get_courses();
     },
+    student_login_message: function student_login_message() {
+      if (!this.student_check) {
+        alert('يجب عليك تسجيل الدخول اولا');
+      }
+    },
     institute_rate: function institute_rate(institute_obj) {
       if (institute_obj.rate_switch == 1) {
         return institute_obj.sat_rate;
@@ -44563,11 +44568,35 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(blog.category.name_ar))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(blog.institute.name_ar))]),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            blog.institute == undefined
+                              ? "لا يوجد"
+                              : blog.institute.name_ar
+                          )
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(blog.country.name_ar))]),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            blog.country == undefined
+                              ? "لا يوجد"
+                              : blog.country.name_ar
+                          )
+                        )
+                      ]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(blog.city.name_ar))]),
+                      _c("td", [
+                        _vm._v(
+                          _vm._s(
+                            blog.city == undefined
+                              ? "لا يوجد"
+                              : blog.city.name_ar
+                          )
+                        )
+                      ]),
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(blog.created_at))]),
                       _vm._v(" "),
@@ -52199,7 +52228,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm.residences
+          _vm.residences[0]
             ? _c("div", { staticClass: "form-group" }, [
                 _c("label", [_vm._v("السكن")]),
                 _vm._v(" "),
@@ -52269,69 +52298,73 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", [_vm._v("الاستقبال من المطار")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.chosin_airport,
-                    expression: "chosin_airport"
-                  }
-                ],
-                staticClass: "form-control selectpicker rounded-10 border",
-                attrs: { "data-live-search": "true" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.chosin_airport = $event.target.multiple
-                      ? $$selectedVal
-                      : $$selectedVal[0]
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "", disabled: "" } }, [
-                  _vm._v("الاستقبال من المطار")
-                ]),
+          _vm.airports[0]
+            ? _c("div", { staticClass: "form-group" }, [
+                _c("label", [_vm._v("الاستقبال من المطار")]),
                 _vm._v(" "),
                 _c(
-                  "option",
-                  { attrs: { selected: "" }, domProps: { value: 0 } },
-                  [_vm._v(" لا احتاج خدمة الاستقبال")]
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.chosin_airport,
+                        expression: "chosin_airport"
+                      }
+                    ],
+                    staticClass: "form-control selectpicker rounded-10 border",
+                    attrs: { "data-live-search": "true" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.chosin_airport = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "", disabled: "" } }, [
+                      _vm._v("الاستقبال من المطار")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "option",
+                      { attrs: { selected: "" }, domProps: { value: 0 } },
+                      [_vm._v(" لا احتاج خدمة الاستقبال")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.airports, function(airport) {
+                      return _c(
+                        "option",
+                        { key: airport.id, domProps: { value: airport } },
+                        [
+                          _vm._v(
+                            _vm._s(airport.name_ar) +
+                              " - " +
+                              _vm._s(airport.price)
+                          )
+                        ]
+                      )
+                    })
+                  ],
+                  2
                 ),
                 _vm._v(" "),
-                _vm._l(_vm.airports, function(airport) {
-                  return _c(
-                    "option",
-                    { key: airport.id, domProps: { value: airport } },
-                    [
-                      _vm._v(
-                        _vm._s(airport.name_ar) + " - " + _vm._s(airport.price)
-                      )
-                    ]
-                  )
+                _c("input", {
+                  attrs: { type: "hidden", name: "airport" },
+                  domProps: { value: JSON.stringify(_vm.chosin_airport) }
                 })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c("input", {
-              attrs: { type: "hidden", name: "airport" },
-              domProps: { value: JSON.stringify(_vm.chosin_airport) }
-            })
-          ]),
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm.insurance_price
             ? _c("div", { staticClass: "row" }, [
@@ -52935,27 +52968,27 @@ var render = function() {
                               )
                             : _vm._e(),
                           _vm._v(" "),
-                          _vm.student_check
-                            ? _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "add-favourite position-absolute",
-                                  attrs: { "course-id": course.course_id }
-                                },
-                                [
-                                  course.favourite_course_id != null
-                                    ? _c("i", {
-                                        staticClass:
-                                          "fas fa-heart favourite-icon"
-                                      })
-                                    : _c("i", {
-                                        staticClass:
-                                          "far fa-heart favourite-icon"
-                                      })
-                                ]
-                              )
-                            : _vm._e(),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "add-favourite position-absolute",
+                              attrs: { "course-id": course.course_id }
+                            },
+                            [
+                              course.favourite_course_id != null
+                                ? _c("i", {
+                                    staticClass: "fas fa-heart favourite-icon"
+                                  })
+                                : _c("i", {
+                                    staticClass: "far fa-heart favourite-icon",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.student_login_message()
+                                      }
+                                    }
+                                  })
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "a",

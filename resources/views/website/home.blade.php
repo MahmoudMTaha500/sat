@@ -112,11 +112,12 @@
                         </div>
                         <!-- Offer Icon -->
                         <!-- Add To Favourite Btn -->
-                        @if(auth()->guard('student')->check())
-                            <div class="add-favourite position-absolute" course-id="{{$offer->id}}">
-                                <i class="{{heart_type($offer)}} fa-heart favourite-icon"></i>
-                            </div>
-                        @endif
+                        <div class="add-favourite position-absolute" course-id="{{$offer->id}}">
+                            <i @if(!auth()->guard('student')->check()) onclick="alert('يجب عليك تسجيل الدخول اولا')" @endif class="@if(auth()->guard('student')->check()) {{heart_type($offer)}} @else far @endif    fa-heart favourite-icon"></i>
+                        </div>
+                        
+                            
+                        
                         <!-- ./Add To Favourite Btn -->
                         <!-- Institute Img -->
                         <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">

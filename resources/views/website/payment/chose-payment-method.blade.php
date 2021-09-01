@@ -125,6 +125,9 @@
                         </div>
                     </div>
                 </div>
+                <a href="{{route('prev_step_form_chose_payment_method' , ['request_id' => $request_id ])}}" class="btn bg-dark text-white rounded-10 float-left">
+                    الخطوة السابقة
+                </a>
                 <!-- ./Confirm Reservation Form -->
             </div>
             <div class="col-lg-4">

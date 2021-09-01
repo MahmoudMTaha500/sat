@@ -98,6 +98,7 @@ class VueRequestsController extends Controller
             ->WhereIn('course_prices.id', $course_prices_ids)
             ->Where([
                     'courses.approvement' => 1 , 
+                    'institutes.approvement' => 1 , 
                     'courses.deleted_at' => NULL , 
                     'course_prices.deleted_at' => NULL,
                     'institutes.deleted_at' => NULL,

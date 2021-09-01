@@ -64,7 +64,7 @@
                             <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                         </select>
                     </div>
-                    <div  v-if="residences" class="form-group">
+                    <div  v-if="residences[0]" class="form-group">
                         <label>السكن</label>
                         <select v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option :value="0" disabled>هل ترغب في السكن؟</option>
@@ -73,7 +73,7 @@
                         </select>
                         <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
                     </div>
-                    <div class="form-group">
+                    <div v-if="airports[0]" class="form-group">
                         <label>الاستقبال من المطار</label>
                         <select v-model="chosin_airport" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option value="" disabled>الاستقبال من المطار</option>
