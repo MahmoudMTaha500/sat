@@ -1,6 +1,3 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-<script src="https://secure.gosell.io/js/sdk/tap.min.js"></script>
-
 @extends('website.app') @section('website.content')
 
 <!-- Sign Up -->
@@ -44,7 +41,7 @@
                     @else
                         <form class="my-4" method="POST" action="{{ route('order-visa.store') }}">
                             @csrf
-                            
+                            <label>الاسم</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <input name="name"
                                 @if($student)
@@ -60,6 +57,7 @@
                                 </span>
                                 @enderror
                             </div>
+                            <label>البريد الإلكتروني</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <input name="email"
                                 @if($student)
@@ -78,6 +76,7 @@
                                 </span>
                                 @enderror
                             </div>
+                            <label>رقم الجوال </label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <input name="phone" 
                                 @if($student)
@@ -94,6 +93,7 @@
                                 </span>
                                 @enderror
                             </div>
+                            <label>الدولة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country" required>
                                     <option value="" selected disabled>اختر الدوله</option>
@@ -107,9 +107,9 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                            </div>   
+                            </div>  
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light" style="display:none;"   id="sheingen">
-                                <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror"   name="country_sheingen" required>
+                                <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror"   name="schengen_country">
                                     <option value="" selected disabled> اختر من دول شنغن</option>
                                     <option value="Germany"> المانيا  </option>
                                     <option value="France"> فرنسا </option>
@@ -135,6 +135,7 @@
                                 </span>    
                              
                             </div>
+                            <label>نوع التأشيرة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
                                     <option value="" selected disabled>اختر التاشيرة</option>
@@ -168,6 +169,7 @@
                                 <b id="price_text" style="color:#006FFF"></b>   ريال سعودي
                                 
                             </span>
+                            <label>ملاحظة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <textarea name="notes" value="{{ old('notes') }}" type="text" class="form-control border-0 bg-transparent @error('notes') is-invalid @enderror" placeholder="ملاحظات"> </textarea>
                                 @error('notes')
@@ -177,7 +179,7 @@
                                 @enderror
                             </div>
 
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-12"><label>وسيلة الدفع</label> <br /></div>
                                 <div class="col-md-6">
                                     <div class="form-check form-check-inline mr-0 ml-4">
@@ -196,27 +198,75 @@
                                         </span>
                                     </div>
                                 @enderror
-                            </div>
+                            </div> --}}
 
                             <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">انشاء</button>
                             <button type="button" class="btn bg-main-color text-white w-100 rounded-10"
                                     data-toggle="modal" data-target="#office_numbers">
-                                    ارقام المكتب
+                                    طرق الدفع
                                 </button>
                             <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-body py-5 px-4 text-center">
-                                            <div class="cheched-img ">
-                                                <img src="imgs/checked.png" alt="" class="img-fluid">
+                                            <div class="cheched-img">
+                                                <img src="imgs/checked.png" alt="" class="img-fluid" />
                                             </div>
                                             <div class="cheched-heading">
                                                 <h3 class="text-main-color font-weight-bold">كلاسات</h3>
                                                 <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
                                             </div>
                                             <ul class="p-0">
-                                                <li><hr><a href="tel:966555484931">+966 55 548 4931</a> <hr></li>
+                                                <li>
+                                                    <hr />
+                                                    <div class="social-links">
+                                                        <a class="bg-main-color d-inline-block text-center ml-3" href="tel:966555484931">
+                                                            <span class="text-white font-weight-bold"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                                                        </a>
+                                                        <a dir="ltr" href="tel:+966555484931">+966 55 548 4931</a>
+                                                    </div>
+                                                    <hr />
+                                                    <div class="social-links">
+                                                        <a class="bg-main-color d-inline-block text-center ml-3" href="tel:966555484931">
+                                                            <span class="text-white font-weight-bold"><i class="fab fa-whatsapp"></i></span>
+                                                        </a>
+                                                        <a dir="ltr" target="_blank" href="https://wa.me/+966555484931">+966 55 548 4931</a>
+                                                    </div>
+                                                    <hr />
+                                                    <div class="cheched-heading">
+                                                        <p>او يمكنك التحويل مباشرة علي الحسابات الاتية</p>
+                                                    </div>
+                                                    <div class="text-right">
+                                                        <div class="cost-body px-3 pt-3"><div>
+                                                            <img class="mb-4" src="{{asset('storage/bank-logos/NBC.png')}}" width="150px" alt="">
+                                                            <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> مؤسسة سات للخدمات التجارية</span> </span> 
+                                                            <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 05800000176208</span> </span> 
+                                                            <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT for Trading Services</span> </span> 
+                                                            <span class="font-weight-bold d-block">SA0610000005800000176208</span> 
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="text-right">
+                                                        <div class="cost-body px-3 pt-3"><div>
+                                                            <img class="mb-4" src="{{asset('storage/bank-logos/Rajhi.png')}}" width="150px" alt="">
+                                                            <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> وكالة سات للسياحة و السفر</span> </span> 
+                                                            <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 562608010266542</span> </span> 
+                                                            <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT Agency for Travel and Tourism</span> </span> 
+                                                            <span class="font-weight-bold d-block">SA2780000562608010266542</span> 
+                                                        </div>
+                                                    </div>
+                                                    <hr>
+                                                    <div class="text-right">
+                                                        <div class="cost-body px-3 pt-3"><div>
+                                                            <img class="mb-4" src="{{asset('storage/bank-logos/riyad.png')}}" width="150px" alt="">
+                                                            <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> وكالة سات للسفر و السياحة</span> </span> 
+                                                            <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 05800000176208</span> </span> 
+                                                            <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT Agency</span> </span> 
+                                                            <span class="font-weight-bold d-block">SA2120000003184470469940</span> 
+                                                        </div>
+                                                    </div>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -233,71 +283,6 @@
     </div>
 </section>
 <!-- ./Sign Up -->
-
-
-
-
-<script>
-    //pass your public key from tap's dashboard
-    var tap = Tapjsli("pk_test_pu0ALqysgrz5UWKvjotBZTQY");
-
-    var elements = tap.elements({});
-    var style = {
-        base: {
-            color: "#535353",
-            lineHeight: "18px",
-            fontFamily: "sans-serif",
-            fontSmoothing: "antialiased",
-            fontSize: "16px",
-            "::placeholder": {
-                color: "rgba(0, 0, 0, 0.26)",
-                fontSize: "15px",
-            },
-        },
-        invalid: {
-            color: "red",
-        },
-    };
-    // input labels/placeholders
-    var labels = {
-        cardNumber: "Card Number",
-        expirationDate: "MM/YY",
-        cvv: "CVV",
-        cardHolder: "Card Holder Name",
-    };
-    //payment options
-    var paymentOptions = {
-        currencyCode: ["KWD", "USD", "SAR"],
-        labels: labels,
-        TextDirection: "ltr",
-    };
-    //create element, pass style and payment options
-    var card = elements.create("card", { style: style }, paymentOptions);
-    //mount element
-    card.mount("#element-container");
-    //card change event listener
-    card.addEventListener("change", function (event) {
-        if (event.BIN) {
-            console.log(event.BIN);
-        }
-        if (event.loaded) {
-            console.log("UI loaded :" + event.loaded);
-            console.log("current currency is :" + card.getCurrency());
-        }
-        var displayError = document.getElementById("error-handler");
-        if (event.error) {
-            displayError.textContent = event.error.message;
-        } else {
-            displayError.textContent = "";
-        }
-    });
-
-
-   
-</script>
-
-
-
 @endsection
 
 
@@ -307,30 +292,6 @@
 
 <script>
 
-var form = $("#form-container")
-
-form.submit(function(e){
-            e.preventDefault();
-            
-            
-         tap.createToken(card).then(function (result) {
-            
-            console.log(result);
-            if (result.error) {
-                // Inform the user if there was an error
-                var errorElement = document.getElementById("error-handler");
-                errorElement.textContent = result.error.message;
-            } else {
-                console.log(result.id)
-                // Send the token to your server
-                function get_token_id(result , form_submition){
-                    document.getElementById("token_input").value = result.id;
-                    form_submition(form)
-                }
-                get_token_id(result , function(form){form.unbind('submit').submit();})
-            }
-        });
-    });
 
     $('.visa-country').change(function(){
         var visa = event.target.value;

@@ -2677,6 +2677,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["aprove_route", "dahsboard_url", 'public_url', "get_blogs_url", "csrftoken", "categories", "users", 'create', 'edit', 'delete_pre'],
   data: function data() {
@@ -3326,6 +3329,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["course_url", "dahsboard_url", "public_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
   data: function data() {
@@ -3434,6 +3441,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -6059,6 +6070,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_props$data$methods$c = {
@@ -6079,17 +6101,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       student_favourite_courses: {},
       arrange_as: "",
       keyword_institute: '',
-      total_linkes: 0
+      total_linkes: 0,
+      pagination_pages: [1, 2, 3, 4, 5]
     };
   },
   methods: {
+    pagination_pages_method: function pagination_pages_method(current_page) {
+      if (current_page <= 4) {
+        this.pagination_pages = [1, 2, 3, 4, 5];
+      } else if (current_page > this.courses.last_page - 2) {
+        this.pagination_pages = [this.courses.last_page - 4, this.courses.last_page - 3, this.courses.last_page - 2, this.courses.last_page - 1, this.courses.last_page];
+      } else {
+        this.pagination_pages = [current_page - 2, current_page - 1, current_page, current_page + 1, current_page + 2];
+      }
+
+      if (this.courses.last_page < 5) {
+        this.pagination_pages = Array.from({
+          length: this.courses.last_page
+        }, function (_, i) {
+          return i + 1;
+        });
+      }
+    },
     get_courses: function get_courses() {
       var _this = this;
 
       axios.get(this.get_courses_url, {
         params: this.params().filter_params
       }).then(function (response) {
-        return _this.courses = response.data.courses, _this.next_page_url = response.data.courses.next_page_url, _this.prev_page_url = response.data.courses.prev_page_url;
+        _this.courses = response.data.courses;
+        _this.next_page_url = response.data.courses.next_page_url;
+        _this.prev_page_url = response.data.courses.prev_page_url;
+
+        if (_this.courses.last_page < 5) {
+          _this.pagination_pages = Array.from({
+            length: _this.courses.last_page
+          }, function (_, i) {
+            return i + 1;
+          });
+        }
+
+        window.scrollTo(0, 0);
       });
     },
     filter_courses: function filter_courses() {
@@ -6214,13 +6266,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['public_path'],
+  props: ["public_path"],
   data: function data() {
     return {
-      search: '',
+      search: "",
+      toggle_result_box_checker: false,
       institute_search: {}
     };
   },
@@ -6228,9 +6279,8 @@ __webpack_require__.r(__webpack_exports__);
     get_suggestions_search: function get_suggestions_search() {
       var _this = this;
 
-      if (this.search.length >= 2) {
-        // alert(this.search);
-        axios.get(this.public_path + '/api/search-form-institute', {
+      if (this.search.length >= 1) {
+        axios.get(this.public_path + "/api/search-form-institute", {
           params: {
             search: this.search
           }
@@ -6242,6 +6292,17 @@ __webpack_require__.r(__webpack_exports__);
     appendvalue: function appendvalue(val) {
       this.search = val;
       this.institute_search = {};
+      this.toggle_result_box_checker = false;
+    },
+    toggle_result_box: function toggle_result_box() {
+      if (this.search.length == 0) {
+        this.toggle_result_box_checker = false;
+        this.institute_search = {};
+      } else if (this.institute_search[0] == undefined) {
+        this.toggle_result_box_checker = false;
+      } else {
+        this.toggle_result_box_checker = true;
+      }
     }
   }
 });
@@ -44600,6 +44661,8 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(blog.created_at))]),
                       _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(blog.creator.name))]),
+                      _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
                         _c("input", {
                           directives: [
@@ -44894,6 +44957,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "border-top-0" }, [_vm._v("المدينه")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("التاريخ")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكاتب")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحاله")]),
         _vm._v(" "),
@@ -46187,6 +46252,14 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
+                          _c("td", [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(course.creator.name) +
+                                "\n                                    "
+                            )
+                          ]),
+                          _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
                             _c("input", {
                               directives: [
@@ -46478,6 +46551,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "border-top-0" }, [_vm._v("عدد الطلابات")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("العروض")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكاتب")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحالة")]),
         _vm._v(" "),
@@ -46825,6 +46900,14 @@ var render = function() {
                           : _c("span", [_vm._v(" طلبه    ")])
                       ]),
                       _vm._v(" "),
+                      _c("td", [
+                        _vm._v(
+                          "\n                                    " +
+                            _vm._s(institute.creator.name) +
+                            "\n                                "
+                        )
+                      ]),
+                      _vm._v(" "),
                       _c("td", { staticClass: "text-truncate" }, [
                         _c("input", {
                           directives: [
@@ -47124,6 +47207,8 @@ var staticRenderFns = [
         _c("th", { staticClass: "border-top-0" }, [_vm._v("التقييم")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("التقييم بواسطة")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("الكاتب")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الحاله")]),
         _vm._v(" "),
@@ -52917,7 +53002,10 @@ var render = function() {
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
-                                  return _vm.filter_courses()
+                                  _vm.filter_courses()
+                                  _vm.pagination_pages_method(
+                                    _vm.courses.current_page
+                                  )
                                 }
                               }
                             },
@@ -53037,6 +53125,28 @@ var render = function() {
                                 _c(
                                   "a",
                                   {
+                                    staticClass: "text-dark",
+                                    attrs: {
+                                      href:
+                                        _vm.public_path +
+                                        "institute/" +
+                                        course.institute_id +
+                                        "/" +
+                                        course.institute_sulg
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      " معهد " + _vm._s(course.institute_name)
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("h6", { staticClass: "card-title" }, [
+                                _c(
+                                  "a",
+                                  {
                                     staticClass: "text-main-color",
                                     attrs: {
                                       href:
@@ -53049,11 +53159,7 @@ var render = function() {
                                         course.course_sulg
                                     }
                                   },
-                                  [
-                                    _vm._v(
-                                      " معهد " + _vm._s(course.institute_name)
-                                    )
-                                  ]
+                                  [_vm._v(" " + _vm._s(course.course_name))]
                                 )
                               ]),
                               _vm._v(" "),
@@ -53097,14 +53203,6 @@ var render = function() {
                                     " , " +
                                     _vm._s(course.city_name)
                                 )
-                              ]),
-                              _vm._v(" "),
-                              _c("p", { staticClass: "mb-0" }, [
-                                _c("i", {
-                                  staticClass:
-                                    "fas fa-graduation-cap text-main-color"
-                                }),
-                                _vm._v(" " + _vm._s(course.course_name))
                               ]),
                               _vm._v(" "),
                               _c("p", { staticClass: "mb-0 overflow-hidden" }, [
@@ -53183,101 +53281,142 @@ var render = function() {
         _c("div", { staticClass: "row px-xl-5" }, [
           _c("div", { staticClass: "col-12" }, [
             _c("nav", { attrs: { "aria-label": "Page navigation  " } }, [
-              _c(
-                "ul",
-                { staticClass: "pagination d-flex justify-content-end" },
-                [
-                  _c("li", { staticClass: "page-item" }, [
+              _c("div", { staticClass: "row", attrs: { dir: "ltr" } }, [
+                _c(
+                  "div",
+                  { staticClass: "col-md-auto col-12 order-md-1 order-2" },
+                  [
                     _c(
-                      "button",
+                      "ul",
                       {
                         staticClass:
-                          "page-link rounded-10 mx-1 text-dark border-0",
-                        style: !_vm.courses.prev_page_url
-                          ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
-                          : "",
-                        attrs: { disabled: !_vm.courses.prev_page_url },
-                        on: {
-                          click: function($event) {
-                            return _vm.pagination(_vm.prev_page_url)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-chevron-right" })]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "page-item" }, [
-                    _c("span", [
-                      _c(
-                        "span",
-                        {
-                          staticClass:
-                            "page-link rounded-10 mx-1 text-white border-0",
-                          staticStyle: { background: "#f4c20d" }
-                        },
-                        [
-                          _vm._v(
-                            " page " +
-                              _vm._s(_vm.courses.current_page) +
-                              " of " +
-                              _vm._s(_vm.courses.last_page) +
-                              " "
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.courses.last_page, function(page, index) {
-                    return _c(
-                      "li",
-                      {
-                        key: index,
-                        staticClass: "page-item",
-                        class: _vm.courses.current_page == page ? "active" : ""
+                          "pagination d-flex justify-content-center p-0"
                       },
                       [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "page-link",
-                            on: {
-                              click: function($event) {
-                                return _vm.pagination(
-                                  _vm.courses.path + "?page=" + page
+                        _c("li", [
+                          _c("span", [
+                            _c(
+                              "span",
+                              {
+                                staticClass:
+                                  "page-link rounded-10 mx-1 bg-dark text-white border-0"
+                              },
+                              [
+                                _vm._v(
+                                  " page " +
+                                    _vm._s(_vm.courses.current_page) +
+                                    " of " +
+                                    _vm._s(_vm.courses.last_page) +
+                                    " "
                                 )
-                              }
-                            }
-                          },
-                          [_vm._v(_vm._s(page))]
-                        )
+                              ]
+                            )
+                          ])
+                        ])
                       ]
                     )
-                  }),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "page-item" }, [
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "col-md-auto col-12 text-center order-md-2 order-1"
+                  },
+                  [
                     _c(
-                      "button",
+                      "ul",
                       {
                         staticClass:
-                          "page-link rounded-10 mx-1 text-dark border-0",
-                        style: !_vm.courses.next_page_url
-                          ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
-                          : "",
-                        attrs: { disabled: !_vm.courses.next_page_url },
-                        on: {
-                          click: function($event) {
-                            return _vm.pagination(_vm.next_page_url)
-                          }
-                        }
+                          "pagination d-flex justify-content-center p-0",
+                        attrs: { dir: "rtl" }
                       },
-                      [_c("i", { staticClass: "fas fa-chevron-left" })]
+                      [
+                        _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "page-link rounded-10 mx-1 text-dark border-0",
+                              style: !_vm.courses.prev_page_url
+                                ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
+                                : "",
+                              attrs: { disabled: !_vm.courses.prev_page_url },
+                              on: {
+                                click: function($event) {
+                                  _vm.pagination(_vm.prev_page_url)
+                                  _vm.pagination_pages_method(
+                                    _vm.courses.current_page - 1
+                                  )
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-chevron-right" })]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.pagination_pages, function(page, index) {
+                          return _c(
+                            "li",
+                            {
+                              key: index,
+                              staticClass: "page-item",
+                              class:
+                                _vm.courses.current_page == page
+                                  ? "active"
+                                  : "",
+                              staticStyle: { margin: "0 5px" }
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "page-link",
+                                  staticStyle: { "border-radius": "10px" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.pagination(
+                                        _vm.courses.path + "?page=" + page
+                                      )
+                                      _vm.pagination_pages_method(page)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(page))]
+                              )
+                            ]
+                          )
+                        }),
+                        _vm._v(" "),
+                        _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "page-link rounded-10 mx-1 text-dark border-0",
+                              style: !_vm.courses.next_page_url
+                                ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
+                                : "",
+                              attrs: { disabled: !_vm.courses.next_page_url },
+                              on: {
+                                click: function($event) {
+                                  _vm.pagination(_vm.next_page_url)
+                                  _vm.pagination_pages_method(
+                                    _vm.courses.current_page + 1
+                                  )
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-chevron-left" })]
+                          )
+                        ])
+                      ],
+                      2
                     )
-                  ])
-                ],
-                2
-              )
+                  ]
+                )
+              ])
             ])
           ])
         ])
@@ -53364,13 +53503,15 @@ var render = function() {
       attrs: {
         id: "searchform",
         name: "keyword",
-        type: "text",
-        placeholder: "ادخل اسم المعهد او المدينة او الدولة او الدورة لبدء البحث"
+        type: "search",
+        autocomplete: "off",
+        placeholder: "ادخل اسم المعهد "
       },
       domProps: { value: _vm.search },
       on: {
         keyup: function($event) {
-          return _vm.get_suggestions_search()
+          _vm.get_suggestions_search()
+          _vm.toggle_result_box()
         },
         input: function($event) {
           if ($event.target.composing) {
@@ -53381,16 +53522,17 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _vm.institute_search
+    _vm.toggle_result_box_checker
       ? _c(
           "div",
-          { staticStyle: { background: "#fff" } },
+          { staticClass: "search-field-box" },
           _vm._l(_vm.institute_search, function(institute) {
             return _c(
-              "option",
+              "span",
               {
                 key: institute.id,
-                domProps: { value: institute.name_ar },
+                staticClass: "item",
+                attrs: { value: institute.name_ar },
                 on: {
                   click: function($event) {
                     return _vm.appendvalue(institute.name_ar)

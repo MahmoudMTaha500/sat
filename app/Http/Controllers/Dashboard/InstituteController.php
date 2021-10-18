@@ -29,13 +29,12 @@ class InstituteController extends Controller
             }
         }
         $page_title = 'المعاهد';
- 
         return view('admin.institutes.index', ['institutes' => $institutes, "useVue" => $useVue, 'countries' => $countries,'page_title'=>$page_title]);
     }
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-        $institutes = Institute::with('country', 'city','rats','courses')->paginate(10);
+        $institutes = Institute::with('country', 'city','rats','courses' , 'creator' )->paginate(10);
         return response()->json(['institutes' => $institutes]);
     }
     /************************************************************** */
@@ -79,7 +78,7 @@ class InstituteController extends Controller
                 "title_tag" => $request->title_tag,
                 "meta_keywords" => $request->meta_keywords,
                 "meta_description" => $request->meta_description,
-                "creator_id" => 1,
+                "creator_id" => auth()->user()->id,
                 "sat_rate" => 1,
                 "rate_switch" => 1,
                 "approvement" => 1,
@@ -137,6 +136,7 @@ class InstituteController extends Controller
             $institute->logo = $logoNamePath;
         }
         if ($request->banner) {
+            
             $validate_images = $request->validate([
                 'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);

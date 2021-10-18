@@ -30,7 +30,7 @@ class VisaCategoryController extends Controller
 
     public function store(Request $request)
     {
-             VisaCategory::create(['name_ar'=>$request->name_ar,'creator_id'=>1]); 
+             VisaCategory::create(['name_ar'=>$request->name_ar,'creator_id'=>auth()->user()->id]); 
              return back()->with('success','تم اضافة التصنيف');
     }
 

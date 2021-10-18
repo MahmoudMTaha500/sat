@@ -68,6 +68,7 @@
                                                             <select class="currency_exchange form-control text-left" name="currency_exchange">
                                                                 <option value="">الريال السعودي</option>
                                                                 <option {{old('currency_exchange') == 'GBP' ? 'selected' : ''}} value="GBP"> الجنيه الاسترليني</option>
+                                                                <option {{old('currency_exchange') == 'EUR' ? 'selected' : ''}}value="EUR"> اليورو</option>
                                                                 <option {{old('currency_exchange') == 'USD' ? 'selected' : ''}} value="USD"> الدولار</option>
                                                             </select>
                                                         </div>

@@ -18,9 +18,9 @@ class simpleVisaController extends Controller
 
         $notUseVue = true;
         $page_identity = [
-            'title_tag' => 'كلاسات | التاشيرة',
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => 'كلاسات | طلب تأشيرة',
+            'meta_keywords' => 'دراسة اللغة بالخارج,تعلم اللغة الانجليزية بالخارج , دراسة اللغة الانجليزية بالخارج,تكلفة دراسة اللغة الانجليزية بالخارجن، مكتب دراسة اللغة الانجليزية بالخارج, تعلم اللغة الانجليزية خارج المملكة',
+            'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
             'page_name' => 'visa',
         ];
         return view('website.visa.simple_visa' , compact('student','notUseVue' , 'page_identity'));
@@ -30,11 +30,10 @@ class simpleVisaController extends Controller
         // dd($request->all());
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => 'required|string|max:255|unique:students,email',
+            'email' => 'required|string|max:255',
             'phone' => ['required', 'string', 'max:255'],
             'country' => ['required'],
             'visatype' => ['required'],
-            'payment_method' => ['required'],
         ], [
             'name.required' => 'الاسم مطلوب',
             'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
@@ -45,7 +44,6 @@ class simpleVisaController extends Controller
             'phone.required' => 'رقم الجوال مطلوب',
             'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
             'country.required' => 'الدولة مطلوبة',
-            'payment_method.required' => ' برجاء اختيار وسيلة الدفع المناسبة لك',
         ]);
 
         $data = [
@@ -59,8 +57,10 @@ class simpleVisaController extends Controller
                 'price_status'=>'لم يتم الدفع',
                 'document_status'=>'لم يتم الارسال',
                 'request_status'=>'جديد',
-                'payment_method'=>$request->payment_method,
         ];
+        if(!empty($request->schengen_country)){
+            $data['country'] = $request->country.' | '.$request->schengen_country;
+        }
         $visa = SempleVisa::create($data);
         if($request->payment_method == 'online'){
             session()->flash('alert_message', ' تم ارسال بياناتك بنجاح , يرجى استكمال الدفع الالكتروني');

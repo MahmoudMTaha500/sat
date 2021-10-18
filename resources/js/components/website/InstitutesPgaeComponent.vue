@@ -78,7 +78,7 @@
                                                     <label class="form-check-label">افضل العروض</label>
                                                 </div>
                                             </div>
-                                            <button @click="filter_courses()" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">فلتر</button>
+                                            <button @click="filter_courses(); pagination_pages_method(courses.current_page)" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">فلتر</button>
                                         </form>
                                         <!-- ./Filter Form -->
                                     </div>
@@ -116,7 +116,8 @@
                                         <!-- ./Institute Img -->
                                         <div class="card-body rounded-10 bg-white">
                                             <!-- Institute Title -->
-                                            <h5 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg" class="text-main-color"> معهد {{course.institute_name}}</a></h5>
+                                            <h5 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg" class="text-dark"> معهد {{course.institute_name}}</a></h5>
+                                            <h6 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg" class="text-main-color"> {{course.course_name}}</a></h6>
                                             <!-- ./Institute Title -->
                                             <!-- Institute Rate -->
 
@@ -126,7 +127,6 @@
                                             <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{course.country_name}} , {{course.city_name}}</p>
                                             <!-- ./Institute Location -->
                                             <!-- Course Name -->
-                                            <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> {{course.course_name}}</p>
                                             <!-- ./Course Name -->
                                             <!-- Course Time And Level -->
                                             <p class="mb-0 overflow-hidden">
@@ -156,37 +156,48 @@
                 <div class="row px-xl-5">
                     <div class="col-12">
                         <nav aria-label="Page navigation  ">
-                            <ul class="pagination d-flex justify-content-end">
-                                <li class="page-item">
-                                    <button
-                                        :style="!courses.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
-                                        @click="pagination(prev_page_url)"
-                                        :disabled="!courses.prev_page_url"
-                                        class="page-link rounded-10 mx-1 text-dark border-0"
-                                    >
-                                        <i class="fas fa-chevron-right"></i>
-                                    </button>
-                                </li>
-                                <li class="page-item">
-                                    <span>
-                                        <span style="background: #f4c20d;" class="page-link rounded-10 mx-1 text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
-                                    </span>
-                                </li>
-                                <li class="page-item" v-for="(page, index) in courses.last_page" :key="index" :class="courses.current_page == page ? 'active' : ''">
-                                <a class="page-link" @click="pagination(courses.path+'?page='+page)">{{ page }}</a>
-                                </li>
+                            <div class="row" dir="ltr">
+                                
+                                <div class="col-md-auto col-12 order-md-1 order-2">
+                                    <ul class="pagination d-flex justify-content-center p-0">
+                                        <li>
+                                            <span>
+                                                <span  class="page-link rounded-10 mx-1 bg-dark text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-auto col-12 text-center order-md-2 order-1">
+                                    <ul dir="rtl" class="pagination d-flex justify-content-center p-0">
+                                        <li class="page-item">
+                                            <button
+                                                :style="!courses.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                                @click="pagination(prev_page_url);pagination_pages_method(courses.current_page-1)"
+                                                :disabled="!courses.prev_page_url"
+                                                class="page-link rounded-10 mx-1 text-dark border-0"
+                                            >
+                                                <i class="fas fa-chevron-right"></i>
+                                            </button>
+                                        </li>
+                                        
+                                        <li style="margin:0 5px;" class="page-item" v-for="(page, index) in pagination_pages" :key="index" :class="courses.current_page == page ? 'active' : ''">
+                                            <a style="border-radius: 10px;" class="page-link" @click="pagination(courses.path+'?page='+page);pagination_pages_method(page)">{{ page }}</a>
+                                        </li>
+                                        
 
-                                <li class="page-item">
-                                    <button
-                                        :style="!courses.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
-                                        @click="pagination(next_page_url)"
-                                        :disabled="!courses.next_page_url"
-                                        class="page-link rounded-10 mx-1 text-dark border-0"
-                                    >
-                                        <i class="fas fa-chevron-left"></i>
-                                    </button>
-                                </li>
-                            </ul>
+                                        <li class="page-item">
+                                            <button
+                                                :style="!courses.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                                @click="pagination(next_page_url);pagination_pages_method(courses.current_page +1 )"
+                                                :disabled="!courses.next_page_url"
+                                                class="page-link rounded-10 mx-1 text-dark border-0"
+                                            >
+                                                <i class="fas fa-chevron-left"></i>
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </nav>
                     </div>
                 </div>
@@ -219,15 +230,41 @@
                 arrange_as: "",
                 keyword_institute:'',
                 total_linkes: 0,
+                pagination_pages: [1,2,3,4,5]
             };
         },
         methods: {
+            pagination_pages_method: function(current_page){
+                if(current_page <= 4){
+                    this.pagination_pages = [1,2,3,4,5]
+                }else if(current_page > (this.courses.last_page-2) ){
+                    this.pagination_pages = [this.courses.last_page -4 , this.courses.last_page -3 , this.courses.last_page -2 , this.courses.last_page - 1 , this.courses.last_page]
+                }else{
+                    this.pagination_pages = [current_page -2 , current_page - 1 , current_page , current_page + 1 , current_page + 2]
+                }
+
+                if(this.courses.last_page < 5){
+                    this.pagination_pages = Array.from({length: this.courses.last_page}, (_, i) => i + 1)
+                }
+
+                
+            },
             get_courses: function () {
                 axios
                     .get(this.get_courses_url, {
                         params: this.params().filter_params,
                     })
-                    .then((response) => ((this.courses = response.data.courses), (this.next_page_url = response.data.courses.next_page_url), (this.prev_page_url = response.data.courses.prev_page_url)));
+                    .then((response) =>{
+                        this.courses = response.data.courses
+                        this.next_page_url = response.data.courses.next_page_url
+                        this.prev_page_url = response.data.courses.prev_page_url
+                        if(this.courses.last_page < 5){
+                            this.pagination_pages = Array.from({length: this.courses.last_page}, (_, i) => i + 1)
+                        }
+                        window.scrollTo(0,0)
+                    });
+
+                    
             },
             filter_courses: function () {
                 this.country_id = this.$refs.countries_component_ref.$refs.country_id_ref.value;

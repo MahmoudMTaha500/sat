@@ -98,9 +98,9 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <show-images-component
-                                                :image_name="{{json_encode("panner")}}"
+                                                :image_name="{{json_encode("banner")}}"
                                                 :image_label="{{json_encode("اختر الصورة")}}"
-                                                :old="{{json_encode(old('panner'))}}"
+                                                :old="{{json_encode(old('banner'))}}"
                                                 :path_image_edit="{{ json_encode( asset($institute->banner == 'null' ? 'storage/default_images.png' : $institute->banner) )}}"
 
 

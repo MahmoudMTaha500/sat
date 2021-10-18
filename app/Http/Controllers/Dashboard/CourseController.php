@@ -32,9 +32,8 @@ class CourseController extends Controller
     /************************************************************** */
     public function getCourses()
     {
-        $courses = Course::with('institute', 'institute.city','student_request')->paginate(10);
+        $courses = Course::with('institute', 'institute.city','student_request' , 'creator')->paginate(10);
         return response()->json(['courses' => $courses]);
-
     }
     /************************************************************** */
     public function create()
@@ -76,7 +75,7 @@ class CourseController extends Controller
                 'slug' => str_replace(' ', '-', $request->name_ar),
                 'about_ar' => $request->desc,
                 'institute_id' => $request->institute_id,
-                'creator_id' => 1,
+                'creator_id' => auth()->user()->id,
                 'min_age' => $request->min_age,
                 'start_day' => date('Y-m-d H:i:s'),
                 'study_period' => $request->study_period,
@@ -158,7 +157,7 @@ class CourseController extends Controller
         $updateCourse->name_ar = $request->name_ar;
         $updateCourse->about_ar = $request->desc;
         $updateCourse->institute_id = $request->institute_id;
-        $updateCourse->creator_id = 1;
+        $updateCourse->creator_id = auth()->user()->id;
         $updateCourse->min_age = $request->min_age;
         $updateCourse->study_period = $request->study_period;
         $updateCourse->lessons_per_week = $request->lessons_per_week;
@@ -243,7 +242,7 @@ class CourseController extends Controller
             $courses = $courses->where("approvment" , "$status" );
         }
 
-        $courses = $courses->with('institute', 'institute.city','student_request')->paginate(10);
+        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->paginate(10);
         return response()->json(['courses' => $courses]);
 
     }

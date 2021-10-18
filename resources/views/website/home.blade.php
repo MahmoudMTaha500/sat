@@ -1,12 +1,12 @@
 @extends('website.app') @section('website.content')
 <!-- Intro  -->
-<section class="intro" style="background-image: url({{asset('website')}}/imgs/home_page_header.png)">
+<section class="intro">
     <div class="container-fluid">
-        <div class="row px-xl-5">
-            <div class="col-lg-7 align-self-center py-5 order-lg-1 order-2">
+        <div class="row px-xl-5 align-items-end pt-md-5">
+            <div class="col-lg-6 align-self-center">
                 <!-- Section Heading -->
-                <h1 class="text-white font-weight-bold mb-4">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد</h1>
-                <p class="lead text-white mb-4">نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون التعليمي بين المؤسسات وخلق بيئة تنافسية</p>
+                <h1 class="text-white font-weight-bold mb-4 intro-title">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد</h1>
+                <p class="lead text-white mb-4 intro-desc">نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون التعليمي بين المؤسسات وخلق بيئة تنافسية</p>
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
@@ -29,9 +29,8 @@
                 </form>
                 <!-- ./Search Form -->
             </div>
-            <div class="col-lg-5 mx-auto order-lg-2 order-1 text-center">
-                <!-- Intro Img -->
-                <!-- ./Intro Img -->
+            <div class="col-lg-6 mx-auto text-center">
+                <img class="w-100 mt-5 mt-md-2" src="{{asset('storage/banners/intro-home.png')}}" alt="" srcset="">
             </div>
         </div>
     </div>
@@ -122,13 +121,14 @@
                         <!-- Institute Img -->
                         <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                             <div class="institute-img d-inline-block position-relative">
-                                <img src="{{$offer->institute->banner == 'null' ? asset('storage/default_images.png') :  asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" alt="..." />
+                                <img src="{{$offer->institute->banner == 'null' ? asset('storage/default_images.png') :  asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top"/>
                             </div>
                         </a>
                         <!-- ./Institute Img -->
                         <div class="card-body rounded-10 bg-white">
                             <!-- Institute Title -->
-                            <h5 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color"> معهد {{$offer->institute->name_ar}} </a></h5>
+                            <h5 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></h5>
+                            <h6 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></h6>
                             <!-- ./Institute Title -->
                             <!-- Institute Rate -->
                             <p class="mb-0"><span class="starrr" ratio="{{institute_rate($offer->institute)}}"></span> {{institute_rate($offer->institute)}}</p>
@@ -137,7 +137,6 @@
                             <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{$offer->institute->country->name_ar}} , {{$offer->institute->city->name_ar}}</p>
                             <!-- ./Institute Location -->
                             <!-- Course Name -->
-                            <p class="mb-0"><i class="fas fa-graduation-cap text-main-color"></i> {{$offer->name_ar}}</p>
                             <!-- ./Course Name -->
                             <!-- Course Time And Level -->
                             <p class="mb-0 overflow-hidden">
@@ -169,9 +168,9 @@
         @if (isset($two_blogs[0]))
         <div class="row">
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-1" style="background-image:url('{{$two_blogs[0]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[0]->banner)}}')"> </div>
+            <div class="col-md-6 bg-study-1 home-single-blog-image m-md-0 m-3" style="background-image:url('{{$two_blogs[0]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[0]->banner)}}')"> </div>
             <!-- ./Background Img -->
-            <div class="col-md-6 p-5">
+            <div class="col-md-6 p-md-5 p-3">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
                 <a href="{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
@@ -185,7 +184,7 @@
         @if (isset($two_blogs[1]))
 
         <div class="row">
-            <div class="col-md-6 p-5">
+            <div class="col-md-6 p-md-5 p-3 order-md-1 order-2">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
                 <a href="{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
@@ -195,7 +194,7 @@
                 </div>
             </div>
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-2" style="background-image:url('{{$two_blogs[1]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[1]->banner)}}')"></div>
+            <div class="col-md-6 bg-study-2 home-single-blog-image order-md-2 order-1 m-md-0 m-3" style="background-image:url('{{$two_blogs[1]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[1]->banner)}}')"></div>
             <!-- ./Background Img -->
         </div>
         @endif

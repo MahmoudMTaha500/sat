@@ -33,7 +33,7 @@ class InstituteSeeder extends Seeder
                 "creator_id" => 1,
                 "sat_rate" => rand(1 , 5),
                 "rate_switch" => 1,
-                "approvement" => rand(0 , 1),
+                "approvement" => 1,
             ]);
         }
     }

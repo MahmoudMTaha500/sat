@@ -34,7 +34,7 @@ class BlogCategoryController extends Controller
     {
         $validated = $request->validated();
         // dd($request->all());
-           BlogCategory::create(['name_ar'=>$request->name_ar,'creator_id'=>1]);
+           BlogCategory::create(['name_ar'=>$request->name_ar,'creator_id'=>auth()->user()->id]);
            session()->flash('alert_message',['message' =>'تم اضافه التصنيف','icon'=>'success']);
            return redirect()->route('blog_categories.index');
     }

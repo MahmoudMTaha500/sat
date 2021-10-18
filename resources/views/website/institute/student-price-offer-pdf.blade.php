@@ -204,8 +204,8 @@
                             <td style="text-align: right">
                                 السكن : {{$data['residence']['name_ar']}}
                             </td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ArabicDate(date("m/d/Y", strtotime("$data[from_date] -1 day")))}}</td>
+                            <td>{{ArabicDate(date("m/d/Y", strtotime("$data[to_date] +1 day")))}}</td>
                             <td></td>
                             <td>{{$data['residence']['price']*$data['weeks']}}</td>
                         </tr>

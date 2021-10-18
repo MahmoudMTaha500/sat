@@ -116,17 +116,14 @@
                                                 </div>
                                             </div>
 
-
-
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">اختر العمله</label>
                                                     <select class=" form-control text-left currency_exchange" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                         <option value="">الريال السعودي</option>
                                                         <option  @if($course->coursesPrice[0]->currency_code == "GBP") selected @endif value="GBP"> الجنيه الاسترليني</option>
+                                                        <option @if($course->coursesPrice[0]->currency_code == "EUR") selected @endif value="EUR"> اليورو</option>
                                                         <option   @if($course->coursesPrice[0]->currency_code == "USD") selected @endif  value="USD"> الدولار</option>
-
-                                                  
                                                     </select>
                                                 </div>
                                             </div>

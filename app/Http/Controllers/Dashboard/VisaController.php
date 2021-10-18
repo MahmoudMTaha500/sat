@@ -44,7 +44,7 @@ class VisaController extends Controller
             'price'=>$request->price,
             'approvement'=>1,
             'active'=>1,
-            'creator_id'=>1,
+            'creator_id'=>auth()->user()->id,
             ]);
       $countArray = count($request->priority);
             for($x=0; $x<$countArray;$x++ ){
@@ -107,7 +107,7 @@ class VisaController extends Controller
         'price'=>$request->price,
         'approvement'=>1,
         'active'=>1,
-        'creator_id'=>1,
+        'creator_id'=>auth()->user()->id,
         ]);
         $VisaQuestion =  VisaQuestion::where(['visa_id'=>$visa->id])->get();
 

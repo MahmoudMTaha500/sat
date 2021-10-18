@@ -4,11 +4,11 @@
     <div class="top-footer bg-main-color py-5">
         <div class="container-fluid">
             <div class="row px-xl-5">
-                <div class="col-xl-5 col-12">
+                <div class="col-md-5 col-12">
                     <img src="{{asset('website')}}/imgs/logo-white.png" alt="" class="img-fluid" />
                     <p class="text-white mt-4">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد و مع أمهر المعلمين حول العالم نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون</p>
                 </div>
-                <div class="col-xl-2 col-6">
+                <div class="col-md-2 col-6 mt-3 mt-md-0">
                     <h6 class="text-secondary-color">الخدمات</h6>
                     <ul class="p-0">
                         <li><a href="{{route('website.institutes')}}" class="text-white">المعاهد</a></li>
@@ -17,7 +17,7 @@
                         <li><a href="{{route('website.articles')}}" class="text-white">المقالات</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-2 col-6">
+                <div class="col-md-2 col-6 mt-3 mt-md-0">
                     <h6 class="text-secondary-color">الشركة</h6>
                     <ul class="p-0">
                         <li><a href="{{route('website.about.us')}}" class="text-white">عن الشركة</a></li>
@@ -26,7 +26,7 @@
                         <li><a href="{{route('website.refund_policy')}}" class="text-white">شروط الاستردات</a></li>
                     </ul>
                 </div>
-                <div class="col-xl-3 col-12">
+                <div class="col-md-3 col-12 col-6 mt-3 mt-md-0">
                     <h6 class="text-secondary-color">تواصل معنا</h6>
                     <ul class="p-0">
                         <li class="text-white"><i class="fas fa-envelope"></i> <a href="mailto:admission@sat-edu.com" class="text-white">admission@sat-edu.com</a></li>

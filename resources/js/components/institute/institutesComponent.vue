@@ -66,6 +66,7 @@
                                     <th class="border-top-0">عدد الكورسات</th>
                                     <th class="border-top-0">التقييم</th>
                                     <th class="border-top-0">التقييم بواسطة</th>
+                                    <th class="border-top-0">الكاتب</th>
                                     <th class="border-top-0">الحاله</th>
                                     <th class="border-top-0">اكشن</th>
                                 </tr>
@@ -88,6 +89,9 @@
                                         <span v-if="institute.rate_switch" > سات    </span>
                                         <span v-else> طلبه    </span>
                                         
+                                    </td>
+                                    <td>
+                                        {{institute.creator.name}}
                                     </td>
 
                                     <td class="text-truncate">

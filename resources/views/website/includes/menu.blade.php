@@ -24,8 +24,8 @@
                     </button>
                     <!-- Login & Register In Mobile Screen -->
                     <div class="contact d-lg-none d-block">
-                        <a href="" data-toggle="modal" data-target="#phoneNumbers" class="btn rounded-circle text-muted border text-center p-0 position-relative"><i class="fas fa-phone-volume"></i></a>
-                        <a href="" data-toggle="modal" data-target="#Whatsup" class="btn rounded-circle text-success border text-center p-0 mr-3 position-relative"><i class="fab fa-whatsapp"></i></a>
+                        <a href="tel:966555484931" target="_blank"  class="btn rounded-circle text-muted border text-center p-0 position-relative"><i class="fas fa-phone-volume"></i></a>
+                        <a href="https://wa.me/+966555484931" target="_blank" class="btn rounded-circle text-success border text-center p-0 mr-3 position-relative"><i class="fab fa-whatsapp"></i></a>
                     </div>
                     <!-- ./Login & Register In Mobile Screen -->
 

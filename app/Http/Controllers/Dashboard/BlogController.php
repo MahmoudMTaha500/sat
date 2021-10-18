@@ -72,7 +72,7 @@ class BlogController extends Controller
                 'meta_keywords' => $request->meta_keywords,
                 'meta_description' => $request->meta_description,
                 'banner' => $pannerNamePath,
-                'creator_id' => 1,
+                'creator_id' => auth()->user()->id,
                 'approvement' => 1,
             ]
         );

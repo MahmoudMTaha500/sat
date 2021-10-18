@@ -38,9 +38,9 @@ class WebsiteController extends Controller
         $blogs = Blog::inRandomOrder()->take(8)->get();
         $partners = Partner::inRandomOrder()->take(8)->get();
         $page_identity = [
-            'title_tag' => 'كلاسات Classat للدراسة بالخارج',
-            'meta_keywords' => 'تعلم اللغة في أكبر المعاهد، الدراسة بالخارج، دورة اللغة المناسبة لك، معاهد بريطانيا، مدينة برايتون، كلاسات، Studying abroad',
-            'meta_description' => 'أبدا رحلتك و تعلم اللغة في أكبر المعاهد و أمهر المعلمين حول العالم نسعى في كلاسات (Classat)  من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون',
+            'title_tag' => 'كلاسات للدراسة بالخارج',
+            'meta_keywords' => 'دراسة اللغة بالخارج، تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة،اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة،معاهد تعليم اللغة الانجليزية بالخارج،عروض دراسة اللغة الإنجليزية في الخارج ',
+            'meta_description' => 'أبدا رحلتك و تعلم اللغة في أكبر المعاهد و أمهر المعلمين حول العالم نسعى في كلاسات من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون',
             'page_name' => 'home',
         ];
         return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_identity'));
@@ -62,35 +62,42 @@ class WebsiteController extends Controller
         $useVue = true;
         $search = $request->all();
         $page_identity = [
-            'title_tag' => 'كلاسات Classat جميع المعاهد الخاصة بدراسة اللغة حول العالم',
-            'meta_keywords' => 'معهد "برايتون كوليدج" Brighton Language College، معهد (كاسل) Castle School Brighton، معهد (إل إس آي) LSI Language Studies International، تعلم اللغة في، أكبر المعاهد، الدراسة بالخارج ، دورة اللغة المناسبة لك ، معاهد بريطانيا ، مدينة برايتون، كلاسات       ,Studying abroad',
-            'meta_description' => 'كلاسات (Classat) منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
+            'title_tag' => 'كلاسات جميع المعاهد الخاصة بدراسة اللغة حول العالم',
+            'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج ،تكلفة دراسة اللغة الانجليزية بالخارج ،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+            'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
             'page_name' => 'institutes',
         ];
         return view('website.institute.institutes', compact('useVue' , 'search' , 'page_identity'));
     }
     // institute page method : show the course info through institute profile
-    public function institute_page($institute_id, $institute_slug, $course_slug)
+    public function institute_page($institute_id, $institute_slug, $course_slug = null)
     {
+        $useVue = true;
         $course = Course::with('coursesPrice', 'coursesPricePerWeek')->where(['institute_id' => $institute_id, 'slug' => $course_slug])->get();
-
-        $institute = Institute::where(['id' => $institute_id, 'slug' => $institute_slug])->get();
-        if (empty($course[0])) {return redirect()->route('website.home');}
-        $course = $course[0];
-        $institute = $institute[0];
+        $institute = Institute::where(['id' => $institute_id, 'slug' => $institute_slug])->get()[0];
         $institute_blogs = Blog::latest()
                                         ->where('country_id' , $institute->country_id)
                                         ->orWhere('city_id' , $institute->city_id)
                                         ->orWhere('institute_id' , $institute->id)
                                         ->get();
-        $useVue = true;
-        $page_identity = [
-            'title_tag' => $institute->title_tag.' | '.$course->title_tag,
-            'meta_keywords' => $institute->meta_keywords.','.$course->meta_keywords,
-            'meta_description' => $institute->meta_description.','.$course->meta_description,
-            'page_name' => 'institutes',
-        ];
-        return view('website.institute.institute-profile', compact('useVue', 'course', 'institute' , 'page_identity' , 'institute_blogs'));
+        if (empty($course[0])) {
+            $page_identity = [
+                'title_tag' => $institute->title_tag,
+                'meta_keywords' => $institute->meta_keywords,
+                'meta_description' => $institute->meta_description,
+                'page_name' => 'institutes',
+            ];
+            return view('website.institute.institute-profile', compact('useVue',  'institute' , 'page_identity' , 'institute_blogs'));
+        }else{
+            $course = $course[0];
+            $page_identity = [
+                'title_tag' => $institute->title_tag.' | '.$course->title_tag,
+                'meta_keywords' => $institute->meta_keywords.','.$course->meta_keywords,
+                'meta_description' => $institute->meta_description.','.$course->meta_description,
+                'page_name' => 'institutes',
+            ];
+            return view('website.institute.institute-profile', compact('useVue',  'institute' , 'page_identity' , 'course' , 'institute_blogs'));
+        }
     }
     // confirm reservation page
     public function confirm_reservation(Request $request, $pay_checker = null)
@@ -156,9 +163,9 @@ class WebsiteController extends Controller
     public function student_login_page()
     {
         $page_identity = [
-            'title_tag' => 'تسجيل دخول',
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => 'كلاسات | تسجيل الدخول',
+            'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+            'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
             'page_name' => '',
         ];
         if(Auth::guard('student')->check()){
@@ -187,9 +194,9 @@ class WebsiteController extends Controller
     {
         $useVue = true;
         $page_identity = [
-            'title_tag' => 'انشاء حساب جديد',
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => 'كلاسات | إنشاء حساب',
+            'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+            'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
             'page_name' => '',
         ];
         if(Auth::guard('student')->check()){
@@ -284,9 +291,9 @@ if($student_mail){
 
         }
         $page_identity = [
-            'title_tag' => 'المقالات',
-            'meta_keywords' => '',
-            'meta_description' => '',
+            'title_tag' => 'كلاسات | المقالات',
+            'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+            'meta_description' => 'هنا في موقع كلاسات يمكنك قراءة وتصفح جميع المقالات الخاصة بالدراسة حول العالم والتى تزيد من معرفتك عن وجهتك نحو الدولة التي ترغب بالدراسة بها',
             'page_name' => 'articles',
         ];
         return view('website.blog.articles', compact('blogs'  , 'page_identity'));
@@ -773,9 +780,9 @@ if($student_mail){
         public function about_us()
         {
             $page_identity = [
-                'title_tag' => 'من نحن' ,
-                'meta_keywords' => '',
-                'meta_description' => '',
+                'title_tag' => 'كلاسات | من نحن' ,
+                'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+                'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
                 'page_name' => 'about-us',
             ];
             return view('website.about-us' , compact('page_identity'));
@@ -783,9 +790,9 @@ if($student_mail){
         public function contact_us()
         {
             $page_identity = [
-                'title_tag' => 'تواصل معنا' ,
-                'meta_keywords' => '',
-                'meta_description' => '',
+                'title_tag' => 'كلاسات | تواصل معنا' ,
+                'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+                'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
                 'page_name' => 'contact-us',
             ];
             return view('website.contact-us' , compact('page_identity') );
@@ -793,9 +800,9 @@ if($student_mail){
         public function terms_conditions()
         {
             $page_identity = [
-                'title_tag' => 'الشروط و الاحكام' ,
-                'meta_keywords' => '',
-                'meta_description' => '',
+                'title_tag' => 'كلاسات | الشروط والاحكام' ,
+                'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+                'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
                 'page_name' => 'terms-conditions',
             ];
             $terms_conditions = WebsiteSettings::get()[0]->terms_conditions_ar;
@@ -804,9 +811,9 @@ if($student_mail){
         public function refund_policy()
         {
             $page_identity = [
-                'title_tag' => 'شروط الاستردات' ,
-                'meta_keywords' => '',
-                'meta_description' => '',
+                'title_tag' => 'كلاسات | سياسة الاسترداد' ,
+                'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+                'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
                 'page_name' => 'refund policy',
             ];
             $refund_policy = WebsiteSettings::get()[0]->refund_policy_ar;
@@ -847,8 +854,8 @@ if($student_mail){
                 $offers = Course::where('discount' , '!=' , 0)->paginate(12);
                 $page_identity = [
                     'title_tag' => 'كلاسات | العروض',
-                    'meta_keywords' => '',
-                    'meta_description' => '',
+                    'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة،اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
+                    'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
                     'page_name' => 'offers',
                 ];
                 return view('website.offers' , compact('offers' , 'page_identity'));

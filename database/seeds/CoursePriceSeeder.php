@@ -11,7 +11,7 @@ class CoursePriceSeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 1; $x <= 90; $x++) {
+        for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
                 "currency_code" => 'USD',
                 "currency_amount" => 100,
@@ -20,7 +20,7 @@ class CoursePriceSeeder extends Seeder
                 "course_id" => $x,
             ]);
         }
-        for ($x = 1; $x <= 90; $x++) {
+        for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
                 "currency_code" => 'GBP',
                 "currency_amount" => 200,
@@ -29,7 +29,7 @@ class CoursePriceSeeder extends Seeder
                 "course_id" => $x,
             ]);
         }
-        for ($x = 1; $x <= 90; $x++) {
+        for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
                 "currency_code" => 'USD',
                 "currency_amount" => 500,
@@ -38,7 +38,7 @@ class CoursePriceSeeder extends Seeder
                 "course_id" => $x,
             ]);
         }
-        for ($x = 1; $x <= 90; $x++) {
+        for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
                 "currency_code" => 'GBP',
                 "currency_amount" => 100,

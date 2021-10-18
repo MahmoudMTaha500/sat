@@ -95,6 +95,7 @@
                                         <th class="border-top-0">المدينة</th>
                                         <th class="border-top-0">عدد الطلابات</th>
                                         <th class="border-top-0">العروض</th>
+                                        <th class="border-top-0">الكاتب</th>
                                         <th class="border-top-0">الحالة</th>
                                         <th class="border-top-0">اكشن</th>
                                     </tr>
@@ -107,6 +108,9 @@
 
                                         <td class="text-truncate">  <a :href="dahsboard_url+'/student-requests?course_id='+course.id" target="_blank">{{ course.student_request.length  }} طلابات </a> </td>
                                         <td class="text-truncate">{{ (course.discount != null) ? course.discount : "-" }}</td>
+                                        <td>
+                                            {{course.creator.name}}
+                                        </td>
                                         <td class="text-truncate">
                                             <input type="checkbox" v-model="course.approvement" @change="updateApprovment" @click="getCourse_id(course.id)" />
                                             <label>{{ (course.approvement == 1) ? "مقبول":"غير مقبول" }}</label>

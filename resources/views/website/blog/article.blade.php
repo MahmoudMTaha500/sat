@@ -21,10 +21,12 @@
             @endif
 
             @if($blog->course) 
-            <a href="{{route('website.institute',[$blog->institute->id , $blog->institute->slug , $blog->course->slug])}}" class="btn bg-main-color text-white rounded-10">
+            <p class="mt-3">
+                <a href="{{route('website.institute',[$blog->institute->id , $blog->institute->slug , $blog->course->slug])}}" class="btn bg-main-color text-white rounded-10">
                 
-                قدم الان في دورة  {{$blog->course->name_ar}} 
-            </a>
+                    قدم الان في دورة  {{$blog->course->name_ar}} 
+                </a>
+            </p>
             @endif
 
           

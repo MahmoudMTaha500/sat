@@ -127,7 +127,7 @@ class VueRequestsController extends Controller
             if($request->arrange_as == 'lowest_prices'){ $courses = $courses->orderBy('discounted_price', 'ASC'); }
         }
 
-        return response()->json(['status' => 'success', 'courses' => $courses->paginate(9)]);
+        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('course_name')->paginate(9)]);
     }
 
     // get course details in institute profile

@@ -11,7 +11,7 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        for ($x = 1; $x <= 90; $x++) {
+        for ($x = 1; $x <= 200; $x++) {
             $int= mt_rand(1262055681,1262055681);
             Course::create([
                 "name_ar" => 'لغة انجليزية عام '.$x,
@@ -28,7 +28,7 @@ class CourseSeeder extends Seeder
                 "title_tag" => 'لغة انجليزية عام'.$x,
                 "meta_keywords" => 'كابلان, الدراسة في الخارج اللغة الانجليزية',
                 "meta_description" => 'كابلان, الدراسة في الخارج اللغة الانجليزية',
-                "approvement" => rand(0,1),
+                "approvement" => 1,
                 "discount" => rand(0,95)/100,
             ]);
         }

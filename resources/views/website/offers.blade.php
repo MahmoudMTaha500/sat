@@ -31,20 +31,20 @@
                                     </div>
                                 @endif
                                 <!-- ./Add To Favourite Btn -->
+                                <div class="add-favourite position-absolute" course-id="{{$offer->id}}">
+                                    <i @if(!auth()->guard('student')->check()) onclick="alert('يجب عليك تسجيل الدخول اولا')" @endif class="@if(auth()->guard('student')->check()) {{heart_type($offer)}} @else far @endif    fa-heart favourite-icon"></i>
+                                </div>
                                 <!-- Institute Img -->
                                 <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                                     <div class="institute-img d-inline-block position-relative">
-                                        <img src="{{asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top w-100" />
+                                        <img src="{{$offer->institute->banner == 'null' ? asset('storage/default_images.png') :  asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" />
                                     </div>
                                 </a>
                                 <!-- ./Institute Img -->
                                 <div class="card-body rounded-10 bg-white">
                                     <!-- Institute Title -->
-                                    <h5 class="card-title">
-                                        <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">
-                                            معهد {{$offer->institute->name_ar}}
-                                        </a>
-                                    </h5>
+                                    <h5 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></h5>
+                            <h6 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></h6>
                                     <!-- ./Institute Title -->
                                     <!-- Institute Rate -->
                                     <p class="mb-0"><span class="starrr" ratio="{{institute_rate($offer->institute)}}"></span> {{institute_rate($offer->institute)}}</p>

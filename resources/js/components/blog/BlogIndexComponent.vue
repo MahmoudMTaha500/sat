@@ -79,6 +79,7 @@
 
                                     <!-- <th class="border-top-0">التعليقات</th> -->
                                     <th class="border-top-0">التاريخ</th>
+                                    <th class="border-top-0">الكاتب</th>
                                     <th class="border-top-0">الحاله</th>
                                     <th class="border-top-0">اكشن</th>
                                 </tr>
@@ -89,6 +90,7 @@
                                     <td>{{blog.creator.name}}</td>
                                     <td>{{blog.category.name_ar}}</td>
                                     <td>{{blog.institute == undefined ? 'لا يوجد' : blog.institute.name_ar}}</td>
+                                    
                                     <td>{{blog.country == undefined ? 'لا يوجد' : blog.country.name_ar}}</td>
                                     <td>{{blog.city == undefined ? 'لا يوجد' : blog.city.name_ar}}</td>
 
@@ -99,6 +101,7 @@
                                         </div>
                                     </td> -->
                                     <td>{{blog.created_at}}</td>
+                                    <td>{{blog.creator.name}}</td>
                                     <td class="text-truncate">
                                         <input type="checkbox" id="checkbox" v-model="blog.approvement" @change="updateApprovement" @click="getblog_id(blog.id)" />
                                         <label for="checkbox">{{ (blog.approvement == 1) ? "مقبول":"غير مقبول" }}</label>

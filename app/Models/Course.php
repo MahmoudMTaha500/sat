@@ -12,6 +12,10 @@ class Course extends Model
     protected $guarded = [];
     protected $date = ['deleted_at'];
 
+    public function creator()
+    {
+        return $this->belongsTo('App\User', 'creator_id', 'id');
+    }
     public function institute()
     {
         return $this->belongsTo('App\Models\Institute', 'institute_id', 'id');

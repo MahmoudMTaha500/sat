@@ -19,34 +19,39 @@
         </div>
         <!-- ./Section Heading -->
         <div class="row px-xl-5 mx-xl-2">
-            <div class="col-12 px-0">
+            <div class="col-12 px-0 position-relative">
                 <!-- Institute Imgs -->
                 <div class="institute-imgs owl-carousel" id="institute-imgs">
                     <div class="profile-institute-img"><img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" alt="{{asset($institute->banner_alt)}}" class="img-fluid w-100 d-block" /></div>
                 </div>
+                <img class="institute-logo" src="{{$institute->logo == 'null' ? asset('storage/default_images.png') : asset($institute->logo)}}" alt="{{asset($institute->logo_alt)}}" />
                 <!-- ./Institute Imgs -->
             </div>
         </div>
         <div class="row px-xl-5 mt-5">
-            <div class="col-lg-8">
+            <div class="col-lg-{{isset($course) ? '8' : '12'}}">
                 <!-- Tabs -->
                 <ul class="nav nav-tabs bg-white border-0 rounded-10 nav-justified p-0 mb-3" id="myTab" role="tablist">
+                    @isset($course)
+                        <li class="nav-item mb-0">
+                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5 active" id="about-course-tab" data-toggle="tab" href="#about-course" role="tab" aria-controls="about-course" aria-selected="true">
+                                تفاصيل الكورس
+                            </a>
+                        </li>
+                    @endisset
                     <li class="nav-item mb-0">
-                        <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5 active" id="about-course-tab" data-toggle="tab" href="#about-course" role="tab" aria-controls="about-course" aria-selected="true">
-                            تفاصيل الكورس
-                        </a>
-                    </li>
-                    <li class="nav-item mb-0">
-                        <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="brief-institute-tab" data-toggle="tab" href="#brief-institute" role="tab" aria-controls="brief-institute" aria-selected="false">
+                        <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5 @if(!isset($course)) active @endif" id="brief-institute-tab" data-toggle="tab" href="#brief-institute" role="tab" aria-controls="brief-institute" aria-selected="false">
                             نبذه عن المعهد
                         </a>
                     </li>
 
-                    @if (!empty($course->blogs[0]))
-                        <li class="nav-item mb-0">
-                            <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#course_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات عن الدورة</a>
-                        </li>
-                    @endif
+                    @isset($course)
+                        @if (!empty($course->blogs[0]))
+                            <li class="nav-item mb-0">
+                                <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" data-toggle="tab" href="#course_blogs" role="tab" aria-controls="living" aria-selected="false">مقالات عن الدورة</a>
+                            </li>
+                        @endif
+                    @endisset
                     @if (!empty($institute->blogs[0]))
                     
                         <li class="nav-item mb-0">
@@ -75,82 +80,84 @@
                 @endif
 
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="about-course" role="tabpanel" aria-labelledby="about-course-tab">
-                        <!-- About Course Tab -->
-                        <div class="bg-white rounded-10 p-4">
-                            <h5 class="text-main-color font-weight-bold mb-3">{{$course->name_ar}}</h5>
-                            <p class="mb-3">{!! $course->about_ar !!}</p>
-                            <div class="row mt-5">
-                                @if ($course->min_age !=null)
-                                    <div class="course-include d-inline-block mb-4 col-md-4 col-6">
-                                        <div class="include-img d-inline-block">
-                                            <i class="fas fa-user text-main-color fa-lg position-relative"></i>
-                                        </div>
-                                        <div class="include-info d-inline-block pr-3">
-                                            <p class="mb-2">الحد الأدنى للعمر</p>
-                                            <p class="text-main-color font-weight-bold">{{$course->min_age}}</p>
-                                        </div>
-                                    </div>
-                                    @endif @if ($course->hours_per_week !=null)
-                                    <div class="course-include d-inline-block mb-4 col-md-4 col-6">
-                                        <div class="include-img d-inline-block">
-                                            <i class="fas fa-clock text-main-color fa-lg position-relative"></i>
-                                        </div>
-                                        <div class="include-info d-inline-block pr-3">
-                                            <p class="mb-2">ساعات/أسبوع</p>
-                                            <p class="text-main-color font-weight-bold">{{$course->hours_per_week}}</p>
-                                        </div>
-                                    </div>
-                                    @endif
-                                    <div class="course-include d-inline-block mb-4 col-md-4 col-6">
-                                        <div class="include-img d-inline-block">
-                                            <i class="fas fa-calendar-plus text-main-color fa-lg position-relative"></i>
-                                        </div>
-                                        <div class="include-info d-inline-block pr-3">
-                                            <p class="mb-2">يبدأ الكورس كل</p>
-                                            <p class="text-main-color font-weight-bold">الاثنين</p>
-                                        </div>
-                                    </div>
-                                    @if ($course->required_level !=null)
+                    @isset($course)
+                        <div class="tab-pane fade show active" id="about-course" role="tabpanel" aria-labelledby="about-course-tab">
+                            <!-- About Course Tab -->
+                            <div class="bg-white rounded-10 p-4">
+                                <h5 class="text-main-color font-weight-bold mb-3">{{$course->name_ar}}</h5>
+                                <p class="mb-3">{!! $course->about_ar !!}</p>
+                                <div class="row mt-5">
+                                    @if ($course->min_age !=null)
                                         <div class="course-include d-inline-block mb-4 col-md-4 col-6">
                                             <div class="include-img d-inline-block">
-                                                <i class="fas fa-signal text-main-color fa-lg position-relative"></i>
+                                                <i class="fas fa-user text-main-color fa-lg position-relative"></i>
                                             </div>
                                             <div class="include-info d-inline-block pr-3">
-                                                <p class="mb-2">المستوى المطلوب</p>
-                                                <p class="text-main-color font-weight-bold">{{$course->required_level}}</p>
+                                                <p class="mb-2">الحد الأدنى للعمر</p>
+                                                <p class="text-main-color font-weight-bold">{{$course->min_age}}</p>
                                             </div>
                                         </div>
-                                    @endif
-                                    @if ($course->study_period !=null)
-                                   
+                                        @endif @if ($course->hours_per_week !=null)
                                         <div class="course-include d-inline-block mb-4 col-md-4 col-6">
                                             <div class="include-img d-inline-block">
-                                                <i class="fas fa-sun text-main-color fa-lg position-relative"></i>
+                                                <i class="fas fa-clock text-main-color fa-lg position-relative"></i>
                                             </div>
                                             <div class="include-info d-inline-block pr-3">
-                                                <p class="mb-2">وقت الدراسة</p>
-                                                <p class="text-main-color font-weight-bold">{{$course->study_period == 'morning' ? 'صباحي' : 'مسائي'}}</p>
+                                                <p class="mb-2">ساعات/أسبوع</p>
+                                                <p class="text-main-color font-weight-bold">{{$course->hours_per_week}}</p>
                                             </div>
                                         </div>
-                                    @endif
-                                    @if ($course->lessons_per_week !=null)
-                                   
+                                        @endif
                                         <div class="course-include d-inline-block mb-4 col-md-4 col-6">
                                             <div class="include-img d-inline-block">
-                                                <i class="fas fa-book-open text-main-color fa-lg position-relative"></i>
+                                                <i class="fas fa-calendar-plus text-main-color fa-lg position-relative"></i>
                                             </div>
                                             <div class="include-info d-inline-block pr-3">
-                                                <p class="mb-2">درس/الأسبوع</p>
-                                                <p class="text-main-color font-weight-bold">{{$course->lessons_per_week}}</p>
+                                                <p class="mb-2">يبدأ الكورس كل</p>
+                                                <p class="text-main-color font-weight-bold">الاثنين</p>
                                             </div>
                                         </div>
-                                    @endif
+                                        @if ($course->required_level !=null)
+                                            <div class="course-include d-inline-block mb-4 col-md-4 col-6">
+                                                <div class="include-img d-inline-block">
+                                                    <i class="fas fa-signal text-main-color fa-lg position-relative"></i>
+                                                </div>
+                                                <div class="include-info d-inline-block pr-3">
+                                                    <p class="mb-2">المستوى المطلوب</p>
+                                                    <p class="text-main-color font-weight-bold">{{$course->required_level}}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($course->study_period !=null)
+                                    
+                                            <div class="course-include d-inline-block mb-4 col-md-4 col-6">
+                                                <div class="include-img d-inline-block">
+                                                    <i class="fas fa-sun text-main-color fa-lg position-relative"></i>
+                                                </div>
+                                                <div class="include-info d-inline-block pr-3">
+                                                    <p class="mb-2">وقت الدراسة</p>
+                                                    <p class="text-main-color font-weight-bold">{{$course->study_period == 'morning' ? 'صباحي' : 'مسائي'}}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                        @if ($course->lessons_per_week !=null)
+                                    
+                                            <div class="course-include d-inline-block mb-4 col-md-4 col-6">
+                                                <div class="include-img d-inline-block">
+                                                    <i class="fas fa-book-open text-main-color fa-lg position-relative"></i>
+                                                </div>
+                                                <div class="include-info d-inline-block pr-3">
+                                                    <p class="mb-2">درس/الأسبوع</p>
+                                                    <p class="text-main-color font-weight-bold">{{$course->lessons_per_week}}</p>
+                                                </div>
+                                            </div>
+                                        @endif
+                                </div>
                             </div>
+                            <!-- ./About Course Tab -->
                         </div>
-                        <!-- ./About Course Tab -->
-                    </div>
-                    <div class="tab-pane fade" id="brief-institute" role="tabpanel" aria-labelledby="brief-institute-tab">
+                    @endisset
+                    <div class="tab-pane fade @if(!isset($course)) show active @endif" id="brief-institute" role="tabpanel" aria-labelledby="brief-institute-tab">
                         <!-- Brief Institute Tab -->
                         <div class="bg-white rounded-10 p-4 mb-4">
                             <h5 class="text-main-color font-weight-bold mb-3">{{$institute->name_ar}}</h5>
@@ -166,33 +173,35 @@
                     </div>
                     
 
-                    @if (!empty($course->blogs[0]))
-                        <div class="tab-pane fade" id="course_blogs" role="tabpanel" aria-labelledby="living-tab">
+                    @isset($course)
+                        @if (!empty($course->blogs[0]))
+                            <div class="tab-pane fade" id="course_blogs" role="tabpanel" aria-labelledby="living-tab">
 
-                            <div class="row">
-                                @foreach ($course->blogs as $blog)
-                                    <div class="col-md-6">
-                                        <!-- Living Tab -->
-                                        <div class="bg-white rounded-10 p-4 mb-4">
-                                            <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png')  : asset($blog->banner)}}" alt="{{$blog->img_alt}}" class="w-100 rounded-10" />
-                                            <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
-                                            <p class="mb-3">
-                                                {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
-                                                <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
-                                            </p>
+                                <div class="row">
+                                    @foreach ($course->blogs as $blog)
+                                        <div class="col-md-6">
+                                            <!-- Living Tab -->
+                                            <div class="bg-white rounded-10 p-4 mb-4">
+                                                <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png')  : asset($blog->banner)}}" alt="{{$blog->img_alt}}" class="w-100 rounded-10" />
+                                                <h5 class="text-main-color font-weight-bold my-3">{{$blog->title_ar}}</h5>
+                                                <p class="mb-3">
+                                                    {!! substr(strip_tags($blog->content_ar) , 0 , 500) !!}
+                                                    <a href="{{route('website.article',$blog->id)}}" class="text-secondary-color">.. قراءة المزيد</a>
+                                                </p>
 
-                                            {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
-                                            {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
+                                                {{-- <a href="" class="btn bg-secondary-color font-weight-bold text-white rounded-10">عرض جميع معاهد نيويورك</a> --}}
+                                                {{-- <a href="" class="btn bg-white px-5 mr-3 font-weight-bold border-secondary-color text-secondary-color rounded-10">دول أخــرى</a> --}}
+                                            </div>
+                                            <!-- ./Living Tab -->
                                         </div>
-                                        <!-- ./Living Tab -->
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                </div>
+                                
+
+
                             </div>
-                            
-
-
-                        </div>
-                    @endif
+                        @endif
+                    @endisset
 
                     @if (!empty($institute_blogs))
                         <div class="tab-pane fade" id="institute_blogs" role="tabpanel" aria-labelledby="living-tab">
@@ -225,38 +234,73 @@
                     <div class="tab-pane fade" id="training" role="tabpanel" aria-labelledby="training-tab">
                         <!-- Other Courses -->
                         <div class="row">
-                            @foreach ($institute->courses as $institute_course) @if ($institute_course->id != $course->id)
-                            <div class="col-lg-4 px-0">
-                                <!-- Course -->
-                                <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
-                                    <!-- Institute Img -->
-                                    <img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : $institute->banner}}" class="card-img-top" alt="..." />
-                                    <!-- ./Institute Img -->
-                                    <div class="card-body rounded-10 bg-white">
-                                        <!-- Course Title -->
-                                        <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
-                                        <!-- ./Course Title -->
+                            @foreach ($institute->courses as $institute_course)
+                               @if (isset($course))
+                                    @if ($institute_course->id != $course->id)
+                                        <div class="col-lg-4 px-0">
+                                            <!-- Course -->
+                                            <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                                <!-- Institute Img -->
+                                                <img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" class="card-img-top" alt="..." />
+                                                <!-- ./Institute Img -->
+                                                <div class="card-body rounded-10 bg-white">
+                                                    <!-- Course Title -->
+                                                    <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
+                                                    <!-- ./Course Title -->
 
-                                        <!-- Course Time And Level -->
-                                        <p class="mb-0 overflow-hidden">
-                                            @if ($institute_course->study_period != null)
-                                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
-                                            @endif
-                                            @if ($institute_course->required_level != null)
-                                                <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
-                                            @endif
-                                        </p>
-                                        <!-- ./Course Time And Level -->
+                                                    <!-- Course Time And Level -->
+                                                    <p class="mb-0 overflow-hidden">
+                                                        @if ($institute_course->study_period != null)
+                                                            <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
+                                                        @endif
+                                                        @if ($institute_course->required_level != null)
+                                                            <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
+                                                        @endif
+                                                    </p>
+                                                    <!-- ./Course Time And Level -->
+                                                </div>
+                                                <!-- Course Price -->
+                                                <div class="card-footer bg-white overflow-hidden">
+                                                    <span class="float-left text-main-color">{{$institute_course->coursesPricePerWeek->price}} / أسبوع </span>
+                                                </div>
+                                                <!-- ./Course Price -->
+                                            </div>
+                                            <!-- ./Course -->
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="col-lg-4 px-0">
+                                        <!-- Course -->
+                                        <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                            <!-- Institute Img -->
+                                            <img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" class="card-img-top" alt="..." />
+                                            <!-- ./Institute Img -->
+                                            <div class="card-body rounded-10 bg-white">
+                                                <!-- Course Title -->
+                                                <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
+                                                <!-- ./Course Title -->
+
+                                                <!-- Course Time And Level -->
+                                                <p class="mb-0 overflow-hidden">
+                                                    @if ($institute_course->study_period != null)
+                                                        <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
+                                                    @endif
+                                                    @if ($institute_course->required_level != null)
+                                                        <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
+                                                    @endif
+                                                </p>
+                                                <!-- ./Course Time And Level -->
+                                            </div>
+                                            <!-- Course Price -->
+                                            <div class="card-footer bg-white overflow-hidden">
+                                                <span class="float-left text-main-color">{{$institute_course->coursesPricePerWeek->price}} / أسبوع </span>
+                                            </div>
+                                            <!-- ./Course Price -->
+                                        </div>
+                                        <!-- ./Course -->
                                     </div>
-                                    <!-- Course Price -->
-                                    <div class="card-footer bg-white overflow-hidden">
-                                        <span class="float-left text-main-color">{{$institute_course->coursesPricePerWeek->price}} / أسبوع </span>
-                                    </div>
-                                    <!-- ./Course Price -->
-                                </div>
-                                <!-- ./Course -->
-                            </div>
-                            @endif @endforeach
+                                @endif
+                            @endforeach
                         </div>
                         <!-- ./Other Courses -->
                     </div>
@@ -318,18 +362,20 @@
                     {{ $message }}
                 </div>
                 @enderror 
-                <course-price-info-component
-                    course_obj = '{{$course}}'
-                    residence_obj = '{{$course->institute->residence}}'
-                    airport_obj = '{{$course->institute->airport}}'
-                    course_id = '{{$course->id}}'
-                    course_for_institute_page_url = {{route('vue.get.course.for.institute.page')}}
-                    get_course_price_url = {{route('vue.get.course.price.per.week')}}
-                    get_insurance_price_url = {{route('vue.get.insurance.price.per.week')}}
-                    save_request_url = {{route('student_requests.confirm_reservation')}}
-                    csrf_token =  "{{csrf_token()}}"
-                >
-                </course-price-info-component>
+                @isset($course)
+                    <course-price-info-component
+                        course_obj = '{{$course}}'
+                        residence_obj = '{{$course->institute->residence}}'
+                        airport_obj = '{{$course->institute->airport}}'
+                        course_id = '{{$course->id}}'
+                        course_for_institute_page_url = {{route('vue.get.course.for.institute.page')}}
+                        get_course_price_url = {{route('vue.get.course.price.per.week')}}
+                        get_insurance_price_url = {{route('vue.get.insurance.price.per.week')}}
+                        save_request_url = {{route('student_requests.confirm_reservation')}}
+                        csrf_token =  "{{csrf_token()}}"
+                    >
+                    </course-price-info-component>
+                @endisset
             </div>
         </div>
     </div>
