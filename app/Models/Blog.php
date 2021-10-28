@@ -2,12 +2,15 @@
 
 namespace App\Models;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Blog extends Model
+class Blog extends Model implements HasMedia
 {
     use SoftDeletes;
+    use InteractsWithMedia;
 
     protected $guarded = [];  
     protected $date = ['deleted_at'];
@@ -37,6 +40,11 @@ class Blog extends Model
     public function course()
     {
         return $this->belongsTo('App\Models\Course', 'course_id', 'id');
+    }
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+              ->width(400);
     }
   
 }

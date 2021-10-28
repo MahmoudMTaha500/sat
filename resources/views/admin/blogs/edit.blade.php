@@ -112,9 +112,15 @@
                                                     :image_name="{{json_encode("banner")}}"
                                                     :image_label="{{json_encode("اختر الصورة")}}"
                                                     :old="{{json_encode(old('banner'))}}"
-                                                    :path_image_edit="{{ json_encode( asset($blog->banner) )}}"
-    
-    
+                                                    :path_image_edit="{{ json_encode( empty($blog->getFirstMedia('blog_banner')) ? asset('/storage/default_images.png') : $blog->getFirstMediaUrl('blog_banner'))}}"
+                                                    ></show-images-component>
+                                                    <br>
+                                                    <br>
+                                                    <show-images-component
+                                                    :image_name="{{json_encode("featured_image")}}"
+                                                    :image_label="{{json_encode("الصورة المميزة للمقال")}}"
+                                                    :old="{{json_encode(old('featured_image'))}}"
+                                                    :path_image_edit="{{ json_encode( empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMediaUrl('blog_featured_image'))}}"
                                                     ></show-images-component>
                                                 </div>
                                                 

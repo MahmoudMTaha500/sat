@@ -80,6 +80,12 @@
                                                 :image_label="{{json_encode(" صورة المقال ")}}"
                                                 :old="{{json_encode(old('banner'))}}"
                                                 ></show-images-component>
+
+                                              
+                                                <show-images-component :image_name="{{json_encode("featured_image")}}" 
+                                                :image_label="{{json_encode(" الصورة المميزة للمقال ")}}"
+                                                :old="{{json_encode(old('featured_image'))}}"
+                                                ></show-images-component>
                                             </div>
 
                                             <div class="col-12">

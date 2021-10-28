@@ -51,13 +51,8 @@ class BlogController extends Controller
     public function store(blogRequest $request)
     {
         $validated = $request->validated();
-        $bannerObj = $validated['banner'];
-        $bannerName = time() . $bannerObj->getClientOriginalName();
-        $pathBanner = public_path("storage/blogs");
-        $bannerObj->move($pathBanner, $bannerName);
-        $pannerNamePath = "storage/blogs" . '/' . $bannerName;
         $slug = str_replace(' ', '-', $request->title_ar);
-        Blog::create(
+        $blog = Blog::create(
             [
                 'title_ar' => $request->title_ar,
                 'slug' => $slug,
@@ -71,11 +66,17 @@ class BlogController extends Controller
                 'title_tag' => $request->title_tag,
                 'meta_keywords' => $request->meta_keywords,
                 'meta_description' => $request->meta_description,
-                'banner' => $pannerNamePath,
+                'banner' => '-',
                 'creator_id' => auth()->user()->id,
                 'approvement' => 1,
             ]
         );
+        $blog->addMediaFromRequest('banner')
+                ->toMediaCollection('blog_banner');
+
+        $blog->addMediaFromRequest('featured_image')
+                ->toMediaCollection('blog_featured_image');
+             
         session()->flash("alert_message", ['message' => "تم اضافة المقال", 'icon' => 'success']);
         return redirect()->route("blogs.index");
     }
@@ -119,14 +120,18 @@ class BlogController extends Controller
         $blog->meta_description = $request->meta_description;
         
         if ($request->banner) {
-            $bannerObj = $request->banner;
-            $bannerName = time() . $bannerObj->getClientOriginalName();
-            $pathBanner = public_path("storage/blogs");
-            File::delete($blog->banner);
-            $bannerObj->move($pathBanner, $bannerName);
-            $pannerNamePath = "storage/blogs" . '/' . $bannerName;
-            $blog->banner = $pannerNamePath;
+            $blog->clearMediaCollection('blog_banner');
+            $blog->addMediaFromRequest('banner')
+            ->toMediaCollection('blog_banner');
         }
+
+        if ($request->featured_image) {
+            $blog->clearMediaCollection('blog_featured_image');
+            $blog->addMediaFromRequest('featured_image')
+            ->toMediaCollection('blog_featured_image');
+        }
+
+
         $blog->save();
         session()->flash('alert_message', ['message' => 'تم تعديل المقال', 'icon' => 'success']);
         return back();

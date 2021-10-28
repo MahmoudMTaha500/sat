@@ -4,13 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Institute extends Model
+class Institute extends Model implements HasMedia
 {
     use SoftDeletes;
+    use InteractsWithMedia;
     protected $table = 'institutes';
     protected $guarded = [];
     protected $date = ['deleted_at'];
+    
 
     public function creator()
     {
@@ -51,6 +56,12 @@ class Institute extends Model
     public function blogs()
     {
         return $this->hasMany('App\Models\Blog', 'institute_id', 'id');
+    }
+
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+              ->width(400);
     }
 
 }

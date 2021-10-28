@@ -17,6 +17,7 @@ class blogRequest extends FormRequest
             'content_ar' => 'required',
             'category_id' => 'required',
             'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'featured_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
 
         ];
     }
@@ -27,8 +28,11 @@ class blogRequest extends FormRequest
             'content_ar.required' => "محتوي المقال مطلوب",
             'category_id.required' => "تصنيف المقال مطلوب",
             'banner.required' => 'صورة المقال مطلوبة',
-            'banner.image' => 'صورة المقال يجب ان يكون صورة',
-            'banner.mimes' => 'صورة المقال يجب ان يكون بالصيغ الاتية (jpeg , png , jpg , gif , svg , webp)',
+            'banner.image' => 'صورة المقال يجب ان تكون صورة',
+            'banner.mimes' => 'صورة المقال يجب ان تكون بالصيغ الاتية (jpeg , png , jpg , gif , svg , webp)',
+            'featured_image.required' => 'صورة المقال المميزة مطلوبة',
+            'featured_image.image' => 'صورة المقال المميزة يجب ان تكون صورة',
+            'featured_image.mimes' => 'صورة المقال المميزة يجب ان تكون بالصيغ الاتية (jpeg , png , jpg , gif , svg , webp)',
         ];
     }
 }

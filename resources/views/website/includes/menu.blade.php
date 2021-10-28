@@ -17,7 +17,7 @@
             <div class="col-12">
                 <!-- NavBar -->
                 <nav class="navbar navbar-expand-lg navbar-light py-3 px-0">
-                    <a class="navbar-brand mb-3" href="{{route('website.home')}}"><img src="{{asset('website')}}/imgs/logo.png" alt="" class="img-fluid" /></a>
+                    <a class="navbar-brand mb-3" href="{{route('website.home')}}"><img src="{{asset('website')}}/imgs/logo.png" alt="Classat Logo" class="img-fluid" /></a>
 
                     <button class="navbar-toggler" type="button"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>

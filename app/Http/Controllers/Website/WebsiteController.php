@@ -24,6 +24,7 @@ use PDF;
 use Hash;
 use Tap\TapPayment\Facade\TapPayment;
 use App\Models\WebsiteSettings;
+use Debugbar;
 
 
 
@@ -43,7 +44,9 @@ class WebsiteController extends Controller
             'meta_description' => 'أبدا رحلتك و تعلم اللغة في أكبر المعاهد و أمهر المعلمين حول العالم نسعى في كلاسات من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون',
             'page_name' => 'home',
         ];
+       
         return view('website.home', compact('useVue', 'best_offers', 'success_stories', 'two_blogs', 'blogs', 'partners' , 'page_identity'));
+        
     }
 
 // search form institute in home page 
@@ -85,7 +88,7 @@ class WebsiteController extends Controller
                 'title_tag' => $institute->title_tag,
                 'meta_keywords' => $institute->meta_keywords,
                 'meta_description' => $institute->meta_description,
-                'page_name' => 'institutes',
+                'page_name' => 'institute-profile',
             ];
             return view('website.institute.institute-profile', compact('useVue',  'institute' , 'page_identity' , 'institute_blogs'));
         }else{
@@ -94,7 +97,7 @@ class WebsiteController extends Controller
                 'title_tag' => $institute->title_tag.' | '.$course->title_tag,
                 'meta_keywords' => $institute->meta_keywords.','.$course->meta_keywords,
                 'meta_description' => $institute->meta_description.','.$course->meta_description,
-                'page_name' => 'institutes',
+                'page_name' => 'institute-profile',
             ];
             return view('website.institute.institute-profile', compact('useVue',  'institute' , 'page_identity' , 'course' , 'institute_blogs'));
         }
@@ -814,7 +817,7 @@ if($student_mail){
                 'title_tag' => 'كلاسات | سياسة الاسترداد' ,
                 'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
                 'meta_description' => 'كلاسات منصة إلكترونية رائدة في تقديم الخدمات الأكاديمية والتعليمية بأفضل المعاهد والمؤسسات الدولية للطلبة الدوليين، و توفير دورات اللغة الإنجليزية الأكاديمية المتخصصة',
-                'page_name' => 'refund policy',
+                'page_name' => 'refund_policy',
             ];
             $refund_policy = WebsiteSettings::get()[0]->refund_policy_ar;
             return view('website.refund-policy' , compact('page_identity' , 'refund_policy') );

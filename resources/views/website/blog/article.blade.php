@@ -1,7 +1,7 @@
 
 @extends('website.app') @section('website.content')
 
-    <div class="article-img position-relative" style="background-image: url({{$blog->banner == 'null' ? asset('storage/default_images.png') : asset($blog->banner)}}" alt="{{$blog->title_tag}})">
+    <div class="article-img position-relative" style="background-image: url({{$blog->banner == 'null' ? asset('storage/default_images.png') : $blog->getFirstMediaUrl('blog')}})">
         <div class="overlay"></div>
         <div class="center-content" class="col-lg-4  align-self-center mx-auto text-center">
             @if (isset($blog->country))
@@ -12,6 +12,7 @@
                 
                 تصفح دورات معهد  {{$blog->institute->name_ar}} 
             </a>
+            
             @else  
                 @isset($blog->country)
                     <a href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}" class="btn bg-main-color text-white rounded-10">
@@ -40,7 +41,7 @@
             <div class="row px-xl-5">
                 
                 <div class="col-lg-9 col-md-8">
-                    <h4 class="text-main-color">{{$blog->title_ar}}</h4>
+                    <h4 class="text-main-color">{{$blog->title_ar}} {{$blog->getFirstMedia('blog')}}</h4>
                     @if (isset($blog->country) || isset($blog->institute))
                         <div>
                             <i class="fas fa-eye"></i> 

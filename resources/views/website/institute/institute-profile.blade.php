@@ -22,7 +22,12 @@
             <div class="col-12 px-0 position-relative">
                 <!-- Institute Imgs -->
                 <div class="institute-imgs owl-carousel" id="institute-imgs">
-                    <div class="profile-institute-img"><img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" alt="{{asset($institute->banner_alt)}}" class="img-fluid w-100 d-block" /></div>
+                    <picture>
+                        <source srcset="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMediaUrl('institute_banner')}}" media="(min-width:700px)">
+                        <source srcset="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" media="(min-width:500px)">
+                        <img src="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" alt="{{$institute->img_alt}}" width="100%">
+                    </picture>
+                    {{-- <div class="profile-institute-img"><img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" alt="{{asset($institute->banner_alt)}}" class="img-fluid w-100 d-block" /></div> --}}
                 </div>
                 <img class="institute-logo" src="{{$institute->logo == 'null' ? asset('storage/default_images.png') : asset($institute->logo)}}" alt="{{asset($institute->logo_alt)}}" />
                 <!-- ./Institute Imgs -->

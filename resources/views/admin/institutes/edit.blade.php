@@ -101,9 +101,7 @@
                                                 :image_name="{{json_encode("banner")}}"
                                                 :image_label="{{json_encode("اختر الصورة")}}"
                                                 :old="{{json_encode(old('banner'))}}"
-                                                :path_image_edit="{{ json_encode( asset($institute->banner == 'null' ? 'storage/default_images.png' : $institute->banner) )}}"
-
-
+                                                :path_image_edit="{{ json_encode( empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMediaUrl('institute_banner'))}}"
                                                 ></show-images-component>
                                             </div>
                                         </div>

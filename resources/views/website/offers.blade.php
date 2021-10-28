@@ -37,7 +37,7 @@
                                 <!-- Institute Img -->
                                 <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                                     <div class="institute-img d-inline-block position-relative">
-                                        <img src="{{$offer->institute->banner == 'null' ? asset('storage/default_images.png') :  asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" />
+                                        <img src="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" alt="{{$offer->institute->name_ar}}" alt="{{$offer->institute->name_ar}}" class="card-img-top" />
                                     </div>
                                 </a>
                                 <!-- ./Institute Img -->

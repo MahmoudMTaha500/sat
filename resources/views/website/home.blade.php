@@ -30,7 +30,7 @@
                 <!-- ./Search Form -->
             </div>
             <div class="col-lg-6 mx-auto text-center">
-                <img class="w-100 mt-5 mt-md-2" src="{{asset('storage/banners/intro-home.png')}}" alt="" srcset="">
+                <img class="w-100 mt-5 mt-md-2" src="{{asset('storage/banners/intro-home.png')}}" alt="Home Intro Image" srcset="">
             </div>
         </div>
     </div>
@@ -121,7 +121,7 @@
                         <!-- Institute Img -->
                         <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                             <div class="institute-img d-inline-block position-relative">
-                                <img src="{{$offer->institute->banner == 'null' ? asset('storage/default_images.png') :  asset($offer->institute->banner)}}" alt="{{$offer->institute->name_ar}}" class="card-img-top"/>
+                                <img src="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" alt="{{$offer->institute->name_ar}}" class="card-img-top"/>
                             </div>
                         </a>
                         <!-- ./Institute Img -->
@@ -168,7 +168,15 @@
         @if (isset($two_blogs[0]))
         <div class="row">
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-1 home-single-blog-image m-md-0 m-3" style="background-image:url('{{$two_blogs[0]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[0]->banner)}}')"> </div>
+            <div class="col-md-6 bg-study-1 p-0 align-self-end"> 
+            <picture>
+                <source srcset="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMediaUrl('blog_featured_image')}}" media="(min-width:700px)">
+                <source srcset="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
+                <img src="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[0]->img_alt}}" width="100%">
+            </picture>
+
+                            
+            </div>
             <!-- ./Background Img -->
             <div class="col-md-6 p-md-5 p-3">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
@@ -194,7 +202,13 @@
                 </div>
             </div>
             <!-- Background Img -->
-            <div class="col-md-6 bg-study-2 home-single-blog-image order-md-2 order-1 m-md-0 m-3" style="background-image:url('{{$two_blogs[1]->banner == 'null' ? asset('storage/default_images.png') : asset($two_blogs[1]->banner)}}')"></div>
+            <div class="col-md-6 bg-study-2 order-md-2 order-1 p-0">
+                <picture>
+                    <source srcset="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMediaUrl('blog_featured_image')}}" media="(min-width:700px)">
+                    <source srcset="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
+                    <img src="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[1]->img_alt}}" width="100%">
+                </picture>
+            </div>
             <!-- ./Background Img -->
         </div>
         @endif
@@ -254,7 +268,7 @@
 
                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
                         <a href="{{route('website.article',$blog->id)}}">
-                            <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png') :  asset($blog->banner)}}" alt="{{$blog->title_ar}}" class="card-img-top" />
+                            <img src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->img_alt}}" class="card-img-top" />
                         </a>
                         <div class="card-body rounded-10 bg-white">
                             <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>

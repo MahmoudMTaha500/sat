@@ -51,18 +51,8 @@ class InstituteController extends Controller
     /************************************************************** */
     public function store(StoreInstituteRequest $request)
     {
-        // return public_path("storage/institute/banners");
         $validated = $request->validated();
-        $logoObject = $validated['logo'];
-        $logoName = time() . $logoObject->getClientOriginalName();
-        $pathLogo = public_path("storage/institute/logos");
-        $request->logo->move($pathLogo, $logoName);
-        $logoNamePath = "storage/institute/logos" . '/' . $logoName;
-        $bannerObject = $validated['banner'];
-        $PannerName = time() . $bannerObject->getClientOriginalName();
-        $pathPanner = public_path("storage/institute/banners");
-        $request->banner->move($pathPanner, $PannerName);
-        $bannerNamePath = "storage/institute/banners" . '/' . $PannerName;
+        
         $slug = str_replace(' ', '-', $request->name_ar);
             $institute = Institute::create([
                 "name_ar" => $request->name_ar,
@@ -71,8 +61,8 @@ class InstituteController extends Controller
                 "institute_questions" => $request->institute_questions,
                 "country_id" => $request->country_id,
                 "city_id" => $request->city_id,
-                "logo" => $logoNamePath,
-                "banner" => $bannerNamePath,
+                "logo" => '-',
+                "banner" => '-',
                 "logo_alt" => $request->logo_alt,
                 "banner_alt" => $request->banner_alt,
                 "title_tag" => $request->title_tag,
@@ -84,6 +74,20 @@ class InstituteController extends Controller
                 "approvement" => 1,
                 "map" => $request->map,
             ]);
+
+
+        $institute->addMediaFromRequest('banner')
+            ->toMediaCollection('institute_banner');
+
+        $logoObject = $validated['logo'];
+        $logoName = time() . $logoObject->getClientOriginalName();
+        $pathLogo = public_path("storage/institute/logos");
+        $request->logo->move($pathLogo, $logoName);
+        $logoNamePath = "storage/institute/logos" . '/' . $logoName;
+
+        $institute->update(['logo' => $logoNamePath]);
+            
+
             session()->flash('alert_message', ['message' => 'تم اضافة المعهد بنجاح', 'icon' => 'success']);
             return redirect()->route('institute.index');
     }
@@ -136,20 +140,9 @@ class InstituteController extends Controller
             $institute->logo = $logoNamePath;
         }
         if ($request->banner) {
-            
-            $validate_images = $request->validate([
-                'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            ]);
-
-            $bannerObject = $validate_images['banner'];
-            $PannerName = time() . $bannerObject->getClientOriginalName();
-            $pathPanner = public_path("storage/institute/banners");
-            File::delete($institute->banner);
-
-            $request->banner->move($pathPanner, $PannerName);
-
-            $bannerNamePath = "storage/institute/banners" . '/' . $PannerName;
-            $institute->banner = $bannerNamePath;
+            $institute->media()->delete();
+            $institute->addMediaFromRequest('banner')
+            ->toMediaCollection('institute_banner');
         }
    $rateSwitch = 0;
    if($request->rate_switch =="on"){

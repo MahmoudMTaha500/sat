@@ -69,11 +69,15 @@ class VueRequestsController extends Controller
         $courses = DB::table('courses')
             ->join('course_prices', 'courses.id', '=', 'course_prices.course_id')
             ->join('institutes', 'institutes.id', '=', 'courses.institute_id')
+            // ->leftJoin('media', 'media.model_id', '=', 'courses.institute_id')
             ->join('countries', 'institutes.country_id', '=', 'countries.id')
             ->join('cities', 'institutes.city_id', '=', 'cities.id')
             ->leftJoin(DB::raw('(SELECT * , AVG(rate) AS student_rates FROM institute_rates WHERE deleted_at = NULL GROUP BY institute_id) AS institute_rates'), 'institute_rates.institute_id', '=', 'institutes.id')
             ->leftJoin(DB::raw('(SELECT *  FROM favourites WHERE student_id = ' . $student_id . ' )  AS student_favourites'), 'student_favourites.course_id', '=', 'courses.id')
+            ->leftJoin(DB::raw('(SELECT *  FROM media WHERE collection_name = "institute_banner" )  AS institute_media'), 'institute_media.model_id', '=', 'courses.institute_id')
             ->select(
+                'institute_media.id AS institute_banner_id',
+                'institute_media.file_name AS institute_banner_name',
                 'courses.id AS course_id',
                 'courses.name_ar AS course_name',
                 'courses.slug AS course_sulg',

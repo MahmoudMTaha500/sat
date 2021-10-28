@@ -26,7 +26,7 @@
                             <!-- Article -->
                             <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
                                     <a href="{{route('website.article',$blog->id)}}">
-                                        <img src="{{$blog->banner == 'null' ? asset('storage/default_images.png') : asset($blog->banner)}}" alt="{{$blog->title_ar}}" class="card-img-top" />
+                                        <img src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->title_ar}}" class="card-img-top" />
                                     </a>
                                     <div class="card-body rounded-10 bg-white">
                                         <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>

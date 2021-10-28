@@ -53104,11 +53104,17 @@ var render = function() {
                                     staticClass: "card-img-top",
                                     attrs: {
                                       src:
-                                        course.institute_banner == "null"
+                                        course.institute_banner_id == null
                                           ? _vm.public_path +
                                             "storage/default_images.png"
                                           : _vm.public_path +
-                                            course.institute_banner,
+                                            "storage/uploaded_media/" +
+                                            course.institute_banner_id +
+                                            "/conversions/" +
+                                            course.institute_banner_name.replace(
+                                              /(\.[\w\d?=_-]+)$/i,
+                                              "-thumb$1"
+                                            ),
                                       alt: course.institute_name
                                     }
                                   })
