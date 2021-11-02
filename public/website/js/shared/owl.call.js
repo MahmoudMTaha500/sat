@@ -30,7 +30,7 @@ $('#offers-list,#news-list,#offer-group-list').owlCarousel({
        items: 3,
     },
     1300:{
-        items: 4,
+        items: 3,
     }
     }
 });

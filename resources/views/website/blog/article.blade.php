@@ -1,9 +1,15 @@
 
 @extends('website.app') @section('website.content')
 
-    <div class="article-img position-relative" style="background-image: url({{$blog->banner == 'null' ? asset('storage/default_images.png') : $blog->getFirstMediaUrl('blog')}})">
+    <div class="article-img position-relative">
         <div class="overlay"></div>
-        <div class="center-content" class="col-lg-4  align-self-center mx-auto text-center">
+        <picture>
+            <source srcset="{{empty($blog->getFirstMedia('blog_banner')) ? asset('/storage/default_images.png') : $blog->getFirstMediaUrl('blog_banner')}}" media="(min-width:700px)">
+            <source srcset="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
+            <img src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMediaUrl('blog_featured_image')}}" alt="{{$blog->img_alt}}" width="100%">
+        </picture>
+
+        <div class="center-content" class="col-lg-12 text-center">
             @if (isset($blog->country))
                 <h4 class="text-white mb-4">دراسة اللغة الانجليزية في {{$blog->country->name_ar}} </h4>
             @endif

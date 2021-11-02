@@ -689,7 +689,6 @@ body {
   }
 
   .article-img {
-      height: 500px;
       background: no-repeat center;
       background-size: cover!important;
       
@@ -698,7 +697,6 @@ body {
 
   @media(max-width:500px){
       .article-img{
-          height: 300px;
       }
   }
 
@@ -753,4 +751,9 @@ body {
   }
  }
 
+ @media(max-width:400px){
+  .article-img .center-content {
+    top: 15%;
+  }
+ }
   /*# sourceMappingURL=article.css.map */

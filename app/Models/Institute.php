@@ -61,7 +61,9 @@ class Institute extends Model implements HasMedia
     public function registerMediaConversions(Media $media = null): void
     {
         $this->addMediaConversion('thumb')
-              ->width(400);
+              ->width(320);
+        $this->addMediaConversion('thumb_md')
+              ->width(450);
     }
 
 }
