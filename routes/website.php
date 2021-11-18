@@ -65,7 +65,7 @@ Route::post('order-visa-checkout', "simpleVisaController@order_visa_checkout")->
 
 Route::get('prev-step-form-chose-payment-method', 'WebsiteController@prev_step_form_chose_payment_method')->name('prev_step_form_chose_payment_method');
 
-Route::get('/sitemap', function()
+Route::get('/sitemap.xml', function()
 {
     $courses = \App\Models\Course::all();
     $institutes = \App\Models\Institute::all();
@@ -76,7 +76,12 @@ Route::get('/sitemap', function()
 
 
 
+
+
+
 });
 
-
-
+Route::get('/page-404', function()
+{
+    return view('website.includes.page-404');
+});

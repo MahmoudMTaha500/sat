@@ -55,32 +55,9 @@
 <!-- ./Footer -->
 <div class="support position-fixed p-3 d-md-none d-block">
     <p class="text-white mb-0">
-        <span class="close-support position-absolute"><i class="fas fa-times"></i></span> هل تحتاج الي مساعدة؟ .. اطلب مستشارك <a href="support.html" class="float-left text-secondary-color bg-white"><i class="fas fa-arrow-left"></i></a>
+        <span class="close-support position-absolute"><i class="fas fa-times"></i></span> هل تحتاج الي مساعدة؟ .. اطلب مستشارك <a href="tel:966555484931" class="float-left text-secondary-color bg-white"><i class="fas fa-arrow-left"></i></a>
     </p>
 
-    @if (!isset($notUseVue)) 
-    <script src="{{asset('js/app.js')}}"></script>
-    @endif
-    <script src="{{url('/admin')}}/app-assets/vendors/js/vendors.min.js" type="text/javascript"></script>
-    <!-- Jquery, Popper and Bootstrap JS -->
-    <script src="{{asset('website')}}/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="{{asset('website')}}/jspopper.min.js"></script>
-    <script src="{{asset('website')}}/js/bootstrap.min.js"></script>
-    <!-- OWl slider  -->
-    <script src="{{asset('website')}}/js/plugins/owl.carousel.min.js"></script>
-    <!-- Starrr  -->
-    <script src="{{asset('website')}}/js/plugins/starrr.js"></script>
-    <!-- Select Search -->
-    <script src="{{asset('website')}}/js/bootstrap-select.min.js"></script>
-    <!-- Custom js -->
-    <script src="{{asset('website')}}/js/plugins/uploadImg.js"></script>
-    <script src="{{asset('website')}}/js/shared/starr.call.js"></script>
-    <script src="{{asset('website')}}/js/shared/owl.call.js"></script>
-    <script src="{{asset('website')}}/js/shared/select-picker.call.js"></script>
-    <script src="{{asset('website')}}/js/shared/sidemenu.js"></script>
-    <script src="{{asset('website')}}/js/jquery-1.12.4.js"></script>
-    <script src="{{asset('website')}}/js/jquery-ui.js"></script>
-    <script src="{{asset('website')}}/js/shared/support.js"></script>
-    <script src="{{asset('website')}}/js/custom.js"></script>
 
+    <script src="{{asset('js/app.js')}}"></script>
 </div>

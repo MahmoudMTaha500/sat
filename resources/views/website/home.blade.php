@@ -124,15 +124,15 @@
                                 <picture>
                                     <source srcset="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" media="(min-width:700px)">
                                     <source srcset="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" media="(min-width:400px)">
-                                    <img width="100" src="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" alt="{{$offer->institute->name_ar}}" class="card-img-top"/>
+                                    <img loading="lazy" width="100" src="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" alt="{{$offer->institute->name_ar}}" class="card-img-top"/>
                                 </picture>
                             </div>
                         </a>
                         <!-- ./Institute Img -->
                         <div class="card-body rounded-10 bg-white">
                             <!-- Institute Title -->
-                            <h5 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></h5>
-                            <h6 class="card-title"><a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></h6>
+                            <p class="card-title"><a class="h5" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></p>
+                            <p class="card-title"><a class="h6" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></p>
                             <!-- ./Institute Title -->
                             <!-- Institute Rate -->
                             <p class="mb-0"><span class="starrr" ratio="{{institute_rate($offer->institute)}}"></span> {{institute_rate($offer->institute)}}</p>
@@ -176,7 +176,7 @@
             <picture>
                 <source srcset="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMediaUrl('blog_featured_image')}}" media="(min-width:700px)">
                 <source srcset="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
-                <img src="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[0]->img_alt}}" width="100%">
+                <img loading="lazy" src="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[0]->img_alt}}" width="100%">
             </picture>
 
                             
@@ -185,7 +185,7 @@
             <div class="col-md-6 p-md-5 p-3">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
-                <a href="{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
+                <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
                 <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
@@ -199,7 +199,7 @@
             <div class="col-md-6 p-md-5 p-3 order-md-1 order-2">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
-                <a href="{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}"><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
+                <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
                 <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
@@ -210,7 +210,7 @@
                 <picture>
                     <source srcset="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMediaUrl('blog_featured_image')}}" media="(min-width:700px)">
                     <source srcset="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
-                    <img src="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[1]->img_alt}}" width="100%">
+                    <img loading="lazy" src="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[1]->img_alt}}" width="100%">
                 </picture>
             </div>
             <!-- ./Background Img -->
@@ -240,7 +240,7 @@
             <div class="col-12">
                 <div class="trusted-list owl-carousel" id="trusted-list">
                     @foreach ($partners as $partner)
-                    <div class="p-5"><img src="{{$partner->logo == null ? asset('storage/default_images.png') : $partner->logo}}" alt="{{$partner->name}}" class="img-fluid" /></div>
+                    <div class="p-5"><img loading="lazy" src="{{$partner->logo == null ? asset('storage/default_images.png') : $partner->logo}}" alt="{{$partner->name}}" class="img-fluid" /></div>
                     @endforeach
                 </div>
             </div>
@@ -272,10 +272,10 @@
 
                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
                         <a href="{{route('website.article',$blog->id)}}">
-                            <img src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->img_alt}}" class="card-img-top" />
+                            <img loading="lazy" src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->img_alt}}" class="card-img-top" />
                         </a>
                         <div class="card-body rounded-10 bg-white">
-                            <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>
+                            <a href="{{route('website.article',$blog->id)}}"><p class="card-title text-main-color h5">{{$blog->title_ar}}</p></a>
                             <p class="mb-0">
                                 <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
                             </p>
@@ -321,12 +321,12 @@
                         <div class="user-info">
                             <!-- User Img -->
                             <div class="user-info__img">
-                                <img src="{{$story->student->profile_image == null ? asset('storage/default_images.png') : $story->student->profile_image}}" alt="{{$story->student->name}}" class="img-fluid rounded-pill mx-auto" />
+                                <img loading="lazy" src="{{$story->student->profile_image == null ? asset('storage/default_images.png') : $story->student->profile_image}}" alt="student-image" class="img-fluid rounded-pill mx-auto" />
                             </div>
                             <!-- ./User Img -->
                             <!-- User Name -->
                             <div class="user-info__name">
-                                <h6>{{$story->student->name}}</h6>
+                                <span>{{$story->student->name}}</span>
                             </div>
                             <!-- ./User Name -->
                             <!-- University Name -->
@@ -364,15 +364,3 @@
 </section>
 <!-- ./Browse our institutes -->
 @endif @endsection
-
-@section('website.includes.page_scripts')
-<script>
-
-
-    // $("#searchform").keyup(function(){
-    //     if(this.value.length >= 2){
-    //         alert(this.value);
-    //     }
-    // })
-</script>
-@endsection
