@@ -72,26 +72,6 @@
                 </ul>
             </li>
             @endif
-           
-            {{-- <li class="nav-item">
-                <a href="#">
-                    <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main"> الفواتير</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="navbar-light.html" data-i18n="nav.navbars.nav_light">كل الفواتير</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-dark.html" data-i18n="nav.navbars.nav_dark">انشاء فاتورة جديدة</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
-                    </li>
-                </ul>
-            </li> --}}
-
-           
 
             <li class="nav-item {{ $department_name == 'country' ? 'open' : '' }}">
                 <a href="#">
@@ -175,34 +155,6 @@
                 </ul>
             </li>
             @endif
-                     {{-- <li class="nav-item  {{ $department_name == 'insurances' ? 'open' : '' }}">
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> التامينات</span></a>
-                <ul class="menu-content">
-                    <li  class="{{ $page_name == 'insurances' ? 'active' : ''}}">
-                        <a class="menu-item" href="{{route('insurances.index')}}" data-i18n="nav.navbars.nav_light">كل التامينات</a>
-                    </li>
-                    <li   class="{{ $page_name == 'add-insurances' ? 'active' : ''}}">
-                        <a class="menu-item"  href="{{route('insurances.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تامين جديد</a>
-                    </li>
-                    <li>
-                        <a class="menu-item"  href="#" data-i18n="nav.navbars.nav_semi">الارشيف</a>
-                    </li>
-                </ul>
-            </li> --}}
-                     {{-- <li class="nav-item">
-                <a href="#"><i class="la la-institution"></i><span class="menu-title" data-i18n="nav.navbars.main"> المطارات</span></a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item"  href="{{route('blog_categories.create')}}" data-i18n="nav.navbars.nav_light">كل المطارات</a>
-                    </li>
-                    <li>
-                        <a class="menu-item"  href="{{route('blog_categories.create')}}"data-i18n="nav.navbars.nav_dark">اضافة مطار جديد</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">الارشيف</a>
-                    </li>
-                </ul>
-            </li> --}}
             @if(auth()->user()->hasPermission('visas-read'))
                 <li class="nav-item">
                     <a href="{{route('simple-visa.index')}}">
@@ -272,88 +224,7 @@
             @endif
 
             @if(auth()->user()->hasPermission('visas-read'))
-
-            {{-- <li class="nav-item {{ $department_name == 'visa' ? 'open' : '' }}">
-                <a href="#">
-                    <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main"> التاشيرات</span>
-                </a>
-                <ul class="menu-content">
-
-                    <li class="{{ $page_name == 'visa' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('simple-visa.index')}}" data-i18n="nav.navbars.nav_light"> التاشيرات</a>
-                    </li>
-                    @if(auth()->user()->hasPermission('visas-create'))
-
-                    <li class="{{ $page_name == 'create-visa' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('simple-visa.create')}}" data-i18n="nav.navbars.nav_dark">اضافة تاشيرة جديدة </a>
-                    </li>
-                    @endif
-                    <li class="{{ $page_name == 'visa-categories' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('visa_categories.index')}}" data-i18n="nav.navbars.nav_semi">تصنيفات التاشيرات</a>
-                    </li>
-                    @if(auth()->user()->hasPermission('visas-create'))
-
-                    <li class="{{ $page_name == 'create-visa-category' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('visa_categories.create')}}" data-i18n="nav.navbars.nav_semi">اضافةتصنيف جديد</a>
-                    </li>
-                    @endif
-                    @if(auth()->user()->hasPermission('visas-delete'))
-                    <li class="{{ $page_name == 'visa-archive' ? 'active' : ''}}" >
-                        <a class="menu-item" href="{{route('visas.index')}}" data-i18n="nav.navbars.nav_semi">ارشيف التاشيرات</a>
-                    </li>
-                    @endif
-
-                </ul>
-            </li> --}}
             @endif
-            {{-- <li class="nav-item {{ $department_name == 'visa-requests' ? 'open' : '' }}">
-                <a href="#">
-                    <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main"> طلبات التاشيرات</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="/sat/visa/index.php?page=visa" data-i18n="nav.navbars.nav_light">طلبات التاشيرات</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="/sat/visa/archivesRequests.php?page=visa" data-i18n="nav.navbars.nav_semi">ارشيف الطلابات</a>
-                    </li>
-                </ul>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a href="animation.html">
-                    <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.animation.main">دردشة مباشرة</span>
-                </a>
-            </li> --}}
-
-            {{-- <li class="nav-item">
-                <a href="animation.html">
-                    <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.animation.main">اعدادات الموقع</span>
-                </a>
-            </li> --}}
-            {{-- <li class="nav-item">
-                <a href="#">
-                    <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main">المحفظة</span>
-                </a>
-                <ul class="menu-content">
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">المحفظة</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">المحفظة</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">المحفظة</a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="navbar-semi-dark.html" data-i18n="nav.navbars.nav_semi">المحفظة</a>
-                    </li>
-                </ul>
-            </li> --}}
             @if(auth()->user()->hasRole('super-admin') ||  auth()->user()->hasRole('admin'))
                 <li class="nav-item {{ $department_name == 'website-setting' ? 'open' : '' }}">
                     <a href="#">
@@ -361,6 +232,9 @@
                         <span class="menu-title" data-i18n="nav.navbars.main"> اعدادات الموقع</span>
                     </a>
                     <ul class="menu-content">
+                        <li   class="{{ $page_name== 'refund-policy' ? 'active' : "" }}">
+                            <a class="menu-item" href="{{route('exchange-rate.index')}}" data-i18n="nav.navbars.nav_dark">اسعار صرف العملات</a>
+                        </li>
                         <li   class="{{ $page_name== 'refund-policy' ? 'active' : "" }}">
                             <a class="menu-item" href="{{route('website_settings.refund_policy')}}" data-i18n="nav.navbars.nav_dark">سياسة الاسترداد</a>
                         </li>

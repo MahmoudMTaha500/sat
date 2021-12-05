@@ -163,5 +163,10 @@ Route::post('/update-refund-policy','WebsiteSettingsController@update_refund_pol
 Route::get('/terms-conditions','WebsiteSettingsController@terms_conditions')->name('website_settings.terms_conditions');
 Route::post('/update-terms-conditions','WebsiteSettingsController@update_terms_conditions')->name('website_settings.update_terms_conditions');
 
+
+// exchange rate Route
+Route::resource('exchange-rate', "ExchangeRateController");
+
+
 });
 

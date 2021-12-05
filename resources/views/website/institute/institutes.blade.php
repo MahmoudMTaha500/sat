@@ -4,7 +4,7 @@
 
 
 
-
+<h1 class="d-none">المعاهد</h1>
 <institutes-pgae-component
     :get_courses_url="{{ json_encode(route('vue.get.courses')) }}"
     :get_student_favourite_courses_url="{{ json_encode(route('vue.get.student.favourite.courses')) }}"

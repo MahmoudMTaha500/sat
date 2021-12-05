@@ -7,6 +7,7 @@ use App\Models\Institute;
 use App\Models\Insurances;
 use App\Models\Country;
 use Illuminate\Http\Request;
+use App\Models\ExchangeRate;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 
 
@@ -34,14 +35,13 @@ class InsurancesController extends Controller
     public function create()
     {
         $Institutes = Institute::get();
-        //
         $department_name = 'services';
         $page_name = 'add-insurances';
         $page_title = 'التامينات';
         $useVue = true;
         $countries = Country::all();
-
-        return view("admin.insurances.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue'));
+        $exchange_rates = ExchangeRate::all();
+        return view("admin.insurances.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue' , 'exchange_rates'));
     }
 
     public function store(InsurancesRequest $request)
@@ -55,7 +55,8 @@ class InsurancesController extends Controller
             ->amount($price_amount)
             ->withoutVerifying()
             ->get();
-            $price = $converted_price + $request->exchange_money*$price_amount;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $price = $converted_price + $exchange_money*$price_amount;
         }
 
 
@@ -79,11 +80,7 @@ class InsurancesController extends Controller
 
     public function edit($id)
     {
-        // // $insurances = Insurances::where('id' , 1)->get()[0];
-        // $Institutes = institute::get();
-        // $department_name = 'insurances';
-        // $page_name = 'insurances';
-        // return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes'));
+
     }
     public function editInsuarnce($id)
     {
@@ -95,9 +92,8 @@ class InsurancesController extends Controller
         $page_title = 'التامينات';
         $countries = Country::all();
         $useVue = true;
-
-
-        return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes', 'insurance','page_title' , 'countries' , 'useVue'));
+        $exchange_rates = ExchangeRate::all();
+        return view("admin.insurances.edit", compact('department_name', 'page_name', 'Institutes', 'insurance','page_title' , 'countries' , 'useVue' , 'exchange_rates'));
     }
 
     public function update(InsurancesRequest $request, Insurances $Insurances)
@@ -112,7 +108,8 @@ class InsurancesController extends Controller
             ->amount($price_amount)
             ->withoutVerifying()
             ->get();
-            $price = $converted_price + $request->exchange_money*$price_amount;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $price = $converted_price + $exchange_money*$price_amount;
         }
 
 

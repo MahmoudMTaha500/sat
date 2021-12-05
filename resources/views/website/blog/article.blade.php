@@ -21,7 +21,7 @@
             
             @else  
                 @isset($blog->country)
-                    <a href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}" class="btn bg-main-color text-white rounded-10">
+                    <a href="#" onclick="this.href = '{{route('website.institutes' , ['country_id' => $blog->country->id])}}' " class="btn bg-main-color text-white rounded-10">
                         معاهد {{$blog->country->name_ar}} 
                     </a>
                 @endisset
@@ -47,14 +47,14 @@
             <div class="row px-xl-5">
                 
                 <div class="col-lg-9 col-md-8">
-                    <h4 class="text-main-color">{{$blog->title_ar}} {{$blog->getFirstMedia('blog')}}</h4>
+                    <h1 class="text-main-color h4 mb-5">{{$blog->title_ar}}</h1>
                     @if (isset($blog->country) || isset($blog->institute))
                         <div>
                             <i class="fas fa-eye"></i> 
                             تصفح
                             (
                                 @isset($blog->country)
-                                    <a  href="{{route('website.institutes' , ['country_id' => $blog->country->id])}}">معاهد {{$blog->country->name_ar}}</a>
+                                    <a  href="#" onclick="this.href= '{{route('website.institutes' , ['country_id' => $blog->country->id])}}' ">معاهد {{$blog->country->name_ar}}</a>
                                 @endisset
                                 @isset($blog->institute)
                                     - <a href="{{route('website.institutes' , ['institute_name' => $blog->institute->name_ar])}}" >دورات معهد {{$blog->institute->name_ar}}</a>
@@ -72,7 +72,7 @@
                             <ul class="sidebar-row-ul">
                                 <li>
                                     @foreach($categories as $cat)
-                                    <li><a href="{{route('website.articles',['cat_id'=> $cat->id])}}">  {{$cat->name_ar}} </a></li>
+                                    <li><a href="#" onclick="this.href= '{{route('website.articles',['cat_id'=> $cat->id])}}' ">  {{$cat->name_ar}} </a></li>
                                     @endforeach
                                  
                                 </li>

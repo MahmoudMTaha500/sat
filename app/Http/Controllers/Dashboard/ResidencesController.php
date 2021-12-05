@@ -7,6 +7,7 @@ use App\Models\residences;
 use App\Models\Country;
 use Illuminate\Http\Request;
 use App\Models\Institute;
+use App\Models\ExchangeRate;
 use  App\Http\Requests\services\ResidencesRequest;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 
@@ -40,8 +41,8 @@ public function getResidences(){
         $page_title = 'السكن';
         $useVue = true;
         $countries = Country::all();
-
-        return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue'));
+        $exchange_rates = ExchangeRate::all();
+        return view("admin.residences.create", compact('department_name', 'page_name', 'Institutes','page_title' , 'countries' , 'useVue' , 'exchange_rates'));
     }
 
     public function store(ResidencesRequest $request)
@@ -55,7 +56,8 @@ public function getResidences(){
             ->amount($price_amount)
             ->withoutVerifying()
             ->get();
-            $price = $converted_price + $request->exchange_money*$price_amount;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $price = $converted_price + $exchange_money*$price_amount;
         }
 
         $residences = residences::create([
@@ -65,7 +67,7 @@ public function getResidences(){
             'currency_code'=>$request->currency_exchange,
             'currency_amount'=>$price_amount,
             ]);
-            // session()->flash('alert_message', ['message' => 'تم اضافه الدورة بنجاح', 'icon' => 'success']);
+           
 
             session()->flash('alert_message', ['message'=>"تم اضافه السكن بنجاح", 'icon'=>'success']);
             return redirect()->route('residences.index');
@@ -88,8 +90,9 @@ public function getResidences(){
         $page_title = 'السكن';
         $useVue = true;
         $countries = Country::all();
+        $exchange_rates = ExchangeRate::all();
 
-        return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title' , 'useVue' , 'countries'));
+        return view("admin.residences.edit", compact('department_name', 'page_name', 'Institutes','residence','page_title' , 'useVue' , 'countries' , 'exchange_rates'));
     }
     public function update(ResidencesRequest $request, residences $residences)
     {
@@ -103,7 +106,8 @@ public function getResidences(){
             ->amount($price_amount)
             ->withoutVerifying()
             ->get();
-            $price = $converted_price + $request->exchange_money*$price_amount;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $price = $converted_price + $exchange_money*$price_amount;
         }
 
 

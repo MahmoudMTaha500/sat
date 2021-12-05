@@ -67,18 +67,13 @@
                                                             <label for="projectinput2">اختر العمله</label>
                                                             <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                                 <option value="">الريال السعودي</option>
-                                                                <option {{$insurance->currency_code == "GBP" ? "selected" : ''}} value="GBP"> الجنيه الاسترليني</option>
-                                                                <option {{$insurance->currency_code == "EUR" ? "selected" : ''}} value="EUR"> اليورو</option>
-                                                                <option {{$insurance->currency_code == "USD" ? "selected" : ''}} value="USD"> الدولار</option>
+                                                                @foreach ($exchange_rates as $exchange_rate)
+                                                                    <option @if($insurance->currency_code == $exchange_rate->currency_code) selected @endif value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
+                                                                @endforeach
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput1"> سعر الصرافه</label>
-                                                            <input type="text" id="projectinput1" class="currency_exchange_rate form-control" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0" />
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

@@ -6,16 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Models\Airports ;
 use App\Models\Country ;
 use Illuminate\Http\Request;
+use App\Models\ExchangeRate;
 use AmrShawky\LaravelCurrency\Facade\Currency;
 
 
 class AirportsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $department_name = 'services';
@@ -31,11 +27,7 @@ class AirportsController extends Controller
         $airports = Airports::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['airports'=>$airports]);
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         
@@ -46,16 +38,10 @@ class AirportsController extends Controller
         $page_title = 'المطارات';
         $useVue = true;
         $countries = Country::all();
-
-        return view("admin.airports.create", compact('department_name', 'page_name','page_title', 'Institutes'  , 'countries' , 'useVue'));
+        $exchange_rates = ExchangeRate::all();
+        return view("admin.airports.create", compact('department_name', 'page_name','page_title', 'Institutes'  , 'countries' , 'useVue' , 'exchange_rates'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(AirportRequest $request)
     {
 
@@ -68,7 +54,8 @@ class AirportsController extends Controller
             ->amount($price_amount)
             ->withoutVerifying()
             ->get();
-            $price = $converted_price + $request->exchange_money*$price_amount;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $price = $converted_price + $exchange_money*$price_amount;
         }
 
         $airports = Airports::create([
@@ -83,31 +70,17 @@ class AirportsController extends Controller
             return redirect()->route('airports.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\airports  $airports
-     * @return \Illuminate\Http\Response
-     */
     public function show(airports $airports)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\airports  $airports
-     * @return \Illuminate\Http\Response
-     */
     public function edit(airports $airports)
     {
         //
     }
     public function editAirports($id)
     {
-        // $insurances = Insurances::where('id' , 1)->get()[0];
-        // dd();
         $airport= Airports::find($id);
         $Institutes = institute::get();
         $department_name = 'services';
@@ -115,15 +88,10 @@ class AirportsController extends Controller
         $page_title = 'المطارات';
         $countries = Country::all();
         $useVue = true;
-        return view("admin.airports.edit", compact('department_name', 'page_name', 'Institutes','page_title','airport' , 'countries' , 'useVue'));
+        $exchange_rates = ExchangeRate::all();
+        return view("admin.airports.edit", compact('department_name', 'page_name', 'Institutes','page_title','airport' , 'countries' , 'useVue' , 'exchange_rates'));
     }
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\airports  $airports
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(AirportRequest $request, airports $airports)
     {
 
@@ -136,7 +104,8 @@ class AirportsController extends Controller
             ->amount($price_amount)
             ->withoutVerifying()
             ->get();
-            $price = $converted_price + $request->exchange_money*$price_amount;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $price = $converted_price + $exchange_money*$price_amount;
         }
 
 

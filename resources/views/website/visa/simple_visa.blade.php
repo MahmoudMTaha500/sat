@@ -5,7 +5,7 @@
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="col-12 text-center">
-            <h3 class="text-main-color font-weight-bold">طلب تاشيره جديد</h3>
+            <h1 class="text-main-color font-weight-bold">طلب تاشيره جديد</h1>
             <p>برجاء ادخال البيانات لانشاء التاشيره</p>
         </div>
         <!-- ./Section Heading -->
@@ -211,7 +211,7 @@
                                     <div class="modal-content">
                                         <div class="modal-body py-5 px-4 text-center">
                                             <div class="cheched-img">
-                                                <img src="imgs/checked.png" alt="" class="img-fluid" />
+                                                <img src="{{asset('storage/icons/check.png')}}" alt="" class="img-fluid" />
                                             </div>
                                             <div class="cheched-heading">
                                                 <h3 class="text-main-color font-weight-bold">كلاسات</h3>

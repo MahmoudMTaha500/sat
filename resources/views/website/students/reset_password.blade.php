@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="col-12 text-center">
-            <h3 class="text-main-color font-weight-bold"> اعاده انشاء كلمه المرور</h3>
+            <h1 class="text-main-color font-weight-bold"> اعاده انشاء كلمه المرور</h1>
             <p>برجاء ادخال بريدك الالكتروني    لارسال كلمه المرور الجديده  </p>
         </div>
         <!-- ./Section Heading -->

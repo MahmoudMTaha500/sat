@@ -7,6 +7,7 @@ use App\Http\Requests\Courses\StoreCoursesRequest;
 use App\Models\Country;
 use App\Models\Course;
 use App\Models\CoursePrice;
+use App\Models\ExchangeRate;
 use App\Models\Institute;
 use Illuminate\Http\Request;
 use AmrShawky\LaravelCurrency\Facade\Currency;
@@ -42,8 +43,9 @@ class CourseController extends Controller
         $department_name = 'courses';
         $page_name = 'add-course';
         $page_title = 'الدورات';
+        $exchange_rates = ExchangeRate::all();
 
-        return view("admin.courses.create", compact('department_name', 'page_name', 'institutes','page_title'));
+        return view("admin.courses.create", compact('department_name', 'page_name', 'institutes','page_title' , 'exchange_rates'));
     }
     /************************************************************** */
     public function store(StoreCoursesRequest $request)
@@ -58,7 +60,8 @@ class CourseController extends Controller
             ->amount(1)
             ->withoutVerifying()
             ->get();
-            $calc_currency =  $currency + $request->exchange_money;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $calc_currency =  $currency + $exchange_money;
         }else{
             $calc_currency =  1;
         }
@@ -131,23 +134,25 @@ class CourseController extends Controller
         $department_name = 'courses';
         $page_name = 'courses';
         $page_title = 'الدورات';
+        $exchange_rates = ExchangeRate::all();
 
-        return view("admin.courses.edit", compact('course', 'institutes', 'department_name', 'page_name', 'course_prices','page_title'));
+        return view("admin.courses.edit", compact('course', 'institutes', 'department_name', 'page_name', 'course_prices','page_title' , 'exchange_rates'));
         // dd($course);
     }
     /************************************************************** */
     public function update(StoreCoursesRequest $request, Course $course)
     {
         $validate = $request->validated();
-
         if(!empty($request->currency_exchange)){
             $currency =    Currency::convert()
             ->from("$request->currency_exchange")
             ->to('SAR')
             ->amount(1)
             ->withoutVerifying()
+            
             ->get();
-            $calc_currency =  $currency + $request->exchange_money;
+            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+            $calc_currency =  $currency + $exchange_money;
         }else{
             $calc_currency =  1;
         }

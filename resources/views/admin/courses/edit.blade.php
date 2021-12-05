@@ -121,16 +121,10 @@
                                                     <label for="projectinput2">اختر العمله</label>
                                                     <select class=" form-control text-left currency_exchange" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                         <option value="">الريال السعودي</option>
-                                                        <option  @if($course->coursesPrice[0]->currency_code == "GBP") selected @endif value="GBP"> الجنيه الاسترليني</option>
-                                                        <option @if($course->coursesPrice[0]->currency_code == "EUR") selected @endif value="EUR"> اليورو</option>
-                                                        <option   @if($course->coursesPrice[0]->currency_code == "USD") selected @endif  value="USD"> الدولار</option>
+                                                        @foreach ($exchange_rates as $exchange_rate)
+                                                            <option @if($course->coursesPrice[0]->currency_code == $exchange_rate->currency_code) selected @endif value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
+                                                        @endforeach
                                                     </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label for="projectinput1"> سعر الصرافه</label>
-                                                    <input type="text" id="projectinput1" class="form-control currency_exchange_rate" placeholder="ادخل  سعر الصرافه " name="exchange_money" value="0" />
                                                 </div>
                                             </div>
 

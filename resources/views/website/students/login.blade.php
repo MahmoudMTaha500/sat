@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="col-12 text-center">
-            <h3 class="text-main-color font-weight-bold">تسجيل الدخول</h3>
+            <h1 class="text-main-color font-weight-bold">تسجيل الدخول</h1>
             <p>برجاء ادخال بريدك الالكتروني والكلمة المرور للدخول لحسابك </p>
         </div>
         <!-- ./Section Heading -->

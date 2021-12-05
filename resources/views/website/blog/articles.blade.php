@@ -7,7 +7,7 @@
             <div class="col-12">
                 <div class="heading-institutes">
 
-                    <h3 class="text-main-color font-weight-bold">المقالات</h3>
+                    <h1 class="text-main-color font-weight-bold">المقالات</h1>
                     <p>تصفح جميع المقالات الخاصة بدراسة اللغة حول العالم</p>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                                     <div class="card-body rounded-10 bg-white">
                                         <a href="{{route('website.article',$blog->id)}}"><h5 class="card-title text-main-color">{{$blog->title_ar}}</h5></a>
                                         <p class="mb-0">
-                                            <span>{!! mb_substr($blog->content_ar ,0 , 150 , 'utf-8') !!} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
+                                            <span>{!!  mb_substr( strip_tags($blog->content_ar) ,0 , 150 , 'utf-8')  !!} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
                                         </p>
                                         <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
                                     </div>

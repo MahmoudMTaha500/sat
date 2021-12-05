@@ -8,7 +8,7 @@
             <div class="col-12">
               <div class="heading-institutes">
     
-                <h3 class="text-main-color font-weight-bold">العروض</h3>
+                <h1 class="text-main-color font-weight-bold">العروض</h1>
                 <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
               </div>
             </div>

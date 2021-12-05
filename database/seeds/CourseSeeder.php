@@ -12,6 +12,7 @@ class CourseSeeder extends Seeder
     public function run()
     {
         for ($x = 1; $x <= 200; $x++) {
+            $level = ['مبتدئ A1' , 'مبتدئ A2' , 'المتوسط B1' , 'المتوسط B2' , 'متقدم C1' , 'متقدم C2'];
             $int= mt_rand(1262055681,1262055681);
             Course::create([
                 "name_ar" => 'لغة انجليزية عام '.$x,
@@ -24,7 +25,7 @@ class CourseSeeder extends Seeder
                 "study_period" => 'صباحي',
                 "lessons_per_week" => 5,
                 "hours_per_week" => 20,
-                "required_level" => 'مبتدئ',
+                "required_level" => $level[rand(0 , 5)],
                 "title_tag" => 'لغة انجليزية عام'.$x,
                 "meta_keywords" => 'كابلان, الدراسة في الخارج اللغة الانجليزية',
                 "meta_description" => 'كابلان, الدراسة في الخارج اللغة الانجليزية',

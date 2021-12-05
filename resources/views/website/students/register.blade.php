@@ -10,7 +10,7 @@
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="col-12 text-center">
-            <h3 class="text-main-color font-weight-bold">إنشاء حساب جديد</h3>
+            <h1 class="text-main-color font-weight-bold">إنشاء حساب جديد</h1>
             <p>برجاء ادخال البيانات لانشاء حساب جديد  </p>
         </div>
         <!-- ./Section Heading -->

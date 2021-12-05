@@ -11,8 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
- var jsFiles = [
-    'resources/js/app.js',
+ 
+
+ mix.js('resources/js/app.js', 'public/js')
+ .sass('resources/sass/app.scss', 'public/css');
+
+
+// website files
+
+var jsFiles = [
+    'resources/js/website-js.js',
     'public/admin/app-assets/vendors/js/vendors.min.js',
     'public/website/js/jquery-3.5.1.slim.min.js',
     'public/website/js/popper.min.js',
@@ -43,7 +51,5 @@ var cssFiles = [
     'public/website/css/pages/index.css',
 ];
 
-mix.js(jsFiles, 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
-
+mix.js(jsFiles, 'public/website/js/global.js');
 mix.styles(cssFiles, 'public/website/css/global.css');

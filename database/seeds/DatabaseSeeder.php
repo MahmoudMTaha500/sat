@@ -34,5 +34,6 @@ class DatabaseSeeder extends Seeder
         $this->call(InstituteRateSeeder::class);
         $this->call(FavouriteSeeder::class);
         $this->call(WebsiteSettingsSeeder::class);
+        $this->call(ExchangeRateSeeder::class);
     }
 }

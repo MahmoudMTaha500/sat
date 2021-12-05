@@ -57,7 +57,5 @@
     <p class="text-white mb-0">
         <span class="close-support position-absolute"><i class="fas fa-times"></i></span> هل تحتاج الي مساعدة؟ .. اطلب مستشارك <a href="tel:966555484931" class="float-left text-secondary-color bg-white"><i class="fas fa-arrow-left"></i></a>
     </p>
-
-
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{asset('website')}}/js/global.js"></script>
 </div>

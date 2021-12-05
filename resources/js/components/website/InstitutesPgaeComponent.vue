@@ -55,10 +55,16 @@
                                                 <select v-model="course_level" class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option value="" disabled selected>المستوي</option>
                                                     <option value="">الكل</option>
-                                                    <option value="مبتدئ">مبتدئ</option>
-                                                    <option value="متوسط">متوسط</option>
-                                                    <option class="متقدم">متقدم</option>
+                                                    <option value="مبتدئ A1">مبتدئ A1</option>
+                                                    <option value="مبتدئ A2">مبتدئ A2</option>
+                                                    <option value="المتوسط B1">المتوسط B1</option>
+                                                    <option value="المتوسط B2">المتوسط B2</option>
+                                                    <option value="متقدم C1">متقدم C1</option>
+                                                    <option value="متقدم C2">متقدم C2</option>
                                                 </select>
+
+
+                                                
                                             </div>
                                         <div class="form-group">
                                                 <label> ترتيب حسب </label>

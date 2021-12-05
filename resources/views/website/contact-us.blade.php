@@ -7,7 +7,7 @@
             <div class="row px-xl-5 mb-4">
                 <div class="col-12">
                     <div class="heading-institutes">
-                        <h3 class="text-main-color font-weight-bold">تواصل معنا</h3>
+                        <h1 class="text-main-color font-weight-bold">تواصل معنا</h1>
                         <p>في حال وجود اي ملاحظات أو استفسارات ,والحصول على نشرتنا الدورية من منح دراسية وأخر عروضنا والكثير يمكنك التواصل مع فريق سات على</p>
                     </div>
                 </div>
