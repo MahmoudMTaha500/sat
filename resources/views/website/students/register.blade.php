@@ -18,7 +18,11 @@
             <div class="col-md-5 mx-auto">
                 <!-- Sign Up Form -->
                 <div class="sign-out-form shadow-lg rounded-10 py-4 px-2 p-xl-5 mx-auto bg-white">
-
+                    @if($errors->has('not_robot_error'))
+                        <div class="alert alert-danger text-center">
+                            {{$errors->first('not_robot_error')}}
+                        </div>
+                    @endif
                     <form class="my-4" method="POST" action="{{ route('student.register') }}">
                         @csrf
                         <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
@@ -92,6 +96,10 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div>
+                        <div class="col-12">
+                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                            <div class="g-recaptcha w-100" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
                         </div>
                         
                         <button type="submit"

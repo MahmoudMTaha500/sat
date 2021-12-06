@@ -17,6 +17,11 @@
             <div class="col-lg-8">
                 <!-- Confirm Reservation Form -->
                 <div class="bg-white p-xl-5 p-3 rounded-10 mb-4">
+                    @if($errors->has('not_robot_error'))
+                        <div class="alert alert-danger text-center">
+                            {{$errors->first('not_robot_error')}}
+                        </div>
+                    @endif
                     @if(auth()->guard('student')->check())
                         <form action="{{route('create_student_request')}}" method="post">
                             @csrf
@@ -89,6 +94,10 @@
                                     </div>
                                 </div>
                                 <div class="col-12">
+                                    <script src='https://www.google.com/recaptcha/api.js'></script>
+                                    <div class="g-recaptcha w-100" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
+                                </div>
+                                <div class="col-12">
                                     <button class="btn bg-secondary-color text-white w-100 rounded-10" type="submit">
                                         تأكيد الحجز
                                     </button>
@@ -154,6 +163,10 @@
                                     <div class="form-group btn-light rounded-10">
                                         <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
                                     </div>
+                                </div>
+                                <div class="col-12">
+                                    <script src='https://www.google.com/recaptcha/api.js'></script>
+                                    <div class="g-recaptcha w-100" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn bg-secondary-color text-white w-100 rounded-10" type="submit">

@@ -27,49 +27,57 @@ class simpleVisaController extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => 'required|string|max:255',
-            'phone' => ['required', 'string', 'max:255'],
-            'country' => ['required'],
-            'visatype' => ['required'],
-        ], [
-            'name.required' => 'الاسم مطلوب',
-            'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
-            'email.required' => 'البريد الإلكتروني مطلوب',
-            'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
-            'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
-            'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
-            'phone.required' => 'رقم الجوال مطلوب',
-            'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
-            'country.required' => 'الدولة مطلوبة',
-        ]);
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".env('RECAPTCHA_SECRET_KEY')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']);
+        $googleobj = json_decode($response);
+        $verified = $googleobj->success;
+        if ($verified === true){
+            // dd($request->all());
+            $validated = $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => 'required|string|max:255',
+                'phone' => ['required', 'string', 'max:255'],
+                'country' => ['required'],
+                'visatype' => ['required'],
+            ], [
+                'name.required' => 'الاسم مطلوب',
+                'name.max' => 'يجب الا يتجاوز الاسم ال 255 حرف',
+                'email.required' => 'البريد الإلكتروني مطلوب',
+                'email.email' => 'برجاء ادخال بريد إلكتروني صحيح',
+                'email.max' => 'يجب الا يتجاوز البريد الإلكتروني ال 255 حرف',
+                'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
+                'phone.required' => 'رقم الجوال مطلوب',
+                'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
+                'country.required' => 'الدولة مطلوبة',
+            ]);
 
-        $data = [
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'phone'=>$request->phone,
-                'country'=>$request->country,
-                'visa_type'=>$request->visatype,
-                'price'=>$request->price,
-                'note'=>$request->notes,
-                'price_status'=>'لم يتم الدفع',
-                'document_status'=>'لم يتم الارسال',
-                'request_status'=>'جديد',
-        ];
-        if(!empty($request->schengen_country)){
-            $data['country'] = $request->country.' | '.$request->schengen_country;
-        }
-        $visa = SempleVisa::create($data);
-        if($request->payment_method == 'online'){
-            session()->flash('alert_message', ' تم ارسال بياناتك بنجاح , يرجى استكمال الدفع الالكتروني');
-            session()->flash('visa_id', $visa->id);
-            return redirect()->back();
+            $data = [
+                    'name'=>$request->name,
+                    'email'=>$request->email,
+                    'phone'=>$request->phone,
+                    'country'=>$request->country,
+                    'visa_type'=>$request->visatype,
+                    'price'=>$request->price,
+                    'note'=>$request->notes,
+                    'price_status'=>'لم يتم الدفع',
+                    'document_status'=>'لم يتم الارسال',
+                    'request_status'=>'جديد',
+            ];
+            if(!empty($request->schengen_country)){
+                $data['country'] = $request->country.' | '.$request->schengen_country;
+            }
+            $visa = SempleVisa::create($data);
+            if($request->payment_method == 'online'){
+                session()->flash('alert_message', ' تم ارسال بياناتك بنجاح , يرجى استكمال الدفع الالكتروني');
+                session()->flash('visa_id', $visa->id);
+                return redirect()->back();
+            }else{
+                session()->flash('alert_message', ' تم ارسال بياناتك بنجاح و سنقوم بالتواصل معك قريبا');
+                return redirect()->back();
+            }
         }else{
-            session()->flash('alert_message', ' تم ارسال بياناتك بنجاح و سنقوم بالتواصل معك قريبا');
-            return redirect()->back();
+            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت']);
         }
+        
             
 
 

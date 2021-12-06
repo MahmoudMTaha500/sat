@@ -214,9 +214,14 @@ class WebsiteController extends Controller
     // student register request : create new user of type student
     public function student_register_auth(RegisterStudentRequest $request)
     {
-        // return $request->all();
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".env('RECAPTCHA_SECRET_KEY')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']);
+        $googleobj = json_decode($response);
+        $verified = $googleobj->success;
+        if ($verified !== true){
+            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت']);
+        }  
         $remember = $request->has('remember') ? true : false;
-        $data = $request->except('_token', 'password', 'password_confirmation');
+        $data = $request->except('_token', 'password', 'password_confirmation', 'g-recaptcha-response');
         $data['password'] = bcrypt($request->password);
         Student::create($data);
         if (Auth::guard('student')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
@@ -339,7 +344,8 @@ if($student_mail){
     // student register request : create new user of type student
     public function student_invoice(Request $request)
     {
-        
+       
+
         $student_request = StudentRequest::find($request->request_id);
         $course = $student_request->course;
         $institute = $student_request->course->institute;
@@ -380,7 +386,13 @@ if($student_mail){
 
     // create student request and account if the student was new student
     public function create_student_request(Request $request)
-    {       
+    {     
+        $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".env('RECAPTCHA_SECRET_KEY')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']);
+        $googleobj = json_decode($response);
+        $verified = $googleobj->success;
+        if ($verified !== true){
+            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت']);
+        }  
         // configuer basic variables
         $name = $request->name;
         $email = $request->email;
@@ -418,9 +430,10 @@ if($student_mail){
 
         // configure student data
         $unbcrypt_password = random_password();
-        $student_data = $request->except('_token', 'note', 'course_details');
+        $student_data = $request->except('_token', 'note', 'course_details' , 'g-recaptcha-response');
         $student_data['password'] = bcrypt($unbcrypt_password);
 
+        
         if(auth()->guard('student')->check()){
             $student = Student::find(auth()->guard('student')->user()->id);
         }else{

@@ -4,6 +4,15 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\ExchangeRate;
 use Illuminate\Http\Request;
+use App\Models\CoursePrice;
+use AmrShawky\LaravelCurrency\Facade\Currency;
+use Illuminate\Support\Facades\DB;
+use App\Models\Airports ;
+use App\Models\residences;
+use App\Models\Insurances;
+
+
+
 
 class ExchangeRateController extends Controller
 {
@@ -51,5 +60,56 @@ class ExchangeRateController extends Controller
     public function destroy(ExchangeRate $exchangeRate)
     {
         //
+    }
+
+    public function update_all_prices(ExchangeRate $exchangeRate)
+    {
+        $exchange_rates = ExchangeRate::all();
+        foreach($exchange_rates as $exchange_rate){
+            $unit_price_in_sar = Currency::convert()
+                                            ->from($exchange_rate->currency_code)
+                                            ->to('SAR')
+                                            ->amount(1)
+                                            ->withoutVerifying()
+                                            ->get();
+
+            $currencies_object[$exchange_rate->currency_code] = [
+               'exchange_rate' =>  $exchange_rate->exchange_rates,
+               'unit_price_in_sar' => $unit_price_in_sar
+            ];
+        }
+
+        $course_prices = CoursePrice::all();
+        foreach($course_prices as $course_price){
+            $currency_object = $currencies_object[$course_price->currency_code];
+            $new_price = $course_price->currency_amount*($currency_object['unit_price_in_sar'] + $currency_object['exchange_rate']);
+            $course_price->update(['price' => $new_price]);
+        }
+
+        $airports = Airports::all();
+        foreach($airports as $airport){
+            $currency_object = $currencies_object[$airport->currency_code];
+            $new_price = $airport->currency_amount*($currency_object['unit_price_in_sar'] + $currency_object['exchange_rate']);
+            $airport->update(['price' => $new_price]);
+        }
+
+
+        $residences = residences::all();
+        foreach($residences as $residence){
+            $currency_object = $currencies_object[$residence->currency_code];
+            $new_price = $residence->currency_amount*($currency_object['unit_price_in_sar'] + $currency_object['exchange_rate']);
+            $residence->update(['price' => $new_price]);
+        }
+
+        $insurances = Insurances::all();
+        foreach($insurances as $insurance){
+            $currency_object = $currencies_object[$insurance->currency_code];
+            $new_price = $insurance->currency_amount*($currency_object['unit_price_in_sar'] + $currency_object['exchange_rate']);
+            $insurance->update(['price' => $new_price]);
+        }
+
+
+        return 'done';
+        
     }
 }

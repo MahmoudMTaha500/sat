@@ -166,6 +166,8 @@ Route::post('/update-terms-conditions','WebsiteSettingsController@update_terms_c
 
 // exchange rate Route
 Route::resource('exchange-rate', "ExchangeRateController");
+Route::get('/update-all-prices','ExchangeRateController@update_all_prices')->name('website_settings.update_all_prices');
+
 
 
 });

@@ -13,7 +13,7 @@ class CoursePriceSeeder extends Seeder
     {
         for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
-                "currency_code" => 'USD',
+                "currency_code" => 'EUR',
                 "currency_amount" => 100,
                 "weeks" => 7,
                 "price" => 550,
@@ -31,7 +31,7 @@ class CoursePriceSeeder extends Seeder
         }
         for ($x = 1; $x <= 200; $x++) {
             CoursePrice::create([
-                "currency_code" => 'USD',
+                "currency_code" => 'EUR',
                 "currency_amount" => 500,
                 "weeks" => 20,
                 "price" => 300,

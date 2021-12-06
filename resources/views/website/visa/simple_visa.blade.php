@@ -24,10 +24,14 @@
                         {{session()->get('alert_message')}}
                     </div>
                     @endif
-
+                    @if($errors->has('not_robot_error'))
+                        <div class="alert alert-danger text-center">
+                            {{$errors->first()}}
+                        </div>
+                    @endif
                     @if (session()->has('visa_id'))
                         
-
+                    
                         <form id="form-container" method="post" action="{{route('order-visa-checkout')}}">
                             @csrf
                             <input type="hidden" name="token_id" id="token_input" />
@@ -178,28 +182,8 @@
                                 </span>
                                 @enderror
                             </div>
-
-                            {{-- <div class="row">
-                                <div class="col-md-12"><label>وسيلة الدفع</label> <br /></div>
-                                <div class="col-md-6">
-                                    <div class="form-check form-check-inline mr-0 ml-4">
-                                        <input v-model="insurance_price_checker"  name="payment_method" type="radio" id="inlineCheckbox1" value="online" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">الدفع اونلاين</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-check form-check-inline mr-0 ml-4">
-                                        <input v-model="insurance_price_checker" name="payment_method" type="radio" id="inlineCheckbox1" value="office" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">الدفع عن طريق مكتب</label>
-                                    </div>
-                                </div>
-                                @error('payment_method')
-                                    <div>
-                                        <span class="invalid-feedback d-block" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    </div>
-                                @enderror
-                            </div> --}}
-
+                            <script src='https://www.google.com/recaptcha/api.js'></script>
+                            <div class="g-recaptcha" data-sitekey="{{env('RECAPTCHA_SITE_KEY')}}"></div>
                             <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">انشاء</button>
                             <button type="button" class="btn bg-main-color text-white w-100 rounded-10"
                                     data-toggle="modal" data-target="#office_numbers">
