@@ -34,7 +34,7 @@ class InstituteController extends Controller
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-        $institutes = Institute::with('country', 'city','rats','courses' , 'creator' )->paginate(10);
+        $institutes = Institute::latest()->with('country', 'city','rats','courses' , 'creator' )->paginate(10);
         return response()->json(['institutes' => $institutes]);
     }
     /************************************************************** */

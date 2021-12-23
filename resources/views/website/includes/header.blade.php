@@ -18,9 +18,26 @@
     <meta name="keywords" content="{{(isset($page_identity) ? ($page_identity['meta_keywords'] == '' ? 'كلاسات'  : $page_identity['meta_keywords'] ) : 'كلاسات')}}" />
     
     <!-- Cairo Font  -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet" />
+    <link
+        rel="preload"
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+        as="style"
+        onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap"
+            rel="stylesheet"
+            type="text/css"
+        />
+    </noscript>
+
+    <link rel="stylesheet" media="print" onload="this.onload=null;this.removeAttribute('media');" href="{{asset('website')}}/css/global.css">
+    <noscript>
+        <link rel="stylesheet" href="{{asset('website')}}/css/global.css">
+    </noscript>
+    <link rel="stylesheet" href="{{asset('website')}}/css/main.css" />
     
-    <link rel="stylesheet" href="{{asset('website')}}/css/global.css" />
     <link rel="icon" href="{{asset('website/imgs/logo-icon.png')}}">
     <title>{{(isset($page_identity) ? ($page_identity['title_tag'] == '' ? 'كلاسات'  : $page_identity['title_tag'] ) : 'كلاسات')}}</title>
 </head> 

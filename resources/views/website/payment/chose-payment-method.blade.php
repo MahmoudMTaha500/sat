@@ -36,7 +36,7 @@
                                 </div>
                                 <div class="col-auto text-right">
                                     اقبل سياسة الاسترجاع للاستمرار في عملية الدفع <br>
-                                    <a data-toggle="modal" data-target="#refund-policy" href="#">اضغط هنا لعرض سياسة الاسترجاع</a>
+                                    <a data-toggle="modal" data-target="#refund-policy" href="{{route('website.refund_policy')}}">اضغط هنا لعرض سياسة الاسترجاع</a>
                                 </div>
                             </div>
                             <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">

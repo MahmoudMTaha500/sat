@@ -25,8 +25,8 @@
                       <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                       <div class="heading-elements">
                         <ul class="list-inline mb-0">
-                          {{-- <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
-                            href="{{route('exchange-rate.create')}}" > <i class="ft-plus ft-md"></i> اضافة صرف عملة</a></li> --}}
+                          <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
+                            href="{{route('website_settings.update_all_prices' , ['dashboard_update' => true] )}}" > <i class="ft-plus ft-md"></i> تحديث كل العملات</a></li>
                         </ul>
                       </div>
                     </div>

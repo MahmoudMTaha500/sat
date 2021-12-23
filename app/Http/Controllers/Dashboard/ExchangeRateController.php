@@ -62,7 +62,7 @@ class ExchangeRateController extends Controller
         //
     }
 
-    public function update_all_prices(ExchangeRate $exchangeRate)
+    public function update_all_prices(ExchangeRate $exchangeRate , Request $request)
     {
         $exchange_rates = ExchangeRate::all();
         foreach($exchange_rates as $exchange_rate){
@@ -81,9 +81,11 @@ class ExchangeRateController extends Controller
 
         $course_prices = CoursePrice::all();
         foreach($course_prices as $course_price){
-            $currency_object = $currencies_object[$course_price->currency_code];
-            $new_price = $course_price->currency_amount*($currency_object['unit_price_in_sar'] + $currency_object['exchange_rate']);
-            $course_price->update(['price' => $new_price]);
+            if(!empty($course_price->currency_code)){
+              $currency_object = $currencies_object[$course_price->currency_code];
+              $new_price = $course_price->currency_amount*($currency_object['unit_price_in_sar'] + $currency_object['exchange_rate']);
+              $course_price->update(['price' => $new_price]);
+            }
         }
 
         $airports = Airports::all();
@@ -108,8 +110,12 @@ class ExchangeRateController extends Controller
             $insurance->update(['price' => $new_price]);
         }
 
-
-        return 'done';
+        if($request->has('dashboard_update')){
+            session()->flash('alert_message', ['message' => 'تم تحديث كل العملات بنجاح', 'icon' => 'success']);
+            return back(); 
+        }else{
+            return 'done';
+        }
         
     }
 }

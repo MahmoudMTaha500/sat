@@ -57,5 +57,18 @@
     <p class="text-white mb-0">
         <span class="close-support position-absolute"><i class="fas fa-times"></i></span> هل تحتاج الي مساعدة؟ .. اطلب مستشارك <a href="tel:966555484931" class="float-left text-secondary-color bg-white"><i class="fas fa-arrow-left"></i></a>
     </p>
-    <script src="{{asset('website')}}/js/global.js"></script>
+    @if ($page_identity['page_name'] != 'home')
+        <script src="{{asset('website')}}/js/global.js"></script>
+    @else
+        <script src="{{asset('website')}}/js/home-scripts.js"></script>
+        <script>
+            // add-favourite
+            $(document).on("click", ".add-favourite", function () {
+                $favourite_obj = $(this)
+                axios.get("/update-student-favorit", { params: { course_id: $favourite_obj.attr("course-id") } }).then(function (a) {
+                    "removed" == a.data && $favourite_obj.find(".favourite-icon").addClass("far").removeClass("fas"), "added" == a.data && $favourite_obj.find(".favourite-icon").addClass("fas").removeClass("far"), console.log(a.data);
+                });
+            });
+        </script>
+    @endif
 </div>

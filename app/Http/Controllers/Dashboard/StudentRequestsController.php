@@ -47,9 +47,9 @@ class StudentRequestsController extends Controller
         );
 
         
-        if($request->status == 'حصل علي قبول'){$data['request_status'] = 'تم قبولك بنجاح';}
-        if($request->status == 'بداء الدراسة'){$data['request_status'] = 'لقد تم بداء دراستك';}
-        if($request->status == 'مرفوض'){$data['request_status'] = 'تم رفضك';}
+        if($request->status == 'حصل علي قبول'){$data['request_status'] = '<span style="color:#4caf50">تم قبولك بنجاح</span>';}
+        if($request->status == 'بداء الدراسة'){$data['request_status'] = '<span style="color:#4caf50">لقد تم بداء دراستك</span>';}
+        if($request->status == 'مرفوض'){$data['request_status'] = '<span style="color:#f44336">تم رفضك</span> ';}
 
 
         $subject = 'حالة الطلب الخاص بكم في موقع كلاسات';
