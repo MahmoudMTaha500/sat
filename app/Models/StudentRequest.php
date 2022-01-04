@@ -3,9 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class StudentRequest extends Model
+class StudentRequest extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+    
     protected $guarded = [];  
 
 
@@ -38,6 +43,10 @@ class StudentRequest extends Model
     {
         return $this->belongsTo("App\Models\Insurances", 'insurance_id', 'id');
     }
+    // public function bill_file()
+    // {
+    //     return $this->belongsTo("App\Models\Insurances", 'insurance_id', 'id');
+    // }
 
 
 }

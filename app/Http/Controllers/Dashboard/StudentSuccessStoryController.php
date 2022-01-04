@@ -30,7 +30,7 @@ class StudentSuccessStoryController extends Controller
      */
 
      public function getstories(){
-        $StudentSuccessStory =  StudentSuccessStory::with('student')->paginate(10);
+        $StudentSuccessStory =  StudentSuccessStory::latest('id')->with('student')->paginate(10);
         return response()->json(['StudentSuccessStory'=>$StudentSuccessStory]);
      }
 

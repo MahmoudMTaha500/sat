@@ -19,7 +19,7 @@ class InsurancesController extends Controller
         $department_name = 'services';
         $page_name = 'insurances';
         $useVue = true;
-        $institutes = Institute::get();
+        $institutes = Institute::latest('id')->get();
         $page_title = 'التامينات';
 
 
@@ -34,7 +34,7 @@ class InsurancesController extends Controller
 
     public function create()
     {
-        $Institutes = Institute::get();
+        $Institutes = Institute::latest('id')->get();
         $department_name = 'services';
         $page_name = 'add-insurances';
         $page_title = 'التامينات';
@@ -86,7 +86,7 @@ class InsurancesController extends Controller
     {
 
         $insurance = Insurances::find($id);
-        $Institutes = Institute::get();
+        $Institutes = Institute::latest('id')->get();
         $department_name = 'services';
         $page_name = 'insurances';
         $page_title = 'التامينات';
@@ -146,11 +146,11 @@ class InsurancesController extends Controller
 
 
         if (!$institute_id) {
-            $Insurances = $Insurances->with('institute')->paginate(10);
+            $Insurances = $Insurances->with('institute')->latest('id')->paginate(10);
             return response()->json(['insurances' => $Insurances]);
         }
  
-        $Insurances = $Insurances->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
+        $Insurances = $Insurances->with('institute' , 'institute.city' , 'institute.country')->latest('id')->paginate(10);
         return response()->json(['insurances' => $Insurances]);
 
     }

@@ -20,12 +20,12 @@ class SimpleVisaController extends Controller
         $page_title = 'الفيزا';
         $useVue = true;
 
-        $visas= SempleVisa::paginate(10);
+        $visas= SempleVisa::latest('id')->paginate(10);
         return view('admin.visas.simple_visa' , compact('department_name','page_name','page_title','useVue'));
     }
 
     public function get_simple_visa(){
-        $visas= SempleVisa::paginate(10);
+        $visas= SempleVisa::latest('id')->paginate(10);
         return response()->json(['visas'=>$visas]);
     }
     /**
@@ -93,7 +93,7 @@ class SimpleVisaController extends Controller
         if ($request->name_ar != '') {
             $visa = $visa->where('title_ar', 'LIKE', '%' . $request->name_ar . '%');
         }
-        $visa = $visa->paginate(10);
+        $visa = $visa->latest('id')->paginate(10);
         return response()->json(['visas'=>$visa]);
     }
 

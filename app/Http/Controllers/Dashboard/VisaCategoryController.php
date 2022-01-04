@@ -11,7 +11,7 @@ class VisaCategoryController extends Controller
 
     public function index()
     {
-        $categories = VisaCategory::paginate(10);
+        $categories = VisaCategory::latest('id')->paginate(10);
         $department_name='visa';
         $page_name='visa-categories';
         $page_title = ' التاشيرات';

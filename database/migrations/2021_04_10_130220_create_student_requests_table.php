@@ -19,6 +19,7 @@ class CreateStudentRequestsTable extends Migration
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->longText('institute_message')->nullable();
             $table->string('status');
+            $table->boolean('payment_status')->default(0)->comment('0 = pending & 1 = paid & 2 = not paid & 3 = partially paid');
             $table->integer('weeks')->default(1);
             $table->bigInteger('price_per_week')->default(0);
             $table->decimal('course_discount')->default(0);

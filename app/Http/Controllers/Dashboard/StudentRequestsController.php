@@ -16,10 +16,10 @@ class StudentRequestsController extends Controller
 
     public function index()
     {
-        $institutes = Institute::with('city')->get();
-        $courses = Course::get();
-        $countercourse = Course::get();
-        $countries = Country::get();
+        $institutes = Institute::latest('id')->with('city')->get();
+        $courses = Course::latest('id')->get();
+        $countercourse = Course::latest('id')->get();
+        $countries = Country::latest('id')->get();
         $department_name = 'student-request';
         $page_name = 'student-request';
         $page_title = 'الطلابات';
@@ -29,7 +29,7 @@ class StudentRequestsController extends Controller
     }
     public function getStudentsRequest()
     {
-        $students_requets = StudentRequest::with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->paginate(10);
+        $students_requets = StudentRequest::with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->latest('id')->paginate(10);
         return response()->json(['studentsRequests' => $students_requets]);
     }
     public function updateStatus(Request $request)
@@ -200,7 +200,7 @@ class StudentRequestsController extends Controller
       
 
 
-        $student_request = $student_request->with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->paginate(10);
+        $student_request = $student_request->with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->latest('id')->paginate(10);
         return response()->json(['studentsRequests' => $student_request]);
 
     }

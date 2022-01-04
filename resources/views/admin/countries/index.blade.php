@@ -27,7 +27,7 @@
                                     @if(auth()->user()->hasPermission('cities-countries-create'))
 
                                     <li>
-                                        <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" href="{{url('/dashboard/addcountry')}}"> <i class="ft-plus ft-md"></i> اضافة دوله جديد</a>
+                                        <a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right" href="{{route('countries.create')}}"> <i class="ft-plus ft-md"></i> اضافة دوله جديد</a>
                                     </li>
                                     @endif
                                 </ul>

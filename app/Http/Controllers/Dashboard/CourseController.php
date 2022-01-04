@@ -18,10 +18,10 @@ class CourseController extends Controller
 
     public function index()
     {
-        $institutes = Institute::with('city')->get();
-        $courses = Course::get();
-        $countercourse = Course::get();
-        $countries = Country::get();
+        $institutes = Institute::with('city')->latest('id')->get();
+        $courses = Course::latest('id')->get();
+        $countercourse = Course::latest('id')->get();
+        $countries = Country::latest('id')->get();
         $count_courses = count($countercourse);
         $department_name = 'courses';
         $page_name = 'courses';
@@ -33,13 +33,13 @@ class CourseController extends Controller
     /************************************************************** */
     public function getCourses()
     {
-        $courses = Course::with('institute', 'institute.city','student_request' , 'creator')->paginate(10);
+        $courses = Course::with('institute', 'institute.city','student_request' , 'creator')->latest('id')->paginate(10);
         return response()->json(['courses' => $courses]);
     }
     /************************************************************** */
     public function create()
     {
-        $institutes = Institute::get();
+        $institutes = Institute::latest('id')->get();
         $department_name = 'courses';
         $page_name = 'add-course';
         $page_title = 'الدورات';
@@ -128,9 +128,9 @@ class CourseController extends Controller
     /************************************************************** */
     public function edit(Course $course)
     {
-        $institutes = Institute::get();
+        $institutes = Institute::latest('id')->get();
         $course = Course::find($course->id);
-        $course_prices = CoursePrice::where(["course_id" => $course->id])->get();
+        $course_prices = CoursePrice::where(["course_id" => $course->id])->latest('id')->get();
         $department_name = 'courses';
         $page_name = 'courses';
         $page_title = 'الدورات';
@@ -247,7 +247,7 @@ class CourseController extends Controller
             $courses = $courses->where("approvment" , "$status" );
         }
 
-        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->paginate(10);
+        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->latest('id')->paginate(10);
         return response()->json(['courses' => $courses]);
 
     }
@@ -262,7 +262,7 @@ class CourseController extends Controller
     public function archive(Request $request)
     {
 
-        $courses = Course::onlyTrashed()->get();
+        $courses = Course::onlyTrashed()->latest('id')->get();
         // dd($courses);
         $page_name = 'archive_course';
         return view('admin.courses.archives', ['page_name' => $page_name, 'courses' => $courses]);

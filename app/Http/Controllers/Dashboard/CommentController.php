@@ -16,7 +16,7 @@ class CommentController extends Controller
     public function index()
     { 
 
-        $comments =  Comment::where(['element_type'=>"institute"])->paginate(10);
+        $comments =  Comment::where(['element_type'=>"institute"])->latest('id')->paginate(10);
            
         $department_name = 'comment';
         $page_name = 'comment';
@@ -33,7 +33,7 @@ class CommentController extends Controller
      public function getcomment()
      {
     
-        $comments =  Comment::where(['element_type'=>"institute"])->with('institute','student')->get();
+        $comments =  Comment::where(['element_type'=>"institute"])->with('institute','student')->latest('id')->get();
 
          return response()->json(['comments'=>$comments]);
 
@@ -44,7 +44,7 @@ class CommentController extends Controller
     public function blog()
     { 
 
-        $comments =  Comment::where(['element_type'=>"blog"])->paginate(10);
+        $comments =  Comment::where(['element_type'=>"blog"])->latest('id')->paginate(10);
            
         $department_name = 'comment';
         $page_name = 'blog-comment';
@@ -57,7 +57,7 @@ class CommentController extends Controller
     public function getcommentBlog()
     {
    
-       $comments =  Comment::where(['element_type'=>"blog"])->with('blog','student')->paginate(10);
+       $comments =  Comment::where(['element_type'=>"blog"])->with('blog','student')->latest('id')->paginate(10);
 
         return response()->json(['comments'=>$comments]);
 

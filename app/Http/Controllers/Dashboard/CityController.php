@@ -12,7 +12,7 @@ class CityController extends Controller
 
     public function index()
     {
-        $cities = City::get();
+        $cities = City::latest('id')->get();
         $department_name = 'country';
         $page_name = 'getcountries';
         $page_title = 'المدن';
@@ -21,7 +21,7 @@ class CityController extends Controller
 
     public function create(Request $request)
     {
-        $countries = Country::get();
+        $countries = Country::latest('id')->get();
         $department_name = 'country';
         $page_name = 'addcountry';
         $page_title = 'المدن';
@@ -59,7 +59,7 @@ class CityController extends Controller
 
     public function edit(City $city)
     {
-        $countries = Country::get();
+        $countries = Country::latest('id')->get();
         $cities = City::find($city->id);
         $department_name = 'country';
         $page_name = 'addcountry';
@@ -107,7 +107,7 @@ class CityController extends Controller
     public function getCities(Request $request)
     {
         $country_id = $request->countryID;
-        $cities = City::where("country_id", $country_id)->get();
+        $cities = City::where("country_id", $country_id)->latest('id')->get();
         return response()->json(['cities' => $cities]);
 // dd($cities);
     }

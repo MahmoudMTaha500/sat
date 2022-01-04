@@ -12,7 +12,7 @@ class BlogCategoryController extends Controller
 
     public function index()
     {
-        $categories = BlogCategory::with('blogs')->get();
+        $categories = BlogCategory::with('blogs')->latest('id')->get();
         // dd($categories);
         $department_name = 'blogs';
         $page_name = 'blog-categories';

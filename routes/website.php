@@ -43,9 +43,13 @@ Route::get('/student-requests/confirm-reservation','WebsiteController@confirm_re
 Route::post('create-student-request', 'WebsiteController@create_student_request')->name('create_student_request');
 Route::get('/student-requests/payment-method','WebsiteController@chose_payment_method')->name('student_requests.chose_payment_method');   
 Route::get('/update-student-favorit', 'WebsiteController@update_student_favorit')->name('update.student.favorit');
-
 Route::get('student/reset-password', 'WebsiteController@student_reset_password')->name('student.reset_password');
 Route::post('student/reset-password', 'WebsiteController@student_send_mail_reset_password')->name('student.reset_password');
+Route::post('student/student-upload-payment-bill/{request_id}', 'StudentController@student_upload_payment_bill')->name('student.upload.payment.bill');
+
+
+
+
 // invoice pdf route
 Route::get('student-price-offer', 'WebsiteController@student_invoice')->name('student_invoice');
 

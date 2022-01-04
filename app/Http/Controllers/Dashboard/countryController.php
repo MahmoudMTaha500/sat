@@ -11,7 +11,7 @@ class countryController extends Controller
 
     public function index(Request $request)
     {
-        $country = Country::get();
+        $country = Country::latest('id')->get();
         $page_title = 'الدول';
 
         return view("admin.countries.index", ['country' => $country, 'page_title'=>$page_title]);

@@ -14,32 +14,25 @@ class StudentController extends Controller
         $page_name = 'students';
         $useVue = true;
         $page_title = 'الطلاب';
-           
         return view('admin.students.index',compact('department_name','page_name','useVue' ,'page_title'));
             
     }
 
 
     public function getStudents(){
-        // dd(11);  
-            $students =  Student::with('country','city')->paginate(10);
-            return response()->json(['students'=>$students]);
+        $students =  Student::with('country','city')->latest('id')->paginate(10);
+        return response()->json(['students'=>$students]);
     }
 
 
    public function filter(Request $request){
-//    dd($request->all());
-$name= $request->name;
-// dd($name);
-   $students = new Student();
-
-   if ($name != null) {
-       $students = $students->where("name", 'LIKE', "%{$name}%");
-   }
-   $students = $students->with('country', 'city')->paginate(10);
-   return response()->json(['students' => $students]);
-
-
+        $name= $request->name;
+        $students = new Student();
+        if ($name != null) {
+            $students = $students->where("name", 'LIKE', "%{$name}%");
+        }
+        $students = $students->with('country', 'city')->latest('id')->paginate(10);
+        return response()->json(['students' => $students]);
    }
 
 

@@ -15,7 +15,7 @@ class VisaController extends Controller
 
     public function index()
     {
-        $visas = Visa::get();
+        $visas = Visa::latest('id')->get();
        $department_name='visa';
         $page_name='visa';
         $page_title = ' التاشيرات';
@@ -26,8 +26,8 @@ class VisaController extends Controller
  
     public function create()
     {
-        $countries = Country::get();
-        $visaCategory = VisaCategory::get();
+        $countries = Country::latest('id')->get();
+        $visaCategory = VisaCategory::latest('id')->get();
         $department_name='visa';
         $page_name='add-visa';
         $page_title = ' التاشيرات';
@@ -86,9 +86,9 @@ class VisaController extends Controller
     public function edit(Visa $visa)
     {
         $visa = Visa::find($visa->id);
-        $countries = Country::get();
-        $visaCategory = VisaCategory::get();
-        $VisaQuestion = VisaQuestion::where(['visa_id'=>$visa->id])->with('question_choices')->get();
+        $countries = Country::latest('id')->get();
+        $visaCategory = VisaCategory::latest('id')->get();
+        $VisaQuestion = VisaQuestion::latest('id')->where(['visa_id'=>$visa->id])->with('question_choices')->get();
         $page_title = ' التاشيرات';
     
 
@@ -109,7 +109,7 @@ class VisaController extends Controller
         'active'=>1,
         'creator_id'=>auth()->user()->id,
         ]);
-        $VisaQuestion =  VisaQuestion::where(['visa_id'=>$visa->id])->get();
+        $VisaQuestion =  VisaQuestion::latest('id')->where(['visa_id'=>$visa->id])->get();
 
           foreach($VisaQuestion as $question){
                     if($question->field_type == 'select') {
@@ -152,7 +152,7 @@ class VisaController extends Controller
     {
         $VisaDelete = Visa::find($visa->id);
        
-          $VisaQuestion =  VisaQuestion::where(['visa_id'=>$visa->id])->get();
+          $VisaQuestion =  VisaQuestion::latest('id')->where(['visa_id'=>$visa->id])->get();
           foreach($VisaQuestion as $question){
                     if($question->field_type == 'select') {
                         $VisaQuestionChoices = VisaQuestionChoices::where(['question_id'=>$question->id])->delete(); 

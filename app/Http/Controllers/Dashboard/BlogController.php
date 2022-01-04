@@ -23,23 +23,23 @@ class BlogController extends Controller
         $page_name = 'blogs';
         $page_title = 'المقالات';
         $useVue = true;
-        $users = User::get();
-        $categories = BlogCategory::get();
+        $users = User::latest('id')->get();
+        $categories = BlogCategory::latest('id')->get();
         return view("admin.blogs.index", compact('department_name', 'page_name', 'useVue', 'users', 'page_title', 'categories'));
     }
     /***************************************************************/
     public function get_blogs_by_vue(Request $request)
     {
 
-        $blogs = Blog::with('creator', 'category', 'country', 'city', 'institute')->paginate(10);
+        $blogs = Blog::with('creator', 'category', 'country', 'city', 'institute')->latest('id')->paginate(10);
         return response()->json($blogs);
     }
     /***************************************************************/
     public function create()
     {
-        $Institutes = Institute::get();
-        $BlogCategories = BlogCategory::get();
-        $countries = Country::get();
+        $Institutes = Institute::latest('id')->get();
+        $BlogCategories = BlogCategory::latest('id')->get();
+        $countries = Country::latest('id')->get();
         $useVue = true;
         $department_name = 'blogs';
         $page_name = 'add-blog';
@@ -88,9 +88,9 @@ class BlogController extends Controller
     /***************************************************************/
     public function edit(Blog $blog)
     {
-        $Institutes = Institute::get();
-        $BlogCategories = BlogCategory::get();
-        $countries = Country::get();
+        $Institutes = Institute::latest('id')->get();
+        $BlogCategories = BlogCategory::latest('id')->get();
+        $countries = Country::latest('id')->get();
         $blog = Blog::find($blog->id);
         $useVue = true;
 
@@ -181,13 +181,13 @@ class BlogController extends Controller
             }
             $blog = $blog->where("approvement", $x);
         }
-        $blog = $blog->with('creator', 'category', 'country', 'city', 'institute')->paginate(10);
+        $blog = $blog->with('creator', 'category', 'country', 'city', 'institute')->latest('id')->paginate(10);
         return response()->json($blog);
     }
     /***************************************************************/
     public function archive(Request $request)
     {
-        $Blogs = Blog::onlyTrashed()->get();
+        $Blogs = Blog::onlyTrashed()->latest('id')->get();
         return view('admin.blogs.archives', ['Blogs' => $Blogs]);
     }
     /***************************************************************/
@@ -216,7 +216,7 @@ class BlogController extends Controller
         if(!empty($request->city_id)){
             $institutes = $institutes->where(['city_id' => $request->city_id]);
         }
-        $institutes = $institutes->with('city')->get();
+        $institutes = $institutes->with('city')->latest('id')->get();
         return response()->json($institutes);
     }
 
@@ -226,7 +226,7 @@ class BlogController extends Controller
         if(!empty($request->institute_id)){
             $courses = $courses->where(['institute_id' => $request->institute_id]);
         }
-        $courses = $courses->get();
+        $courses = $courses->latest('id')->get();
         return response()->json($courses);
     }
 

@@ -20,7 +20,7 @@ class ResidencesController extends Controller
         $department_name = 'services';
         $page_name = 'residences';
         $useVue=true;
-        $institutes = Institute::get();
+        $institutes = Institute::latest('id')->get();
         $page_title = 'السكن';
         
         return view("admin.residences.index", compact('department_name', 'page_name','useVue','institutes','page_title'));
@@ -29,12 +29,12 @@ class ResidencesController extends Controller
 
     
 public function getResidences(){
-    $residences = residences::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
+    $residences = residences::with('institute' , 'institute.city' , 'institute.country')->latest('id')->paginate(10);
     return response()->json(['residences'=>$residences]);
 }
     public function create()
     {
-        $Institutes = Institute::get();
+        $Institutes = Institute::latest('id')->get();
         // 
         $department_name = 'services';
         $page_name = 'add-insurances';
@@ -84,7 +84,7 @@ public function getResidences(){
     public function editResidences($id)
     {
         $residence= residences::find($id);
-        $Institutes = Institute::get();
+        $Institutes = Institute::latest('id')->get();
         $department_name = 'services';
         $page_name = 'residences';
         $page_title = 'السكن';
@@ -149,7 +149,7 @@ public function getResidences(){
         }
     
     
-        $residences = $residences->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
+        $residences = $residences->with('institute' , 'institute.city' , 'institute.country')->latest('id')->paginate(10);
         return response()->json(['residences' => $residences]);
         
     }

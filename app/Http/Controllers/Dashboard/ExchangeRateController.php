@@ -21,7 +21,7 @@ class ExchangeRateController extends Controller
     {
         $department_name = 'exchange-rates';
         $page_name = 'exchange rates';
-        $exchange_rates = ExchangeRate::get();
+        $exchange_rates = ExchangeRate::latest('id')->get();
         $page_title = 'صرف العملات';
         return view("admin.exchange_rates.index", compact('department_name', 'page_name','exchange_rates','page_title'));
     }

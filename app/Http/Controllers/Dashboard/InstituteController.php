@@ -19,7 +19,7 @@ class InstituteController extends Controller
 
     public function index(Request $request)
     {
-        $institutes = Institute::with('country', 'city','courses')->paginate(5);
+        $institutes = Institute::with('country', 'city','courses')->latest('id')->paginate(5);
         $useVue = true;
         $countries = Country::all();
 
@@ -34,7 +34,7 @@ class InstituteController extends Controller
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-        $institutes = Institute::latest()->with('country', 'city','rats','courses' , 'creator' )->paginate(10);
+        $institutes = Institute::latest()->with('country', 'city','rats','courses' , 'creator' )->latest('id')->paginate(10);
         return response()->json(['institutes' => $institutes]);
     }
     /************************************************************** */
@@ -171,7 +171,7 @@ class InstituteController extends Controller
         // dd($id);
         InstituteRate::where('institute_id', $id)->forceDelete();
         Comment::where(['element_id' => $id, 'element_type' => 'institute'])->forceDelete();
-        $courses = Course::where('institute_id', $id)->get();
+        $courses = Course::where('institute_id', $id)->latest('id')->get();
         foreach($courses as $course){
             $courses_price = CoursePrice::where('course_id',$course->id)->forceDelete();
             $Favourite = Favourite::where('course_id',$course->id)->forceDelete();
@@ -191,7 +191,7 @@ $institute->forceDelete();
     public function archive(Request $request)
     {
 
-        $institutes = Institute::onlyTrashed()->get();
+        $institutes = Institute::onlyTrashed()->latest('id')->get();
         return view('admin.institutes.archives', ['institutes' => $institutes]);
 
     }
@@ -227,7 +227,7 @@ $institute->forceDelete();
         if($name_ar){
             $name_ar = $institute->where('name_ar',$name_ar);
         }
-        $institute = $institute->with('country', 'city' , 'rats','courses')->paginate(10);
+        $institute = $institute->with('country', 'city' , 'rats','courses')->latest('id')->paginate(10);
         return response()->json(['institutes' => $institute]);
     }
 

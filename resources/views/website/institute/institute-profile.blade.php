@@ -246,7 +246,7 @@
                                             <!-- Course -->
                                             <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                                 <!-- Institute Img -->
-                                                <img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" class="card-img-top" alt="..." />
+                                                <img src="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" class="card-img-top" alt="..." />
                                                 <!-- ./Institute Img -->
                                                 <div class="card-body rounded-10 bg-white">
                                                     <!-- Course Title -->
@@ -266,7 +266,7 @@
                                                 </div>
                                                 <!-- Course Price -->
                                                 <div class="card-footer bg-white overflow-hidden">
-                                                    <span class="float-left text-main-color">{{$institute_course->coursesPricePerWeek->price}} / أسبوع </span>
+                                                    <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
                                                 </div>
                                                 <!-- ./Course Price -->
                                             </div>
@@ -278,7 +278,7 @@
                                         <!-- Course -->
                                         <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                             <!-- Institute Img -->
-                                            <img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" class="card-img-top" alt="..." />
+                                            <img src="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" class="card-img-top" alt="..." />
                                             <!-- ./Institute Img -->
                                             <div class="card-body rounded-10 bg-white">
                                                 <!-- Course Title -->
@@ -298,7 +298,7 @@
                                             </div>
                                             <!-- Course Price -->
                                             <div class="card-footer bg-white overflow-hidden">
-                                                <span class="float-left text-main-color">{{$institute_course->coursesPricePerWeek->price}} / أسبوع </span>
+                                                <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
                                             </div>
                                             <!-- ./Course Price -->
                                         </div>

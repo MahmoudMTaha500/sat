@@ -18,20 +18,20 @@ class AirportsController extends Controller
         $page_name = 'airports';
         $page_title = 'المطارات';
         $useVue=true;
-        $institutes = institute::get();
+        $institutes = institute::latest('id')->get();
         
         return view("admin.airports.index", compact('department_name', 'page_name', 'page_title','useVue','institutes'));
    
     }
     public function getAirports(){
-        $airports = Airports::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
+        $airports = Airports::latest('id')->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['airports'=>$airports]);
     }
 
     public function create()
     {
         
-        $Institutes = institute::get();
+        $Institutes = institute::latest('id')->get();
         // 
         $department_name = 'services';
         $page_name = 'add-airport';
@@ -82,7 +82,7 @@ class AirportsController extends Controller
     public function editAirports($id)
     {
         $airport= Airports::find($id);
-        $Institutes = institute::get();
+        $Institutes = institute::latest('id')->get();
         $department_name = 'services';
         $page_name = 'airports';
         $page_title = 'المطارات';
@@ -154,7 +154,7 @@ public function filter(Request $request)
     }
 
 
-    $Airports = $Airports->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
+    $Airports = $Airports->with('institute' , 'institute.city' , 'institute.country')->latest('id')->paginate(10);
     return response()->json(['airports' => $Airports]);
     
     // dd($request->all());

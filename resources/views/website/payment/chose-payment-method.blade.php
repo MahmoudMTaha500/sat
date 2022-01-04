@@ -15,8 +15,28 @@
         <!-- ./Section Heading -->
         <div class="row px-xl-5">
             <div class="col-lg-8">
+                @include('website.includes.errors')
                 <!-- Confirm Reservation Form -->
+
+                <div class="bg-white p-xl-5 p-3 rounded-10 mb-4 upload-payment-bill" @if(!$errors->any()) style="display: none" @endif>
+                    <div class="text-center">
+                        <h3 class="text-main-color font-weight-bold h5">برجاء اضافة فاتورة التحويل الخاصة بكم لاكمال الطلب</h3>
+                        <p>او يمكنك الرجوع لفرق الدعم الخاص بنا لاستكمال طلبك </p>
+                        <div class="mt-5">
+                            <form class="form" action="{{route('student.upload.payment.bill' , $request_id)}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="file" class="form-control mb-3" name="payment_bill_file">
+                                <button class="btn btn-primary w-100" type="submit">رفع</button>
+                            </form>
+                        </div>
+                        <div class="my-5 alert alert-warning text-center">
+                            يرجى ملاحظة ان مبلغ التحويل هو مجرد تامين للتقديم علي الدورة, و يتم ارسال تفاصيل السعر النهائي عند التواصل بفريق العمل الخاص بنا 
+                        </div>
+                    </div>
+                </div>
+
                 <div class="bg-white p-xl-5 p-3 rounded-10 mb-4">
+                    
                     <div class="text-center">
                         <div class="cheched-img">
                             <img src="{{asset('website/imgs/checked.png')}}" alt="" class="img-fluid" />
@@ -30,6 +50,11 @@
                             <button disabled type="button" class="btn bg-main-color text-white w-100 rounded-10 pay-now-btn" data-toggle="modal" data-target="#office_numbers">
                                 ادفع الان
                             </button>
+                            <a href="https://wa.me/+966555484931"  target="_blank">
+                                <button type="button" class="btn bg-success text-white w-100 rounded-10 mt-3">
+                                    تواصل مع خدمة العملاء
+                                </button>
+                            </a>
                             <div class="row mt-4">
                                 <div class="col-auto">
                                     <input type="checkbox" class="refund-policy" value="1">
@@ -42,10 +67,35 @@
                             <div class="modal fade" id="office_numbers" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">طرق الدفع</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        </div>
                                         <div class="modal-body py-5 px-4 text-center">
-                                            <div class="cheched-img">
-                                                <img src="imgs/checked.png" alt="" class="img-fluid" />
+                                            <div class="cheched-img mb-5">
+                                                <img src="{{asset('storage/icons/check.png')}}"  alt="" class="img-fluid" />
                                             </div>
+                                            <div>
+                                                <div class="upload-payment-bill">
+                                                    
+                                                    <div class="text-right">
+                                                        <div class="cost-body px-3 pt-3">
+                                                            <span class="font-weight-bold d-block text-main-color">يرجى ارسال الفاتورة الخاصة بالتحويل لاكمال عملية الدفع</span> 
+                                                            <span class=" d-block text-dark mb-5">يمكنك ارسال رسوم الدورة عن طريق الحسابات في الاسفل</span> 
+                                                            <form class="form" action="{{route('student.upload.payment.bill' , $request_id)}}" method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <input type="file" class="form-control mb-3" name="payment_bill_file">
+                                                                <button class="btn btn-primary w-100" type="submit">ارسل الفاتورة</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-5 alert alert-warning text-center">
+                                                        يرجى ملاحظة ان مبلغ التحويل هو مجرد تامين للتقديم علي الدورة, و يتم ارسال تفاصيل السعر النهائي عند التواصل بفريق العمل الخاص بنا 
+                                                    </div>
+                                                    <hr>
+                                                </div>
+                                            </div>
+                                            
                                             <div class="cheched-heading">
                                                 <h3 class="text-main-color font-weight-bold">كلاسات</h3>
                                                 <p>الرجاء التواصل بالمكتب الخاص بنا عن طريق الارقام الاتية</p>
@@ -99,6 +149,7 @@
                                                             <span class="font-weight-bold d-block">SA2120000003184470469940</span> 
                                                         </div>
                                                     </div>
+                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -125,6 +176,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <a href="{{route('prev_step_form_chose_payment_method' , ['request_id' => $request_id ])}}" class="btn bg-dark text-white rounded-10 float-left">
                     الخطوة السابقة
                 </a>
@@ -170,6 +222,9 @@
         </script>
     @enderror 
     <script>
+        $('.pay-now-btn').click(function(){
+            $('.upload-payment-bill').show()
+        })
         $('.refund-policy').change(function(){
             if($(this).prop('checked') == true){
                 $('.pay-now-btn').prop('disabled', false)

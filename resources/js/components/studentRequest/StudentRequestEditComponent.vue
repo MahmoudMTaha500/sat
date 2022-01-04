@@ -56,6 +56,15 @@
                     </div>
                 </div>
                 <hr>
+                <div class="row my-3">
+                    <div class="col-5">
+                        <strong>صورة ايصال الحوالة :</strong>
+                    </div>
+                    <div class="col-7">
+                        <span v-if="bill_file != 0" ><a :href="bill_file" target="_blank">اضغط للعرض</a></span>
+                        <span v-else >لم يتم رفع ملف لايصال الحوالة</span>
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
                 <form class="form" method="post" :action="student_requests_url+'/'+student_request.id">
@@ -158,7 +167,7 @@
 
 <script>
     export default {
-        props: ["csrf_token" , "get_course_price_url" , "get_insurance_price_url" , "student_request" , "student_requests_url"],
+        props: ["csrf_token" , "get_course_price_url" , "get_insurance_price_url" , "student_request" , "student_requests_url" , "bill_file"],
         data() {
             return {
                 student_name : this.student_request.student.name,

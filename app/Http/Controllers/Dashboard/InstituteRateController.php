@@ -9,7 +9,7 @@ class InstituteRateController extends Controller
 {
     public function index()
     {
-    $rates  = InstituteRate::with('institute','student')->get();
+    $rates  = InstituteRate::with('institute','student')->latest('id')->get();
           
     $department_name = 'institutes';
     $page_name = 'rate';
@@ -22,16 +22,16 @@ class InstituteRateController extends Controller
    public function getrates(Request $request){
        if($request->has('approvement')){
            if($request->approvement == '1'){
-                $rates  = InstituteRate::with('institute','student')->where('approvement' , 1)->paginate(10);
+                $rates  = InstituteRate::with('institute','student')->where('approvement' , 1)->latest('id')->paginate(10);
             }
             elseif($request->approvement == '0'){
-               $rates  = InstituteRate::with('institute','student')->where('approvement' , 0)->paginate(10);
+               $rates  = InstituteRate::with('institute','student')->where('approvement' , 0)->latest('id')->paginate(10);
             }
             else{
-                $rates  = InstituteRate::with('institute','student')->paginate(10);
+                $rates  = InstituteRate::with('institute','student')->latest('id')->paginate(10);
             }
        }else{
-            $rates  = InstituteRate::with('institute','student')->paginate(10);
+            $rates  = InstituteRate::with('institute','student')->latest('id')->paginate(10);
        }
    
 

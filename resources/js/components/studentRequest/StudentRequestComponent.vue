@@ -126,11 +126,11 @@
                         </div>
                         <div>
                             <strong>التامين</strong>
-                            <p v-if="insurance_Obj">
-                                السعر : {{insurance_Obj.price}}
+                            <p v-if="insurance_Obj != 0">
+                                ({{insurance_Obj*serviceObj.weeks}} ريال) | {{insurance_Obj}} ريال / الاسبوع 
                             </p>
                             <p v-else>
-                                لا يوجد تامين
+                                لا يوجد تأمين
                             </p>
                             <hr />
                         </div>
@@ -433,7 +433,7 @@ request_id: 0,
                 this.serviceObj = obj;
                 this.course_Obj = this.serviceObj.course;
                 this.airport_Obj = this.serviceObj.airport;
-                this.insurance_Obj = this.serviceObj.insurance;
+                this.insurance_Obj = obj.insurance_price;
                 this.residence_Obj = this.serviceObj.residence;
                 this.institute_name = this.course_Obj.institute.name_ar;
                 $("#request_details_modal").modal("show");
