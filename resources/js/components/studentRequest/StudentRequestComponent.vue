@@ -245,7 +245,8 @@
                                         <th class="border-top-0">ملاحظات الطالب</th>
                                         <th class="border-top-0">ملاحظات كلاسات</th>
 
-                                        <th class="border-top-0">الحالة</th>
+                                        <th class="border-top-0">حالة الدراسة</th>
+                                        <th class="border-top-0">حالة الدفع</th>
                                         <th class="border-top-0">التاريخ</th>
                                         <th class="border-top-0">تحكم</th>
                                     </tr>
@@ -281,12 +282,35 @@
                                         <td class="text-truncate">
                                             <!-- <input type="checkbox" id="checkbox" v-model="request.approvment" @change="updateApprovment" @click="getrequest_id(request.id)" />
                                             <label for="checkbox">{{ (request.approvment == 1) ? "مقبول":"غير مقبول" }}</label> -->
-                                            <select v-model="request.status" @change="updateStatus" @click="getrequest_id(request.id)" name="" id="">
+                                            <!-- <select v-model="request.status" @change="updateStatus" @click="getrequest_id(request.id)" name="" id="">
                                                 <option value="جديد"> جديد</option>
                                                 <option value="حصل علي قبول"> حصل علي قبول </option>
                                                 <option value="بداء الدراسة"> بداء الدراسة</option>
                                                 <option value="مرفوض"> مرفوض</option>
-                                            </select>
+                                            </select> -->
+                                            <p v-if="request.status == 'جديد' " >
+                                                <span class="text-warning">{{request.status}}</span>
+                                            </p>
+                                            <p v-else-if="request.status == 'حصل علي قبول' " >
+                                                <span class="text-success">{{request.status}}</span>
+                                            </p>                                            
+                                            <p v-else-if="request.status == 'بداء الدراسة' " >
+                                                <span class="text-success">{{request.status}}</span>
+                                            </p>                                            
+                                            <p v-else-if="request.status == 'مرفوض' " >
+                                                <span class="text-danger">{{request.status}}</span>
+                                            </p>                                            
+                                        </td>
+                                        <td class="text-truncate">
+                                            <p v-if="request.payment_status == '0' " >
+                                                <span class="text-danger">لم يتم الدفع</span>
+                                            </p>
+                                            <p v-else-if="request.payment_status == '1' " >
+                                                <span class="text-success">تم الدفع</span>
+                                            </p>                                            
+                                            <p v-else-if="request.payment_status == '2' " >
+                                                <span class="text-warning">مدفوع جزئيا</span>
+                                            </p>                                          
                                         </td>
                                         <td class="text-truncate">{{request.created_at}}</td>
 

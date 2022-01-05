@@ -110,7 +110,8 @@ class StudentRequestsController extends Controller
     {
         $validated = $request->validate([
             'weeks' => 'required|numeric',
-            'started_date' => 'required',
+            'from_date' => 'required',
+            'to_date' => 'required',
             'institute_message' => 'required',
             'paid_price' => 'required',
         ]);
@@ -118,6 +119,7 @@ class StudentRequestsController extends Controller
         $airport = json_decode($request->airport , true);
         $data = [];
         $data['institute_message'] = $request->institute_message;
+        $data['payment_status'] = $request->payment_status;
         $data['status'] = $request->status;
         $data['weeks'] = $request->weeks;
         $data['price_per_week'] = $request->price_per_week;
@@ -129,7 +131,8 @@ class StudentRequestsController extends Controller
         $data['total_price'] = $request->total_price;
         $data['paid_price'] = $request->paid_price;
         $data['remaining_price'] = $request->total_price - $request->paid_price;
-        $data['started_date'] = $request->started_date;
+        $data['from_date'] = $request->from_date;
+        $data['to_date'] = $request->to_date;
         $data['note'] = $request->note;
         StudentRequest::where('id' , $id)->update($data);
         session()->flash('alert_message', ['message' => 'تم تعديل الطلب بنجاح', 'icon' => 'success']);

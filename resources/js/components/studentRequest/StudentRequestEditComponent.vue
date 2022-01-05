@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput2">الحاله</label>
+                                    <label for="projectinput2">حالة القبول</label>
                                     <select class="form-control text-left" name="status">
                                         <option  value="">اختر الحاله</option>
 
@@ -86,6 +86,16 @@
                                         <option :selected="status == 'حصل علي قبول' ? true : false " value="حصل علي قبول"> حصل علي قبول </option>
                                         <option :selected="status == 'بداء الدراسة' ? true : false " value="بداء الدراسة"> بداء الدراسة</option>
                                         <option :selected="status == 'مرفوض' ? true : false " value="مرفوض"> مرفوض</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput2">حالة الدفع</label>
+                                    <select class="form-control text-left" name="payment_status">
+                                        <option :selected="payment_status == '0' ? true : false " value="0"> لم يتم الدفع</option>
+                                        <option :selected="payment_status == '2' ? true : false " value="2"> مدفوع جزئيا  </option>
+                                        <option :selected="payment_status == '1' ? true : false " value="1"> تم الدفع بالكامل</option>
                                     </select>
                                 </div>
                             </div>
@@ -107,7 +117,20 @@
                                     <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
                                 </div>
                             </div>
-                             <div class="col-md-6">
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1"> تاريخ البداية </label>
+                                    <input type="text" v-model="from_date" id="projectinput1" min="1" class="form-control"   name="from_date" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1"> تاريخ الانتهاء </label>
+                                    <input type="text" v-model="to_date" id="projectinput1" min="1" class="form-control"   name="to_date" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="projectinput2"> الاستقبال ({{chosin_airport.price}} ريال سعودي)</label>
                                     <select v-model="chosin_airport" class="form-control text-left">
@@ -115,12 +138,6 @@
                                         <option :selected="airport_obj.id == chosin_airport.id ? true : false "  v-for="  airport_obj in airports" :key="airport_obj.id" :value="airport_obj">{{airport_obj.price}} ريال - {{ airport_obj.name_ar}} </option>
                                     </select>
                                     <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="projectinput1"> تاريخ البداية </label>
-                                    <input type="text" v-model="started_date" id="projectinput1" min="1" class="form-control"   name="started_date" />
                                 </div>
                             </div>
                             
@@ -178,10 +195,12 @@
                 paid_price : this.student_request.paid_price,
                 remaining_price : this.student_request.remaining_price,
                 status : this.student_request.status,
+                payment_status : this.student_request.payment_status,
                 weeks : this.student_request.weeks,
                 notes : this.student_request.note,
                 institute_message : this.student_request.institute_message,
-                started_date : this.student_request.started_date,
+                from_date : this.student_request.from_date,
+                to_date : this.student_request.to_date,
                 residences : this.student_request.course.institute.residence,
                 chosin_residence :'',
                 airports : this.student_request.course.institute.airport,
