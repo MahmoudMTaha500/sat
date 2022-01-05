@@ -57,7 +57,7 @@ class WebsiteController extends Controller
         public function search_form_institute(Request  $request)
         {
     //    dd($request->all());
-            $institutes = Institute::where('name_ar','like',"%$request->search%")->take(6)->get(['id','name_ar']);
+            $institutes = Institute::latest('id')->where('name_ar','like',"%$request->search%")->take(6)->get(['id','name_ar']);
 
         return response()->json(['institutes'=>$institutes]);
         }
@@ -80,9 +80,9 @@ class WebsiteController extends Controller
     public function institute_page($institute_id, $institute_slug, $course_slug = null)
     {
         $useVue = true;
-        $course = Course::with('coursesPrice', 'coursesPricePerWeek')->where(['institute_id' => $institute_id, 'slug' => $course_slug])->get();
+        $course = Course::latest('id')->with('coursesPrice', 'coursesPricePerWeek')->where(['institute_id' => $institute_id, 'slug' => $course_slug])->get();
         $institute = Institute::where(['id' => $institute_id, 'slug' => $institute_slug])->get()[0];
-        $institute_blogs = Blog::latest()
+        $institute_blogs = Blog::latest('id')->latest()
                                         ->where('country_id' , $institute->country_id)
                                         ->orWhere('city_id' , $institute->city_id)
                                         ->orWhere('institute_id' , $institute->id)
@@ -297,9 +297,9 @@ if($student_mail){
     {
 
         if(request('cat_id')){
-            $blogs = Blog::where('category_id',request('cat_id'))->paginate(8);
+            $blogs = Blog::latest('id')->where('category_id',request('cat_id'))->paginate(8);
         } else{
-            $blogs = Blog::paginate(8);
+            $blogs = Blog::latest('id')->paginate(8);
 
         }
         $page_identity = [
@@ -741,7 +741,7 @@ if($student_mail){
         public function student_success_story()
         {
             $student = auth()->guard('student')->user();
-            $student_request= StudentRequest::where('student_id',$student->id)->with('course')->groupBy(['institute_id'])->get();
+            $student_request= StudentRequest::latest('id')->where('student_id',$student->id)->with('course')->groupBy(['institute_id'])->get();
             $page_title = 'success-story';
             $page_identity = [
                 'title_tag' => 'قصة النجاح' ,
@@ -871,7 +871,7 @@ if($student_mail){
             }
             public function offers()
             {
-                $offers = Course::where('discount' , '!=' , 0)->paginate(12);
+                $offers = Course::latest('id')->where('discount' , '!=' , 0)->paginate(12);
                 $page_identity = [
                     'title_tag' => 'كلاسات | العروض',
                     'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة،اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',

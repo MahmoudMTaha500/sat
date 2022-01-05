@@ -6,7 +6,7 @@
             <div class="row px-xl-5">
                 <div class="col-md-5 col-12">
                     <img src="{{asset('website')}}/imgs/logo-white.png" alt="Classat Logo" class="img-fluid" />
-                    <p class="text-white mt-4">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد و مع أمهر المعلمين حول العالم نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون</p>
+                    <p class="text-white mt-4">ابدأ رحلتك الآن، وتعلم اللغة في أكبر المعاهد الدولية على يد أمهر المعلمين وخبراء اللغة حول العالم. نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون وخلق بيئة تنافسية</p>
                 </div>
                 <div class="col-md-2 col-6 mt-3 mt-md-0">
                     <h6 class="text-secondary-color">الخدمات</h6>
@@ -22,7 +22,7 @@
                     <ul class="p-0">
                         <li><a href="{{route('website.about.us')}}" class="text-white">عن الشركة</a></li>
                         <li><a href="{{route('website.contact.us')}}" class="text-white">اتصل بنا</a></li>
-                        <li><a href="{{route('website.terms_conditions')}}" class="text-white">الشروط و الاحكام</a></li>
+                        <li><a href="{{route('website.terms_conditions')}}" class="text-white">الشروط والأحكام</a></li>
                         <li><a href="{{route('website.refund_policy')}}" class="text-white">شروط الاستردات</a></li>
                     </ul>
                 </div>

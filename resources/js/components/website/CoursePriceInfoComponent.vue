@@ -11,7 +11,7 @@
                         اللغة الإنجليزية العامة :
                         <span  v-if="course.discount !=0" class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} - </span>
                     </span>
-                    <span   class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الاسبوع </span>
+                    <span   class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الأسبوع </span>
                     <hr />
                 </div>
                 <div>
@@ -21,7 +21,7 @@
                 </div>
                 <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
-                    <span class="text-main-color">{{chosin_residence.price*weeks}} ريال سعودي  (سعر الاسبوع الواحد : {{  chosin_residence.price   }}) </span>
+                    <span class="text-main-color">{{chosin_residence.price*weeks}} ريال سعودي  (سعر الأسبوع الواحد : {{  chosin_residence.price   }}) </span>
                     <hr />
                 </div>
                 <div v-if="chosin_airport.price !=0 && chosin_airport.price != '' && !isNaN(chosin_airport.price) ">
@@ -35,7 +35,7 @@
                     <hr />
                 </div>
                 <div>
-                    <span class="d-block"><span class="font-weight-bold"> اجمالي السعر : </span> </span>
+                    <span class="d-block"><span class="font-weight-bold"> إجمالي السعر : </span> </span>
                     <span class="text-main-color">{{Math.round(total_price())}} ريال سعودي </span>
                 </div>
             </div>
@@ -58,9 +58,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>عدد الاسابيع</label>
+                        <label>عدد الأسابيع</label>
                         <select name="weeks" @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
-                            <option value="">عدد الاسابيع</option>
+                            <option value="">عدد الأسابيع</option>
                             <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                         </select>
                     </div>
@@ -68,7 +68,7 @@
                         <label>السكن</label>
                         <select v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option :value="0" disabled>هل ترغب في السكن؟</option>
-                            <option :value="0" selected>لا احتاج خدمة سكن</option>
+                            <option :value="0" selected>لا أحتاج إلى خدمة السكن </option>
                             <option v-for="residence in residences" :key="residence.id" :value="residence">{{residence.name_ar}} - {{residence.price}}</option>
                         </select>
                         <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">

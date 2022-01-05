@@ -5,8 +5,8 @@
         <div class="row px-xl-5 align-items-end pt-md-5">
             <div class="col-lg-6 align-self-center">
                 <!-- Section Heading -->
-                <h1 class="text-white font-weight-bold mb-4 intro-title">أبدا رحلتك الأن و تعلم اللغة في أكبر المعاهد</h1>
-                <p class="lead text-white mb-4 intro-desc">نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية لرفع مستوى التعاون التعليمي بين المؤسسات وخلق بيئة تنافسية</p>
+                <h1 class="text-white font-weight-bold mb-4 intro-title">ابدأ رحلتك الآن، وتعلم اللغة في أكبر المعاهد الدولية</h1>
+                <p class="lead text-white mb-4 intro-desc">نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون، وخلق بيئة تنافسية</p>
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
@@ -42,8 +42,8 @@
         <div class="row px-xl-5">
             <!-- Section Heading -->
             <div class="col-md-6 align-self-center">
-                <h3 class="text-main-color font-weight-bold">أبحث عن دورة اللغة المناسبة لك</h3>
-                <p>ابحث عن أفضل الجامعات والمعاهد للدراسة بالخارج بكل سهولة ومع افضل تجربة مستخدم</p>
+                <h3 class="text-main-color font-weight-bold">ابحث عن دورة اللغة المناسبة لك</h3>
+                <p>ابحث عن أفضل الجامعات والمعاهد للدراسة بالخارج بكل سهولة مع أفضل تجربة مُستخدم</p>
             </div>
             <!-- ./Section Heading -->
 
@@ -64,7 +64,7 @@
                         <!-- Weeks Count Field -->
                         <div class="form-group">
                             <select name="weeks" class="form-control rounded-10" data-live-search="true">
-                                <option value="" disabled selected>عدد الاسابيع</option>
+                                <option value="" disabled selected>عدد الأسابيع</option>
                                 @for ($i = 0; $i <= 45; $i++)
                                     <option value="{{$i}}">{{$i}}</option>
                                 @endfor                                
@@ -186,7 +186,7 @@
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
                 <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
-                <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
+                <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
                 </div>
@@ -200,7 +200,7 @@
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
                 <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
-                <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">معرفة المزيد</button></a>
+                <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
                 </div>
@@ -258,8 +258,8 @@
         <div class="row px-xl-5 mb-4">
             <div class="col-12">
                 <div class="heading-best-offers text-center">
-                    <h3 class="text-main-color font-weight-bold">أخر الأخبار و الموضوعات المهمة</h3>
-                    <p>اعرف اخر الأخبار و الموضوعات الجديده الخاص بالطالب السعودي بالخارج و الدراسه بشكل عام</p>
+                    <h3 class="text-main-color font-weight-bold">آخر الأخبار والموضوعات المهمة</h3>
+                    <p>اعرف آخر الأخبار والموضوعات الجديدة التي تخص حياة الطلبة السعوديين بالخارج والدراسة بشكل عام</p>
                 </div>
             </div>
         </div>
@@ -277,7 +277,7 @@
                         <div class="card-body rounded-10 bg-white">
                             <a href="{{route('website.article',$blog->id)}}"><p class="card-title text-main-color h5">{{$blog->title_ar}}</p></a>
                             <p class="mb-0">
-                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <a href="{{route('website.article',$blog->id)}}">المزيد</a></span>
+                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <a href="{{route('website.article',$blog->id)}}">اقرأ المزيد</a></span>
                             </p>
                             <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
                         </div>
@@ -290,7 +290,7 @@
     </div>
 </section>
 <!-- ./News -->
-@endif @if (isset($blogs[0]))
+@endif @if (isset($success_stories[0]))
 <!-- Success Stories -->
 <section class="success-stories pt-5 pb-0">
     <div class="container-fluid">
@@ -299,7 +299,7 @@
             <div class="col-12">
                 <div class="heading-success-stories text-center">
                     <h3 class="text-main-color font-weight-bold">آراء العملاء</h3>
-                    <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
+                    <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون، وخلق بيئة تنافسية</p>
                 </div>
             </div>
         </div>
@@ -355,7 +355,7 @@
         <div class="row px-xl-5">
             <div class="col-12 text-center">
                 <h3 class="text-main-color font-weight-bold">تصفح معاهدنا</h3>
-                <p>تصفح لائحة أفضل معاهد اللغات المعتمدة من أجلك لتطوير مهاراتك اللغوية</p>
+                <p>تصفح لائحة أفضل معاهد اللغات المعتمدة، أعددناها من أجل تطوير مهاراتك اللغوية</p>
                 <a href="{{route('website.institutes')}}"><button class="btn rounded-10 bg-secondary-color text-white px-4">ابدأ الآن</button></a>
             </div>
         </div>

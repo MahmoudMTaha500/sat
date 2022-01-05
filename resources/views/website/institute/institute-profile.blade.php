@@ -338,7 +338,7 @@
                             --}}
                         </div>
                         <div class="bg-white rounded-10 p-4 mb-4">
-                            <h5 class="text-main-color font-weight-bold">أضف تقييم</h5>
+                            <h5 class="text-main-color font-weight-bold">إضافة التقييم</h5>
                             <p class="starrr add-rate"></p>
                             <form method="POST" action="{{route('institutes.add.review')}}">
                                 @csrf

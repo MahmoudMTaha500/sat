@@ -31,7 +31,7 @@ class StudentController extends Controller
             'payment_bill_file.max' => 'يجب الا يتجاوز حجم الملف 5 ميجا بايت',
         ]);
 
-        $student_request = StudentRequest::where('id' , $request_id)->get()[0];
+        $student_request = StudentRequest::latest('id')->where('id' , $request_id)->get()[0];
         if(!empty($student_request->getFirstMedia('student_request_payment_bill_file'))){
             $student_request->getFirstMedia('student_request_payment_bill_file')->delete();
         }

@@ -8,7 +8,7 @@
                 <div class="col-12">
                     <div class="heading-institutes">
                         <h1 class="text-main-color font-weight-bold">تواصل معنا</h1>
-                        <p>في حال وجود اي ملاحظات أو استفسارات ,والحصول على نشرتنا الدورية من منح دراسية وأخر عروضنا والكثير يمكنك التواصل مع فريق سات على</p>
+                        <p>يمكنكم الحصول على النشرة الدورية ومعرفة آخر عروضنا، كما يُسعدنا تواصلكم مع فريق عمل "سات" واستقبال ملاحظاتكم واستفساراتكم على العناوين التالية:</p>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                                 </span>
                                 @enderror
                                 <div class="form-group btn-light">
-                                    <input value="{{old('email')}}" name="email" type="email" class="form-control rounded-10 bg-transparent @error('email') is-invalid @enderror" placeholder="الايميل" />
+                                    <input value="{{old('email')}}" name="email" type="email" class="form-control rounded-10 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الألكتروني" />
                                 </div>
                                 @error('message')
                                 <span class="invalid-feedback d-block" role="alert">
@@ -86,7 +86,7 @@
                                     <textarea name="message" class="form-control rounded-10 bg-transparent @error('message') is-invalid @enderror" placeholder="اكتب رسالتك هنا" rows="12">{{old('message')}}</textarea>
                                 </div>
 
-                                <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">ارسال</button>
+                                <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">إرسال</button>
                             </form>
                         </div>
                     </div>

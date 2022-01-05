@@ -8,7 +8,7 @@
         <!-- Section Heading -->
         <div class="col-12 text-center">
             <h1 class="text-main-color font-weight-bold">تسجيل الدخول</h1>
-            <p>برجاء ادخال بريدك الالكتروني والكلمة المرور للدخول لحسابك </p>
+            <p>برجاء ادخال بريدك الإلكتروني، وكلمة المرور للدخول لحسابك </p>
         </div>
         <!-- ./Section Heading -->
         <div class="row ">
@@ -60,7 +60,7 @@
                             class="btn rounded-10 bg-secondary-color w-100 text-center mb-3 text-white">تسجيل الدخول</button>
                         <!-- ./Submit Btn -->
                         <!-- Register Link -->
-                        <p class="text-center">ليس لديك حساب؟ <a href="{{route('student.register')}}" class="text-secondary-color">انشاء حساب جديد</a></p>
+                        <p class="text-center">ليس لديك حساب؟ <a href="{{route('student.register')}}" class="text-secondary-color">إنشاء حساب جديد</a></p>
                         <!-- Register Link -->
                     </form>
                 </div>

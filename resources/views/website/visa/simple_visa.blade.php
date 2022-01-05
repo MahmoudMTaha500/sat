@@ -5,18 +5,13 @@
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="col-12 text-center">
-            <h1 class="text-main-color font-weight-bold">طلب تاشيره جديد</h1>
-            <p>برجاء ادخال البيانات لانشاء التاشيره</p>
+            <h1 class="text-main-color font-weight-bold">طلب تأشيرة جديدة</h1>
+            <p>برجاء إدخال البيانات لإنشاء التأشيرة</p>
         </div>
         <!-- ./Section Heading -->
         <div class="row">
             <div class="col-md-5 mx-auto">
                 <!-- Sign Up Form -->
-
-                
-
-
-
 
                 <div class="sign-out-form shadow-lg rounded-10 py-4 px-2 p-xl-5 mx-auto bg-white">
                     @if (session()->has('alert_message'))
@@ -73,7 +68,7 @@
 
 
                                 
-                                 type="email" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الألكتروني" />
+                                 type="email" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الإلكتروني" />
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -101,8 +96,8 @@
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country" required>
                                     <option value="" selected disabled>اختر الدوله</option>
-                                    <option value="England"> بريطانايا  </option>
-                                    <option value="USA"> امريكا </option>
+                                    <option value="England"> بريطانيا   </option>
+                                    <option value="USA"> أمريكا </option>
                                     <option value="Schengen"> شنغن </option>
                                 </select>
 
@@ -117,8 +112,8 @@
                                     <option value="" selected disabled> اختر من دول شنغن</option>
                                     <option value="Germany"> المانيا  </option>
                                     <option value="France"> فرنسا </option>
-                                    <option   value="Italy"> ايطاليا </option>
-                                    <option   value="Spain"> اسبانيا </option>
+                                    <option   value="Italy"> إيطاليا </option>
+                                    <option   value="Spain"> إسبانيا  </option>
                                     <option   value="Estonia"> إستونيا </option>
                                     <option   value="Belgium"> بلجيكا </option>
                                     <option   value="Greece"> اليونان </option>
@@ -142,21 +137,21 @@
                             <label>نوع التأشيرة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
                                 <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
-                                    <option value="" selected disabled>اختر التاشيرة</option>
-                                    <option visa-price="820"   class="uk" value=" سياحي 6 شهور">سياحي 6 شهور </option>
-                                    <option visa-price="820"    class="uk" value=" دراسي 6 شهور">دراسي 6 شهور </option>
+                                    <option value="" selected disabled>اختر التأشيرة </option>
+                                    <option visa-price="820"   class="uk" value=" سياحي ستة أشهر ">سياحي ستة أشهر  </option>
+                                    <option visa-price="820"    class="uk" value=" دراسي ستة أشهر ">دراسي ستة أشهر  </option>
                                     <option visa-price="2480"    class="uk" value="  سياحي سنتين"> سياحي سنتين</option>
-                                    <option visa-price="4310"    class="uk" value="  سياحي 5 سنوات"> سياحي 5 سنوات </option>
-                                    <option visa-price="5350"    class="uk" value="  سياحي 10 سنوات"> سياحي 10 سنوات </option>
-                                    <option visa-price="2260"   class="uk" value=" تاشيره طالب اقل من سته شهور">تاشيره طالب اقل من سته شهور  </option>
-                                    <option visa-price="4900"   class="uk" value=" تاشيره طالب سنه">تاشيره طالب سنه  </option>
-                                    <option visa-price="8960"   class="uk" value="  تاشيره طالب سنتين"> تاشيره طالب سنتين  </option>
-                                    <option visa-price="11640"   class="uk" value=" تاشيره طالب ثلاث سنوات"> تاشيره طالب ثلاث سنوات </option>
-                                    <option visa-price="14250"   class="uk" value="  تاشيره طالب اربع سنوات"> تاشيره طالب اربع سنوات </option>
-                                    <option visa-price="3940"   class="uk" value="  دراسي 11 شهر"> دراسي 11 شهر </option>
+                                    <option visa-price="4310"    class="uk" value="  سياحي خمس سنوات"> سياحي خمس سنوات </option>
+                                    <option visa-price="5350"    class="uk" value="  سياحي عَشْر سنين"> سياحي عَشْر سنين </option>
+                                    <option visa-price="2260"   class="uk" value=" تأشيرة طالب أقل من ستة أشهر">تأشيرة طالب أقل من ستة أشهر  </option>
+                                    <option visa-price="4900"   class="uk" value=" تأشيرة طالب لسنة واحدة">تأشيرة طالب لسنة واحدة  </option>
+                                    <option visa-price="8960"   class="uk" value="  تأشيرة طالب لسنتين"> تأشيرة طالب لسنتين  </option>
+                                    <option visa-price="11640"   class="uk" value=" تأشيرة طالب لثلاث سنوات"> تأشيرة طالب لثلاث سنوات </option>
+                                    <option visa-price="14250"   class="uk" value="  تأشيرة طالب لأربع سنوات"> تأشيرة طالب لأربع سنوات </option>
+                                    <option visa-price="3940"   class="uk" value="  دراسي أحد عشر شهراً"> دراسي أحد عشر شهراً </option>
 
                                     <option visa-price="2220"  class="usa" value="  دراسي شامل السفيس"> دراسي شامل السفيس </option>
-                                    <option visa-price="838"   class="usa" value=" مرافق"> مرافق</option>
+                                    <option visa-price="838"   class="usa" value=" مُرافق"> مُرافق</option>
                                     <option visa-price="838"   class="usa" value=" سياحي"> سياحي</option>
                                     <option visa-price="730"   class="schengen" value=" سياحي"> سياحي</option>
                                 </select>

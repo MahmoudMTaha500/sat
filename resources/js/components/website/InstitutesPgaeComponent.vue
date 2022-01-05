@@ -8,7 +8,7 @@
                     <div class="col-12">
                         <div class="heading-institutes">
                             <h3 class="text-main-color font-weight-bold">الدورات ( {{courses.total}} )</h3>
-                            <p>تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم فقط اختر اللغة التي ترغب في دراستها</p>
+                            <p>تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم، واختر اللغة التي ترغب في دراستها</p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                                             </div>
 
                                             <div class="form-group">
-                                                <label>عدد الاسابيع</label>
+                                                <label>عدد الأسابيع</label>
                                                 <select v-model="weeks" class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option v-for="week in 45" :key="week" :value="week">{{week}}</option>
                                                 </select>
@@ -70,10 +70,10 @@
                                                 <label> ترتيب حسب </label>
                                                 <select v-model="arrange_as" class="form-control  rounded-10" data-live-search="true">
                                                     <option value="">الكل</option>
-                                                    <option value="highest_rates">التقيم من الاعلى الي الاقل</option>
-                                                    <option value="lowest_rates">  التقييم من الاقل للاعلي    </option>
-                                                    <option value="highest_prices">   السعر من الاعلي للاقل    </option>
-                                                    <option value="lowest_prices">  السعر من الاقل للاعلي    </option>
+                                                    <option value="highest_rates">التقييم من الأعلى إلى الأقل</option>
+                                                    <option value="lowest_rates">  التقييم من الأعلى إلى الأقل    </option>
+                                                    <option value="highest_prices">   السعر من الأعلى للأقل    </option>
+                                                    <option value="lowest_prices">  السعر من الأقل للأعلى    </option>
                                                  
                                                 </select>
                                             </div>
@@ -81,7 +81,7 @@
                                             <div class="mb-4">
                                                 <div class="form-check form-check-inline mr-0 ml-4">
                                                     <input class="form-check-input mr-0 ml-3 bg-secondary" type="checkbox" v-model="best_offers" />
-                                                    <label class="form-check-label">افضل العروض</label>
+                                                    <label class="form-check-label">أفضل العروض</label>
                                                 </div>
                                             </div>
                                             <button @click="filter_courses(); pagination_pages_method(courses.current_page)" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">فلتر</button>

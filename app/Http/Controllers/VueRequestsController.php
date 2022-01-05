@@ -14,7 +14,7 @@ class VueRequestsController extends Controller
 {
     public function get_countries()
     {
-        $countries = Country::get(['name_ar as name', 'id']);
+        $countries = Country::latest('id')->get(['name_ar as name', 'id']);
         return response()->json($countries);
     }
     public function get_cities(Request $request)
@@ -25,7 +25,7 @@ class VueRequestsController extends Controller
                 $cities = $cities->where('country_id', $request->country_id);
             }
         }
-        $cities = $cities->get(['name_ar as name', 'id']);
+        $cities = $cities->latest('id')->get(['name_ar as name', 'id']);
         return response()->json($cities);
     }
 
@@ -154,7 +154,7 @@ class VueRequestsController extends Controller
             });
         }
 
-        $courses = $courses->latest()->with('institute', 'institute.city', 'institute.country', 'institute.rats', 'coursesPricePerWeek')->paginate(9);
+        $courses = $courses->latest('id')->with('institute', 'institute.city', 'institute.country', 'institute.rats', 'coursesPricePerWeek')->paginate(9);
         return response()->json(['status' => 'success', 'courses' => $courses]);
     }
 
@@ -178,7 +178,7 @@ class VueRequestsController extends Controller
     // get price per week in institute profile
     public function get_student_favourite_courses(Request $request)
     {
-        $student_favourite_courses = Favourite::where(['course_id' => $request->course_id])->get();
+        $student_favourite_courses = Favourite::latest('id')->where(['course_id' => $request->course_id])->get();
         return response()->json(['status' => 'success', 'student_favourite_courses' => $student_favourite_courses]);
 
     }

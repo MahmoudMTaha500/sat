@@ -11,7 +11,7 @@
         <!-- Section Heading -->
         <div class="col-12 text-center">
             <h1 class="text-main-color font-weight-bold">إنشاء حساب جديد</h1>
-            <p>برجاء ادخال البيانات لانشاء حساب جديد  </p>
+            <p>إنشاء حساب جديد  </p>
         </div>
         <!-- ./Section Heading -->
         <div class="row ">
@@ -90,7 +90,7 @@
                             @enderror
                         </div>
                         <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="password_confirmation" value="{{ old('password_confirmation') }}"  type="password" class="form-control border-0 bg-transparent @error('password_confirmation') is-invalid @enderror" placeholder="تاكيد كلمة المرور">
+                            <input name="password_confirmation" value="{{ old('password_confirmation') }}"  type="password" class="form-control border-0 bg-transparent @error('password_confirmation') is-invalid @enderror" placeholder="تأكيد كلمة المرور">
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
