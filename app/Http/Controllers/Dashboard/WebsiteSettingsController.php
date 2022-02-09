@@ -14,7 +14,7 @@ class WebsiteSettingsController extends Controller
         $refund_policy = WebsiteSettings::get()[0]->refund_policy_ar;
         $department_name='website-settings';
         $page_name='refund-policy';
-        $page_title = 'شروط الاستردات';
+        $page_title = 'شروط الاسترداد';
         return view('admin.website_settings.refund_policy' , compact('department_name' , 'page_name','refund_policy','page_title'));
     }
 
@@ -23,7 +23,7 @@ class WebsiteSettingsController extends Controller
         WebsiteSettings::where(['id'=>'1'])->update([
             'refund_policy_ar'=>$request->refund_policy,
         ]);
-        session()->flash('alert_message', ['message' => 'تم تحديث شروط الاستردات', 'icon' => 'success']);
+        session()->flash('alert_message', ['message' => 'تم تحديث شروط الاسترداد', 'icon' => 'success']);
         return back();
     }
 
@@ -32,7 +32,7 @@ class WebsiteSettingsController extends Controller
         $terms_conditions = WebsiteSettings::get()[0]->terms_conditions_ar;
         $department_name='website-settings';
         $page_name='terms-conditions';
-        $page_title = 'الشروط و الاحكام';
+        $page_title = 'الشروط و الأحكام';
         return view('admin.website_settings.terms_conditions' , compact('department_name' , 'page_name','terms_conditions','page_title'));
     }
 
@@ -42,7 +42,7 @@ class WebsiteSettingsController extends Controller
             'terms_conditions_ar'=>$request->terms_conditions,
         ]);
 
-        session()->flash('alert_message', ['message' => 'تم تحديث الشروط و الاحكام بنجاح', 'icon' => 'success']);
+        session()->flash('alert_message', ['message' => 'تم تحديث الشروط و الأحكام بنجاح', 'icon' => 'success']);
         return back();
     }
 }

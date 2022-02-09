@@ -118,15 +118,35 @@
                             </tbody>
                         </table>
 
-                        <div class="pagination">
-                            <button class="btn btn-default" @click="fetchInstitutes(institutes.prev_page_url)" :disabled="!institutes.prev_page_url">
-                                Previos
-                            </button>
-                            <span> page {{institutes.current_page}} of {{institutes.last_page }} </span>
-                            <button class="btn btn-default" @click="fetchInstitutes(institutes.next_page_url)" :disabled="!institutes.next_page_url">
-                                Next
-                            </button>
-                        </div>
+                        <ul dir="rtl" class="pagination d-flex justify-content-center p-0">
+                            <li class="page-item">
+                                <button
+                                    :style="!institutes.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                    @click="pagination(prev_page_url);pagination_pages_method(institutes.current_page-1)"
+                                    :disabled="!institutes.prev_page_url"
+                                    class="page-link rounded-10 mx-1 text-dark border-0"
+                                >
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </li>
+                            
+                            <li style="margin:0 5px;" class="page-item" v-for="(page, index) in pagination_pages" :key="index" :class="institutes.current_page == page ? 'active' : ''">
+                                <a style="border-radius: 10px;" class="page-link" @click="pagination(institutes.path+'?page='+page);pagination_pages_method(page)">{{ page }}</a>
+                            </li>
+                            
+
+                            <li class="page-item">
+                                <button
+                                    :style="!institutes.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                    @click="pagination(next_page_url);pagination_pages_method(institutes.current_page +1 )"
+                                    :disabled="!institutes.next_page_url"
+                                    class="page-link rounded-10 mx-1 text-dark border-0"
+                                >
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                            </li>
+                        </ul>
+                        
                     </div>
                 </div>
             </div>
@@ -171,12 +191,28 @@
             };
         },
         methods: {
+            pagination_pages_method: function(current_page){
+                if(current_page <= 4){
+                    this.pagination_pages = [1,2,3,4,5]
+                }else if(current_page > (this.institutes.last_page-2) ){
+                    this.pagination_pages = [this.institutes.last_page -4 , this.institutes.last_page -3 , this.institutes.last_page -2 , this.institutes.last_page - 1 , this.institutes.last_page]
+                }else{
+                    this.pagination_pages = [current_page -2 , current_page - 1 , current_page , current_page + 1 , current_page + 2]
+                }
+
+                if(this.institutes.last_page < 5){
+                    this.pagination_pages = Array.from({length: this.institutes.last_page}, (_, i) => i + 1)
+                }
+            },
+            pagination: function (url) {
+                this.instutite_url = url;
+                this.getInstitutes();
+            },
             getInstitutes: function () {
-                let $this = this;
                 axios.get(this.url).then((response) => (this.institutes = response.data.institutes));
             },
 
-            fetchInstitutes: function (url1) {
+            institutesPagination: function (url1) {
                 this.url = url1;
                 this.getInstitutes();
             },

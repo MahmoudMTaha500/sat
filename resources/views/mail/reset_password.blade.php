@@ -74,7 +74,7 @@
                         </tr>
                         <tr class="contact-info">
                             <td class="text-left">
-                                <a class="main-color" href="{{route('website.terms_conditions')}}">الشروط و الاحكام</a> 
+                                <a class="main-color" href="{{route('website.terms_conditions')}}">الشروط و الأحكام</a> 
                             </td>
                             <td width="15px">|</td>
                             <td class="text-right">
@@ -191,7 +191,7 @@
                         <a class="main-color" href="https://wa.me/+966555484931">  <span dir="ltr">+966 55 548 4931 <img src="https://www.linkpicture.com/q/whatsapp_64.png" alt=""></span>  </a>
                     </p>
                     <p class="main-color">
-                        <a class="main-color" href="{{route('website.terms_conditions')}}">الشروط و الاحكام &nbsp;&nbsp;|&nbsp;&nbsp; </a> 
+                        <a class="main-color" href="{{route('website.terms_conditions')}}">الشروط و الأحكام &nbsp;&nbsp;|&nbsp;&nbsp; </a> 
                         <a class="main-color" href="{{route('website.refund_policy')}}">سياسة الاسترجاع</a>
                     </p>
                 </div>

@@ -47,16 +47,9 @@ class AirportsController extends Controller
 
         $price_amount = $request->price;
         $price = $request->price;
-        if(!empty($request->currency_exchange)){
-            $converted_price = Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount($price_amount)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $price = $converted_price + $exchange_money*$price_amount;
-        }
+        $converted_price = currency_convertor($request->currency_exchange, 'SAR' , $price_amount);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $price = $converted_price + $exchange_money*$price_amount;
 
         $airports = Airports::create([
             'name_ar'=>$request->name_ar,
@@ -97,17 +90,9 @@ class AirportsController extends Controller
 
         $price_amount = $request->price;
         $price = $request->price;
-        if(!empty($request->currency_exchange)){
-            $converted_price = Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount($price_amount)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $price = $converted_price + $exchange_money*$price_amount;
-        }
-
+        $converted_price = currency_convertor($request->currency_exchange, 'SAR' , $price_amount);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $price = $converted_price + $exchange_money*$price_amount;
 
         $airport= Airports::find($request->id);
         $airport->name_ar=$request->name_ar;

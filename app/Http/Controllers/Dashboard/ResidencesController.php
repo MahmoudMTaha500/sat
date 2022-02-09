@@ -49,16 +49,9 @@ public function getResidences(){
     {
         $price_amount = $request->price;
         $price = $request->price;
-        if(!empty($request->currency_exchange)){
-            $converted_price = Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount($price_amount)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $price = $converted_price + $exchange_money*$price_amount;
-        }
+        $converted_price = currency_convertor($request->currency_exchange, 'SAR' , $price_amount);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $price = $converted_price + $exchange_money*$price_amount;
 
         $residences = residences::create([
             'name_ar'=>$request->name_ar,
@@ -66,11 +59,10 @@ public function getResidences(){
             'price'=>$price,
             'currency_code'=>$request->currency_exchange,
             'currency_amount'=>$price_amount,
-            ]);
-           
+        ]);
 
-            session()->flash('alert_message', ['message'=>"تم اضافه السكن بنجاح", 'icon'=>'success']);
-            return redirect()->route('residences.index');
+        session()->flash('alert_message', ['message'=>"تم اضافه السكن بنجاح", 'icon'=>'success']);
+        return redirect()->route('residences.index');
 
     }
     public function show(residences $residences)
@@ -96,20 +88,12 @@ public function getResidences(){
     }
     public function update(ResidencesRequest $request, residences $residences)
     {
-
+        
         $price_amount = $request->price;
         $price = $request->price;
-        if(!empty($request->currency_exchange)){
-            $converted_price = Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount($price_amount)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $price = $converted_price + $exchange_money*$price_amount;
-        }
-
+        $converted_price = currency_convertor($request->currency_exchange, 'SAR' , $price_amount);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $price = $converted_price + $exchange_money*$price_amount;
 
         $residence= residences::find($request->id);
         $residence->name_ar=$request->name_ar;

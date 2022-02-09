@@ -101,11 +101,6 @@
                                                         <option   @if($course->required_level == "المتوسط B2" )selected @endif value="المتوسط B2">المتوسط B2</option>
                                                         <option    @if($course->required_level == "متقدم C1" )selected @endif value="متقدم C1">متقدم C1</option>
                                                         <option    @if($course->required_level == "متقدم C2" )selected @endif value="متقدم C2">متقدم C2</option>
-
-
-                                                        {{-- <option @if($course->required_level == "مبتدئ") echo selected @endif value=" مبتدئ ">مبتدئ</option>
-                                                        <option @if($course->required_level == "متوسط") echo selected @endif value= " متوسط " >متوسط</option>
-                                                        <option @if($course->required_level == "متقدم") echo selected @endif value=" متقدم ">متقدم</option> --}}
                                                     </select>
                                                 </div>
                                             </div>
@@ -120,7 +115,6 @@
                                                 <div class="form-group">
                                                     <label for="projectinput2">اختر العمله</label>
                                                     <select class=" form-control text-left currency_exchange" name="currency_exchange" value="{{old('currency_exchange')}}">
-                                                        <option value="">الريال السعودي</option>
                                                         @foreach ($exchange_rates as $exchange_rate)
                                                             <option @if($course->coursesPrice[0]->currency_code == $exchange_rate->currency_code) selected @endif value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
                                                         @endforeach

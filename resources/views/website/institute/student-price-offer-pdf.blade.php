@@ -259,7 +259,7 @@
 
     <section class="refund-policy">
         <h2 class="title">
-            سياسة الاستردات
+            سياسة الاسترداد
         </h2>
         <div class="refund-policy-content">
             {!! $data['refund_policy'] !!}
@@ -279,7 +279,7 @@
                 <a class="main-color" style="text-decoration: none" href="https://wa.me/+966555484931">  <span dir="ltr">+966 55 548 4931 <img style="margin-bottom: -7px" width="30px" src="{{$data['base_url'].'/storage/icons/whatsapp.png'}}" alt=""></span>  </a>
             </p>
             <p class="main-color">
-                <a class="main-color" style="text-decoration: none" href="{{route('website.terms_conditions')}}">الشروط و الاحكام </a> | 
+                <a class="main-color" style="text-decoration: none" href="{{route('website.terms_conditions')}}">الشروط و الأحكام </a> | 
                 <a class="main-color" style="text-decoration: none" href="{{route('website.refund_policy')}}">سياسة الاسترجاع</a>
             </p>
         </div>
@@ -287,35 +287,4 @@
     </div>
 </body>
 </html>
-
-3
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

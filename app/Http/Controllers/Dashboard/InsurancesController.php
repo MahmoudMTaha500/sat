@@ -28,7 +28,7 @@ class InsurancesController extends Controller
 
     public function getInsurances()
     {
-        $insurances = Insurances::with('institute' , 'institute.city' , 'institute.country')->paginate(10);
+        $insurances = Insurances::latest('id')->with('institute' , 'institute.city' , 'institute.country')->paginate(10);
         return response()->json(['insurances' => $insurances]);
     }
 
@@ -48,18 +48,9 @@ class InsurancesController extends Controller
     {
         $price_amount = $request->price;
         $price = $request->price;
-        if(!empty($request->currency_exchange)){
-            $converted_price = Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount($price_amount)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $price = $converted_price + $exchange_money*$price_amount;
-        }
-
-
+        $converted_price = currency_convertor($request->currency_exchange, 'SAR' , $price_amount);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $price = $converted_price + $exchange_money*$price_amount;
 
         $insurances = Insurances::create([
             'weeks' => $request->weeks,
@@ -101,16 +92,9 @@ class InsurancesController extends Controller
 
         $price_amount = $request->price;
         $price = $request->price;
-        if(!empty($request->currency_exchange)){
-            $converted_price = Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount($price_amount)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $price = $converted_price + $exchange_money*$price_amount;
-        }
+        $converted_price = currency_convertor($request->currency_exchange, 'SAR' , $price_amount);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $price = $converted_price + $exchange_money*$price_amount;
 
 
         $insurance = Insurances::find($request->id);

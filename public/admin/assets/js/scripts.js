@@ -28,24 +28,4 @@
             el.parent().find(".visa-question-select").hide();
         }
     });
-
-    function currency_exchange(selector){
-        if (selector.val() == "GBP") {
-            $(".currency_exchange_rate").val("0.21");
-        } else if (selector.val() == "USD") {
-            $(".currency_exchange_rate").val("0");
-        } else {
-            $(".currency_exchange_rate").val("0");
-        }
-    }
-
-    $(".currency_exchange").change(function () {
-        currency_exchange($(this))
-    });
-
-    currency_exchange($('.currency_exchange'))
-
-
-
-
 })(window);

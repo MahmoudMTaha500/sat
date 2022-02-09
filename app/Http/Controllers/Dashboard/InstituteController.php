@@ -34,7 +34,7 @@ class InstituteController extends Controller
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-        $institutes = Institute::latest()->with('country', 'city','rats','courses' , 'creator' )->latest('id')->paginate(10);
+        $institutes = Institute::latest()->where('deleted_at', NULL)->with('country', 'city','rats','courses' , 'creator' )->latest('id')->paginate(10);
         return response()->json(['institutes' => $institutes]);
     }
     /************************************************************** */
@@ -227,7 +227,7 @@ $institute->forceDelete();
         if($name_ar){
             $name_ar = $institute->where('name_ar',$name_ar);
         }
-        $institute = $institute->with('country', 'city' , 'rats','courses')->latest('id')->paginate(10);
+        $institute = $institute->with('country', 'city','rats','courses' , 'creator' )->latest('id')->where('deleted_at', NULL)->paginate(10);
         return response()->json(['institutes' => $institute]);
     }
 

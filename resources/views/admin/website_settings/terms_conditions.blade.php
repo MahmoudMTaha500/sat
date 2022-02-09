@@ -8,7 +8,7 @@
                     <div class="breadcrumb-wrapper col-12">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{route('dashboard')}}">لوحة التحكم</a></li>
-                            <li class="breadcrumb-item active">الشروط و الاحكام</li>
+                            <li class="breadcrumb-item active">الشروط و الأحكام</li>
                         </ol>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                 <div class="col-lg-10">
                     <div class="card" style="zoom: 1;">
                         <div class="card-header">
-                            <h4 class="card-title" id="bordered-layout-card-center">الشروط و الاحكام</h4>
+                            <h4 class="card-title" id="bordered-layout-card-center">الشروط و الأحكام</h4>
                             <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         </div>
                         <div class="card-content collpase show">

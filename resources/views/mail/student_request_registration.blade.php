@@ -88,7 +88,7 @@
                         </tr>
                         <tr class="contact-info">
                             <td class="text-left">
-                                <a class="main-color" href="{{route('website.terms_conditions')}}">الشروط و الاحكام</a> 
+                                <a class="main-color" href="{{route('website.terms_conditions')}}">الشروط و الأحكام</a> 
                             </td>
                             <td width="15px">|</td>
                             <td class="text-right">

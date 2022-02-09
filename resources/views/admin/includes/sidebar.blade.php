@@ -239,7 +239,7 @@
                             <a class="menu-item" href="{{route('website_settings.refund_policy')}}" data-i18n="nav.navbars.nav_dark">سياسة الاسترداد</a>
                         </li>
                         <li   class="{{ $page_name=='terms-conditions' ? 'active' : "" }}"   >
-                            <a class="menu-item" href="{{route('website_settings.terms_conditions')}}" data-i18n="nav.navbars.nav_light">الشروط و الاحكام</a>
+                            <a class="menu-item" href="{{route('website_settings.terms_conditions')}}" data-i18n="nav.navbars.nav_light">الشروط و الأحكام</a>
                         </li>
                     </ul>
                 </li>

@@ -116,7 +116,6 @@
                                                 <div class="form-group">
                                                     <label for="projectinput2">اختر العمله</label>
                                                     <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
-                                                        <option value="">الريال السعودي</option>
                                                         @foreach ($exchange_rates as $exchange_rate)
                                                             <option value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
                                                         @endforeach

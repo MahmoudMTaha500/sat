@@ -53,22 +53,10 @@ class CourseController extends Controller
         // dd($request->all()); 
         $validate = $request->validated();
         $name_ar = $request->name_ar;
-        if(!empty($request->currency_exchange)){
-            $currency =    Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount(1)
-            ->withoutVerifying()
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $calc_currency =  $currency + $exchange_money;
-        }else{
-            $calc_currency =  1;
-        }
+        $currency = currency_convertor($request->currency_exchange, 'SAR' , 1);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $calc_currency =  $currency + $exchange_money;
        
-        
-               
-
         
 
         $getcourse = Course::where(['institute_id' => $request->institute_id, 'name_ar' => $name_ar])->first();
@@ -95,11 +83,7 @@ class CourseController extends Controller
 
             $exchange = $request->currency_exchange;
             $coures_price = $request->coures_price;
-            // dump($exchange);
-            // dd($coures_price);
-            foreach ($coures_price as $price) { 
-            // dump($price);
-                
+            foreach ($coures_price as $price) {                 
             $total_currency_price = $price["preice_per_week"] *   $calc_currency;
              $original_price=$price["preice_per_week"];
                 CoursePrice::create([
@@ -130,7 +114,7 @@ class CourseController extends Controller
     {
         $institutes = Institute::latest('id')->get();
         $course = Course::find($course->id);
-        $course_prices = CoursePrice::where(["course_id" => $course->id])->latest('id')->get();
+        $course_prices = CoursePrice::where(["course_id" => $course->id])->get();
         $department_name = 'courses';
         $page_name = 'courses';
         $page_title = 'الدورات';
@@ -143,19 +127,9 @@ class CourseController extends Controller
     public function update(StoreCoursesRequest $request, Course $course)
     {
         $validate = $request->validated();
-        if(!empty($request->currency_exchange)){
-            $currency =    Currency::convert()
-            ->from("$request->currency_exchange")
-            ->to('SAR')
-            ->amount(1)
-            ->withoutVerifying()
-            
-            ->get();
-            $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
-            $calc_currency =  $currency + $exchange_money;
-        }else{
-            $calc_currency =  1;
-        }
+        $currency = currency_convertor($request->currency_exchange, 'SAR' , 1);
+        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $calc_currency =  $currency + $exchange_money;
 
 
         $updateCourse = Course::find($course->id);

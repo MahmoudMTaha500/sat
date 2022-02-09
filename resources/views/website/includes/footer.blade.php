@@ -23,7 +23,7 @@
                         <li><a href="{{route('website.about.us')}}" class="text-white">عن الشركة</a></li>
                         <li><a href="{{route('website.contact.us')}}" class="text-white">اتصل بنا</a></li>
                         <li><a href="{{route('website.terms_conditions')}}" class="text-white">الشروط والأحكام</a></li>
-                        <li><a href="{{route('website.refund_policy')}}" class="text-white">شروط الاستردات</a></li>
+                        <li><a href="{{route('website.refund_policy')}}" class="text-white">شروط الاسترداد</a></li>
                     </ul>
                 </div>
                 <div class="col-md-3 col-12 col-6 mt-3 mt-md-0">
