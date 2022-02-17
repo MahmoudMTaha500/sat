@@ -34,8 +34,21 @@ class InstituteController extends Controller
     /************************************************************** */
     public function getInstitues(Request $request)
     {
-        $institutes = Institute::latest()->where('deleted_at', NULL)->with('country', 'city','rats','courses' , 'creator' )->latest('id')->paginate(10);
-        return response()->json(['institutes' => $institutes]);
+        $country_id = $request->country_id;
+        $city_id = $request->city_id;
+        $name_ar = $request->name_ar;
+        $institute = new Institute;
+        if($country_id){
+            $institute = $institute->where('country_id',$country_id);
+        }
+        if($city_id){
+            $institute = $institute->where('city_id',$city_id);
+        }  
+        if($name_ar){
+            $name_ar = $institute->where('name_ar',$name_ar);
+        }
+        $institute = $institute->with('country', 'city','rats','courses' , 'creator' )->latest('id')->where('deleted_at', NULL)->paginate(10);
+        return response()->json(['institutes' => $institute]);
     }
     /************************************************************** */
     public function create()
@@ -159,6 +172,7 @@ class InstituteController extends Controller
     public function destroy(Institute $institute)
     {
         InstituteRate::where('institute_id', $institute->id)->delete();
+        Course::where('institute_id', $institute->id)->delete();
         Comment::where(['element_id' => $institute->id, 'element_type' => 'institute'])->delete();
         $institute->delete();
         session()->flash('alert_message', ['message' => 'تم مسح المعهد بنجاح', 'icon' => 'error']);
@@ -166,24 +180,14 @@ class InstituteController extends Controller
 
     }
     /************************************************************** */
-    public function force_Delete(Institute $institute,$id)
+    public function force_Delete($institute_id)
     {
-        // dd($id);
-        InstituteRate::where('institute_id', $id)->forceDelete();
-        Comment::where(['element_id' => $id, 'element_type' => 'institute'])->forceDelete();
-        $courses = Course::where('institute_id', $id)->latest('id')->get();
-        foreach($courses as $course){
-            $courses_price = CoursePrice::where('course_id',$course->id)->forceDelete();
-            $Favourite = Favourite::where('course_id',$course->id)->forceDelete();
-            $StudentRequest = StudentRequest::where('course_id',$course->id)->forceDelete();
-        }
-        // Favourite::where('')
-        Course::where('institute_id', $id)->forceDelete();
-        $institute = Institute::find($id);
+        $institute = Institute::withTrashed()->find($institute_id);
         File::delete($institute->logo);
-        File::delete($institute->banner);
-$institute->forceDelete();
-        // Institute::where('id', $id)->forceDelete();
+        if(!empty($institute->getFirstMedia('institute_banner'))){
+           $institute->getFirstMedia('institute_banner')->delete();
+        }
+        $institute->forceDelete();
         session()->flash('alert_message', ['message' => 'تم حذف  المعهد  نهائيا بنجاح', 'icon' => 'error']);
         return back();
     }
@@ -200,6 +204,7 @@ $institute->forceDelete();
     {
         $restor = Institute::where(['id' => $id])->restore();
         InstituteRate::where('institute_id', $id)->restore();
+        Course::where('institute_id', $id)->restore();
         Comment::where(['element_id' => $id, 'element_type' => 'institute'])->restore();
         session()->flash('alert_message', ['message' => 'تم ارجاع المعهد بنجاح', 'icon' => 'success']);
         return back();

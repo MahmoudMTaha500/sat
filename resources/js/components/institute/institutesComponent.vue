@@ -3,7 +3,7 @@
         <div id="recent-transactions" class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">الكورسات ({{this.institutes.total}})</h4>
+                    <h4 class="card-title">المعاهد ({{this.institutes.total}})</h4>
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-primary w-100" @click="filterInstitute()" data-dismiss="modal" aria-label="Close">بحث</button>
+                                        <button type="button" class="btn btn-primary w-100" @click="filter_institutes(); pagination_pages_method(institutes.current_page)" data-dismiss="modal" aria-label="Close">بحث</button>
                                     </div>
                                 </div>
                             </div>
@@ -101,14 +101,14 @@
                                     
                                     <td class="text-truncate">
                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                            <a v-if="edit" :href="instutite_url_edit +'/'+ institute.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
-                                            <a :href="show_instutite_url +'/'+ institute.id" class="btn btn-default btn-sm round">عرض</a>
-                                            <form :action="instutite_url_edit +'/'+ institute.id" method="post" class="btn-group">
+                                            <a v-if="edit" :href="institute_url_edit +'/'+ institute.id+'/edit'" class="btn btn-info btn-sm round">تعديل</a>
+                                            <a :href="show_institute_url +'/'+ institute.id" class="btn btn-default btn-sm round">عرض</a>
+                                            <form :action="institute_url_edit +'/'+ institute.id" method="post" class="btn-group">
                                                 <input type="hidden" name="_token" :value="csrftoken" />
                                                 <input type="hidden" name="_method" value="delete" />
                                                 <button v-if="delete_pre" class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذا المعهد')">حذف</button>
                                             </form>
-                                            <a  v-if="force_delete" :href="instutite_url_edit +'/forceDelete/'+ institute.id"
+                                            <a  v-if="force_delete" :href="institute_url_edit +'/forceDelete/'+ institute.id"
                                              onclick="return confirm('سوف يتم حذف المعهد نهائيا .هل انت متاكد؟')"
                                              class="btn btn-dark btn-sm round" style="margin-right:3px;">حذف نهائي</a>
 
@@ -124,12 +124,11 @@
                                     :style="!institutes.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
                                     @click="pagination(prev_page_url);pagination_pages_method(institutes.current_page-1)"
                                     :disabled="!institutes.prev_page_url"
-                                    class="page-link rounded-10 mx-1 text-dark border-0"
+                                    class="page-link"
                                 >
-                                    <i class="fas fa-chevron-right"></i>
+                                    <i class="la la-angle-right"></i>
                                 </button>
                             </li>
-                            
                             <li style="margin:0 5px;" class="page-item" v-for="(page, index) in pagination_pages" :key="index" :class="institutes.current_page == page ? 'active' : ''">
                                 <a style="border-radius: 10px;" class="page-link" @click="pagination(institutes.path+'?page='+page);pagination_pages_method(page)">{{ page }}</a>
                             </li>
@@ -140,9 +139,9 @@
                                     :style="!institutes.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
                                     @click="pagination(next_page_url);pagination_pages_method(institutes.current_page +1 )"
                                     :disabled="!institutes.next_page_url"
-                                    class="page-link rounded-10 mx-1 text-dark border-0"
+                                    class="page-link"
                                 >
-                                    <i class="fas fa-chevron-left"></i>
+                                    <i class="la la-angle-left"></i>
                                 </button>
                             </li>
                         </ul>
@@ -157,8 +156,7 @@
 <script>
     export default {
         props: [
-                "instutite_url", 
-                "instutite_url_edit", 
+                "institute_url_edit", 
                 "csrftoken", 
                 "aprove_route", 
                 "path_logo", 
@@ -166,19 +164,21 @@
                 "countries_from_blade",
                 "dahsboard_url", 
                 "url_filtier", 
-                "show_instutite_url",
+                "show_institute_url",
                 "create",
                 "edit",
                 "delete_pre",
-                "force_delete"
+                "force_delete",
+                "get_institute_url",
             ],
         data() {
             return {
                 institutes: {},
+                next_page_url: "",
+                prev_page_url: "",
                 perPage: 10,
                 currentPage: 1,
                 paginate: {},
-                url: this.instutite_url,
                 institute_id: "",
                 aproveRoute: this.aprove_route,
                 selected: "",
@@ -188,10 +188,12 @@
                 newCity: "",
                 citySelectForUpdate: "",
                 name_ar: "",
+                pagination_pages: [1,2,3,4,5],
             };
         },
         methods: {
             pagination_pages_method: function(current_page){
+                
                 if(current_page <= 4){
                     this.pagination_pages = [1,2,3,4,5]
                 }else if(current_page > (this.institutes.last_page-2) ){
@@ -202,19 +204,43 @@
 
                 if(this.institutes.last_page < 5){
                     this.pagination_pages = Array.from({length: this.institutes.last_page}, (_, i) => i + 1)
+                    console.log(this.institutes.last_page)
                 }
+                
+                
             },
             pagination: function (url) {
-                this.instutite_url = url;
-                this.getInstitutes();
+                this.get_institute_url = url;
+                this.get_institutes();
             },
-            getInstitutes: function () {
-                axios.get(this.url).then((response) => (this.institutes = response.data.institutes));
+            get_institutes: function () {
+                axios
+                    .get(this.get_institute_url, {
+                        params: this.params().filter_params,
+                    })
+                    .then((response) =>{
+                        this.institutes = response.data.institutes
+                        this.next_page_url = response.data.institutes.next_page_url
+                        this.prev_page_url = response.data.institutes.prev_page_url
+                        if(this.institutes.last_page < 5){
+                            this.pagination_pages = Array.from({length: this.institutes.last_page}, (_, i) => i + 1)
+                        }
+                    });
             },
 
+            params: function () {
+                var filter_params = {
+                    country_id: this.selected, 
+                    city_id: this.selected_city, 
+                    name_ar: this.name_ar
+                };
+                var pagination_params = "&keyword=" + this.keyword;
+                return { filter_params: filter_params, pagination_params: pagination_params };
+            },
+            
             institutesPagination: function (url1) {
                 this.url = url1;
-                this.getInstitutes();
+                this.get_institutes();
             },
 
             updateApprovement: function (e) {
@@ -256,13 +282,12 @@
                 } else {
                 }
             },
-            filterInstitute: function () {
-
- var pagination_params = "&country_id=" + this.selected + "&city_id=" + this.selected_city + "&name_ar=" + this.name_ar;
-                
-                axios.get(this.dahsboard_url+'/filter', {  params:{  country_id: this.selected, city_id: this.selected_city, name_ar: this.name_ar }}, { headers: { "X-CSRFToken": "{{csrf_token()}}" } })
-                .then((response) =>  (this.institutes = response.data.institutes),  (this.institutes.prev_page_url += pagination_params), (this.institutes.next_page_url += pagination_params)
-                )},
+            filter_institutes: function () {
+                    this.country_id = this.selected;
+                    this.city_id = this.selected_city;
+                    this.name_ar = this.name_ar;
+                    this.get_institutes();
+                },
             avargae:function(obj){
                     //  console.dir(obj);
 var  str = JSON.stringify(obj);
@@ -298,7 +323,7 @@ console.log(str); // Logs output to dev tools console.
         },
 
         beforeMount() {
-            this.getInstitutes();
+            this.get_institutes();
             this.returnCountryCity();
         },
     };

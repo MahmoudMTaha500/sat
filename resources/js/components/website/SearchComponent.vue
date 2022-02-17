@@ -4,7 +4,7 @@
         <input v-model="search" @keyup="get_suggestions_search() ; toggle_result_box()" id="searchform" name="keyword" type="search" autocomplete="off" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد " />
         <!-- ./Search Field -->
         <div v-if="toggle_result_box_checker" class="search-field-box">
-            <span class="item" v-for="institute in institute_search" :key="institute.id" :value="institute.name_ar" @click="appendvalue(institute.name_ar)"> {{institute.name_ar}}</span>
+            <span class="item" v-for="institute in institute_search" :key="institute.id" :value="institute.name_ar" @click="appendvalue(institute.name_ar)"> {{institute.name_ar}} ( {{institute.country.name_ar}} - {{institute.city.name_ar}} )</span>
         </div>
     </div>
 </template>

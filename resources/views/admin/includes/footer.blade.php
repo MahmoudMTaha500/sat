@@ -33,7 +33,7 @@
   <script src="{{url('/admin')}}/app-assets/js/scripts/forms/form-repeater.js" type="text/javascript"></script>
   <script src="{{url('/admin')}}/app-assets/js/scripts/extensions/toolbar.js" type="text/javascript"></script>
   <script src="{{url('/admin')}}/app-assets/js/scripts/forms/switch.js" type="text/javascript"></script>
-  <script src="{{url('/admin')}}/app-assets/js/scripts/editors/editor-ckeditor.js" type="text/javascript"></script>
+  {{-- <script src="{{url('/admin')}}/app-assets/js/scripts/editors/editor-ckeditor.js" type="text/javascript"></script> --}}
   <script src="{{url('/admin')}}/app-assets/js/scripts/extensions/sweet-alerts.js" type="text/javascript"></script>
   <!-- END PAGE LEVEL JS-->
   

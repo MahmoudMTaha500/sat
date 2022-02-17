@@ -185,7 +185,10 @@
             <div class="col-md-6 p-md-5 p-3">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
-                <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
+                @if(!empty($two_blogs[0]->country))
+                    <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
+                @endif
+                
                 <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
@@ -199,7 +202,9 @@
             <div class="col-md-6 p-md-5 p-3 order-md-1 order-2">
                 <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
                 <p>{!! mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
-                <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
+                @if(!empty($two_blogs[1]->country))
+                    <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
+                @endif
                 <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}

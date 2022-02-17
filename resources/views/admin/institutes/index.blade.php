@@ -17,21 +17,20 @@
         </div>
         <div class="content-body">
             <institutes-component
-                :instutite_url="{{ json_encode(url('/dashboard/getinstitues')) }}"
-                :instutite_url_edit="{{ json_encode(url('/dashboard/institute/')) }}"
+                :get_institute_url="{{ json_encode(url('/dashboard/getinstitues')) }}"
+                :institute_url_edit="{{ json_encode(url('/dashboard/institute/')) }}"
                 :csrftoken="{{ json_encode(csrf_token()) }}"
                 :aprove_route="{{json_encode(url('/dashboard/update-institute-aprovement'))}}"
                 :path_logo="{{json_encode(asset('/'))}}"
                 :route_create="{{json_encode(url('/dashboard/institute/create'))}}"
-                :show_instutite_url="{{json_encode(route('institute.index'))}}"
+                :show_institute_url="{{json_encode(route('institute.index'))}}"
                 :countries_from_blade="{{ json_encode($countries) }}"
                 :dahsboard_url="{{ json_encode(url('/dashboard')) }}"
                 :url_filtier="{{ json_encode(url('/dashboard/filter')) }}"
                 :create="{{  json_encode(auth()->user()->hasPermission('institutes-create') )}}"
                 :edit="{{  json_encode(auth()->user()->hasPermission('institutes-update') )}}"
                 :delete_pre="{{  json_encode(auth()->user()->hasPermission('institutes-delete') )}}"
-                :force_delete="{{  json_encode(auth()->user()->hasRole(['super-admin','admin']) )}}"
-                
+                :force_delete="{{  json_encode(auth()->user()->hasRole(['super-admin','admin']) )}}"                
             ></institutes-component>
         </div>
     </div>

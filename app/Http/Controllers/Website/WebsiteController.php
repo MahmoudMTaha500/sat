@@ -57,7 +57,7 @@ class WebsiteController extends Controller
         public function search_form_institute(Request  $request)
         {
     //    dd($request->all());
-            $institutes = Institute::latest('id')->where('name_ar','like',"%$request->search%")->take(6)->get(['id','name_ar']);
+            $institutes = Institute::latest('id')->where('name_ar','like',"%$request->search%")->with('country','city')->take(6)->get();
 
         return response()->json(['institutes'=>$institutes]);
         }

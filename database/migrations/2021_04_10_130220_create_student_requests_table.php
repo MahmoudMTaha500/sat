@@ -24,10 +24,10 @@ class CreateStudentRequestsTable extends Migration
             $table->bigInteger('price_per_week')->default(0);
             $table->decimal('course_discount')->default(0);
             $table->bigInteger("residence_id")->unsigned()->nullable();
-            $table->foreign('residence_id')->references('id')->on('residences');
+            $table->foreign('residence_id')->references('id')->on('residences')->onDelete('cascade');
             $table->bigInteger('residence_price')->default(0);
             $table->bigInteger("airport_id")->unsigned()->nullable();
-            $table->foreign('airport_id')->references('id')->on('airports');
+            $table->foreign('airport_id')->references('id')->on('airports')->onDelete('cascade');
             $table->bigInteger('airport_price')->default(0);
             $table->bigInteger('insurance_price')->default(0);
             $table->bigInteger('total_price')->default(0);

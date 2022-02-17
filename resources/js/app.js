@@ -9,9 +9,9 @@ import Vue from 'vue';
 import rate from 'vue-rate';
 import 'vue-rate/dist/vue-rate.css';
 Vue.use(rate);
-// import CKEditor from '@ckeditor/ckeditor5-vue';
-import CKEditor from '@ckeditor/ckeditor5-vue2';
-Vue.use(CKEditor);
+    // import CKEditor from '@ckeditor/ckeditor5-vue';
+    import CKEditor from '@ckeditor/ckeditor5-vue2';
+    Vue.use(CKEditor);
 require('./bootstrap');
 
 window.Vue = require('vue');

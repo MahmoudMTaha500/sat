@@ -36,7 +36,7 @@ Route::get('getinstitues', 'InstituteController@getInstitues');
 Route::post('update-institute-aprovement', 'InstituteController@updateAprovement');
 Route::get('filter', 'InstituteController@filter');
 
-Route::get('institute/restor/{id}', 'InstituteController@restor');
+Route::get('institute/restor/{id}', 'InstituteController@restor')->name('institute_restore');
 Route::get('institute/archive', 'InstituteController@archive');
 Route::resource('institute', 'InstituteController');
 Route::get('getcomment', 'CommentController@getcomment');
@@ -55,7 +55,7 @@ Route::get("getcities", "CityController@getCities")->name('getcities');
 Route::post("addCity", "CityController@addCity");
 
 // Institute Route
-Route::get('/institute/forceDelete/{id}', 'InstituteController@force_Delete');
+Route::get('/institute/forceDelete/{id}', 'InstituteController@force_Delete')->name('institute_force_delete');
 Route::resource('institute', 'InstituteController');
 /**********************************   ************************************************************************************** */
 
