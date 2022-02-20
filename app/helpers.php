@@ -98,14 +98,13 @@ function currency_convertor($from, $to, $price_amount) {
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://free.currconv.com/api/v7/convert?q=" . $string . "&compact=ultra&apiKey=835e3dd1d697d458a1bf",
+        CURLOPT_URL => "https://free.currconv.com/api/v7/convert?q=" . $string . "&compact=ultra&apiKey=fc5abbd5b1451aedcb40",
         CURLOPT_RETURNTRANSFER => 1
     ));
     $response = curl_exec($curl);
     $response = json_decode($response, true);
     return $response[$string]*$price_amount;
 
-    // old Currency convertor code
     // $converted_price = Currency::convert()
     // ->from("$request->currency_exchange")
     // ->to('SAR')

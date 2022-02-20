@@ -31,9 +31,54 @@ class CourseController extends Controller
         return view("admin.courses.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'count_courses', 'countries','page_title'));
     }
     /************************************************************** */
-    public function getCourses()
+    public function getCourses(Request $request)
     {
-        $courses = Course::with('institute', 'institute.city','student_request' , 'creator')->latest('id')->paginate(10);
+
+        $institute_id = $request->institute_id;
+        $country_id = $request->country_id;
+        $city_id = $request->city_id;
+        $name_ar = $request->name_ar;
+        $discount_offers = $request->discount_offers;
+        $non_discount_offers = $request->non_discount_offers;
+        $status = $request->status;
+        $unfinished_seo = $request->unfinished_seo;
+                    
+
+        $courses = new Course();
+
+        if ($institute_id != null) {
+            $courses = $courses->where("institute_id", $institute_id);
+        }
+        if ($country_id != null) {
+            $courses = $courses->with('institute')->whereHas('institute', function ($query) use ($country_id) {
+                $query->where('country_id', $country_id);
+            });
+        }
+        if ($city_id != null) {
+            $courses = $courses->with('institute')->whereHas('institute', function ($query) use ($country_id, $city_id) {
+                $query->where('country_id', $country_id)->where('city_id', $city_id);
+            });
+        }
+        if ($name_ar != null) {
+            $courses = $courses->where("name_ar", 'LIKE', "%{$request->name_ar}%");
+        }
+
+        if ($discount_offers == 'false') {
+            
+            $courses = $courses->where("discount" , 0);
+        }
+        if ($non_discount_offers == 'false') {
+            $courses = $courses->where("discount" , '!=' , 0);
+        }
+
+        if ($status) {
+            $courses = $courses->where("approvement" , "$status" );
+        }
+        if ($unfinished_seo == 'true') {
+            $courses = $courses->where("meta_description" , null );
+        }
+
+        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->latest('id')->paginate(10);
         return response()->json(['courses' => $courses]);
     }
     /************************************************************** */
@@ -136,7 +181,7 @@ class CourseController extends Controller
         $updateCourse->name_ar = $request->name_ar;
         $updateCourse->about_ar = $request->desc;
         $updateCourse->institute_id = $request->institute_id;
-        $updateCourse->creator_id = auth()->user()->id;
+        // $updateCourse->creator_id = auth()->user()->id;
         $updateCourse->min_age = $request->min_age;
         $updateCourse->study_period = $request->study_period;
         $updateCourse->lessons_per_week = $request->lessons_per_week;
@@ -177,54 +222,7 @@ class CourseController extends Controller
         return back()->with("success", 'تم الحذف الدورة');
 
     }
-    /************************************************************** */
-    public function filtercourses(Request $request)
-    {
-        // dd($request->all());
 
-        $institute_id = $request->institute_id;
-        $country_id = $request->country_id;
-        $city_id = $request->city_id;
-        $name_ar = $request->name_ar;
-        $discount_offers = $request->discount_offers;
-        $non_discount_offers = $request->non_discount_offers;
-        $status = $request->status;
-
-        $courses = new Course();
-
-        if ($institute_id != null) {
-            $courses = $courses->where("institute_id", $institute_id);
-        }
-        if ($country_id != null) {
-            $courses = $courses->with('institute')->whereHas('institute', function ($query) use ($country_id) {
-                $query->where('country_id', $country_id);
-            });
-        }
-        if ($city_id != null) {
-            $courses = $courses->with('institute')->whereHas('institute', function ($query) use ($country_id, $city_id) {
-                $query->where('country_id', $country_id)->where('city_id', $city_id);
-            });
-        }
-        if ($name_ar != null) {
-            $courses = $courses->where("name_ar", 'LIKE', "%{$request->name_ar}%");
-        }
-
-        if ($discount_offers == 'false') {
-            
-            $courses = $courses->where("discount" , 0);
-        }
-        if ($non_discount_offers == 'false') {
-            $courses = $courses->where("discount" , '!=' , 0);
-        }
-
-        if ($status) {
-            $courses = $courses->where("approvment" , "$status" );
-        }
-
-        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->latest('id')->paginate(10);
-        return response()->json(['courses' => $courses]);
-
-    }
     /************************************************************** */
     public function updateAprovement(Request $request)
     {

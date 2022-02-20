@@ -54,6 +54,10 @@
                                     <label for="projectinput1">بدون تخفيضات</label> <br />
                                     <input type="checkbox" data-size="sm" checked class="switchery" v-model="non_discount_offers" />
                                 </div>
+                                <div class="col-12 mt-3">
+                                    <label for="projectinput1">غير منتهي (SEO)</label> <br />
+                                    <input type="checkbox" data-size="sm" checked class="switchery" v-model="unfinished_seo" />
+                                </div>
                             </div>
                         </div>
                         <div class="form-group">
@@ -62,7 +66,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary w-100" @click="filterCoureses()" data-dismiss="modal" aria-label="Close">بحث</button>
+                        <button type="button" class="btn btn-primary w-100" @click="filter_courses();" data-dismiss="modal" aria-label="Close">بحث</button>
                     </div>
                 </div>
             </div>
@@ -131,15 +135,33 @@
                                 </tbody>
                             </table>
 
-                            <div class="pagination">
-                                <button class="btn btn-default" @click="coursesPagination(courses.prev_page_url)" :disabled="!courses.prev_page_url">
-                                    Previos
-                                </button>
-                                <span> page {{courses.current_page}} of {{courses.last_page }} </span>
-                                <button class="btn btn-default" @click="coursesPagination(courses.next_page_url)" :disabled="!courses.next_page_url">
-                                    Next
-                                </button>
-                            </div>
+                            <ul dir="rtl" class="pagination d-flex justify-content-center p-0">
+                                <li class="page-item">
+                                    <button
+                                        :style="!courses.prev_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                        @click="pagination(prev_page_url);pagination_pages_method(courses.current_page-1)"
+                                        :disabled="!courses.prev_page_url"
+                                        class="page-link"
+                                    >
+                                        <i class="la la-angle-right"></i>
+                                    </button>
+                                </li>
+                                <li style="margin:0 5px;" class="page-item" v-for="(page, index) in pagination_pages" :key="index" :class="courses.current_page == page ? 'active' : ''">
+                                    <a style="border-radius: 10px;" class="page-link" @click="pagination(courses.path+'?page='+page);pagination_pages_method(page)">{{ page }}</a>
+                                </li>
+                                
+
+                                <li class="page-item">
+                                    <button
+                                        :style="!courses.next_page_url ? 'background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;' : ''"
+                                        @click="pagination(next_page_url);pagination_pages_method(courses.current_page +1 )"
+                                        :disabled="!courses.next_page_url"
+                                        class="page-link"
+                                    >
+                                        <i class="la la-angle-left"></i>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -150,11 +172,10 @@
 
 <script>
     export default {
-        props: ["course_url", "dahsboard_url", "public_url","course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
+        props: ["get_courses_url", "dahsboard_url", "public_url","course_url", "countries_from_blade", "institutes", "csrftoken", "delete_pre", "create", "edit"],
         data() {
             return {
                 courses: {},
-                url_course: this.course_url,
                 country_id: "",
                 city_id: "",
                 countries: this.countries_from_blade,
@@ -164,16 +185,50 @@
                 course_id: "",
                 discount_offers: true,
                 non_discount_offers: true,
-                status:""
+                unfinished_seo : false,
+                status:"",
+                pagination_pages: [1,2,3,4,5],
+                next_page_url: "",
+                prev_page_url: "",
             };
         },
         methods: {
-            getcourses: function () {
-                axios.get(this.url_course).then((response) => (this.courses = response.data.courses));
+            pagination_pages_method: function(current_page){
+                if(current_page <= 4){
+                    this.pagination_pages = [1,2,3,4,5]
+                }else if(current_page > (this.courses.last_page-2) ){
+                    this.pagination_pages = [this.courses.last_page -4 , this.courses.last_page -3 , this.courses.last_page -2 , this.courses.last_page - 1 , this.courses.last_page]
+                }else{
+                    this.pagination_pages = [current_page -2 , current_page - 1 , current_page , current_page + 1 , current_page + 2]
+                }
+                if(this.courses.last_page < 5){
+                    this.pagination_pages = Array.from({length: this.courses.last_page}, (_, i) => i + 1)
+                    console.log(this.courses.last_page)
+                }
+            },
+            pagination: function (url) {
+                this.get_courses_url = url;
+                this.get_courses();
+            },
+            get_courses: function () {
+                axios.get(this.get_courses_url , {
+                    params: this.params().filter_params,
+                }).then((response) => {
+                    this.courses = response.data.courses
+                    this.next_page_url = response.data.courses.next_page_url
+                    this.prev_page_url = response.data.courses.prev_page_url
+                    if(this.courses.last_page < 5){
+                        this.pagination_pages = Array.from({length: this.courses.last_page}, (_, i) => i + 1)
+                    }
+                });
+            },
+             filter_courses: function () {
+                this.get_courses_url = this.courses.first_page_url
+                this.get_courses()
             },
             coursesPagination: function (url) {
                 this.url_course = url;
-                this.getcourses();
+                this.get_courses();
             },
             getcities: function () {
                 var country_id = this.country_id;
@@ -188,7 +243,7 @@
                     this.city_id = "";
                 }
             },
-            filterCoureses: function () {
+            params: function () {
                 var filter_params = {
                     institute_id: this.institute_id,
                     country_id: this.country_id,
@@ -196,17 +251,10 @@
                     name_ar: this.name_ar,
                     discount_offers: this.discount_offers,
                     non_discount_offers: this.non_discount_offers,
-                    status:this.status
+                    status:this.status,
+                    unfinished_seo:this.unfinished_seo
                 };
-                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id + "&name_ar=" + this.name_ar;
-                "&discount_offers=" + this.discount_offers;
-                "&non_discount_offers=" + this.non_discount_offers;
-                "&status=" + this.status;
-                axios
-                    .get(this.dahsboard_url + "/filtercourses", {
-                        params: filter_params,
-                    })
-                    .then((response) => ((this.courses = response.data.courses), (this.courses.prev_page_url += pagination_params), (this.courses.next_page_url += pagination_params)));
+                return { filter_params: filter_params};
             },
             updateApprovment: function (e) {
                 const newValue = e.target.checked;
@@ -225,10 +273,10 @@
 
             this.institute_id = institute_id_url;
 
-             this.filterCoureses();
+             this.get_courses();
             //  alert(institute_id_url);
         } else{
-              this.getcourses();
+              this.get_courses();
         }
         },
     };

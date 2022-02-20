@@ -107,7 +107,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="projectinput3">وصف الدورة</label>
-                                                    <textarea type="text" id="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc">{{$course->about_ar}}</textarea>
+                                                    <textarea type="text" class="ckeditor" rows="5" class="form-control" placeholder="اضف وصف للدورة" name="desc">{{$course->about_ar}}</textarea>
                                                 </div>
                                             </div>
 

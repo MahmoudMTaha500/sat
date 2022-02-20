@@ -19,7 +19,7 @@
 
 
             <courses-component
-            :course_url="{{json_encode(url('/dashboard/getcourses'))}}"
+            :get_courses_url="{{json_encode(url('/dashboard/getcourses'))}}"
             :dahsboard_url="{{ json_encode(url('/dashboard')) }}"   
             :public_url="{{ json_encode(url('/')) }}"
 
