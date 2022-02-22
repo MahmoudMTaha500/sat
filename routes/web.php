@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
-Route::get('/tesssst', function(){
-    return 'asd';
-});
+// Route::get('/test', function(){
+    
+// });

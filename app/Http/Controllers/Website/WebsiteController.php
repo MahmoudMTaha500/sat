@@ -495,6 +495,8 @@ if($student_mail){
         // $notification_body = '<p>لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز <a target="_blank" href="' . route('student_invoice' , ['request_id' => $student_request->id]) . '" class="text-secondary-color"> عرض السعر</a></p>
         // <a href="' . route('pay_now', $student_request->id) . '"  class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">دفع الان</a>';
         session()->put('course_payment_session', ['course_details' => $course_details ,'request_id' => $student_request->id]);
+
+        send_whatsapp_message($request->phone , 'لقد تم استلام طلبك بنجاح و سوف يقوم طاقم الموقع بالاتصال بك لمراجعة طلبك و تأكيد الحجز');
         return redirect()->route('student_requests.chose_payment_method');
 
     }

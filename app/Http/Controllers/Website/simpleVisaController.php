@@ -30,6 +30,7 @@ class simpleVisaController extends Controller
         $response=file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=".env('RECAPTCHA_SECRET_KEY')."&response=".$_POST['g-recaptcha-response']."&remoteip=".$_SERVER['REMOTE_ADDR']);
         $googleobj = json_decode($response);
         $verified = $googleobj->success;
+        
         if ($verified === true){
             // dd($request->all());
             $validated = $request->validate([
@@ -49,6 +50,9 @@ class simpleVisaController extends Controller
                 'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
                 'country.required' => 'الدولة مطلوبة',
             ]);
+
+            $wp_phone = $request->phone;
+            $wp_body = 'تم ارسال بياناتك بنجاح و سنقوم بالتواصل معك قريبا';
 
             $data = [
                     'name'=>$request->name,
@@ -72,6 +76,7 @@ class simpleVisaController extends Controller
                 return redirect()->back();
             }else{
                 session()->flash('alert_message', ' تم ارسال بياناتك بنجاح و سنقوم بالتواصل معك قريبا');
+                send_whatsapp_message($wp_phone , $wp_body);
                 return redirect()->back();
             }
         }else{
