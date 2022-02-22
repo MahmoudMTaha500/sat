@@ -139,10 +139,10 @@ function send_whatsapp_message($to , $body) {
     $err = curl_error($curl);
     curl_close($curl);
 
-    if ($err) {
-        echo "cURL Error #:" . $err;
-    } else {
-        echo $response;
-    }
+    // if ($err) {
+    //     echo "cURL Error #:" . $err;
+    // } else {
+    //     echo $response;
+    // }
 
 }
