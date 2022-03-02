@@ -6,6 +6,8 @@
     <meta name="description" content="Modern admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities with bitcoin dashboard.">
     <meta name="keywords" content="admin template, modern admin template, dashboard template, flat admin template, responsive admin template, web app, crypto dashboard, bitcoin dashboard">
     <meta name="author" content="PIXINVENT">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title> {{isset($page_title) ? $page_title : 'لوحة تحكم' }} </title>
     <link rel="icon" href="{{asset('website/imgs/logo-icon.png')}}">
 

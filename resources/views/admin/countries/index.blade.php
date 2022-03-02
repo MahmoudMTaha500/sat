@@ -35,19 +35,19 @@
                         </div>
                         <div class="card-content">
                             <div class="table-responsive">
-                                <table id="recent-orders" class="table table-hover table-xl mb-0">
+                                <table id="tablecontents" class="table table-hover table-xl mb-0 sortable">
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">اسم الدوله</th>
-
+                                
                                             <th class="border-top-0">اكشن</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach($country as $coun )
-                                        <tr>
+                                        <tr class="row1" data-id="{{ $coun->id }}" >
                                             <td>{{$coun->name_ar}}</td>
-
+                                
                                             <td class="text-truncate">
                                                 <div class="btn-group" role="group" aria-label="Basic example">
                                                     @if(auth()->user()->hasPermission('cities-countries-update'))
@@ -80,3 +80,9 @@
     </div>
 </div>
 @endsection
+
+
+
+
+
+

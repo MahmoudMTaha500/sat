@@ -11,7 +11,7 @@ class countryController extends Controller
 
     public function index(Request $request)
     {
-        $country = Country::latest('id')->get();
+        $country = Country::orderBy('order')->get();
         $page_title = 'الدول';
 
         return view("admin.countries.index", ['country' => $country, 'page_title'=>$page_title]);
@@ -44,6 +44,19 @@ class countryController extends Controller
         }
 
         
+    }
+    public function countries_sortable(Request $request)
+    {
+        $countries = country::all();
+
+        foreach ($countries as $country) {
+            foreach ($request->order as $order) {
+                if ($order['id'] == $country->id) {
+                    $country->update(['order' => $order['position']]);
+                }
+            }
+        }
+        return response('Update Successfully.', 200);
     }
 
     public function edit($id)

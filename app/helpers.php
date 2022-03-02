@@ -1,5 +1,5 @@
 <?php 
-
+use AmrShawky\LaravelCurrency\Facade\Currency;
 
 // return the avg of stutend rates or swich to the sat rat
 function institute_rate($institute_obj){
@@ -103,14 +103,19 @@ function currency_convertor($from, $to, $price_amount) {
     ));
     $response = curl_exec($curl);
     $response = json_decode($response, true);
-    return $response[$string]*$price_amount;
+    if($response != null){
+        return $response[$string]*$price_amount;
+    }else{
+        $converted_price = Currency::convert()
+        ->from($from)
+        ->to($to)
+        ->amount(1)
+        ->withoutVerifying()
+        ->get();
+        return $converted_price*$price_amount;
+    }
 
-    // $converted_price = Currency::convert()
-    // ->from("$request->currency_exchange")
-    // ->to('SAR')
-    // ->amount($price_amount)
-    // ->withoutVerifying()
-    // ->get();
+    
 }
 
 

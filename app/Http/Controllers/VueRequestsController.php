@@ -14,7 +14,7 @@ class VueRequestsController extends Controller
 {
     public function get_countries()
     {
-        $countries = Country::latest('id')->get(['name_ar as name', 'id']);
+        $countries = Country::orderBy('order')->get(['name_ar as name', 'id']);
         return response()->json($countries);
     }
     public function get_cities(Request $request)

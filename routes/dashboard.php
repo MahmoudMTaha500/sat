@@ -61,6 +61,8 @@ Route::resource('institute', 'InstituteController');
 
 // Country Route
 Route::resource('countries', 'countryController');
+Route::post('countries-sortable','countryController@countries_sortable');
+
 
 // City Route
 /**********************************   ************************************************************************************** */
