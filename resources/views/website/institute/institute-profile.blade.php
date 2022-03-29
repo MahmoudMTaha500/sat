@@ -18,23 +18,26 @@
             </div>
         </div>
         <!-- ./Section Heading -->
-        <div class="row px-xl-5 mx-xl-2">
-            <div class="col-12 px-0 position-relative">
-                <!-- Institute Imgs -->
-                <div class="institute-imgs owl-carousel" id="institute-imgs">
-                    <picture>
-                        <source srcset="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMediaUrl('institute_banner')}}" media="(min-width:700px)">
-                        <source srcset="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" media="(min-width:500px)">
-                        <img src="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" alt="{{$institute->img_alt}}" width="100%">
-                    </picture>
-                    {{-- <div class="profile-institute-img"><img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" alt="{{asset($institute->banner_alt)}}" class="img-fluid w-100 d-block" /></div> --}}
-                </div>
-                <img class="institute-logo" src="{{$institute->logo == 'null' ? asset('storage/default_images.png') : asset($institute->logo)}}" alt="{{asset($institute->logo_alt)}}" />
-                <!-- ./Institute Imgs -->
-            </div>
-        </div>
+        
         <div class="row px-xl-5 mt-5">
-            <div class="col-lg-{{isset($course) ? '8' : '12'}}">
+            
+            {{-- <div class="col-lg-{{isset($course) ? '8' : '12'}}"> --}}
+            <div class="col-md-8">
+                <div class=" mb-5 pb-3">
+                    <div class="col-12 px-0 position-relative">
+                        <!-- Institute Imgs -->
+                        <div class="institute-imgs owl-carousel" id="institute-imgs">
+                            <picture>
+                                <source srcset="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMediaUrl('institute_banner')}}" media="(min-width:700px)">
+                                <source srcset="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" media="(min-width:500px)">
+                                <img src="{{empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" alt="{{$institute->img_alt}}" width="100%">
+                            </picture>
+                            {{-- <div class="profile-institute-img"><img src="{{$institute->banner == 'null' ? asset('storage/default_images.png') : asset($institute->banner)}}" alt="{{asset($institute->banner_alt)}}" class="img-fluid w-100 d-block" /></div> --}}
+                        </div>
+                        <img class="institute-logo" src="{{$institute->logo == 'null' ? asset('storage/default_images.png') : asset($institute->logo)}}" alt="{{asset($institute->logo_alt)}}" />
+                        <!-- ./Institute Imgs -->
+                    </div>
+                </div>
                 <!-- Tabs -->
                 <ul class="nav nav-tabs bg-white border-0 rounded-10 nav-justified p-0 mb-3" id="myTab" role="tablist">
                     @isset($course)
@@ -357,7 +360,7 @@
                 </div>
                 <!-- ./Tabs -->
             </div>
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 @error('from_date')
                 <div class="alert alert-danger text-center">
                     {{ $message }}

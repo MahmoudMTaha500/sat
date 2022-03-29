@@ -44,6 +44,10 @@
                                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
                                             <input v-model="name_ar" type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="name_ar" />
                                         </div>
+                                        <div class="form-group">
+                                            <label for="projectinput1">غير منتهي (SEO)</label> <br />
+                                            <input type="checkbox" data-size="sm" checked class="switchery" v-model="unfinished_seo" />
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-primary w-100" @click="filter_institutes(); pagination_pages_method(institutes.current_page)" data-dismiss="modal" aria-label="Close">بحث</button>
@@ -189,6 +193,7 @@
                 citySelectForUpdate: "",
                 name_ar: "",
                 pagination_pages: [1,2,3,4,5],
+                unfinished_seo : false,
             };
         },
         methods: {
@@ -232,7 +237,8 @@
                 var filter_params = {
                     country_id: this.selected, 
                     city_id: this.selected_city, 
-                    name_ar: this.name_ar
+                    name_ar: this.name_ar,
+                    unfinished_seo:this.unfinished_seo
                 };
                 var pagination_params = "&keyword=" + this.keyword;
                 return { filter_params: filter_params, pagination_params: pagination_params };

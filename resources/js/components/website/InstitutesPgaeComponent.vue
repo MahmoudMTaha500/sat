@@ -7,7 +7,7 @@
                 <div class="row px-xl-5">
                     <div class="col-12">
                         <div class="heading-institutes">
-                            <h3 class="text-main-color font-weight-bold">الدورات ( {{courses.total}} )</h3>
+                            <h3 class="text-main-color font-weight-bold">المعاهد ( {{courses.total}} )</h3>
                             <p>تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم، واختر اللغة التي ترغب في دراستها</p>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
                         <div id="accordion" class="sticky-top pt-4">
                             <div class="card rounded-10 shadow-sm mb-4">
                                 <div class="card-header border-bottom bg-white rounded-10 border-0" id="headingOne">
-                                    <h5 class="font-weight-bold text-main-color" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">فلتر بواسطة</h5>
+                                    <h5 class="font-weight-bold text-main-color" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">ابحث عن معهد</h5>
                                 </div>
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body border-top">
@@ -29,18 +29,18 @@
                                         <form action="">
                                             <label>ادخل اسم المعهد</label>
                                             <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                                                <input  :value="keyword_institute" ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
+                                                <input  v-model="keyword" ref="keyword" type="text" class="form-control border-0 bg-transparent pr-1" placeholder="بحث" />
                                                 <div class="input-group-append">
                                                     <span class="input-group-text border-0 p-0 bg-transparent" id="basic-addon2"><i class="fas fa-search"></i></span>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label>اختر الدولة</label>
-                                                <country-component :get_countries_url="get_countries_url" ref="countries_component_ref" :ele_class="'form-control rounded-10'"> </country-component>
+                                                <country-component  :get_countries_url="get_countries_url" ref="countries_component_ref" :ele_class="'form-control rounded-10'"> </country-component>
                                             </div>
                                             <div class="form-group">
                                                 <label>اختر المدينة</label>
-                                                <city-component :get_cities_url="get_cities_url" ref="cities_component_ref" :ele_class="'form-control rounded-10'"> </city-component>
+                                                <city-component  :get_cities_url="get_cities_url" ref="cities_component_ref" :ele_class="'form-control rounded-10'"> </city-component>
                                             </div>
 
                                             <div class="form-group">
@@ -84,7 +84,7 @@
                                                     <label class="form-check-label">أفضل العروض</label>
                                                 </div>
                                             </div>
-                                            <button @click="filter_courses(); pagination_pages_method(courses.current_page)" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">فلتر</button>
+                                            <button @click="filter_courses(); pagination_pages_method(courses.current_page)" type="button" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">بحث</button>
                                         </form>
                                         <!-- ./Filter Form -->
                                     </div>
@@ -94,7 +94,7 @@
                         <!-- ./Filter Institute -->
                     </div>
                     <div class="col-xl-9">
-                        <div class="institutes-list pt-4">
+                        <div class="institutes-list pt-4" id="institutes-box">
                             <div class="row">
                                 <div v-for="course in courses.data" :key="course.course_id" class="col-lg-4 col-md-6">
                                     <!-- Institute -->
@@ -234,7 +234,6 @@
                 course_level: "",
                 student_favourite_courses: {},
                 arrange_as: "",
-                keyword_institute:'',
                 total_linkes: 0,
                 pagination_pages: [1,2,3,4,5]
             };
@@ -267,9 +266,8 @@
                         if(this.courses.last_page < 5){
                             this.pagination_pages = Array.from({length: this.courses.last_page}, (_, i) => i + 1)
                         }
-                        window.scrollTo(0,0)
+                       
                     });
-
                     
             },
             filter_courses: function () {
@@ -278,12 +276,21 @@
                 this.get_courses_url = this.courses.first_page_url;
                 this.keyword = this.$refs.keyword.value;
                 this.get_courses();
+
+                 $('html, body').animate({
+                        scrollTop: $("#institutes-box").offset().top
+                    }, 500);
+
+
             },
             pagination: function (url) {
                 this.get_courses_url = url;
 
                 
                 this.get_courses();
+                $('html, body').animate({
+                        scrollTop: $("#institutes-box").offset().top
+                    }, 500);
             },
             student_login_message:function(){
                 if(!this.student_check){
@@ -344,14 +351,15 @@
             
         },
         beforeMount() {
+            
 
                  this.total_linkes = this.courses.last_page - this.courses.current_page;
 
             if (this.search.length != 0) {
                 this.keyword = this.search.keyword;
-                if (this.search.country_id != undefined) {
-                    this.country_id = this.search.country_id;
-                    
+                if (this.search.country != undefined) {
+                    this.country_id = this.search.country;
+                   
                 }
                 if (this.search.city != undefined) {
                     this.city_id = this.search.city;
@@ -361,7 +369,6 @@
                 }
                 if(this.search.institute_name){
                     this.keyword = this.search.institute_name;
-                    this.keyword_institute = this.search.institute_name;
           
                 }
             }

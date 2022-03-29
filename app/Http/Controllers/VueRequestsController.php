@@ -25,7 +25,7 @@ class VueRequestsController extends Controller
                 $cities = $cities->where('country_id', $request->country_id);
             }
         }
-        $cities = $cities->latest('id')->get(['name_ar as name', 'id']);
+        $cities = $cities->orderBy('name_ar')->get(['name_ar as name', 'id']);
         return response()->json($cities);
     }
 
@@ -100,6 +100,7 @@ class VueRequestsController extends Controller
                 'cities.id AS city_id',
             )
             ->WhereIn('course_prices.id', $course_prices_ids)
+            ->where('courses.main_course_trigger' , 1)
             ->Where([
                     'courses.approvement' => 1 , 
                     'institutes.approvement' => 1 , 

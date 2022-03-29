@@ -37,6 +37,7 @@ class InstituteController extends Controller
         $country_id = $request->country_id;
         $city_id = $request->city_id;
         $name_ar = $request->name_ar;
+        $unfinished_seo = $request->unfinished_seo;
         $institute = new Institute;
         if($country_id){
             $institute = $institute->where('country_id',$country_id);
@@ -45,7 +46,10 @@ class InstituteController extends Controller
             $institute = $institute->where('city_id',$city_id);
         }  
         if($name_ar){
-            $name_ar = $institute->where('name_ar',$name_ar);
+            $institute = $institute->where('name_ar', 'LIKE', "%{$name_ar}%");
+        }
+        if ($unfinished_seo == 'true') {
+            $institute = $institute->where("meta_description" , null );
         }
         $institute = $institute->with('country', 'city','rats','courses' , 'creator' )->latest('id')->where('deleted_at', NULL)->paginate(10);
         return response()->json(['institutes' => $institute]);
