@@ -756,4 +756,22 @@ body {
     top: 15%;
   }
  }
+
+ .ui-datepicker .ui-datepicker-next span {
+  background-image: url(/website/css/images/datepicker/right.png) !important;
+  background-size: cover;
+}
+
+.ui-icon-circle-triangle-e, .ui-icon-circle-triangle-w {
+  background-position: 0px!important;
+}
+
+.ui-datepicker .ui-datepicker-prev span {
+  background-image: url(/website/css/images/datepicker/left.png) !important;
+  background-size: cover;
+}
+
+.ui-datepicker .ui-datepicker-next, .ui-datepicker .ui-datepicker-prev{
+  background-color:#006FFF;
+}
   /*# sourceMappingURL=article.css.map */

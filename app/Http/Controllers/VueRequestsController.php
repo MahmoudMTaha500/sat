@@ -108,7 +108,7 @@ class VueRequestsController extends Controller
                     'course_prices.deleted_at' => NULL,
                     'institutes.deleted_at' => NULL,
                 ]);
-
+        
         if(!empty($request->country_id)){
             $courses = $courses->where('countries.id' , $request->country_id);
         }
@@ -132,7 +132,7 @@ class VueRequestsController extends Controller
             if($request->arrange_as == 'lowest_prices'){ $courses = $courses->orderBy('discounted_price', 'ASC'); }
         }
 
-        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('course_name')->paginate(9)]);
+        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('institutes.institute_class' , 'ASC')->paginate(9)]);
     }
 
     // get course details in institute profile

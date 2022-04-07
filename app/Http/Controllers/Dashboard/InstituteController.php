@@ -89,6 +89,7 @@ class InstituteController extends Controller
                 "sat_rate" => 1,
                 "rate_switch" => 1,
                 "approvement" => 1,
+                "institute_class" => $request->institute_class,
                 "map" => $request->map,
             ]);
 
@@ -144,6 +145,7 @@ class InstituteController extends Controller
         $institute->meta_keywords = $request->meta_keywords;
         $institute->meta_description = $request->meta_description;
         $institute->map = $request->map;
+        $institute->institute_class = $request->institute_class;
         if ($request->logo) {
             $validate_images = $request->validate([
                 'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',

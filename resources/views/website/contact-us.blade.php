@@ -22,7 +22,7 @@
                                     <span class="text-main-color font-weight-bold"><i class="fas fa-envelope"></i> البريد الألكتروني :</span> admission@sat-edu.com
                                 </li>
                                 <li class="mb-3">
-                                    <span class="text-main-color font-weight-bold"><i class="fas fa-phone"></i> رقم الجوال :</span> +966 55 548 4931
+                                    <span class="text-main-color font-weight-bold"><i class="fas fa-phone"></i> رقم الجوال :</span> <a dir="ltr" href="tel:966555484931">+966 55 548 4931</a>
                                 </li>
                                 <li class="mb-3">
                                     <span class="text-main-color font-weight-bold"><i class="fas fa-map-marker-alt"></i> العنوان :</span>شركة GMC, الدور الأول, مكتب ٧, المروج, Imam Saud Bin Abdulaziz Bin Mohammed Rd, عمارة جوار, Riyadh Saudi Arabia, السعودية
