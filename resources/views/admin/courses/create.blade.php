@@ -92,7 +92,7 @@
                                                     <input type="number" step="any" id="projectinput1" min="1" class="form-control" placeholder="ساعات/أسبوع" name="hours_per_week"  value="{{old('hours_per_week')}}"  />
                                                 </div>
                                             </div>
-                                            <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label for="projectinput2">المستوى المطلوب</label>
                                                     <select class="form-control text-left" name="required_level">
@@ -104,6 +104,12 @@
                                                         <option    @if("متقدم C1" == old('required_level') )selected @endif value="متقدم C1">متقدم C1</option>
                                                         <option    @if("متقدم C2" == old('required_level') )selected @endif value="متقدم C2">متقدم C2</option>
                                                     </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="projectinput4">دورة المعهد الرئيسية؟</label>
+                                                    <input type="checkbox" id="switchery" class="switchery"  name="main_course_trigger" />
                                                 </div>
                                             </div>
                                             <div class="col-md-12">

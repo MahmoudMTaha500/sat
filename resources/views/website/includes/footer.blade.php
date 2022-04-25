@@ -31,7 +31,7 @@
                     <ul class="p-0">
                         <li class="text-white"><i class="fas fa-envelope"></i> <a href="mailto:admission@sat-edu.com" class="text-white">admission@sat-edu.com</a></li>
                         <li class="text-white"><i class="fas fa-phone"></i> <a dir="ltr" href="tel:966555484931" class="text-white">+966 55 548 4931</a></li>
-                        <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> المملكة العربية السعودية والمملكة المتحدة (نيوكاسل, يورك).                        </li>
+                        <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> Office Number 10, 4516 Imam Saud Bin Abdulaziz Bin Mohammed Rd, Al Muruj Dist., Riyadh 12282 </li>
                         <li class="social-links-sm">
                             <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>
@@ -61,6 +61,8 @@
         <script src="{{asset('website')}}/js/global.js"></script>
     @else
         <script src="{{asset('website')}}/js/home-scripts.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
         <script>
             // add-favourite
             $(document).on("click", ".add-favourite", function () {
@@ -68,6 +70,9 @@
                 axios.get("/update-student-favorit", { params: { course_id: $favourite_obj.attr("course-id") } }).then(function (a) {
                     "removed" == a.data && $favourite_obj.find(".favourite-icon").addClass("far").removeClass("fas"), "added" == a.data && $favourite_obj.find(".favourite-icon").addClass("fas").removeClass("far"), console.log(a.data);
                 });
+            });
+            $(document).ready(function() {
+                $('.searchable-select').select2();
             });
         </script>
     @endif

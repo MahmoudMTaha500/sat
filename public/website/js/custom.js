@@ -223,6 +223,12 @@ $(".datepicker-active-monday").datepicker({
     }
 })
 
+$(".datepicker-active-monday").change(function(){
+    // $(".datepicker-helper-field").val($(this).val())
+    console.log(this)
+})
+
+
 
 // add-favourite
 $(document).on("click", ".add-favourite", function () {

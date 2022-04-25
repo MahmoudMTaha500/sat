@@ -34,6 +34,7 @@ class CreateInstitutesTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->integer("sat_rate");
             $table->integer("rate_switch");
+            $table->integer("institute_class")->default(9999);
             $table->integer("approvement");
             $table->longText("map")->nullable();
 

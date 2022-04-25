@@ -92,6 +92,16 @@
                                         <div class="row">
                                         <div  class="col-md-12">
                                             <div class="form-group">
+                                                <label for="institute-name"> تصنيف المعهد</label>
+                                                <Select class="form-control" name="institute_class">
+                                                    <option {{old('institute_class') == 1 ? 'selected' : ''}} value="1">A</option>
+                                                    <option {{old('institute_class') == 2 ? 'selected' : ''}} value="2">B</option>
+                                                    <option {{old('institute_class') == 3 ? 'selected' : ''}} value="3">C</option>
+                                                </Select>
+                                            </div>
+                                        </div>
+                                        <div  class="col-md-12">
+                                            <div class="form-group">
                                                 <label for="institute-name"> الموقع</label>
                                                 <input type="text" id="institute-map" class="form-control" placeholder="ادخل  الموقع" name="map" value="{{old('map')}}" />
                                             </div>

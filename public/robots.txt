@@ -1,2 +1,6 @@
 User-agent: *
 Disallow:
+
+Allow: /
+# Sitemap
+Sitemap: http://www.mysite.com/sitemap.xml

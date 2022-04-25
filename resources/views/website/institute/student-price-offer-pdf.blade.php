@@ -205,8 +205,8 @@
                                 السكن : {{$data['residence']['name_ar']}}
                             </td>
                             <td>{{ArabicDate(date("m/d/Y", strtotime("$data[from_date] -1 day")))}}</td>
-                            <td>{{ArabicDate(date("m/d/Y", strtotime("$data[to_date] +1 day")))}}</td>
-                            <td></td>
+                            <td>{{ArabicDate(date("m/d/Y", strtotime("$data[residence_to_date] +1 day")))}}</td>
+                            <td>{{$data['residence_weeks']}} اسابيع</td>
                             <td>{{$data['residence']['price']*$data['weeks']}}</td>
                         </tr>
                     @endif 
@@ -252,7 +252,7 @@
     
         <div>
             <p class="note">
-                يُرجي ملاحظة أن هذه الأسعار متغيرة بشكل دوري.
+                يُرجي ملاحظة أن هذه الأسعار غير ثابتة بسبب تغير أسعار الصرف للعملات الأجنبية مقابل الريال السعودي
             </p>
         </div>
     </section>
@@ -280,7 +280,8 @@
             </p>
             <p class="main-color">
                 <a class="main-color" style="text-decoration: none" href="{{route('website.terms_conditions')}}">الشروط و الأحكام </a> | 
-                <a class="main-color" style="text-decoration: none" href="{{route('website.refund_policy')}}">سياسة الاسترجاع</a>
+                <a class="main-color" style="text-decoration: none" href="{{route('website.refund_policy')}}">سياسة الاسترجاع</a> |
+                <a class="main-color" style="text-decoration: none" href="{{route('website.home')}}">موقع كلاسات</a> 
             </p>
         </div>
 

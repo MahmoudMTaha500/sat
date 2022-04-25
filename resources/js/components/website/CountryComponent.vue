@@ -31,13 +31,14 @@
             }
         },
         beforeMount() {
-            
             this.get_countries();
-            this.get_cities();
+            // this.get_cities();
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            const course_id_url = urlParams.get('country_id');
-            this.country_id = course_id_url;
+            const country_id_url = urlParams.get('country');
+             if(country_id_url != null){
+                this.country_id = country_id_url;
+            }
         },
         
     };

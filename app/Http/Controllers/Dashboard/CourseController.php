@@ -121,6 +121,7 @@ class CourseController extends Controller
                 "title_tag" => $request->title_tag,
                 "meta_keywords" => $request->meta_keywords,
                 "meta_description" => $request->meta_description,
+                "main_course_trigger" => ($request->main_course_trigger == null ? 0 : 1),
                 'discount' => $request->discount/100,
                 'approvement' => 0,
 
@@ -191,6 +192,7 @@ class CourseController extends Controller
         $updateCourse->meta_keywords = $request->meta_keywords;
         $updateCourse->meta_description = $request->meta_description;
         $updateCourse->discount = $request->discount/100;
+        $updateCourse->main_course_trigger = ($request->main_course_trigger == null ? 0 : 1);
         $updateCourse->save();
 
         CoursePrice::where(["course_id" => $course->id])->forcedelete();

@@ -58,7 +58,7 @@
                         <!-- ./Country Field -->
                         <!-- City Field -->
                         <div class="form-group">
-                            <city-component ref="cities_component_ref" get_cities_url="{{route('vue.get.cities')}}" ele_class="{{'form-control rounded-10'}}"> </city-component>
+                            <city-component ref="cities_component_ref" get_cities_url="{{route('vue.get.cities')}}" ele_class="{{'form-control rounded-10 searchable-select'}}"> </city-component>
                         </div>
                         <!-- ./City Field -->
                         <!-- Weeks Count Field -->

@@ -1,5 +1,5 @@
 <template>
-    <div style="display: inline;">
+    <div @click="change_from_date" style="display: inline;">
         <!-- Cost -->
         <div class="bg-white py-4 rounded-10 mb-4">
             <div class="cost-heading border-bottom pb-2 px-3">
@@ -7,21 +7,17 @@
             </div>
             <div class="cost-body px-3 pt-3">
                 <div>
+                    <span class="d-block">{{course.name_ar}} </span>
                     <span class="font-weight-bold d-block">
-                        اللغة الإنجليزية العامة :
                         <span  v-if="course.discount !=0" class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} - </span>
                     </span>
-                    <span   class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الأسبوع </span>
-                    <hr />
-                </div>
-                <div>
-                    <span class="font-weight-bold d-block"> سعر الدورة : </span>
-                    <span class="text-main-color"> {{Math.round(price_per_week*weeks*(1- course.discount))}} ريال سعودي</span>
+                    <span  v-if="course.discount != 0" class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ريال سعودي / الأسبوع </span>
+                    <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.round(price_per_week*weeks*(1- course.discount))}} ريال سعودي </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? 'اسبوع ' : 'اسابيع ')}})</span> </span>
                     <hr />
                 </div>
                 <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
-                    <span class="text-main-color">{{chosin_residence.price*weeks}} ريال سعودي  (سعر الأسبوع الواحد : {{  chosin_residence.price   }}) </span>
+                    <span class="text-main-color">{{chosin_residence.price*residence_weeks}} ريال سعودي   <span class="h6 small text-success"> ({{residence_weeks + ( residence_weeks == 1 ? 'اسبوع ' : 'اسابيع ')}}) </span> </span>
                     <hr />
                 </div>
                 <div v-if="chosin_airport.price !=0 && chosin_airport.price != '' && !isNaN(chosin_airport.price) ">
@@ -47,31 +43,41 @@
                 <h5 class="font-weight-bold text-main-color">الحجز والتقديم</h5>
             </div>
             <div class="reservation-body px-3 pt-3">
-                <form :action="save_request_url" method="get">
+                <form :action="save_request_url" method="get" autocomplete="off">
                     <input type="hidden" name="_token" :value="csrf_token">
                     <input type="hidden" name="course_id" :value="course_id">
                     <label>تاريخ البداية</label>
-                    <div class="input-group mb-3 border rounded-10 pl-3 pr-2 btn-light">
-                        <input readonly="readonly" name="from_date" autocomplete="off" type="text" class="datepicker-active-monday form-control border-0 bg-transparent" data-toggle="datepicker" placeholder="تاريخ البداية">
+                    <div class="input-group mb-0 border rounded-10 pl-3 pr-2 btn-light">
+                        <input v-model="from_date"  name="from_date" autocomplete="off" type="text" :class="(from_date_error != '' ? 'is-invalid' : '') + ' datepicker-active-monday form-control border-0 bg-transparent' " data-toggle="datepicker" placeholder="تاريخ البداية">
                         <div class="input-group-append">
                             <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
                         </div>
                     </div>
+                    <p class="h6 small text-danger">{{(from_date_error != '' ? from_date_error : '')}}</p>
+                    
                     <div class="form-group">
-                        <label>عدد الأسابيع</label>
+                        <label>عدد اسابيع الدورة</label>
                         <select name="weeks" @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option value="">عدد الأسابيع</option>
                             <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                         </select>
                     </div>
-                    <div  v-if="residences[0]" class="form-group">
+
+                    <div  v-if="residences[0]" class="form-group residence-box">
                         <label>السكن</label>
-                        <select v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                        <select  v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
                             <option :value="0" disabled>هل ترغب في السكن؟</option>
                             <option :value="0" selected>لا أحتاج إلى خدمة السكن </option>
-                            <option v-for="residence in residences" :key="residence.id" :value="residence">{{residence.name_ar}} - {{residence.price}}</option>
+                            <option v-for="residence in residences" :key="residence.id" :value="residence">{{residence.name_ar}} - {{residence.price}} (ريال سعودي / الاسبوع)</option>
                         </select>
                         <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
+                    </div>
+                    <div v-if="residences[0]" class="form-group">
+                        <label>عدد اسابيع السكن</label>
+                        <select name="residence_weeks" v-model="residence_weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                            <option value="">عدد الأسابيع</option>
+                            <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
+                        </select>
                     </div>
                     <div v-if="airports[0]" class="form-group">
                         <label>الاستقبال من المطار</label>
@@ -107,7 +113,7 @@
 
 <script>
     export default {
-        props: ["csrf_token" , "save_request_url" , "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
+        props: ["csrf_token" , "from_date_error" , "save_request_url" , "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
         data() {
             return {
                 course: JSON.parse(this.course_obj),
@@ -118,8 +124,10 @@
                 insurance_price: 0,
                 insurance_price_checker: 0,
                 weeks: 1,
+                residence_weeks: 1,
                 price_per_week: 0,
                 weeks_count: 100,
+                from_date: '',
             };
         },
         methods: {
@@ -143,18 +151,47 @@
                     totalPrice += this.chosin_airport.price
                 }
                 if(!isNaN(this.chosin_residence.price)){
-                    totalPrice += this.chosin_residence.price*this.weeks
+                    totalPrice += this.chosin_residence.price*this.residence_weeks
                 }
                 if(this.insurance_price_checker == '1'){
                     totalPrice += this.insurance_price*this.weeks
                 }
                return totalPrice
             },
+            change_from_date(){
+                this.from_date = $('.datepicker-active-monday').val() 
+            }
         },
         beforeMount() {
+
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const url_weeks = urlParams.get('weeks')
+            const url_from_date = urlParams.get('from_date')
+            const url_residence = urlParams.get('residence')
+            const url_residence_weeks = urlParams.get('residence_weeks')
+            if (url_weeks != undefined) {
+                this.weeks = url_weeks;
+            }
+            if(url_from_date != undefined){
+                this.from_date = url_from_date;
+            }
+            if(url_residence != undefined){
+                this.chosin_residence = JSON.parse(url_residence);
+                console.log(url_residence)
+            }
+            if(url_residence_weeks != undefined){
+                this.residence_weeks = url_residence_weeks;
+            }
+
             this.get_price_per_week();
             this.get_insurance_price();
+
+            window.setInterval(() => {
+                this.change_from_date()
+            }, 500)
            
         },
     };
 </script>
+

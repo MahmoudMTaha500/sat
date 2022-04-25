@@ -45,7 +45,7 @@
                                 <input name="name"
                                 @if($student)
                                 value="{{ $student->name }}"   
-                                disabled  
+                                readonly  
                                 @else
                                 value="{{ old('name') }}" 
                                 @endif                           
@@ -61,7 +61,7 @@
                                 <input name="email"
                                 @if($student)
                                 value="{{ $student->email }}" 
-                                disabled    
+                                readonly    
                                 @else
                                 value="{{ old('email') }}"
                                 @endif      
@@ -80,7 +80,7 @@
                                 <input name="phone" 
                                 @if($student)
                                 value="{{ $student->phone }}"  
-                                disabled   
+                                readonly   
                                 @else
                                 value="{{ old('phone') }}"
                                 @endif      
@@ -94,8 +94,8 @@
                             </div>
                             <label>الدولة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country" required>
-                                    <option value="" selected disabled>اختر الدوله</option>
+                                <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country">
+                                    <option value="" selected readonly>اختر الدوله</option>
                                     <option value="England"> بريطانيا   </option>
                                     <option value="USA"> أمريكا </option>
                                     <option value="Schengen"> شنغن </option>
@@ -108,26 +108,26 @@
                                 @enderror
                             </div>  
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light" style="display:none;"   id="sheingen">
-                                <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror"   name="schengen_country">
-                                    <option value="" selected disabled> اختر من دول شنغن</option>
-                                    <option value="Germany"> المانيا  </option>
-                                    <option value="France"> فرنسا </option>
-                                    <option   value="Italy"> إيطاليا </option>
-                                    <option   value="Spain"> إسبانيا  </option>
-                                    <option   value="Estonia"> إستونيا </option>
-                                    <option   value="Belgium"> بلجيكا </option>
-                                    <option   value="Greece"> اليونان </option>
-                                    <option   value="Denmark"> الدنمارك </option>
-                                    <option   value="Finland"> فنلندا </option>
-                                    <option   value="Portugal"> البرتغال </option>
-                                    <option   value="Malta"> 	مالطا </option>
-                                    <option   value="Switzerland"> سويسرا </option>
-                                    <option   value="Sweden"> السويد </option>
-                                    <option   value="Slovakia"> سلوفاكيا </option>
-                                    <option   value="Poland"> بولندا </option>
-                                    <option   value="Iceland"> 	آيسلندا </option>
-                                    <option   value="Netherlands"> هولندا </option>
-                                    <option   value="Norway"> النرويج </option>
+                                <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror schengen_country"   name="schengen_country">
+                                    <option  value="" selected readonly> اختر من دول شنغن</option>
+                                    <option  value="Germany"> المانيا  </option>
+                                    <option  value="France"> فرنسا </option>
+                                    <option  value="Italy"> إيطاليا </option>
+                                    <option  value="Spain"> إسبانيا  </option>
+                                    <option  value="Estonia"> إستونيا </option>
+                                    <option  value="Belgium"> بلجيكا </option>
+                                    <option  value="Greece"> اليونان </option>
+                                    <option  value="Denmark"> الدنمارك </option>
+                                    <option  value="Finland"> فنلندا </option>
+                                    <option  value="Portugal"> البرتغال </option>
+                                    <option  value="Malta"> 	مالطا </option>
+                                    <option  value="Switzerland"> سويسرا </option>
+                                    <option  value="Sweden"> السويد </option>
+                                    <option  value="Slovakia"> سلوفاكيا </option>
+                                    <option  value="Poland"> بولندا </option>
+                                    <option  value="Iceland"> 	آيسلندا </option>
+                                    <option  value="Netherlands"> هولندا </option>
+                                    <option  value="Norway"> النرويج </option>
                                 </select>
 
                                 <span class="invalid-feedback" role="alert">
@@ -136,8 +136,8 @@
                             </div>
                             <label>نوع التأشيرة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
-                                    <option value="" selected disabled>اختر التأشيرة </option>
+                                <select  name="visatype" required id="visID" readonly class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
+                                    <option value="" selected readonly>اختر التأشيرة </option>
                                     <option visa-price="820"   class="uk" value=" سياحي ستة أشهر ">سياحي ستة أشهر  </option>
                                     <option visa-price="820"    class="uk" value=" دراسي ستة أشهر ">دراسي ستة أشهر  </option>
                                     <option visa-price="2480"    class="uk" value="  سياحي سنتين"> سياحي سنتين</option>
@@ -153,7 +153,7 @@
                                     <option visa-price="2220"  class="usa" value="  دراسي شامل السفيس"> دراسي شامل السفيس </option>
                                     <option visa-price="838"   class="usa" value=" مُرافق"> مُرافق</option>
                                     <option visa-price="838"   class="usa" value=" سياحي"> سياحي</option>
-                                    <option visa-price="730"   class="schengen" value=" سياحي"> سياحي</option>
+                                    <option visa-price="500"   class="schengen" value=" سياحي"> سياحي</option>
                                 </select>
                                 <input type="hidden" id="price_visa" name="price" />
 
@@ -274,33 +274,60 @@
 
     $('.visa-country').change(function(){
         var visa = event.target.value;
+        $('.visatype').val('')
+        $("#price_text").text('');
+        $('#text_hidden').hide()
         $('#sheingen').css('display','none');
         if (visa == "England") {
-            $("#visID").removeAttr("disabled");
+            $("#visID").removeAttr("readonly");
             $(".usa").css("display", "none");
             $(".schengen").css("display", "none");
             $(".uk").css("display", "");
         }
         if (visa == "USA") {
-            $("#visID").removeAttr("disabled");
+            $("#visID").removeAttr("readonly");
             $(".uk").css("display", "none");
             $(".schengen").css("display", "none");
             $(".usa").css("display", "");
         }
         if (visa == "Schengen") {
-            $("#visID").removeAttr("disabled");
+            $("#visID").removeAttr("readonly");
             $(".uk").css("display", "none");
             $(".usa").css("display", "none");
             $(".schengen").css("display", "");
-            $('#sheingen').css('display','block');
+            $('#sheingen').css('display','block').val('');
+            $('.schengen_country').val('');
+        }
+    })
+
+    $('.schengen_country').change(function(){
+        var schengenCountry = $(this).val()
+        if(schengenCountry != null){
+            var value = 500
+            if(schengenCountry == 'Germany'){value = 550}
+            if(schengenCountry == 'Spain'){value = 430}
+            if($('.visatype').val() != null){
+                $("#price_text").text(value);
+                $('#text_hidden').show()
+            }
         }
     })
     $(".visatype").change(function(){
         var selectedVisaType = $(this).children("option:selected");
-        var value = (document.getElementById("price_visa").value = selectedVisaType.attr('visa-price'));
-
-        $("#price_text").text(value);
-        $('#text_hidden').show()
+        if(selectedVisaType.hasClass('schengen')){
+            var schengenCountry = $('.schengen_country').val()
+            if(schengenCountry != null){
+                var value = 500
+                if(schengenCountry == 'Germany'){value = 550}
+                if(schengenCountry == 'Spain'){value = 430}
+                $("#price_text").text(value);
+                $('#text_hidden').show()
+            }
+        }else{
+            var value = (document.getElementById("price_visa").value = selectedVisaType.attr('visa-price'));
+            $("#price_text").text(value);
+            $('#text_hidden').show()
+        }
     });
     
 </script>

@@ -25,7 +25,7 @@ class VueRequestsController extends Controller
                 $cities = $cities->where('country_id', $request->country_id);
             }
         }
-        $cities = $cities->latest('id')->get(['name_ar as name', 'id']);
+        $cities = $cities->orderBy('name_ar')->get(['name_ar as name', 'id']);
         return response()->json($cities);
     }
 
@@ -66,6 +66,7 @@ class VueRequestsController extends Controller
             }
             
         }
+        // return $course_prices_ids;
         $courses = DB::table('courses')
             ->join('course_prices', 'courses.id', '=', 'course_prices.course_id')
             ->join('institutes', 'institutes.id', '=', 'courses.institute_id')
@@ -99,7 +100,8 @@ class VueRequestsController extends Controller
                 'countries.id AS country_id',
                 'cities.id AS city_id',
             )
-            ->WhereIn('course_prices.id', $course_prices_ids)
+            ->whereIntegerInRaw('course_prices.id', $course_prices_ids)
+            ->where('courses.main_course_trigger' , 1)
             ->Where([
                     'courses.approvement' => 1 , 
                     'institutes.approvement' => 1 , 
@@ -107,7 +109,7 @@ class VueRequestsController extends Controller
                     'course_prices.deleted_at' => NULL,
                     'institutes.deleted_at' => NULL,
                 ]);
-
+        
         if(!empty($request->country_id)){
             $courses = $courses->where('countries.id' , $request->country_id);
         }
@@ -131,7 +133,7 @@ class VueRequestsController extends Controller
             if($request->arrange_as == 'lowest_prices'){ $courses = $courses->orderBy('discounted_price', 'ASC'); }
         }
 
-        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('course_name')->paginate(9)]);
+        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('institutes.institute_class' , 'ASC')->paginate(9)]);
     }
 
     // get course details in institute profile
