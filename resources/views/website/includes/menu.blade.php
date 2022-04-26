@@ -14,20 +14,23 @@
 <header>
     <div class="container-fluid">
         <div class="row px-lg-0 px-xl-5">
-            <div class="col-12">
+            <div class="col-12 p-0">
                 <!-- NavBar -->
                 <nav class="navbar navbar-expand-lg navbar-light py-3 px-0">
                     <a class="navbar-brand mb-3" href="{{route('website.home')}}"><img src="{{asset('website')}}/imgs/logo.png" alt="Classat Logo" class="img-fluid" /></a>
 
-                    <button class="navbar-toggler" type="button"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <!-- Login & Register In Mobile Screen -->
-                    <div class="contact d-lg-none d-block">
-                        <a href="tel:966555484931" target="_blank"  class="btn rounded-circle text-muted border text-center p-0 position-relative"><i class="fas fa-phone-volume"></i></a>
-                        <a href="https://wa.me/+966555484931" target="_blank" class="btn rounded-circle text-success border text-center p-0 mr-3 position-relative"><i class="fab fa-whatsapp"></i></a>
+                    <div class="mobile-header-bottom">
+                        <button class="navbar-toggler" type="button"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <a href="{{route('website.institutes')}}" class="btn rounded-10 bg-secondary-color text-white d-lg-none d-block">المعاهد</a>
+                        <!-- Login & Register In Mobile Screen -->
+                        <div class="contact d-lg-none d-block">
+                            <a href="tel:966555484931" target="_blank"  class="btn rounded-circle text-muted border text-center p-0 position-relative"><i class="fas fa-phone-volume"></i></a>
+                            <a href="https://wa.me/+966555484931" target="_blank" class="btn rounded-circle text-success border text-center p-0 mr-3 position-relative"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <!-- ./Login & Register In Mobile Screen -->
                     </div>
-                    <!-- ./Login & Register In Mobile Screen -->
 
                     @if(Auth::guard('student')->check())
                     <!-- User Logged In Mobile Screen -->
@@ -111,7 +114,7 @@
                             </li>
                             @endforeach --}} @if(!(Auth::guard('student')->check()))
                             <li class="nav-item d-lg-none d-block">
-                                <a href="{{route('student.login')}}" class="btn rounded-10 text-secondary-color border-secondary-color mb-3">تسجيل الدخول</a>
+                                <a href="{{route('student.login')}}" class="btn rounded-10 text-secondary-color border-secondary-color">تسجيل الدخول</a>
                             </li>
                             <li class="nav-item d-lg-none d-block">
                                 <a href="{{route('student.register')}}" class="btn rounded-10 bg-secondary-color text-white">إنشاء حساب جديد</a>

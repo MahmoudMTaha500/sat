@@ -37,7 +37,7 @@
 </section>
 <!-- ./Intro -->
 <!-- Search Institute -->
-<section class="search-institute py-5">
+<section class="search-institute py-5 ">
     <div class="container-fluid">
         <div class="row px-xl-5">
             <!-- Section Heading -->
@@ -85,7 +85,7 @@
 
 @if (isset($best_offers[0]))
 <!-- Best Offers -->
-<section class="best-offers py-5 bg-sub-secondary-color">
+<section class="best-offers py-5">
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="row px-xl-5 mb-5">
@@ -167,7 +167,7 @@
 <!-- ./Best Offers -->
 @endif 
 <!-- Studies -->
-<div class="studies py-5">
+<div class="studies py-5 bg-sub-secondary-color">
     <div class="container-fluid">
         @if (isset($two_blogs[0]))
         <div class="row">
@@ -257,7 +257,7 @@
 
 @if (isset($blogs[0]))
 <!-- News -->
-<section class="news py-5 bg-sub-secondary-color">
+<section class="news py-5">
     <div class="container-fluid">
         <!-- Section Heading -->
         <div class="row px-xl-5 mb-4">
@@ -279,10 +279,11 @@
                         <a href="{{route('website.article',$blog->id)}}">
                             <img loading="lazy" src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->img_alt}}" class="card-img-top" />
                         </a>
+                        
                         <div class="card-body rounded-10 bg-white">
                             <a href="{{route('website.article',$blog->id)}}"><p class="card-title text-main-color h5">{{$blog->title_ar}}</p></a>
                             <p class="mb-0">
-                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <a href="{{route('website.article',$blog->id)}}">اقرأ المزيد</a></span>
+                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <br> <a href="{{route('website.article',$blog->id)}}">اقرأ المزيد</a></span>
                             </p>
                             <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
                         </div>

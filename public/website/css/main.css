@@ -327,7 +327,7 @@ form .btn {
   position: absolute;
   bottom: 0%;
   right: 50%;
-  z-index: 100000;
+  z-index: 1;
   padding: 10px;
   background-color: #fff;
   transform: translate(50%, 50%);
@@ -715,9 +715,10 @@ body {
 
 
   .select2-container--default .select2-selection--single{
-    border: 1px solid #dee2e6;
+    border: 1px solid #ced4da!important;
     height: 35px;
-    padding-top: 2px;
+    padding-top: 2px!important;
+
 }
   .select2-container--default .select2-selection--single:focus{
       outline: #F4C20D !important;
@@ -747,7 +748,84 @@ body {
     background-color: #006fff;
   }
   
+  .select2-container .select2-selection--single{
+    height: 40px!important;
+  }
+  .select2-container--default .select2-selection--single{
+    border-radius:10px!important;
+  }
+  .select2-container--default .select2-selection--single .select2-selection__arrow b{
+    border-color: #000 transparent transparent transparent!important;
+    border-width: 7px 6.5px 0 6.5px!important;
+    left: 85%!important;
+    top: 60%!important;
+  }
+
+  .mobile-header-bottom{
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    display: none;
+    padding:15px;
+    background-color: #006fff;
+    box-shadow: 0px 14px 39px -20px #000000db;
+  }
+
+  .navbar{
+    background-color: #fff;
+  }
+  .navbar-nav li{
+    margin-bottom: 0px;
+  }
+
+  .navbar-light .navbar-toggler{
+    background-color: #fff;
+  }
+  .tab-content>.active{
+    overflow: hidden;
+  }
+  .institute-page-title{
+    font-size: 30px;
+  }
+
+  .related-courses .related-course-title{
+    font-size: 16px;
+  }
+  
+ 
+  
  @media(max-width:767px){
+  .navbar{
+    padding-bottom: 0px!important;
+  }
+  .navbar.fixed{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%!important;
+    z-index: 10000;
+    padding: 0px!important;
+  }
+  .navbar-nav{
+    padding:30px 0px;
+  }
+  .navbar-nav li{
+    padding: 10px 15px;
+    border-bottom: 1px solid #006fff;
+  }
+  .navbar-nav li:last-child{
+    border: none;
+  }
+  .navbar-nav li a.nav-link{
+    padding: 0px;
+  }
+  
+  .navbar-collapse{
+    background-color: #f0f6fe;
+  }
+  .mobile-header-bottom{
+    display: flex;
+  }
   .home-single-blog-image{
     padding: 25%;
   }
@@ -761,6 +839,35 @@ body {
   }
   .top-footer{
     text-align: center;
+  }
+  .heading-institutes h3{
+    font-size: 1.5rem;
+  }
+
+  .institute-page-title{
+    font-size: 25px;
+    margin-top: 30px;
+  }
+  .course-title{
+    font-size: 18px;
+  }
+  .nav-tabs{
+    overflow-x: unset;
+    overflow-y: unset;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .nav-tabs .nav-item a{
+    padding: 5px 10px!important;
+    
+  }
+  .nav-tabs .nav-item:first-of-type a.active{
+    border-bottom-right-radius: 0px !important;
+    border-top-left-radius: 10px !important;
+  }
+  .nav-tabs .nav-item:last-of-type a.active{
+    border-bottom-right-radius: 10px !important;
+    border-top-left-radius: 0px !important;
   }
  }
 

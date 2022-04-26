@@ -6,7 +6,7 @@
         <div class="row px-xl-5 mb-4">
             <div class="col-12">
                 <div class="heading-institutes">
-                    <h3 class="text-main-color font-weight-bold">{{$institute->name_ar}}</h3>
+                    <h1 class="text-main-color font-weight-bold institute-page-title">{{$institute->name_ar}}</h1>
                     <p class="mb-1">
                         <i class="fas fa-map-marker-alt text-main-color"></i>
                         {{$institute->country->name_ar}} - {{$institute->city->name_ar}}
@@ -22,7 +22,7 @@
         <div class="row px-xl-5 mt-5">
             
             {{-- <div class="col-lg-{{isset($course) ? '8' : '12'}}"> --}}
-            <div class="col-md-8">
+            <div class="col-md-8 order-md-1 order-2">
                 <div class=" mb-5 pb-3">
                     <div class="col-12 px-0 position-relative">
                         <!-- Institute Imgs -->
@@ -93,7 +93,7 @@
                             <!-- About Course Tab -->
                             <div class="bg-white rounded-10 p-4">
                                 <div class="course-info" style="height: 150px; overflow:hidden">
-                                    <h5 class="text-main-color font-weight-bold mb-3">{{$course->name_ar}}</h5>
+                                    <h5 class="text-main-color font-weight-bold mb-3 course-title">{{$course->name_ar}}</h5>
                                     <p class="mb-3">{!! $course->about_ar !!}</p>
                                     <div class="row mt-5" >
                                         @if ($course->min_age !=null)
@@ -170,21 +170,21 @@
                                 
                             </div>
 
-                            <div class="row mt-5">
+                            <div id="related-courses" class="row mt-5">
                                 <div class="col-12 mb-3">
                                     <h2 class="text-main-color">الدورات التدريبية</h2>
                                 </div>
                                 @foreach ($institute->courses as $institute_course)
                                    @if (isset($course))
                                         @if ($institute_course->id != $course->id)
-                                            <div class="col-lg-4 px-0">
+                                            <div class="col-lg-6 px-0 related-courses">
                                                 <!-- Course -->
                                                 <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                                     <!-- Institute Img -->
                                                     <!-- ./Institute Img -->
                                                     <div class="card-body rounded-10 bg-white">
                                                         <!-- Course Title -->
-                                                        <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
+                                                        <h5 class="card-title related-course-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
                                                         <!-- ./Course Title -->
     
                                                         <!-- Course Time And Level -->
@@ -394,9 +394,9 @@
                     <div class="tab-pane fade" id="rate" role="tabpanel" aria-labelledby="rate-tab">
                         <!-- Course Rate Tab -->
 
-                        <div class="bg-white rounded-10 py-4 mb-4">
+                        <div class="bg-white rounded-10 mb-4">
                             @foreach ($institute->approved_rates as $rate)
-                            <div class="border-bottom mt-3">
+                            <div class="border-bottom mt-3  py-4">
                                 <div class="row px-4">
                                     <div class="col-lg-2 col-4">
                                         <img src="{{$rate->student->profile_image == null ? asset('storage/default_images.png') : $rate->student->profile_image}}" alt="{{$rate->student->name}}" class="img-fluid rounded-pill img-user" />
@@ -439,7 +439,8 @@
                 </div>
                 <!-- ./Tabs -->
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 order-md-2 order-1 mb-5">
+                
                 @isset($course)
                     <course-price-info-component
                         course_obj = '{{$course}}'
@@ -458,71 +459,71 @@
                 <div style="height: 700px; overflow-y:scroll">
                     <h2 class="text-main-color mb-3">الدورات التدريبية</h2>
 
-                @foreach ($institute->courses as $institute_course)
-                               @if (isset($course))
-                                    @if ($institute_course->id != $course->id)
-                                        <div class="col-lg-12 px-0">
-                                            <!-- Course -->
-                                            <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
-                                                <!-- Institute Img -->
-                                                <!-- ./Institute Img -->
-                                                <div class="card-body rounded-10 bg-white">
-                                                    <!-- Course Title -->
-                                                    <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
-                                                    <!-- ./Course Title -->
+                    @foreach ($institute->courses as $institute_course)
+                        @if (isset($course))
+                            @if ($institute_course->id != $course->id)
+                                <div class="col-lg-12 px-0 related-courses">
+                                    <!-- Course -->
+                                    <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                        <!-- Institute Img -->
+                                        <!-- ./Institute Img -->
+                                        <div class="card-body rounded-10 bg-white">
+                                            <!-- Course Title -->
+                                            <h5 class="card-title related-course-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
+                                            <!-- ./Course Title -->
 
-                                                    <!-- Course Time And Level -->
-                                                    <p class="mb-0 overflow-hidden">
-                                                        @if ($institute_course->study_period != null)
-                                                            <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
-                                                        @endif
-                                                        @if ($institute_course->required_level != null)
-                                                            <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
-                                                        @endif
-                                                    </p>
-                                                    <!-- ./Course Time And Level -->
-                                                </div>
-                                                <!-- Course Price -->
-                                                <div class="card-footer bg-white overflow-hidden">
-                                                    <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
-                                                </div>
-                                                <!-- ./Course Price -->
-                                            </div>
-                                            <!-- ./Course -->
+                                            <!-- Course Time And Level -->
+                                            <p class="mb-0 overflow-hidden">
+                                                @if ($institute_course->study_period != null)
+                                                    <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
+                                                @endif
+                                                @if ($institute_course->required_level != null)
+                                                    <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
+                                                @endif
+                                            </p>
+                                            <!-- ./Course Time And Level -->
                                         </div>
-                                    @endif
-                                @else
-                                    <div class="col-lg-12 px-0">
-                                        <!-- Course -->
-                                        <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
-                                            <!-- Institute Img -->
-                                            <!-- ./Institute Img -->
-                                            <div class="card-body rounded-10 bg-white">
-                                                <!-- Course Title -->
-                                                <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
-                                                <!-- ./Course Title -->
-
-                                                <!-- Course Time And Level -->
-                                                <p class="mb-0 overflow-hidden">
-                                                    @if ($institute_course->study_period != null)
-                                                        <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
-                                                    @endif
-                                                    @if ($institute_course->required_level != null)
-                                                        <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
-                                                    @endif
-                                                </p>
-                                                <!-- ./Course Time And Level -->
-                                            </div>
-                                            <!-- Course Price -->
-                                            <div class="card-footer bg-white overflow-hidden">
-                                                <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
-                                            </div>
-                                            <!-- ./Course Price -->
+                                        <!-- Course Price -->
+                                        <div class="card-footer bg-white overflow-hidden">
+                                            <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
                                         </div>
-                                        <!-- ./Course -->
+                                        <!-- ./Course Price -->
                                     </div>
-                                @endif
-                            @endforeach    
+                                    <!-- ./Course -->
+                                </div>
+                            @endif
+                        @else
+                            <div class="col-lg-12 px-0">
+                                <!-- Course -->
+                                <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                                    <!-- Institute Img -->
+                                    <!-- ./Institute Img -->
+                                    <div class="card-body rounded-10 bg-white">
+                                        <!-- Course Title -->
+                                        <h5 class="card-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
+                                        <!-- ./Course Title -->
+
+                                        <!-- Course Time And Level -->
+                                        <p class="mb-0 overflow-hidden">
+                                            @if ($institute_course->study_period != null)
+                                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$institute_course->study_period}}</span>
+                                            @endif
+                                            @if ($institute_course->required_level != null)
+                                                <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$institute_course->required_level}}</span>
+                                            @endif
+                                        </p>
+                                        <!-- ./Course Time And Level -->
+                                    </div>
+                                    <!-- Course Price -->
+                                    <div class="card-footer bg-white overflow-hidden">
+                                        <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                    </div>
+                                    <!-- ./Course Price -->
+                                </div>
+                                <!-- ./Course -->
+                            </div>
+                        @endif
+                    @endforeach    
                 @endisset
                 </div>
             </div>
