@@ -38,75 +38,79 @@
         </div>
         <!-- ./Cost -->
         <!-- Reservation -->
-        <div class="bg-white py-4 rounded-10">
-            <div class="reservation-heading border-bottom pb-2 px-3">
-                <h5 class="font-weight-bold text-main-color">الحجز والتقديم</h5>
-            </div>
-            <div class="reservation-body px-3 pt-3">
-                <form :action="save_request_url" method="get" autocomplete="off">
-                    <input type="hidden" name="_token" :value="csrf_token">
-                    <input type="hidden" name="course_id" :value="course_id">
-                    <label>تاريخ البداية</label>
-                    <div class="input-group mb-0 border rounded-10 pl-3 pr-2 btn-light">
-                        <input v-model="from_date"  name="from_date" autocomplete="off" type="text" :class="(from_date_error != '' ? 'is-invalid' : '') + ' datepicker-active-monday form-control border-0 bg-transparent' " data-toggle="datepicker" placeholder="تاريخ البداية">
-                        <div class="input-group-append">
-                            <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
+        <div id="accordion" class="sticky-top pt-4">
+            <div class="bg-white py-4 rounded-10">
+                <div class="reservation-heading border-bottom pb-2 px-3">
+                    <h5 class="font-weight-bold text-main-color">الحجز والتقديم</h5>
+                </div>
+                <div class="reservation-body px-3 pt-3">
+                    <form :action="save_request_url" method="get" autocomplete="off">
+                        <input type="hidden" name="_token" :value="csrf_token">
+                        <input type="hidden" name="course_id" :value="course_id">
+                        <label>تاريخ البداية</label>
+                        <div class="input-group mb-0 border rounded-10 pl-3 pr-2 btn-light">
+                            <input v-model="from_date"  name="from_date" autocomplete="off" type="text" :class="(from_date_error != '' ? 'is-invalid' : '') + ' datepicker-active-monday form-control border-0 bg-transparent' " data-toggle="datepicker" placeholder="تاريخ البداية">
+                            <div class="input-group-append">
+                                <span class="input-group-text border-0 bg-white p-0 bg-transparent" id="basic-addon2"><i class="far fa-calendar"></i></span>
+                            </div>
                         </div>
-                    </div>
-                    <p class="h6 small text-danger">{{(from_date_error != '' ? from_date_error : '')}}</p>
-                    
-                    <div class="form-group">
-                        <label>عدد اسابيع الدورة</label>
-                        <select name="weeks" @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
-                            <option value="">عدد الأسابيع</option>
-                            <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
-                        </select>
-                    </div>
+                        <p class="h6 small text-danger">{{(from_date_error != '' ? from_date_error : '')}}</p>
+                        
+                        <div class="form-group">
+                            <label>عدد اسابيع الدورة</label>
+                            <select name="weeks" @change="get_price_per_week() ; get_insurance_price()" v-model="weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                <option value="">عدد الأسابيع</option>
+                                <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
+                            </select>
+                        </div>
 
-                    <div  v-if="residences[0]" class="form-group residence-box">
-                        <label>السكن</label>
-                        <select  v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
-                            <option :value="0" disabled>هل ترغب في السكن؟</option>
-                            <option :value="0" selected>لا أحتاج إلى خدمة السكن </option>
-                            <option v-for="residence in residences" :key="residence.id" :value="residence">{{residence.name_ar}} - {{residence.price}} (ريال سعودي / الاسبوع)</option>
-                        </select>
-                        <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
-                    </div>
-                    <div v-if="residences[0]" class="form-group">
-                        <label>عدد اسابيع السكن</label>
-                        <select name="residence_weeks" v-model="residence_weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
-                            <option value="">عدد الأسابيع</option>
-                            <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
-                        </select>
-                    </div>
-                    <div v-if="airports[0]" class="form-group">
-                        <label>الاستقبال من المطار</label>
-                        <select v-model="chosin_airport" class="form-control selectpicker rounded-10 border" data-live-search="true">
-                            <option value="" disabled>الاستقبال من المطار</option>
-                            <option selected :value="0"> لا احتاج خدمة الاستقبال</option>
-                            <option v-for="airport in airports" :key="airport.id" :value="airport">{{airport.name_ar}} - {{airport.price}}</option>
-                        </select>
-                        <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
-                    </div>
-                    <div  v-if="insurance_price" class="row">
-                        <div class="col-md-12"><label>هل تحتاج الي التامين الصحي</label> <br /></div>
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline mr-0 ml-4">
-                                <input v-model="insurance_price_checker"  name="insurance" type="radio" id="inlineCheckbox1" value="1" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">نعم ({{insurance_price*weeks}} ريال)</label>
+                        <div  v-if="residences[0]" class="form-group residence-box">
+                            <label>السكن</label>
+                            <select  v-model="chosin_residence" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                <option :value="0" disabled>هل ترغب في السكن؟</option>
+                                <option :value="0" selected>لا أحتاج إلى خدمة السكن </option>
+                                <option v-for="residence in residences" :key="residence.id" :value="residence">{{residence.name_ar}} - {{residence.price}} (ريال سعودي / الاسبوع)</option>
+                            </select>
+                            <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
+                        </div>
+                        <div v-if="residences[0]" class="form-group">
+                            <label>عدد اسابيع السكن</label>
+                            <select name="residence_weeks" v-model="residence_weeks" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                <option value="">عدد الأسابيع</option>
+                                <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
+                            </select>
+                        </div>
+                        <div v-if="airports[0]" class="form-group">
+                            <label>الاستقبال من المطار</label>
+                            <select v-model="chosin_airport" class="form-control selectpicker rounded-10 border" data-live-search="true">
+                                <option value="" disabled>الاستقبال من المطار</option>
+                                <option selected :value="0"> لا احتاج خدمة الاستقبال</option>
+                                <option v-for="airport in airports" :key="airport.id" :value="airport">{{airport.name_ar}} - {{airport.price}}</option>
+                            </select>
+                            <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
+                        </div>
+                        <div  v-if="insurance_price" class="row">
+                            <div class="col-md-12"><label>هل تحتاج الي التامين الصحي</label> <br /></div>
+                            <div class="col-md-6">
+                                <div class="form-check form-check-inline mr-0 ml-4">
+                                    <input v-model="insurance_price_checker"  name="insurance" type="radio" id="inlineCheckbox1" value="1" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">نعم ({{insurance_price*weeks}} ريال)</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check form-check-inline mr-0 ml-4">
+                                    <input v-model="insurance_price_checker"  name="insurance" type="radio" id="inlineCheckbox1" value="0" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">لا</label>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-check form-check-inline mr-0 ml-4">
-                                <input v-model="insurance_price_checker"  name="insurance" type="radio" id="inlineCheckbox1" value="0" class="form-check-input mr-0 ml-3 bg-secondary" /> <label class="form-check-label">لا</label>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Redirect to Confirm Reservation -->
-                    <button class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">حجز</button>
-                </form>
+                        
+                        <!-- Redirect to Confirm Reservation -->
+                        <button class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">حجز</button>
+                    </form>
+                </div>
             </div>
+            <!-- <button id="related-courses" class="btn rounded-10 btn-primary text-white mb-2 w-100 mt-5">خيارات الكورسات المتوفرة</button> -->
         </div>
+        
         <!-- ./Reservation -->
     </div>
 </template>

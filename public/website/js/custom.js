@@ -1,4 +1,22 @@
+document.addEventListener("scroll" , function(){
+    let navBar = document.querySelector(".navbar")
+    if(window.pageYOffset > 40){
+        if(navBar !== null){
+            $(".navbar-brand").hide();
+            navBar.classList.add("fixed");
+        }
+    }else{
+        if(navBar !== null){ 
+            navBar.classList.remove("fixed");
+            $(".navbar-brand").show();
+        }
+    }
+})
 
+$('.toggel-filter-btn').click( function(){
+    let btn = $(this)
+    btn.text( btn.attr("aria-expanded") != "true" ? "اغلاق" : "بحث من جديد")
+})
 
 // Starr Call Plugin
 $('.add-rate').starrr({
@@ -237,3 +255,5 @@ $(document).on("click", ".add-favourite", function () {
         "removed" == a.data && $favourite_obj.find(".favourite-icon").addClass("far").removeClass("fas"), "added" == a.data && $favourite_obj.find(".favourite-icon").addClass("fas").removeClass("far"), console.log(a.data);
     });
 });
+
+

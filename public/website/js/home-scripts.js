@@ -2182,6 +2182,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
   data: function data() {
@@ -2514,6 +2518,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = (_props$data$methods$c = {
@@ -2581,15 +2609,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.keyword = this.$refs.keyword.value;
       this.get_courses();
       $('html, body').animate({
-        scrollTop: $("#institutes-box").offset().top
+        scrollTop: $("#institutes-box").offset().top - 950
       }, 500);
+      $(".toggel-filter-btn").trigger('click');
+    },
+    newFilter: function newFilter() {
+      if ($(".toggel-filter-btn").attr("aria-expanded") == "false") {
+        $(".toggel-filter-btn").trigger('click');
+        $('html, body').animate({
+          scrollTop: $("#institutes-box").offset().top - 230
+        }, 500);
+      } else {
+        $('html, body').animate({
+          scrollTop: $("#institutes-box").offset().top - 920
+        }, 500);
+      }
     },
     pagination: function pagination(url) {
       this.get_courses_url = url;
       this.get_courses();
       $('html, body').animate({
-        scrollTop: $("#institutes-box").offset().top
+        scrollTop: $("#institutes-box").offset().top - 950
       }, 500);
+
+      if ($(".toggel-filter-btn").attr("aria-expanded") == "true") {
+        $(".toggel-filter-btn").trigger('click');
+      }
     },
     student_login_message: function student_login_message() {
       if (!this.student_check) {
@@ -39856,244 +39901,122 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
-        _vm._m(3),
-        _vm._v(" "),
-        _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                action: _vm.save_request_url,
-                method: "get",
-                autocomplete: "off"
-              }
-            },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token" },
-                domProps: { value: _vm.csrf_token }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                attrs: { type: "hidden", name: "course_id" },
-                domProps: { value: _vm.course_id }
-              }),
-              _vm._v(" "),
-              _c("label", [_vm._v("تاريخ البداية")]),
-              _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
+        [
+          _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
+            _vm._m(3),
+            _vm._v(" "),
+            _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
               _c(
-                "div",
+                "form",
                 {
-                  staticClass:
-                    "input-group mb-0 border rounded-10 pl-3 pr-2 btn-light"
+                  attrs: {
+                    action: _vm.save_request_url,
+                    method: "get",
+                    autocomplete: "off"
+                  }
                 },
                 [
                   _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.from_date,
-                        expression: "from_date"
-                      }
-                    ],
-                    class:
-                      (_vm.from_date_error != "" ? "is-invalid" : "") +
-                      " datepicker-active-monday form-control border-0 bg-transparent",
-                    attrs: {
-                      name: "from_date",
-                      autocomplete: "off",
-                      type: "text",
-                      "data-toggle": "datepicker",
-                      placeholder: "تاريخ البداية"
-                    },
-                    domProps: { value: _vm.from_date },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.from_date = $event.target.value
-                      }
-                    }
+                    attrs: { type: "hidden", name: "_token" },
+                    domProps: { value: _vm.csrf_token }
                   }),
                   _vm._v(" "),
-                  _vm._m(4)
-                ]
-              ),
-              _vm._v(" "),
-              _c("p", { staticClass: "h6 small text-danger" }, [
-                _vm._v(
-                  _vm._s(_vm.from_date_error != "" ? _vm.from_date_error : "")
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", [_vm._v("عدد اسابيع الدورة")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.weeks,
-                        expression: "weeks"
-                      }
-                    ],
-                    staticClass: "form-control selectpicker rounded-10 border",
-                    attrs: { name: "weeks", "data-live-search": "true" },
-                    on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.weeks = $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        },
-                        function($event) {
-                          _vm.get_price_per_week()
-                          _vm.get_insurance_price()
-                        }
-                      ]
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("عدد الأسابيع")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.weeks_count, function(week_count) {
-                      return _c(
-                        "option",
-                        { key: week_count, domProps: { value: week_count } },
-                        [_vm._v(" " + _vm._s(week_count) + " ")]
-                      )
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _vm.residences[0]
-                ? _c("div", { staticClass: "form-group residence-box" }, [
-                    _c("label", [_vm._v("السكن")]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  _c("input", {
+                    attrs: { type: "hidden", name: "course_id" },
+                    domProps: { value: _vm.course_id }
+                  }),
+                  _vm._v(" "),
+                  _c("label", [_vm._v("تاريخ البداية")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "input-group mb-0 border rounded-10 pl-3 pr-2 btn-light"
+                    },
+                    [
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.chosin_residence,
-                            expression: "chosin_residence"
+                            value: _vm.from_date,
+                            expression: "from_date"
                           }
                         ],
-                        staticClass:
-                          "form-control selectpicker rounded-10 border",
-                        attrs: { "data-live-search": "true" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.chosin_residence = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "option",
-                          { attrs: { disabled: "" }, domProps: { value: 0 } },
-                          [_vm._v("هل ترغب في السكن؟")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "option",
-                          { attrs: { selected: "" }, domProps: { value: 0 } },
-                          [_vm._v("لا أحتاج إلى خدمة السكن ")]
-                        ),
-                        _vm._v(" "),
-                        _vm._l(_vm.residences, function(residence) {
-                          return _c(
-                            "option",
-                            {
-                              key: residence.id,
-                              domProps: { value: residence }
-                            },
-                            [
-                              _vm._v(
-                                _vm._s(residence.name_ar) +
-                                  " - " +
-                                  _vm._s(residence.price) +
-                                  " (ريال سعودي / الاسبوع)"
-                              )
-                            ]
-                          )
-                        })
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "hidden", name: "residence" },
-                      domProps: { value: JSON.stringify(_vm.chosin_residence) }
-                    })
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.residences[0]
-                ? _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("عدد اسابيع السكن")]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.residence_weeks,
-                            expression: "residence_weeks"
-                          }
-                        ],
-                        staticClass:
-                          "form-control selectpicker rounded-10 border",
+                        class:
+                          (_vm.from_date_error != "" ? "is-invalid" : "") +
+                          " datepicker-active-monday form-control border-0 bg-transparent",
                         attrs: {
-                          name: "residence_weeks",
-                          "data-live-search": "true"
+                          name: "from_date",
+                          autocomplete: "off",
+                          type: "text",
+                          "data-toggle": "datepicker",
+                          placeholder: "تاريخ البداية"
                         },
+                        domProps: { value: _vm.from_date },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.residence_weeks = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.from_date = $event.target.value
                           }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(4)
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "h6 small text-danger" }, [
+                    _vm._v(
+                      _vm._s(
+                        _vm.from_date_error != "" ? _vm.from_date_error : ""
+                      )
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("عدد اسابيع الدورة")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.weeks,
+                            expression: "weeks"
+                          }
+                        ],
+                        staticClass:
+                          "form-control selectpicker rounded-10 border",
+                        attrs: { name: "weeks", "data-live-search": "true" },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.weeks = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            },
+                            function($event) {
+                              _vm.get_price_per_week()
+                              _vm.get_insurance_price()
+                            }
+                          ]
                         }
                       },
                       [
@@ -40114,182 +40037,342 @@ var render = function() {
                       ],
                       2
                     )
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.airports[0]
-                ? _c("div", { staticClass: "form-group" }, [
-                    _c("label", [_vm._v("الاستقبال من المطار")]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.chosin_airport,
-                            expression: "chosin_airport"
-                          }
-                        ],
-                        staticClass:
-                          "form-control selectpicker rounded-10 border",
-                        attrs: { "data-live-search": "true" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.chosin_airport = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { value: "", disabled: "" } }, [
-                          _vm._v("الاستقبال من المطار")
-                        ]),
+                  ]),
+                  _vm._v(" "),
+                  _vm.residences[0]
+                    ? _c("div", { staticClass: "form-group residence-box" }, [
+                        _c("label", [_vm._v("السكن")]),
                         _vm._v(" "),
                         _c(
-                          "option",
-                          { attrs: { selected: "" }, domProps: { value: 0 } },
-                          [_vm._v(" لا احتاج خدمة الاستقبال")]
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.chosin_residence,
+                                expression: "chosin_residence"
+                              }
+                            ],
+                            staticClass:
+                              "form-control selectpicker rounded-10 border",
+                            attrs: { "data-live-search": "true" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.chosin_residence = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { disabled: "" },
+                                domProps: { value: 0 }
+                              },
+                              [_vm._v("هل ترغب في السكن؟")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "" },
+                                domProps: { value: 0 }
+                              },
+                              [_vm._v("لا أحتاج إلى خدمة السكن ")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.residences, function(residence) {
+                              return _c(
+                                "option",
+                                {
+                                  key: residence.id,
+                                  domProps: { value: residence }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(residence.name_ar) +
+                                      " - " +
+                                      _vm._s(residence.price) +
+                                      " (ريال سعودي / الاسبوع)"
+                                  )
+                                ]
+                              )
+                            })
+                          ],
+                          2
                         ),
                         _vm._v(" "),
-                        _vm._l(_vm.airports, function(airport) {
-                          return _c(
-                            "option",
-                            { key: airport.id, domProps: { value: airport } },
-                            [
-                              _vm._v(
-                                _vm._s(airport.name_ar) +
-                                  " - " +
-                                  _vm._s(airport.price)
+                        _c("input", {
+                          attrs: { type: "hidden", name: "residence" },
+                          domProps: {
+                            value: JSON.stringify(_vm.chosin_residence)
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.residences[0]
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("عدد اسابيع السكن")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.residence_weeks,
+                                expression: "residence_weeks"
+                              }
+                            ],
+                            staticClass:
+                              "form-control selectpicker rounded-10 border",
+                            attrs: {
+                              name: "residence_weeks",
+                              "data-live-search": "true"
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.residence_weeks = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "" } }, [
+                              _vm._v("عدد الأسابيع")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.weeks_count, function(week_count) {
+                              return _c(
+                                "option",
+                                {
+                                  key: week_count,
+                                  domProps: { value: week_count }
+                                },
+                                [_vm._v(" " + _vm._s(week_count) + " ")]
                               )
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.airports[0]
+                    ? _c("div", { staticClass: "form-group" }, [
+                        _c("label", [_vm._v("الاستقبال من المطار")]),
+                        _vm._v(" "),
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.chosin_airport,
+                                expression: "chosin_airport"
+                              }
+                            ],
+                            staticClass:
+                              "form-control selectpicker rounded-10 border",
+                            attrs: { "data-live-search": "true" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.chosin_airport = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "", disabled: "" } },
+                              [_vm._v("الاستقبال من المطار")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "option",
+                              {
+                                attrs: { selected: "" },
+                                domProps: { value: 0 }
+                              },
+                              [_vm._v(" لا احتاج خدمة الاستقبال")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.airports, function(airport) {
+                              return _c(
+                                "option",
+                                {
+                                  key: airport.id,
+                                  domProps: { value: airport }
+                                },
+                                [
+                                  _vm._v(
+                                    _vm._s(airport.name_ar) +
+                                      " - " +
+                                      _vm._s(airport.price)
+                                  )
+                                ]
+                              )
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          attrs: { type: "hidden", name: "airport" },
+                          domProps: {
+                            value: JSON.stringify(_vm.chosin_airport)
+                          }
+                        })
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.insurance_price
+                    ? _c("div", { staticClass: "row" }, [
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "form-check form-check-inline mr-0 ml-4"
+                            },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.insurance_price_checker,
+                                    expression: "insurance_price_checker"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-check-input mr-0 ml-3 bg-secondary",
+                                attrs: {
+                                  name: "insurance",
+                                  type: "radio",
+                                  id: "inlineCheckbox1",
+                                  value: "1"
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.insurance_price_checker,
+                                    "1"
+                                  )
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.insurance_price_checker = "1"
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", { staticClass: "form-check-label" }, [
+                                _vm._v(
+                                  "نعم (" +
+                                    _vm._s(_vm.insurance_price * _vm.weeks) +
+                                    " ريال)"
+                                )
+                              ])
                             ]
                           )
-                        })
-                      ],
-                      2
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      attrs: { type: "hidden", name: "airport" },
-                      domProps: { value: JSON.stringify(_vm.chosin_airport) }
-                    })
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.insurance_price
-                ? _c("div", { staticClass: "row" }, [
-                    _vm._m(5),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "form-check form-check-inline mr-0 ml-4"
-                        },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.insurance_price_checker,
-                                expression: "insurance_price_checker"
-                              }
-                            ],
-                            staticClass:
-                              "form-check-input mr-0 ml-3 bg-secondary",
-                            attrs: {
-                              name: "insurance",
-                              type: "radio",
-                              id: "inlineCheckbox1",
-                              value: "1"
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "form-check form-check-inline mr-0 ml-4"
                             },
-                            domProps: {
-                              checked: _vm._q(_vm.insurance_price_checker, "1")
-                            },
-                            on: {
-                              change: function($event) {
-                                _vm.insurance_price_checker = "1"
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { staticClass: "form-check-label" }, [
-                            _vm._v(
-                              "نعم (" +
-                                _vm._s(_vm.insurance_price * _vm.weeks) +
-                                " ريال)"
-                            )
-                          ])
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "form-check form-check-inline mr-0 ml-4"
-                        },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.insurance_price_checker,
-                                expression: "insurance_price_checker"
-                              }
-                            ],
-                            staticClass:
-                              "form-check-input mr-0 ml-3 bg-secondary",
-                            attrs: {
-                              name: "insurance",
-                              type: "radio",
-                              id: "inlineCheckbox1",
-                              value: "0"
-                            },
-                            domProps: {
-                              checked: _vm._q(_vm.insurance_price_checker, "0")
-                            },
-                            on: {
-                              change: function($event) {
-                                _vm.insurance_price_checker = "0"
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("label", { staticClass: "form-check-label" }, [
-                            _vm._v("لا")
-                          ])
-                        ]
-                      )
-                    ])
-                  ])
-                : _vm._e(),
-              _vm._v(" "),
-              _c(
-                "button",
-                {
-                  staticClass:
-                    "btn rounded-10 bg-secondary-color text-white mb-2 w-100"
-                },
-                [_vm._v("حجز")]
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.insurance_price_checker,
+                                    expression: "insurance_price_checker"
+                                  }
+                                ],
+                                staticClass:
+                                  "form-check-input mr-0 ml-3 bg-secondary",
+                                attrs: {
+                                  name: "insurance",
+                                  type: "radio",
+                                  id: "inlineCheckbox1",
+                                  value: "0"
+                                },
+                                domProps: {
+                                  checked: _vm._q(
+                                    _vm.insurance_price_checker,
+                                    "0"
+                                  )
+                                },
+                                on: {
+                                  change: function($event) {
+                                    _vm.insurance_price_checker = "0"
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("label", { staticClass: "form-check-label" }, [
+                                _vm._v("لا")
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn rounded-10 bg-secondary-color text-white mb-2 w-100"
+                    },
+                    [_vm._v("حجز")]
+                  )
+                ]
               )
-            ]
-          )
-        ])
-      ])
+            ])
+          ])
+        ]
+      )
     ]
   )
 }
@@ -40770,7 +40853,57 @@ var render = function() {
                       ])
                     ]
                   )
-                ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "nav",
+                  {
+                    attrs: {
+                      "aria-label": "Page navigation  d-lg-none d-block"
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "row", attrs: { dir: "ltr" } }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "col-md-auto col-12 order-md-1 order-2"
+                        },
+                        [
+                          _c(
+                            "ul",
+                            {
+                              staticClass:
+                                "pagination d-flex justify-content-center p-0 m-0"
+                            },
+                            [
+                              _c("li", { staticClass: "m-0" }, [
+                                _c("span", [
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass:
+                                        "page-link rounded-10 mx-1 bg-dark text-white border-0"
+                                    },
+                                    [
+                                      _vm._v(
+                                        " page " +
+                                          _vm._s(_vm.courses.current_page) +
+                                          " of " +
+                                          _vm._s(_vm.courses.last_page) +
+                                          " "
+                                      )
+                                    ]
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                )
               ]
             )
           ]),
@@ -41213,6 +41346,25 @@ var render = function() {
                     )
                   ]
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "text-center d-lg-none d-block" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn rounded-10 bg-secondary-color text-white",
+                    on: {
+                      click: function($event) {
+                        return _vm.newFilter()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                                البحث من جديد\n                            "
+                    )
+                  ]
+                )
               ])
             ])
           ])
@@ -41229,14 +41381,20 @@ var staticRenderFns = [
     return _c(
       "div",
       {
-        staticClass: "card-header border-bottom bg-white rounded-10 border-0",
+        staticClass:
+          "card-header border-bottom bg-white rounded-10 border-0 d-flex justify-content-between",
         attrs: { id: "headingOne" }
       },
       [
+        _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
+          _vm._v("ابحث عن معهد")
+        ]),
+        _vm._v(" "),
         _c(
-          "h5",
+          "button",
           {
-            staticClass: "font-weight-bold text-main-color",
+            staticClass:
+              "toggel-filter-btn btn rounded-10 bg-secondary-color text-white",
             attrs: {
               "data-toggle": "collapse",
               "data-target": "#collapseOne",
@@ -41244,7 +41402,11 @@ var staticRenderFns = [
               "aria-controls": "collapseOne"
             }
           },
-          [_vm._v("ابحث عن معهد")]
+          [
+            _vm._v(
+              "\n                                    اغلاق\n                                "
+            )
+          ]
         )
       ]
     )
@@ -55403,7 +55565,26 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// Starr Call Plugin
+document.addEventListener("scroll", function () {
+  var navBar = document.querySelector(".navbar");
+
+  if (window.pageYOffset > 40) {
+    if (navBar !== null) {
+      $(".navbar-brand").hide();
+      navBar.classList.add("fixed");
+    }
+  } else {
+    if (navBar !== null) {
+      navBar.classList.remove("fixed");
+      $(".navbar-brand").show();
+    }
+  }
+});
+$('.toggel-filter-btn').click(function () {
+  var btn = $(this);
+  btn.text(btn.attr("aria-expanded") != "true" ? "اغلاق" : "بحث من جديد");
+}); // Starr Call Plugin
+
 $('.add-rate').starrr({
   change: function change(e, value) {
     //   alert('new rating is ' + value)

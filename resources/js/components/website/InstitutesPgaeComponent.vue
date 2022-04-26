@@ -19,9 +19,13 @@
                         <!-- Filter Institute -->
                         <div id="accordion" class="sticky-top pt-4">
                             <div class="card rounded-10 shadow-sm mb-4">
-                                <div class="card-header border-bottom bg-white rounded-10 border-0" id="headingOne">
-                                    <h5 class="font-weight-bold text-main-color" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">ابحث عن معهد</h5>
+                                <div class="card-header border-bottom bg-white rounded-10 border-0 d-flex justify-content-between" id="headingOne">
+                                    <h5 class="font-weight-bold text-main-color" >ابحث عن معهد</h5>
+                                    <button class="toggel-filter-btn btn rounded-10 bg-secondary-color text-white" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        اغلاق
+                                    </button>
                                 </div>
+                                 
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div class="card-body border-top">
                                         <!-- Filter Form -->
@@ -90,6 +94,19 @@
                                     </div>
                                 </div>
                             </div>
+                            <nav aria-label="Page navigation  d-lg-none d-block">
+                                <div class="row" dir="ltr">
+                                    <div class="col-md-auto col-12 order-md-1 order-2">
+                                        <ul class="pagination d-flex justify-content-center p-0 m-0">
+                                            <li class="m-0">
+                                                <span>
+                                                    <span  class="page-link rounded-10 mx-1 bg-dark text-white border-0"> page {{courses.current_page}} of {{courses.last_page }} </span>
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
                         </div>
                         <!-- ./Filter Institute -->
                     </div>
@@ -202,7 +219,14 @@
                                             </button>
                                         </li>
                                     </ul>
+                                    
                                 </div>
+                                
+                            </div>
+                            <div class="text-center d-lg-none d-block">
+                                <button @click="newFilter()" class="btn rounded-10 bg-secondary-color text-white">
+                                    البحث من جديد
+                                </button>
                             </div>
                         </nav>
                     </div>
@@ -278,19 +302,31 @@
                 this.get_courses();
 
                  $('html, body').animate({
-                        scrollTop: $("#institutes-box").offset().top
-                    }, 500);
+                        scrollTop: $("#institutes-box").offset().top -950 }, 500);
+               
+                $(".toggel-filter-btn").trigger('click')
 
 
+            },
+            newFilter: function(){
+                if($(".toggel-filter-btn").attr("aria-expanded") == "false"){
+                    $(".toggel-filter-btn").trigger('click')
+                    $('html, body').animate({ scrollTop: $("#institutes-box").offset().top -230 }, 500);
+                }else{
+                $('html, body').animate({ scrollTop: $("#institutes-box").offset().top - 920 }, 500);
+
+                }
             },
             pagination: function (url) {
                 this.get_courses_url = url;
 
                 
                 this.get_courses();
-                $('html, body').animate({
-                        scrollTop: $("#institutes-box").offset().top
-                    }, 500);
+                $('html, body').animate({scrollTop: $("#institutes-box").offset().top -950 }, 500);
+                if($(".toggel-filter-btn").attr("aria-expanded") == "true"){
+                    $(".toggel-filter-btn").trigger('click')
+                }
+                    
             },
             student_login_message:function(){
                 if(!this.student_check){

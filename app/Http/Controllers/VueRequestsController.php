@@ -66,6 +66,7 @@ class VueRequestsController extends Controller
             }
             
         }
+        // return $course_prices_ids;
         $courses = DB::table('courses')
             ->join('course_prices', 'courses.id', '=', 'course_prices.course_id')
             ->join('institutes', 'institutes.id', '=', 'courses.institute_id')
@@ -99,7 +100,7 @@ class VueRequestsController extends Controller
                 'countries.id AS country_id',
                 'cities.id AS city_id',
             )
-            ->WhereIn('course_prices.id', $course_prices_ids)
+            ->whereIntegerInRaw('course_prices.id', $course_prices_ids)
             ->where('courses.main_course_trigger' , 1)
             ->Where([
                     'courses.approvement' => 1 , 

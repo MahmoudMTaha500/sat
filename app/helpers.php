@@ -122,14 +122,14 @@ function currency_convertor($from, $to, $price_amount) {
 function send_whatsapp_message($to , $body) {
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "https://api.ultramsg.com/instance3125/messages/chat",
+        CURLOPT_URL => "https://api.ultramsg.com/instance3604/messages/chat",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => "",
         CURLOPT_MAXREDIRS => 10,
         CURLOPT_TIMEOUT => 30,
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => "token=9x86jzeghrspxlab&to=$to&body=$body&priority=1&referenceId=",
+        CURLOPT_POSTFIELDS => "token=cfy58w02acrkwbv8&to=$to&body=$body&priority=1&referenceId=",
         CURLOPT_HTTPHEADER => array(
             "content-type: application/x-www-form-urlencoded"
         ),
