@@ -74,10 +74,14 @@
                                                         <p><span class="font-weight-bold">المدينة :</span>{{$request->course->institute->city->name_ar}}</p>
                                                         <p><span class="font-weight-bold">تاريخ بداية الدورة :</span>{{ArabicDate($request->from_date)}}</p>
                                                         <p><span class="font-weight-bold">تاريخ إنتهاء  الدورة :</span>{{ArabicDate($request->to_date)}}</p>
-                                                        <p><span class="font-weight-bold">عدد الأسابيع :</span>{{$request->weeks}} أسابيع</p>
+                                                        <p><span class="font-weight-bold">عدد اسابيع الدورة :</span>{{$request->weeks}} أسابيع</p>
                                                         <p><span class="font-weight-bold">عدد الدروس :</span>{{$request->course->lessons_per_week}} درس / أسبوع</p>
                                                         <p><span class="font-weight-bold">عدد الساعات :</span>{{$request->course->hours_per_week}} ساعة في الأسبوع</p>
                                                         <p><span class="font-weight-bold">تاريخ الحجز :</span>{{ArabicDate($request->created_at)}}</p>
+                                                        @if ($request->residence_id != null)
+                                                            <p class="text-dark"><span class="font-weight-bold text-main-color">تفاصيل السكن : </span> {{$request->residence->name_ar }} ريال سعودي</p>
+                                                            <p class="text-dark"><span class="font-weight-bold text-main-color">عدد اسابيع السكن : </span> {{$request->residence_weeks}} أسابيع</p>
+                                                        @endif 
                                                         <div class="border-top py-3">
                                                             <h5 class="text-main-color font-weight-bold mb-3">الدفعات</h5>
                                                             <p><span class="font-weight-bold">المدفوع :</span> {{$request->paid_price}}  ريال سعودي</p>

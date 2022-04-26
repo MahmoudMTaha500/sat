@@ -45,7 +45,7 @@
                                 <input name="name"
                                 @if($student)
                                 value="{{ $student->name }}"   
-                                disabled  
+                                readonly  
                                 @else
                                 value="{{ old('name') }}" 
                                 @endif                           
@@ -61,7 +61,7 @@
                                 <input name="email"
                                 @if($student)
                                 value="{{ $student->email }}" 
-                                disabled    
+                                readonly    
                                 @else
                                 value="{{ old('email') }}"
                                 @endif      
@@ -80,7 +80,7 @@
                                 <input name="phone" 
                                 @if($student)
                                 value="{{ $student->phone }}"  
-                                disabled   
+                                readonly   
                                 @else
                                 value="{{ old('phone') }}"
                                 @endif      
@@ -94,8 +94,8 @@
                             </div>
                             <label>الدولة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country" required>
-                                    <option value="" selected disabled>اختر الدوله</option>
+                                <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country">
+                                    <option value="" selected readonly>اختر الدوله</option>
                                     <option value="England"> بريطانيا   </option>
                                     <option value="USA"> أمريكا </option>
                                     <option value="Schengen"> شنغن </option>
@@ -109,7 +109,7 @@
                             </div>  
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light" style="display:none;"   id="sheingen">
                                 <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror schengen_country"   name="schengen_country">
-                                    <option  value="" selected disabled> اختر من دول شنغن</option>
+                                    <option  value="" selected readonly> اختر من دول شنغن</option>
                                     <option  value="Germany"> المانيا  </option>
                                     <option  value="France"> فرنسا </option>
                                     <option  value="Italy"> إيطاليا </option>
@@ -136,8 +136,8 @@
                             </div>
                             <label>نوع التأشيرة</label>
                             <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select  name="visatype" required id="visID" disabled class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
-                                    <option value="" selected disabled>اختر التأشيرة </option>
+                                <select  name="visatype" required id="visID" readonly class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
+                                    <option value="" selected readonly>اختر التأشيرة </option>
                                     <option visa-price="820"   class="uk" value=" سياحي ستة أشهر ">سياحي ستة أشهر  </option>
                                     <option visa-price="820"    class="uk" value=" دراسي ستة أشهر ">دراسي ستة أشهر  </option>
                                     <option visa-price="2480"    class="uk" value="  سياحي سنتين"> سياحي سنتين</option>
@@ -279,19 +279,19 @@
         $('#text_hidden').hide()
         $('#sheingen').css('display','none');
         if (visa == "England") {
-            $("#visID").removeAttr("disabled");
+            $("#visID").removeAttr("readonly");
             $(".usa").css("display", "none");
             $(".schengen").css("display", "none");
             $(".uk").css("display", "");
         }
         if (visa == "USA") {
-            $("#visID").removeAttr("disabled");
+            $("#visID").removeAttr("readonly");
             $(".uk").css("display", "none");
             $(".schengen").css("display", "none");
             $(".usa").css("display", "");
         }
         if (visa == "Schengen") {
-            $("#visID").removeAttr("disabled");
+            $("#visID").removeAttr("readonly");
             $(".uk").css("display", "none");
             $(".usa").css("display", "none");
             $(".schengen").css("display", "");

@@ -31,7 +31,7 @@
                     <ul class="p-0">
                         <li class="text-white"><i class="fas fa-envelope"></i> <a href="mailto:admission@sat-edu.com" class="text-white">admission@sat-edu.com</a></li>
                         <li class="text-white"><i class="fas fa-phone"></i> <a dir="ltr" href="tel:966555484931" class="text-white">+966 55 548 4931</a></li>
-                        <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> شركة GMC, الدور الأول, مكتب ٧, المروج, Imam Saud Bin Abdulaziz Bin Mohammed Rd, عمارة جوار, Riyadh Saudi Arabia, السعودية</li>
+                        <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> Office Number 10, 4516 Imam Saud Bin Abdulaziz Bin Mohammed Rd, Al Muruj Dist., Riyadh 12282 </li>
                         <li class="social-links-sm">
                             <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>

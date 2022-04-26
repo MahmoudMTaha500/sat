@@ -21,6 +21,7 @@ class CreateStudentRequestsTable extends Migration
             $table->string('status');
             $table->boolean('payment_status')->default(0)->comment('0 = not paid & 1 = paid & 2 = partially paid');
             $table->integer('weeks')->default(1);
+            $table->integer('residence_weeks')->default(1);
             $table->bigInteger('price_per_week')->default(0);
             $table->decimal('course_discount')->default(0);
             $table->bigInteger("residence_id")->unsigned()->nullable();
@@ -35,6 +36,7 @@ class CreateStudentRequestsTable extends Migration
             $table->bigInteger('remaining_price')->default(0);
             $table->string('from_date');
             $table->string('to_date');
+            $table->string('residence_to_date');
             $table->longText('note')->nullable();
             $table->longText('classat_note')->nullable();
             $table->timestamps();

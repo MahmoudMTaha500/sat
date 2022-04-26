@@ -111,7 +111,7 @@
                                         </div>
                                          <!-- ./Add To Favourite Btn -->
                                         <!-- Institute Img -->
-                                        <a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg">
+                                        <a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg+'?weeks='+weeks">
                                             <div class="institute-img d-inline-block position-relative">
                                                 <img :src="course.institute_banner_id == null ? public_path+'storage/default_images.png' : public_path+'storage/uploaded_media/'+course.institute_banner_id+'/conversions/'+course.institute_banner_name.replace(/(\.[\w\d?=_-]+)$/i, '-thumb$1')" :alt="course.institute_name" class="card-img-top" />
                                             </div>
@@ -123,7 +123,7 @@
                                         <div class="card-body rounded-10 bg-white">
                                             <!-- Institute Title -->
                                             <h5 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg" class="text-dark"> معهد {{course.institute_name}}</a></h5>
-                                            <h6 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg" class="text-main-color"> {{course.course_name}}</a></h6>
+                                            <h6 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg+'?weeks='+weeks" class="text-main-color"> {{course.course_name}}</a></h6>
                                             <!-- ./Institute Title -->
                                             <!-- Institute Rate -->
 

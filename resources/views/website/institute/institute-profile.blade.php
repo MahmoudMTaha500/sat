@@ -79,11 +79,13 @@
                 <div class="alert alert-danger text-center">
                     {{ $message }}
                 </div>
-                @enderror @if (auth()->guard('student')->check()) @include('admin.includes.errors') @endif @if (session()->has('alert_message'))
-                <div class="alert alert-success text-center">
-                    {{print_r(session()->get('alert_message'))}}
-                </div>
-                @endif
+                @enderror 
+
+                {{-- @if (auth()->guard('student')->check()) @include('admin.includes.errors') @endif @if (session()->has('alert_message'))
+                    <div class="alert alert-success text-center">
+                        {{print_r(session()->get('alert_message'))}}
+                    </div>
+                @endif --}}
 
                 <div class="tab-content" id="myTabContent">
                     @isset($course)
@@ -438,18 +440,10 @@
                 <!-- ./Tabs -->
             </div>
             <div class="col-md-4">
-                @error('from_date')
-                <div class="alert alert-danger text-center">
-                    {{ $message }}
-                </div>
-                @enderror @error('weeks')
-                <div class="alert alert-danger text-center">
-                    {{ $message }}
-                </div>
-                @enderror 
                 @isset($course)
                     <course-price-info-component
                         course_obj = '{{$course}}'
+                        from_date_error = '@error('from_date'){{ $message }}@enderror'
                         residence_obj = '{{$course->institute->residence}}'
                         airport_obj = '{{$course->institute->airport}}'
                         course_id = '{{$course->id}}'

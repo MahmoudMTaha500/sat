@@ -774,4 +774,12 @@ body {
 .ui-datepicker .ui-datepicker-next, .ui-datepicker .ui-datepicker-prev{
   background-color:#006FFF;
 }
+
+.residence-box .bootstrap-select .dropdown-menu li{
+  border-bottom: 2px solid #006fff;
+  margin-bottom: 0px;
+}
+.bootstrap-select .dropdown-menu li a span.text{
+  font-size: 14px;
+}
   /*# sourceMappingURL=article.css.map */

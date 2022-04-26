@@ -122,8 +122,10 @@ class WebsiteController extends Controller
 
         $course_details = [];
         $weeks = $request->weeks;
+        $residence_weeks = $request->residence_weeks;
         $from_date = $request->from_date;
         $to_date = to_date($from_date , $weeks);
+        $residence_to_date = to_date($from_date , $residence_weeks);
         $residence = json_decode($request->residence, true);
         $airport = json_decode($request->airport, true);
         $insurance = $request->insurance;
@@ -140,6 +142,7 @@ class WebsiteController extends Controller
         }
 
 
+        $course_details['course_obj'] = $course;
         $course_details['course_id'] = $course_id;
         $course_details['price_per_week'] = $course_price_per_week;
         $course_details['total_price'] = $totalPrice;
@@ -149,12 +152,14 @@ class WebsiteController extends Controller
         $course_details['city'] = $course->institute->city->name_ar;
         $course_details['from_date'] = $from_date;
         $course_details['to_date'] = $to_date;
+        $course_details['residence_to_date'] = $residence_to_date;
         $course_details['weeks'] = $weeks;
+        $course_details['residence_weeks'] = $residence_weeks;
         $course_details['lessons_per_week'] = $course->lessons_per_week;
         $course_details['hours_per_week'] = $course->hours_per_week;
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
-        $course_details['residence'] = $residence;
+        $course_details['residence'] = $request->residence;
 
         $page_identity = [
             'title_tag' => 'تاكيد الحجز',
@@ -365,7 +370,9 @@ if($student_mail){
         $data['course_name'] = $course->name_ar;
         $data['from_date'] = $student_request->from_date;
         $data['to_date'] = $student_request->to_date;
+        $data['residence_to_date'] = $student_request->residence_to_date;
         $data['weeks'] = $student_request->weeks;
+        $data['residence_weeks'] = $student_request->residence_weeks;
         $data['total_price'] = $student_request->total_price;
         $data['course_price'] = $student_request->price_per_week;
         $data['insurance_price'] = $student_request->insurance_price;
@@ -452,6 +459,7 @@ if($student_mail){
         $student_request_data['institute_message'] = $course->institute->institute_questions;
         $student_request_data['status'] = 'جديد';
         $student_request_data['weeks'] = $course_details['weeks'];
+        $student_request_data['residence_weeks'] = $course_details['residence_weeks'];
         $student_request_data['price_per_week'] = $course_details['price_per_week']*(1-$course->discount);
         $student_request_data['course_discount'] = $course->discount;
         if ($course_details['residence'] != 0) {
@@ -468,6 +476,7 @@ if($student_mail){
         $student_request_data['remaining_price'] = $course_details['total_price'];
         $student_request_data['from_date'] = $course_details['from_date'];
         $student_request_data['to_date'] = $course_details['to_date'];
+        $student_request_data['residence_to_date'] = $course_details['residence_to_date'];
         $student_request_data['note'] = $note;
 
         // create student request
