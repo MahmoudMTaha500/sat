@@ -108,7 +108,7 @@
                     </form>
                 </div>
             </div>
-            <!-- <button id="related-courses" class="btn rounded-10 btn-primary text-white mb-2 w-100 mt-5">خيارات الكورسات المتوفرة</button> -->
+            <button @click="goToRelatedCourse()" id="related-courses" class="d-lg-none d-block btn rounded-10 btn-primary text-white mb-2 w-100 mt-5">خيارات الكورسات المتوفرة</button>
         </div>
         
         <!-- ./Reservation -->
@@ -164,6 +164,9 @@
             },
             change_from_date(){
                 this.from_date = $('.datepicker-active-monday').val() 
+            },
+            goToRelatedCourse(){
+                $('html, body').animate({ scrollTop: $("#related-courses").offset().top -100}, 500);
             }
         },
         beforeMount() {

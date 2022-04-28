@@ -103,7 +103,7 @@ function currency_convertor($from, $to, $price_amount) {
     ));
     $response = curl_exec($curl);
     $response = json_decode($response, true);
-    if($response != null){
+    if($response != null && !isset($response["error"])){
         return $response[$string]*$price_amount;
     }else{
         $converted_price = Currency::convert()

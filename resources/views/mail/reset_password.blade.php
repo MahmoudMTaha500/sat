@@ -57,7 +57,7 @@
                         <tr class="social-links">
                             <td colspan="3">
                                 <a href="https://www.snapchat.com/add/classat"><img width="30px" src="{{url('/')}}/storage/icons/snapchat.png" alt=""> </a>
-                                <a href="https://twitter.com/classat?s=21"><img width="30px" src="{{url('/')}}/storage/icons/twitter.png" alt=""> </a>
+                                <a href="https://twitter.com/clas_sat"><img width="30px" src="{{url('/')}}/storage/icons/twitter.png" alt=""> </a>
                                 <a href="https://www.instagram.com/class_at/"><img width="30px" src="{{url('/')}}/storage/icons/instegram.png" alt=""> </a>
                             </td>
                         </tr>
@@ -183,7 +183,7 @@
             </div>
             <div class="footer">
                 <a href="https://www.snapchat.com/add/classat"><img width="30px" src="https://www.linkpicture.com/q/snapchat_2.png" alt=""> </a>&nbsp;&nbsp;
-                <a href="https://twitter.com/classat?s=21"><img width="30px" src="https://www.linkpicture.com/q/twitter_14.png" alt=""> </a>&nbsp;&nbsp;
+                <a href="https://twitter.com/clas_sat"><img width="30px" src="https://www.linkpicture.com/q/twitter_14.png" alt=""> </a>&nbsp;&nbsp;
                 <a href="https://www.instagram.com/class_at/"><img width="30px" src="https://www.linkpicture.com/q/instegram.png" alt=""> </a>
                 <div class="contact-info">
                     <p class="main-color">

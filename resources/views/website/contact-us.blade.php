@@ -31,10 +31,10 @@
                                     <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
                                         <span class="text-white font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>
                                     </a>
-                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
+                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/clas_sat">
                                         <span class="text-white font-weight-bold"><i class="fab fa-twitter"></i></span>
                                     </a>
-                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
+                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.instagram.com/class_at/">
                                         <span class="text-white font-weight-bold"><i class="fab fa-instagram"></i></span>
                                     </a>
                                 </li>

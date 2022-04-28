@@ -268,7 +268,7 @@
 
     <div class="footer" dir="ltr">
         <a style="text-decoration: none" href="https://www.snapchat.com/add/classat"><img width="40px" src="{{$data['base_url'].'/storage/icons/snapchat.png'}}" alt=""> </a>&nbsp;&nbsp;
-        <a style="text-decoration: none" href="https://twitter.com/classat?s=21"><img width="40px" src="{{$data['base_url'].'/storage/icons/twitter.png'}}" alt=""> </a>&nbsp;&nbsp;
+        <a style="text-decoration: none" href="https://twitter.com/clas_sat"><img width="40px" src="{{$data['base_url'].'/storage/icons/twitter.png'}}" alt=""> </a>&nbsp;&nbsp;
         <a style="text-decoration: none" href="https://www.instagram.com/class_at/"><img width="40px" src="{{$data['base_url'].'/storage/icons/instegram.png'}}" alt=""> </a>
 
         <div>

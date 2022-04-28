@@ -778,6 +778,18 @@ body {
   .related-courses .related-course-title{
     font-size: 16px;
   }
+
+  .institute-img{
+    width: 100%;
+  }
+
+  .institutes-page .institute-box-title{
+    font-size: 18px;
+  }
+  
+  .institutes-page .course-box-title{
+    font-size: 16px;
+  }
   
  
   
@@ -855,6 +867,12 @@ body {
   .nav-tabs .nav-item:last-of-type a.active{
     border-bottom-right-radius: 10px !important;
     border-top-left-radius: 0px !important;
+  }
+  .include-info p{
+    font-size: 14px;
+  }
+  .include-img i{
+    font-size: 20px;
   }
  }
 

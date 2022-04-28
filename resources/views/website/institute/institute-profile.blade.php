@@ -182,7 +182,7 @@
                                                 <div class="card mx-xl-4 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                                     <!-- Institute Img -->
                                                     <!-- ./Institute Img -->
-                                                    <div class="card-body rounded-10 bg-white">
+                                                    <div class="card-body rounded-10 bg-white px-4 mx-2">
                                                         <!-- Course Title -->
                                                         <h5 class="card-title related-course-title"><a href="{{route('website.institute' , [$institute->id, $institute->slug , $institute_course->slug])}}" class="text-main-color"> {{$institute_course->name_ar}}</a></h5>
                                                         <!-- ./Course Title -->
@@ -457,7 +457,7 @@
                     </course-price-info-component>
                 @else
                 <div style="height: 700px; overflow-y:scroll">
-                    <h2 class="text-main-color mb-3">الدورات التدريبية</h2>
+                    <h3 class="text-main-color mb-3">الدورات التدريبية</h3>
 
                     @foreach ($institute->courses as $institute_course)
                         @if (isset($course))
@@ -536,6 +536,7 @@
 <script>
     $('.course-info-read-more').click(function(){
         $('.course-info').css('height' , 'auto')
+        $(this).hide()
     })
 </script>
 @endsection

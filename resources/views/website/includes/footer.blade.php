@@ -36,7 +36,7 @@
                             <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>
                             </a>
-                            <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/classat?s=21">
+                            <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/clas_sat">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-twitter"></i></span>
                             </a>
                             <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.instagram.com/class_at/">

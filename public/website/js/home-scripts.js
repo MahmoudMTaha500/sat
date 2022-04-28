@@ -2248,6 +2248,11 @@ __webpack_require__.r(__webpack_exports__);
     },
     change_from_date: function change_from_date() {
       this.from_date = $('.datepicker-active-monday').val();
+    },
+    goToRelatedCourse: function goToRelatedCourse() {
+      $('html, body').animate({
+        scrollTop: $("#related-courses").offset().top - 100
+      }, 500);
     }
   },
   beforeMount: function beforeMount() {
@@ -2608,10 +2613,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.get_courses_url = this.courses.first_page_url;
       this.keyword = this.$refs.keyword.value;
       this.get_courses();
-      $('html, body').animate({
-        scrollTop: $("#institutes-box").offset().top - 950
-      }, 500);
-      $(".toggel-filter-btn").trigger('click');
+
+      if (screen.width <= 767) {
+        $('html, body').animate({
+          scrollTop: $("#institutes-box").offset().top - 950
+        }, 500);
+        $(".toggel-filter-btn").trigger('click');
+      }
     },
     newFilter: function newFilter() {
       if ($(".toggel-filter-btn").attr("aria-expanded") == "false") {
@@ -2632,8 +2640,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         scrollTop: $("#institutes-box").offset().top - 950
       }, 500);
 
-      if ($(".toggel-filter-btn").attr("aria-expanded") == "true") {
-        $(".toggel-filter-btn").trigger('click');
+      if (screen.width <= 767) {
+        if ($(".toggel-filter-btn").attr("aria-expanded") == "true") {
+          $(".toggel-filter-btn").trigger('click');
+        }
       }
     },
     student_login_message: function student_login_message() {
@@ -2699,7 +2709,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.total_linkes = this.courses.last_page - this.courses.current_page;
 
     if (this.search.length != 0) {
-      this.keyword = this.search.keyword;
+      if (this.search.keyword != undefined) {
+        this.keyword = this.search.keyword;
+      }
 
       if (this.search.country != undefined) {
         this.country_id = this.search.country;
@@ -2716,6 +2728,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (this.search.institute_name) {
         this.keyword = this.search.institute_name;
       }
+
+      $(document).ready(function () {
+        $('html, body').animate({
+          scrollTop: $("#institutes-box").offset().top - 1050
+        }, 500);
+
+        if (screen.width <= 767) {
+          $(".toggel-filter-btn").trigger('click');
+        }
+      });
     }
 
     this.get_courses();
@@ -40370,7 +40392,22 @@ var render = function() {
                 ]
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "d-lg-none d-block btn rounded-10 btn-primary text-white mb-2 w-100 mt-5",
+              attrs: { id: "related-courses" },
+              on: {
+                click: function($event) {
+                  return _vm.goToRelatedCourse()
+                }
+              }
+            },
+            [_vm._v("خيارات الكورسات المتوفرة")]
+          )
         ]
       )
     ]
@@ -40469,315 +40506,56 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticStyle: { display: "inline" } }, [
-    _c("section", { staticClass: "institutes py-5 bg-sub-secondary-color" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "row px-xl-5" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("div", { staticClass: "heading-institutes" }, [
-              _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
-                _vm._v("المعاهد ( " + _vm._s(_vm.courses.total) + " )")
-              ]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم، واختر اللغة التي ترغب في دراستها"
-                )
+    _c(
+      "section",
+      { staticClass: "institutes py-5 bg-sub-secondary-color institutes-page" },
+      [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row px-xl-5" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "heading-institutes" }, [
+                _c("h3", { staticClass: "text-main-color font-weight-bold" }, [
+                  _vm._v("المعاهد ( " + _vm._s(_vm.courses.total) + " )")
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "تصفح جميع المعاهد الخاصة بدراسة اللغة حول العالم، واختر اللغة التي ترغب في دراستها"
+                  )
+                ])
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row px-xl-5 mb-5" }, [
-          _c("div", { staticClass: "col-xl-3" }, [
-            _c(
-              "div",
-              { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
-              [
-                _c("div", { staticClass: "card rounded-10 shadow-sm mb-4" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "collapse show",
-                      attrs: {
-                        id: "collapseOne",
-                        "aria-labelledby": "headingOne",
-                        "data-parent": "#accordion"
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "card-body border-top" }, [
-                        _c("form", { attrs: { action: "" } }, [
-                          _c("label", [_vm._v("ادخل اسم المعهد")]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light"
-                            },
-                            [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.keyword,
-                                    expression: "keyword"
-                                  }
-                                ],
-                                ref: "keyword",
-                                staticClass:
-                                  "form-control border-0 bg-transparent pr-1",
-                                attrs: { type: "text", placeholder: "بحث" },
-                                domProps: { value: _vm.keyword },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.keyword = $event.target.value
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _vm._m(1)
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("اختر الدولة")]),
-                              _vm._v(" "),
-                              _c("country-component", {
-                                ref: "countries_component_ref",
-                                attrs: {
-                                  get_countries_url: _vm.get_countries_url,
-                                  ele_class: "form-control rounded-10"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("اختر المدينة")]),
-                              _vm._v(" "),
-                              _c("city-component", {
-                                ref: "cities_component_ref",
-                                attrs: {
-                                  get_cities_url: _vm.get_cities_url,
-                                  ele_class: "form-control rounded-10"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v("عدد الأسابيع")]),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row px-xl-5 mb-5" }, [
+            _c("div", { staticClass: "col-xl-3" }, [
+              _c(
+                "div",
+                { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
+                [
+                  _c("div", { staticClass: "card rounded-10 shadow-sm mb-4" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "collapse show",
+                        attrs: {
+                          id: "collapseOne",
+                          "aria-labelledby": "headingOne",
+                          "data-parent": "#accordion"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "card-body border-top" }, [
+                          _c("form", { attrs: { action: "" } }, [
+                            _c("label", [_vm._v("ادخل اسم المعهد")]),
                             _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.weeks,
-                                    expression: "weeks"
-                                  }
-                                ],
-                                staticClass:
-                                  "form-control selectpicker rounded-10",
-                                attrs: { "data-live-search": "true" },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.weeks = $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  }
-                                }
-                              },
-                              _vm._l(45, function(week) {
-                                return _c(
-                                  "option",
-                                  { key: week, domProps: { value: week } },
-                                  [_vm._v(_vm._s(week))]
-                                )
-                              }),
-                              0
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v("المستوى المطلوب")]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.course_level,
-                                    expression: "course_level"
-                                  }
-                                ],
-                                staticClass:
-                                  "form-control selectpicker rounded-10",
-                                attrs: { "data-live-search": "true" },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.course_level = $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "option",
-                                  {
-                                    attrs: {
-                                      value: "",
-                                      disabled: "",
-                                      selected: ""
-                                    }
-                                  },
-                                  [_vm._v("المستوي")]
-                                ),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("الكل")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "مبتدئ A1" } }, [
-                                  _vm._v("مبتدئ A1")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "مبتدئ A2" } }, [
-                                  _vm._v("مبتدئ A2")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "option",
-                                  { attrs: { value: "المتوسط B1" } },
-                                  [_vm._v("المتوسط B1")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "option",
-                                  { attrs: { value: "المتوسط B2" } },
-                                  [_vm._v("المتوسط B2")]
-                                ),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "متقدم C1" } }, [
-                                  _vm._v("متقدم C1")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "متقدم C2" } }, [
-                                  _vm._v("متقدم C2")
-                                ])
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v(" ترتيب حسب ")]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.arrange_as,
-                                    expression: "arrange_as"
-                                  }
-                                ],
-                                staticClass: "form-control  rounded-10",
-                                attrs: { "data-live-search": "true" },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.arrange_as = $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  }
-                                }
-                              },
-                              [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("الكل")
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "option",
-                                  { attrs: { value: "highest_rates" } },
-                                  [_vm._v("التقييم من الأعلى إلى الأقل")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "option",
-                                  { attrs: { value: "lowest_rates" } },
-                                  [_vm._v("  التقييم من الأعلى إلى الأقل    ")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "option",
-                                  { attrs: { value: "highest_prices" } },
-                                  [_vm._v("   السعر من الأعلى للأقل    ")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "option",
-                                  { attrs: { value: "lowest_prices" } },
-                                  [_vm._v("  السعر من الأقل للأعلى    ")]
-                                )
-                              ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-4" }, [
                             _c(
                               "div",
                               {
                                 staticClass:
-                                  "form-check form-check-inline mr-0 ml-4"
+                                  "input-group mb-3 border rounded-10 pl-3 pr-2 btn-light"
                               },
                               [
                                 _c("input", {
@@ -40785,592 +40563,907 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.best_offers,
-                                      expression: "best_offers"
+                                      value: _vm.keyword,
+                                      expression: "keyword"
                                     }
                                   ],
+                                  ref: "keyword",
                                   staticClass:
-                                    "form-check-input mr-0 ml-3 bg-secondary",
-                                  attrs: { type: "checkbox" },
-                                  domProps: {
-                                    checked: Array.isArray(_vm.best_offers)
-                                      ? _vm._i(_vm.best_offers, null) > -1
-                                      : _vm.best_offers
-                                  },
+                                    "form-control border-0 bg-transparent pr-1",
+                                  attrs: { type: "text", placeholder: "بحث" },
+                                  domProps: { value: _vm.keyword },
                                   on: {
-                                    change: function($event) {
-                                      var $$a = _vm.best_offers,
-                                        $$el = $event.target,
-                                        $$c = $$el.checked ? true : false
-                                      if (Array.isArray($$a)) {
-                                        var $$v = null,
-                                          $$i = _vm._i($$a, $$v)
-                                        if ($$el.checked) {
-                                          $$i < 0 &&
-                                            (_vm.best_offers = $$a.concat([
-                                              $$v
-                                            ]))
-                                        } else {
-                                          $$i > -1 &&
-                                            (_vm.best_offers = $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1)))
-                                        }
-                                      } else {
-                                        _vm.best_offers = $$c
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
                                       }
+                                      _vm.keyword = $event.target.value
                                     }
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c(
-                                  "label",
-                                  { staticClass: "form-check-label" },
-                                  [_vm._v("أفضل العروض")]
-                                )
+                                _vm._m(1)
                               ]
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  _vm.filter_courses()
-                                  _vm.pagination_pages_method(
-                                    _vm.courses.current_page
-                                  )
-                                }
-                              }
-                            },
-                            [_vm._v("بحث")]
-                          )
-                        ])
-                      ])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "nav",
-                  {
-                    attrs: {
-                      "aria-label": "Page navigation  d-lg-none d-block"
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "row", attrs: { dir: "ltr" } }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass: "col-md-auto col-12 order-md-1 order-2"
-                        },
-                        [
-                          _c(
-                            "ul",
-                            {
-                              staticClass:
-                                "pagination d-flex justify-content-center p-0 m-0"
-                            },
-                            [
-                              _c("li", { staticClass: "m-0" }, [
-                                _c("span", [
-                                  _c(
-                                    "span",
-                                    {
-                                      staticClass:
-                                        "page-link rounded-10 mx-1 bg-dark text-white border-0"
-                                    },
-                                    [
-                                      _vm._v(
-                                        " page " +
-                                          _vm._s(_vm.courses.current_page) +
-                                          " of " +
-                                          _vm._s(_vm.courses.last_page) +
-                                          " "
-                                      )
-                                    ]
-                                  )
-                                ])
-                              ])
-                            ]
-                          )
-                        ]
-                      )
-                    ])
-                  ]
-                )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-xl-9" }, [
-            _c(
-              "div",
-              {
-                staticClass: "institutes-list pt-4",
-                attrs: { id: "institutes-box" }
-              },
-              [
-                _c(
-                  "div",
-                  { staticClass: "row" },
-                  _vm._l(_vm.courses.data, function(course) {
-                    return _c(
-                      "div",
-                      {
-                        key: course.course_id,
-                        staticClass: "col-lg-4 col-md-6"
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5"
-                          },
-                          [
-                            course.discount != 0
-                              ? _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "offer-icon position-absolute bg-secondary-color text-white"
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                                        - " +
-                                        _vm._s(
-                                          Math.round(course.discount * 100)
-                                        ) +
-                                        " %\n                                    "
-                                    )
-                                  ]
-                                )
-                              : _vm._e(),
+                            ),
                             _vm._v(" "),
                             _c(
                               "div",
-                              {
-                                staticClass: "add-favourite position-absolute",
-                                attrs: { "course-id": course.course_id }
-                              },
+                              { staticClass: "form-group" },
                               [
-                                course.favourite_course_id != null
-                                  ? _c("i", {
-                                      staticClass: "fas fa-heart favourite-icon"
-                                    })
-                                  : _c("i", {
-                                      staticClass:
-                                        "far fa-heart favourite-icon",
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.student_login_message()
+                                _c("label", [_vm._v("اختر الدولة")]),
+                                _vm._v(" "),
+                                _c("country-component", {
+                                  ref: "countries_component_ref",
+                                  attrs: {
+                                    get_countries_url: _vm.get_countries_url,
+                                    ele_class: "form-control rounded-10"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("label", [_vm._v("اختر المدينة")]),
+                                _vm._v(" "),
+                                _c("city-component", {
+                                  ref: "cities_component_ref",
+                                  attrs: {
+                                    get_cities_url: _vm.get_cities_url,
+                                    ele_class: "form-control rounded-10"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", [_vm._v("عدد الأسابيع")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.weeks,
+                                      expression: "weeks"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "form-control selectpicker rounded-10",
+                                  attrs: { "data-live-search": "true" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.weeks = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
+                                  }
+                                },
+                                _vm._l(45, function(week) {
+                                  return _c(
+                                    "option",
+                                    { key: week, domProps: { value: week } },
+                                    [_vm._v(_vm._s(week))]
+                                  )
+                                }),
+                                0
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", [_vm._v("المستوى المطلوب")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.course_level,
+                                      expression: "course_level"
+                                    }
+                                  ],
+                                  staticClass:
+                                    "form-control selectpicker rounded-10",
+                                  attrs: { "data-live-search": "true" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.course_level = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "option",
+                                    {
+                                      attrs: {
+                                        value: "",
+                                        disabled: "",
+                                        selected: ""
+                                      }
+                                    },
+                                    [_vm._v("المستوي")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("option", { attrs: { value: "" } }, [
+                                    _vm._v("الكل")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "مبتدئ A1" } },
+                                    [_vm._v("مبتدئ A1")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "مبتدئ A2" } },
+                                    [_vm._v("مبتدئ A2")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "المتوسط B1" } },
+                                    [_vm._v("المتوسط B1")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "المتوسط B2" } },
+                                    [_vm._v("المتوسط B2")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "متقدم C1" } },
+                                    [_vm._v("متقدم C1")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "متقدم C2" } },
+                                    [_vm._v("متقدم C2")]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", [_vm._v(" ترتيب حسب ")]),
+                              _vm._v(" "),
+                              _c(
+                                "select",
+                                {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.arrange_as,
+                                      expression: "arrange_as"
+                                    }
+                                  ],
+                                  staticClass: "form-control  rounded-10",
+                                  attrs: { "data-live-search": "true" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.arrange_as = $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("option", { attrs: { value: "" } }, [
+                                    _vm._v("الكل")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "highest_rates" } },
+                                    [_vm._v("التقييم من الأعلى إلى الأقل")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "lowest_rates" } },
+                                    [
+                                      _vm._v(
+                                        "  التقييم من الأعلى إلى الأقل    "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "highest_prices" } },
+                                    [_vm._v("   السعر من الأعلى للأقل    ")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "option",
+                                    { attrs: { value: "lowest_prices" } },
+                                    [_vm._v("  السعر من الأقل للأعلى    ")]
+                                  )
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "mb-4" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "form-check form-check-inline mr-0 ml-4"
+                                },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.best_offers,
+                                        expression: "best_offers"
+                                      }
+                                    ],
+                                    staticClass:
+                                      "form-check-input mr-0 ml-3 bg-secondary",
+                                    attrs: { type: "checkbox" },
+                                    domProps: {
+                                      checked: Array.isArray(_vm.best_offers)
+                                        ? _vm._i(_vm.best_offers, null) > -1
+                                        : _vm.best_offers
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$a = _vm.best_offers,
+                                          $$el = $event.target,
+                                          $$c = $$el.checked ? true : false
+                                        if (Array.isArray($$a)) {
+                                          var $$v = null,
+                                            $$i = _vm._i($$a, $$v)
+                                          if ($$el.checked) {
+                                            $$i < 0 &&
+                                              (_vm.best_offers = $$a.concat([
+                                                $$v
+                                              ]))
+                                          } else {
+                                            $$i > -1 &&
+                                              (_vm.best_offers = $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1)))
+                                          }
+                                        } else {
+                                          _vm.best_offers = $$c
                                         }
                                       }
-                                    })
-                              ]
-                            ),
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "label",
+                                    { staticClass: "form-check-label" },
+                                    [_vm._v("أفضل العروض")]
+                                  )
+                                ]
+                              )
+                            ]),
                             _vm._v(" "),
                             _c(
-                              "a",
+                              "button",
                               {
-                                attrs: {
-                                  href:
-                                    _vm.public_path +
-                                    "institute/" +
-                                    course.institute_id +
-                                    "/" +
-                                    course.institute_sulg +
-                                    "/" +
-                                    course.course_sulg +
-                                    "?weeks=" +
-                                    _vm.weeks
+                                staticClass:
+                                  "btn rounded-10 bg-secondary-color text-white mb-2 w-100",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.filter_courses()
+                                    _vm.pagination_pages_method(
+                                      _vm.courses.current_page
+                                    )
+                                  }
                                 }
                               },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "institute-img d-inline-block position-relative"
-                                  },
-                                  [
-                                    _c("img", {
-                                      staticClass: "card-img-top",
-                                      attrs: {
-                                        src:
-                                          course.institute_banner_id == null
-                                            ? _vm.public_path +
-                                              "storage/default_images.png"
-                                            : _vm.public_path +
-                                              "storage/uploaded_media/" +
-                                              course.institute_banner_id +
-                                              "/conversions/" +
-                                              course.institute_banner_name.replace(
-                                                /(\.[\w\d?=_-]+)$/i,
-                                                "-thumb$1"
-                                              ),
-                                        alt: course.institute_name
-                                      }
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "card-body rounded-10 bg-white" },
-                              [
-                                _c("h5", { staticClass: "card-title" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-dark",
-                                      attrs: {
-                                        href:
-                                          _vm.public_path +
-                                          "institute/" +
-                                          course.institute_id +
-                                          "/" +
-                                          course.institute_sulg
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        " معهد " + _vm._s(course.institute_name)
-                                      )
-                                    ]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c("h6", { staticClass: "card-title" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "text-main-color",
-                                      attrs: {
-                                        href:
-                                          _vm.public_path +
-                                          "institute/" +
-                                          course.institute_id +
-                                          "/" +
-                                          course.institute_sulg +
-                                          "/" +
-                                          course.course_sulg +
-                                          "?weeks=" +
-                                          _vm.weeks
-                                      }
-                                    },
-                                    [_vm._v(" " + _vm._s(course.course_name))]
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  { staticClass: "mb-0 d-flex" },
-                                  [
-                                    _c("rate", {
-                                      attrs: {
-                                        length: 5,
-                                        value: Math.round(
-                                          course.institute_rate
-                                        ),
-                                        disabled: ""
-                                      }
-                                    }),
-                                    _vm._v(" "),
-                                    _c(
-                                      "span",
-                                      {
-                                        staticStyle: { "line-height": "39px" }
-                                      },
-                                      [
-                                        _vm._v(
-                                          _vm._s(
-                                            Math.round(
-                                              course.institute_rate * 10
-                                            ) / 10
-                                          )
-                                        )
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                ),
-                                _vm._v(" "),
-                                _c("p", { staticClass: "mb-0" }, [
-                                  _c("i", {
-                                    staticClass:
-                                      "fas fa-map-marker-alt text-main-color"
-                                  }),
-                                  _vm._v(
-                                    " " +
-                                      _vm._s(course.country_name) +
-                                      " , " +
-                                      _vm._s(course.city_name)
-                                  )
-                                ]),
-                                _vm._v(" "),
-                                _c(
-                                  "p",
-                                  { staticClass: "mb-0 overflow-hidden" },
-                                  [
-                                    course.courses_study_period
-                                      ? _c(
-                                          "span",
-                                          { staticClass: "float-right" },
-                                          [
-                                            _c("i", {
-                                              staticClass:
-                                                "fas fa-sun text-main-color"
-                                            }),
-                                            _vm._v(
-                                              " " +
-                                                _vm._s(
-                                                  course.courses_study_period ==
-                                                    "مسائي"
-                                                    ? "مسائي"
-                                                    : "صباحي"
-                                                )
-                                            )
-                                          ]
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _c("span", { staticClass: "float-left" }, [
-                                      _c("i", {
-                                        staticClass:
-                                          "fas fa-signal text-main-color"
-                                      }),
-                                      _vm._v(
-                                        " " +
-                                          _vm._s(course.courses_required_level)
-                                      )
-                                    ])
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "card-footer bg-white overflow-hidden"
-                              },
-                              [
-                                course.discount != 0
-                                  ? _c(
-                                      "del",
-                                      { staticClass: "text-muted del" },
-                                      [
-                                        _vm._v(
-                                          _vm._s(
-                                            course.real_price * _vm.weeks
-                                          ) + "  ريال "
-                                        )
-                                      ]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "span",
-                                  { staticClass: "float-left text-main-color" },
-                                  [
-                                    _vm._v(
-                                      _vm._s(
-                                        Math.round(
-                                          course.discounted_price * _vm.weeks
-                                        )
-                                      ) + "  ريال "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("p")
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  }),
-                  0
-                )
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "row px-xl-5" }, [
-          _c("div", { staticClass: "col-12" }, [
-            _c("nav", { attrs: { "aria-label": "Page navigation  " } }, [
-              _c("div", { staticClass: "row", attrs: { dir: "ltr" } }, [
-                _c(
-                  "div",
-                  { staticClass: "col-md-auto col-12 order-md-1 order-2" },
-                  [
-                    _c(
-                      "ul",
-                      {
-                        staticClass:
-                          "pagination d-flex justify-content-center p-0"
-                      },
-                      [
-                        _c("li", [
-                          _c("span", [
-                            _c(
-                              "span",
-                              {
-                                staticClass:
-                                  "page-link rounded-10 mx-1 bg-dark text-white border-0"
-                              },
-                              [
-                                _vm._v(
-                                  " page " +
-                                    _vm._s(_vm.courses.current_page) +
-                                    " of " +
-                                    _vm._s(_vm.courses.last_page) +
-                                    " "
-                                )
-                              ]
+                              [_vm._v("بحث")]
                             )
                           ])
                         ])
                       ]
                     )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "col-md-auto col-12 text-center order-md-2 order-1"
-                  },
-                  [
-                    _c(
-                      "ul",
-                      {
-                        staticClass:
-                          "pagination d-flex justify-content-center p-0",
-                        attrs: { dir: "rtl" }
-                      },
-                      [
-                        _c("li", { staticClass: "page-item" }, [
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "nav",
+                    {
+                      staticClass: "d-lg-none d-block",
+                      attrs: { "aria-label": "Page navigation" }
+                    },
+                    [
+                      _c("div", { staticClass: "row", attrs: { dir: "ltr" } }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "col-md-auto col-12 order-md-1 order-2"
+                          },
+                          [
+                            _c(
+                              "ul",
+                              {
+                                staticClass:
+                                  "pagination d-flex justify-content-center p-0 m-0"
+                              },
+                              [
+                                _c("li", { staticClass: "m-0" }, [
+                                  _c("span", [
+                                    _c(
+                                      "span",
+                                      {
+                                        staticClass:
+                                          "page-link rounded-10 mx-1 bg-dark text-white border-0"
+                                      },
+                                      [
+                                        _vm._v(
+                                          " page " +
+                                            _vm._s(_vm.courses.current_page) +
+                                            " of " +
+                                            _vm._s(_vm.courses.last_page) +
+                                            " "
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              ]
+                            )
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-xl-9" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "institutes-list pt-4",
+                  attrs: { id: "institutes-box" }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "row" },
+                    _vm._l(_vm.courses.data, function(course) {
+                      return _c(
+                        "div",
+                        {
+                          key: course.course_id,
+                          staticClass: "col-lg-4 col-md-6"
+                        },
+                        [
                           _c(
-                            "button",
+                            "div",
                             {
                               staticClass:
-                                "page-link rounded-10 mx-1 text-dark border-0",
-                              style: !_vm.courses.prev_page_url
-                                ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
-                                : "",
-                              attrs: { disabled: !_vm.courses.prev_page_url },
-                              on: {
-                                click: function($event) {
-                                  _vm.pagination(_vm.prev_page_url)
-                                  _vm.pagination_pages_method(
-                                    _vm.courses.current_page - 1
-                                  )
-                                }
-                              }
-                            },
-                            [_c("i", { staticClass: "fas fa-chevron-right" })]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.pagination_pages, function(page, index) {
-                          return _c(
-                            "li",
-                            {
-                              key: index,
-                              staticClass: "page-item",
-                              class:
-                                _vm.courses.current_page == page
-                                  ? "active"
-                                  : "",
-                              staticStyle: { margin: "0 5px" }
+                                "card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5"
                             },
                             [
+                              course.discount != 0
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "offer-icon position-absolute bg-secondary-color text-white"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                        - " +
+                                          _vm._s(
+                                            Math.round(course.discount * 100)
+                                          ) +
+                                          " %\n                                    "
+                                      )
+                                    ]
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "add-favourite position-absolute",
+                                  attrs: { "course-id": course.course_id }
+                                },
+                                [
+                                  course.favourite_course_id != null
+                                    ? _c("i", {
+                                        staticClass:
+                                          "fas fa-heart favourite-icon"
+                                      })
+                                    : _c("i", {
+                                        staticClass:
+                                          "far fa-heart favourite-icon",
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.student_login_message()
+                                          }
+                                        }
+                                      })
+                                ]
+                              ),
+                              _vm._v(" "),
                               _c(
                                 "a",
                                 {
-                                  staticClass: "page-link",
-                                  staticStyle: { "border-radius": "10px" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.pagination(
-                                        _vm.courses.path + "?page=" + page
-                                      )
-                                      _vm.pagination_pages_method(page)
-                                    }
+                                  attrs: {
+                                    href:
+                                      _vm.public_path +
+                                      "institute/" +
+                                      course.institute_id +
+                                      "/" +
+                                      course.institute_sulg +
+                                      "/" +
+                                      course.course_sulg +
+                                      "?weeks=" +
+                                      _vm.weeks
                                   }
                                 },
-                                [_vm._v(_vm._s(page))]
+                                [
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "institute-img d-inline-block position-relative"
+                                    },
+                                    [
+                                      _c("img", {
+                                        staticClass: "card-img-top",
+                                        attrs: {
+                                          src:
+                                            course.institute_banner_id == null
+                                              ? _vm.public_path +
+                                                "storage/default_images.png"
+                                              : _vm.public_path +
+                                                "storage/uploaded_media/" +
+                                                course.institute_banner_id +
+                                                "/conversions/" +
+                                                course.institute_banner_name.replace(
+                                                  /(\.[\w\d?=_-]+)$/i,
+                                                  "-thumb$1"
+                                                ),
+                                          alt: course.institute_name
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "card-body rounded-10 bg-white"
+                                },
+                                [
+                                  _c(
+                                    "h5",
+                                    {
+                                      staticClass:
+                                        "card-title institute-box-title"
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "text-dark",
+                                          attrs: {
+                                            href:
+                                              _vm.public_path +
+                                              "institute/" +
+                                              course.institute_id +
+                                              "/" +
+                                              course.institute_sulg +
+                                              "/" +
+                                              course.course_sulg +
+                                              "?weeks=" +
+                                              _vm.weeks
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            " معهد " +
+                                              _vm._s(course.institute_name)
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "h6",
+                                    {
+                                      staticClass: "card-title course-box-title"
+                                    },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "text-main-color",
+                                          attrs: {
+                                            href:
+                                              _vm.public_path +
+                                              "institute/" +
+                                              course.institute_id +
+                                              "/" +
+                                              course.institute_sulg +
+                                              "/" +
+                                              course.course_sulg +
+                                              "?weeks=" +
+                                              _vm.weeks
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            " " + _vm._s(course.course_name)
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "mb-0 d-flex" },
+                                    [
+                                      _c("rate", {
+                                        attrs: {
+                                          length: 5,
+                                          value: Math.round(
+                                            course.institute_rate
+                                          ),
+                                          disabled: ""
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        {
+                                          staticStyle: { "line-height": "39px" }
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              Math.round(
+                                                course.institute_rate * 10
+                                              ) / 10
+                                            )
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-0" }, [
+                                    _c("i", {
+                                      staticClass:
+                                        "fas fa-map-marker-alt text-main-color"
+                                    }),
+                                    _vm._v(
+                                      " " +
+                                        _vm._s(course.country_name) +
+                                        " , " +
+                                        _vm._s(course.city_name)
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "p",
+                                    { staticClass: "mb-0 overflow-hidden" },
+                                    [
+                                      course.courses_study_period
+                                        ? _c(
+                                            "span",
+                                            { staticClass: "float-right" },
+                                            [
+                                              _c("i", {
+                                                staticClass:
+                                                  "fas fa-sun text-main-color"
+                                              }),
+                                              _vm._v(
+                                                " " +
+                                                  _vm._s(
+                                                    course.courses_study_period ==
+                                                      "مسائي"
+                                                      ? "مسائي"
+                                                      : "صباحي"
+                                                  )
+                                              )
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "span",
+                                        { staticClass: "float-left" },
+                                        [
+                                          _c("i", {
+                                            staticClass:
+                                              "fas fa-signal text-main-color"
+                                          }),
+                                          _vm._v(
+                                            " " +
+                                              _vm._s(
+                                                course.courses_required_level
+                                              )
+                                          )
+                                        ]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "card-footer bg-white overflow-hidden"
+                                },
+                                [
+                                  course.discount != 0
+                                    ? _c(
+                                        "del",
+                                        { staticClass: "text-muted del" },
+                                        [
+                                          _vm._v(
+                                            _vm._s(
+                                              course.real_price * _vm.weeks
+                                            ) + "  ريال "
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "span",
+                                    {
+                                      staticClass: "float-left text-main-color"
+                                    },
+                                    [
+                                      _vm._v(
+                                        _vm._s(
+                                          Math.round(
+                                            course.discounted_price * _vm.weeks
+                                          )
+                                        ) + "  ريال "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("p")
+                                ]
                               )
                             ]
                           )
-                        }),
-                        _vm._v(" "),
-                        _c("li", { staticClass: "page-item" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass:
-                                "page-link rounded-10 mx-1 text-dark border-0",
-                              style: !_vm.courses.next_page_url
-                                ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
-                                : "",
-                              attrs: { disabled: !_vm.courses.next_page_url },
-                              on: {
-                                click: function($event) {
-                                  _vm.pagination(_vm.next_page_url)
-                                  _vm.pagination_pages_method(
-                                    _vm.courses.current_page + 1
+                        ]
+                      )
+                    }),
+                    0
+                  )
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row px-xl-5" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("nav", { attrs: { "aria-label": "Page navigation  " } }, [
+                _c("div", { staticClass: "row", attrs: { dir: "ltr" } }, [
+                  _c(
+                    "div",
+                    { staticClass: "col-md-auto col-12 order-md-1 order-2" },
+                    [
+                      _c(
+                        "ul",
+                        {
+                          staticClass:
+                            "pagination d-flex justify-content-center p-0"
+                        },
+                        [
+                          _c("li", [
+                            _c("span", [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "page-link rounded-10 mx-1 bg-dark text-white border-0"
+                                },
+                                [
+                                  _vm._v(
+                                    " page " +
+                                      _vm._s(_vm.courses.current_page) +
+                                      " of " +
+                                      _vm._s(_vm.courses.last_page) +
+                                      " "
                                   )
+                                ]
+                              )
+                            ])
+                          ])
+                        ]
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "col-md-auto col-12 text-center order-md-2 order-1"
+                    },
+                    [
+                      _c(
+                        "ul",
+                        {
+                          staticClass:
+                            "pagination d-flex justify-content-center p-0",
+                          attrs: { dir: "rtl" }
+                        },
+                        [
+                          _c("li", { staticClass: "page-item" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "page-link rounded-10 mx-1 text-dark border-0",
+                                style: !_vm.courses.prev_page_url
+                                  ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
+                                  : "",
+                                attrs: { disabled: !_vm.courses.prev_page_url },
+                                on: {
+                                  click: function($event) {
+                                    _vm.pagination(_vm.prev_page_url)
+                                    _vm.pagination_pages_method(
+                                      _vm.courses.current_page - 1
+                                    )
+                                  }
                                 }
-                              }
-                            },
-                            [_c("i", { staticClass: "fas fa-chevron-left" })]
-                          )
-                        ])
-                      ],
-                      2
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "text-center d-lg-none d-block" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn rounded-10 bg-secondary-color text-white",
-                    on: {
-                      click: function($event) {
-                        return _vm.newFilter()
+                              },
+                              [_c("i", { staticClass: "fas fa-chevron-right" })]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.pagination_pages, function(page, index) {
+                            return _c(
+                              "li",
+                              {
+                                key: index,
+                                staticClass: "page-item",
+                                class:
+                                  _vm.courses.current_page == page
+                                    ? "active"
+                                    : "",
+                                staticStyle: { margin: "0 5px" }
+                              },
+                              [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "page-link",
+                                    staticStyle: { "border-radius": "10px" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.pagination(
+                                          _vm.courses.path + "?page=" + page
+                                        )
+                                        _vm.pagination_pages_method(page)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v(_vm._s(page))]
+                                )
+                              ]
+                            )
+                          }),
+                          _vm._v(" "),
+                          _c("li", { staticClass: "page-item" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "page-link rounded-10 mx-1 text-dark border-0",
+                                style: !_vm.courses.next_page_url
+                                  ? "background: #e4e4e4!important;color: #b5b5b5!important;cursor: not-allowed;"
+                                  : "",
+                                attrs: { disabled: !_vm.courses.next_page_url },
+                                on: {
+                                  click: function($event) {
+                                    _vm.pagination(_vm.next_page_url)
+                                    _vm.pagination_pages_method(
+                                      _vm.courses.current_page + 1
+                                    )
+                                  }
+                                }
+                              },
+                              [_c("i", { staticClass: "fas fa-chevron-left" })]
+                            )
+                          ])
+                        ],
+                        2
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-center d-lg-none d-block" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "btn rounded-10 bg-secondary-color text-white",
+                      on: {
+                        click: function($event) {
+                          return _vm.newFilter()
+                        }
                       }
-                    }
-                  },
-                  [
-                    _vm._v(
-                      "\n                                البحث من جديد\n                            "
-                    )
-                  ]
-                )
+                    },
+                    [
+                      _vm._v(
+                        "\n                                البحث من جديد\n                            "
+                      )
+                    ]
+                  )
+                ])
               ])
             ])
           ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -55568,7 +55661,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 document.addEventListener("scroll", function () {
   var navBar = document.querySelector(".navbar");
 
-  if (window.pageYOffset > 40) {
+  if (window.pageYOffset > 70) {
     if (navBar !== null) {
       $(".navbar-brand").hide();
       navBar.classList.add("fixed");

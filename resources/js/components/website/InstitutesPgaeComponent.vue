@@ -1,7 +1,7 @@
 <template>
     <div style="display: inline;">
         <!-- Institutes -->
-        <section class="institutes py-5 bg-sub-secondary-color">
+        <section class="institutes py-5 bg-sub-secondary-color institutes-page">
             <div class="container-fluid">
                 <!-- Section Heading -->
                 <div class="row px-xl-5">
@@ -94,7 +94,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <nav aria-label="Page navigation  d-lg-none d-block">
+                            <nav aria-label="Page navigation" class="d-lg-none d-block">
                                 <div class="row" dir="ltr">
                                     <div class="col-md-auto col-12 order-md-1 order-2">
                                         <ul class="pagination d-flex justify-content-center p-0 m-0">
@@ -139,8 +139,8 @@
                                         <!-- ./Institute Img -->
                                         <div class="card-body rounded-10 bg-white">
                                             <!-- Institute Title -->
-                                            <h5 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg" class="text-dark"> معهد {{course.institute_name}}</a></h5>
-                                            <h6 class="card-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg+'?weeks='+weeks" class="text-main-color"> {{course.course_name}}</a></h6>
+                                            <h5 class="card-title institute-box-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg+'?weeks='+weeks" class="text-dark"> معهد {{course.institute_name}}</a></h5>
+                                            <h6 class="card-title course-box-title"><a :href="public_path+'institute/'+course.institute_id+'/'+course.institute_sulg+'/'+course.course_sulg+'?weeks='+weeks" class="text-main-color"> {{course.course_name}}</a></h6>
                                             <!-- ./Institute Title -->
                                             <!-- Institute Rate -->
 
@@ -301,10 +301,10 @@
                 this.keyword = this.$refs.keyword.value;
                 this.get_courses();
 
-                 $('html, body').animate({
-                        scrollTop: $("#institutes-box").offset().top -950 }, 500);
-               
-                $(".toggel-filter-btn").trigger('click')
+                if(screen.width <= 767){
+                    $('html, body').animate({ scrollTop: $("#institutes-box").offset().top -950 }, 500);
+                    $(".toggel-filter-btn").trigger('click')
+                }
 
 
             },
@@ -323,9 +323,12 @@
                 
                 this.get_courses();
                 $('html, body').animate({scrollTop: $("#institutes-box").offset().top -950 }, 500);
-                if($(".toggel-filter-btn").attr("aria-expanded") == "true"){
-                    $(".toggel-filter-btn").trigger('click')
+                if(screen.width <= 767){
+                    if($(".toggel-filter-btn").attr("aria-expanded") == "true"){
+                        $(".toggel-filter-btn").trigger('click')
+                    }
                 }
+                
                     
             },
             student_login_message:function(){
@@ -392,10 +395,11 @@
                  this.total_linkes = this.courses.last_page - this.courses.current_page;
 
             if (this.search.length != 0) {
-                this.keyword = this.search.keyword;
+                if (this.search.keyword != undefined) {
+                    this.keyword = this.search.keyword;
+                }
                 if (this.search.country != undefined) {
                     this.country_id = this.search.country;
-                   
                 }
                 if (this.search.city != undefined) {
                     this.city_id = this.search.city;
@@ -407,6 +411,13 @@
                     this.keyword = this.search.institute_name;
           
                 }
+                $( document ).ready(function() {
+                    $('html, body').animate({scrollTop: $("#institutes-box").offset().top -1050 }, 500);
+                     if(screen.width <= 767){
+                        $(".toggel-filter-btn").trigger('click')
+                    }
+                    
+                });
             }
 
             this.get_courses();

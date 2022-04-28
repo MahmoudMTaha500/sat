@@ -71,7 +71,7 @@
                         <tr class="social-links">
                             <td colspan="3">
                                 <a href="https://www.snapchat.com/add/classat"><img width="30px" src="{{url('/')}}/storage/icons/snapchat.png" alt=""> </a>
-                                <a href="https://twitter.com/classat?s=21"><img width="30px" src="{{url('/')}}/storage/icons/twitter.png" alt=""> </a>
+                                <a href="https://twitter.com/clas_sat"><img width="30px" src="{{url('/')}}/storage/icons/twitter.png" alt=""> </a>
                                 <a href="https://www.instagram.com/class_at/"><img width="30px" src="{{url('/')}}/storage/icons/instegram.png" alt=""> </a>
                             </td>
                         </tr>

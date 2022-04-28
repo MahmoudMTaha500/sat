@@ -1,6 +1,6 @@
 document.addEventListener("scroll" , function(){
     let navBar = document.querySelector(".navbar")
-    if(window.pageYOffset > 40){
+    if(window.pageYOffset > 70){
         if(navBar !== null){
             $(".navbar-brand").hide();
             navBar.classList.add("fixed");
