@@ -17,12 +17,12 @@ class StudentRequestsController extends Controller
     public function index()
     {
         $institutes = Institute::latest('id')->with('city')->get();
+        $countries = Country::latest('id')->get();
         $courses = Course::latest('id')->get();
         $countercourse = Course::latest('id')->get();
-        $countries = Country::latest('id')->get();
         $department_name = 'student-request';
         $page_name = 'student-request';
-        $page_title = 'الطلابات';
+        $page_title = 'الطلبات';
 
         $useVue = true;
         return view("admin.students_requests.index", compact('useVue', 'department_name', 'page_name', 'courses', 'institutes', 'countries'));

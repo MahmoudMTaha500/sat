@@ -75,7 +75,7 @@
                                     <th class="border-top-0">اسم الدورة</th>
                                     <th class="border-top-0">اسم المعهد</th>
                                     <th class="border-top-0">المدينة</th>
-                                    <th class="border-top-0">عدد الطلابات</th>
+                                    <th class="border-top-0">عدد الطلبات</th>
                                     <th class="border-top-0">الحالة</th>
                                     <th class="border-top-0">اكشن</th>
                                 </tr>

@@ -70,9 +70,9 @@
 
                    
                  
-                    <li class="nav-item mb-0">
+                    {{-- <li class="nav-item mb-0">
                         <a class="nav-link font-weight-bold rounded-0 text-dark border-0 py-3 px-md-0 px-5" id="rate-tab" data-toggle="tab" href="#rate" role="tab" aria-controls="rate" aria-selected="false">التقييمات</a>
-                    </li>
+                    </li> --}}
                 </ul>
 
                 @error('login_error')
@@ -419,7 +419,7 @@
                             </div>
                             --}}
                         </div>
-                        <div class="bg-white rounded-10 p-4 mb-4">
+                        {{-- <div class="bg-white rounded-10 p-4 mb-4">
                             <h5 class="text-main-color font-weight-bold">إضافة التقييم</h5>
                             <p class="starrr add-rate"></p>
                             <form method="POST" action="{{route('institutes.add.review')}}">
@@ -433,7 +433,7 @@
                                     <button class="btn bg-secondary-color text-white">أضافة التقييم</button>
                                 </div>
                             </form>
-                        </div>
+                        </div> --}}
                         <!-- ./Course Rate Tab -->
                     </div>
                 </div>

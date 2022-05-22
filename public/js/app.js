@@ -46945,7 +46945,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("المدينة")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("عدد الطلابات")]),
+        _c("th", { staticClass: "border-top-0" }, [_vm._v("عدد الطلبات")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("العروض")]),
         _vm._v(" "),
@@ -50360,7 +50360,7 @@ var render = function() {
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
               _c("h4", { staticClass: "card-title" }, [
-                _vm._v("الدورات (" + _vm._s(this.studentsRequests.total) + ")")
+                _vm._v("الطلبات (" + _vm._s(this.studentsRequests.total) + ")")
               ]),
               _vm._v(" "),
               _vm._m(8),
@@ -68859,8 +68859,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

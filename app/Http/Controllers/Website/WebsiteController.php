@@ -276,7 +276,7 @@ if($student_mail){
             ->subject($subject);
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
-        session()->flash('alert_message', 'تم ارسال كلمه المرور اللي البريد الاليكتروني الخاص بك .');
+        session()->flash('alert_message', 'تم ارسال كلمه المرور اللي البريد الإلكتروني الخاص بك .');
         return back();
    
 

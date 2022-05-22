@@ -109,7 +109,7 @@
                     <li>3BE Principal: Aurelian Popescu</li>
                     <li>4402087273500: هاتف</li>
                     <li>فاكس</li>
-                    <li>البريد الاليكتروني</li>
+                    <li>البريد الإلكتروني</li>
                     <li>uk.ireland@kaplaninternational.com</li>
                     <li>www.kaplan.com</li>
                 </ul>

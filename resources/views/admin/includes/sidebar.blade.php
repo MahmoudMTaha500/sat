@@ -210,11 +210,11 @@
             <li class="nav-item {{ $department_name == 'student-request' ? 'open' : '' }}">
                 <a href="#">
                     <i class="la la-institution"></i>
-                    <span class="menu-title" data-i18n="nav.navbars.main"> الطلابات</span>
+                    <span class="menu-title" data-i18n="nav.navbars.main"> الطلبات</span>
                 </a>
                 <ul class="menu-content">
                     <li  class="{{ $page_name == 'student-request' ? 'active' : ''}}">
-                        <a class="menu-item"  href="{{route('student-requests.index')}}" data-i18n="nav.navbars.nav_light">الطلابات</a>
+                        <a class="menu-item"  href="{{route('student-requests.index')}}" data-i18n="nav.navbars.nav_light">الطلبات</a>
                     </li>
                     <li>
                         <a class="menu-item" href="/sat/student-requests?page=student_requests" data-i18n="nav.navbars.nav_semi">الارشيف</a>
