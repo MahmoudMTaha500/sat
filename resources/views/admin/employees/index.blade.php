@@ -36,7 +36,7 @@
                           <thead>
                             <tr>
                               <th class="border-top-0">اسم الموظف</th>
-                              <th class="border-top-0">البريد الاليكتروني </th>
+                              <th class="border-top-0">البريد الإلكتروني </th>
                               <th class="border-top-0">قسم الوظف</th>
                               <th class="border-top-0">اكشن</th>
                             </tr>

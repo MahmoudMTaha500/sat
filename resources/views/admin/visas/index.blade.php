@@ -37,7 +37,7 @@
                                         <tr>
                                             <th class="border-top-0">الدولة</th>
                                             <th class="border-top-0">تصنيف التاشيرة</th>
-                                            <th class="border-top-0">عدد الطلابات</th>
+                                            <th class="border-top-0">عدد الطلبات</th>
                                             <th class="border-top-0">تاريخ الانشاء</th>
                                             <th class="border-top-0">اكشن</th>
                                         </tr>

@@ -58,8 +58,8 @@
                               <div class="col-md-6">
 
                                 <div class="form-group">
-                                  <label for="projectinput1">البريد الاليكتروني</label>
-                                  <input type="email" id="projectinput1" class="form-control" required placeholder="ادخل البريد الاليكتروني"
+                                  <label for="projectinput1">البريد الإلكتروني</label>
+                                  <input type="email" id="projectinput1" class="form-control" required placeholder="ادخل البريد الإلكتروني"
                                   name="email"  value="{{$user->email}}">
                                 </div>
                               </div>

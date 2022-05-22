@@ -34,7 +34,7 @@ class EmployeesRequest extends FormRequest
     {
         return [
           'name.required'=>" اسم الموظف مطلوب",
-          'email.required'=>"البريد الاليكتروني مطلوب",
+          'email.required'=>"البريد الإلكتروني مطلوب",
           'password.required'=>"كلمه المرور مطلوبه",
 
         ];

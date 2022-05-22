@@ -7,7 +7,7 @@
         <li class="list-group-item py-3 border-bottom {{$page_identity['page_name'] == 'student-profile' ? 'active' : ''}}"><a href="{{route('student.profile')}}" class="{{$page_identity['page_name'] == 'student-profile' ? 'text-white' : ''}}">البيانات الشخصية</a></li>
         <li class="list-group-item py-3 border-bottom {{$page_identity['page_name'] == 'student-favourite' ? 'active' : ''}}"><a href="{{route('student.favourite')}}" class="{{$page_identity['page_name'] == 'student-favourite' ? 'text-white' : ''}}">المفضلة</a></li>
         <li class="list-group-item py-3 border-bottom {{$page_identity['page_name'] == 'student-reservation' ? 'active' : ''}}"><a href="{{route('student.reservation')}}" class="{{$page_identity['page_name'] == 'student-reservation' ? 'text-white' : ''}}">الحجوزات</a></li>
-        <li class="list-group-item py-3 {{$page_identity['page_name'] == 'success-story' ? 'active' : ''}}"><a href="{{route('student.success.story')}}" class="{{$page_identity['page_name'] == 'success-story' ? 'text-white' : ''}}">تجربتك مع كلاسات</a></li>
+        {{-- <li class="list-group-item py-3 {{$page_identity['page_name'] == 'success-story' ? 'active' : ''}}"><a href="{{route('student.success.story')}}" class="{{$page_identity['page_name'] == 'success-story' ? 'text-white' : ''}}">تجربتك مع كلاسات</a></li> --}}
         {{-- <li class="list-group-item py-3 {{$page_identity['page_name'] == 'student-notification' ? 'active' : ''}}"><a href="{{route('student.notification')}}" class="{{$page_identity['page_name'] == 'student-notification' ? 'text-white' : ''}}">الاشعارات</a></li> --}}
     </ul>
 </div>

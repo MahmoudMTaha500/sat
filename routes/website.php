@@ -19,7 +19,7 @@ Route::get('/refund-policy', 'WebsiteController@refund_policy')->name('website.r
 /** institute Routes *************************************/
 Route::get('/institutes', 'WebsiteController@institutes_page')->name('website.institutes');
 Route::get('/institute/{institute_id?}/{institute_slug?}/{course_slug?}', 'WebsiteController@institute_page')->name('website.institute');
-Route::post('institute/add-review', 'WebsiteController@add_review')->name('institutes.add.review');
+// Route::post('institute/add-review', 'WebsiteController@add_review')->name('institutes.add.review');
 
 
 /** articles Routes *************************************/
@@ -32,7 +32,7 @@ Route::get('student/profile', 'WebsiteController@student_profile')->middleware('
 Route::get('student/reservation', 'WebsiteController@student_reservation')->middleware('AuthStudent:student')->name('student.reservation');
 Route::get('student/favourite', 'WebsiteController@student_favourite')->middleware('AuthStudent:student')->name('student.favourite');
 Route::get('student/notification', 'WebsiteController@student_notification')->middleware('AuthStudent:student')->name('student.notification');
-Route::get('student/success-story', 'WebsiteController@student_success_story')->middleware('AuthStudent:student')->name('student.success.story');
+// Route::get('student/success-story', 'WebsiteController@student_success_story')->middleware('AuthStudent:student')->name('student.success.story');
 Route::post('student/update-success-story', 'WebsiteController@update_success_story')->middleware('AuthStudent:student')->name('student.update.success.story');
 Route::get('student/login', 'WebsiteController@student_login_page')->name('student.login');
 Route::post('student/login', 'WebsiteController@student_login_auth')->name('student.login');

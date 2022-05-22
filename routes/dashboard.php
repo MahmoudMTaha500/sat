@@ -15,7 +15,10 @@ Route::group(['middleware' => 'admins'] ,function(){
 Route::get('/', function () {
     $department_name='dashboard';
     $page_name='dashboard';
-    return view('/admin/dashboard' , compact('department_name' , 'page_name'));
+    $institutes = \App\Models\Institute::latest('id')->with('city')->get();
+    $countries = \App\Models\Country::latest('id')->get();
+    $useVue = true;
+    return view('/admin/dashboard' , compact('department_name' , 'page_name' , 'institutes' , 'countries', 'useVue'));
 })->name('dashboard');
 
 

@@ -122,7 +122,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                        <input type="email" name="email" placeholder="البريد الاليكتروني">
+                        <input type="email" name="email" placeholder="البريد الإلكتروني">
                         @error('email')
                             <span style="color:red;display:block" class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
