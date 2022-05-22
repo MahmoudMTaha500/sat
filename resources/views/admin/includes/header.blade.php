@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/bootstrap-switch.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/forms/toggle/switchery.min.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/extensions/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/vendors/css/ui/jquery-ui.min.css">
     <!-- END VENDOR CSS-->
    
     <!-- BEGIN MODERN CSS-->
@@ -46,7 +47,7 @@
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/pages/timeline.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/pages/dashboard-ecommerce.css">
     <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/plugins/forms/switch.css">
-
+    <link rel="stylesheet" type="text/css" href="{{url('/admin')}}/app-assets/css-rtl/plugins/ui/jqueryui.css">
 
     <!-- END Page Level CSS-->
     <!-- BEGIN Custom CSS-->

@@ -20,7 +20,7 @@ class StudentController extends Controller
 
 
     public function getStudents(){
-        $students =  Student::with('country','city')->latest('id')->paginate(10);
+        $students =  Student::latest('id')->paginate(10);
         return response()->json(['students'=>$students]);
     }
 

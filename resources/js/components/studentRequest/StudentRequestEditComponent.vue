@@ -17,6 +17,8 @@
                     </div>
                     <div class="col-7">
                         <span>{{institute_name}}</span>
+                        <hr>
+                        <strong>{{`${country} + ${city}`}}</strong>
                     </div>
                 </div>
                 <hr>
@@ -31,10 +33,19 @@
                 <hr>
                 <div class="row my-3">
                     <div class="col-5">
+                        <strong>السكن :</strong>
+                    </div>
+                    <div class="col-7">
+                        <span>{{chosin_residence.name_ar}} <span class="text-primary">({{Math.round(chosin_residence.price*residence_weeks)}} ريال سعودي)</span></span>
+                    </div>
+                </div>
+                <hr>
+                <div class="row my-3">
+                    <div class="col-5">
                         <strong>السعر الكلي :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{totalPrice() }} ريال سعودي</span>
+                        <span>{{totalPrice().toFixed(2) }} ريال سعودي</span>
                     </div>
                 </div>
                 <hr>
@@ -52,7 +63,7 @@
                         <strong>المتبقي :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{totalPrice() - paid_price}} ريال سعودي</span>
+                        <span>{{(totalPrice() - paid_price).toFixed(2)}} ريال سعودي</span>
                     </div>
                 </div>
                 <hr>
@@ -99,17 +110,21 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-
-                                  
+                            <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="projectinput1"> عدد الاسابيع </label>
+                                    <label for="projectinput1"> عدد اسابيع الكورس </label>
                                     <input @change="get_course_price() ; get_insurance_price()" type="number" v-model="weeks" id="projectinput1" min="1" class="form-control" placeholder="ادخل  عدد الاسابيع" name="weeks" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="projectinput1"> عدد اسابيع السكن </label>
+                                    <input @change="get_course_price() ; get_insurance_price()" type="number" v-model="residence_weeks" id="projectinput1" min="1" class="form-control" placeholder="ادخل  عدد الاسابيع" name="residence_weeks" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput2"> السكن ({{chosin_residence.price*weeks}} ريال سعودي)</label>
+                                    <label for="projectinput1"> السكن  </label>
                                     <select v-model="chosin_residence" class="form-control text-left">
                                         <option :value="{price:0}">لا اريد سكن </option>
                                         <option :selected="residence_obj.id == chosin_residence.id ? true : false "  v-for="  residence_obj in residences" :key="residence_obj.id" :value="residence_obj">{{residence_obj.price}} ريال - {{ residence_obj.name_ar}} </option>
@@ -120,17 +135,32 @@
                             
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> تاريخ البداية </label>
-                                    <input type="text" v-model="from_date" id="projectinput1" min="1" class="form-control"   name="from_date" />
+                                    <label for="projectinput1"> تاريخ بداية الكورس </label>
+                                    <input type="text" v-model="from_date" class="form-control datepicker-default" name="from_date" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> تاريخ الانتهاء </label>
-                                    <input type="text" v-model="to_date" id="projectinput1" min="1" class="form-control"   name="to_date" />
+                                    <label for="projectinput1"> تاريخ انتهاء الكورس </label>
+                                    <input type="text" v-model="to_date" id="projectinput1" min="1" class="form-control"  readonly name="to_date" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1"> تاريخ البداية السكن </label>
+                                    <input type="text" v-model="residence_from_date" id="projectinput1" min="1" class="form-control"  disabled  />
                                 </div>
                             </div>
                             <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1"> تاريخ انتهاء السكن </label>
+                                    <input type="text" :value="residence_to_date" id="projectinput1" min="1" class="form-control"  disabled />
+                                </div>
+                            </div>
+
+
+                            <div v-if="chosin_airport[0] != null" class="col-md-6">
                                 <div class="form-group">
                                     <label for="projectinput2"> الاستقبال ({{chosin_airport.price}} ريال سعودي)</label>
                                     <select v-model="chosin_airport" class="form-control text-left">
@@ -152,7 +182,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-6">
+                            <div  v-if="insurance_price != 0"  class="col-md-6">
                                 <div class="form-group">
                                     <label for="projectinput4"> اريد تامين ({{insurance_price*weeks}} ريال سعودي)</label>
                                     <input type="checkbox" v-model="insurance_price_checker" id="switchery" class="switchery" :value="insurance_val" name="insurance_checker" />
@@ -162,7 +192,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="projectinput3">رساله المعهد </label>
-                                    <textarea v-html="institute_message" type="text" id="ckeditor" rows="20" class="form-control" placeholder="  رساله المعهد " name="institute_message"></textarea>
+                                    <textarea v-html="institute_message" type="text"  rows="20" class="form-control ckeditor" placeholder="  رساله المعهد " name="institute_message"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -189,6 +219,8 @@
             return {
                 student_name : this.student_request.student.name,
                 institute_name : this.student_request.course.institute.name_ar,
+                country : this.student_request.course.institute.country.name_ar,
+                city : this.student_request.course.institute.city.name_ar,
                 course_name : this.student_request.course.name_ar,
                 course_discount : this.student_request.course.discount,
                 total_price : this.student_request.total_price,
@@ -197,6 +229,7 @@
                 status : this.student_request.status,
                 payment_status : this.student_request.payment_status,
                 weeks : this.student_request.weeks,
+                residence_weeks : this.student_request.residence_weeks,
                 notes : this.student_request.note,
                 institute_message : this.student_request.institute_message,
                 from_date : this.student_request.from_date,
@@ -208,6 +241,8 @@
                 insurance_price_checker : this.student_request.insurance_price == 0 ? false : true,
                 insurance_price :'',
                 course_price :'',
+                residence_from_date :'',
+                residence_to_date :'',
             };
         },
         methods: {
@@ -251,13 +286,27 @@
                     total_price += this.chosin_airport.price
                 }
                 if(!isNaN(this.chosin_residence.price)){
-                    total_price += this.chosin_residence.price*this.weeks
+                    total_price += this.chosin_residence.price*this.residence_weeks
                 }
                return total_price
             },
+            change_from_date(){
+                let modified_date = (data, days) => {return new Intl.DateTimeFormat('en-US').format(new Date(new Date(data).getTime() + days*86400000))};
+                this.from_date = $('.datepicker-default').val();
+                this.to_date =  modified_date(this.from_date, this.weeks*7);
+                this.residence_from_date =  modified_date(this.from_date, -1);
+                this.residence_to_date =  modified_date(this.residence_from_date, this.residence_weeks*7);
+            }
         },
+
+        
         
         beforeMount() {
+
+            window.setInterval(() => {
+                this.change_from_date()
+            }, 500)
+
             this.set_chosin_residence()
             this.set_chosin_airport()
             this.get_insurance_price()

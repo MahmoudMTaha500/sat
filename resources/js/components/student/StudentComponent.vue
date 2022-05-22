@@ -53,7 +53,6 @@
 
                                         <th class="border-top-0"> الجنسيه</th>
                                         <th class="border-top-0">العنوان</th>
-                                        <th class="border-top-0">اكشن</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,23 +60,10 @@
                                         <td class="text-truncate">{{student.name}}</td>
                                         <td class="text-truncate">{{student.email}}</td>
                                         <td class="text-truncate">{{student.phone}}</td>
-                                        <td class="text-truncate">{{student.country.name_ar}}</td>
-                                        <td class="text-truncate">{{student.city.name_ar}}</td>
+                                        <td class="text-truncate"> <span v-if ="student.country != null">{{student.country}}</span> <span v-else class="text-danger">لا يوجد</span></td>
+                                        <td class="text-truncate"><span v-if ="student.city != null">{{student.city}}</span> <span v-else class="text-danger">لا يوجد</span></td>
                                         <td class="text-truncate">{{student.nationality}}</td>
                                         <td class="text-truncate">{{student.address}}</td>
-
-                                        <td>
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a  class="btn btn-info btn-sm round"> تعديل</a>
-                                                <a href="#" class="btn btn-default btn-sm round">عرض</a>
-
-                                                <!-- <form :action="dahsboard_url+'/courses/'+course.id" method="POST" class="btn-group"> -->
-                                                    <!-- <input type="hidden" name="_token" :value="csrftoken" /> -->
-                                                    <!-- <input type="hidden" name="_method" value="delete" /> -->
-                                                    <button class="btn btn-danger btn-sm round" onclick="return confirm('هل انت متاكد من حذف هذه الدورة')">حذف</button>
-                                                <!-- </form> -->
-                                            </div>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

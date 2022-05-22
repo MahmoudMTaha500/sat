@@ -24,7 +24,7 @@
                     <div class="row">
                         @foreach ($favourites as $favourite)
                         <div class="col-xl-4 col-md-6">
-                            <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5">
+                            <div class="card mx-xl-4 mx-0 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                                 <!-- Offer Icon -->
                                 <div class="offer-icon position-absolute bg-secondary-color text-white">
                                     - {{$favourite->course->discount*100}} %
@@ -38,7 +38,7 @@
                                 <!-- Institute Img -->
                                 <a href="{{route('website.institute' , [$favourite->course->institute->id, $favourite->course->institute->slug , $favourite->course->slug])}}">
                                     <div class="institute-img d-inline-block position-relative">
-                                        <img src="../{{$favourite->course->institute->banner}}" alt="{{$favourite->course->institute->name_ar}}" class="card-img-top w-100" />
+                                        <img src="{{empty($favourite->course->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $favourite->course->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" alt="{{$favourite->course->institute->name_ar}}" class="card-img-top w-100" />
                                     </div>
                                 </a>
                                 <!-- ./Institute Img -->

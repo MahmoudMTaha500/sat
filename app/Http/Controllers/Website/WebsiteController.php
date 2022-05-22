@@ -159,7 +159,7 @@ class WebsiteController extends Controller
         $course_details['hours_per_week'] = $course->hours_per_week;
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
-        $course_details['residence'] = $request->residence;
+        $course_details['residence'] = json_decode($request->residence, true);
 
         $page_identity = [
             'title_tag' => 'تاكيد الحجز',

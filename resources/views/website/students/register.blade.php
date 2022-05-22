@@ -1,8 +1,3 @@
-
-
-
-
-
 @extends('website.app') @section('website.content')
 
 <!-- Sign Up -->
@@ -25,72 +20,72 @@
                     @endif
                     <form class="my-4" method="POST" action="{{ route('student.register') }}">
                         @csrf
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="name" value="{{ old('name') }}" type="text" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم بالكامل">
+                        <div class="form-group">
+                            <input name="name" value="{{ old('name') }}" type="text" class="form-control rounded-10 border px-3 btn-light @error('name') pr-5 is-invalid @enderror" placeholder="الاسم بالكامل">
                             @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="email" value="{{ old('email') }}" type="email" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الألكتروني">
+                        <div class="form-group">
+                            <input name="email" value="{{ old('email') }}" type="email" class="form-control rounded-10 border px-3 btn-light @error('email')pr-5  is-invalid @enderror" placeholder="البريد الألكتروني">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="phone" value="{{ old('phone') }}"  type="tel" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال">
+                        <div class="form-group">
+                            <input name="phone" value="{{ old('phone') }}"  type="tel" class="form-control rounded-10 border px-3 btn-light @error('phone')pr-5  is-invalid @enderror" placeholder="رقم الجوال">
                             @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="country" value="{{ old('country') }}"  type="text" class="form-control border-0 bg-transparent @error('country') is-invalid @enderror" placeholder="الدولة">
+                        <div class="form-group">
+                            <input name="country" value="{{ old('country') }}"  type="text" class="form-control rounded-10 border px-3 btn-light @error('countrypr-5 ') is-invalid @enderror" placeholder="الدولة">
                             @error('country')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="city" value="{{ old('city') }}"  type="text" class="form-control border-0 bg-transparent @error('city') is-invalid @enderror" placeholder="المدينة">
+                        <div class="form-group">
+                            <input name="city" value="{{ old('city') }}"  type="text" class="form-control rounded-10 border px-3 btn-light @error('city') pr-5 is-invalid @enderror" placeholder="المدينة">
                             @error('city')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="address" value="{{ old('address') }}"  type="text" class="form-control border-0 bg-transparent @error('address') is-invalid @enderror" placeholder="العنوان">
+                        <div class="form-group">
+                            <input name="address" value="{{ old('address') }}"  type="text" class="form-control rounded-10 border px-3 btn-light @error('addresspr-5 ') is-invalid @enderror" placeholder="العنوان">
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="nationality" value="{{ old('nationality') }}"  type="text" class="form-control border-0 bg-transparent @error('nationality') is-invalid @enderror" placeholder="الجنسية">
+                        <div class="form-group">
+                            <input name="nationality" value="{{ old('nationality') }}"  type="text" class="form-control rounded-10 border px-3 btn-light @error('nationapr-5 lity') is-invalid @enderror" placeholder="الجنسية">
                             @error('nationality')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="password" value="{{ old('password') }}"  type="password" class="form-control border-0 bg-transparent @error('password') is-invalid @enderror" placeholder="كلمة المرور">
+                        <div class="form-group">
+                            <input name="password" value="{{ old('password') }}"  type="password" class="form-control rounded-10 border px-3 btn-light @error('passworpr-5 d') is-invalid @enderror" placeholder="كلمة المرور">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                            <input name="password_confirmation" value="{{ old('password_confirmation') }}"  type="password" class="form-control border-0 bg-transparent @error('password_confirmation') is-invalid @enderror" placeholder="تأكيد كلمة المرور">
+                        <div class="form-group">
+                            <input name="password_confirmation" value="{{ old('password_confirmation') }}"  type="password" class="form-control rounded-10 border px-3 btn-light @error('passworpr-5 d_confirmation') is-invalid @enderror" placeholder="تأكيد كلمة المرور">
                             @error('password_confirmation')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

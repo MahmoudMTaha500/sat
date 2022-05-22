@@ -36,7 +36,7 @@ class simpleVisaController extends Controller
             $validated = $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'email' => 'required|string|max:255',
-                'phone' => ['required', 'string', 'max:255'],
+                'phone' => ['required' , 'numeric'],
                 'country' => ['required'],
                 'visatype' => ['required'],
             ], [
@@ -48,6 +48,7 @@ class simpleVisaController extends Controller
                 'email.unique' => 'هذا البريد الإلكتروني موجود بالفعل',
                 'phone.required' => 'رقم الجوال مطلوب',
                 'phone.max' => 'يجب الا يتجاوز رقم الجوال 255 حرف',
+                'phone.numeric' => 'يجب ان يتكون الهاتف من ارقام فقط',
                 'country.required' => 'الدولة مطلوبة',
             ]);
 
@@ -80,7 +81,7 @@ class simpleVisaController extends Controller
                 return redirect()->back();
             }
         }else{
-            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت']);
+            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت'])->withInput();
         }
         
             

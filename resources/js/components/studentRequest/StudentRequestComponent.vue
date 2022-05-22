@@ -10,60 +10,54 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                       
                         <div class="form-group">
-                        <label for="projectinput1">الدولة</label>
+                            <label for="projectinput1">الدولة</label>
                             <select v-model="country_id" v-on:change="getcities(); get_institutes(); " id="country" class="form-control" name="country_id" required>
-                            <option value="">حدد الدولة</option>
-                            <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
+                                <option value="">حدد الدولة</option>
+                                <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
                             </select>
                         </div>
                         <div class="form-group">
-                        <label for="projectinput1">المدينة</label>
+                            <label for="projectinput1">المدينة</label>
 
-                            <select v-model="city_id" id="city"  v-on:change="get_institutes();"  class="form-control" name="city_id" required>
-                            <option value="">حدد المدينة</option>
-                            <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
+                            <select v-model="city_id" id="city" v-on:change="get_institutes();" class="form-control" name="city_id" required>
+                                <option value="">حدد المدينة</option>
+                                <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                             </select>
                         </div>
 
-
                         <div class="form-group">
-                        <label for="projectinput1">المعهد</label>
-                            <select v-model="institute_id" id="" class="form-control"  v-on:change="get_filter_courses();" name="institute_id" required>
-                            <option value="">حدد المعهد</option>
-                            <option v-for="institute in institutes" :key="institute.id" :value="institute.id">  {{institute.name_ar +' | '+ institute.city.name_ar}} </option>
+                            <label for="projectinput1">المعهد</label>
+                            <select v-model="institute_id" id="" class="form-control" v-on:change="get_filter_courses();" name="institute_id" required>
+                                <option value="">حدد المعهد</option>
+                                <option v-for="institute in institutes" :key="institute.id" :value="institute.id"> {{institute.name_ar +' | '+ institute.city.name_ar}} </option>
                             </select>
                         </div>
                         <div class="form-group">
-                        <label for="projectinput2">الدورات</label>
+                            <label for="projectinput2">الدورات</label>
                             <select v-model="course_id" class="form-control t" name="course_id">
-                            <option value="">اختر الدورة</option>
-                            <option v-for="course in courses" :key="course.id" :value="course.id"> {{course.name_ar}}</option>
+                                <option value="">اختر الدورة</option>
+                                <option v-for="course in courses" :key="course.id" :value="course.id"> {{course.name_ar}}</option>
                             </select>
                         </div>
 
-             <div class="form-group">
+                        <div class="form-group">
                             <label for="projectinput1">البحث بكلمات مفتاحية</label>
                             <input v-model="name_ar" type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="name_ar" />
                         </div>
-                        <div class="form-group" style="direction:rtl" >
+                        <div class="form-group" style="direction: rtl;">
                             <label for="projectinput1"> جديد</label>
-                                <input v-model="news" type="checkbox" id="projectinput1" class="form-control"   value="جديد"/>
-                            <label for="">  حصل علي قبول</label> 
+                            <input v-model="news" type="checkbox" id="projectinput1" class="form-control" value="جديد" />
+                            <label for=""> حصل علي قبول</label>
 
-                            <input v-model="got_accepted" type="checkbox" id="projectinput1" class="form-control"   value="حصل علي قبول"/>
-                            <label for="">    بداء الدراسه</label> 
+                            <input v-model="got_accepted" type="checkbox" id="projectinput1" class="form-control" value="حصل علي قبول" />
+                            <label for=""> بداء الدراسه</label>
 
-                            <input v-model="study_started" type="checkbox" id="projectinput1" class="form-control"   value="بداء الدراسة"/>
-                            <label for="">    مرفوض</label> 
+                            <input v-model="study_started" type="checkbox" id="projectinput1" class="form-control" value="بداء الدراسة" />
+                            <label for=""> مرفوض</label>
 
-                            <input v-model="rejected" type="checkbox" id="projectinput1" class="form-control"   value="مرفوض"/>
-                     
+                            <input v-model="rejected" type="checkbox" id="projectinput1" class="form-control" value="مرفوض" />
                         </div>
-                     
-          
-                       
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary w-100" @click="filterCoureses()" data-dismiss="modal" aria-label="Close">بحث</button>
@@ -87,7 +81,7 @@
                             <strong>اسم الكورس</strong>
                             <div v-if="serviceObj =={}">
                                 <!-- <p  > {{serviceObj.course.name_ar}}</p> -->
-                                <p>aaaa</p>
+                                <p>N/A</p>
                             </div>
                             <div v-else-if="serviceObj !=={} ">
                                 <p>{{course_Obj.name_ar}}</p>
@@ -127,7 +121,7 @@
                         <div>
                             <strong>التامين</strong>
                             <p v-if="insurance_Obj != 0">
-                                ({{insurance_Obj*serviceObj.weeks}} ريال) | {{insurance_Obj}} ريال / الاسبوع 
+                                ({{insurance_Obj*serviceObj.weeks}} ريال) | {{insurance_Obj}} ريال / الاسبوع
                             </p>
                             <p v-else>
                                 لا يوجد تأمين
@@ -201,12 +195,12 @@
                     </div>
                     <div class="modal-body">
                         <div>
-                            <textarea v-model="classat_notes"  class="w-100"></textarea>
+                            <textarea v-model="classat_notes" class="w-100"></textarea>
                             <hr />
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" @click="update_classat_note()" class="btn grey btn-outline-success w-100" data-dismiss="modal">حفظ </button>
+                        <button type="button" @click="update_classat_note()" class="btn grey btn-outline-success w-100" data-dismiss="modal">حفظ</button>
                     </div>
                 </div>
             </div>
@@ -239,12 +233,9 @@
                                         <th class="border-top-0">الهاتف</th>
                                         <th class="border-top-0">البر يد الالكتروني</th>
                                         <th class="border-top-0">المعهد</th>
-                                        <th class="border-top-0">الكورس</th>
-                                        <th class="border-top-0">تفاصيل الطلب</th>
-                                        <th class="border-top-0">رسالة المعهد</th>
-                                        <th class="border-top-0">ملاحظات الطالب</th>
-                                        <th class="border-top-0">ملاحظات كلاسات</th>
-
+                                        <th class="border-top-0">الدولة</th>
+                                        <th class="border-top-0">الميدنة</th>
+                                        <th class="border-top-0">التفاصيل</th>
                                         <th class="border-top-0">حالة الدراسة</th>
                                         <th class="border-top-0">حالة الدفع</th>
                                         <th class="border-top-0">التاريخ</th>
@@ -257,67 +248,49 @@
                                         <td class="text-truncate">{{request.student.phone}}</td>
                                         <td class="text-truncate">{{request.student.email}}</td>
                                         <td class="text-truncate">{{request.course.institute.name_ar}}</td>
-                                        <td class="text-truncate">{{request.course.name_ar}}</td>
+                                        <td class="text-truncate">{{request.course.institute.country.name_ar}}</td>
+                                        <td class="text-truncate">{{request.course.institute.city.name_ar}}</td>
                                         <td class="text-truncate">
-                                            <button type="button" class="btn btn-sm btn-outline-info round" @click="modelService(request)">
-                                                <i class="la la-eye"></i>
-                                            </button>
-                                        </td>
-                                        <td class="text-truncate">
-                                            <button type="button" class="btn btn-sm btn-outline-info round" @click="modelmessageInstitute(request)">
-                                                <i class="la la-eye"></i>
-                                            </button>
-                                        </td>
-                                        <td class="text-truncate">
-                                            <button type="button" class="btn btn-sm btn-outline-info round" @click="notes_request(request)">
-                                                <i class="la la-eye"></i>
-                                            </button>
-                                        </td>
-                                        <td class="text-truncate">
-                                            <button type="button" class="btn btn-sm btn-outline-info round" @click="classat_notes_request(request)">
-                                                <i class="la la-eye"></i>
-                                            </button>
+                                            <div class="btn-group" role="group" aria-label="Basic example">
+                                                <button @click="modelService(request)" class="btn btn-info btn-sm round"> تفاصيل الطلب</button>
+                                                <button @click="modelmessageInstitute(request)" class="btn btn-danger btn-sm round">رسالة المعهد</button>
+                                                <button @click="notes_request(request)" class="btn btn-warning btn-sm round">ملاحظات الطالب</button>
+                                                <button @click="classat_notes_request(request)" class="btn btn-success btn-sm round">ملاحظات كلاسات</button>
+                                            </div>
                                         </td>
 
+
                                         <td class="text-truncate">
-                                            <!-- <input type="checkbox" id="checkbox" v-model="request.approvment" @change="updateApprovment" @click="getrequest_id(request.id)" />
-                                            <label for="checkbox">{{ (request.approvment == 1) ? "مقبول":"غير مقبول" }}</label> -->
-                                            <!-- <select v-model="request.status" @change="updateStatus" @click="getrequest_id(request.id)" name="" id="">
-                                                <option value="جديد"> جديد</option>
-                                                <option value="حصل علي قبول"> حصل علي قبول </option>
-                                                <option value="بداء الدراسة"> بداء الدراسة</option>
-                                                <option value="مرفوض"> مرفوض</option>
-                                            </select> -->
-                                            <p v-if="request.status == 'جديد' " >
+
+                                            <p v-if="request.status == 'جديد' ">
                                                 <span class="text-warning">{{request.status}}</span>
                                             </p>
-                                            <p v-else-if="request.status == 'حصل علي قبول' " >
+                                            <p v-else-if="request.status == 'حصل علي قبول' ">
                                                 <span class="text-success">{{request.status}}</span>
-                                            </p>                                            
-                                            <p v-else-if="request.status == 'بداء الدراسة' " >
+                                            </p>
+                                            <p v-else-if="request.status == 'بداء الدراسة' ">
                                                 <span class="text-success">{{request.status}}</span>
-                                            </p>                                            
-                                            <p v-else-if="request.status == 'مرفوض' " >
+                                            </p>
+                                            <p v-else-if="request.status == 'مرفوض' ">
                                                 <span class="text-danger">{{request.status}}</span>
-                                            </p>                                            
+                                            </p>
                                         </td>
                                         <td class="text-truncate">
-                                            <p v-if="request.payment_status == '0' " >
+                                            <p v-if="request.payment_status == '0' ">
                                                 <span class="text-danger">لم يتم الدفع</span>
                                             </p>
-                                            <p v-else-if="request.payment_status == '1' " >
+                                            <p v-else-if="request.payment_status == '1' ">
                                                 <span class="text-success">تم الدفع</span>
-                                            </p>                                            
-                                            <p v-else-if="request.payment_status == '2' " >
+                                            </p>
+                                            <p v-else-if="request.payment_status == '2' ">
                                                 <span class="text-warning">مدفوع جزئيا</span>
-                                            </p>                                          
+                                            </p>
                                         </td>
-                                        <td class="text-truncate">{{request.created_at}}</td>
+                                        <td class="text-truncate">{{new Intl.DateTimeFormat('en-GB').format(new Date(request.created_at))}}</td>
 
                                         <td>
                                             <div class="btn-group" role="group" aria-label="Basic example">
-                                                <a  v-if="edit" :href="dahsboard_url+'/student-requests/'+request.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
-                                                <a href="#" class="btn btn-default btn-sm round">عرض</a>
+                                                <a v-if="edit" :href="dahsboard_url+'/student-requests/'+request.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
 
                                                 <form :action="dahsboard_url+'/student-requests/'+request.id" method="POST" class="btn-group">
                                                     <input type="hidden" name="_token" :value="csrftoken" />
@@ -350,27 +323,27 @@
 <script>
     import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
     export default {
-        props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken" ,'create','edit','delete_pre' , 'update_classat_note_route' , 'get_courses_url' ,'get_institutes_url'],
+        props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "create", "edit", "delete_pre", "update_classat_note_route", "get_courses_url", "get_institutes_url"],
         data() {
             return {
                 studentsRequests: {},
                 url: this.student_request_url,
-                  url_course: this.course_url,
+                url_course: this.course_url,
                 country_id: "",
                 city_id: "",
                 countries: this.countries_from_blade,
                 cities: {},
                 courses: {},
                 institute_id: "",
-                course_id:'',
-            
-                name_ar: "",
-            news:'',
-            got_accepted:'',
-            study_started:'',
-            rejected:'',
+                course_id: "",
 
-request_id: 0,
+                name_ar: "",
+                news: "",
+                got_accepted: "",
+                study_started: "",
+                rejected: "",
+
+                request_id: 0,
                 discount_offers: true,
                 non_discount_offers: true,
                 serviceObj: {},
@@ -390,8 +363,10 @@ request_id: 0,
             };
         },
         methods: {
-            update_classat_note: function () {
-                axios.post(this.update_classat_note_route, { request_id: this.request_id, classat_notes: this.classat_notes }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {alert('تم حفظ الملاحظة بنجاح')});
+            update_classat_note: function (obj) {
+                axios.post(this.update_classat_note_route, { request_id: this.request_id, classat_notes: this.classat_notes }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {
+                    alert("تم حفظ الملاحظة بنجاح");
+                });
             },
             getstudentsRequests: function () {
                 axios.get(this.url).then((response) => (this.studentsRequests = response.data.studentsRequests));
@@ -400,7 +375,7 @@ request_id: 0,
                 this.url = url1;
                 this.getstudentsRequests();
             },
-             get_institutes() {
+            get_institutes() {
                 axios
                     .get(this.get_institutes_url, {
                         params: {
@@ -423,7 +398,7 @@ request_id: 0,
                     this.city_id = "";
                 }
             },
-            
+
             filterCoureses: function () {
                 // alert(this.news);
                 var filter_params = {
@@ -431,18 +406,17 @@ request_id: 0,
                     course_id: this.course_id,
                     country_id: this.country_id,
                     city_id: this.city_id,
-                    name_ar:this.name_ar,
-                    new:this.news,
-                    got_accepted:this.got_accepted,
-                    study_started:this.study_started,
-                    rejected:this.rejected,
-                 
+                    name_ar: this.name_ar,
+                    new: this.news,
+                    got_accepted: this.got_accepted,
+                    study_started: this.study_started,
+                    rejected: this.rejected,
                 };
-                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id ;
+                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id;
                 axios
                     .get(this.dahsboard_url + "/student-requests/filterstudentsRequests", {
                         params: filter_params,
-                    } )
+                    })
                     .then((response) => ((this.studentsRequests = response.data.studentsRequests), (this.studentsRequests.prev_page_url += pagination_params), (this.studentsRequests.next_page_url += pagination_params)));
             },
             updateStatus: function (e) {
@@ -475,7 +449,9 @@ request_id: 0,
                 $("#notes").modal("show");
             },
             classat_notes_request: function (obj) {
-                this.classat_notes = obj.classat_note;
+                if(this.classat_notes == ''){
+                    this.classat_notes = obj.classat_note;
+                }
                 this.request_id = obj.id;
 
                 $("#classat_notes").modal("show");
@@ -483,7 +459,7 @@ request_id: 0,
             getcourses: function () {
                 axios.get(this.url_course).then((response) => (this.courses = response.data.courses.data));
             },
-             get_filter_courses() {
+            get_filter_courses() {
                 axios
                     .get(this.get_courses_url, {
                         params: {
@@ -496,19 +472,17 @@ request_id: 0,
         beforeMount() {
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
-            const course_id_url = urlParams.get('course_id');
-        // alert(course_id_url);
+            const course_id_url = urlParams.get("course_id");
+            // alert(course_id_url);
 
-          if(course_id_url){
-            this.course_id = course_id_url;
-             this.filterCoureses();
-            //  alert(institute_id_url);
-        } else{
-            this.getstudentsRequests();
-            this.get_filter_courses();
-
-
-          }
+            if (course_id_url) {
+                this.course_id = course_id_url;
+                this.filterCoureses();
+                //  alert(institute_id_url);
+            } else {
+                this.getstudentsRequests();
+                this.get_filter_courses();
+            }
         },
     };
 </script>

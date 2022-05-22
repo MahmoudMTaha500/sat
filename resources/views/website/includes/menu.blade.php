@@ -1,16 +1,4 @@
 
-
-
-
-
-
-
-
-
-
-
-
-
 <header>
     <div class="container-fluid">
         <div class="row px-lg-0 px-xl-5">
@@ -23,7 +11,45 @@
                         <button class="navbar-toggler" type="button"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
+
+                        @if(Auth::guard('student')->check())
+                            <!-- User Logged In Mobile Screen -->
+                            <div class="loged position-relative mt-1 d-lg-none d-block">
+                                {{-- <a class="text-main-color text-decoration-none notification align-middle" href="notification-full.html">
+                                    <i class="text-main-color fas fa-bell"></i> <span class="badge badge-primary badge-pill rounded-circle bg-secondary-color text-center font-weight-bold p-0 position-absolute">14</span>
+                                </a> --}}
+                                <div class="dropdown open-sidemenu d-inline-block">
+                                    <a class="btn bg-transparent" href="" onclick="return false;">
+                                        <img src="{{auth()->guard('student')->user()->profile_image == null ? asset('storage/default__user_image.jpg') : asset(auth()->guard('student')->user()->profile_image)}}" alt="" class="rounded-circle" />
+                                    </a>
+                                    <div class="sidemenu position-fixed">
+                                        <div class="sidemenu-nav bg-white">
+                                            <div class="profile-img py-4 text-center position-relative mx-auto">
+                                                <input type="file" class="d-none upload" />
+                                                <div class="overlay text-center text-white position-absolute"><i class="far fa-image"></i></div>
+                                                <img
+                                                    src="{{auth()->guard('student')->user()->profile_image == null ? asset('storage/default__user_image.jpg') : asset(auth()->guard('student')->user()->profile_image)}}"
+                                                    alt=""
+                                                    class="img-fluid rounded-circle img-uploaded"
+                                                />
+                                                <h6 class="text-main-color font-weight-bold mt-2">{{auth()->guard('student')->user()->name}}</h6>
+                                            </div>
+                                            <ul class="list-group list-group-flush p-0 border-0">
+                                                <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.profile')}}" class="text-dark">البيانات الشخصية</a></li>
+                                                <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.favourite')}}" class="text-dark">المفضلة</a></li>
+                                                <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.reservation')}}" class="text-dark">الحجوزات</a></li>
+                                                <li class="list-group-item py-3 text-center border-bottom"><a href="{{route('student.success.story')}}" class="text-dark">تجربتك مع كلاسات</a></li>
+                                                <li class="list-group-item py-3 text-center"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-dark">تسجيل الخروج</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ./User Logged In Mobile Screen -->
+                        @endif
                         <a href="{{route('website.institutes')}}" class="btn rounded-10 bg-secondary-color text-white d-lg-none d-block">المعاهد</a>
+
+
                         <!-- Login & Register In Mobile Screen -->
                         <div class="contact d-lg-none d-block">
                             <a href="tel:966555484931" target="_blank"  class="btn rounded-circle text-muted border text-center p-0 position-relative"><i class="fas fa-phone-volume"></i></a>
@@ -32,42 +58,7 @@
                         <!-- ./Login & Register In Mobile Screen -->
                     </div>
 
-                    @if(Auth::guard('student')->check())
-                    <!-- User Logged In Mobile Screen -->
-                    <div class="loged position-relative mt-1 d-lg-none d-block">
-                        {{-- <a class="text-main-color text-decoration-none notification align-middle" href="notification-full.html">
-                            <i class="text-main-color fas fa-bell"></i> <span class="badge badge-primary badge-pill rounded-circle bg-secondary-color text-center font-weight-bold p-0 position-absolute">14</span>
-                        </a> --}}
-                        <div class="dropdown open-sidemenu d-inline-block">
-                            <a class="btn bg-transparent" href="#">
-                                <img src="{{auth()->guard('student')->user()->profile_image == null ? asset('storage/default__user_image.jpg') : asset(auth()->guard('student')->user()->profile_image)}}" alt="" class="rounded-circle" />
-                            </a>
-                            <div class="sidemenu position-fixed">
-                                <div class="sidemenu-nav bg-white">
-                                    <div class="profile-img py-4 text-center position-relative mx-auto">
-                                        <input type="file" class="d-none upload" />
-                                        <div class="overlay text-center text-white position-absolute"><i class="far fa-image"></i></div>
-                                        <img
-                                            src="{{auth()->guard('student')->user()->profile_image == null ? asset('storage/default__user_image.jpg') : asset(auth()->guard('student')->user()->profile_image)}}"
-                                            alt=""
-                                            class="img-fluid rounded-circle img-uploaded"
-                                        />
-                                        <h6 class="text-main-color font-weight-bold mt-2">{{auth()->guard('student')->user()->name}}</h6>
-                                    </div>
-                                    <ul class="list-group list-group-flush p-0 border-0">
-                                        <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.profile')}}" class="text-dark">البيانات الشخصية</a></li>
-                                        <li class="list-group-item py-3 border-bottom text-center"><a href="favourite.html" class="text-dark">المفضلة</a></li>
-                                        <li class="list-group-item py-3 border-bottom text-center"><a href="reservation.html" class="text-dark">الحجوزات</a></li>
-                                        <li class="list-group-item py-3 text-center border-bottom"><a href="notification.html" class="text-dark">الاشعارات</a></li>
-                                        <li class="list-group-item py-3 text-center"><a href="#" class="text-dark">تسجيل الخروج</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ./User Logged In Mobile Screen -->
-
-                    @endif
+                    
 
                     <!-- Nav Menu  -->
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">

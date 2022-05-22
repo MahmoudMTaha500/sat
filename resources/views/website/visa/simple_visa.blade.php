@@ -41,7 +41,7 @@
                         <form class="my-4" method="POST" action="{{ route('order-visa.store') }}">
                             @csrf
                             <label>الاسم</label>
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                            <div class="form-group">
                                 <input name="name"
                                 @if($student)
                                 value="{{ $student->name }}"   
@@ -49,7 +49,7 @@
                                 @else
                                 value="{{ old('name') }}" 
                                 @endif                           
-                                type="text" class="form-control border-0 bg-transparent @error('name') is-invalid @enderror" placeholder="الاسم بالكامل" />
+                                type="text" class="form-control  rounded-10 border pl-3 pr-3 btn-light @error('name') pr-5 pr-5 is-invalid @enderror" placeholder="الاسم بالكامل" />
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
                                 @enderror
                             </div>
                             <label>البريد الإلكتروني</label>
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                            <div class="form-group">
                                 <input name="email"
                                 @if($student)
                                 value="{{ $student->email }}" 
@@ -68,7 +68,7 @@
 
 
                                 
-                                 type="email" class="form-control border-0 bg-transparent @error('email') is-invalid @enderror" placeholder="البريد الإلكتروني" />
+                                 type="email" class="form-control rounded-10 border pl-3 pr-3 btn-light @error('email') pr-5 is-invalid @enderror" placeholder="البريد الإلكتروني" />
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -76,7 +76,7 @@
                                 @enderror
                             </div>
                             <label>رقم الجوال </label>
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
+                            <div class="form-group">
                                 <input name="phone" 
                                 @if($student)
                                 value="{{ $student->phone }}"  
@@ -85,7 +85,7 @@
                                 value="{{ old('phone') }}"
                                 @endif      
                                 
-                                type="tel" class="form-control border-0 bg-transparent @error('phone') is-invalid @enderror" placeholder="رقم الجوال" />
+                                type="tel" class="form-control rounded-10 border pl-3 pr-3 btn-light @error('phone') pr-5 is-invalid @enderror" placeholder="رقم الجوال" />
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -93,41 +93,41 @@
                                 @enderror
                             </div>
                             <label>الدولة</label>
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select class="form-control visa-country border-0 bg-transparent @error('country') is-invalid @enderror" name="country">
+                            <div class="form-group">
+                                <select class="form-control visa-country rounded-10 border pl-3 pr-3 btn-light @error('country') pr-5 is-invalid @enderror" name="country">
                                     <option value="" selected readonly>اختر الدوله</option>
-                                    <option value="England"> بريطانيا   </option>
-                                    <option value="USA"> أمريكا </option>
-                                    <option value="Schengen"> شنغن </option>
+                                    <option {{ old('country') == "England" ? 'selected' : '' }} value="England"> بريطانيا   </option>
+                                    <option {{ old('country') == "USA" ? 'selected' : '' }} value="USA"> أمريكا </option>
+                                    <option {{ old('country') == "Schengen" ? 'selected' : '' }} value="Schengen"> شنغن </option>
                                 </select>
 
-                                {{-- <input name="country" value="{{ old('country') }}" type="text" class="form-control border-0 bg-transparent @error('country') is-invalid @enderror" placeholder="الدولة" /> --}} @error('country')
+                                {{-- <input name="country" value="{{ old('country') }}" type="text" class="form-control rounded-10 border pl-3 pr-3 btn-light @error('country') pr-5 is-invalid @enderror" placeholder="الدولة" /> --}} @error('country')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>  
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light" style="display:none;"   id="sheingen">
-                                <select class="form-control border-0 bg-transparent @error('') is-invalid @enderror schengen_country"   name="schengen_country">
+                            <div class="form-group" style="display:none;"   id="sheingen">
+                                <select class="form-control rounded-10 border pl-3 pr-3 btn-light @error('') pr-5 is-invalid @enderror schengen_country"   name="schengen_country">
                                     <option  value="" selected readonly> اختر من دول شنغن</option>
-                                    <option  value="Germany"> المانيا  </option>
-                                    <option  value="France"> فرنسا </option>
-                                    <option  value="Italy"> إيطاليا </option>
-                                    <option  value="Spain"> إسبانيا  </option>
-                                    <option  value="Estonia"> إستونيا </option>
-                                    <option  value="Belgium"> بلجيكا </option>
-                                    <option  value="Greece"> اليونان </option>
-                                    <option  value="Denmark"> الدنمارك </option>
-                                    <option  value="Finland"> فنلندا </option>
-                                    <option  value="Portugal"> البرتغال </option>
-                                    <option  value="Malta"> 	مالطا </option>
-                                    <option  value="Switzerland"> سويسرا </option>
-                                    <option  value="Sweden"> السويد </option>
-                                    <option  value="Slovakia"> سلوفاكيا </option>
-                                    <option  value="Poland"> بولندا </option>
-                                    <option  value="Iceland"> 	آيسلندا </option>
-                                    <option  value="Netherlands"> هولندا </option>
-                                    <option  value="Norway"> النرويج </option>
+                                    <option {{ old('schengen_country') == "Germany" ? 'selected' : '' }} value="Germany"> المانيا  </option>
+                                    <option {{ old('schengen_country') == "France" ? 'selected' : '' }} value="France"> فرنسا </option>
+                                    <option {{ old('schengen_country') == "Italy" ? 'selected' : '' }} value="Italy"> إيطاليا </option>
+                                    <option {{ old('schengen_country') == "Spain" ? 'selected' : '' }} value="Spain"> إسبانيا  </option>
+                                    <option {{ old('schengen_country') == "Estonia" ? 'selected' : '' }} value="Estonia"> إستونيا </option>
+                                    <option {{ old('schengen_country') == "Belgium" ? 'selected' : '' }} value="Belgium"> بلجيكا </option>
+                                    <option {{ old('schengen_country') == "Greece" ? 'selected' : '' }} value="Greece"> اليونان </option>
+                                    <option {{ old('schengen_country') == "Denmark" ? 'selected' : '' }} value="Denmark"> الدنمارك </option>
+                                    <option {{ old('schengen_country') == "Finland" ? 'selected' : '' }} value="Finland"> فنلندا </option>
+                                    <option {{ old('schengen_country') == "Portugal" ? 'selected' : '' }} value="Portugal"> البرتغال </option>
+                                    <option {{ old('schengen_country') == "Malta" ? 'selected' : '' }} value="Malta"> 	مالطا </option>
+                                    <option {{ old('schengen_country') == "Switzerland" ? 'selected' : '' }} value="Switzerland"> سويسرا </option>
+                                    <option {{ old('schengen_country') == "Sweden" ? 'selected' : '' }} value="Sweden"> السويد </option>
+                                    <option {{ old('schengen_country') == "Slovakia" ? 'selected' : '' }} value="Slovakia"> سلوفاكيا </option>
+                                    <option {{ old('schengen_country') == "Poland" ? 'selected' : '' }} value="Poland"> بولندا </option>
+                                    <option {{ old('schengen_country') == "Iceland" ? 'selected' : '' }} value="Iceland"> 	آيسلندا </option>
+                                    <option {{ old('schengen_country') == "Netherlands" ? 'selected' : '' }} value="Netherlands"> هولندا </option>
+                                    <option {{ old('schengen_country') == "Norway" ? 'selected' : '' }} value="Norway"> النرويج </option>
                                 </select>
 
                                 <span class="invalid-feedback" role="alert">
@@ -135,25 +135,25 @@
                              
                             </div>
                             <label>نوع التأشيرة</label>
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <select  name="visatype" required id="visID" readonly class="visatype form-control border-0 bg-transparent @error('visatype') is-invalid @enderror"  >
+                            <div class="form-group">
+                                <select  name="visatype"  id="visID" readonly class="visatype form-control rounded-10 border pl-3 pr-3 btn-light @error('visatype') pr-5 is-invalid @enderror"  >
                                     <option value="" selected readonly>اختر التأشيرة </option>
-                                    <option visa-price="820"   class="uk" value=" سياحي ستة أشهر ">سياحي ستة أشهر  </option>
-                                    <option visa-price="820"    class="uk" value=" دراسي ستة أشهر ">دراسي ستة أشهر  </option>
-                                    <option visa-price="2480"    class="uk" value="  سياحي سنتين"> سياحي سنتين</option>
-                                    <option visa-price="4310"    class="uk" value="  سياحي خمس سنوات"> سياحي خمس سنوات </option>
-                                    <option visa-price="5350"    class="uk" value="  سياحي عَشْر سنين"> سياحي عَشْر سنين </option>
-                                    <option visa-price="2260"   class="uk" value=" تأشيرة طالب أقل من ستة أشهر">تأشيرة طالب أقل من ستة أشهر  </option>
-                                    <option visa-price="4900"   class="uk" value=" تأشيرة طالب لسنة واحدة">تأشيرة طالب لسنة واحدة  </option>
-                                    <option visa-price="8960"   class="uk" value="  تأشيرة طالب لسنتين"> تأشيرة طالب لسنتين  </option>
-                                    <option visa-price="11640"   class="uk" value=" تأشيرة طالب لثلاث سنوات"> تأشيرة طالب لثلاث سنوات </option>
-                                    <option visa-price="14250"   class="uk" value="  تأشيرة طالب لأربع سنوات"> تأشيرة طالب لأربع سنوات </option>
-                                    <option visa-price="3940"   class="uk" value="  دراسي أحد عشر شهراً"> دراسي أحد عشر شهراً </option>
+                                    <option {{ old('visatype') == "سياحي ستة أشهر" ? 'selected' : '' }} visa-price="820"   class="uk" value="سياحي ستة أشهر">سياحي ستة أشهر  </option>
+                                    <option {{ old('visatype') == "دراسي ستة أشهر" ? 'selected' : '' }} visa-price="820"    class="uk" value="دراسي ستة أشهر">دراسي ستة أشهر  </option>
+                                    <option {{ old('visatype') == "سياحي سنتين" ? 'selected' : '' }} visa-price="2480"    class="uk" value="سياحي سنتين"> سياحي سنتين</option>
+                                    <option {{ old('visatype') == "سياحي خمس سنوات" ? 'selected' : '' }} visa-price="4310"    class="uk" value="سياحي خمس سنوات"> سياحي خمس سنوات </option>
+                                    <option {{ old('visatype') == "سياحي عَشْر سنين" ? 'selected' : '' }} visa-price="5350"    class="uk" value="سياحي عَشْر سنين"> سياحي عَشْر سنين </option>
+                                    <option {{ old('visatype') == "تأشيرة طالب أقل من ستة أشهر" ? 'selected' : '' }} visa-price="2260"   class="uk" value="تأشيرة طالب أقل من ستة أشهر">تأشيرة طالب أقل من ستة أشهر  </option>
+                                    <option {{ old('visatype') == "تأشيرة طالب لسنة واحدة" ? 'selected' : '' }} visa-price="4900"   class="uk" value="تأشيرة طالب لسنة واحدة">تأشيرة طالب لسنة واحدة  </option>
+                                    <option {{ old('visatype') == "تأشيرة طالب لسنتين" ? 'selected' : '' }} visa-price="8960"   class="uk" value="تأشيرة طالب لسنتين"> تأشيرة طالب لسنتين  </option>
+                                    <option {{ old('visatype') == "تأشيرة طالب لثلاث سنوات" ? 'selected' : '' }} visa-price="11640"   class="uk" value="تأشيرة طالب لثلاث سنوات"> تأشيرة طالب لثلاث سنوات </option>
+                                    <option {{ old('visatype') == "تأشيرة طالب لأربع سنوات" ? 'selected' : '' }} visa-price="14250"   class="uk" value="تأشيرة طالب لأربع سنوات"> تأشيرة طالب لأربع سنوات </option>
+                                    <option {{ old('visatype') == "دراسي أحد عشر شهراً" ? 'selected' : '' }} visa-price="3940"   class="uk" value="دراسي أحد عشر شهراً"> دراسي أحد عشر شهراً </option>
 
-                                    <option visa-price="2220"  class="usa" value="  دراسي شامل السفيس"> دراسي شامل السفيس </option>
-                                    <option visa-price="838"   class="usa" value=" مُرافق"> مُرافق</option>
-                                    <option visa-price="838"   class="usa" value=" سياحي"> سياحي</option>
-                                    <option visa-price="500"   class="schengen" value=" سياحي"> سياحي</option>
+                                    <option {{ old('visatype') == "دراسي شامل السفيس" ? 'selected' : '' }} visa-price="2220"  class="usa" value="دراسي شامل السفيس"> دراسي شامل السفيس </option>
+                                    <option {{ old('visatype') == "مُرافق" ? 'selected' : '' }} visa-price="838"   class="usa" value="مُرافق"> مُرافق</option>
+                                    <option {{ old('visatype') == "سياحي" ? 'selected' : '' }} visa-price="838"   class="usa" value="سياحي"> سياحي</option>
+                                    <option {{ old('visatype') == "سياحي " ? 'selected' : '' }} visa-price="500"   class="schengen" value="سياحي "> سياحي</option>
                                 </select>
                                 <input type="hidden" id="price_visa" name="price" />
 
@@ -169,8 +169,8 @@
                                 
                             </span>
                             <label>ملاحظة</label>
-                            <div class="form-group rounded-10 border pl-3 pr-2 btn-light">
-                                <textarea name="notes" value="{{ old('notes') }}" type="text" class="form-control border-0 bg-transparent @error('notes') is-invalid @enderror" placeholder="ملاحظات"> </textarea>
+                            <div class="form-group">
+                                <textarea name="notes" value="{{ old('notes') }}" type="text" class="form-control rounded-10 border pl-3 pr-3 btn-light @error('notes') pr-5 is-invalid @enderror" placeholder="ملاحظات"> {{old("notes")}} </textarea>
                                 @error('notes')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -271,10 +271,12 @@
 
 <script>
 
-
-    $('.visa-country').change(function(){
-        var visa = event.target.value;
-        $('.visatype').val('')
+    function visaCountry() {
+        var visa = $('.visa-country').val();
+        
+        if('{{old("visatype")}}' == ''){
+            $('.visatype').val('')
+        }
         $("#price_text").text('');
         $('#text_hidden').hide()
         $('#sheingen').css('display','none');
@@ -295,14 +297,18 @@
             $(".uk").css("display", "none");
             $(".usa").css("display", "none");
             $(".schengen").css("display", "");
-            $('#sheingen').css('display','block').val('');
-            $('.schengen_country').val('');
+            
+            $('#sheingen').css('display','block');
+            if('{{old("schengen_country")}}' == ''){
+                $('.schengen_country').val('')
+            }
         }
-    })
+    }
 
-    $('.schengen_country').change(function(){
-        var schengenCountry = $(this).val()
-        if(schengenCountry != null){
+    
+    function schengenCountry(){
+        var schengenCountry = $('.schengen_country').val()
+        if(schengenCountry != ''){
             var value = 500
             if(schengenCountry == 'Germany'){value = 550}
             if(schengenCountry == 'Spain'){value = 430}
@@ -311,12 +317,13 @@
                 $('#text_hidden').show()
             }
         }
-    })
-    $(".visatype").change(function(){
-        var selectedVisaType = $(this).children("option:selected");
+    }
+
+    function visatype() {
+        var selectedVisaType = $(".visatype").children("option:selected");
         if(selectedVisaType.hasClass('schengen')){
             var schengenCountry = $('.schengen_country').val()
-            if(schengenCountry != null){
+            if(schengenCountry != ''){
                 var value = 500
                 if(schengenCountry == 'Germany'){value = 550}
                 if(schengenCountry == 'Spain'){value = 430}
@@ -328,7 +335,23 @@
             $("#price_text").text(value);
             $('#text_hidden').show()
         }
-    });
+    }
+
     
+
+    $('.visa-country').on( 'change' ,function(){
+        visaCountry()
+    })
+    $('.schengen_country').change(function(){
+        schengenCountry()
+    })
+    $(".visatype").change(function(){
+        visatype()
+    });
+
+
+    visaCountry()
+    schengenCountry()
+    visatype()
 </script>
 @endsection

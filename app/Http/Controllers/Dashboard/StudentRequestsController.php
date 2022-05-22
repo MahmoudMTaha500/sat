@@ -29,7 +29,7 @@ class StudentRequestsController extends Controller
     }
     public function getStudentsRequest()
     {
-        $students_requets = StudentRequest::with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->latest('id')->paginate(10);
+        $students_requets = StudentRequest::with('student','course.institute.city', 'course.institute.country', 'course', 'airport', 'residence', 'insurance',)->latest('id')->paginate(10);
         return response()->json(['studentsRequests' => $students_requets]);
     }
     public function updateStatus(Request $request)
@@ -82,7 +82,7 @@ class StudentRequestsController extends Controller
     }
     public function edit($id)
     {
-        $student_request = StudentRequest::with('student', 'course.institute.residence' , 'course.institute.airport')->find($id);
+        $student_request = StudentRequest::with('student', 'course.institute.residence' , 'course.institute.airport' , 'course.institute.city', 'course.institute.country')->find($id);
         $department_name = 'student-request';
         $page_name = 'student-request';
         $useVue = true;
@@ -110,6 +110,7 @@ class StudentRequestsController extends Controller
     {
         $validated = $request->validate([
             'weeks' => 'required|numeric',
+            'residence_weeks' => 'required|numeric',
             'from_date' => 'required',
             'to_date' => 'required',
             'institute_message' => 'required',
@@ -123,10 +124,15 @@ class StudentRequestsController extends Controller
         $data['status'] = $request->status;
         $data['weeks'] = $request->weeks;
         $data['price_per_week'] = $request->price_per_week;
-        $data['residence_id'] = $residence['id'];
-        $data['residence_price'] = $residence['price'];
-        $data['airport_id'] = $airport['id'];
-        $data['airport_price'] = $airport['price'];
+        if(!empty($residence)){
+            $data['residence_weeks'] = $request->residence_weeks;
+            $data['residence_id'] = $residence['id'];
+            $data['residence_price'] = $residence['price'];
+        }
+        if(!empty($airport)){
+            $data['airport_id'] = $airport['id'];
+            $data['airport_price'] = $airport['price'];
+        }
         $data['insurance_price'] = $request->insurance_price;
         $data['total_price'] = $request->total_price;
         $data['paid_price'] = $request->paid_price;

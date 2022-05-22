@@ -93,6 +93,35 @@ function heart_type($course_obj) {
 }
 
 
+function CallAPI($method, $url, $data = false)
+{
+    $curl = curl_init();
+    switch ($method)
+    {
+        case "POST":
+            curl_setopt($curl, CURLOPT_POST, 1);
+
+            if ($data)
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            break;
+        case "PUT":
+            curl_setopt($curl, CURLOPT_PUT, 1);
+            break;
+        default:
+            if ($data)
+                $url = sprintf("%s?%s", $url, http_build_query($data));
+    }
+    // Optional Authentication:
+    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+    curl_setopt($curl, CURLOPT_USERPWD, "username:password");
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $result = curl_exec($curl);
+    curl_close($curl);
+    return $result;
+}
+
+
 function currency_convertor($from, $to, $price_amount) {
     $string = $from . "_" . $to;
     $curl = curl_init();
@@ -112,7 +141,17 @@ function currency_convertor($from, $to, $price_amount) {
         ->amount(1)
         ->withoutVerifying()
         ->get();
-        return $converted_price*$price_amount;
+        
+        if($converted_price*$price_amount != 0){
+            return $converted_price*$price_amount;
+        }else{
+            $oanda_url = 'https://cc-api.oanda.com/cc-api/v1/currencies?base='.$from.'&quote='.$to.'&data_type=general_currency_pair&start_date=2022-05-08&end_date=2025-05-09';
+            // print_r($oanda_url);
+            $oanda_respons = json_decode(CallAPI('GET' , $oanda_url), true)['response'][0];
+            $oanda_converted_price = $oanda_respons['average_bid'];
+            return $oanda_converted_price*$price_amount;
+        }
+        
     }
 
     

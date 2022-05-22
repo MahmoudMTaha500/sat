@@ -21,12 +21,12 @@
                 <div id="recent-transactions" class="col-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4 class="card-title"> الموظفين (12)</h4>
+                      <h4 class="card-title"> الموظفين ({{$users->total()}})</h4>
                       <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                       <div class="heading-elements">
                         <ul class="list-inline mb-0">
                           <li><a class="btn btn-sm btn-success box-shadow-2 round btn-min-width pull-right"
-                            href="/sat/employees/create.php" > <i class="ft-plus ft-md"></i> اضافة موظف جديد</a></li>
+                            href="{{route('employees.create')}}" > <i class="ft-plus ft-md"></i> اضافة موظف جديد</a></li>
                         </ul>
                       </div>
                     </div>

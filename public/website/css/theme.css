@@ -125,7 +125,7 @@ header .sidemenu {
   right: 0;
   bottom: 0;
   transform: translateX(-600px);
-  transition: transform 1s ease-in-out;
+  transition: transform 0.2s ease-in-out;
   opacity: 0; }
   header .sidemenu-nav {
     height: 100vh;
@@ -137,7 +137,7 @@ header .open {
   transform: translateX(0);
   background: #00000082;
   opacity: 1;
-  transition: transform 1s ease-in-out,background 0.01s linear 1s; }
+  transition: transform 0.2s ease-in-out,background 0.01s linear 0.2s; }
 header .active a {
   color: #F4C20D !important; }
 header a.nav-link {
@@ -166,7 +166,9 @@ header .loged a.notification {
 header .loged .dropdown img {
   width: 40px;
   height: 40px;
-  object-fit: cover; }
+  object-fit: cover; 
+  border: 2px solid #fff;
+}
 header .loged .badge {
   width: 20px;
   height: 20px;
@@ -181,15 +183,17 @@ header .loged .badge {
   height: 126px !important; }
 .profile-img .overlay {
   background: #0000007d;
-  width: 126px;
-  height: 126px;
-  font-size: 34px;
-  line-height: 126px;
-  border-radius: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 0;
-  cursor: pointer; }
+    width: 126px;
+    height: 126px;
+    font-size: 34px;
+    line-height: 126px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-61%);
+    opacity: 0;
+    cursor: pointer;
+    top: 24px;
+   }
 .profile-img:hover .overlay {
   opacity: 1 !important; }
 
@@ -200,11 +204,16 @@ header .loged .badge {
   border-radius: 50%;
   line-height: 0 !important; }
 
+  .btn{
+    height: fit-content;
+  }
+
 .btn.bg-secondary-color {
   background: #F4C20D !important;
   transition: all 0.4s ease-in-out; }
   .btn.bg-secondary-color:hover {
-    background: rgba(244, 194, 13, 0.7) !important; }
+    background: rgba(244, 194, 13, 0.7) !important; 
+  }
 
 form input, form select, form button, form .custom-file-input {
   height: 40px !important; }
@@ -214,12 +223,12 @@ form textarea:focus {
   border-color: #F4C20D !important;
   box-shadow: 0 0 0 0.2rem rgba(244, 194, 13, 0.4) !important;
   border-radius: 10px !important; }
-form .input-group:focus-within, form .form-group:focus-within {
+form .input-group:focus-within, form .form-group .form-control:focus-within {
   border-color: #F4C20D !important;
-  box-shadow: 0 0 0 0.2rem rgba(244, 194, 13, 0.4) !important;
+  box-shadow: 0 0 0 0.05rem rgba(244, 194, 13, 0.4) !important;
   border-radius: 10px !important; }
 form select {
-  background-image: linear-gradient(45deg, transparent 50%, #343434 60%), linear-gradient(135deg, #343434 40%, transparent 50%) !important;
+  background-image: linear-gradient(45deg, transparent 50%, #343434 60%), linear-gradient(135deg, #343434 40%, transparent 50%);
   background-position: calc(40px - 27px) 14px, calc(40px - 20px) 14px, 100% 0;
   background-size: 8px 8px, 8px 8px;
   background-repeat: no-repeat;
@@ -763,6 +772,7 @@ body {
   }
   .navbar-nav li{
     margin-bottom: 0px;
+    
   }
 
   .navbar-light .navbar-toggler{
@@ -790,6 +800,10 @@ body {
   .institutes-page .course-box-title{
     font-size: 16px;
   }
+
+  .sticky-top{
+    z-index: 9!important;
+  }
   
  
   
@@ -807,6 +821,7 @@ body {
   }
   .navbar-nav{
     padding:30px 0px;
+    box-shadow: 1px 10px 15px -8px #00000075;
   }
   .navbar-nav li{
     padding: 10px 15px;
@@ -824,6 +839,7 @@ body {
   }
   .mobile-header-bottom{
     display: flex;
+    align-items: center;
   }
   .home-single-blog-image{
     padding: 25%;
@@ -908,3 +924,8 @@ body {
   font-size: 14px;
 }
   /*# sourceMappingURL=article.css.map */
+
+  .ui-widget.ui-widget-content{
+    z-index: 10000!important;
+  }
+

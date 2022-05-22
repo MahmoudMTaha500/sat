@@ -108,7 +108,7 @@ class CourseController extends Controller
         if ($getcourse == []) {
             $course = Course::create([
                 'name_ar' => $request->name_ar,
-                'slug' => str_replace(' ', '-', $request->name_ar),
+                'slug' => str_replace(['---' , '--' , '----'], '-', str_replace(['/' , ' ' , '–'], '-', $request->name_ar)) ,
                 'about_ar' => $request->desc,
                 'institute_id' => $request->institute_id,
                 'creator_id' => auth()->user()->id,
@@ -158,6 +158,7 @@ class CourseController extends Controller
     /************************************************************** */
     public function edit(Course $course)
     {
+        
         $institutes = Institute::latest('id')->get();
         $course = Course::find($course->id);
         $course_prices = CoursePrice::where(["course_id" => $course->id])->get();
@@ -181,6 +182,7 @@ class CourseController extends Controller
         $updateCourse = Course::find($course->id);
         $updateCourse->name_ar = $request->name_ar;
         $updateCourse->about_ar = $request->desc;
+        $updateCourse->slug = str_replace(['---' , '--' , '----'], '-', str_replace(['/' , ' ' , '–'], '-', $request->name_ar)) ;
         $updateCourse->institute_id = $request->institute_id;
         // $updateCourse->creator_id = auth()->user()->id;
         $updateCourse->min_age = $request->min_age;
