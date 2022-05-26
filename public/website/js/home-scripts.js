@@ -2187,7 +2187,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["csrf_token", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
+  props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
     return {
       course: JSON.parse(this.course_obj),
@@ -2195,7 +2195,7 @@ __webpack_require__.r(__webpack_exports__);
       airports: JSON.parse(this.airport_obj),
       chosin_residence: 0,
       chosin_airport: 0,
-      insurance_price: 0,
+      insurance_price: this.insurance.price,
       insurance_price_checker: 0,
       weeks: 1,
       residence_weeks: 1,
@@ -2215,18 +2215,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         return _this.price_per_week = response.data.price_per_week;
-      });
-    },
-    get_insurance_price: function get_insurance_price() {
-      var _this2 = this;
-
-      axios.get(this.get_insurance_price_url, {
-        params: {
-          course_id: this.course_id,
-          weeks: this.weeks
-        }
-      }).then(function (response) {
-        return _this2.insurance_price = response.data.insurance_price;
       });
     },
     total_price: function total_price() {
@@ -2256,7 +2244,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    var _this3 = this;
+    var _this2 = this;
 
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
@@ -2283,9 +2271,8 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.get_price_per_week();
-    this.get_insurance_price();
     window.setInterval(function () {
-      _this3.change_from_date();
+      _this2.change_from_date();
     }, 500);
   }
 });
@@ -39816,7 +39803,7 @@ var render = function() {
                           _vm.price_per_week * (1 - _vm.course.discount)
                         )
                       ) +
-                      " ريال سعودي / الأسبوع "
+                      " ر.س / الأسبوع "
                   )
                 ])
               : _c("span", { staticClass: "text-main-color" }, [
@@ -39828,7 +39815,7 @@ var render = function() {
                             _vm.weeks *
                             (1 - _vm.course.discount)
                         )
-                      ) + " ريال سعودي "
+                      ) + " ر.س "
                     )
                   ]),
                   _vm._v(" "),
@@ -39861,7 +39848,7 @@ var render = function() {
                 _c("span", { staticClass: "text-main-color" }, [
                   _vm._v(
                     _vm._s(_vm.chosin_residence.price * _vm.residence_weeks) +
-                      " ريال سعودي   "
+                      " ر.س   "
                   ),
                   _c("span", { staticClass: "h6 small text-success" }, [
                     _vm._v(
@@ -39892,7 +39879,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-main-color" }, [
-                  _vm._v(_vm._s(_vm.chosin_airport.price) + " ريال سعودي ")
+                  _vm._v(_vm._s(_vm.chosin_airport.price) + " ر.س ")
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -39904,9 +39891,7 @@ var render = function() {
                 _vm._m(1),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-main-color" }, [
-                  _vm._v(
-                    _vm._s(_vm.insurance_price * _vm.weeks) + " ريال سعودي "
-                  )
+                  _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ر.س ")
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -39917,7 +39902,7 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("span", { staticClass: "text-main-color" }, [
-              _vm._v(_vm._s(Math.round(_vm.total_price())) + " ريال سعودي ")
+              _vm._v(_vm._s(Math.round(_vm.total_price())) + " ر.س ")
             ])
           ])
         ])
@@ -40016,8 +40001,7 @@ var render = function() {
                             expression: "weeks"
                           }
                         ],
-                        staticClass:
-                          "form-control selectpicker rounded-10 border",
+                        staticClass: "form-control rounded-10 border",
                         attrs: { name: "weeks", "data-live-search": "true" },
                         on: {
                           change: [
@@ -40035,8 +40019,7 @@ var render = function() {
                                 : $$selectedVal[0]
                             },
                             function($event) {
-                              _vm.get_price_per_week()
-                              _vm.get_insurance_price()
+                              return _vm.get_price_per_week()
                             }
                           ]
                         }
@@ -40126,7 +40109,7 @@ var render = function() {
                                     _vm._s(residence.name_ar) +
                                       " - " +
                                       _vm._s(residence.price) +
-                                      " (ريال سعودي / الاسبوع)"
+                                      " (ر.س / الاسبوع)"
                                   )
                                 ]
                               )
@@ -40144,7 +40127,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.residences[0]
+                  _vm.chosin_residence != 0
                     ? _c("div", { staticClass: "form-group" }, [
                         _c("label", [_vm._v("عدد اسابيع السكن")]),
                         _vm._v(" "),
@@ -40159,8 +40142,7 @@ var render = function() {
                                 expression: "residence_weeks"
                               }
                             ],
-                            staticClass:
-                              "form-control selectpicker rounded-10 border",
+                            staticClass: "form-control rounded-10 border",
                             attrs: {
                               name: "residence_weeks",
                               "data-live-search": "true"
@@ -40257,7 +40239,10 @@ var render = function() {
                                 "option",
                                 {
                                   key: airport.id,
-                                  domProps: { value: airport }
+                                  domProps: {
+                                    selected: airport.id == 3,
+                                    value: airport
+                                  }
                                 },
                                 [
                                   _vm._v(
@@ -40327,7 +40312,7 @@ var render = function() {
                                 _vm._v(
                                   "نعم (" +
                                     _vm._s(_vm.insurance_price * _vm.weeks) +
-                                    " ريال)"
+                                    " ر.س)"
                                 )
                               ])
                             ]
@@ -41262,7 +41247,7 @@ var render = function() {
                                           _vm._v(
                                             _vm._s(
                                               course.real_price * _vm.weeks
-                                            ) + "  ريال "
+                                            ) + "  ر.س "
                                           )
                                         ]
                                       )
@@ -41279,7 +41264,7 @@ var render = function() {
                                           Math.round(
                                             course.discounted_price * _vm.weeks
                                           )
-                                        ) + "  ريال "
+                                        ) + "  ر.س "
                                       )
                                     ]
                                   ),
@@ -61906,13 +61891,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\website-js.js */"./resources/js/website-js.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\custom.js */"./public/website/js/custom.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\website-js.js */"./resources/js/website-js.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\custom.js */"./public/website/js/custom.js");
 
 
 /***/ })

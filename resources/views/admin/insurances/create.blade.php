@@ -52,28 +52,18 @@
                                             </create-service-component>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="institute-name"> عدد الاسابيع</label>
-                                                    <input type="number" class="form-control" placeholder="ادخل  عدد الاسابيع" value="{{old('weeks')}}" name="weeks"  />
+                                                    <label for="institute-name"> السعر</label>
+                                                    <input type="number" class="form-control" placeholder="ادخل  السعر" value="{{old('price')}}" name="price"  />
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="institute-name"> السعر</label>
-                                                            <input type="number" class="form-control" placeholder="ادخل  السعر" value="{{old('price')}}" name="price"  />
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="projectinput2">اختر العمله</label>
-                                                            <select class="currency_exchange form-control text-left" name="currency_exchange">
-                                                                @foreach ($exchange_rates as $exchange_rate)
-                                                                    <option {{old('currency_exchange') == $exchange_rate->currency_code ? 'selected' : ''}} value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                <div class="form-group">
+                                                    <label for="projectinput2">اختر العمله</label>
+                                                    <select class="currency_exchange form-control text-left" name="currency_exchange">
+                                                        @foreach ($exchange_rates as $exchange_rate)
+                                                            <option {{old('currency_exchange') == $exchange_rate->currency_code ? 'selected' : ''}} value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>

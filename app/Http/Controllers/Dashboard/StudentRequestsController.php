@@ -82,7 +82,7 @@ class StudentRequestsController extends Controller
     }
     public function edit($id)
     {
-        $student_request = StudentRequest::with('student', 'course.institute.residence' , 'course.institute.airport' , 'course.institute.city', 'course.institute.country')->find($id);
+        $student_request = StudentRequest::with('student', 'course.institute.residence' , 'course.institute.airport' , 'course.institute.city', 'course.institute.country' , 'course.institute.insurance')->find($id);
         $department_name = 'student-request';
         $page_name = 'student-request';
         $useVue = true;
@@ -113,7 +113,6 @@ class StudentRequestsController extends Controller
             'residence_weeks' => 'required|numeric',
             'from_date' => 'required',
             'to_date' => 'required',
-            'institute_message' => 'required',
             'paid_price' => 'required',
         ]);
         $residence = json_decode($request->residence , true);
@@ -132,6 +131,11 @@ class StudentRequestsController extends Controller
         if(!empty($airport)){
             $data['airport_id'] = $airport['id'];
             $data['airport_price'] = $airport['price'];
+        }
+        if(!empty($airport->insurance_price)){
+            $data['insurance_price'] = $airport->insurance_price;
+        }else{
+            $data['insurance_price'] = 0;
         }
         $data['insurance_price'] = $request->insurance_price;
         $data['total_price'] = $request->total_price;

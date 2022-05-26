@@ -41,9 +41,9 @@ class Institute extends Model implements HasMedia
     {
         return $this->hasMany("App\Models\Airports", 'institute_id', 'id');
     }
-    public function insurancePrice()
+    public function insurance()
     {
-        return $this->hasMany('App\Models\Insurances', 'institute_id', 'id')->orderByRaw("CAST(weeks as UNSIGNED) ASC")->select('weeks' , 'price');
+        return $this->hasOne('App\Models\Insurances', 'institute_id', 'id');
     }
     public function rats()
     {

@@ -33,13 +33,13 @@
                         <li class="text-white"><i class="fas fa-phone"></i> <a dir="ltr" href="tel:966555484931" class="text-white">+966 55 548 4931</a></li>
                         <li class="text-white mb-4"><i class="fas fa-map-marker-alt"></i> Office Number 10, 4516 Imam Saud Bin Abdulaziz Bin Mohammed Rd, Al Muruj Dist., Riyadh 12282 </li>
                         <li class="social-links-sm">
-                            <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
+                            <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/clas_sat">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>
                             </a>
                             <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/clas_sat">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-twitter"></i></span>
                             </a>
-                            <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.instagram.com/class_at/">
+                            <a class="bg-white d-inline-block text-center ml-3" target="_blank" href="https://www.instagram.com/Clas_sat/">
                                 <span class="text-main-color font-weight-bold"><i class="fab fa-instagram"></i></span>
                             </a>
                         </li>

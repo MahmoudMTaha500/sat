@@ -4782,155 +4782,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "create", "edit", "delete_pre", "update_classat_note_route", "get_courses_url", "get_institutes_url"],
@@ -5056,33 +4907,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     getrequest_id: function getrequest_id(id) {
       return this.request_id = id;
-    },
-    modelService: function modelService(obj) {
-      this.serviceObj = obj;
-      this.course_Obj = this.serviceObj.course;
-      this.airport_Obj = this.serviceObj.airport;
-      this.insurance_Obj = obj.insurance_price;
-      this.residence_Obj = this.serviceObj.residence;
-      this.institute_name = this.course_Obj.institute.name_ar;
-      $("#request_details_modal").modal("show");
-    },
-    modelmessageInstitute: function modelmessageInstitute(obj) {
-      this.institute_message = obj.institute_message;
-      this.editorData = obj.institute_message; //  console.log(this.institute_message);
-
-      $("#institute_email_modal").modal("show");
-    },
-    notes_request: function notes_request(obj) {
-      this.notes = obj.note;
-      $("#notes").modal("show");
-    },
-    classat_notes_request: function classat_notes_request(obj) {
-      if (this.classat_notes == '') {
-        this.classat_notes = obj.classat_note;
-      }
-
-      this.request_id = obj.id;
-      $("#classat_notes").modal("show");
     },
     getcourses: function getcourses() {
       var _this5 = this;
@@ -5343,6 +5167,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "get_course_price_url", "get_insurance_price_url", "student_request", "student_requests_url", "bill_file"],
   data: function data() {
@@ -5369,7 +5195,7 @@ __webpack_require__.r(__webpack_exports__);
       airports: this.student_request.course.institute.airport,
       chosin_airport: '',
       insurance_price_checker: this.student_request.insurance_price == 0 ? false : true,
-      insurance_price: '',
+      insurance_price: this.student_request.course.institute.insurance.price,
       course_price: '',
       residence_from_date: '',
       residence_to_date: ''
@@ -5997,7 +5823,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["csrf_token", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj", "get_insurance_price_url"],
+  props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
     return {
       course: JSON.parse(this.course_obj),
@@ -6005,7 +5831,7 @@ __webpack_require__.r(__webpack_exports__);
       airports: JSON.parse(this.airport_obj),
       chosin_residence: 0,
       chosin_airport: 0,
-      insurance_price: 0,
+      insurance_price: this.insurance.price,
       insurance_price_checker: 0,
       weeks: 1,
       residence_weeks: 1,
@@ -6025,18 +5851,6 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         return _this.price_per_week = response.data.price_per_week;
-      });
-    },
-    get_insurance_price: function get_insurance_price() {
-      var _this2 = this;
-
-      axios.get(this.get_insurance_price_url, {
-        params: {
-          course_id: this.course_id,
-          weeks: this.weeks
-        }
-      }).then(function (response) {
-        return _this2.insurance_price = response.data.insurance_price;
       });
     },
     total_price: function total_price() {
@@ -6066,7 +5880,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   beforeMount: function beforeMount() {
-    var _this3 = this;
+    var _this2 = this;
 
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
@@ -6093,9 +5907,8 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.get_price_per_week();
-    this.get_insurance_price();
     window.setInterval(function () {
-      _this3.change_from_date();
+      _this2.change_from_date();
     }, 500);
   }
 });
@@ -50074,284 +49887,6 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade text-left",
-        attrs: {
-          id: "request_details_modal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel1",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", [
-                  _c("strong", [_vm._v("اسم الكورس")]),
-                  _vm._v(" "),
-                  _vm.serviceObj == {}
-                    ? _c("div", [_c("p", [_vm._v("N/A")])])
-                    : _vm.serviceObj !== {}
-                    ? _c("div", [
-                        _c("p", [_vm._v(_vm._s(_vm.course_Obj.name_ar))])
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c("hr")
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("strong", [_vm._v("المعهد")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.institute_name))]),
-                  _vm._v(" "),
-                  _c("hr")
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("strong", [_vm._v("عدد الاسابيع")]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(_vm.serviceObj.weeks) + " اسابيع")]),
-                  _vm._v(" "),
-                  _c("hr")
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("strong", [_vm._v("السكن")]),
-                  _vm._v(" "),
-                  _vm.residence_Obj
-                    ? _c("p", [
-                        _vm._v(
-                          "\n                            العنوان : " +
-                            _vm._s(_vm.residence_Obj.name_ar) +
-                            " && السعر : " +
-                            _vm._s(_vm.residence_Obj.price) +
-                            "\n                        "
-                        )
-                      ])
-                    : _c("p", [
-                        _vm._v(
-                          "\n                            لا يوجد سكن\n                        "
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _c("hr")
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("strong", [_vm._v("المطار")]),
-                  _vm._v(" "),
-                  _vm.airport_Obj
-                    ? _c("p", [
-                        _vm._v(
-                          "\n                            المطار : " +
-                            _vm._s(_vm.airport_Obj.name_ar) +
-                            " && السعر : " +
-                            _vm._s(_vm.airport_Obj.price) +
-                            "\n                        "
-                        )
-                      ])
-                    : _c("p", [
-                        _vm._v(
-                          "\n                            لا يوجد مطار\n                        "
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _c("hr")
-                ]),
-                _vm._v(" "),
-                _c("div", [
-                  _c("strong", [_vm._v("التامين")]),
-                  _vm._v(" "),
-                  _vm.insurance_Obj != 0
-                    ? _c("p", [
-                        _vm._v(
-                          "\n                            (" +
-                            _vm._s(_vm.insurance_Obj * _vm.serviceObj.weeks) +
-                            " ريال) | " +
-                            _vm._s(_vm.insurance_Obj) +
-                            " ريال / الاسبوع\n                        "
-                        )
-                      ])
-                    : _c("p", [
-                        _vm._v(
-                          "\n                            لا يوجد تأمين\n                        "
-                        )
-                      ]),
-                  _vm._v(" "),
-                  _c("hr")
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(2)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade text-left",
-        attrs: {
-          id: "institute_email_modal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel1",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog modal-xl", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(3),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "modal-body" },
-                [
-                  _c("ckeditor", {
-                    attrs: {
-                      editor: _vm.editor,
-                      config: _vm.editorConfig,
-                      cols: 30,
-                      rows: 15
-                    },
-                    model: {
-                      value: _vm.editorData,
-                      callback: function($$v) {
-                        _vm.editorData = $$v
-                      },
-                      expression: "editorData"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _vm._m(4)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade text-left",
-        attrs: {
-          id: "notes",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel1",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(5),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", [
-                  _c("p", [_vm._v(_vm._s(_vm.notes))]),
-                  _vm._v(" "),
-                  _c("hr")
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(6)
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade text-left",
-        attrs: {
-          id: "classat_notes",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "myModalLabel1",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(7),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", [
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.classat_notes,
-                        expression: "classat_notes"
-                      }
-                    ],
-                    staticClass: "w-100",
-                    domProps: { value: _vm.classat_notes },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.classat_notes = $event.target.value
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("hr")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn grey btn-outline-success w-100",
-                    attrs: { type: "button", "data-dismiss": "modal" },
-                    on: {
-                      click: function($event) {
-                        return _vm.update_classat_note()
-                      }
-                    }
-                  },
-                  [_vm._v("حفظ")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
     _c("div", { staticClass: "row" }, [
       _c(
         "div",
@@ -50363,9 +49898,9 @@ var render = function() {
                 _vm._v("الطلبات (" + _vm._s(this.studentsRequests.total) + ")")
               ]),
               _vm._v(" "),
-              _vm._m(8),
+              _vm._m(1),
               _vm._v(" "),
-              _vm._m(9)
+              _vm._m(2)
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-content" }, [
@@ -50377,7 +49912,7 @@ var render = function() {
                     attrs: { id: "recent-orders" }
                   },
                   [
-                    _vm._m(10),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c(
                       "tbody",
@@ -50408,76 +49943,6 @@ var render = function() {
                           _c("td", { staticClass: "text-truncate" }, [
                             _vm._v(
                               _vm._s(request.course.institute.city.name_ar)
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "btn-group",
-                                attrs: {
-                                  role: "group",
-                                  "aria-label": "Basic example"
-                                }
-                              },
-                              [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-info btn-sm round",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.modelService(request)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v(" تفاصيل الطلب")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-danger btn-sm round",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.modelmessageInstitute(
-                                          request
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("رسالة المعهد")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-warning btn-sm round",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.notes_request(request)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("ملاحظات الطالب")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-success btn-sm round",
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.classat_notes_request(
-                                          request
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("ملاحظات كلاسات")]
-                                )
-                              ]
                             )
                           ]),
                           _vm._v(" "),
@@ -50711,140 +50176,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
-        _vm._v("تفاصيل الطلب")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn grey btn-outline-secondary w-100",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("غلق")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
-        _vm._v("رسالة الي معهد كابلان")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-info w-100", attrs: { type: "button" } },
-        [_vm._v("ارسال الايميل")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
-        _vm._v("ملاحظات الطالب")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn grey btn-outline-secondary w-100",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("غلق")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h4", { staticClass: "modal-title", attrs: { id: "myModalLabel1" } }, [
-        _vm._v("ملاحظات كلاسات")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("a", { staticClass: "heading-elements-toggle" }, [
       _c("i", { staticClass: "la la-ellipsis-v font-medium-3" })
     ])
@@ -50894,8 +50225,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("الميدنة")]),
         _vm._v(" "),
-        _c("th", { staticClass: "border-top-0" }, [_vm._v("التفاصيل")]),
-        _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("حالة الدراسة")]),
         _vm._v(" "),
         _c("th", { staticClass: "border-top-0" }, [_vm._v("حالة الدفع")]),
@@ -50941,7 +50270,7 @@ var render = function() {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
+        _c("div", { staticClass: "row" }, [
           _vm._m(1),
           _vm._v(" "),
           _c("div", { staticClass: "col-7" }, [
@@ -50955,7 +50284,7 @@ var render = function() {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
+        _c("div", { staticClass: "row" }, [
           _vm._m(2),
           _vm._v(" "),
           _c("div", { staticClass: "col-7" }, [
@@ -50969,77 +50298,73 @@ var render = function() {
                         _vm.course_price * _vm.weeks * (1 - _vm.course_discount)
                       )
                     ) +
-                    " ريال سعودي)"
+                    " ر.س)"
                 )
               ])
             ])
           ])
         ]),
         _vm._v(" "),
-        _c("hr"),
+        _vm.chosin_residence != "" ? _c("hr") : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
-          _vm._m(3),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-7" }, [
-            _c("span", [
-              _vm._v(_vm._s(_vm.chosin_residence.name_ar) + " "),
-              _c("span", { staticClass: "text-primary" }, [
-                _vm._v(
-                  "(" +
-                    _vm._s(
-                      Math.round(
-                        _vm.chosin_residence.price * _vm.residence_weeks
-                      )
-                    ) +
-                    " ريال سعودي)"
-                )
+        _vm.chosin_residence != ""
+          ? _c("div", { staticClass: "row" }, [
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-7" }, [
+                _c("span", [
+                  _vm._v(_vm._s(_vm.chosin_residence.name_ar) + " "),
+                  _c("span", { staticClass: "text-primary" }, [
+                    _vm._v(
+                      "(" +
+                        _vm._s(
+                          Math.round(
+                            _vm.chosin_residence.price * _vm.residence_weeks
+                          )
+                        ) +
+                        " ر.س)"
+                    )
+                  ])
+                ])
               ])
             ])
-          ])
-        ]),
+          : _vm._e(),
         _vm._v(" "),
-        _c("hr"),
+        _vm.chosin_airport != "" ? _c("hr") : _vm._e(),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
-          _vm._m(4),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-7" }, [
-            _c("span", [
-              _vm._v(_vm._s(_vm.totalPrice().toFixed(2)) + " ريال سعودي")
+        _vm.chosin_airport != ""
+          ? _c("div", { staticClass: "row" }, [
+              _vm._m(4),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-7" }, [
+                _c("span", [
+                  _vm._v(_vm._s(_vm.chosin_airport.name_ar) + " "),
+                  _c("span", { staticClass: "text-primary" }, [
+                    _vm._v(
+                      "(" +
+                        _vm._s(Math.round(_vm.chosin_airport.price)) +
+                        " ر.س)"
+                    )
+                  ])
+                ])
+              ])
             ])
-          ])
-        ]),
+          : _vm._e(),
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
+        _c("div", { staticClass: "row" }, [
           _vm._m(5),
           _vm._v(" "),
           _c("div", { staticClass: "col-7" }, [
-            _c("span", [_vm._v(_vm._s(_vm.paid_price) + " ريال سعودي")])
+            _c("span", [_vm._v(_vm._s(_vm.totalPrice().toFixed(2)) + " ر.س")])
           ])
         ]),
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
+        _c("div", { staticClass: "row" }, [
           _vm._m(6),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-7" }, [
-            _c("span", [
-              _vm._v(
-                _vm._s((_vm.totalPrice() - _vm.paid_price).toFixed(2)) +
-                  " ريال سعودي"
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "row my-3" }, [
-          _vm._m(7),
           _vm._v(" "),
           _c("div", { staticClass: "col-7" }, [
             _vm.bill_file != 0
@@ -51329,7 +50654,7 @@ var render = function() {
                         }
                       },
                       [
-                        _c("option", { domProps: { value: { price: 0 } } }, [
+                        _c("option", { attrs: { value: "" } }, [
                           _vm._v("لا اريد سكن ")
                         ]),
                         _vm._v(" "),
@@ -51349,7 +50674,7 @@ var render = function() {
                             [
                               _vm._v(
                                 _vm._s(residence_obj.price) +
-                                  " ريال - " +
+                                  " ر.س - " +
                                   _vm._s(residence_obj.name_ar) +
                                   " "
                               )
@@ -51494,7 +50819,7 @@ var render = function() {
                           _vm._v(
                             " الاستقبال (" +
                               _vm._s(_vm.chosin_airport.price) +
-                              " ريال سعودي)"
+                              " ر.س)"
                           )
                         ]),
                         _vm._v(" "),
@@ -51549,7 +50874,7 @@ var render = function() {
                                 [
                                   _vm._v(
                                     _vm._s(airport_obj.price) +
-                                      " ريال - " +
+                                      " ر.س - " +
                                       _vm._s(airport_obj.name_ar) +
                                       " "
                                   )
@@ -51573,7 +50898,7 @@ var render = function() {
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "projectinput2" } }, [
-                      _vm._v(" المدفوع ")
+                      _vm._v(" المدفوع (ر.س) ")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -51604,14 +50929,112 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" المتبقي (ر.س) ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "projectinput1",
+                        min: "1",
+                        disabled: ""
+                      },
+                      domProps: {
+                        value: (_vm.totalPrice() - _vm.paid_price).toFixed(2)
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "projectinput1" } }, [
+                      _vm._v(" المطار  ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.chosin_airport,
+                            expression: "chosin_airport"
+                          }
+                        ],
+                        staticClass: "form-control text-left",
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.chosin_airport = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("لا اريد استقبال ")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.airports, function(airport_obj) {
+                          return _c(
+                            "option",
+                            {
+                              key: airport_obj.id,
+                              domProps: {
+                                selected:
+                                  airport_obj.id == _vm.chosin_airport.id
+                                    ? true
+                                    : false,
+                                value: airport_obj
+                              }
+                            },
+                            [
+                              _vm._v(
+                                _vm._s(airport_obj.price) +
+                                  " ر.س - " +
+                                  _vm._s(airport_obj.name_ar) +
+                                  " "
+                              )
+                            ]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      attrs: { type: "hidden", name: "airport" },
+                      domProps: { value: JSON.stringify(_vm.chosin_airport) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
                 _vm.insurance_price != 0
                   ? _c("div", { staticClass: "col-md-6" }, [
+                      _c("label", { attrs: { for: "projectinput1" } }, [
+                        _vm._v(" التامين  ")
+                      ]),
+                      _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
                         _c("label", { attrs: { for: "projectinput4" } }, [
                           _vm._v(
                             " اريد تامين (" +
                               _vm._s(_vm.insurance_price * _vm.weeks) +
-                              " ريال سعودي)"
+                              " ر.س)"
                           )
                         ]),
                         _vm._v(" "),
@@ -51628,14 +51051,14 @@ var render = function() {
                           attrs: {
                             type: "checkbox",
                             id: "switchery",
-                            name: "insurance_checker"
+                            name: "insurance_price"
                           },
                           domProps: {
-                            value: _vm.insurance_val,
+                            value: _vm.insurance_price * _vm.weeks,
                             checked: Array.isArray(_vm.insurance_price_checker)
                               ? _vm._i(
                                   _vm.insurance_price_checker,
-                                  _vm.insurance_val
+                                  _vm.insurance_price * _vm.weeks
                                 ) > -1
                               : _vm.insurance_price_checker
                           },
@@ -51645,7 +51068,7 @@ var render = function() {
                                 $$el = $event.target,
                                 $$c = $$el.checked ? true : false
                               if (Array.isArray($$a)) {
-                                var $$v = _vm.insurance_val,
+                                var $$v = _vm.insurance_price * _vm.weeks,
                                   $$i = _vm._i($$a, $$v)
                                 if ($$el.checked) {
                                   $$i < 0 &&
@@ -51671,25 +51094,6 @@ var render = function() {
                 _c("div", { staticClass: "col-md-12" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "projectinput3" } }, [
-                      _vm._v("رساله المعهد ")
-                    ]),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      staticClass: "form-control ckeditor",
-                      attrs: {
-                        type: "text",
-                        rows: "20",
-                        placeholder: "  رساله المعهد ",
-                        name: "institute_message"
-                      },
-                      domProps: { innerHTML: _vm._s(_vm.institute_message) }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput3" } }, [
                       _vm._v("ملاحظات ")
                     ]),
                     _vm._v(" "),
@@ -51707,7 +51111,7 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(8)
+              _vm._m(7)
             ])
           ]
         )
@@ -51753,23 +51157,15 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("المطار :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
       _c("strong", [_vm._v("السعر الكلي :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-5" }, [
-      _c("strong", [_vm._v("المدفوع :")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-5" }, [
-      _c("strong", [_vm._v("المتبقي :")])
     ])
   },
   function() {
@@ -52866,7 +52262,7 @@ var render = function() {
                           _vm.price_per_week * (1 - _vm.course.discount)
                         )
                       ) +
-                      " ريال سعودي / الأسبوع "
+                      " ر.س / الأسبوع "
                   )
                 ])
               : _c("span", { staticClass: "text-main-color" }, [
@@ -52878,7 +52274,7 @@ var render = function() {
                             _vm.weeks *
                             (1 - _vm.course.discount)
                         )
-                      ) + " ريال سعودي "
+                      ) + " ر.س "
                     )
                   ]),
                   _vm._v(" "),
@@ -52911,7 +52307,7 @@ var render = function() {
                 _c("span", { staticClass: "text-main-color" }, [
                   _vm._v(
                     _vm._s(_vm.chosin_residence.price * _vm.residence_weeks) +
-                      " ريال سعودي   "
+                      " ر.س   "
                   ),
                   _c("span", { staticClass: "h6 small text-success" }, [
                     _vm._v(
@@ -52942,7 +52338,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-main-color" }, [
-                  _vm._v(_vm._s(_vm.chosin_airport.price) + " ريال سعودي ")
+                  _vm._v(_vm._s(_vm.chosin_airport.price) + " ر.س ")
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -52954,9 +52350,7 @@ var render = function() {
                 _vm._m(1),
                 _vm._v(" "),
                 _c("span", { staticClass: "text-main-color" }, [
-                  _vm._v(
-                    _vm._s(_vm.insurance_price * _vm.weeks) + " ريال سعودي "
-                  )
+                  _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ر.س ")
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -52967,7 +52361,7 @@ var render = function() {
             _vm._m(2),
             _vm._v(" "),
             _c("span", { staticClass: "text-main-color" }, [
-              _vm._v(_vm._s(Math.round(_vm.total_price())) + " ريال سعودي ")
+              _vm._v(_vm._s(Math.round(_vm.total_price())) + " ر.س ")
             ])
           ])
         ])
@@ -53066,8 +52460,7 @@ var render = function() {
                             expression: "weeks"
                           }
                         ],
-                        staticClass:
-                          "form-control selectpicker rounded-10 border",
+                        staticClass: "form-control rounded-10 border",
                         attrs: { name: "weeks", "data-live-search": "true" },
                         on: {
                           change: [
@@ -53085,8 +52478,7 @@ var render = function() {
                                 : $$selectedVal[0]
                             },
                             function($event) {
-                              _vm.get_price_per_week()
-                              _vm.get_insurance_price()
+                              return _vm.get_price_per_week()
                             }
                           ]
                         }
@@ -53176,7 +52568,7 @@ var render = function() {
                                     _vm._s(residence.name_ar) +
                                       " - " +
                                       _vm._s(residence.price) +
-                                      " (ريال سعودي / الاسبوع)"
+                                      " (ر.س / الاسبوع)"
                                   )
                                 ]
                               )
@@ -53194,7 +52586,7 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _vm.residences[0]
+                  _vm.chosin_residence != 0
                     ? _c("div", { staticClass: "form-group" }, [
                         _c("label", [_vm._v("عدد اسابيع السكن")]),
                         _vm._v(" "),
@@ -53209,8 +52601,7 @@ var render = function() {
                                 expression: "residence_weeks"
                               }
                             ],
-                            staticClass:
-                              "form-control selectpicker rounded-10 border",
+                            staticClass: "form-control rounded-10 border",
                             attrs: {
                               name: "residence_weeks",
                               "data-live-search": "true"
@@ -53307,7 +52698,10 @@ var render = function() {
                                 "option",
                                 {
                                   key: airport.id,
-                                  domProps: { value: airport }
+                                  domProps: {
+                                    selected: airport.id == 3,
+                                    value: airport
+                                  }
                                 },
                                 [
                                   _vm._v(
@@ -53377,7 +52771,7 @@ var render = function() {
                                 _vm._v(
                                   "نعم (" +
                                     _vm._s(_vm.insurance_price * _vm.weeks) +
-                                    " ريال)"
+                                    " ر.س)"
                                 )
                               ])
                             ]
@@ -54312,7 +53706,7 @@ var render = function() {
                                           _vm._v(
                                             _vm._s(
                                               course.real_price * _vm.weeks
-                                            ) + "  ريال "
+                                            ) + "  ر.س "
                                           )
                                         ]
                                       )
@@ -54329,7 +53723,7 @@ var render = function() {
                                           Math.round(
                                             course.discounted_price * _vm.weeks
                                           )
-                                        ) + "  ريال "
+                                        ) + "  ر.س "
                                       )
                                     ]
                                   ),
@@ -68859,8 +68253,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -65,147 +65,7 @@
                 </div>
             </div>
         </div>
-        <!-- Request Details Modal -->
 
-        <div class="modal fade text-left" id="request_details_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">تفاصيل الطلب</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <strong>اسم الكورس</strong>
-                            <div v-if="serviceObj =={}">
-                                <!-- <p  > {{serviceObj.course.name_ar}}</p> -->
-                                <p>N/A</p>
-                            </div>
-                            <div v-else-if="serviceObj !=={} ">
-                                <p>{{course_Obj.name_ar}}</p>
-                            </div>
-                            <hr />
-                        </div>
-                        <div>
-                            <strong>المعهد</strong>
-                            <p>{{institute_name }}</p>
-                            <hr />
-                        </div>
-                        <div>
-                            <strong>عدد الاسابيع</strong>
-                            <p>{{serviceObj.weeks}} اسابيع</p>
-                            <hr />
-                        </div>
-                        <div>
-                            <strong>السكن</strong>
-                            <p v-if="residence_Obj">
-                                العنوان : {{residence_Obj.name_ar}} && السعر : {{residence_Obj.price}}
-                            </p>
-                            <p v-else>
-                                لا يوجد سكن
-                            </p>
-                            <hr />
-                        </div>
-                        <div>
-                            <strong>المطار</strong>
-                            <p v-if="airport_Obj">
-                                المطار : {{airport_Obj.name_ar}} && السعر : {{airport_Obj.price}}
-                            </p>
-                            <p v-else>
-                                لا يوجد مطار
-                            </p>
-                            <hr />
-                        </div>
-                        <div>
-                            <strong>التامين</strong>
-                            <p v-if="insurance_Obj != 0">
-                                ({{insurance_Obj*serviceObj.weeks}} ريال) | {{insurance_Obj}} ريال / الاسبوع
-                            </p>
-                            <p v-else>
-                                لا يوجد تأمين
-                            </p>
-                            <hr />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn grey btn-outline-secondary w-100" data-dismiss="modal">غلق</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  End  Request Details Modal -->
-
-        <!-- Institute Email Modal -->
-        <div class="modal fade text-left" id="institute_email_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-            <div class="modal-dialog modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">رسالة الي معهد كابلان</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- <textarea v-model="institute_message"   name="ckeditor" id="ckeditor" cols="30" rows="15" class="ckeditor">
-                             asdasda
-                    </textarea> -->
-                        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig" :cols="30" :rows="15"></ckeditor>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info w-100">ارسال الايميل</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Institute Email Modal -->
-
-        <!-- Request Details Modal -->
-
-        <div class="modal fade text-left" id="notes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">ملاحظات الطالب</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <p>{{notes}}</p>
-                            <hr />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn grey btn-outline-secondary w-100" data-dismiss="modal">غلق</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade text-left" id="classat_notes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">ملاحظات كلاسات</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <textarea v-model="classat_notes" class="w-100"></textarea>
-                            <hr />
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" @click="update_classat_note()" class="btn grey btn-outline-success w-100" data-dismiss="modal">حفظ</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--  End  Request Details Modal -->
 
         <div class="row">
             <div id="recent-transactions" class="col-12">
@@ -235,7 +95,6 @@
                                         <th class="border-top-0">المعهد</th>
                                         <th class="border-top-0">الدولة</th>
                                         <th class="border-top-0">الميدنة</th>
-                                        <th class="border-top-0">التفاصيل</th>
                                         <th class="border-top-0">حالة الدراسة</th>
                                         <th class="border-top-0">حالة الدفع</th>
                                         <th class="border-top-0">التاريخ</th>
@@ -250,14 +109,6 @@
                                         <td class="text-truncate">{{request.course.institute.name_ar}}</td>
                                         <td class="text-truncate">{{request.course.institute.country.name_ar}}</td>
                                         <td class="text-truncate">{{request.course.institute.city.name_ar}}</td>
-                                        <td class="text-truncate">
-                                            <div class="btn-group" role="group" aria-label="Basic example">
-                                                <button @click="modelService(request)" class="btn btn-info btn-sm round"> تفاصيل الطلب</button>
-                                                <button @click="modelmessageInstitute(request)" class="btn btn-danger btn-sm round">رسالة المعهد</button>
-                                                <button @click="notes_request(request)" class="btn btn-warning btn-sm round">ملاحظات الطالب</button>
-                                                <button @click="classat_notes_request(request)" class="btn btn-success btn-sm round">ملاحظات كلاسات</button>
-                                            </div>
-                                        </td>
 
 
                                         <td class="text-truncate">
@@ -427,35 +278,6 @@
                 return (this.request_id = id);
             },
 
-            modelService: function (obj) {
-                this.serviceObj = obj;
-                this.course_Obj = this.serviceObj.course;
-                this.airport_Obj = this.serviceObj.airport;
-                this.insurance_Obj = obj.insurance_price;
-                this.residence_Obj = this.serviceObj.residence;
-                this.institute_name = this.course_Obj.institute.name_ar;
-                $("#request_details_modal").modal("show");
-            },
-            modelmessageInstitute: function (obj) {
-                this.institute_message = obj.institute_message;
-                this.editorData = obj.institute_message;
-                //  console.log(this.institute_message);
-
-                $("#institute_email_modal").modal("show");
-            },
-            notes_request: function (obj) {
-                this.notes = obj.note;
-
-                $("#notes").modal("show");
-            },
-            classat_notes_request: function (obj) {
-                if(this.classat_notes == ''){
-                    this.classat_notes = obj.classat_note;
-                }
-                this.request_id = obj.id;
-
-                $("#classat_notes").modal("show");
-            },
             getcourses: function () {
                 axios.get(this.url_course).then((response) => (this.courses = response.data.courses.data));
             },

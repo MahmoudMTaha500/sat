@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row my-3">
+                <div class="row">
                     <div class="col-5">
                         <strong>اسم المعهد :</strong>
                     </div>
@@ -22,52 +22,43 @@
                     </div>
                 </div>
                 <hr>
-                <div class="row my-3">
+                <div class="row">
                     <div class="col-5">
                         <strong>اسم الدورة :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{course_name}} <span class="text-primary">({{Math.round(course_price*weeks*(1-course_discount))}} ريال سعودي)</span></span>
+                        <span>{{course_name}} <span class="text-primary">({{Math.round(course_price*weeks*(1-course_discount))}} ر.س)</span></span>
                     </div>
                 </div>
-                <hr>
-                <div class="row my-3">
+                <hr v-if="chosin_residence != ''">
+                <div class="row" v-if="chosin_residence != ''">
                     <div class="col-5">
                         <strong>السكن :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{chosin_residence.name_ar}} <span class="text-primary">({{Math.round(chosin_residence.price*residence_weeks)}} ريال سعودي)</span></span>
+                        <span>{{chosin_residence.name_ar}} <span class="text-primary">({{Math.round(chosin_residence.price*residence_weeks)}} ر.س)</span></span>
+                    </div>
+                </div>
+                <hr v-if="chosin_airport != ''">
+                <div class="row" v-if="chosin_airport != ''">
+                    <div class="col-5">
+                        <strong>المطار :</strong>
+                    </div>
+                    <div class="col-7">
+                        <span>{{chosin_airport.name_ar}} <span class="text-primary">({{Math.round(chosin_airport.price)}} ر.س)</span></span>
                     </div>
                 </div>
                 <hr>
-                <div class="row my-3">
+                <div class="row">
                     <div class="col-5">
                         <strong>السعر الكلي :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{totalPrice().toFixed(2) }} ريال سعودي</span>
+                        <span>{{totalPrice().toFixed(2) }} ر.س</span>
                     </div>
                 </div>
                 <hr>
-                <div class="row my-3">
-                    <div class="col-5">
-                        <strong>المدفوع :</strong>
-                    </div>
-                    <div class="col-7">
-                        <span>{{paid_price}} ريال سعودي</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row my-3">
-                    <div class="col-5">
-                        <strong>المتبقي :</strong>
-                    </div>
-                    <div class="col-7">
-                        <span>{{(totalPrice() - paid_price).toFixed(2)}} ريال سعودي</span>
-                    </div>
-                </div>
-                <hr>
-                <div class="row my-3">
+                <div class="row">
                     <div class="col-5">
                         <strong>صورة ايصال الحوالة :</strong>
                     </div>
@@ -126,8 +117,8 @@
                                 <div class="form-group">
                                     <label for="projectinput1"> السكن  </label>
                                     <select v-model="chosin_residence" class="form-control text-left">
-                                        <option :value="{price:0}">لا اريد سكن </option>
-                                        <option :selected="residence_obj.id == chosin_residence.id ? true : false "  v-for="  residence_obj in residences" :key="residence_obj.id" :value="residence_obj">{{residence_obj.price}} ريال - {{ residence_obj.name_ar}} </option>
+                                        <option value="">لا اريد سكن </option>
+                                        <option :selected="residence_obj.id == chosin_residence.id ? true : false "  v-for="  residence_obj in residences" :key="residence_obj.id" :value="residence_obj">{{residence_obj.price}} ر.س - {{ residence_obj.name_ar}} </option>
                                     </select>
                                     <input type="hidden" name="residence" :value="JSON.stringify(chosin_residence)">
                                 </div>
@@ -162,10 +153,10 @@
 
                             <div v-if="chosin_airport[0] != null" class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput2"> الاستقبال ({{chosin_airport.price}} ريال سعودي)</label>
+                                    <label for="projectinput2"> الاستقبال ({{chosin_airport.price}} ر.س)</label>
                                     <select v-model="chosin_airport" class="form-control text-left">
                                         <option :value="{price:0}">لا اريد استقبال </option>
-                                        <option :selected="airport_obj.id == chosin_airport.id ? true : false "  v-for="  airport_obj in airports" :key="airport_obj.id" :value="airport_obj">{{airport_obj.price}} ريال - {{ airport_obj.name_ar}} </option>
+                                        <option :selected="airport_obj.id == chosin_airport.id ? true : false "  v-for="  airport_obj in airports" :key="airport_obj.id" :value="airport_obj">{{airport_obj.price}} ر.س - {{ airport_obj.name_ar}} </option>
                                     </select>
                                     <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
                                 </div>
@@ -177,24 +168,35 @@
                            
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput2"> المدفوع </label>
+                                    <label for="projectinput2"> المدفوع (ر.س) </label>
                                     <input type="number" v-model="paid_price"  class="form-control" placeholder="المدفوع" name="paid_price" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1"> المتبقي (ر.س) </label>
+                                    <input type="text" :value="(totalPrice() - paid_price).toFixed(2)" id="projectinput1" min="1" class="form-control"  disabled />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1"> المطار  </label>
+                                    <select v-model="chosin_airport" class="form-control text-left">
+                                        <option value="">لا اريد استقبال </option>
+                                        <option :selected="airport_obj.id == chosin_airport.id ? true : false "  v-for="  airport_obj in airports" :key="airport_obj.id" :value="airport_obj">{{airport_obj.price}} ر.س - {{ airport_obj.name_ar}} </option>
+                                    </select>
+                                    <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
                                 </div>
                             </div>
 
                             <div  v-if="insurance_price != 0"  class="col-md-6">
+                                <label for="projectinput1"> التامين  </label>
                                 <div class="form-group">
-                                    <label for="projectinput4"> اريد تامين ({{insurance_price*weeks}} ريال سعودي)</label>
-                                    <input type="checkbox" v-model="insurance_price_checker" id="switchery" class="switchery" :value="insurance_val" name="insurance_checker" />
+                                    <label for="projectinput4"> اريد تامين ({{insurance_price*weeks}} ر.س)</label>
+                                    <input type="checkbox" v-model="insurance_price_checker" id="switchery" class="switchery" :value="insurance_price*weeks" name="insurance_price" />
                                 </div>
                             </div>
-                            
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="projectinput3">رساله المعهد </label>
-                                    <textarea v-html="institute_message" type="text"  rows="20" class="form-control ckeditor" placeholder="  رساله المعهد " name="institute_message"></textarea>
-                                </div>
-                            </div>
+
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="projectinput3">ملاحظات </label>
@@ -239,7 +241,7 @@
                 airports : this.student_request.course.institute.airport,
                 chosin_airport :'',
                 insurance_price_checker : this.student_request.insurance_price == 0 ? false : true,
-                insurance_price :'',
+                insurance_price : this.student_request.course.institute.insurance.price,
                 course_price :'',
                 residence_from_date :'',
                 residence_to_date :'',

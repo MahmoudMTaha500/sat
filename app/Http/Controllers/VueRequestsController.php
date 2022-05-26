@@ -172,7 +172,7 @@ class VueRequestsController extends Controller
     public function get_insurance_price_per_week(Request $request)
     {
         $institute = Course::where(['id' => $request->course_id])->get()[0]->institute;
-        $price_per_week = price_per_week($institute->insurancePrice, $request->weeks);
+        $price_per_week = price_per_week($institute->insurance, $request->weeks);
         return response()->json(['status' => 'success', 'insurance_price' => $price_per_week]);
 
     }

@@ -68,8 +68,8 @@
                                 </div>
                                 <!-- Course Price -->
                                 <div class="card-footer bg-white overflow-hidden">
-                                    <del class="text-muted del">{{round($favourite->course->coursesPricePerWeek->price)}} ريال / أسبوع </del>
-                                    <span class="float-left text-main-color">{{round($favourite->course->coursesPricePerWeek->price*(1-$favourite->course->discount)) }} ريال / أسبوع </span>
+                                    <del class="text-muted del">{{round($favourite->course->coursesPricePerWeek->price)}} ر.س / أسبوع </del>
+                                    <span class="float-left text-main-color">{{round($favourite->course->coursesPricePerWeek->price*(1-$favourite->course->discount)) }} ر.س / أسبوع </span>
                                 </div>
                                 <!-- ./Course Price -->
                             </div>

@@ -24,8 +24,7 @@ class InsurancesRequest extends FormRequest
     public function rules()
     {
         return [
-            "weeks"=>'required',
-            "institute_id"=>'required',
+            "institute_id"=>'required|unique:insurances,institute_id,' . app('request')->id,
             "price"=>'required',
         ];
     }
@@ -34,10 +33,9 @@ class InsurancesRequest extends FormRequest
     public function messages()
     {
         return[
-            "weeks.required"=>'عدد الاسابيع مطلوب',
             "institute_id.required"=>'المعهد  مطلوب',
+            "institute_id.unique"=>'تم اضافة تامين لهذا المعهد من قبل',
             "price.required"=>' السعر مطلوب',
-
         ];
     }
 }

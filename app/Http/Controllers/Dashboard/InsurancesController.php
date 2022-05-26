@@ -53,7 +53,6 @@ class InsurancesController extends Controller
         $price = $converted_price + $exchange_money*$price_amount;
 
         $insurances = Insurances::create([
-            'weeks' => $request->weeks,
             'institute_id' => $request->institute_id,
             'price'=>$price,
             'currency_code'=>$request->currency_exchange,
@@ -98,7 +97,6 @@ class InsurancesController extends Controller
 
 
         $insurance = Insurances::find($request->id);
-        $insurance->weeks = $request->weeks;
         $insurance->institute_id = $request->institute_id;
         $insurance->price=$price;
         $insurance->currency_code=$request->currency_exchange;

@@ -15,7 +15,6 @@ class CreateInsurancesTable extends Migration
     {
         Schema::create('insurances', function (Blueprint $table) {
             $table->id();
-            $table->string('weeks');
             $table->integer('price');
             $table->string('currency_code');
             $table->integer('currency_amount');

@@ -160,8 +160,8 @@
                                         </div>
                                         <!-- Course Price -->
                                         <div class="card-footer bg-white overflow-hidden">
-                                            <del v-if="course.discount != 0" class="text-muted del">{{course.real_price*weeks}}  ريال </del>
-                                            <span class="float-left text-main-color">{{Math.round(course.discounted_price*weeks)}}  ريال </span>
+                                            <del v-if="course.discount != 0" class="text-muted del">{{course.real_price*weeks}}  ر.س </del>
+                                            <span class="float-left text-main-color">{{Math.round(course.discounted_price*weeks)}}  ر.س </span>
                                             <p></p>
                                         </div>
                                         <!-- ./Course Price -->

@@ -165,7 +165,7 @@
                             </div>
                             <span id="text_hidden" style="display: none; color:#212529; margin:0; padding:0;">
                                 السعر :
-                                <b id="price_text" style="color:#006FFF"></b>   ريال سعودي
+                                <b id="price_text" style="color:#006FFF"></b>   ر.س
                                 
                             </span>
                             <label>ملاحظة</label>

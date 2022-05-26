@@ -38,7 +38,7 @@
                                                 <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.profile')}}" class="text-dark">البيانات الشخصية</a></li>
                                                 <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.favourite')}}" class="text-dark">المفضلة</a></li>
                                                 <li class="list-group-item py-3 border-bottom text-center"><a href="{{route('student.reservation')}}" class="text-dark">الحجوزات</a></li>
-                                                <li class="list-group-item py-3 text-center border-bottom"><a href="{{route('student.success.story')}}" class="text-dark">تجربتك مع كلاسات</a></li>
+                                                {{-- <li class="list-group-item py-3 text-center border-bottom"><a href="{{route('student.success.story')}}" class="text-dark">تجربتك مع كلاسات</a></li> --}}
                                                 <li class="list-group-item py-3 text-center"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-dark">تسجيل الخروج</a></li>
                                             </ul>
                                         </div>

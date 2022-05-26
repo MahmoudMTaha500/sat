@@ -200,7 +200,7 @@
                                                     </div>
                                                     <!-- Course Price -->
                                                     <div class="card-footer bg-white overflow-hidden">
-                                                        <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                                        <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ر.س / أسبوع </span>
                                                     </div>
                                                     <!-- ./Course Price -->
                                                 </div>
@@ -231,7 +231,7 @@
                                                 </div>
                                                 <!-- Course Price -->
                                                 <div class="card-footer bg-white overflow-hidden">
-                                                    <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                                    <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ر.س / أسبوع </span>
                                                 </div>
                                                 <!-- ./Course Price -->
                                             </div>
@@ -348,7 +348,7 @@
                                                 </div>
                                                 <!-- Course Price -->
                                                 <div class="card-footer bg-white overflow-hidden">
-                                                    <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                                    <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ر.س / أسبوع </span>
                                                 </div>
                                                 <!-- ./Course Price -->
                                             </div>
@@ -380,7 +380,7 @@
                                             </div>
                                             <!-- Course Price -->
                                             <div class="card-footer bg-white overflow-hidden">
-                                                <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                                <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ر.س / أسبوع </span>
                                             </div>
                                             <!-- ./Course Price -->
                                         </div>
@@ -446,13 +446,14 @@
                         course_obj = '{{$course}}'
                         from_date_error = '@error('from_date'){{ $message }}@enderror'
                         residence_obj = '{{$course->institute->residence}}'
+                        :insurance = '{{empty($course->institute->insurance) ? 0 : $course->institute->insurance}}'
                         airport_obj = '{{$course->institute->airport}}'
                         course_id = '{{$course->id}}'
                         course_for_institute_page_url = {{route('vue.get.course.for.institute.page')}}
                         get_course_price_url = {{route('vue.get.course.price.per.week')}}
-                        get_insurance_price_url = {{route('vue.get.insurance.price.per.week')}}
                         save_request_url = {{route('student_requests.confirm_reservation')}}
                         csrf_token =  "{{csrf_token()}}"
+                        :old="{{ json_encode(Session::getOldInput()) }}"
                     >
                     </course-price-info-component>
                 @else
@@ -485,7 +486,7 @@
                                         </div>
                                         <!-- Course Price -->
                                         <div class="card-footer bg-white overflow-hidden">
-                                            <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                            <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ر.س / أسبوع </span>
                                         </div>
                                         <!-- ./Course Price -->
                                     </div>
@@ -516,7 +517,7 @@
                                     </div>
                                     <!-- Course Price -->
                                     <div class="card-footer bg-white overflow-hidden">
-                                        <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ريال / أسبوع </span>
+                                        <span class="float-left text-main-color">{{ empty($institute_course->coursesPricePerWeek) ? '' : $institute_course->coursesPricePerWeek->price}} ر.س / أسبوع </span>
                                     </div>
                                     <!-- ./Course Price -->
                                 </div>

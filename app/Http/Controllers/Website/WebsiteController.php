@@ -131,12 +131,12 @@ class WebsiteController extends Controller
         $insurance = $request->insurance;
         $course_id = $request->course_id;
         $course = Course::where('id', $course_id)->get()[0];
-        $insurance_price = price_per_week($course->institute->insurancePrice, $weeks);
+        $insurance_price = $course->institute->insurance->price;
         $course_price_per_week = price_per_week($course->coursesPrice, $weeks);
         $course_discount = $course->discount;
         $totalPrice = ($course_price_per_week * (1 - $course_discount)) * $weeks;
         if ($airport != 0) {$totalPrice += $airport['price'];}
-        if ($residence != 0) {$totalPrice += $residence['price'] * $weeks;}
+        if ($residence != 0) {$totalPrice += $residence['price'] * $residence_weeks;}
         if ($insurance == 1) {$totalPrice += $insurance_price*$weeks;}else{
             $insurance_price = 0;
         }
@@ -276,7 +276,7 @@ if($student_mail){
             ->subject($subject);
             $message->from('no-reply@sat-edu.com', 'Classat');
         });
-        session()->flash('alert_message', 'تم ارسال كلمه المرور اللي البريد الإلكتروني الخاص بك .');
+        session()->flash('alert_message', 'تم ارسال كلمه المرور اللي البريد الاليكتروني الخاص بك .');
         return back();
    
 

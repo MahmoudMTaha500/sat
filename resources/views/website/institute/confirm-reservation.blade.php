@@ -247,25 +247,27 @@
                         <h5 class="font-weight-bold text-main-color">تفاصيل الكورس والحجز</h5>
                     </div>
                     <div class="cost-body px-3 pt-3">
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">تكلفة الكورس الإجمالية @if($course_details['residence'] != 0) + السكن @endif : </span> {{round($course_details['total_price'])}} ريال سعودي</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">أسم المعهد : </span> {{$course_details['institute_name']}}</p>
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">اسم الكورس : </span> {{$course_details['course_name']}}</p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">اسم الكورس : </span> {{$course_details['course_name']}} <span class="text-success">--</span></p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">الموقع : </span> {{$course_details['country']}} - {{$course_details['city']}}</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">تاريخ بداية الكورس : </span> {{ArabicDate($course_details['from_date'])}}</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">تاريخ نهاية الكورس : </span> {{ArabicDate($course_details['to_date'])}}</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">عدد اسابيع الكورس : </span> {{$course_details['weeks']}} أسابيع</p>
                         @if ($course_details['airport'] != 0)
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">الاستقبال : </span> {{$course_details['airport']['name_ar']}} - {{$course_details['airport']['price']}} ريال سعودي</p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">الاستقبال : </span> {{$course_details['airport']['name_ar']}} - {{$course_details['airport']['price']}} ر.س</p>
                         @endif 
                         @if ($course_details['residence'] != 0)
-                            <p class="text-dark"><span class="font-weight-bold text-main-color">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} - {{$course_details['residence']['price']*$course_details['weeks'] }} ريال سعودي</p>
+                            <p class="text-dark"><span class="font-weight-bold text-main-color">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} - {{$course_details['residence']['price']*$course_details['residence_weeks'] }} ر.س</p>
                             <p class="text-dark"><span class="font-weight-bold text-main-color">عدد اسابيع السكن : </span> {{$course_details['residence_weeks']}} أسابيع</p>
                         @endif 
                         @if ($course_details['insurance_price'] != 0)
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">التامين : </span> {{$course_details['insurance_price']*$course_details['weeks']}} ريال سعودي</p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">التامين : </span> {{$course_details['insurance_price']*$course_details['weeks']}} ر.س</p>
                         @endif
                         <p class="text-dark"><span class="font-weight-bold text-main-color">عدد الدروس : </span> {{$course_details['lessons_per_week']}} درس / أسبوع</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">عدد الساعات : </span> {{$course_details['hours_per_week']}} ساعة في الأسبوع</p>
+                        <hr>
+                        <p class="text-dark h4"><span class="font-weight-bold text-main-color">التكليفة الاجمالية : </span> <span class="text-success">{{round($course_details['total_price'])}}</span> <span class="h6">ر.س</span></p>
+
                     </div>
                 </div>
             </div>

@@ -29,13 +29,13 @@
                             <div class="col-lg-6 mb-4">
                                 <div class="custom-control custom-radio">
                                     <input required value="{{round($course_details['total_price']/2)}}" type="radio" id="deposit" name="paid_price" class="custom-control-input" />
-                                    <label  class="custom-control-label" for="deposit">الحد الأدني {{round($course_details['total_price']/2)}} ريال سعودي ( قيمة العربون )</label>
+                                    <label  class="custom-control-label" for="deposit">الحد الأدني {{round($course_details['total_price']/2)}} ر.س ( قيمة العربون )</label>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-4 text-left">
                                 <div class="custom-control custom-radio">
                                     <input required value="{{round($course_details['total_price'])}}" type="radio" id="total_price" name="paid_price" class="custom-control-input" />
-                                    <label class="custom-control-label" for="total_price">المبلغ بالكامل {{round($course_details['total_price'])}} ريال سعودي</label>
+                                    <label class="custom-control-label" for="total_price">المبلغ بالكامل {{round($course_details['total_price'])}} ر.س</label>
                                 </div>
                             </div>
 
@@ -147,18 +147,18 @@
                         <h5 class="font-weight-bold text-main-color">تفاصيل الكورس والحجز</h5>
                     </div>
                     <div class="cost-body px-3 pt-3">
-                        <p class="text-dark"><span class="font-weight-bold">تكلفة الكورس الإجمالية : </span> {{round($course_details['total_price'])}} ريال سعودي</p>
+                        <p class="text-dark"><span class="font-weight-bold">تكلفة الكورس الإجمالية : </span> {{round($course_details['total_price'])}} ر.س</p>
                         <p class="text-dark"><span class="font-weight-bold">أسم المعهد : </span> {{$course_details['institute_name']}}</p>
                         <p class="text-dark"><span class="font-weight-bold">اسم الكورس : </span> {{$course_details['course_name']}}</p>
                         <p class="text-dark"><span class="font-weight-bold">الموقع : </span> {{$course_details['country']}} - {{$course_details['city']}}</p>
                         <p class="text-dark"><span class="font-weight-bold">تاريخ بداية الكورس : </span> {{ArabicDate($course_details['from_date'])}}</p>
                         <p class="text-dark"><span class="font-weight-bold">تاريخ نهاية الكورس : </span> {{ArabicDate($course_details['to_date'])}}</p>
                         @if (isset($course_details['airport']['name_ar']))
-                        <p class="text-dark"><span class="font-weight-bold">الاستقبال : </span> {{$course_details['airport']['name_ar']}} - {{$course_details['airport']['price']}} ريال سعودي</p>
+                        <p class="text-dark"><span class="font-weight-bold">الاستقبال : </span> {{$course_details['airport']['name_ar']}} - {{$course_details['airport']['price']}} ر.س</p>
                         @endif @if ( isset($course_details['residence']['name_ar']))
-                        <p class="text-dark"><span class="font-weight-bold">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} - {{$course_details['residence']['price']*$course_details['weeks'] }} ريال سعودي</p>
+                        <p class="text-dark"><span class="font-weight-bold">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} - {{$course_details['residence']['price']*$course_details['weeks'] }} ر.س</p>
                         @endif @if ($course_details['insurance_price'] != 0)
-                        <p class="text-dark"><span class="font-weight-bold">التامين : </span> {{$course_details['insurance_price']*$course_details['weeks']}} ريال سعودي</p>
+                        <p class="text-dark"><span class="font-weight-bold">التامين : </span> {{$course_details['insurance_price']*$course_details['weeks']}} ر.س</p>
                         @endif
                         <p class="text-dark"><span class="font-weight-bold">عدد الأسابيع : </span> {{$course_details['weeks']}} أسابيع</p>
                         <p class="text-dark"><span class="font-weight-bold">عدد الدروس : </span> {{$course_details['lessons_per_week']}} درس / أسبوع</p>

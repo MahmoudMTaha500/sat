@@ -21,7 +21,7 @@ class StudentRequestSeeder extends Seeder
             $course = Course::where('id' , $x)->get()[0];
             $residence = residences::where('institute_id' , $course->institute->id)->inRandomOrder()->get()[0];
             $airport = Airports::where('institute_id' , $course->institute->id)->inRandomOrder()->get()[0];
-            $insurance = price_per_week(Institute::where('id' , $course->institute->id)->get()[0]->insurancePrice , $weeks);
+            $insurance = Institute::where('id' , $course->institute->id)->get()[0]->insurance->price;
             $price_per_week = price_per_week($course->coursesPrice , $weeks);
             $total_price = ($price_per_week*(1-$course->discount) + $insurance +$residence->price)*$weeks + $airport->price;
 
