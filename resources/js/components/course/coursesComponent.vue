@@ -106,7 +106,7 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="course in courses.data" :key="course.id">
-                                        <td class="text-truncate">{{course.name_ar}}</td>
+                                        <td class="text-truncate"> <span v-if="course.main_course_trigger == 1" class="text-warning"> <i class="la la-star"></i> </span> {{course.name_ar}}</td>
                                         <td class="text-truncate">{{course.institute.name_ar}}</td>
                                         <td class="text-truncate">{{course.institute.city.name_ar}}</td>
 

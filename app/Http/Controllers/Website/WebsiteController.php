@@ -131,19 +131,24 @@ class WebsiteController extends Controller
         $insurance = $request->insurance;
         $course_id = $request->course_id;
         $course = Course::where('id', $course_id)->get()[0];
-        $insurance_price = $course->institute->insurance->price;
+        
         $course_price_per_week = price_per_week($course->coursesPrice, $weeks);
         $course_discount = $course->discount;
         $totalPrice = ($course_price_per_week * (1 - $course_discount)) * $weeks;
         if ($airport != 0) {$totalPrice += $airport['price'];}
         if ($residence != 0) {$totalPrice += $residence['price'] * $residence_weeks;}
-        if ($insurance == 1) {$totalPrice += $insurance_price*$weeks;}else{
+        if ($insurance == 1) {
+            $insurance_price = $course->institute->insurance->price;
+            $totalPrice += $insurance_price*$weeks;
+        }
+        else{
             $insurance_price = 0;
         }
 
 
         $course_details['course_obj'] = $course;
         $course_details['course_id'] = $course_id;
+        $course_details['course_price'] = $course_price_per_week * (1 - $course_discount);
         $course_details['price_per_week'] = $course_price_per_week;
         $course_details['total_price'] = $totalPrice;
         $course_details['institute_name'] = $course->institute->name_ar;
@@ -157,9 +162,10 @@ class WebsiteController extends Controller
         $course_details['residence_weeks'] = $residence_weeks;
         $course_details['lessons_per_week'] = $course->lessons_per_week;
         $course_details['hours_per_week'] = $course->hours_per_week;
+        $course_details['insurance'] = $insurance;
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
-        $course_details['residence'] = json_decode($request->residence, true);
+        $course_details['residence'] = $residence;
 
         $page_identity = [
             'title_tag' => 'تاكيد الحجز',
@@ -398,7 +404,7 @@ if($student_mail){
         $googleobj = json_decode($response);
         $verified = $googleobj->success;
         if ($verified !== true){
-            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت']);
+            return back()->withErrors(['not_robot_error' => 'برجاء اثبات انك لست روبوت'])->withInput();
         }  
         // configuer basic variables
         $name = $request->name;
@@ -406,9 +412,7 @@ if($student_mail){
         $phone = $request->phone;
         $address = $request->address;
         $nationality = $request->nationality;
-        $country = $request->country;
-        $city = $request->city;
-        $note = $request->city;
+        $note = $request->note;
         $course_details = json_decode($request->course_details, true);
 
         if(!auth()->guard('student')->check()){

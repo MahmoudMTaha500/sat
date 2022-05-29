@@ -48,13 +48,31 @@
                         <span>{{chosin_airport.name_ar}} <span class="text-primary">({{Math.round(chosin_airport.price)}} ر.س)</span></span>
                     </div>
                 </div>
+                <hr v-if="insurance_price_checker != 0">
+                <div class="row" v-if="insurance_price_checker != 0">
+                    <div class="col-5">
+                        <strong>التامين :</strong>
+                    </div>
+                    <div class="col-7">
+                        <span><span class="text-primary">{{Math.round(insurance_price*weeks)}} ر.س</span></span>
+                    </div>
+                </div>
+                <hr v-if="student_note != null">
+                <div class="row" v-if="student_note != null">
+                    <div class="col-5">
+                        <strong>ملاحظات الطالب :</strong>
+                    </div>
+                    <div class="col-7">
+                        <span>{{student_note}}</span>
+                    </div>
+                </div>
                 <hr>
                 <div class="row">
                     <div class="col-5">
                         <strong>السعر الكلي :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{totalPrice().toFixed(2) }} ر.س</span>
+                        <span><span class="text-success h4">{{totalPrice().toFixed(2) }}</span> ر.س</span>
                     </div>
                 </div>
                 <hr>
@@ -82,9 +100,8 @@
                                 <div class="form-group">
                                     <label for="projectinput2">حالة القبول</label>
                                     <select class="form-control text-left" name="status">
-                                        <option  value="">اختر الحاله</option>
-
                                         <option :selected="status == 'جديد' ? true : false " value="جديد"> جديد</option>
+                                        <option :selected="status == 'تم التواصل وبانتظار المستندات' ? true : false " value="تم التواصل وبانتظار المستندات">تم التواصل وبانتظار المستندات</option>
                                         <option :selected="status == 'حصل علي قبول' ? true : false " value="حصل علي قبول"> حصل علي قبول </option>
                                         <option :selected="status == 'بداء الدراسة' ? true : false " value="بداء الدراسة"> بداء الدراسة</option>
                                         <option :selected="status == 'مرفوض' ? true : false " value="مرفوض"> مرفوض</option>
@@ -103,19 +120,19 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="projectinput1"> عدد اسابيع الكورس </label>
+                                    <label> عدد اسابيع الكورس </label>
                                     <input @change="get_course_price() ; get_insurance_price()" type="number" v-model="weeks" id="projectinput1" min="1" class="form-control" placeholder="ادخل  عدد الاسابيع" name="weeks" />
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="projectinput1"> عدد اسابيع السكن </label>
+                                    <label> عدد اسابيع السكن </label>
                                     <input @change="get_course_price() ; get_insurance_price()" type="number" v-model="residence_weeks" id="projectinput1" min="1" class="form-control" placeholder="ادخل  عدد الاسابيع" name="residence_weeks" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> السكن  </label>
+                                    <label> السكن  </label>
                                     <select v-model="chosin_residence" class="form-control text-left">
                                         <option value="">لا اريد سكن </option>
                                         <option :selected="residence_obj.id == chosin_residence.id ? true : false "  v-for="  residence_obj in residences" :key="residence_obj.id" :value="residence_obj">{{residence_obj.price}} ر.س - {{ residence_obj.name_ar}} </option>
@@ -126,26 +143,26 @@
                             
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> تاريخ بداية الكورس </label>
+                                    <label> تاريخ بداية الكورس </label>
                                     <input type="text" v-model="from_date" class="form-control datepicker-default" name="from_date" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> تاريخ انتهاء الكورس </label>
+                                    <label> تاريخ انتهاء الكورس </label>
                                     <input type="text" v-model="to_date" id="projectinput1" min="1" class="form-control"  readonly name="to_date" />
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> تاريخ البداية السكن </label>
+                                    <label> تاريخ البداية السكن </label>
                                     <input type="text" v-model="residence_from_date" id="projectinput1" min="1" class="form-control"  disabled  />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> تاريخ انتهاء السكن </label>
+                                    <label> تاريخ انتهاء السكن </label>
                                     <input type="text" :value="residence_to_date" id="projectinput1" min="1" class="form-control"  disabled />
                                 </div>
                             </div>
@@ -174,13 +191,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> المتبقي (ر.س) </label>
+                                    <label> المتبقي (ر.س) </label>
                                     <input type="text" :value="(totalPrice() - paid_price).toFixed(2)" id="projectinput1" min="1" class="form-control"  disabled />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="projectinput1"> المطار  </label>
+                                    <label> المطار  </label>
                                     <select v-model="chosin_airport" class="form-control text-left">
                                         <option value="">لا اريد استقبال </option>
                                         <option :selected="airport_obj.id == chosin_airport.id ? true : false "  v-for="  airport_obj in airports" :key="airport_obj.id" :value="airport_obj">{{airport_obj.price}} ر.س - {{ airport_obj.name_ar}} </option>
@@ -190,9 +207,9 @@
                             </div>
 
                             <div  v-if="insurance_price != 0"  class="col-md-6">
-                                <label for="projectinput1"> التامين  </label>
+                                <label> التامين  </label>
                                 <div class="form-group">
-                                    <label for="projectinput4"> اريد تامين ({{insurance_price*weeks}} ر.س)</label>
+                                    <label> اريد تامين ({{insurance_price*weeks}} ر.س)</label>
                                     <input type="checkbox" v-model="insurance_price_checker" id="switchery" class="switchery" :value="insurance_price*weeks" name="insurance_price" />
                                 </div>
                             </div>
@@ -200,7 +217,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="projectinput3">ملاحظات </label>
-                                    <textarea :value="notes" type="text" rows="10" class="form-control" placeholder="  ملاحظات " name="note"></textarea>
+                                    <textarea :value="classat_note" type="text" rows="10" class="form-control" placeholder="  ملاحظات " name="classat_note"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +249,8 @@
                 payment_status : this.student_request.payment_status,
                 weeks : this.student_request.weeks,
                 residence_weeks : this.student_request.residence_weeks,
-                notes : this.student_request.note,
+                classat_note : this.student_request.classat_note,
+                student_note : this.student_request.note,
                 institute_message : this.student_request.institute_message,
                 from_date : this.student_request.from_date,
                 to_date : this.student_request.to_date,
@@ -241,7 +259,7 @@
                 airports : this.student_request.course.institute.airport,
                 chosin_airport :'',
                 insurance_price_checker : this.student_request.insurance_price == 0 ? false : true,
-                insurance_price : this.student_request.course.institute.insurance.price,
+                insurance_price : (this.student_request.course.institute.insurance == null ? 0 : this.student_request.course.institute.insurance.price),
                 course_price :'',
                 residence_from_date :'',
                 residence_to_date :'',

@@ -29,7 +29,7 @@ class StudentRequestsController extends Controller
     }
     public function getStudentsRequest()
     {
-        $students_requets = StudentRequest::with('student','course.institute.city', 'course.institute.country', 'course', 'airport', 'residence', 'insurance',)->latest('id')->paginate(10);
+        $students_requets = StudentRequest::with('student','course.institute.city', 'course.institute.country', 'course', 'airport', 'residence', 'insurance')->latest('id')->paginate(10);
         return response()->json(['studentsRequests' => $students_requets]);
     }
     public function updateStatus(Request $request)
@@ -108,6 +108,17 @@ class StudentRequestsController extends Controller
     }
     public function update(Request $request, $id)
     {
+        if(isset($request->api_request)){
+            if($request->status_type == 'studying-status'){
+                StudentRequest::where('id' , $request->request_id)->update(['status' => $request->status]);
+                return response()->json(['status' => 'success']);
+            }
+            if($request->status_type == 'payment-status'){
+                StudentRequest::where('id' , $request->request_id)->update(['payment_status' => $request->status]);
+                return response()->json(['status' => 'success']);
+            }
+            
+        }
         $validated = $request->validate([
             'weeks' => 'required|numeric',
             'residence_weeks' => 'required|numeric',
@@ -143,7 +154,7 @@ class StudentRequestsController extends Controller
         $data['remaining_price'] = $request->total_price - $request->paid_price;
         $data['from_date'] = $request->from_date;
         $data['to_date'] = $request->to_date;
-        $data['note'] = $request->note;
+        $data['classat_note'] = $request->classat_note;
         StudentRequest::where('id' , $id)->update($data);
         session()->flash('alert_message', ['message' => 'تم تعديل الطلب بنجاح', 'icon' => 'success']);
         return redirect()->back();
@@ -155,27 +166,17 @@ class StudentRequestsController extends Controller
     }
 
     public function filter(Request $request){
-        // dd($request->all());
-
-        $institute_id = $request->institute_id;
         $country_id = $request->country_id;
         $city_id = $request->city_id;
+        $institute_id = $request->institute_id;
         $course_id = $request->course_id;
-        $name_ar = $request->name_ar;
+        $from_date = $request->from_date;
+        $to_date = $request->to_date;
+        $studying_status = $request->studying_status;
+        $payment_status = $request->payment_status;
 
-        $new = $request->new;
-        $got_accepted = $request->got_accepted;
-        $study_started = $request->study_started;
-        $rejected = $request->rejected;
  
         $student_request = new StudentRequest();
-
-        if ($institute_id != null) {
-            // $student_request = $student_request->where("institute_id", $institute_id);
-            $student_request = $student_request->with('course')->whereHas('course', function ($query) use ($institute_id) {
-                $query->where('institute_id', $institute_id);
-            });
-        }
         if ($country_id != null) {
             $student_request = $student_request->with('course')->whereHas('course', function ($query) use ($institute_id ,$country_id)   {
                 $query->whereHas('institute',function($query2) use ($country_id) {
@@ -191,29 +192,27 @@ class StudentRequestsController extends Controller
           
             });
         }
+        if ($institute_id != null) {
+            $student_request = $student_request->with('course')->whereHas('course', function ($query) use ($institute_id) {
+                $query->where('institute_id', $institute_id);
+            });
+        }
+        
         if ($course_id != null) {
             $student_request = $student_request->where("course_id", $course_id);
         
         }
-    
-        
-        if ($new == 'true') {
-            $student_request = $student_request->orWhere("status", "جديد");
+        if ($from_date != null && $to_date != null) {
+            $student_request = $student_request->whereBetween('created_at', [$from_date." 00:00:00", $to_date." 23:59:59"]);
         }
-        if ($got_accepted == 'true' ) {
-            $student_request = $student_request->orWhere("status", "حصل علي قبول");
+        if ($studying_status != null) {
+            $student_request = $student_request->where('status', $studying_status);
         }
-        if ($study_started == 'true' ) {
-            $student_request = $student_request->orWhere("status", 'LIKE', "%بداء الدراسة%");
-        }
-        if ($rejected == 'true' ) {
-            $student_request = $student_request->orWhere("status", 'LIKE',"%مرفوض%");
+        if ($payment_status != null) {
+            $student_request = $student_request->where('payment_status', $payment_status);
         }
 
-      
-
-
-        $student_request = $student_request->with('student', 'course.institute', 'course', 'airport', 'residence', 'insurance')->latest('id')->paginate(10);
+        $student_request = $student_request->with('student','course.institute.city', 'course.institute.country', 'course', 'airport', 'residence', 'insurance')->latest('id')->paginate(10);
         return response()->json(['studentsRequests' => $student_request]);
 
     }

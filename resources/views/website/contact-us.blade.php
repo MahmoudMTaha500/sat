@@ -28,13 +28,13 @@
                                     <span class="text-main-color font-weight-bold"><i class="fas fa-map-marker-alt"></i> العنوان :</span> Office Number 10, 4516 Imam Saud Bin Abdulaziz Bin Mohammed Rd, Al Muruj Dist., Riyadh 12282
                                 </li>
                                 <li class="social-links-sm">
-                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/classat">
+                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.snapchat.com/add/clas_sat">
                                         <span class="text-white font-weight-bold"><i class="fab fa-snapchat-ghost"></i></span>
                                     </a>
                                     <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://twitter.com/clas_sat">
                                         <span class="text-white font-weight-bold"><i class="fab fa-twitter"></i></span>
                                     </a>
-                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.instagram.com/class_at/">
+                                    <a class="bg-main-color d-inline-block text-center ml-3" target="_blank" href="https://www.instagram.com/Clas_sat/">
                                         <span class="text-white font-weight-bold"><i class="fab fa-instagram"></i></span>
                                     </a>
                                 </li>

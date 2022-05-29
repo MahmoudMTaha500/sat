@@ -56,9 +56,9 @@
                     <table class="footer" width="100%">
                         <tr class="social-links">
                             <td colspan="3">
-                                <a href="https://www.snapchat.com/add/classat"><img width="30px" src="{{url('/')}}/storage/icons/snapchat.png" alt=""> </a>
+                                <a href="https://www.snapchat.com/add/clas_sat"><img width="30px" src="{{url('/')}}/storage/icons/snapchat.png" alt=""> </a>
                                 <a href="https://twitter.com/clas_sat"><img width="30px" src="{{url('/')}}/storage/icons/twitter.png" alt=""> </a>
-                                <a href="https://www.instagram.com/class_at/"><img width="30px" src="{{url('/')}}/storage/icons/instegram.png" alt=""> </a>
+                                <a href="https://www.instagram.com/Clas_sat/"><img width="30px" src="{{url('/')}}/storage/icons/instegram.png" alt=""> </a>
                             </td>
                         </tr>
                         <tr class="contact-info">
@@ -182,9 +182,9 @@
                 
             </div>
             <div class="footer">
-                <a href="https://www.snapchat.com/add/classat"><img width="30px" src="https://www.linkpicture.com/q/snapchat_2.png" alt=""> </a>&nbsp;&nbsp;
+                <a href="https://www.snapchat.com/add/clas_sat"><img width="30px" src="https://www.linkpicture.com/q/snapchat_2.png" alt=""> </a>&nbsp;&nbsp;
                 <a href="https://twitter.com/clas_sat"><img width="30px" src="https://www.linkpicture.com/q/twitter_14.png" alt=""> </a>&nbsp;&nbsp;
-                <a href="https://www.instagram.com/class_at/"><img width="30px" src="https://www.linkpicture.com/q/instegram.png" alt=""> </a>
+                <a href="https://www.instagram.com/Clas_sat/"><img width="30px" src="https://www.linkpicture.com/q/instegram.png" alt=""> </a>
                 <div class="contact-info">
                     <p class="main-color">
                         <a class="main-color" href="tel:+966555484931"> <span dir="ltr">+966 55 548 4931 <img src="https://www.linkpicture.com/q/phone_9.png" alt=""> </span>  &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; </a> 

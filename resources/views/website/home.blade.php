@@ -6,7 +6,8 @@
             <div class="col-lg-6 align-self-center">
                 <!-- Section Heading -->
                 <h1 class="text-white font-weight-bold mb-4 intro-title">ابدأ رحلتك الآن، وتعلم اللغة في أكبر المعاهد الدولية</h1>
-                <p class="lead text-white mb-4 intro-desc">نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون، وخلق بيئة تنافسية</p>
+                <p class="lead text-white mb-4 intro-desc">نوفر لك أفضل الجامعات والمعاهد للدراسة في الخارج, قم بتسجيل حسابك وأحصل على خصم 5% على الرسوم الدراسة</p>
+                {{-- <p class="lead text-white mb-4 intro-desc">نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون، وخلق بيئة تنافسية</p> --}}
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
@@ -119,7 +120,7 @@
                         
                         <!-- ./Add To Favourite Btn -->
                         <!-- Institute Img -->
-                        <a href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
+                        <a target="_blank" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
                             <div class="institute-img d-inline-block position-relative">
                                 <picture>
                                     <source srcset="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" media="(min-width:700px)">
@@ -131,8 +132,8 @@
                         <!-- ./Institute Img -->
                         <div class="card-body rounded-10 bg-white">
                             <!-- Institute Title -->
-                            <p class="card-title"><a class="h5" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></p>
-                            <p class="card-title"><a class="h6" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></p>
+                            <p class="card-title"><a target="_blank" class="h5" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></p>
+                            <p class="card-title"><a target="_blank" class="h6" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></p>
                             <!-- ./Institute Title -->
                             <!-- Institute Rate -->
                             <p class="mb-0"><span class="starrr" ratio="{{institute_rate($offer->institute)}}"></span> {{institute_rate($offer->institute)}}</p>

@@ -4,7 +4,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">البحث في المدن</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">البحث في الطلبات</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -12,7 +12,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="projectinput1">الدولة</label>
-                            <select v-model="country_id" v-on:change="getcities(); get_institutes(); " id="country" class="form-control" name="country_id" required>
+                            <select v-model="filterCountryId" v-on:change="getcities(); get_institutes(); " id="country" class="form-control" name="country_id" required>
                                 <option value="">حدد الدولة</option>
                                 <option v-for="country in countries" :key="country.id" :value="country.id"> {{country.name_ar}} </option>
                             </select>
@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <label for="projectinput1">المدينة</label>
 
-                            <select v-model="city_id" id="city" v-on:change="get_institutes();" class="form-control" name="city_id" required>
+                            <select v-model="filterCityId" id="city" v-on:change="get_institutes();" class="form-control" name="city_id" required>
                                 <option value="">حدد المدينة</option>
                                 <option v-for="city in cities" :key="city.id" :value="city.id"> {{city.name_ar}}</option>
                             </select>
@@ -28,39 +28,62 @@
 
                         <div class="form-group">
                             <label for="projectinput1">المعهد</label>
-                            <select v-model="institute_id" id="" class="form-control" v-on:change="get_filter_courses();" name="institute_id" required>
+                            <select v-model="filterInstituteId" id="" class="form-control" v-on:change="get_filter_courses();" name="institute_id" required>
                                 <option value="">حدد المعهد</option>
                                 <option v-for="institute in institutes" :key="institute.id" :value="institute.id"> {{institute.name_ar +' | '+ institute.city.name_ar}} </option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="projectinput2">الدورات</label>
-                            <select v-model="course_id" class="form-control t" name="course_id">
+                            <select v-model="filterCourseId" class="form-control t" name="course_id">
                                 <option value="">اختر الدورة</option>
                                 <option v-for="course in courses" :key="course.id" :value="course.id"> {{course.name_ar}}</option>
                             </select>
                         </div>
-
-                        <div class="form-group">
-                            <label for="projectinput1">البحث بكلمات مفتاحية</label>
-                            <input v-model="name_ar" type="text" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="name_ar" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1">من</label>
+                                    <input v-model="filterFromDate" type="date" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="from_date" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1">الي</label>
+                                    <input v-model="filterToDate" type="date" id="projectinput1" class="form-control" placeholder="ادخل كلمة مفتاحية" name="to_date" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group" style="direction: rtl;">
-                            <label for="projectinput1"> جديد</label>
-                            <input v-model="news" type="checkbox" id="projectinput1" class="form-control" value="جديد" />
-                            <label for=""> حصل علي قبول</label>
 
-                            <input v-model="got_accepted" type="checkbox" id="projectinput1" class="form-control" value="حصل علي قبول" />
-                            <label for=""> بداء الدراسه</label>
-
-                            <input v-model="study_started" type="checkbox" id="projectinput1" class="form-control" value="بداء الدراسة" />
-                            <label for=""> مرفوض</label>
-
-                            <input v-model="rejected" type="checkbox" id="projectinput1" class="form-control" value="مرفوض" />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1">حالة الدراسة</label>
+                                    <select v-model="filterStudyingStatus" style="height:auto" class="form-control text-left" width="180px">
+                                        <option value=""> الكل</option>
+                                        <option value="جديد"> جديد</option>
+                                        <option value="تم التواصل وبانتظار المستندات">تم التواصل وبانتظار المستندات</option>
+                                        <option value="حصل علي قبول"> حصل علي قبول </option>
+                                        <option value="بداء الدراسة"> بداء الدراسة</option>
+                                        <option value="مرفوض"> مرفوض</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="projectinput1">حالة الدفع</label>
+                                    <select v-model="filterPaymentStatus" style="height:auto" class="form-control text-left" width="180px">
+                                        <option value=""> الكل</option>
+                                        <option value="0"> لم يتم الدفع</option>
+                                        <option value="2"> مدفوع جزئيا  </option>
+                                        <option value="1"> تم الدفع بالكامل</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary w-100" @click="filterCoureses()" data-dismiss="modal" aria-label="Close">بحث</button>
+                        <button type="button" class="btn btn-primary w-100" @click="filterRequests()" data-dismiss="modal" aria-label="Close">بحث</button>
                     </div>
                 </div>
             </div>
@@ -103,43 +126,63 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="request in studentsRequests.data" :key="request.id">
-                                        <td class="text-truncate">{{request.student.name}}</td>
-                                        <td class="text-truncate">{{request.student.phone}}</td>
-                                        <td class="text-truncate">{{request.student.email}}</td>
-                                        <td class="text-truncate">{{request.course.institute.name_ar}}</td>
-                                        <td class="text-truncate">{{request.course.institute.country.name_ar}}</td>
-                                        <td class="text-truncate">{{request.course.institute.city.name_ar}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{request.student.name}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{request.student.phone}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{request.student.email}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{request.course.institute.name_ar}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{request.course.institute.country.name_ar}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{request.course.institute.city.name_ar}}</td>
 
 
-                                        <td class="text-truncate">
+                                        <td class="text-truncate border-top-0 p-1">
+                                            
+                                            <div style="width:180px" class="d-flex align-items-baseline">
+                                                <p class="d-inline" v-if="request.status == 'جديد' ">
+                                                    <i class="la la-dot-circle-o text-warning"></i>
+                                                </p>
+                                                <p class="d-inline" v-if="request.status == 'تم التواصل وبانتظار المستندات' ">
+                                                    <i class="la la-dot-circle-o text-dark"></i>
+                                                </p>
+                                                <p class="d-inline" v-else-if="request.status == 'حصل علي قبول' ">
+                                                    <i class="la la-dot-circle-o text-primary"></i>
+                                                </p>
+                                                <p class="d-inline" v-else-if="request.status == 'بداء الدراسة' ">
+                                                    <i class="la la-dot-circle-o text-success"></i>
+                                                </p>
+                                                <p class="d-inline" v-else-if="request.status == 'مرفوض' ">
+                                                    <i class="la la-dot-circle-o text-danger"></i>
+                                                </p>
 
-                                            <p v-if="request.status == 'جديد' ">
-                                                <span class="text-warning">{{request.status}}</span>
-                                            </p>
-                                            <p v-else-if="request.status == 'حصل علي قبول' ">
-                                                <span class="text-success">{{request.status}}</span>
-                                            </p>
-                                            <p v-else-if="request.status == 'بداء الدراسة' ">
-                                                <span class="text-success">{{request.status}}</span>
-                                            </p>
-                                            <p v-else-if="request.status == 'مرفوض' ">
-                                                <span class="text-danger">{{request.status}}</span>
-                                            </p>
+                                                <select @change="updateStatus($event,'studying-status',request)" style="height:auto" class="form-control text-left" width="180px">
+                                                    <option :selected="request.status == 'جديد' ? true : false " value="جديد"> جديد</option>
+                                                    <option :selected="request.status == 'تم التواصل وبانتظار المستندات' ? true : false " value="تم التواصل وبانتظار المستندات">تم التواصل وبانتظار المستندات</option>
+                                                    <option :selected="request.status == 'حصل علي قبول' ? true : false " value="حصل علي قبول"> حصل علي قبول </option>
+                                                    <option :selected="request.status == 'بداء الدراسة' ? true : false " value="بداء الدراسة"> بداء الدراسة</option>
+                                                    <option :selected="request.status == 'مرفوض' ? true : false " value="مرفوض"> مرفوض</option>
+                                                </select>
+                                            </div>
                                         </td>
-                                        <td class="text-truncate">
-                                            <p v-if="request.payment_status == '0' ">
-                                                <span class="text-danger">لم يتم الدفع</span>
-                                            </p>
-                                            <p v-else-if="request.payment_status == '1' ">
-                                                <span class="text-success">تم الدفع</span>
-                                            </p>
-                                            <p v-else-if="request.payment_status == '2' ">
-                                                <span class="text-warning">مدفوع جزئيا</span>
-                                            </p>
+                                        <td class="text-truncate border-top-0 p-1">
+                                            <div style="width:150px" class="d-flex align-items-baseline">
+                                                <p v-if="request.payment_status == '0' ">
+                                                    <i class="la la-dot-circle-o text-danger"></i>
+                                                </p>
+                                                <p v-else-if="request.payment_status == '1' ">
+                                                    <i class="la la-dot-circle-o text-success"></i>
+                                                </p>
+                                                <p v-else-if="request.payment_status == '2' ">
+                                                    <i class="la la-dot-circle-o text-warning"></i>
+                                                </p>
+                                                <select @change="updateStatus($event,'payment-status',request)" style="height:auto" class="form-control text-left" width="180px">
+                                                    <option :selected="request.payment_status == '0' ? true : false " value="0"> لم يتم الدفع</option>
+                                                    <option :selected="request.payment_status == '2' ? true : false " value="2"> مدفوع جزئيا  </option>
+                                                    <option :selected="request.payment_status == '1' ? true : false " value="1"> تم الدفع بالكامل</option>
+                                                </select>
+                                            </div>
                                         </td>
-                                        <td class="text-truncate">{{new Intl.DateTimeFormat('en-GB').format(new Date(request.created_at))}}</td>
+                                        <td class="text-truncate border-top-0 p-1">{{new Intl.DateTimeFormat('en-GB').format(new Date(request.created_at))}}</td>
 
-                                        <td>
+                                        <td class="text-truncate border-top-0 p-1">
                                             <div class="btn-group" role="group" aria-label="Basic example">
                                                 <a v-if="edit" :href="dahsboard_url+'/student-requests/'+request.id+'/edit'" class="btn btn-info btn-sm round"> تعديل</a>
 
@@ -180,13 +223,17 @@
                 studentsRequests: {},
                 url: this.student_request_url,
                 url_course: this.course_url,
-                country_id: "",
-                city_id: "",
+                filterCountryId: "",
+                filterCityId: "",
                 countries: this.countries_from_blade,
                 cities: {},
                 courses: {},
-                institute_id: "",
-                course_id: "",
+                filterInstituteId: "",
+                filterCourseId: "",
+                filterFromDate: "",
+                filterToDate: "",
+                filterStudyingStatus: "",
+                filterPaymentStatus: "",
 
                 name_ar: "",
                 news: "",
@@ -230,14 +277,14 @@
                 axios
                     .get(this.get_institutes_url, {
                         params: {
-                            country_id: this.country_id,
-                            city_id: this.city_id,
+                            country_id: this.filterCountryId,
+                            city_id: this.filterCityId,
                         },
                     })
                     .then((response) => (this.institutes = response.data));
             },
             getcities: function () {
-                var country_id = this.country_id;
+                var country_id = this.filterCountryId;
                 axios
                     .get(this.dahsboard_url + "/getcities", {
                         params: {
@@ -245,34 +292,46 @@
                         },
                     })
                     .then((response) => (this.cities = response.data.cities));
-                if (this.country_id == "") {
-                    this.city_id = "";
+                if (this.filterCountryId == "") {
+                    this.filterCityId = "";
                 }
             },
 
-            filterCoureses: function () {
+            filterRequests: function () {
                 // alert(this.news);
                 var filter_params = {
-                    institute_id: this.institute_id,
-                    course_id: this.course_id,
-                    country_id: this.country_id,
-                    city_id: this.city_id,
-                    name_ar: this.name_ar,
-                    new: this.news,
-                    got_accepted: this.got_accepted,
-                    study_started: this.study_started,
-                    rejected: this.rejected,
+                    institute_id: this.filterInstituteId,
+                    course_id: this.filterCourseId,
+                    country_id: this.filterCountryId,
+                    city_id: this.filterCityId,
+                    from_date: this.filterFromDate,
+                    to_date: this.filterToDate,
+                    studying_status: this.filterStudyingStatus,
+                    payment_status: this.filterPaymentStatus,
                 };
-                var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id;
+                var pagination_params = "&institute_id=" + this.filterInstituteId + "&country_id=" + this.filterCountryId + "&city_id=" + this.filterCityId;
                 axios
                     .get(this.dahsboard_url + "/student-requests/filterstudentsRequests", {
                         params: filter_params,
                     })
-                    .then((response) => ((this.studentsRequests = response.data.studentsRequests), (this.studentsRequests.prev_page_url += pagination_params), (this.studentsRequests.next_page_url += pagination_params)));
+                    .then((response) => {
+                        console.log(response)
+                        this.studentsRequests = response.data.studentsRequests
+                        this.studentsRequests.prev_page_url += pagination_params
+                        this.studentsRequests.next_page_url += pagination_params
+                    });
             },
-            updateStatus: function (e) {
-                const newValue = e.target.value;
-                axios.post(this.dahsboard_url + "/student-requests/update-status", { request_id: this.request_id, status: newValue }, { headers: { "X-CSRFToken": "{{ csrf_token()}}" } }).then((response) => {});
+            updateStatus: function (event, statusType, request) {
+                axios.put(this.dahsboard_url + "/student-requests/"+request.id, 
+                        {api_request:true, status_type: statusType,request_id: request.id, status: event.target.value }, 
+                        { headers: { "X-CSRFToken": "{{ csrf_token()}}" } })
+                    .then((response) => {
+                        if(response.data.status == 'success'){
+                            if( statusType =='studying-status'){request.status = event.target.value}
+                            if( statusType =='payment-status'){request.payment_status = event.target.value}
+                            
+                        }
+                    });
             },
             getrequest_id: function (id) {
                 return (this.request_id = id);
@@ -285,7 +344,7 @@
                 axios
                     .get(this.get_courses_url, {
                         params: {
-                            institute_id: this.institute_id,
+                            institute_id: this.filterInstituteId,
                         },
                     })
                     .then((response) => (this.courses = response.data));
@@ -295,12 +354,10 @@
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const course_id_url = urlParams.get("course_id");
-            // alert(course_id_url);
 
             if (course_id_url) {
                 this.course_id = course_id_url;
-                this.filterCoureses();
-                //  alert(institute_id_url);
+                this.filterRequests();
             } else {
                 this.getstudentsRequests();
                 this.get_filter_courses();

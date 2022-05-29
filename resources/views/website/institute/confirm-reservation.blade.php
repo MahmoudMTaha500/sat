@@ -90,7 +90,7 @@
                                 <div class="col-12">
                                     <label>ملاحظاتك </label>
                                     <div class="form-group btn-light rounded-10">
-                                        <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
+                                        <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5">{{old('note')}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -162,7 +162,7 @@
                                 <div class="col-12">
                                     <label>ملاحظاتك </label>
                                     <div class="form-group btn-light rounded-10">
-                                        <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5"></textarea>
+                                        <textarea name="note" class="form-control rounded-10" placeholder="أضف ملاحظاتك" rows="5">{{old('note')}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -175,7 +175,17 @@
                                     </button>
                                 </div>
                                 <div class="col-12 mt-4 text-left">
-                                    <a href="{{route('website.institute' , [$course_details['course_obj']->institute->id, $course_details['course_obj']->institute->slug , $course_details['course_obj']->slug, "weeks" => $course_details['weeks'], "from_date" => $course_details['from_date'], "residence" => $course_details['residence'] , "residence_weeks" => $course_details['residence_weeks']  ])}}" class="btn bg-dark text-white rounded-10" type="submit">
+                                    <a href="
+                                            {{route('website.institute' , 
+                                            [$course_details['course_obj']->institute->id, 
+                                            $course_details['course_obj']->institute->slug , 
+                                            $course_details['course_obj']->slug, 
+                                            "weeks" => $course_details['weeks'], 
+                                            "from_date" => $course_details['from_date'], 
+                                            "insurance" => $course_details['insurance'] , 
+                                            "airport" => json_encode($course_details['airport']) , 
+                                            "residence" => json_encode($course_details['residence']) , 
+                                            "residence_weeks" => $course_details['residence_weeks']  ])}}" class="btn bg-dark text-white rounded-10" type="submit">
                                         رجوع <i class="fa fa-arrow-left" aria-hidden="true"></i>
                                     </a>
                                 </div>
@@ -248,25 +258,23 @@
                     </div>
                     <div class="cost-body px-3 pt-3">
                         <p class="text-dark"><span class="font-weight-bold text-main-color">أسم المعهد : </span> {{$course_details['institute_name']}}</p>
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">اسم الكورس : </span> {{$course_details['course_name']}} <span class="text-success">--</span></p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">اسم الكورس : </span> {{$course_details['course_name']}} <span class="text-success font-weight-bold">{{round($course_details['course_price']*$course_details['weeks'])}} ر.س ({{$course_details['weeks'] == '1' ? $course_details['weeks'] . ' أسبوع ' :  $course_details['weeks'] .' أسابيع '}})</span></p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">الموقع : </span> {{$course_details['country']}} - {{$course_details['city']}}</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">تاريخ بداية الكورس : </span> {{ArabicDate($course_details['from_date'])}}</p>
                         <p class="text-dark"><span class="font-weight-bold text-main-color">تاريخ نهاية الكورس : </span> {{ArabicDate($course_details['to_date'])}}</p>
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">عدد اسابيع الكورس : </span> {{$course_details['weeks']}} أسابيع</p>
                         @if ($course_details['airport'] != 0)
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">الاستقبال : </span> {{$course_details['airport']['name_ar']}} - {{$course_details['airport']['price']}} ر.س</p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">الاستقبال : </span> {{$course_details['airport']['name_ar']}} <span class="text-success font-weight-bold ">( {{round($course_details['airport']['price'])}} ر.س )</span> </p>
                         @endif 
                         @if ($course_details['residence'] != 0)
-                            <p class="text-dark"><span class="font-weight-bold text-main-color">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} - {{$course_details['residence']['price']*$course_details['residence_weeks'] }} ر.س</p>
-                            <p class="text-dark"><span class="font-weight-bold text-main-color">عدد اسابيع السكن : </span> {{$course_details['residence_weeks']}} أسابيع</p>
+                            <p class="text-dark"><span class="font-weight-bold text-main-color">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} <span class="text-success font-weight-bold">{{round($course_details['residence']['price']*$course_details['residence_weeks'])}} ر.س ({{$course_details['residence_weeks'] == '1' ? $course_details['residence_weeks'] . ' أسبوع ' :  $course_details['residence_weeks'] .' أسابيع '}})</span></p>
                         @endif 
                         @if ($course_details['insurance_price'] != 0)
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">التامين : </span> {{$course_details['insurance_price']*$course_details['weeks']}} ر.س</p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">التامين : </span> <span class="text-success font-weight-bold">{{round($course_details['insurance_price']*$course_details['weeks'])}} ر.س</span> </p>
                         @endif
                         <p class="text-dark"><span class="font-weight-bold text-main-color">عدد الدروس : </span> {{$course_details['lessons_per_week']}} درس / أسبوع</p>
-                        <p class="text-dark"><span class="font-weight-bold text-main-color">عدد الساعات : </span> {{$course_details['hours_per_week']}} ساعة في الأسبوع</p>
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">عدد الساعات : </span> {{$course_details['hours_per_week']}} ساعة / الأسبوع</p>
                         <hr>
-                        <p class="text-dark h4"><span class="font-weight-bold text-main-color">التكليفة الاجمالية : </span> <span class="text-success">{{round($course_details['total_price'])}}</span> <span class="h6">ر.س</span></p>
+                        <p class="text-dark h4"><span class="font-weight-bold text-main-color">التكليفة الاجمالية : </span> <span class="text-success font-weight-bold">{{round($course_details['total_price'])}}</span> <span class="h6">ر.س</span></p>
 
                     </div>
                 </div>

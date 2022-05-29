@@ -2184,8 +2184,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
@@ -2247,27 +2245,45 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     var queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    var url_weeks = urlParams.get('weeks');
-    var url_from_date = urlParams.get('from_date');
-    var url_residence = urlParams.get('residence');
-    var url_residence_weeks = urlParams.get('residence_weeks');
+    var savedParams = new URLSearchParams(queryString);
+    var saved_weeks = savedParams.get('weeks');
+    var saved_from_date = savedParams.get('from_date');
+    var saved_residence = savedParams.get('residence');
+    var saved_residence_weeks = savedParams.get('residence_weeks');
+    var saved_airport = savedParams.get('airport');
+    var saved_insurance = savedParams.get('insurance');
 
-    if (url_weeks != undefined) {
-      this.weeks = url_weeks;
+    if (this.old.length != 0) {
+      saved_weeks = this.old.weeks;
+      saved_from_date = this.old.from_date;
+      saved_residence = this.old.residence;
+      saved_residence_weeks = this.old.residence_weeks;
+      saved_airport = this.old.airport;
+      saved_insurance = this.old.insurance;
     }
 
-    if (url_from_date != undefined) {
-      this.from_date = url_from_date;
+    if (saved_weeks != undefined) {
+      this.weeks = saved_weeks;
     }
 
-    if (url_residence != undefined) {
-      this.chosin_residence = JSON.parse(url_residence);
-      console.log(url_residence);
+    if (saved_from_date != undefined) {
+      this.from_date = saved_from_date;
     }
 
-    if (url_residence_weeks != undefined) {
-      this.residence_weeks = url_residence_weeks;
+    if (saved_residence != undefined) {
+      this.chosin_residence = JSON.parse(saved_residence);
+    }
+
+    if (saved_residence_weeks != undefined) {
+      this.residence_weeks = saved_residence_weeks;
+    }
+
+    if (saved_airport != undefined) {
+      this.chosin_airport = JSON.parse(saved_airport);
+    }
+
+    if (saved_insurance != undefined) {
+      this.insurance_price_checker = saved_insurance;
     }
 
     this.get_price_per_week();
@@ -39823,7 +39839,7 @@ var render = function() {
                     _vm._v(
                       "(" +
                         _vm._s(
-                          _vm.weeks + (_vm.weeks == 1 ? "اسبوع " : "اسابيع ")
+                          _vm.weeks + (_vm.weeks == 1 ? " اسبوع " : " اسابيع ")
                         ) +
                         ")"
                     )
@@ -39855,7 +39871,7 @@ var render = function() {
                       " (" +
                         _vm._s(
                           _vm.residence_weeks +
-                            (_vm.residence_weeks == 1 ? "اسبوع " : "اسابيع ")
+                            (_vm.residence_weeks == 1 ? " اسبوع " : " اسابيع  ")
                         ) +
                         ") "
                     )
@@ -39888,10 +39904,14 @@ var render = function() {
           _vm._v(" "),
           _vm.insurance_price_checker != 0
             ? _c("div", [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-main-color" }, [
-                  _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ر.س ")
+                _c("span", { staticClass: "d-block" }, [
+                  _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(" التامين الصحي : ")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-main-color" }, [
+                    _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ر.س ")
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -39899,10 +39919,14 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("div", [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("span", { staticClass: "text-main-color" }, [
-              _vm._v(_vm._s(Math.round(_vm.total_price())) + " ر.س ")
+            _c("span", { staticClass: "d-block" }, [
+              _c("span", { staticClass: "font-weight-bold" }, [
+                _vm._v(" إجمالي السعر : ")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-main-color" }, [
+                _vm._v(_vm._s(Math.round(_vm.total_price())) + " ر.س ")
+              ])
             ])
           ])
         ])
@@ -39913,7 +39937,7 @@ var render = function() {
         { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
         [
           _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
-            _vm._m(3),
+            _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
               _c(
@@ -39975,7 +39999,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(2)
                     ]
                   ),
                   _vm._v(" "),
@@ -40024,23 +40048,14 @@ var render = function() {
                           ]
                         }
                       },
-                      [
-                        _c("option", { attrs: { value: "" } }, [
-                          _vm._v("عدد الأسابيع")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.weeks_count, function(week_count) {
-                          return _c(
-                            "option",
-                            {
-                              key: week_count,
-                              domProps: { value: week_count }
-                            },
-                            [_vm._v(" " + _vm._s(week_count) + " ")]
-                          )
-                        })
-                      ],
-                      2
+                      _vm._l(_vm.weeks_count, function(week_count) {
+                        return _c(
+                          "option",
+                          { key: week_count, domProps: { value: week_count } },
+                          [_vm._v(" " + _vm._s(week_count) + " ")]
+                        )
+                      }),
+                      0
                     )
                   ]),
                   _vm._v(" "),
@@ -40163,23 +40178,17 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("عدد الأسابيع")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.weeks_count, function(week_count) {
-                              return _c(
-                                "option",
-                                {
-                                  key: week_count,
-                                  domProps: { value: week_count }
-                                },
-                                [_vm._v(" " + _vm._s(week_count) + " ")]
-                              )
-                            })
-                          ],
-                          2
+                          _vm._l(_vm.weeks_count, function(week_count) {
+                            return _c(
+                              "option",
+                              {
+                                key: week_count,
+                                domProps: { value: week_count }
+                              },
+                              [_vm._v(" " + _vm._s(week_count) + " ")]
+                            )
+                          }),
+                          0
                         )
                       ])
                     : _vm._e(),
@@ -40268,7 +40277,7 @@ var render = function() {
                   _vm._v(" "),
                   _vm.insurance_price
                     ? _c("div", { staticClass: "row" }, [
-                        _vm._m(5),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
                           _c(
@@ -40406,26 +40415,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "cost-heading border-bottom pb-2 px-3" }, [
       _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
         _vm._v("التكاليف")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "d-block" }, [
-      _c("span", { staticClass: "font-weight-bold" }, [
-        _vm._v(" التامين الصحي : ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "d-block" }, [
-      _c("span", { staticClass: "font-weight-bold" }, [
-        _vm._v(" إجمالي السعر : ")
       ])
     ])
   },
@@ -41024,6 +41013,7 @@ var render = function() {
                                 "a",
                                 {
                                   attrs: {
+                                    target: "_blank",
                                     href:
                                       _vm.public_path +
                                       "institute/" +
@@ -41085,6 +41075,7 @@ var render = function() {
                                         {
                                           staticClass: "text-dark",
                                           attrs: {
+                                            target: "_blank",
                                             href:
                                               _vm.public_path +
                                               "institute/" +
@@ -41118,6 +41109,7 @@ var render = function() {
                                         {
                                           staticClass: "text-main-color",
                                           attrs: {
+                                            target: "_blank",
                                             href:
                                               _vm.public_path +
                                               "institute/" +
@@ -61891,13 +61883,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\website-js.js */"./resources/js/website-js.js");
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\custom.js */"./public/website/js/custom.js");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\website-js.js */"./resources/js/website-js.js");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\custom.js */"./public/website/js/custom.js");
 
 
 /***/ })

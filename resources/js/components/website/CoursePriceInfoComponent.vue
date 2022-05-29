@@ -12,12 +12,12 @@
                         <span  v-if="course.discount !=0" class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} - </span>
                     </span>
                     <span  v-if="course.discount != 0" class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ر.س / الأسبوع </span>
-                    <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.round(price_per_week*weeks*(1- course.discount))}} ر.س </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? 'اسبوع ' : 'اسابيع ')}})</span> </span>
+                    <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.round(price_per_week*weeks*(1- course.discount))}} ر.س </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? ' اسبوع ' : ' اسابيع ')}})</span> </span>
                     <hr />
                 </div>
                 <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
-                    <span class="text-main-color">{{chosin_residence.price*residence_weeks}} ر.س   <span class="h6 small text-success"> ({{residence_weeks + ( residence_weeks == 1 ? 'اسبوع ' : 'اسابيع ')}}) </span> </span>
+                    <span class="text-main-color">{{chosin_residence.price*residence_weeks}} ر.س   <span class="h6 small text-success"> ({{residence_weeks + ( residence_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}}) </span> </span>
                     <hr />
                 </div>
                 <div v-if="chosin_airport.price !=0 && chosin_airport.price != '' && !isNaN(chosin_airport.price) ">
@@ -26,13 +26,13 @@
                     <hr />
                 </div>
                 <div v-if="insurance_price_checker !=0">
-                    <span class="d-block"><span class="font-weight-bold"> التامين الصحي : </span> </span>
-                    <span class="text-main-color">{{insurance_price*weeks}} ر.س </span>
+                    <span class="d-block"><span class="font-weight-bold"> التامين الصحي : </span> <span class="text-main-color">{{insurance_price*weeks}} ر.س </span> </span>
+                    
                     <hr />
                 </div>
                 <div>
-                    <span class="d-block"><span class="font-weight-bold"> إجمالي السعر : </span> </span>
-                    <span class="text-main-color">{{Math.round(total_price())}} ر.س </span>
+                    <span class="d-block"><span class="font-weight-bold"> إجمالي السعر : </span> <span class="text-main-color">{{Math.round(total_price())}} ر.س </span> </span>
+                    
                 </div>
             </div>
         </div>
@@ -59,7 +59,6 @@
                         <div class="form-group">
                             <label>عدد اسابيع الدورة</label>
                             <select name="weeks" @change="get_price_per_week()" v-model="weeks" class="form-control rounded-10 border" data-live-search="true">
-                                <option value="">عدد الأسابيع</option>
                                 <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                             </select>
                         </div>
@@ -76,7 +75,6 @@
                         <div v-if="chosin_residence != 0" class="form-group">
                             <label>عدد اسابيع السكن</label>
                             <select name="residence_weeks" v-model="residence_weeks" class="form-control rounded-10 border" data-live-search="true">
-                                <option value="">عدد الأسابيع</option>
                                 <option v-for="week_count in weeks_count" :value="week_count" :key="week_count"> {{week_count}} </option>
                             </select>
                         </div>
@@ -164,24 +162,41 @@
         },
         beforeMount() {
 
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const url_weeks = urlParams.get('weeks')
-            const url_from_date = urlParams.get('from_date')
-            const url_residence = urlParams.get('residence')
-            const url_residence_weeks = urlParams.get('residence_weeks')
-            if (url_weeks != undefined) {
-                this.weeks = url_weeks;
+            let queryString = window.location.search;
+            let savedParams = new URLSearchParams(queryString);
+            let saved_weeks = savedParams.get('weeks')
+            let saved_from_date = savedParams.get('from_date')
+            let saved_residence = savedParams.get('residence')
+            let saved_residence_weeks = savedParams.get('residence_weeks')
+            let saved_airport = savedParams.get('airport')
+            let saved_insurance = savedParams.get('insurance')
+
+            if(this.old.length != 0){
+                saved_weeks = this.old.weeks
+                saved_from_date = this.old.from_date
+                saved_residence = this.old.residence
+                saved_residence_weeks = this.old.residence_weeks
+                saved_airport = this.old.airport
+                saved_insurance = this.old.insurance
             }
-            if(url_from_date != undefined){
-                this.from_date = url_from_date;
+            
+            if (saved_weeks != undefined) {
+                this.weeks = saved_weeks;
             }
-            if(url_residence != undefined){
-                this.chosin_residence = JSON.parse(url_residence);
-                console.log(url_residence)
+            if(saved_from_date != undefined){
+                this.from_date = saved_from_date;
             }
-            if(url_residence_weeks != undefined){
-                this.residence_weeks = url_residence_weeks;
+            if(saved_residence != undefined){
+                this.chosin_residence = JSON.parse(saved_residence);
+            }
+            if(saved_residence_weeks != undefined){
+                this.residence_weeks = saved_residence_weeks;
+            }
+            if(saved_airport != undefined){
+                this.chosin_airport = JSON.parse(saved_airport);
+            }
+            if(saved_insurance != undefined){
+                this.insurance_price_checker = saved_insurance;
             }
 
 

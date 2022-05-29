@@ -4782,6 +4782,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["student_request_url", "dahsboard_url", "course_url", "countries_from_blade", "institutes", "csrftoken", "create", "edit", "delete_pre", "update_classat_note_route", "get_courses_url", "get_institutes_url"],
@@ -4790,13 +4833,17 @@ __webpack_require__.r(__webpack_exports__);
       studentsRequests: {},
       url: this.student_request_url,
       url_course: this.course_url,
-      country_id: "",
-      city_id: "",
+      filterCountryId: "",
+      filterCityId: "",
       countries: this.countries_from_blade,
       cities: {},
       courses: {},
-      institute_id: "",
-      course_id: "",
+      filterInstituteId: "",
+      filterCourseId: "",
+      filterFromDate: "",
+      filterToDate: "",
+      filterStudyingStatus: "",
+      filterPaymentStatus: "",
       name_ar: "",
       news: "",
       got_accepted: "",
@@ -4849,8 +4896,8 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.get_institutes_url, {
         params: {
-          country_id: this.country_id,
-          city_id: this.city_id
+          country_id: this.filterCountryId,
+          city_id: this.filterCityId
         }
       }).then(function (response) {
         return _this2.institutes = response.data;
@@ -4859,7 +4906,7 @@ __webpack_require__.r(__webpack_exports__);
     getcities: function getcities() {
       var _this3 = this;
 
-      var country_id = this.country_id;
+      var country_id = this.filterCountryId;
       axios.get(this.dahsboard_url + "/getcities", {
         params: {
           countryID: country_id
@@ -4868,42 +4915,55 @@ __webpack_require__.r(__webpack_exports__);
         return _this3.cities = response.data.cities;
       });
 
-      if (this.country_id == "") {
-        this.city_id = "";
+      if (this.filterCountryId == "") {
+        this.filterCityId = "";
       }
     },
-    filterCoureses: function filterCoureses() {
+    filterRequests: function filterRequests() {
       var _this4 = this;
 
       // alert(this.news);
       var filter_params = {
-        institute_id: this.institute_id,
-        course_id: this.course_id,
-        country_id: this.country_id,
-        city_id: this.city_id,
-        name_ar: this.name_ar,
-        "new": this.news,
-        got_accepted: this.got_accepted,
-        study_started: this.study_started,
-        rejected: this.rejected
+        institute_id: this.filterInstituteId,
+        course_id: this.filterCourseId,
+        country_id: this.filterCountryId,
+        city_id: this.filterCityId,
+        from_date: this.filterFromDate,
+        to_date: this.filterToDate,
+        studying_status: this.filterStudyingStatus,
+        payment_status: this.filterPaymentStatus
       };
-      var pagination_params = "&institute_id=" + this.institute_id + "&country_id=" + this.country_id + "&city_id=" + this.city_id;
+      var pagination_params = "&institute_id=" + this.filterInstituteId + "&country_id=" + this.filterCountryId + "&city_id=" + this.filterCityId;
       axios.get(this.dahsboard_url + "/student-requests/filterstudentsRequests", {
         params: filter_params
       }).then(function (response) {
-        return _this4.studentsRequests = response.data.studentsRequests, _this4.studentsRequests.prev_page_url += pagination_params, _this4.studentsRequests.next_page_url += pagination_params;
+        console.log(response);
+        _this4.studentsRequests = response.data.studentsRequests;
+        _this4.studentsRequests.prev_page_url += pagination_params;
+        _this4.studentsRequests.next_page_url += pagination_params;
       });
     },
-    updateStatus: function updateStatus(e) {
-      var newValue = e.target.value;
-      axios.post(this.dahsboard_url + "/student-requests/update-status", {
-        request_id: this.request_id,
-        status: newValue
+    updateStatus: function updateStatus(event, statusType, request) {
+      axios.put(this.dahsboard_url + "/student-requests/" + request.id, {
+        api_request: true,
+        status_type: statusType,
+        request_id: request.id,
+        status: event.target.value
       }, {
         headers: {
           "X-CSRFToken": "{{ csrf_token()}}"
         }
-      }).then(function (response) {});
+      }).then(function (response) {
+        if (response.data.status == 'success') {
+          if (statusType == 'studying-status') {
+            request.status = event.target.value;
+          }
+
+          if (statusType == 'payment-status') {
+            request.payment_status = event.target.value;
+          }
+        }
+      });
     },
     getrequest_id: function getrequest_id(id) {
       return this.request_id = id;
@@ -4920,7 +4980,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get(this.get_courses_url, {
         params: {
-          institute_id: this.institute_id
+          institute_id: this.filterInstituteId
         }
       }).then(function (response) {
         return _this6.courses = response.data;
@@ -4930,11 +4990,11 @@ __webpack_require__.r(__webpack_exports__);
   beforeMount: function beforeMount() {
     var queryString = window.location.search;
     var urlParams = new URLSearchParams(queryString);
-    var course_id_url = urlParams.get("course_id"); // alert(course_id_url);
+    var course_id_url = urlParams.get("course_id");
 
     if (course_id_url) {
       this.course_id = course_id_url;
-      this.filterCoureses(); //  alert(institute_id_url);
+      this.filterRequests();
     } else {
       this.getstudentsRequests();
       this.get_filter_courses();
@@ -5169,6 +5229,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "get_course_price_url", "get_insurance_price_url", "student_request", "student_requests_url", "bill_file"],
   data: function data() {
@@ -5186,7 +5263,8 @@ __webpack_require__.r(__webpack_exports__);
       payment_status: this.student_request.payment_status,
       weeks: this.student_request.weeks,
       residence_weeks: this.student_request.residence_weeks,
-      notes: this.student_request.note,
+      classat_note: this.student_request.classat_note,
+      student_note: this.student_request.note,
       institute_message: this.student_request.institute_message,
       from_date: this.student_request.from_date,
       to_date: this.student_request.to_date,
@@ -5195,7 +5273,7 @@ __webpack_require__.r(__webpack_exports__);
       airports: this.student_request.course.institute.airport,
       chosin_airport: '',
       insurance_price_checker: this.student_request.insurance_price == 0 ? false : true,
-      insurance_price: this.student_request.course.institute.insurance.price,
+      insurance_price: this.student_request.course.institute.insurance == null ? 0 : this.student_request.course.institute.insurance.price,
       course_price: '',
       residence_from_date: '',
       residence_to_date: ''
@@ -5820,8 +5898,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
@@ -5883,27 +5959,45 @@ __webpack_require__.r(__webpack_exports__);
     var _this2 = this;
 
     var queryString = window.location.search;
-    var urlParams = new URLSearchParams(queryString);
-    var url_weeks = urlParams.get('weeks');
-    var url_from_date = urlParams.get('from_date');
-    var url_residence = urlParams.get('residence');
-    var url_residence_weeks = urlParams.get('residence_weeks');
+    var savedParams = new URLSearchParams(queryString);
+    var saved_weeks = savedParams.get('weeks');
+    var saved_from_date = savedParams.get('from_date');
+    var saved_residence = savedParams.get('residence');
+    var saved_residence_weeks = savedParams.get('residence_weeks');
+    var saved_airport = savedParams.get('airport');
+    var saved_insurance = savedParams.get('insurance');
 
-    if (url_weeks != undefined) {
-      this.weeks = url_weeks;
+    if (this.old.length != 0) {
+      saved_weeks = this.old.weeks;
+      saved_from_date = this.old.from_date;
+      saved_residence = this.old.residence;
+      saved_residence_weeks = this.old.residence_weeks;
+      saved_airport = this.old.airport;
+      saved_insurance = this.old.insurance;
     }
 
-    if (url_from_date != undefined) {
-      this.from_date = url_from_date;
+    if (saved_weeks != undefined) {
+      this.weeks = saved_weeks;
     }
 
-    if (url_residence != undefined) {
-      this.chosin_residence = JSON.parse(url_residence);
-      console.log(url_residence);
+    if (saved_from_date != undefined) {
+      this.from_date = saved_from_date;
     }
 
-    if (url_residence_weeks != undefined) {
-      this.residence_weeks = url_residence_weeks;
+    if (saved_residence != undefined) {
+      this.chosin_residence = JSON.parse(saved_residence);
+    }
+
+    if (saved_residence_weeks != undefined) {
+      this.residence_weeks = saved_residence_weeks;
+    }
+
+    if (saved_airport != undefined) {
+      this.chosin_airport = JSON.parse(saved_airport);
+    }
+
+    if (saved_insurance != undefined) {
+      this.insurance_price_checker = saved_insurance;
     }
 
     this.get_price_per_week();
@@ -46389,7 +46483,12 @@ var render = function() {
                       _vm._l(_vm.courses.data, function(course) {
                         return _c("tr", { key: course.id }, [
                           _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(_vm._s(course.name_ar))
+                            course.main_course_trigger == 1
+                              ? _c("span", { staticClass: "text-warning" }, [
+                                  _c("i", { staticClass: "la la-star" })
+                                ])
+                              : _vm._e(),
+                            _vm._v(" " + _vm._s(course.name_ar))
                           ]),
                           _vm._v(" "),
                           _c("td", { staticClass: "text-truncate" }, [
@@ -49408,8 +49507,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.country_id,
-                          expression: "country_id"
+                          value: _vm.filterCountryId,
+                          expression: "filterCountryId"
                         }
                       ],
                       staticClass: "form-control",
@@ -49429,7 +49528,7 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.country_id = $event.target.multiple
+                            _vm.filterCountryId = $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
                           },
@@ -49469,8 +49568,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.city_id,
-                          expression: "city_id"
+                          value: _vm.filterCityId,
+                          expression: "filterCityId"
                         }
                       ],
                       staticClass: "form-control",
@@ -49486,7 +49585,7 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.city_id = $event.target.multiple
+                            _vm.filterCityId = $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
                           },
@@ -49525,8 +49624,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.institute_id,
-                          expression: "institute_id"
+                          value: _vm.filterInstituteId,
+                          expression: "filterInstituteId"
                         }
                       ],
                       staticClass: "form-control",
@@ -49542,7 +49641,7 @@ var render = function() {
                                 var val = "_value" in o ? o._value : o.value
                                 return val
                               })
-                            _vm.institute_id = $event.target.multiple
+                            _vm.filterInstituteId = $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]
                           },
@@ -49594,8 +49693,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.course_id,
-                          expression: "course_id"
+                          value: _vm.filterCourseId,
+                          expression: "filterCourseId"
                         }
                       ],
                       staticClass: "form-control t",
@@ -49610,7 +49709,7 @@ var render = function() {
                               var val = "_value" in o ? o._value : o.value
                               return val
                             })
-                          _vm.course_id = $event.target.multiple
+                          _vm.filterCourseId = $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
                         }
@@ -49633,233 +49732,205 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "projectinput1" } }, [
-                    _vm._v("البحث بكلمات مفتاحية")
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "projectinput1" } }, [
+                        _vm._v("من")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.filterFromDate,
+                            expression: "filterFromDate"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "projectinput1",
+                          placeholder: "ادخل كلمة مفتاحية",
+                          name: "from_date"
+                        },
+                        domProps: { value: _vm.filterFromDate },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.filterFromDate = $event.target.value
+                          }
+                        }
+                      })
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.name_ar,
-                        expression: "name_ar"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      id: "projectinput1",
-                      placeholder: "ادخل كلمة مفتاحية",
-                      name: "name_ar"
-                    },
-                    domProps: { value: _vm.name_ar },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "projectinput1" } }, [
+                        _vm._v("الي")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.filterToDate,
+                            expression: "filterToDate"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "date",
+                          id: "projectinput1",
+                          placeholder: "ادخل كلمة مفتاحية",
+                          name: "to_date"
+                        },
+                        domProps: { value: _vm.filterToDate },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.filterToDate = $event.target.value
+                          }
                         }
-                        _vm.name_ar = $event.target.value
-                      }
-                    }
-                  })
+                      })
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass: "form-group",
-                    staticStyle: { direction: "rtl" }
-                  },
-                  [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" جديد")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "projectinput1" } }, [
+                        _vm._v("حالة الدراسة")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
                         {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.news,
-                          expression: "news"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "checkbox",
-                        id: "projectinput1",
-                        value: "جديد"
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.news)
-                          ? _vm._i(_vm.news, "جديد") > -1
-                          : _vm.news
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.news,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "جديد",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.news = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.news = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.filterStudyingStatus,
+                              expression: "filterStudyingStatus"
                             }
-                          } else {
-                            _vm.news = $$c
+                          ],
+                          staticClass: "form-control text-left",
+                          staticStyle: { height: "auto" },
+                          attrs: { width: "180px" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.filterStudyingStatus = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
                           }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("label", { attrs: { for: "" } }, [
-                      _vm._v(" حصل علي قبول")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
+                        },
+                        [
+                          _c("option", { attrs: { value: "" } }, [
+                            _vm._v(" الكل")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "جديد" } }, [
+                            _vm._v(" جديد")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "option",
+                            {
+                              attrs: { value: "تم التواصل وبانتظار المستندات" }
+                            },
+                            [_vm._v("تم التواصل وبانتظار المستندات")]
+                          ),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "حصل علي قبول" } }, [
+                            _vm._v(" حصل علي قبول ")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "بداء الدراسة" } }, [
+                            _vm._v(" بداء الدراسة")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "مرفوض" } }, [
+                            _vm._v(" مرفوض")
+                          ])
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "projectinput1" } }, [
+                        _vm._v("حالة الدفع")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
                         {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.got_accepted,
-                          expression: "got_accepted"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "checkbox",
-                        id: "projectinput1",
-                        value: "حصل علي قبول"
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.got_accepted)
-                          ? _vm._i(_vm.got_accepted, "حصل علي قبول") > -1
-                          : _vm.got_accepted
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.got_accepted,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "حصل علي قبول",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.got_accepted = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.got_accepted = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.filterPaymentStatus,
+                              expression: "filterPaymentStatus"
                             }
-                          } else {
-                            _vm.got_accepted = $$c
-                          }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("label", { attrs: { for: "" } }, [
-                      _vm._v(" بداء الدراسه")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.study_started,
-                          expression: "study_started"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "checkbox",
-                        id: "projectinput1",
-                        value: "بداء الدراسة"
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.study_started)
-                          ? _vm._i(_vm.study_started, "بداء الدراسة") > -1
-                          : _vm.study_started
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.study_started,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "بداء الدراسة",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.study_started = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.study_started = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
+                          ],
+                          staticClass: "form-control text-left",
+                          staticStyle: { height: "auto" },
+                          attrs: { width: "180px" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.filterPaymentStatus = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
                             }
-                          } else {
-                            _vm.study_started = $$c
                           }
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("label", { attrs: { for: "" } }, [_vm._v(" مرفوض")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.rejected,
-                          expression: "rejected"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        type: "checkbox",
-                        id: "projectinput1",
-                        value: "مرفوض"
-                      },
-                      domProps: {
-                        checked: Array.isArray(_vm.rejected)
-                          ? _vm._i(_vm.rejected, "مرفوض") > -1
-                          : _vm.rejected
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.rejected,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "مرفوض",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 && (_vm.rejected = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.rejected = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
-                          } else {
-                            _vm.rejected = $$c
-                          }
-                        }
-                      }
-                    })
-                  ]
-                )
+                        },
+                        [
+                          _c("option", { attrs: { value: "" } }, [
+                            _vm._v(" الكل")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "0" } }, [
+                            _vm._v(" لم يتم الدفع")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2" } }, [
+                            _vm._v(" مدفوع جزئيا  ")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v(" تم الدفع بالكامل")
+                          ])
+                        ]
+                      )
+                    ])
+                  ])
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -49874,7 +49945,7 @@ var render = function() {
                     },
                     on: {
                       click: function($event) {
-                        return _vm.filterCoureses()
+                        return _vm.filterRequests()
                       }
                     }
                   },
@@ -49918,168 +49989,396 @@ var render = function() {
                       "tbody",
                       _vm._l(_vm.studentsRequests.data, function(request) {
                         return _c("tr", { key: request.id }, [
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(_vm._s(request.student.name))
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [_vm._v(_vm._s(request.student.name))]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(_vm._s(request.student.phone))
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [_vm._v(_vm._s(request.student.phone))]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(_vm._s(request.student.email))
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [_vm._v(_vm._s(request.student.email))]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(_vm._s(request.course.institute.name_ar))
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [_vm._v(_vm._s(request.course.institute.name_ar))]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(
-                              _vm._s(request.course.institute.country.name_ar)
-                            )
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [
+                              _vm._v(
+                                _vm._s(request.course.institute.country.name_ar)
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(
-                              _vm._s(request.course.institute.city.name_ar)
-                            )
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [
+                              _vm._v(
+                                _vm._s(request.course.institute.city.name_ar)
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            request.status == "جديد"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-warning" }, [
-                                    _vm._v(_vm._s(request.status))
-                                  ])
-                                ])
-                              : request.status == "حصل علي قبول"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-success" }, [
-                                    _vm._v(_vm._s(request.status))
-                                  ])
-                                ])
-                              : request.status == "بداء الدراسة"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-success" }, [
-                                    _vm._v(_vm._s(request.status))
-                                  ])
-                                ])
-                              : request.status == "مرفوض"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-danger" }, [
-                                    _vm._v(_vm._s(request.status))
-                                  ])
-                                ])
-                              : _vm._e()
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "d-flex align-items-baseline",
+                                  staticStyle: { width: "180px" }
+                                },
+                                [
+                                  request.status == "جديد"
+                                    ? _c("p", { staticClass: "d-inline" }, [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-warning"
+                                        })
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  request.status ==
+                                  "تم التواصل وبانتظار المستندات"
+                                    ? _c("p", { staticClass: "d-inline" }, [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-dark"
+                                        })
+                                      ])
+                                    : request.status == "حصل علي قبول"
+                                    ? _c("p", { staticClass: "d-inline" }, [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-primary"
+                                        })
+                                      ])
+                                    : request.status == "بداء الدراسة"
+                                    ? _c("p", { staticClass: "d-inline" }, [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-success"
+                                        })
+                                      ])
+                                    : request.status == "مرفوض"
+                                    ? _c("p", { staticClass: "d-inline" }, [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-danger"
+                                        })
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      staticClass: "form-control text-left",
+                                      staticStyle: { height: "auto" },
+                                      attrs: { width: "180px" },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.updateStatus(
+                                            $event,
+                                            "studying-status",
+                                            request
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "جديد" },
+                                          domProps: {
+                                            selected:
+                                              request.status == "جديد"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" جديد")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: {
+                                            value:
+                                              "تم التواصل وبانتظار المستندات"
+                                          },
+                                          domProps: {
+                                            selected:
+                                              request.status ==
+                                              "تم التواصل وبانتظار المستندات"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "تم التواصل وبانتظار المستندات"
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "حصل علي قبول" },
+                                          domProps: {
+                                            selected:
+                                              request.status == "حصل علي قبول"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" حصل علي قبول ")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "بداء الدراسة" },
+                                          domProps: {
+                                            selected:
+                                              request.status == "بداء الدراسة"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" بداء الدراسة")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "مرفوض" },
+                                          domProps: {
+                                            selected:
+                                              request.status == "مرفوض"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" مرفوض")]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            request.payment_status == "0"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-danger" }, [
-                                    _vm._v("لم يتم الدفع")
-                                  ])
-                                ])
-                              : request.payment_status == "1"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-success" }, [
-                                    _vm._v("تم الدفع")
-                                  ])
-                                ])
-                              : request.payment_status == "2"
-                              ? _c("p", [
-                                  _c("span", { staticClass: "text-warning" }, [
-                                    _vm._v("مدفوع جزئيا")
-                                  ])
-                                ])
-                              : _vm._e()
-                          ]),
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "d-flex align-items-baseline",
+                                  staticStyle: { width: "150px" }
+                                },
+                                [
+                                  request.payment_status == "0"
+                                    ? _c("p", [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-danger"
+                                        })
+                                      ])
+                                    : request.payment_status == "1"
+                                    ? _c("p", [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-success"
+                                        })
+                                      ])
+                                    : request.payment_status == "2"
+                                    ? _c("p", [
+                                        _c("i", {
+                                          staticClass:
+                                            "la la-dot-circle-o text-warning"
+                                        })
+                                      ])
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      staticClass: "form-control text-left",
+                                      staticStyle: { height: "auto" },
+                                      attrs: { width: "180px" },
+                                      on: {
+                                        change: function($event) {
+                                          return _vm.updateStatus(
+                                            $event,
+                                            "payment-status",
+                                            request
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "0" },
+                                          domProps: {
+                                            selected:
+                                              request.payment_status == "0"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" لم يتم الدفع")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "2" },
+                                          domProps: {
+                                            selected:
+                                              request.payment_status == "2"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" مدفوع جزئيا  ")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "option",
+                                        {
+                                          attrs: { value: "1" },
+                                          domProps: {
+                                            selected:
+                                              request.payment_status == "1"
+                                                ? true
+                                                : false
+                                          }
+                                        },
+                                        [_vm._v(" تم الدفع بالكامل")]
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("td", { staticClass: "text-truncate" }, [
-                            _vm._v(
-                              _vm._s(
-                                new Intl.DateTimeFormat("en-GB").format(
-                                  new Date(request.created_at)
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [
+                              _vm._v(
+                                _vm._s(
+                                  new Intl.DateTimeFormat("en-GB").format(
+                                    new Date(request.created_at)
+                                  )
                                 )
                               )
-                            )
-                          ]),
+                            ]
+                          ),
                           _vm._v(" "),
-                          _c("td", [
-                            _c(
-                              "div",
-                              {
-                                staticClass: "btn-group",
-                                attrs: {
-                                  role: "group",
-                                  "aria-label": "Basic example"
-                                }
-                              },
-                              [
-                                _vm.edit
-                                  ? _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "btn btn-info btn-sm round",
-                                        attrs: {
-                                          href:
-                                            _vm.dahsboard_url +
-                                            "/student-requests/" +
-                                            request.id +
-                                            "/edit"
-                                        }
-                                      },
-                                      [_vm._v(" تعديل")]
-                                    )
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "form",
-                                  {
-                                    staticClass: "btn-group",
-                                    attrs: {
-                                      action:
-                                        _vm.dahsboard_url +
-                                        "/student-requests/" +
-                                        request.id,
-                                      method: "POST"
-                                    }
-                                  },
-                                  [
-                                    _c("input", {
-                                      attrs: { type: "hidden", name: "_token" },
-                                      domProps: { value: _vm.csrftoken }
-                                    }),
-                                    _vm._v(" "),
-                                    _c("input", {
+                          _c(
+                            "td",
+                            { staticClass: "text-truncate border-top-0 p-1" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "btn-group",
+                                  attrs: {
+                                    role: "group",
+                                    "aria-label": "Basic example"
+                                  }
+                                },
+                                [
+                                  _vm.edit
+                                    ? _c(
+                                        "a",
+                                        {
+                                          staticClass:
+                                            "btn btn-info btn-sm round",
+                                          attrs: {
+                                            href:
+                                              _vm.dahsboard_url +
+                                              "/student-requests/" +
+                                              request.id +
+                                              "/edit"
+                                          }
+                                        },
+                                        [_vm._v(" تعديل")]
+                                      )
+                                    : _vm._e(),
+                                  _vm._v(" "),
+                                  _c(
+                                    "form",
+                                    {
+                                      staticClass: "btn-group",
                                       attrs: {
-                                        type: "hidden",
-                                        name: "_method",
-                                        value: "delete"
+                                        action:
+                                          _vm.dahsboard_url +
+                                          "/student-requests/" +
+                                          request.id,
+                                        method: "POST"
                                       }
-                                    }),
-                                    _vm._v(" "),
-                                    _vm.delete_pre
-                                      ? _c(
-                                          "button",
-                                          {
-                                            staticClass:
-                                              "btn btn-danger btn-sm round",
-                                            attrs: {
-                                              onclick:
-                                                "return confirm('هل انت متاكد من حذف هذه الدورة')"
-                                            }
-                                          },
-                                          [_vm._v("حذف")]
-                                        )
-                                      : _vm._e()
-                                  ]
-                                )
-                              ]
-                            )
-                          ])
+                                    },
+                                    [
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_token"
+                                        },
+                                        domProps: { value: _vm.csrftoken }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        attrs: {
+                                          type: "hidden",
+                                          name: "_method",
+                                          value: "delete"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _vm.delete_pre
+                                        ? _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-danger btn-sm round",
+                                              attrs: {
+                                                onclick:
+                                                  "return confirm('هل انت متاكد من حذف هذه الدورة')"
+                                              }
+                                            },
+                                            [_vm._v("حذف")]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
+                                ]
+                              )
+                            ]
+                          )
                         ])
                       }),
                       0
@@ -50155,7 +50454,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLongTitle" } },
-        [_vm._v("البحث في المدن")]
+        [_vm._v("البحث في الطلبات")]
       ),
       _vm._v(" "),
       _c(
@@ -50351,20 +50650,56 @@ var render = function() {
             ])
           : _vm._e(),
         _vm._v(" "),
+        _vm.insurance_price_checker != 0 ? _c("hr") : _vm._e(),
+        _vm._v(" "),
+        _vm.insurance_price_checker != 0
+          ? _c("div", { staticClass: "row" }, [
+              _vm._m(5),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-7" }, [
+                _c("span", [
+                  _c("span", { staticClass: "text-primary" }, [
+                    _vm._v(
+                      _vm._s(Math.round(_vm.insurance_price * _vm.weeks)) +
+                        " ر.س"
+                    )
+                  ])
+                ])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.student_note != null ? _c("hr") : _vm._e(),
+        _vm._v(" "),
+        _vm.student_note != null
+          ? _c("div", { staticClass: "row" }, [
+              _vm._m(6),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-7" }, [
+                _c("span", [_vm._v(_vm._s(_vm.student_note))])
+              ])
+            ])
+          : _vm._e(),
+        _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _vm._m(5),
+          _vm._m(7),
           _vm._v(" "),
           _c("div", { staticClass: "col-7" }, [
-            _c("span", [_vm._v(_vm._s(_vm.totalPrice().toFixed(2)) + " ر.س")])
+            _c("span", [
+              _c("span", { staticClass: "text-success h4" }, [
+                _vm._v(_vm._s(_vm.totalPrice().toFixed(2)))
+              ]),
+              _vm._v(" ر.س")
+            ])
           ])
         ]),
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _vm._m(6),
+          _vm._m(8),
           _vm._v(" "),
           _c("div", { staticClass: "col-7" }, [
             _vm.bill_file != 0
@@ -50435,10 +50770,6 @@ var render = function() {
                         attrs: { name: "status" }
                       },
                       [
-                        _c("option", { attrs: { value: "" } }, [
-                          _vm._v("اختر الحاله")
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "option",
                           {
@@ -50448,6 +50779,20 @@ var render = function() {
                             }
                           },
                           [_vm._v(" جديد")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "تم التواصل وبانتظار المستندات" },
+                            domProps: {
+                              selected:
+                                _vm.status == "تم التواصل وبانتظار المستندات"
+                                  ? true
+                                  : false
+                            }
+                          },
+                          [_vm._v("تم التواصل وبانتظار المستندات")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -50541,9 +50886,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" عدد اسابيع الكورس ")
-                    ]),
+                    _c("label", [_vm._v(" عدد اسابيع الكورس ")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -50581,9 +50924,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-3" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" عدد اسابيع السكن ")
-                    ]),
+                    _c("label", [_vm._v(" عدد اسابيع السكن ")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -50621,9 +50962,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" السكن  ")
-                    ]),
+                    _c("label", [_vm._v(" السكن  ")]),
                     _vm._v(" "),
                     _c(
                       "select",
@@ -50694,9 +51033,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" تاريخ بداية الكورس ")
-                    ]),
+                    _c("label", [_vm._v(" تاريخ بداية الكورس ")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -50724,9 +51061,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" تاريخ انتهاء الكورس ")
-                    ]),
+                    _c("label", [_vm._v(" تاريخ انتهاء الكورس ")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -50760,9 +51095,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" تاريخ البداية السكن ")
-                    ]),
+                    _c("label", [_vm._v(" تاريخ البداية السكن ")]),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -50795,9 +51128,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" تاريخ انتهاء السكن ")
-                    ]),
+                    _c("label", [_vm._v(" تاريخ انتهاء السكن ")]),
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "form-control",
@@ -50931,9 +51262,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" المتبقي (ر.س) ")
-                    ]),
+                    _c("label", [_vm._v(" المتبقي (ر.س) ")]),
                     _vm._v(" "),
                     _c("input", {
                       staticClass: "form-control",
@@ -50952,9 +51281,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "projectinput1" } }, [
-                      _vm._v(" المطار  ")
-                    ]),
+                    _c("label", [_vm._v(" المطار  ")]),
                     _vm._v(" "),
                     _c(
                       "select",
@@ -51025,12 +51352,10 @@ var render = function() {
                 _vm._v(" "),
                 _vm.insurance_price != 0
                   ? _c("div", { staticClass: "col-md-6" }, [
-                      _c("label", { attrs: { for: "projectinput1" } }, [
-                        _vm._v(" التامين  ")
-                      ]),
+                      _c("label", [_vm._v(" التامين  ")]),
                       _vm._v(" "),
                       _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "projectinput4" } }, [
+                        _c("label", [
                           _vm._v(
                             " اريد تامين (" +
                               _vm._s(_vm.insurance_price * _vm.weeks) +
@@ -51103,15 +51428,15 @@ var render = function() {
                         type: "text",
                         rows: "10",
                         placeholder: "  ملاحظات ",
-                        name: "note"
+                        name: "classat_note"
                       },
-                      domProps: { value: _vm.notes }
+                      domProps: { value: _vm.classat_note }
                     })
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(7)
+              _vm._m(9)
             ])
           ]
         )
@@ -51158,6 +51483,22 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-5" }, [
       _c("strong", [_vm._v("المطار :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("التامين :")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-5" }, [
+      _c("strong", [_vm._v("ملاحظات الطالب :")])
     ])
   },
   function() {
@@ -52282,7 +52623,7 @@ var render = function() {
                     _vm._v(
                       "(" +
                         _vm._s(
-                          _vm.weeks + (_vm.weeks == 1 ? "اسبوع " : "اسابيع ")
+                          _vm.weeks + (_vm.weeks == 1 ? " اسبوع " : " اسابيع ")
                         ) +
                         ")"
                     )
@@ -52314,7 +52655,7 @@ var render = function() {
                       " (" +
                         _vm._s(
                           _vm.residence_weeks +
-                            (_vm.residence_weeks == 1 ? "اسبوع " : "اسابيع ")
+                            (_vm.residence_weeks == 1 ? " اسبوع " : " اسابيع  ")
                         ) +
                         ") "
                     )
@@ -52347,10 +52688,14 @@ var render = function() {
           _vm._v(" "),
           _vm.insurance_price_checker != 0
             ? _c("div", [
-                _vm._m(1),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-main-color" }, [
-                  _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ر.س ")
+                _c("span", { staticClass: "d-block" }, [
+                  _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(" التامين الصحي : ")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-main-color" }, [
+                    _vm._v(_vm._s(_vm.insurance_price * _vm.weeks) + " ر.س ")
+                  ])
                 ]),
                 _vm._v(" "),
                 _c("hr")
@@ -52358,10 +52703,14 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("div", [
-            _vm._m(2),
-            _vm._v(" "),
-            _c("span", { staticClass: "text-main-color" }, [
-              _vm._v(_vm._s(Math.round(_vm.total_price())) + " ر.س ")
+            _c("span", { staticClass: "d-block" }, [
+              _c("span", { staticClass: "font-weight-bold" }, [
+                _vm._v(" إجمالي السعر : ")
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-main-color" }, [
+                _vm._v(_vm._s(Math.round(_vm.total_price())) + " ر.س ")
+              ])
             ])
           ])
         ])
@@ -52372,7 +52721,7 @@ var render = function() {
         { staticClass: "sticky-top pt-4", attrs: { id: "accordion" } },
         [
           _c("div", { staticClass: "bg-white py-4 rounded-10" }, [
-            _vm._m(3),
+            _vm._m(1),
             _vm._v(" "),
             _c("div", { staticClass: "reservation-body px-3 pt-3" }, [
               _c(
@@ -52434,7 +52783,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(4)
+                      _vm._m(2)
                     ]
                   ),
                   _vm._v(" "),
@@ -52483,23 +52832,14 @@ var render = function() {
                           ]
                         }
                       },
-                      [
-                        _c("option", { attrs: { value: "" } }, [
-                          _vm._v("عدد الأسابيع")
-                        ]),
-                        _vm._v(" "),
-                        _vm._l(_vm.weeks_count, function(week_count) {
-                          return _c(
-                            "option",
-                            {
-                              key: week_count,
-                              domProps: { value: week_count }
-                            },
-                            [_vm._v(" " + _vm._s(week_count) + " ")]
-                          )
-                        })
-                      ],
-                      2
+                      _vm._l(_vm.weeks_count, function(week_count) {
+                        return _c(
+                          "option",
+                          { key: week_count, domProps: { value: week_count } },
+                          [_vm._v(" " + _vm._s(week_count) + " ")]
+                        )
+                      }),
+                      0
                     )
                   ]),
                   _vm._v(" "),
@@ -52622,23 +52962,17 @@ var render = function() {
                               }
                             }
                           },
-                          [
-                            _c("option", { attrs: { value: "" } }, [
-                              _vm._v("عدد الأسابيع")
-                            ]),
-                            _vm._v(" "),
-                            _vm._l(_vm.weeks_count, function(week_count) {
-                              return _c(
-                                "option",
-                                {
-                                  key: week_count,
-                                  domProps: { value: week_count }
-                                },
-                                [_vm._v(" " + _vm._s(week_count) + " ")]
-                              )
-                            })
-                          ],
-                          2
+                          _vm._l(_vm.weeks_count, function(week_count) {
+                            return _c(
+                              "option",
+                              {
+                                key: week_count,
+                                domProps: { value: week_count }
+                              },
+                              [_vm._v(" " + _vm._s(week_count) + " ")]
+                            )
+                          }),
+                          0
                         )
                       ])
                     : _vm._e(),
@@ -52727,7 +53061,7 @@ var render = function() {
                   _vm._v(" "),
                   _vm.insurance_price
                     ? _c("div", { staticClass: "row" }, [
-                        _vm._m(5),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-6" }, [
                           _c(
@@ -52865,26 +53199,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "cost-heading border-bottom pb-2 px-3" }, [
       _c("h5", { staticClass: "font-weight-bold text-main-color" }, [
         _vm._v("التكاليف")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "d-block" }, [
-      _c("span", { staticClass: "font-weight-bold" }, [
-        _vm._v(" التامين الصحي : ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "d-block" }, [
-      _c("span", { staticClass: "font-weight-bold" }, [
-        _vm._v(" إجمالي السعر : ")
       ])
     ])
   },
@@ -53483,6 +53797,7 @@ var render = function() {
                                 "a",
                                 {
                                   attrs: {
+                                    target: "_blank",
                                     href:
                                       _vm.public_path +
                                       "institute/" +
@@ -53544,6 +53859,7 @@ var render = function() {
                                         {
                                           staticClass: "text-dark",
                                           attrs: {
+                                            target: "_blank",
                                             href:
                                               _vm.public_path +
                                               "institute/" +
@@ -53577,6 +53893,7 @@ var render = function() {
                                         {
                                           staticClass: "text-main-color",
                                           attrs: {
+                                            target: "_blank",
                                             href:
                                               _vm.public_path +
                                               "institute/" +
@@ -68253,8 +68570,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -19,7 +19,7 @@ class CourseController extends Controller
     public function index()
     {
         $institutes = Institute::with('city')->latest('id')->get();
-        $courses = Course::latest('id')->get();
+        $courses = Course::orderBy('main_course_trigger' , 'DESC')->get();
         $countercourse = Course::latest('id')->get();
         $countries = Country::latest('id')->get();
         $count_courses = count($countercourse);
@@ -78,7 +78,7 @@ class CourseController extends Controller
             $courses = $courses->where("meta_description" , null );
         }
 
-        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->latest('id')->paginate(10);
+        $courses = $courses->with('institute', 'institute.city','student_request' , 'creator')->orderBy('main_course_trigger' , 'DESC')->paginate(10);
         return response()->json(['courses' => $courses]);
     }
     /************************************************************** */
