@@ -49,7 +49,7 @@
 
                                             <div class="form-group">
                                                 <label>عدد الأسابيع</label>
-                                                <select v-model="weeks" class="form-control selectpicker rounded-10" data-live-search="true">
+                                                <select @change="filter_courses()" v-model="weeks" class="form-control selectpicker rounded-10" data-live-search="true">
                                                     <option v-for="week in 45" :key="week" :value="week">{{week}}</option>
                                                 </select>
                                             </div>

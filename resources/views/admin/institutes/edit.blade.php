@@ -111,6 +111,7 @@
                                                 <div class="form-group">
                                                     <label for="institute-name"> تصنيف المعهد</label>
                                                     <Select class="form-control" name="institute_class">
+                                                        <option {{$institute->institute_class > 3 ? 'selected' : ''}} value="9999">اختر التصنيف</option>
                                                         <option {{$institute->institute_class == 1 ? 'selected' : ''}} value="1">A</option>
                                                         <option {{$institute->institute_class == 2 ? 'selected' : ''}} value="2">B</option>
                                                         <option {{$institute->institute_class == 3 ? 'selected' : ''}} value="3">C</option>

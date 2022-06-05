@@ -11,21 +11,37 @@
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
-                <form class="form-inline row" method="GET" action="{{route('website.institutes')}}">
-                    {{-- <div class="col-md-9">
-                        <!-- Search Field -->
-                        <input  id='searchform' name="keyword" type="text" class="form-control rounded-10 mb-2 ml-sm-2 w-100 btn-light" placeholder="ادخل اسم المعهد او المدينة او الدولة او الدورة لبدء البحث" />
-                        <!-- ./Search Field -->
-                    </div> --}}
-
-                    <search-component  
-                    :public_path="{{ json_encode(url('/')) }}"    
-                    >
-                </search-component>
-                    <div class="col-md-3">
-                        <!-- Confirm Btn -->
-                        <button type="submit" class="btn rounded-10 bg-secondary-color text-white mb-2 w-100">ابدأ الان</button>
-                        <!-- ./Confirm Btn -->
+                <form class="my-4 row" method="GET" action="<?php echo e(route('website.institutes')); ?>">
+                    <div class="col-lg-6">
+                        <!-- Country Field -->
+                        <div class="form-group">
+                            <country-component ref="countries_component_ref" get_countries_url="<?php echo e(route('vue.get.countries')); ?>" ele_class="<?php echo e('form-control rounded-10'); ?>"> </country-component>
+                        </div>
+                        <!-- ./Country Field -->
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- City Field -->
+                        <div class="form-group">
+                            <city-component ref="cities_component_ref" get_cities_url="<?php echo e(route('vue.get.cities')); ?>" ele_class="<?php echo e('form-control rounded-10 searchable-select'); ?>"> </city-component>
+                        </div>
+                        <!-- ./City Field -->
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Weeks Count Field -->
+                        <div class="form-group">
+                            <select name="weeks" class="form-control rounded-10" data-live-search="true">
+                                <option value="" disabled selected>عدد الأسابيع</option>
+                                <?php for($i = 0; $i <= 45; $i++): ?>
+                                    <option value="<?php echo e($i); ?>"><?php echo e($i); ?></option>
+                                <?php endfor; ?>                                
+                            </select>
+                        </div>
+                        <!-- ./Weeks Count Field -->
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Confirm Btn  -->
+                        <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center text-white">ابحث عن معهد</button>
+                        <!-- ./Confirm Btn  -->
                     </div>
                 </form>
                 <!-- ./Search Form -->
@@ -37,52 +53,7 @@
     </div>
 </section>
 <!-- ./Intro -->
-<!-- Search Institute -->
-<section class="search-institute py-5 ">
-    <div class="container-fluid">
-        <div class="row px-xl-5">
-            <!-- Section Heading -->
-            <div class="col-md-6 align-self-center">
-                <h3 class="text-main-color font-weight-bold">ابحث عن دورة اللغة المناسبة لك</h3>
-                <p>ابحث عن أفضل الجامعات والمعاهد للدراسة بالخارج بكل سهولة مع أفضل تجربة مُستخدم</p>
-            </div>
-            <!-- ./Section Heading -->
 
-            <div class="col-md-6 col-xl-5 mr-auto">
-                <!-- Search Institute Form -->
-                <div class="search-institute-form shadow-lg rounded-10 py-4 px-2 p-xl-5 mx-auto bg-white">
-                    <form class="my-4" method="GET" action="{{route('website.institutes')}}">
-                        <!-- Country Field -->
-                        <div class="form-group">
-                            <country-component ref="countries_component_ref" get_countries_url="{{route('vue.get.countries')}}" ele_class="{{'form-control rounded-10'}}"> </country-component>
-                        </div>
-                        <!-- ./Country Field -->
-                        <!-- City Field -->
-                        <div class="form-group">
-                            <city-component ref="cities_component_ref" get_cities_url="{{route('vue.get.cities')}}" ele_class="{{'form-control rounded-10 searchable-select'}}"> </city-component>
-                        </div>
-                        <!-- ./City Field -->
-                        <!-- Weeks Count Field -->
-                        <div class="form-group">
-                            <select name="weeks" class="form-control rounded-10" data-live-search="true">
-                                <option value="" disabled selected>عدد الأسابيع</option>
-                                @for ($i = 0; $i <= 45; $i++)
-                                    <option value="{{$i}}">{{$i}}</option>
-                                @endfor                                
-                            </select>
-                        </div>
-                        <!-- ./Weeks Count Field -->
-                        <!-- Confirm Btn  -->
-                        <button type="submit" class="btn rounded-10 bg-secondary-color w-100 text-center text-white">ابحث عن معهد</button>
-                        <!-- ./Confirm Btn  -->
-                    </form>
-                </div>
-                <!-- ./Search Institute Form -->
-            </div>
-        </div>
-    </div>
-</section>
-<!-- ./Search Institute-->
 
 @if (isset($best_offers[0]))
 <!-- Best Offers -->

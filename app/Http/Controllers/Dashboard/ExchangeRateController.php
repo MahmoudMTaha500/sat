@@ -66,12 +66,7 @@ class ExchangeRateController extends Controller
     {
         $exchange_rates = ExchangeRate::all();
         foreach($exchange_rates as $exchange_rate){
-            $unit_price_in_sar = Currency::convert()
-                                            ->from($exchange_rate->currency_code)
-                                            ->to('SAR')
-                                            ->amount(1)
-                                            ->withoutVerifying()
-                                            ->get();
+            $unit_price_in_sar = currency_convertor($exchange_rate->currency_code, 'SAR', 1);
 
             $currencies_object[$exchange_rate->currency_code] = [
                'exchange_rate' =>  $exchange_rate->exchange_rates,
