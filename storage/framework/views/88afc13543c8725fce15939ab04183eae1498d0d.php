@@ -1,4 +1,4 @@
-@extends('website.app') @section('website.content')
+ <?php $__env->startSection('website.content'); ?>
 <!-- Intro  -->
 <section class="intro">
     <div class="container-fluid">
@@ -7,7 +7,7 @@
                 <!-- Section Heading -->
                 <h1 class="text-white font-weight-bold mb-4 intro-title">ابدأ رحلتك الآن، وتعلم اللغة في أكبر المعاهد الدولية</h1>
                 <p class="lead text-white mb-4 intro-desc">نوفر لك أفضل الجامعات والمعاهد للدراسة في الخارج, قم بتسجيل حسابك وأحصل على خصم 5% على الرسوم الدراسة</p>
-                {{-- <p class="lead text-white mb-4 intro-desc">نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون، وخلق بيئة تنافسية</p> --}}
+                
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
@@ -47,7 +47,7 @@
                 <!-- ./Search Form -->
             </div>
             <div class="col-lg-6 mx-auto text-center">
-                <img class="w-100 mt-5 mt-md-2" src="{{asset('storage/banners/intro-home.png')}}" alt="Home Intro Image" srcset="">
+                <img class="w-100 mt-5 mt-md-2" src="<?php echo e(asset('storage/banners/intro-home.png')); ?>" alt="Home Intro Image" srcset="">
             </div>
         </div>
     </div>
@@ -55,7 +55,7 @@
 <!-- ./Intro -->
 
 
-@if (isset($best_offers[0]))
+<?php if(isset($best_offers[0])): ?>
 <!-- Best Offers -->
 <section class="best-offers py-5">
     <div class="container-fluid">
@@ -73,63 +73,63 @@
             <div class="col-12 px-0">
                 <!-- Offers -->
                 <div class="offers owl-carousel position-relative" id="offers-list">
-                    @foreach ($best_offers as $offer)
+                    <?php $__currentLoopData = $best_offers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $offer): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                     <!-- Institute -->
                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 institute-card rounded-10 mb-5">
                         <!-- Offer Icon -->
                         <div class="offer-icon position-absolute bg-secondary-color text-white">
-                            - {{$offer->discount*100}} %
+                            - <?php echo e($offer->discount*100); ?> %
                         </div>
                         <!-- Offer Icon -->
                         <!-- Add To Favourite Btn -->
-                        <div class="add-favourite position-absolute" course-id="{{$offer->id}}">
-                            <i @if(!auth()->guard('student')->check()) onclick="alert('يجب عليك تسجيل الدخول اولا')" @endif class="@if(auth()->guard('student')->check()) {{heart_type($offer)}} @else far @endif    fa-heart favourite-icon"></i>
+                        <div class="add-favourite position-absolute" course-id="<?php echo e($offer->id); ?>">
+                            <i <?php if(!auth()->guard('student')->check()): ?> onclick="alert('يجب عليك تسجيل الدخول اولا')" <?php endif; ?> class="<?php if(auth()->guard('student')->check()): ?> <?php echo e(heart_type($offer)); ?> <?php else: ?> far <?php endif; ?>    fa-heart favourite-icon"></i>
                         </div>
                         
                             
                         
                         <!-- ./Add To Favourite Btn -->
                         <!-- Institute Img -->
-                        <a target="_blank" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}">
+                        <a target="_blank" href="<?php echo e(route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])); ?>">
                             <div class="institute-img d-inline-block position-relative">
                                 <picture>
-                                    <source srcset="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" media="(min-width:700px)">
-                                    <source srcset="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb')}}" media="(min-width:400px)">
-                                    <img loading="lazy" width="100" src="{{empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')}}" alt="{{$offer->institute->name_ar}}" class="card-img-top"/>
+                                    <source srcset="<?php echo e(empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')); ?>" media="(min-width:700px)">
+                                    <source srcset="<?php echo e(empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb')); ?>" media="(min-width:400px)">
+                                    <img loading="lazy" width="100" src="<?php echo e(empty($offer->institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $offer->institute->getFirstMedia('institute_banner')->getUrl('thumb_md')); ?>" alt="<?php echo e($offer->institute->name_ar); ?>" class="card-img-top"/>
                                 </picture>
                             </div>
                         </a>
                         <!-- ./Institute Img -->
                         <div class="card-body rounded-10 bg-white">
                             <!-- Institute Title -->
-                            <p class="card-title"><a target="_blank" class="h5" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug ])}}" class="text-dark"> معهد {{$offer->institute->name_ar}} </a></p>
-                            <p class="card-title"><a target="_blank" class="h6" href="{{route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])}}" class="text-main-color">{{$offer->name_ar}} </a></p>
+                            <p class="card-title"><a target="_blank" class="h5" href="<?php echo e(route('website.institute' , [$offer->institute->id, $offer->institute->slug ])); ?>" class="text-dark"> معهد <?php echo e($offer->institute->name_ar); ?> </a></p>
+                            <p class="card-title"><a target="_blank" class="h6" href="<?php echo e(route('website.institute' , [$offer->institute->id, $offer->institute->slug , $offer->slug])); ?>" class="text-main-color"><?php echo e($offer->name_ar); ?> </a></p>
                             <!-- ./Institute Title -->
                             <!-- Institute Rate -->
-                            <p class="mb-0"><span class="starrr" ratio="{{institute_rate($offer->institute)}}"></span> {{institute_rate($offer->institute)}}</p>
+                            <p class="mb-0"><span class="starrr" ratio="<?php echo e(institute_rate($offer->institute)); ?>"></span> <?php echo e(institute_rate($offer->institute)); ?></p>
                             <!-- ./Institute Rate -->
                             <!-- Institute Location -->
-                            <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> {{$offer->institute->country->name_ar}} , {{$offer->institute->city->name_ar}}</p>
+                            <p class="mb-0"><i class="fas fa-map-marker-alt text-main-color"></i> <?php echo e($offer->institute->country->name_ar); ?> , <?php echo e($offer->institute->city->name_ar); ?></p>
                             <!-- ./Institute Location -->
                             <!-- Course Name -->
                             <!-- ./Course Name -->
                             <!-- Course Time And Level -->
                             <p class="mb-0 overflow-hidden">
-                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> {{$offer->study_period=='morning' ? 'صباحي' : 'مسائي'}}</span>
-                                <span class="float-left"> <i class="fas fa-signal text-main-color"></i> {{$offer->required_level}}</span>
+                                <span class="float-right"><i class="fas fa-sun text-main-color"></i> <?php echo e($offer->study_period=='morning' ? 'صباحي' : 'مسائي'); ?></span>
+                                <span class="float-left"> <i class="fas fa-signal text-main-color"></i> <?php echo e($offer->required_level); ?></span>
                             </p>
                             <!-- ./Course Time And Level -->
                         </div>
                         <!-- Course Price -->
                         <div class="card-footer bg-white overflow-hidden">
-                            <del class="text-muted del">{{$offer->coursesPricePerWeek->price}} ر.س / أسبوع </del> <span class="float-left text-main-color">{{$offer->coursesPricePerWeek->price*(1-$offer->discount) }} ر.س / أسبوع </span>
+                            <del class="text-muted del"><?php echo e($offer->coursesPricePerWeek->price); ?> ر.س / أسبوع </del> <span class="float-left text-main-color"><?php echo e($offer->coursesPricePerWeek->price*(1-$offer->discount)); ?> ر.س / أسبوع </span>
                         </div>
                         <!-- ./Course Price -->
                     </div>
                     <!-- ./Institute -->
 
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <!-- ./Offers -->
             </div>
@@ -137,62 +137,62 @@
     </div>
 </section>
 <!-- ./Best Offers -->
-@endif 
+<?php endif; ?> 
 <!-- Studies -->
 <div class="studies py-5 bg-sub-secondary-color">
     <div class="container-fluid">
-        @if (isset($two_blogs[0]))
+        <?php if(isset($two_blogs[0])): ?>
         <div class="row">
             <!-- Background Img -->
             <div class="col-md-6 bg-study-1 p-0 align-self-end"> 
             <picture>
-                <source srcset="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMediaUrl('blog_featured_image')}}" media="(min-width:700px)">
-                <source srcset="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
-                <img loading="lazy" src="{{empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[0]->img_alt}}" width="100%">
+                <source srcset="<?php echo e(empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMediaUrl('blog_featured_image')); ?>" media="(min-width:700px)">
+                <source srcset="<?php echo e(empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')); ?>" media="(min-width:500px)">
+                <img loading="lazy" src="<?php echo e(empty($two_blogs[0]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[0]->getFirstMedia('blog_featured_image')->getUrl('thumb')); ?>" alt="<?php echo e($two_blogs[0]->img_alt); ?>" width="100%">
             </picture>
 
                             
             </div>
             <!-- ./Background Img -->
             <div class="col-md-6 p-md-5 p-3">
-                <h3 class="text-main-color mt-xl-5">{{$two_blogs[0]->title_ar}}</h3>
-                <p>{!! mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
-                @if(!empty($two_blogs[0]->country))
-                    <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
-                @endif
+                <h3 class="text-main-color mt-xl-5"><?php echo e($two_blogs[0]->title_ar); ?></h3>
+                <p><?php echo mb_substr(strip_tags($two_blogs[0]->content_ar) ,0 , 300 , 'utf-8'); ?> ....</p>
+                <?php if(!empty($two_blogs[0]->country)): ?>
+                    <a href="#" onclick="this.href = '<?php echo e(route('website.institutes' , ['country' => $two_blogs[0]->country->id])); ?>' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد <?php echo e($two_blogs[0]->country->name_ar); ?></button></a>
+                <?php endif; ?>
                 
-                <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
+                <a href="<?php echo e(route('website.article',$two_blogs[0]->id)); ?>"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
-                    {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
+                    
                 </div>
             </div>
         </div>
-        @endif
-        @if (isset($two_blogs[1]))
+        <?php endif; ?>
+        <?php if(isset($two_blogs[1])): ?>
 
         <div class="row">
             <div class="col-md-6 p-md-5 p-3 order-md-1 order-2">
-                <h3 class="text-main-color mt-xl-5">{{$two_blogs[1]->title_ar}}</h3>
-                <p>{!! mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8') !!} ....</p>
-                @if(!empty($two_blogs[1]->country))
-                    <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
-                @endif
-                <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
+                <h3 class="text-main-color mt-xl-5"><?php echo e($two_blogs[1]->title_ar); ?></h3>
+                <p><?php echo mb_substr(strip_tags($two_blogs[1]->content_ar) ,0 , 300 , 'utf-8'); ?> ....</p>
+                <?php if(!empty($two_blogs[1]->country)): ?>
+                    <a href="#" onclick="this.href = '<?php echo e(route('website.institutes' , ['country' => $two_blogs[1]->country->id])); ?>' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد <?php echo e($two_blogs[1]->country->name_ar); ?></button></a>
+                <?php endif; ?>
+                <a href="<?php echo e(route('website.article',$two_blogs[1]->id)); ?>"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
-                    {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
+                    
                 </div>
             </div>
             <!-- Background Img -->
             <div class="col-md-6 bg-study-2 order-md-2 order-1 p-0">
                 <picture>
-                    <source srcset="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMediaUrl('blog_featured_image')}}" media="(min-width:700px)">
-                    <source srcset="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" media="(min-width:500px)">
-                    <img loading="lazy" src="{{empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$two_blogs[1]->img_alt}}" width="100%">
+                    <source srcset="<?php echo e(empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMediaUrl('blog_featured_image')); ?>" media="(min-width:700px)">
+                    <source srcset="<?php echo e(empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')); ?>" media="(min-width:500px)">
+                    <img loading="lazy" src="<?php echo e(empty($two_blogs[1]->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $two_blogs[1]->getFirstMedia('blog_featured_image')->getUrl('thumb')); ?>" alt="<?php echo e($two_blogs[1]->img_alt); ?>" width="100%">
                 </picture>
             </div>
             <!-- ./Background Img -->
         </div>
-        @endif
+        <?php endif; ?>
 
     </div>
 </div>
@@ -200,34 +200,10 @@
 
 
 <!-- Trusted Us -->
-{{--
-<section class="trusted-us py-5">
-    <div class="container-fluid">
-        <!-- Section Heading -->
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <div class="heading-trusted-us text-center">
-                    <h3 class="text-main-color font-weight-bold">من وثقوا بنا</h3>
-                    <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
-                </div>
-            </div>
-        </div>
-        <!-- ./Section Heading -->
-        <div class="row px-xl-5">
-            <div class="col-12">
-                <div class="trusted-list owl-carousel" id="trusted-list">
-                    @foreach ($partners as $partner)
-                    <div class="p-5"><img loading="lazy" src="{{$partner->logo == null ? asset('storage/default_images.png') : $partner->logo}}" alt="{{$partner->name}}" class="img-fluid" /></div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
---}}
+
 <!-- ./Trusted Us -->
 
-@if (isset($blogs[0]))
+<?php if(isset($blogs[0])): ?>
 <!-- News -->
 <section class="news py-5">
     <div class="container-fluid">
@@ -245,22 +221,22 @@
             <div class="col-12">
                 <!-- News List -->
                 <div class="news-list owl-carousel position-relative px-xl-5" id="news-list">
-                    @foreach ($blogs as $blog)
+                    <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
-                        <a href="{{route('website.article',$blog->id)}}">
-                            <img loading="lazy" src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->img_alt}}" class="card-img-top" />
+                        <a href="<?php echo e(route('website.article',$blog->id)); ?>">
+                            <img loading="lazy" src="<?php echo e(empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')); ?>" alt="<?php echo e($blog->img_alt); ?>" class="card-img-top" />
                         </a>
                         
                         <div class="card-body rounded-10 bg-white">
-                            <a href="{{route('website.article',$blog->id)}}"><p class="card-title text-main-color h5">{{$blog->title_ar}}</p></a>
+                            <a href="<?php echo e(route('website.article',$blog->id)); ?>"><p class="card-title text-main-color h5"><?php echo e($blog->title_ar); ?></p></a>
                             <p class="mb-0">
-                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <br> <a href="{{route('website.article',$blog->id)}}">اقرأ المزيد</a></span>
+                                <span><?php echo mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8'); ?> ... <br> <a href="<?php echo e(route('website.article',$blog->id)); ?>">اقرأ المزيد</a></span>
                             </p>
-                            <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
+                            <p class="mb-0"><span class="text-muted"><?php echo e(ArabicDate($blog->created_at)); ?></span></p>
                         </div>
                     </div>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <!-- ./News List -->
             </div>
@@ -268,7 +244,7 @@
     </div>
 </section>
 <!-- ./News -->
-@endif @if (isset($success_stories[0]))
+<?php endif; ?> <?php if(isset($success_stories[0])): ?>
 <!-- Success Stories -->
 <section class="success-stories pt-5 pb-0">
     <div class="container-fluid">
@@ -286,38 +262,34 @@
             <div class="col-12">
                 <!-- Stories -->
                 <div class="stories-list owl-carousel custome_slide position-relative px-xl-5" id="slide-testimonal">
-                    @foreach ($success_stories as $story)
+                    <?php $__currentLoopData = $success_stories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $story): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
                     <!-- Quote -->
                     <div class="quote text-center">
                         <!-- Quote Text -->
                         <div class="user-quote pt-4 pb-5 px-4 rounded-10">
                             <i class="fas fa-quote-right"></i>
-                            <p>{{$story->story}}</p>
+                            <p><?php echo e($story->story); ?></p>
                         </div>
                         <!-- ./Quote Text -->
                         <div class="user-info">
                             <!-- User Img -->
                             <div class="user-info__img">
-                                <img loading="lazy" src="{{$story->student->profile_image == null ? asset('storage/default_images.png') : $story->student->profile_image}}" alt="student-image" class="img-fluid rounded-pill mx-auto" />
+                                <img loading="lazy" src="<?php echo e($story->student->profile_image == null ? asset('storage/default_images.png') : $story->student->profile_image); ?>" alt="student-image" class="img-fluid rounded-pill mx-auto" />
                             </div>
                             <!-- ./User Img -->
                             <!-- User Name -->
                             <div class="user-info__name">
-                                <span>{{$story->student->name}}</span>
+                                <span><?php echo e($story->student->name); ?></span>
                             </div>
                             <!-- ./User Name -->
                             <!-- University Name -->
-                            {{--
-                            <div class="user-info__Institute">
-                                <span class="text-muted">جامعة كالفورنيا</span>
-                            </div>
-                            --}}
+                            
                             <!-- ./University Name -->
                         </div>
                     </div>
                     <!-- ./Quote -->
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
                 <!-- ./Stories -->
             </div>
@@ -325,7 +297,7 @@
     </div>
 </section>
 <!-- ./Success Stories -->
-@endif @if (isset($blogs[0]))
+<?php endif; ?> <?php if(isset($blogs[0])): ?>
 <!-- Browse our institutes -->
 <section class="browse-our-institutes py-5">
     <div class="container-fluid">
@@ -334,11 +306,12 @@
             <div class="col-12 text-center">
                 <h3 class="text-main-color font-weight-bold">تصفح معاهدنا</h3>
                 <p>تصفح لائحة أفضل معاهد اللغات المعتمدة، أعددناها من أجل تطوير مهاراتك اللغوية</p>
-                <a href="{{route('website.institutes')}}"><button class="btn rounded-10 bg-secondary-color text-white px-4">ابدأ الآن</button></a>
+                <a href="<?php echo e(route('website.institutes')); ?>"><button class="btn rounded-10 bg-secondary-color text-white px-4">ابدأ الآن</button></a>
             </div>
         </div>
         <!-- ./Section Heading -->
     </div>
 </section>
 <!-- ./Browse our institutes -->
-@endif @endsection
+<?php endif; ?> <?php $__env->stopSection(); ?>
+<?php echo $__env->make('website.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\classat_laravel\resources\views/website/home.blade.php ENDPATH**/ ?>

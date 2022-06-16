@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Course;
+use App\Models\CoursePrice;
 use App\Models\Favourite;
 use App\Models\Institute;
 use Illuminate\Http\Request;
@@ -89,6 +90,7 @@ class VueRequestsController extends Controller
                 'institutes.id AS institute_id',
                 'institutes.slug AS institute_sulg',
                 'institutes.banner AS institute_banner',
+                'institutes.institute_class AS institute_class',
                 'institutes.name_ar AS institute_name',
                 DB::raw("IF(institutes.rate_switch = 1, institutes.sat_rate, institute_rates.student_rates) AS institute_rate"),
                 'countries.name_ar AS country_name',
@@ -132,8 +134,7 @@ class VueRequestsController extends Controller
             if($request->arrange_as == 'highest_prices'){ $courses = $courses->orderBy('discounted_price', 'DESC'); }
             if($request->arrange_as == 'lowest_prices'){ $courses = $courses->orderBy('discounted_price', 'ASC'); }
         }
-
-        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('institutes.institute_class' , 'ASC')->paginate(9)]);
+        return response()->json(['status' => 'success', 'courses' => $courses->orderBy('institute_class' , 'ASC')->orderBy('course_id', 'DESC')->paginate(9)]);
     }
 
     // get course details in institute profile
@@ -163,10 +164,8 @@ class VueRequestsController extends Controller
     // get price per week in institute profile
     public function get_course_price_per_week(Request $request)
     {
-        $course = Course::where(['id' => $request->course_id])->get()[0];
-        $price_per_week = price_per_week($course->coursesPrice, $request->weeks);
-        return response()->json(['status' => 'success', 'price_per_week' => $price_per_week]);
-
+        $course_prices = CoursePrice::where(['course_id' => $request->course_id])->orderBy('weeks' , 'asc')->get();
+        return response()->json(['status' => 'success', 'price_per_week' => price_per_week($course_prices , $request->weeks)]);
     }
     // get price per week in institute profile
     public function get_insurance_price_per_week(Request $request)

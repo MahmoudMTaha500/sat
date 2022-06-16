@@ -13,7 +13,7 @@
 
     <!-- BEGIN GOOGLE FONTS -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Quicksand:300,400,500,700" rel="stylesheet">
-    <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.2.0/line-awesome/css/line-awesome.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="{{url('/admin')}}/app-assets/css-rtl/cairo-font/cairo.css" rel="stylesheet">
     <!-- END GOOGLE FONTS -->
