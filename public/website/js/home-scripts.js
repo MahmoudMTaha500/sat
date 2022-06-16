@@ -61883,13 +61883,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\website-js.js */"./resources/js/website-js.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\custom.js */"./public/website/js/custom.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\website-js.js */"./resources/js/website-js.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\custom.js */"./public/website/js/custom.js");
 
 
 /***/ })

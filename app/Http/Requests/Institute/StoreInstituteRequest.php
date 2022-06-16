@@ -30,6 +30,7 @@ class StoreInstituteRequest extends FormRequest
             'institute_questions' => 'required',
             'country_id' => 'required',
             'city_id' => 'required',
+            'institute_currency' => 'required',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'banner' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
         ];
@@ -44,6 +45,7 @@ class StoreInstituteRequest extends FormRequest
             'institute_questions.required' => 'برجاء ادخال اسئله المعهد  ',
             'country_id.required' => 'برجاء تحديد الدولة',
             'city_id.required' => 'برجاء تحديد المدينة',
+            'institute_currency.required' => 'برجاء تحديد عملة المعهد',
             'logo.required' => 'لوجو المعهد مطلوب',
             'logo.image' => 'لوجو المعهد يجب ان يكون صورة',
             'logo.mimes' => 'لوجو المعهد يجب ان يكون بالصيغ الاتية (jpeg , png , jpg , gif , svg)',

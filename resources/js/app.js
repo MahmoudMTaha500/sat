@@ -26,6 +26,7 @@ import CountryCityComponent from './components/CountryCityComponent';
 import CountryCityBlogComponent from './components/country_city_blog/CountryCityBlogComponent.vue';
 import CitiesComponent from './components/city/CitiesComponent';
 import institutesComponent from './components/institute/institutesComponent';
+import instituteAdditionalFeesComponent from './components/institute/instituteAdditionalFeesComponent';
 import CommentComponent from './components/comment/CommentComponent';
 import CommentBlogComponent from './components/comment/CommentBlogComponent';
 import RateComponent from './components/rate/RateComponent';
@@ -57,6 +58,7 @@ const app = new Vue({
         CountryCityComponent,
         CitiesComponent,
         institutesComponent,
+        instituteAdditionalFeesComponent,
         startdateComponent,
         CommentComponent,
         RateComponent,

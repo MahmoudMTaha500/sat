@@ -3488,6 +3488,104 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['csrf_token'],
+  data: function data() {
+    return {
+      rows_index: [1, 2]
+    };
+  },
+  methods: {
+    additionalFees: function additionalFees() {
+      this.rows_index.push(Math.max.apply(Math, _toConsumableArray(this.rows_index)) + 1);
+    },
+    deleteRow: function deleteRow(index) {
+      this.rows_index.splice(index, 1);
+    }
+  },
+  beforeMount: function beforeMount() {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/institute/institutesComponent.vue?vue&type=script&lang=js& ***!
@@ -46876,6 +46974,244 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59&":
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59& ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm._l(_vm.rows_index, function(row, index) {
+        return _c("div", { key: row, staticClass: "form-group" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                type: "hidden",
+                name: "fees_rows[" + row + "][keyword]",
+                readonly: row == 1 || row == 2
+              },
+              domProps: {
+                value:
+                  row == 1 ? "booking" : row == 2 ? "text-books" : "fees-" + row
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c("label", [_vm._v("اسم المصاريف")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "fees_rows[" + row + "][title]",
+                    readonly: row == 1 || row == 2
+                  },
+                  domProps: {
+                    value:
+                      row == 1
+                        ? "مصاريف الحجز"
+                        : row == 2
+                        ? "الكتب الدراسية"
+                        : ""
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c("label", [_vm._v("السعر")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "text", name: "fees_rows[" + row + "][price]" }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c("label", [_vm._v("نوع المصاريف")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "fees_rows[" + row + "][price-type]"
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "overall" } }, [
+                      _vm._v("اجمالي الدراسة")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "weekly" } }, [
+                      _vm._v("اسبوعي")
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c("label", [_vm._v("التخفيض")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "fees_rows[" + row + "][discount]"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c("label", [_vm._v("نوع التخفيض")]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "fees_rows[" + row + "][discount-type]"
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "" } }, [
+                      _vm._v("اختر نوع التخفيض")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "percentage" } }, [
+                      _vm._v("نسبة مئوية")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "fixed" } }, [
+                      _vm._v("نسبة ثابتة")
+                    ])
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c("label", [_vm._v("الزيادة الصيفية")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "fees_rows[" + row + "][summer-increase]"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger mt-2 w-100",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteRow(index)
+                      }
+                    }
+                  },
+                  [_vm._v("حذف")]
+                )
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("hr")
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-6 col-12" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success mt-2 w-100",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.additionalFees()
+                }
+              }
+            },
+            [_vm._v("اضافة مصاريف جديدة")]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(0)
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-12" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-dark mt-2 w-100",
+          attrs: {
+            "data-dismiss": "modal",
+            "aria-label": "Close",
+            type: "button"
+          }
+        },
+        [_vm._v("اغلاق")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c&":
 /*!********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/institute/institutesComponent.vue?vue&type=template&id=646b9c2c& ***!
@@ -66613,28 +66949,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_country_city_blog_CountryCityBlogComponent_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/country_city_blog/CountryCityBlogComponent.vue */ "./resources/js/components/country_city_blog/CountryCityBlogComponent.vue");
 /* harmony import */ var _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/city/CitiesComponent */ "./resources/js/components/city/CitiesComponent.vue");
 /* harmony import */ var _components_institute_institutesComponent__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/institute/institutesComponent */ "./resources/js/components/institute/institutesComponent.vue");
-/* harmony import */ var _components_comment_CommentComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/comment/CommentComponent */ "./resources/js/components/comment/CommentComponent.vue");
-/* harmony import */ var _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/comment/CommentBlogComponent */ "./resources/js/components/comment/CommentBlogComponent.vue");
-/* harmony import */ var _components_rate_RateComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/rate/RateComponent */ "./resources/js/components/rate/RateComponent.vue");
-/* harmony import */ var _components_startdate_startdateComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/startdate/startdateComponent */ "./resources/js/components/startdate/startdateComponent.vue");
-/* harmony import */ var _components_blog_BlogIndexComponent_vue__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/blog/BlogIndexComponent.vue */ "./resources/js/components/blog/BlogIndexComponent.vue");
-/* harmony import */ var _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/course/coursesComponent.vue */ "./resources/js/components/course/coursesComponent.vue");
-/* harmony import */ var _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/website/CityComponent.vue */ "./resources/js/components/website/CityComponent.vue");
-/* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
-/* harmony import */ var _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/website/CoursePriceInfoComponent.vue */ "./resources/js/components/website/CoursePriceInfoComponent.vue");
-/* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
-/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
-/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
-/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
-/* harmony import */ var _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/website/InstitutesPgaeComponent.vue */ "./resources/js/components/website/InstitutesPgaeComponent.vue");
-/* harmony import */ var _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/student/StudentComponent.vue */ "./resources/js/components/student/StudentComponent.vue");
-/* harmony import */ var _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/student/SuccesStoryComponent.vue */ "./resources/js/components/student/SuccesStoryComponent.vue");
-/* harmony import */ var _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestComponent.vue */ "./resources/js/components/studentRequest/StudentRequestComponent.vue");
-/* harmony import */ var _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestEditComponent.vue */ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue");
-/* harmony import */ var _components_visa_VisaComponent_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/visa/VisaComponent.vue */ "./resources/js/components/visa/VisaComponent.vue");
-/* harmony import */ var _components_Blog_CreateBlogComponent_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/Blog/CreateBlogComponent.vue */ "./resources/js/components/Blog/CreateBlogComponent.vue");
-/* harmony import */ var _components_CreateServiceComponent_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/CreateServiceComponent.vue */ "./resources/js/components/CreateServiceComponent.vue");
-/* harmony import */ var _components_website_SearchComponent_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/website/SearchComponent.vue */ "./resources/js/components/website/SearchComponent.vue");
+/* harmony import */ var _components_institute_instituteAdditionalFeesComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/institute/instituteAdditionalFeesComponent */ "./resources/js/components/institute/instituteAdditionalFeesComponent.vue");
+/* harmony import */ var _components_comment_CommentComponent__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/comment/CommentComponent */ "./resources/js/components/comment/CommentComponent.vue");
+/* harmony import */ var _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/comment/CommentBlogComponent */ "./resources/js/components/comment/CommentBlogComponent.vue");
+/* harmony import */ var _components_rate_RateComponent__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/rate/RateComponent */ "./resources/js/components/rate/RateComponent.vue");
+/* harmony import */ var _components_startdate_startdateComponent__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/startdate/startdateComponent */ "./resources/js/components/startdate/startdateComponent.vue");
+/* harmony import */ var _components_blog_BlogIndexComponent_vue__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/blog/BlogIndexComponent.vue */ "./resources/js/components/blog/BlogIndexComponent.vue");
+/* harmony import */ var _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/course/coursesComponent.vue */ "./resources/js/components/course/coursesComponent.vue");
+/* harmony import */ var _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/website/CityComponent.vue */ "./resources/js/components/website/CityComponent.vue");
+/* harmony import */ var _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/website/CountryComponent.vue */ "./resources/js/components/website/CountryComponent.vue");
+/* harmony import */ var _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/website/CoursePriceInfoComponent.vue */ "./resources/js/components/website/CoursePriceInfoComponent.vue");
+/* harmony import */ var _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/ShowImagesComponent.vue */ "./resources/js/components/ShowImagesComponent.vue");
+/* harmony import */ var _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/insurance/InsuranceComponent.vue */ "./resources/js/components/insurance/InsuranceComponent.vue");
+/* harmony import */ var _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/airport/AirportComponent.vue */ "./resources/js/components/airport/AirportComponent.vue");
+/* harmony import */ var _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/residence/ResidenceComponent.vue */ "./resources/js/components/residence/ResidenceComponent.vue");
+/* harmony import */ var _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/website/InstitutesPgaeComponent.vue */ "./resources/js/components/website/InstitutesPgaeComponent.vue");
+/* harmony import */ var _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/student/StudentComponent.vue */ "./resources/js/components/student/StudentComponent.vue");
+/* harmony import */ var _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/student/SuccesStoryComponent.vue */ "./resources/js/components/student/SuccesStoryComponent.vue");
+/* harmony import */ var _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestComponent.vue */ "./resources/js/components/studentRequest/StudentRequestComponent.vue");
+/* harmony import */ var _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/studentRequest/StudentRequestEditComponent.vue */ "./resources/js/components/studentRequest/StudentRequestEditComponent.vue");
+/* harmony import */ var _components_visa_VisaComponent_vue__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/visa/VisaComponent.vue */ "./resources/js/components/visa/VisaComponent.vue");
+/* harmony import */ var _components_Blog_CreateBlogComponent_vue__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/Blog/CreateBlogComponent.vue */ "./resources/js/components/Blog/CreateBlogComponent.vue");
+/* harmony import */ var _components_CreateServiceComponent_vue__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/CreateServiceComponent.vue */ "./resources/js/components/CreateServiceComponent.vue");
+/* harmony import */ var _components_website_SearchComponent_vue__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/website/SearchComponent.vue */ "./resources/js/components/website/SearchComponent.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -66679,35 +67016,37 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('pagination', __webpack_req
 
 
 
+
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   el: '#sat_app_vue',
   components: {
     CountryCityComponent: _components_CountryCityComponent__WEBPACK_IMPORTED_MODULE_4__["default"],
     CitiesComponent: _components_city_CitiesComponent__WEBPACK_IMPORTED_MODULE_6__["default"],
     institutesComponent: _components_institute_institutesComponent__WEBPACK_IMPORTED_MODULE_7__["default"],
-    startdateComponent: _components_startdate_startdateComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
-    CommentComponent: _components_comment_CommentComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
-    RateComponent: _components_rate_RateComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
-    BlogIndexComponent: _components_blog_BlogIndexComponent_vue__WEBPACK_IMPORTED_MODULE_12__["default"],
-    coursesComponent: _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+    instituteAdditionalFeesComponent: _components_institute_instituteAdditionalFeesComponent__WEBPACK_IMPORTED_MODULE_8__["default"],
+    startdateComponent: _components_startdate_startdateComponent__WEBPACK_IMPORTED_MODULE_12__["default"],
+    CommentComponent: _components_comment_CommentComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
+    RateComponent: _components_rate_RateComponent__WEBPACK_IMPORTED_MODULE_11__["default"],
+    BlogIndexComponent: _components_blog_BlogIndexComponent_vue__WEBPACK_IMPORTED_MODULE_13__["default"],
+    coursesComponent: _components_course_coursesComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
     CountryCityBlogComponent: _components_country_city_blog_CountryCityBlogComponent_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    CommentBlogComponent: _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_9__["default"],
-    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
-    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
-    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
-    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
-    CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_14__["default"],
-    CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
-    CoursePriceInfoComponent: _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
-    InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
-    StudentComponent: _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
-    SuccesStoryComponent: _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
-    StudentRequestComponent: _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"],
-    StudentRequestEditComponent: _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
-    VisaComponent: _components_visa_VisaComponent_vue__WEBPACK_IMPORTED_MODULE_26__["default"],
-    CreateBlogComponent: _components_Blog_CreateBlogComponent_vue__WEBPACK_IMPORTED_MODULE_27__["default"],
-    CreateServiceComponent: _components_CreateServiceComponent_vue__WEBPACK_IMPORTED_MODULE_28__["default"],
-    SearchComponent: _components_website_SearchComponent_vue__WEBPACK_IMPORTED_MODULE_29__["default"]
+    CommentBlogComponent: _components_comment_CommentBlogComponent__WEBPACK_IMPORTED_MODULE_10__["default"],
+    ShowImagesComponent: _components_ShowImagesComponent_vue__WEBPACK_IMPORTED_MODULE_18__["default"],
+    InsuranceComponent: _components_insurance_InsuranceComponent_vue__WEBPACK_IMPORTED_MODULE_19__["default"],
+    AirportComponent: _components_airport_AirportComponent_vue__WEBPACK_IMPORTED_MODULE_20__["default"],
+    ResidenceComponent: _components_residence_ResidenceComponent_vue__WEBPACK_IMPORTED_MODULE_21__["default"],
+    CityComponent: _components_website_CityComponent_vue__WEBPACK_IMPORTED_MODULE_15__["default"],
+    CountryComponent: _components_website_CountryComponent_vue__WEBPACK_IMPORTED_MODULE_16__["default"],
+    CoursePriceInfoComponent: _components_website_CoursePriceInfoComponent_vue__WEBPACK_IMPORTED_MODULE_17__["default"],
+    InstitutesPgaeComponent: _components_website_InstitutesPgaeComponent_vue__WEBPACK_IMPORTED_MODULE_22__["default"],
+    StudentComponent: _components_student_StudentComponent_vue__WEBPACK_IMPORTED_MODULE_23__["default"],
+    SuccesStoryComponent: _components_student_SuccesStoryComponent_vue__WEBPACK_IMPORTED_MODULE_24__["default"],
+    StudentRequestComponent: _components_studentRequest_StudentRequestComponent_vue__WEBPACK_IMPORTED_MODULE_25__["default"],
+    StudentRequestEditComponent: _components_studentRequest_StudentRequestEditComponent_vue__WEBPACK_IMPORTED_MODULE_26__["default"],
+    VisaComponent: _components_visa_VisaComponent_vue__WEBPACK_IMPORTED_MODULE_27__["default"],
+    CreateBlogComponent: _components_Blog_CreateBlogComponent_vue__WEBPACK_IMPORTED_MODULE_28__["default"],
+    CreateServiceComponent: _components_CreateServiceComponent_vue__WEBPACK_IMPORTED_MODULE_29__["default"],
+    SearchComponent: _components_website_SearchComponent_vue__WEBPACK_IMPORTED_MODULE_30__["default"]
   }
 });
 
@@ -67512,6 +67851,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_coursesComponent_vue_vue_type_template_id_9b6dd2c4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_coursesComponent_vue_vue_type_template_id_9b6dd2c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/institute/instituteAdditionalFeesComponent.vue":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/institute/instituteAdditionalFeesComponent.vue ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _instituteAdditionalFeesComponent_vue_vue_type_template_id_437fcd59___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59& */ "./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59&");
+/* harmony import */ var _instituteAdditionalFeesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./instituteAdditionalFeesComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _instituteAdditionalFeesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _instituteAdditionalFeesComponent_vue_vue_type_template_id_437fcd59___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _instituteAdditionalFeesComponent_vue_vue_type_template_id_437fcd59___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/institute/instituteAdditionalFeesComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_instituteAdditionalFeesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./instituteAdditionalFeesComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_instituteAdditionalFeesComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59&":
+/*!***************************************************************************************************************!*\
+  !*** ./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59& ***!
+  \***************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_instituteAdditionalFeesComponent_vue_vue_type_template_id_437fcd59___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/institute/instituteAdditionalFeesComponent.vue?vue&type=template&id=437fcd59&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_instituteAdditionalFeesComponent_vue_vue_type_template_id_437fcd59___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_instituteAdditionalFeesComponent_vue_vue_type_template_id_437fcd59___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -68570,8 +68978,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

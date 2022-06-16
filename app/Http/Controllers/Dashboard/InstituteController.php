@@ -14,6 +14,8 @@ use App\Models\Course;
 use App\Models\CoursePrice;
 use App\Models\Favourite;
 use App\Models\StudentRequest;
+use App\Models\ExchangeRate;
+
 class InstituteController extends Controller
 {
 
@@ -62,13 +64,44 @@ class InstituteController extends Controller
         $page_title = 'المعاهد';
 
         $countries = Country::all();
+        $currencies = ExchangeRate::all();
         $useVue = true;
-        return view('admin.institutes.create', compact('useVue', 'department_name', 'page_name', 'countries','page_title'));
+        return view('admin.institutes.create', compact('useVue', 'department_name', 'page_name', 'countries','page_title' , 'currencies'));
     }
     /************************************************************** */
     public function store(StoreInstituteRequest $request)
     {
         $validated = $request->validated();
+
+        $studying_fees = '[';
+        foreach($request->fees_rows as $index => $fee_row){
+
+            if(empty($fee_row['title'])){
+                return back()->with('error', 'يجب ادخال عنوان و سعر مصاريف المعهد, و باقي الحقول اختياريا')->withInput();
+            }
+            if(empty($fee_row['price'])){
+                return back()->with('error', 'يجب ادخال عنوان و سعر مصاريف المعهد, و باقي الحقول اختياريا')->withInput();
+            }
+
+            if($index != 1 ){$studying_fees .= ',';}
+            $studying_fees .= '{
+                "keyword": "'.$fee_row['keyword'].'",
+                "title": "'.$fee_row['title'].'",
+                "price": "'.$fee_row['price'].'",
+                "price-type": "'.$fee_row['price-type'].'",
+                "discount":"'.$fee_row['discount'].'",
+                "discount-type":"'.$fee_row['discount-type'].'",
+                "summer-increase":"'.$fee_row['summer-increase'].'"
+            }';
+            
+        }
+        $regex = '/^[1-9]|[12][0-9]|3[01]-[1-9]|1[0-2]$/';
+        if (preg_match($regex, $request->summer_start_date)) {
+            return back()->with('error', 'برجاء وضع تاريخ بداية الصيف بالشكل الصحيح')->withInput();
+        }
+        if (preg_match($regex, $request->summer_end_date)) {
+            return back()->with('error', 'برجاء وضع تاريخ نهاية الصيف بالشكل الصحيح')->withInput();
+        }
         
         $slug = str_replace(' ', '-', $request->name_ar);
             $institute = Institute::create([
@@ -89,6 +122,10 @@ class InstituteController extends Controller
                 "sat_rate" => 1,
                 "rate_switch" => 1,
                 "approvement" => 1,
+                "studying_fees" => $studying_fees,
+                "summer_start_date" => $request->summer_start_date,
+                "summer_end_date" => $request->summer_end_date,
+                "institute_currency" => $request->institute_currency,
                 "institute_class" => $request->institute_class,
                 "map" => $request->map,
             ]);
