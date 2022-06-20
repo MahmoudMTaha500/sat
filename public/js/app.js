@@ -6042,6 +6042,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
@@ -6057,7 +6062,8 @@ __webpack_require__.r(__webpack_exports__);
       residence_weeks: 1,
       price_per_week: 0,
       weeks_count: 100,
-      from_date: ''
+      from_date: '',
+      course_booking_fees: JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar
     };
   },
   methods: {
@@ -6086,6 +6092,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.insurance_price_checker == '1') {
         totalPrice += this.insurance_price * this.weeks;
+      }
+
+      if (Number(this.course_booking_fees) != 0) {
+        totalPrice += Number(this.course_booking_fees);
       }
 
       return totalPrice;
@@ -53231,6 +53241,22 @@ var render = function() {
             _vm._v(" "),
             _c("hr")
           ]),
+          _vm._v(" "),
+          _vm.course_booking_fees != 0
+            ? _c("div", [
+                _c("span", { staticClass: "d-block" }, [
+                  _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(" حجز الدورة : ")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-main-color" }, [
+                    _vm._v(_vm._s(_vm.course_booking_fees) + " ر.س   ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr")
+              ])
+            : _vm._e(),
           _vm._v(" "),
           _vm.chosin_residence.price != 0 &&
           _vm.chosin_residence.price != "" &&

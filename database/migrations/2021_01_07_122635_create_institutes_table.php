@@ -34,9 +34,7 @@ class CreateInstitutesTable extends Migration
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->integer("sat_rate");
             $table->integer("rate_switch");
-            $table->json("studying_fees");
-            $table->string("summer_start_date")->nullable();
-            $table->string("summer_end_date")->nullable();
+            $table->json("course_booking_fees")->nullable();
             $table->string("institute_currency");
             $table->integer("institute_class")->default(9999);
             $table->integer("approvement");

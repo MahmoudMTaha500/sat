@@ -15,6 +15,11 @@
                     <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.round(price_per_week*weeks*(1- course.discount))}} ر.س </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? ' اسبوع ' : ' اسابيع ')}})</span> </span>
                     <hr />
                 </div>
+                <div v-if="course_booking_fees !=0">
+                    <span class="d-block"><span class="font-weight-bold"> حجز الدورة : </span> <span class="text-main-color">{{course_booking_fees}} ر.س   </span></span>
+                    
+                    <hr />
+                </div>
                 <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
                     <span class="text-main-color">{{chosin_residence.price*residence_weeks}} ر.س   <span class="h6 small text-success"> ({{residence_weeks + ( residence_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}}) </span> </span>
@@ -130,6 +135,7 @@
                 price_per_week: 0,
                 weeks_count: 100,
                 from_date: '',
+                course_booking_fees: (JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar) ,
             };
         },
         methods: {
@@ -150,6 +156,9 @@
                 }
                 if(this.insurance_price_checker == '1'){
                     totalPrice += this.insurance_price*this.weeks
+                }
+                if(Number(this.course_booking_fees) != 0){
+                    totalPrice += Number(this.course_booking_fees)
                 }
                return totalPrice
             },

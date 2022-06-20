@@ -191,7 +191,7 @@
                     @if (isset($data['airport']['name_ar']))
                         <tr>
                             <td style="text-align: right">
-                                {{$data['airport']['name_ar']}}
+                                الاستقبال : {{ $data['airport']['name_ar']}}
                             </td>
                             <td></td>
                             <td></td>
@@ -207,9 +207,21 @@
                             <td>{{ArabicDate(date("m/d/Y", strtotime("$data[from_date] -1 day")))}}</td>
                             <td>{{ArabicDate(date("m/d/Y", strtotime("$data[residence_to_date] +1 day")))}}</td>
                             <td>{{$data['residence_weeks']}} اسابيع</td>
-                            <td>{{$data['residence']['price']*$data['weeks']}}</td>
+                            <td>{{$data['residence']['price']*$data['residence_weeks']}}</td>
                         </tr>
-                    @endif 
+                    @endif
+
+                    @if (isset($data['course_booking_fees']) && $data['course_booking_fees'] != 0)
+                        <tr>
+                            <td style="text-align: right">
+                                مصاريف حجز الدورة
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{$data['course_booking_fees']}}</td>
+                        </tr>
+                    @endif
     
     
                     @if ($data['insurance_price'] != 0)

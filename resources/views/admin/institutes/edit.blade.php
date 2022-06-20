@@ -88,39 +88,14 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-xl" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">مصاريف
-                                                            اضافية</h5>
-                                                        <button type="button" class="close"
-                                                            data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body p-3">
-                                                        <institute-additional-fees-component 
-                                                        csrf_token = "{{csrf_token()}}"
-                                                        :old_fees = "{{!empty($institute->studying_fees) ? $institute->studying_fees : 'undefined' }}"
-                                                        >
-                                                            
-                                                        </institute-additional-fees-component>
-                                                    </div>
-
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>مصاريف حجز الدورة</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="booking fees" name="course_booking_fees"
+                                                        value="{{$institute->course_booking_fees != null ? json_decode($institute->course_booking_fees, true)['price'] : 0 }}" />
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <button data-toggle="modal" data-target="#exampleModal"
-                                                    type="button" class="btn btn-primary w-100 mt-2"><i
-                                                        class="la la-check-square-o"></i> مصاريف اضافية</button>
-                                            </div>
-                                        </div>
                                             <div class="col-md-3">
                                                 <show-images-component
                                                 :image_name="{{json_encode("logo")}}"
@@ -148,22 +123,7 @@
                                                     </Select>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>بداية الصيف</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="dd-mm" name="summer_start_date"
-                                                        value="{{$institute->summer_start_date }}" />
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    <label>نهاية الصيف</label>
-                                                    <input type="text" class="form-control"
-                                                        placeholder="dd-mm" name="summer_end_date"
-                                                        value="{{$institute->summer_end_date}}" />
-                                                </div>
-                                            </div>
+
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <label>عملة المعهد</label>

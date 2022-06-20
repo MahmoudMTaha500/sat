@@ -72,51 +72,16 @@ class InstituteController extends Controller
     public function store(StoreInstituteRequest $request)
     {
         $validated = $request->validated();
+        $exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
 
-        $studying_fees = '[';
-        foreach($request->fees_rows as $index => $fee_row){
-
-            if(empty($fee_row['title'])){
-                return back()->with('error', 'يجب ادخال عنوان  مصاريف المعهد')->withInput();
-            }
-
-
-            if($index != 1 ){$studying_fees .= ',';}
-
-                $converted_price = currency_convertor($request->institute_currency, 'SAR' , $fee_row['price']);
-                $exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
-                $price = $converted_price + $exchange_money*$fee_row['price'];
-
-
-                $summer_converted_price = currency_convertor($request->institute_currency, 'SAR' , $fee_row['summer-price']);
-                $summer_exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
-                $summer_price = $summer_converted_price + $summer_exchange_money*$fee_row['summer-price'];
-
-                $studying_fees .= '{
-                    "keyword": "'.$fee_row['keyword'].'",
-                    "title": "'.$fee_row['title'].'",
-                    "price": "'.$fee_row['price'].'",
-                    "price-in-sar": "'.floor($price).'",
-                    "price-type": "'.$fee_row['price-type'].'",
-                    "discount":"'.$fee_row['discount'].'",
-                    "discount-type":"'.$fee_row['discount-type'].'",
-                    "summer-price":"'.$fee_row['summer-price'].'",
-                    "summer-price-in-sar": "'.floor($summer_price).'"
-
-                }';
-        }
-        $studying_fees .= ']';
-        session()->flash('studying_fees',$studying_fees);
-        session()->get('studying_fees');
-
-        $regex = '/^([1-9]|[12][0-9]|3[01])-(1[0-2]|[1-9])$/';
-        if (!preg_match($regex, $request->summer_start_date)) {
-            return back()->with('error', 'برجاء وضع تاريخ بداية الصيف بالشكل الصحيح')->withInput();
-        }
-        if (!preg_match($regex, $request->summer_end_date)) {
-            return back()->with('error', 'برجاء وضع تاريخ نهاية الصيف بالشكل الصحيح')->withInput();
-        }
         
+        $course_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->course_booking_fees);
+        $course_booking_fees_price_in_sar = $course_booking_fees_price + $exchange_money*$request->course_booking_fees;
+        $course_booking_fees = '{
+            "price" : "'.$request->course_booking_fees.'",
+            "price_in_sar" : "'.floor($course_booking_fees_price_in_sar).'"
+        }';
+
         
 
         $slug = str_replace(' ', '-', $request->name_ar);
@@ -134,13 +99,11 @@ class InstituteController extends Controller
                 "title_tag" => $request->title_tag,
                 "meta_keywords" => $request->meta_keywords,
                 "meta_description" => $request->meta_description,
+                "course_booking_fees" => $course_booking_fees,
                 "creator_id" => auth()->user()->id,
                 "sat_rate" => 1,
                 "rate_switch" => 1,
                 "approvement" => 1,
-                "studying_fees" => $studying_fees,
-                "summer_start_date" => $request->summer_start_date,
-                "summer_end_date" => $request->summer_end_date,
                 "institute_currency" => $request->institute_currency,
                 "institute_class" => $request->institute_class,
                 "map" => $request->map,
@@ -186,39 +149,16 @@ class InstituteController extends Controller
     /************************************************************** */
     public function update(Request $request, Institute $institute)
     {
-        $studying_fees = '[';
-        foreach($request->fees_rows as $index => $fee_row){
+        $exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
 
-            if(empty($fee_row['title'])){
-                return back()->with('error', 'يجب ادخال عنوان  مصاريف المعهد')->withInput();
-            }
+        
+        $course_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->course_booking_fees);
+        $course_booking_fees_price_in_sar = $course_booking_fees_price + $exchange_money*$request->course_booking_fees;
+        $course_booking_fees = '{
+            "price" : "'.$request->course_booking_fees.'",
+            "price_in_sar" : "'.floor($course_booking_fees_price_in_sar).'"
+        }';
 
-
-            if($index != 1 ){$studying_fees .= ',';}
-
-                $converted_price = currency_convertor($request->institute_currency, 'SAR' , $fee_row['price']);
-                $exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
-                $price = $converted_price + $exchange_money*$fee_row['price'];
-
-
-                $summer_converted_price = currency_convertor($request->institute_currency, 'SAR' , $fee_row['summer-price']);
-                $summer_exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
-                $summer_price = $summer_converted_price + $summer_exchange_money*$fee_row['summer-price'];
-
-                $studying_fees .= '{
-                    "keyword": "'.$fee_row['keyword'].'",
-                    "title": "'.$fee_row['title'].'",
-                    "price": "'.$fee_row['price'].'",
-                    "price-in-sar": "'.floor($price).'",
-                    "price-type": "'.$fee_row['price-type'].'",
-                    "discount":"'.$fee_row['discount'].'",
-                    "discount-type":"'.$fee_row['discount-type'].'",
-                    "summer-price":"'.$fee_row['summer-price'].'",
-                    "summer-price-in-sar": "'.floor($summer_price).'"
-
-                }';
-        }
-        $studying_fees .= ']';
 
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
@@ -232,9 +172,7 @@ class InstituteController extends Controller
         $institute->meta_keywords = $request->meta_keywords;
         $institute->meta_description = $request->meta_description;
         $institute->map = $request->map;
-        $institute->studying_fees= $studying_fees;
-        $institute->summer_start_date = $request->summer_start_date;
-        $institute->summer_end_date = $request->summer_end_date;
+        $institute->course_booking_fees= $course_booking_fees;
         $institute->institute_currency = $request->institute_currency;
         $institute->institute_class = $request->institute_class;
         if ($request->logo) {
@@ -263,7 +201,6 @@ class InstituteController extends Controller
         $institute->sat_rate = $request->score;
         $institute->save();
 
-        Course::where(['institute_id' => $institute->id, 'studying_fees_status' => 0])->update(['studying_fees' => $studying_fees]);
 
         session()->flash('alert_message', ['message' => 'تم تعديل المعهد بنجاح', 'icon' => 'success']);
         return back();

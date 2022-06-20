@@ -80,7 +80,7 @@ class WebsiteController extends Controller
     public function institute_page($institute_id, $institute_slug, $course_slug = null)
     {
         $useVue = true;
-        $course = Course::latest('id')->with('coursesPrice', 'coursesPricePerWeek')->where(['institute_id' => $institute_id, 'slug' => $course_slug])->get();
+        $course = Course::latest('id')->with('coursesPrice', 'coursesPricePerWeek' , 'institute')->where(['institute_id' => $institute_id, 'slug' => $course_slug])->get();
         $institute = Institute::where(['id' => $institute_id, 'slug' => $institute_slug])->get()[0];
         $institute_blogs = Blog::latest('id')->latest()
                                         ->where('country_id' , $institute->country_id)
@@ -132,11 +132,14 @@ class WebsiteController extends Controller
         $course_id = $request->course_id;
         $course = Course::where('id', $course_id)->get()[0];
         
+        $course_booking_fees = $course->institute->course_booking_fees == null ? 0 : json_decode($course->institute->course_booking_fees, true)['price_in_sar'];
+
         $course_price_per_week = price_per_week($course->coursesPrice, $weeks);
         $course_discount = $course->discount;
         $totalPrice = ($course_price_per_week * (1 - $course_discount)) * $weeks;
         if ($airport != 0) {$totalPrice += $airport['price'];}
         if ($residence != 0) {$totalPrice += $residence['price'] * $residence_weeks;}
+        if ($course_booking_fees != 0) {$totalPrice += $course_booking_fees;}
         if ($insurance == 1) {
             $insurance_price = $course->institute->insurance->price;
             $totalPrice += $insurance_price*$weeks;
@@ -166,6 +169,7 @@ class WebsiteController extends Controller
         $course_details['insurance_price'] = $insurance_price;
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
+        $course_details['course_booking_fees'] = $course_booking_fees;
 
         $page_identity = [
             'title_tag' => 'تاكيد الحجز',
@@ -386,6 +390,7 @@ if($student_mail){
         $data['residence'] = residences::find($student_request->residence_id);
         $data['base_url'] = url('/');
         $data['refund_policy'] = WebsiteSettings::find(1)->refund_policy_ar;
+        $data['course_booking_fees'] = $institute->course_booking_fees == null ? 0 : json_decode($institute->course_booking_fees, true)['price_in_sar'];
         
         if($request->has('student_id')){
             if($student_request->student_id == $request->student_id){
