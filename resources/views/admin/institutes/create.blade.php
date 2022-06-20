@@ -91,51 +91,17 @@
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body p-3">
-                                                                <institute-additional-fees-component csrf_token = "{{csrf_token()}}">
+                                                                <institute-additional-fees-component 
+                                                                csrf_token = "{{csrf_token()}}"
+                                                                :old_fees = "{{session()->has('studying_fees') ? session()->get('studying_fees') : 'undefined' }}"
+                                                                >
                                                                     
                                                                 </institute-additional-fees-component>
                                                             </div>
 
-<<<<<<< HEAD
                                                         </div>
                                                     </div>
                                                 </div>
-=======
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <show-images-component
-                                                :image_name="{{json_encode("logo")}}"
-                                                :image_label="{{json_encode("اللوجو")}}"
-                                                :old="{{json_encode(old('logo'))}}"
-                                                ></show-images-component>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <show-images-component
-                                                :image_name="{{json_encode("banner")}}"
-                                                :image_label="{{json_encode("صورة الباننر")}}"
-                                                :old="{{json_encode(old('banner'))}}"
-                                                ></show-images-component>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                        <div  class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="institute-name"> تصنيف المعهد</label>
-                                                <Select class="form-control" name="institute_class">
-                                                    <option {{old('institute_class') > 3 ? 'selected' : ''}} value="9999">اختر التصنيف</option>
-                                                    <option {{old('institute_class') == 1 ? 'selected' : ''}} value="1">A</option>
-                                                    <option {{old('institute_class') == 2 ? 'selected' : ''}} value="2">B</option>
-                                                    <option {{old('institute_class') == 3 ? 'selected' : ''}} value="3">C</option>
-                                                </Select>
-                                            </div>
-                                        </div>
-                                        <div  class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="institute-name"> الموقع</label>
-                                                <input type="text" id="institute-map" class="form-control" placeholder="ادخل  الموقع" name="map" value="{{old('map')}}" />
-                                            </div>
-                                        </div>
->>>>>>> 7e779849e55fccbe0124194fb82ac07890676468
 
                                                 <div class="col-md-3">
                                                     <div class="form-group">

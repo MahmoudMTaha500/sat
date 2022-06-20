@@ -3566,11 +3566,57 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['csrf_token'],
+  props: ['csrf_token', 'old_fees'],
   data: function data() {
     return {
-      rows_index: [1, 2]
+      rows_index: this.old_fees == undefined ? [1, 2] : Array.from(Array(this.old_fees.length + 1).keys()).slice(1)
     };
   },
   methods: {
@@ -46989,201 +47035,418 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _vm._l(_vm.rows_index, function(row, index) {
-        return _c("div", { key: row, staticClass: "form-group" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                type: "hidden",
-                name: "fees_rows[" + row + "][keyword]",
-                readonly: row == 1 || row == 2
-              },
-              domProps: {
-                value:
-                  row == 1 ? "booking" : row == 2 ? "text-books" : "fees-" + row
-              }
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c("label", [_vm._v("اسم المصاريف")]),
-                _vm._v(" "),
+  return _c("div", [
+    _vm.old_fees == undefined
+      ? _c(
+          "div",
+          _vm._l(_vm.rows_index, function(row, index) {
+            return _c("div", { key: row, staticClass: "form-group" }, [
+              _c("div", { staticClass: "row" }, [
                 _c("input", {
                   staticClass: "form-control",
                   attrs: {
-                    type: "text",
-                    name: "fees_rows[" + row + "][title]",
+                    type: "hidden",
+                    name: "fees_rows[" + row + "][keyword]",
                     readonly: row == 1 || row == 2
                   },
                   domProps: {
                     value:
                       row == 1
-                        ? "مصاريف الحجز"
+                        ? "booking"
                         : row == 2
-                        ? "الكتب الدراسية"
-                        : ""
+                        ? "summer-supplementary"
+                        : "fees-" + row
                   }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c("label", [_vm._v("السعر")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: { type: "text", name: "fees_rows[" + row + "][price]" }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c("label", [_vm._v("نوع المصاريف")]),
+                }),
                 _vm._v(" "),
                 _c(
-                  "select",
-                  {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "fees_rows[" + row + "][price-type]"
-                    }
-                  },
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
                   [
-                    _c("option", { attrs: { value: "overall" } }, [
-                      _vm._v("اجمالي الدراسة")
-                    ]),
+                    _c("label", [_vm._v("اسم المصاريف")]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "weekly" } }, [
-                      _vm._v("اسبوعي")
-                    ])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c("label", [_vm._v("التخفيض")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "fees_rows[" + row + "][discount]"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c("label", [_vm._v("نوع التخفيض")]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "fees_rows[" + row + "][discount-type]"
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("اختر نوع التخفيض")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "percentage" } }, [
-                      _vm._v("نسبة مئوية")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "fixed" } }, [
-                      _vm._v("نسبة ثابتة")
-                    ])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c("label", [_vm._v("الزيادة الصيفية")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "fees_rows[" + row + "][summer-increase]"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
-              [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger mt-2 w-100",
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteRow(index)
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][title]",
+                        readonly: row == 1 || row == 2
+                      },
+                      domProps: {
+                        value:
+                          row == 1
+                            ? "مصاريف الحجز"
+                            : row == 2
+                            ? "الاضافة الصيفية"
+                            : ""
                       }
-                    }
-                  },
-                  [_vm._v("حذف")]
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("السعر")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][price]"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("نوع المصاريف")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "fees_rows[" + row + "][price-type]"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "overall" } }, [
+                          _vm._v("اجمالي الدراسة")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "weekly" } }, [
+                          _vm._v("اسبوعي")
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("التخفيض")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][discount]"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("نوع التخفيض")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "fees_rows[" + row + "][discount-type]"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("اختر نوع التخفيض")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "percentage" } }, [
+                          _vm._v("نسبة مئوية")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "fixed" } }, [
+                          _vm._v("نسبة ثابتة")
+                        ])
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("السعر الصيفي")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][summer-price]"
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger mt-2 w-100",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteRow(index)
+                          }
+                        }
+                      },
+                      [_vm._v("حذف")]
+                    )
+                  ]
                 )
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("hr")
-        ])
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-6 col-12" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success mt-2 w-100",
-              attrs: { type: "button" },
-              on: {
-                click: function($event) {
-                  return _vm.additionalFees()
-                }
+              ]),
+              _vm._v(" "),
+              _c("hr")
+            ])
+          }),
+          0
+        )
+      : _c(
+          "div",
+          _vm._l(_vm.rows_index, function(row, index) {
+            return _c("div", { key: row, staticClass: "form-group" }, [
+              _c("div", { staticClass: "row" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "hidden",
+                    name: "fees_rows[" + row + "][keyword]"
+                  },
+                  domProps: { value: _vm.old_fees[row - 1].keyword }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("اسم المصاريف القديمة")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][title]"
+                      },
+                      domProps: { value: _vm.old_fees[row - 1].title }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("السعر")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][price]"
+                      },
+                      domProps: { value: _vm.old_fees[row - 1].price }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("نوع المصاريف")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "fees_rows[" + row + "][price-type]"
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "overall" },
+                            domProps: {
+                              selected:
+                                _vm.old_fees[row - 1]["price-type"] == "overall"
+                                  ? true
+                                  : false
+                            }
+                          },
+                          [_vm._v("اجمالي الدراسة ")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "weekly" },
+                            domProps: {
+                              selected:
+                                _vm.old_fees[row - 1]["price-type"] == "weekly"
+                                  ? true
+                                  : false
+                            }
+                          },
+                          [_vm._v("اسبوعي")]
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("التخفيض")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][discount]"
+                      },
+                      domProps: { value: _vm.old_fees[row - 1].discount }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-2 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("نوع التخفيض")]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "fees_rows[" + row + "][discount-type]"
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("اختر نوع التخفيض")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "percentage" },
+                            domProps: {
+                              selected:
+                                _vm.old_fees[row - 1]["discount-type"] ==
+                                "percentage"
+                                  ? true
+                                  : false
+                            }
+                          },
+                          [_vm._v("نسبة مئوية")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "option",
+                          {
+                            attrs: { value: "fixed" },
+                            domProps: {
+                              selected:
+                                _vm.old_fees[row - 1]["discount-type"] ==
+                                "fixed"
+                                  ? true
+                                  : false
+                            }
+                          },
+                          [_vm._v("نسبة ثابتة")]
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c("label", [_vm._v("السعر الصيفي")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "fees_rows[" + row + "][summer-price]"
+                      },
+                      domProps: { value: _vm.old_fees[row - 1]["summer-price"] }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-1 col-md-3 col-sm-6 col-12 mb-2" },
+                  [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger mt-2 w-100",
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteRow(index)
+                          }
+                        }
+                      },
+                      [_vm._v("حذف")]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("hr")
+            ])
+          }),
+          0
+        ),
+    _vm._v(" "),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-6 col-12" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success mt-2 w-100",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.additionalFees()
               }
-            },
-            [_vm._v("اضافة مصاريف جديدة")]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(0)
-      ])
-    ],
-    2
-  )
+            }
+          },
+          [_vm._v("اضافة مصاريف جديدة")]
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {

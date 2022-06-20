@@ -88,7 +88,40 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">مصاريف
+                                                            اضافية</h5>
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body p-3">
+                                                        <institute-additional-fees-component 
+                                                        csrf_token = "{{csrf_token()}}"
+                                                        :old_fees = "{{!empty($institute->studying_fees) ? $institute->studying_fees : 'undefined' }}"
+                                                        >
+                                                            
+                                                        </institute-additional-fees-component>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <button data-toggle="modal" data-target="#exampleModal"
+                                                    type="button" class="btn btn-primary w-100 mt-2"><i
+                                                        class="la la-check-square-o"></i> مصاريف اضافية</button>
+                                            </div>
+                                        </div>
+                                            <div class="col-md-3">
                                                 <show-images-component
                                                 :image_name="{{json_encode("logo")}}"
                                                 :image_label="{{json_encode("اختر لوجو المعهد")}}"
@@ -96,7 +129,7 @@
                                                 :path_image_edit="{{ json_encode( asset($institute->logo == 'null' ? 'storage/default_images.png' : $institute->logo) )}}"
                                                 ></show-images-component>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-3">
                                                 <show-images-component
                                                 :image_name="{{json_encode("banner")}}"
                                                 :image_label="{{json_encode("اختر الصورة")}}"
@@ -104,10 +137,7 @@
                                                 :path_image_edit="{{ json_encode( empty($institute->getFirstMedia('institute_banner')) ? asset('/storage/default_images.png') : $institute->getFirstMediaUrl('institute_banner'))}}"
                                                 ></show-images-component>
                                             </div>
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div  class="col-md-12">
+                                            <div  class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="institute-name"> تصنيف المعهد</label>
                                                     <Select class="form-control" name="institute_class">
@@ -118,13 +148,42 @@
                                                     </Select>
                                                 </div>
                                             </div>
-                                            <div  class="col-md-12">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>بداية الصيف</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="dd-mm" name="summer_start_date"
+                                                        value="{{$institute->summer_start_date }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>نهاية الصيف</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="dd-mm" name="summer_end_date"
+                                                        value="{{$institute->summer_end_date}}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>عملة المعهد</label>
+                                                    <select class="currency_exchange form-control text-left" name="institute_currency">
+                                                        <option value="">اختر عملة المعهد</option>
+                                                        @foreach ($currencies as $currency)
+                                                            <option {{$institute->institute_currency == $currency->currency_code ? 'selected' : ''}} value="{{$currency->currency_code}}">@lang('website_lang.'.$currency->currency_code)</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div  class="col-md-3">
                                                 <div class="form-group">
                                                     <label for="institute-name"> الموقع</label>
                                                     <input type="text" id="institute-map" class="form-control" placeholder="ادخل  الموقع" name="map"  value="{{$institute->map}}" />
                                                 </div>
                                             </div>
                                         </div>
+                                        
+
                                         <div class="col-12">
                                             <hr>
                                             <h4 class="mt-5 mb-2 text-black">حقول ال SEO</h4>

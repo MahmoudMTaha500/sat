@@ -33,6 +33,8 @@ class CreateCoursesTable extends Migration
             $table->text("title_tag")->nullable();
             $table->text("meta_keywords")->nullable();
             $table->text("meta_description")->nullable();
+            $table->integer("studying_fees_status")->default('0');
+            $table->json("studying_fees");
             $table->integer("main_course_trigger")->default(0)->comment('main institute course = 1; else = 0');
             $table->softDeletes();
             $table->timestamps();

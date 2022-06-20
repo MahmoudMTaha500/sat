@@ -140,6 +140,18 @@
                                                     </div>
                                                 </div>
                                                 <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                                <hr>
+                                                <label for="projectinput3">مصاريف الكتب</label>
+                                                <div data-repeater-list="textbooks_price">
+                                                    <div class="input-group mb-1" data-repeater-item>
+                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks" />
+                                                        <input type="tel" placeholder="سعر الكتب" class="form-control vaildate" id="example-tel-input" name="preice_per_week"   value="{{old('preice_per_week')}}"/>
+                                                        <span class="input-group-append" id="button-addon2">
+                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">
