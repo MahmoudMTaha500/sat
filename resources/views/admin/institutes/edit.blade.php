@@ -38,6 +38,7 @@
                         </div>
                         <div class="card-content collpase show">
                             <div class="card-body">
+                                @include('admin.includes.errors')
                                 <form class="form" action="{{route('institute.update',$institute->id)}}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                     @method('put')

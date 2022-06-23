@@ -149,6 +149,15 @@ class InstituteController extends Controller
     /************************************************************** */
     public function update(Request $request, Institute $institute)
     {
+
+         
+        $validated = $request->validate([
+            'institute_currency' => ['required']
+           
+        ], [
+            'institute_currency.required' => 'برجاء اختر عملة المعهد'
+            ]);
+
         $exchange_money = ExchangeRate::where('currency_code' , $request->institute_currency)->get()[0]->exchange_rates;
 
         
