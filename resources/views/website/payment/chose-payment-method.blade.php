@@ -201,7 +201,10 @@
                         @endif 
                         @if ($course_details['residence'] != 0)
                             <p class="text-dark"><span class="font-weight-bold text-main-color">تفاصيل السكن : </span> {{$course_details['residence']['name_ar']}} <span class="text-success font-weight-bold">{{round($course_details['residence']['price']*$course_details['residence_weeks'])}} ر.س ({{$course_details['residence_weeks'] == '1' ? $course_details['residence_weeks'] . ' أسبوع ' :  $course_details['residence_weeks'] .' أسابيع '}})</span></p>
-                        @endif 
+                        @endif
+                        @if ($course_details['residence_booking_fees'] != 0 && $course_details['residence'] != 0)
+                        <p class="text-dark"><span class="font-weight-bold text-main-color">حجز السكن : </span> <span class="text-success font-weight-bold ">( {{$course_details['residence_booking_fees']}} ر.س )</span></p>
+                        @endif
                         @if ($course_details['insurance_price'] != 0)
                         <p class="text-dark"><span class="font-weight-bold text-main-color">التامين : </span> <span class="text-success font-weight-bold">{{round($course_details['insurance_price']*$course_details['weeks'])}} ر.س</span> </p>
                         @endif

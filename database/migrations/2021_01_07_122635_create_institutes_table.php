@@ -35,6 +35,7 @@ class CreateInstitutesTable extends Migration
             $table->integer("sat_rate");
             $table->integer("rate_switch");
             $table->json("course_booking_fees")->nullable();
+            $table->json("residence_booking_fees")->nullable();
             $table->string("institute_currency");
             $table->integer("institute_class")->default(9999);
             $table->integer("approvement");

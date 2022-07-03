@@ -93,8 +93,16 @@
                                                 <div class="form-group">
                                                     <label>مصاريف حجز الدورة</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="booking fees" name="course_booking_fees"
+                                                        placeholder="course booking fees" name="course_booking_fees"
                                                         value="{{$institute->course_booking_fees != null ? json_decode($institute->course_booking_fees, true)['price'] : 0 }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>مصاريف حجز السكن</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="residence booking fees" name="residence_booking_fees"
+                                                        value="{{$institute->residence_booking_fees != null ? json_decode($institute->residence_booking_fees, true)['price'] : 0 }}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-3">

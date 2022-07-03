@@ -211,6 +211,17 @@
                         </tr>
                     @endif
 
+                    @if (isset($data['residence_booking_fees']) && $data['residence_booking_fees'] != 0 && isset($data['residence']['name_ar']))
+                        <tr>
+                            <td style="text-align: right">
+                                مصاريف حجز السكن
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{$data['residence_booking_fees']}}</td>
+                        </tr>
+                    @endif
                     @if (isset($data['course_booking_fees']) && $data['course_booking_fees'] != 0)
                         <tr>
                             <td style="text-align: right">

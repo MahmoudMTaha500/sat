@@ -77,11 +77,20 @@ class InstituteController extends Controller
         
         $course_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->course_booking_fees);
         $course_booking_fees_price_in_sar = $course_booking_fees_price + $exchange_money*$request->course_booking_fees;
+
+
+        $residence_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->residence_booking_fees);
+        $residence_booking_fees_price_in_sar = $residence_booking_fees_price + $exchange_money*$request->residence_booking_fees;
+
         $course_booking_fees = '{
             "price" : "'.$request->course_booking_fees.'",
             "price_in_sar" : "'.floor($course_booking_fees_price_in_sar).'"
         }';
 
+        $residence_booking_fees = '{
+            "price" : "'.$request->residence_booking_fees.'",
+            "price_in_sar" : "'.floor($residence_booking_fees_price_in_sar).'"
+        }';
         
 
         $slug = str_replace(' ', '-', $request->name_ar);
@@ -100,6 +109,7 @@ class InstituteController extends Controller
                 "meta_keywords" => $request->meta_keywords,
                 "meta_description" => $request->meta_description,
                 "course_booking_fees" => $course_booking_fees,
+                "residence_booking_fees" => $residence_booking_fees,
                 "creator_id" => auth()->user()->id,
                 "sat_rate" => 1,
                 "rate_switch" => 1,
@@ -168,6 +178,13 @@ class InstituteController extends Controller
             "price_in_sar" : "'.floor($course_booking_fees_price_in_sar).'"
         }';
 
+        $residence_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->residence_booking_fees);
+        $residence_booking_fees_price_in_sar = $residence_booking_fees_price + $exchange_money*$request->residence_booking_fees;
+        $residence_booking_fees = '{
+            "price" : "'.$request->residence_booking_fees.'",
+            "price_in_sar" : "'.floor($residence_booking_fees_price_in_sar).'"
+        }';
+
 
         $institute = Institute::find($institute->id);
         $institute->name_ar = $request->name_ar;
@@ -182,6 +199,7 @@ class InstituteController extends Controller
         $institute->meta_description = $request->meta_description;
         $institute->map = $request->map;
         $institute->course_booking_fees= $course_booking_fees;
+        $institute->residence_booking_fees= $residence_booking_fees;
         $institute->institute_currency = $request->institute_currency;
         $institute->institute_class = $request->institute_class;
         if ($request->logo) {

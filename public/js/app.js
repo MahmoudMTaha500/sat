@@ -6047,6 +6047,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
@@ -6063,7 +6069,8 @@ __webpack_require__.r(__webpack_exports__);
       price_per_week: 0,
       weeks_count: 100,
       from_date: '',
-      course_booking_fees: JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar
+      course_booking_fees: JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar,
+      residence_booking_fees: JSON.parse(this.course_obj).institute.residence_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.residence_booking_fees).price_in_sar
     };
   },
   methods: {
@@ -6096,6 +6103,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (Number(this.course_booking_fees) != 0) {
         totalPrice += Number(this.course_booking_fees);
+      }
+
+      if (Number(this.residence_booking_fees) != 0 && !isNaN(this.chosin_residence.price)) {
+        totalPrice += Number(this.residence_booking_fees);
       }
 
       return totalPrice;
@@ -53291,6 +53302,25 @@ var render = function() {
               ])
             : _vm._e(),
           _vm._v(" "),
+          _vm.residence_booking_fees != 0 &&
+          _vm.chosin_residence.price != 0 &&
+          _vm.chosin_residence.price != "" &&
+          !isNaN(_vm.chosin_residence.price)
+            ? _c("div", [
+                _c("span", { staticClass: "d-block" }, [
+                  _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(" حجز السكن : ")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-main-color" }, [
+                    _vm._v(_vm._s(_vm.residence_booking_fees) + " ر.س   ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
           _vm.chosin_airport.price != 0 &&
           _vm.chosin_airport.price != "" &&
           !isNaN(_vm.chosin_airport.price)
@@ -69272,8 +69302,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -133,6 +133,7 @@ class WebsiteController extends Controller
         $course = Course::where('id', $course_id)->get()[0];
         
         $course_booking_fees = $course->institute->course_booking_fees == null ? 0 : json_decode($course->institute->course_booking_fees, true)['price_in_sar'];
+        $residence_booking_fees = $course->institute->residence_booking_fees == null ? 0 : json_decode($course->institute->residence_booking_fees, true)['price_in_sar'];
 
         $course_price_per_week = price_per_week($course->coursesPrice, $weeks);
         $course_discount = $course->discount;
@@ -140,6 +141,7 @@ class WebsiteController extends Controller
         if ($airport != 0) {$totalPrice += $airport['price'];}
         if ($residence != 0) {$totalPrice += $residence['price'] * $residence_weeks;}
         if ($course_booking_fees != 0) {$totalPrice += $course_booking_fees;}
+        if ($residence_booking_fees != 0 && $residence !=0) {$totalPrice += $residence_booking_fees;}
         if ($insurance == 1) {
             $insurance_price = $course->institute->insurance->price;
             $totalPrice += $insurance_price*$weeks;
@@ -170,6 +172,7 @@ class WebsiteController extends Controller
         $course_details['airport'] = $airport;
         $course_details['residence'] = $residence;
         $course_details['course_booking_fees'] = $course_booking_fees;
+        $course_details['residence_booking_fees'] = $residence_booking_fees;
 
         $page_identity = [
             'title_tag' => 'تاكيد الحجز',
@@ -391,6 +394,7 @@ if($student_mail){
         $data['base_url'] = url('/');
         $data['refund_policy'] = WebsiteSettings::find(1)->refund_policy_ar;
         $data['course_booking_fees'] = $institute->course_booking_fees == null ? 0 : json_decode($institute->course_booking_fees, true)['price_in_sar'];
+        $data['residence_booking_fees'] = $institute->residence_booking_fees == null ? 0 : json_decode($institute->residence_booking_fees, true)['price_in_sar'];
         
         if($request->has('student_id')){
             if($student_request->student_id == $request->student_id){

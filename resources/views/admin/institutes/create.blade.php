@@ -83,8 +83,16 @@
                                                     <div class="form-group">
                                                         <label>مصاريف حجز الدورة</label>
                                                         <input type="text" class="form-control"
-                                                            placeholder="booking fees" name="course_booking_fees"
+                                                            placeholder="course booking fees" name="course_booking_fees"
                                                             value="{{ old('course_booking_fees') }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>مصاريف حجز السكن</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="residence booking fees" name="residence_booking_fees"
+                                                            value="{{ old('residence_booking_fees') }}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
