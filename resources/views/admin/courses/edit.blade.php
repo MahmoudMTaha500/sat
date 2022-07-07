@@ -117,7 +117,6 @@
 
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput2">اختر العمله</label>
                                                     <select class=" form-control text-left currency_exchange" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                         @foreach ($exchange_rates as $exchange_rate)
                                                             <option @if($course->coursesPrice[0]->currency_code == $exchange_rate->currency_code) selected @endif value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
@@ -126,20 +125,77 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-12 mb-2 contact-repeater">
-                                                <label for="projectinput3">سعر الكورس</label>
-                                                <div data-repeater-list="coures_price">
-                                                    @foreach($course_prices as $price)
-                                                    <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks" value="{{$price->weeks}}" />
-                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week" value="{{$price->currency_amount}}" />
-                                                        <span class="input-group-append" id="button-addon2">
-                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
-                                                        </span>
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="form-group col-md-6 col-12 mb-2 contact-repeater">
+                                                        <label for="projectinput3">سعر الكورس</label>
+                                                        <div data-repeater-list="coures_price">
+                                                            @foreach($course_prices as $price)
+                                                                <div class="input-group mb-1" data-repeater-item>
+                                                                    <div class="form-control">
+                                                                        <label>عدد الاسابيع</label>
+                                                                        <input type="text" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks"  value="{{$price->weeks}}"/>
+                                                                    </div>
+                                                                    <div class="form-control">
+                                                                        <label>السعر لكل اسبوع</label>
+                                                                        <input type="text" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week"   value="{{$price->currency_amount}}"/>
+                                                                    </div>
+                                                                    <span class="input-group-append" id="button-addon2">
+                                                                        <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                                    </span>
+                                                                </div>
+                                                            @endforeach
+                                                            
+                                                        </div>
+                                                        <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                                        <hr>
                                                     </div>
-                                                    @endforeach
+                                                    <div class="form-group col-md-6 col-12 mb-2 contact-repeater">
+                                                        <label for="projectinput3">مصاريف الكتب</label>
+                                                        <div data-repeater-list="textbooks_fees">
+                                                            @if ($course->textbooks_fees != null)
+                                                                @foreach (json_decode($course->textbooks_fees, true) as $textbooks_fee)
+                                                                    <div class="input-group mb-1" data-repeater-item>
+                                                                        <div class="form-control">
+                                                                            <label>عدد الاسابيع</label>
+                                                                            <input type="text" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="textbooks_num_of_weeks" value="{{$textbooks_fee['weeks']}}"/>
+                                                                        </div>
+                                                                        <div class="form-control">
+                                                                            <label>الرسوم</label>
+                                                                            <input type="text" placeholder="الرسوم" class="form-control vaildate" id="example-tel-input" name="textbooks_fee" value="{{$textbooks_fee['fees']}}"/>
+                                                                        </div>
+                                                                        <span class="input-group-append" id="button-addon2">
+                                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                @endforeach
+                                                            @else
+                                                                <div data-repeater-list="textbooks_fees">
+                                                                    <div class="input-group mb-1" data-repeater-item>
+                                                                        <div class="form-control">
+                                                                            <label>عدد الاسابيع</label>
+                                                                            <input type="text" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="textbooks_num_of_weeks"/>
+                                                                        </div>
+                                                                        <div class="form-control">
+                                                                            <label>الرسوم</label>
+                                                                            <input type="text" placeholder="الرسوم" class="form-control vaildate" id="example-tel-input" name="textbooks_fee"/>
+                                                                        </div>
+                                                                        <span class="input-group-append" id="button-addon2">
+                                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                        <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                                        <hr>
+                                                    </div>
                                                 </div>
-                                                <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                            </div>
+
+
+                                            <div class="form-group col-12 mb-2">
+
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="form-group">

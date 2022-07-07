@@ -2195,6 +2195,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["csrf_token", "old", "insurance", "from_date_error", "save_request_url", "course_obj", "course_id", "course_for_institute_page_url", "get_course_price_url", "residence_obj", "airport_obj"],
   data: function data() {
@@ -2212,7 +2215,8 @@ __webpack_require__.r(__webpack_exports__);
       weeks_count: 100,
       from_date: '',
       course_booking_fees: JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar,
-      residence_booking_fees: JSON.parse(this.course_obj).institute.residence_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.residence_booking_fees).price_in_sar
+      residence_booking_fees: JSON.parse(this.course_obj).institute.residence_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.residence_booking_fees).price_in_sar,
+      course_textboox_fees: 0
     };
   },
   methods: {
@@ -2247,6 +2251,10 @@ __webpack_require__.r(__webpack_exports__);
         totalPrice += Number(this.course_booking_fees);
       }
 
+      if (Number(this.course_textboox_fees) != 0) {
+        totalPrice += Number(this.course_textboox_fees);
+      }
+
       if (Number(this.residence_booking_fees) != 0 && !isNaN(this.chosin_residence.price)) {
         totalPrice += Number(this.residence_booking_fees);
       }
@@ -2260,10 +2268,33 @@ __webpack_require__.r(__webpack_exports__);
       $('html, body').animate({
         scrollTop: $("#related-courses").offset().top - 100
       }, 500);
+    },
+    chose_course_textboox_fees: function chose_course_textboox_fees() {
+      var _this2 = this;
+
+      var textbooxFeesObj = JSON.parse(this.course.textbooks_fees);
+      textbooxFeesObj.sort(function (a, b) {
+        return a.weeks - b.weeks;
+      });
+      textbooxFeesObj.every(function (ele) {
+        _this2.course_textboox_fees = ele.fees_in_sar;
+
+        if (_this2.weeks <= ele.weeks) {
+          return false;
+        }
+
+        return true;
+      });
+      return 0;
+    }
+  },
+  watch: {
+    weeks: function weeks() {
+      this.chose_course_textboox_fees();
     }
   },
   beforeMount: function beforeMount() {
-    var _this2 = this;
+    var _this3 = this;
 
     var queryString = window.location.search;
     var savedParams = new URLSearchParams(queryString);
@@ -2309,7 +2340,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.get_price_per_week();
     window.setInterval(function () {
-      _this2.change_from_date();
+      _this3.change_from_date();
     }, 500);
   }
 });
@@ -39879,6 +39910,22 @@ var render = function() {
                   _vm._v(" "),
                   _c("span", { staticClass: "text-main-color" }, [
                     _vm._v(_vm._s(_vm.course_booking_fees) + " ر.س   ")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("hr")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.course_booking_fees != 0
+            ? _c("div", [
+                _c("span", { staticClass: "d-block" }, [
+                  _c("span", { staticClass: "font-weight-bold" }, [
+                    _vm._v(" رسوم الكتب الدراسية : ")
+                  ]),
+                  _vm._v(" "),
+                  _c("span", { staticClass: "text-main-color" }, [
+                    _vm._v(_vm._s(_vm.course_textboox_fees) + " ر.س   ")
                   ])
                 ]),
                 _vm._v(" "),
@@ -83805,19 +83852,19 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\resources\js\website-js.js */"./resources/js/website-js.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\admin\app-assets\vendors\js\vendors.min.js */"./public/admin/app-assets/vendors/js/vendors.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\bootstrap-select.min.js */"./public/website/js/bootstrap-select.min.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\plugins\uploadImg.js */"./public/website/js/plugins/uploadImg.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\shared\select-picker.call.js */"./public/website/js/shared/select-picker.call.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\jquery-1.12.4.js */"./public/website/js/jquery-1.12.4.js");
-__webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\jquery-ui.js */"./public/website/js/jquery-ui.js");
-module.exports = __webpack_require__(/*! C:\wamp64\www\classat_laravel\public\website\js\custom.js */"./public/website/js/custom.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\resources\js\website-js.js */"./resources/js/website-js.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\admin\app-assets\vendors\js\vendors.min.js */"./public/admin/app-assets/vendors/js/vendors.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\jquery-3.5.1.slim.min.js */"./public/website/js/jquery-3.5.1.slim.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\popper.min.js */"./public/website/js/popper.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\bootstrap.min.js */"./public/website/js/bootstrap.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\owl.carousel.min.js */"./public/website/js/plugins/owl.carousel.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\starrr.js */"./public/website/js/plugins/starrr.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\bootstrap-select.min.js */"./public/website/js/bootstrap-select.min.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\plugins\uploadImg.js */"./public/website/js/plugins/uploadImg.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\shared\select-picker.call.js */"./public/website/js/shared/select-picker.call.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\jquery-1.12.4.js */"./public/website/js/jquery-1.12.4.js");
+__webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\jquery-ui.js */"./public/website/js/jquery-ui.js");
+module.exports = __webpack_require__(/*! C:\wamp64\www\sat-laravel\public\website\js\custom.js */"./public/website/js/custom.js");
 
 
 /***/ })

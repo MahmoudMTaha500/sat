@@ -17,7 +17,10 @@
                 </div>
                 <div v-if="course_booking_fees !=0">
                     <span class="d-block"><span class="font-weight-bold"> حجز الدورة : </span> <span class="text-main-color">{{course_booking_fees}} ر.س   </span></span>
-                    
+                    <hr />
+                </div>
+                <div v-if="course_booking_fees !=0">
+                    <span class="d-block"><span class="font-weight-bold"> رسوم الكتب الدراسية : </span> <span class="text-main-color">{{course_textboox_fees}} ر.س   </span></span>
                     <hr />
                 </div>
                 
@@ -143,6 +146,7 @@
                 from_date: '',
                 course_booking_fees: (JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar) ,
                 residence_booking_fees: (JSON.parse(this.course_obj).institute.residence_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.residence_booking_fees).price_in_sar) ,
+                course_textboox_fees: 0,
             };
         },
         methods: {
@@ -167,6 +171,9 @@
                 if(Number(this.course_booking_fees) != 0){
                     totalPrice += Number(this.course_booking_fees)
                 }
+                if(Number(this.course_textboox_fees) != 0){
+                    totalPrice += Number(this.course_textboox_fees)
+                }
                 if(Number(this.residence_booking_fees) != 0 && !isNaN(this.chosin_residence.price)){
                     totalPrice += Number(this.residence_booking_fees)
                 }
@@ -177,10 +184,27 @@
             },
             goToRelatedCourse(){
                 $('html, body').animate({ scrollTop: $("#related-courses").offset().top -100}, 500);
+            },
+            chose_course_textboox_fees(){
+                let textbooxFeesObj = JSON.parse(this.course.textbooks_fees);
+                textbooxFeesObj.sort((a, b) => a.weeks - b.weeks)
+                
+                textbooxFeesObj.every(ele => {
+                    this.course_textboox_fees = ele.fees_in_sar
+                    if(this.weeks <= ele.weeks){
+                        return false
+                    }
+                    return true;
+                });
+                return 0;
             }
         },
+        watch:{
+            weeks: function (){
+                this.chose_course_textboox_fees()
+             }
+        },
         beforeMount() {
-
             let queryString = window.location.search;
             let savedParams = new URLSearchParams(queryString);
             let saved_weeks = savedParams.get('weeks')

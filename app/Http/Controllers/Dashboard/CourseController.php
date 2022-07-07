@@ -98,9 +98,22 @@ class CourseController extends Controller
         // dd($request->all()); 
         $validate = $request->validated();
         $name_ar = $request->name_ar;
-        $currency = currency_convertor($request->currency_exchange, 'SAR' , 1);
-        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $institute = Institute::find($request->institute_id);
+        $currency = currency_convertor($institute->institute_currency, 'SAR' , 1);
+        $exchange_money = ExchangeRate::where('currency_code' , $institute->institute_currency)->get()[0]->exchange_rates;
+
         $calc_currency =  $currency + $exchange_money;
+
+        $textbooks_fees = '[';
+        foreach($request->textbooks_fees as $index => $textbooks_fee){
+            if($index != 0){$textbooks_fees .=',';}
+            $textbooks_fees .= '{
+                "weeks" : "'.$textbooks_fee['textbooks_num_of_weeks'].'",
+                "fees" : "'.$textbooks_fee['textbooks_fee'].'",
+                "fees_in_sar" : "'.floor($textbooks_fee['textbooks_fee']*$calc_currency).'"
+            }';
+        }
+        $textbooks_fees .= ']';
        
         
 
@@ -123,6 +136,7 @@ class CourseController extends Controller
                 "meta_description" => $request->meta_description,
                 "main_course_trigger" => ($request->main_course_trigger == null ? 0 : 1),
                 'discount' => $request->discount/100,
+                'textbooks_fees' => $textbooks_fees,
                 'approvement' => 0,
 
             ]);
@@ -174,9 +188,22 @@ class CourseController extends Controller
     public function update(StoreCoursesRequest $request, Course $course)
     {
         $validate = $request->validated();
-        $currency = currency_convertor($request->currency_exchange, 'SAR' , 1);
-        $exchange_money = ExchangeRate::where('currency_code' , $request->currency_exchange)->get()[0]->exchange_rates;
+        $institute = $course->institute;
+        $currency = currency_convertor($institute->institute_currency, 'SAR' , 1);
+        $exchange_money = ExchangeRate::where('currency_code' , $institute->institute_currency)->get()[0]->exchange_rates;
         $calc_currency =  $currency + $exchange_money;
+
+
+        $textbooks_fees = '[';
+        foreach($request->textbooks_fees as $index => $textbooks_fee){
+            if($index != 0){$textbooks_fees .=',';}
+            $textbooks_fees .= '{
+                "weeks" : "'.$textbooks_fee['textbooks_num_of_weeks'].'",
+                "fees" : "'.$textbooks_fee['textbooks_fee'].'",
+                "fees_in_sar" : "'.floor($textbooks_fee['textbooks_fee']*$calc_currency).'"
+            }';
+        }
+        $textbooks_fees .= ']';
 
 
         $updateCourse = Course::find($course->id);
@@ -194,6 +221,7 @@ class CourseController extends Controller
         $updateCourse->meta_keywords = $request->meta_keywords;
         $updateCourse->meta_description = $request->meta_description;
         $updateCourse->discount = $request->discount/100;
+        $updateCourse->textbooks_fees = $textbooks_fees;
         $updateCourse->main_course_trigger = ($request->main_course_trigger == null ? 0 : 1);
         $updateCourse->save();
 

@@ -120,7 +120,6 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label for="projectinput2">اختر العمله</label>
                                                     <select class="currency_exchange form-control text-left" name="currency_exchange" value="{{old('currency_exchange')}}">
                                                         @foreach ($exchange_rates as $exchange_rate)
                                                             <option value="{{$exchange_rate->currency_code}}">@lang('website_lang.'.$exchange_rate->currency_code)</option>
@@ -128,70 +127,92 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-12 mb-2 contact-repeater">
-                                                <label for="projectinput3">سعر الكورس</label>
-                                                <div data-repeater-list="coures_price">
-                                                    <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks"  value="{{old('num_of_weeks')}}"/>
-                                                        <input type="tel" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week"   value="{{old('preice_per_week')}}"/>
-                                                        <span class="input-group-append" id="button-addon2">
-                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
-                                                <hr>
-                                                <label for="projectinput3">مصاريف الكتب</label>
-                                                <div data-repeater-list="textbooks_price">
-                                                    <div class="input-group mb-1" data-repeater-item>
-                                                        <input type="tel" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks" />
-                                                        <input type="tel" placeholder="سعر الكتب" class="form-control vaildate" id="example-tel-input" name="preice_per_week"   value="{{old('preice_per_week')}}"/>
-                                                        <span class="input-group-append" id="button-addon2">
-                                                            <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                                <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                            <div class="col-12">
                                                 <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="form-group">
-                                                            <label for="projectinput3">التخفيض</label>
-                                                            <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount"   value="{{old('discount')}}" />
+                                                    <div class="form-group col-md-6 col-12 mb-2 contact-repeater">
+                                                        <label for="projectinput3">سعر الكورس</label>
+                                                        <div data-repeater-list="coures_price">
+                                                            <div class="input-group mb-1" data-repeater-item>
+                                                                <div class="form-control">
+                                                                    <label>عدد الاسابيع</label>
+                                                                    <input type="text" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="num_of_weeks"  value="{{old('num_of_weeks')}}"/>
+                                                                </div>
+                                                                <div class="form-control">
+                                                                    <label>السعر لكل اسبوع</label>
+                                                                    <input type="text" placeholder="السعر لكل اسبوع" class="form-control vaildate" id="example-tel-input" name="preice_per_week"   value="{{old('preice_per_week')}}"/>
+                                                                </div>
+                                                                <span class="input-group-append" id="button-addon2">
+                                                                    <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                                </span>
+                                                            </div>
                                                         </div>
+                                                        <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                                        <hr>
                                                     </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <hr>
-                                                    <h4 class="mt-5 mb-2 text-black">حقول ال SEO</h4>
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="projectinput1">title tage</label> 
-                                                                <input type="text" placeholder="ادخل title tage " name="title_tag" value="{{old('title_tag')}}" class="form-control">
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="projectinput1">الكلمات  المفتاحية</label> 
-                                                                <input type="text" placeholder="ادخل الكلمات المفتاحية " name="meta_keywords" value="{{old('meta_keywords')}}" class="form-control">
-                                                            </div>
-                                                            
-                                                        </div>
-                                                        <div class="col-md-6">
-                                                            <div class="form-group">
-                                                                <label for="projectinput1">وصف الصفحة</label> 
-                                                                <input type="text" placeholder="ادخل meta description" name="meta_description" value="{{old('meta_description')}}" class="form-control">
+                                                    <div class="form-group col-md-6 col-12 mb-2 contact-repeater">
+                                                        <label for="projectinput3">مصاريف الكتب</label>
+                                                        <div data-repeater-list="textbooks_fees">
+                                                            <div class="input-group mb-1" data-repeater-item>
+                                                                <div class="form-control">
+                                                                    <label>عدد الاسابيع</label>
+                                                                    <input type="text" placeholder="عدد الاسابيع" class="form-control vaildate" id="example-tel-input" name="textbooks_num_of_weeks"/>
+                                                                </div>
+                                                                <div class="form-control">
+                                                                    <label>الرسوم</label>
+                                                                    <input type="text" placeholder="الرسوم" class="form-control vaildate" id="example-tel-input" name="textbooks_fee"/>
+                                                                </div>
+                                                                <span class="input-group-append" id="button-addon2">
+                                                                    <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                                </span>
                                                             </div>
                                                         </div>
+                                                        <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة سعر جديد</button>
+                                                        <hr>
                                                     </div>
-                                                </div>
-
-                                                <div class="form-actions center">
-                                                    <button type="submit" class="btn btn-primary w-100 test-btn"><i class="la la-check-square-o"></i> حفظ</button>
                                                 </div>
                                             </div>
+
+                                                                                            
+                                                
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="projectinput3">التخفيض</label>
+                                                    <input type="number" id="projectinput1" min="1" class="form-control" placeholder="00%" name="discount"   value="{{old('discount')}}" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <hr>
+                                                <h4 class="mt-5 mb-2 text-black">حقول ال SEO</h4>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">title tage</label> 
+                                                            <input type="text" placeholder="ادخل title tage " name="title_tag" value="{{old('title_tag')}}" class="form-control">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">الكلمات  المفتاحية</label> 
+                                                            <input type="text" placeholder="ادخل الكلمات المفتاحية " name="meta_keywords" value="{{old('meta_keywords')}}" class="form-control">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1">وصف الصفحة</label> 
+                                                            <input type="text" placeholder="ادخل meta description" name="meta_description" value="{{old('meta_description')}}" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-actions center col-12">
+                                                <button type="submit" class="btn btn-primary w-100 test-btn"><i class="la la-check-square-o"></i> حفظ</button>
+                                            </div>
+
+                                            
                                         </div>
                                     </div>
                                 </form>
