@@ -233,6 +233,43 @@
                             <td>{{$data['course_booking_fees']}}</td>
                         </tr>
                     @endif
+
+
+                    @if ($data['course_summer_increase_weeks'] != 0 && $data['course_summer_increase'] != 0)
+                        <tr>
+                            <td style="text-align: right">
+                                حجز خلال فترة الذروة: الرسوم الدراسية
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>{{$data['course_summer_increase_weeks']}} اسابيع</td>
+                            <td>{{$data['course_summer_increase']}}</td>
+                        </tr>
+                    @endif
+                    @if ($data['residence_summer_increase_weeks'] != 0 && $data['residence_summer_increase'] != 0)
+                        <tr>
+                            <td style="text-align: right">
+                                حجز خلال فترة الذروة: رسوم السكن
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td>{{$data['residence_summer_increase_weeks']}} اسابيع</td>
+                            <td>{{$data['residence_summer_increase']}}</td>
+                        </tr>
+                    @endif
+
+
+                    @if (isset($data['course_textboox_fees']) && $data['course_textboox_fees'] != 0)
+                        <tr>
+                            <td style="text-align: right">
+                                رسوم الكتب الدراسية
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{{$data['course_textboox_fees']}}</td>
+                        </tr>
+                    @endif
     
     
                     @if ($data['insurance_price'] != 0)

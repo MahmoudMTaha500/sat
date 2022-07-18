@@ -86,6 +86,8 @@
                                                             placeholder="course booking fees" name="course_booking_fees"
                                                             value="{{ old('course_booking_fees') }}" />
                                                     </div>
+                                                    
+                                                    
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="form-group">
@@ -93,6 +95,22 @@
                                                         <input type="text" class="form-control"
                                                             placeholder="residence booking fees" name="residence_booking_fees"
                                                             value="{{ old('residence_booking_fees') }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>بداية الصيف</label>
+                                                        <input type="date" class="form-control"
+                                                            name="summer_start_date"
+                                                            value="{{ old('summer_start_date') }}" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>نهاية الصيف</label>
+                                                        <input type="date" class="form-control"
+                                                            name="summer_end_date"
+                                                            value="{{ old('summer_end_date') }}" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">

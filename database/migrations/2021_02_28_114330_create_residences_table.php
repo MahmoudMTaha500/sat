@@ -19,6 +19,7 @@ class CreateResidencesTable extends Migration
             $table->integer('price');
             $table->string('currency_code');
             $table->integer('currency_amount');
+            $table->integer('residence_summer_increase');
             $table->bigInteger("institute_id")->unsigned();
             $table->foreign('institute_id')->references('id')->on('institutes')->onDelete('cascade');
             $table->timestamps();

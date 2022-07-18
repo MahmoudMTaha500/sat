@@ -31,6 +31,7 @@ class CreateCoursesTable extends Migration
             $table->string("required_level")->nullable();
             $table->decimal("discount")->default('0');
             $table->json("textbooks_fees")->nullable();
+            $table->json("course_summer_increase")->nullable();
             $table->text("title_tag")->nullable();
             $table->text("meta_keywords")->nullable();
             $table->text("meta_description")->nullable();
