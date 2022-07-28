@@ -96,6 +96,38 @@
                                                         placeholder="course booking fees" name="course_booking_fees"
                                                         value="{{$institute->course_booking_fees != null ? json_decode($institute->course_booking_fees, true)['price'] : 0 }}" />
                                                 </div>
+                                                <button type="button" class="btn btn-primary w-100 mb-3" data-toggle="modal" data-target="#courseSummerIncrease"> الزيادة الصيفية للدورة</button>
+                                                <!-- Button trigger modal -->
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="courseSummerIncrease" tabindex="-1" role="dialog" aria-labelledby="courseSummerIncreaseTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="courseSummerIncreaseTitle">الزيادة الصيفية للدورات</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                @foreach ($institute->courses as $course)
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <p>{{$course->name_ar}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" class="form-control" name="course_summer_increase[{{$course->id}}]" value="{{$course->course_summer_increase != null ? json_decode($course->course_summer_increase, true)['price'] : 0 }}" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr> 
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
@@ -103,6 +135,54 @@
                                                     <input type="text" class="form-control"
                                                         placeholder="residence booking fees" name="residence_booking_fees"
                                                         value="{{$institute->residence_booking_fees != null ? json_decode($institute->residence_booking_fees, true)['price'] : 0 }}" />
+                                                </div>
+                                                <button type="button" class="btn btn-primary w-100 mb-3" data-toggle="modal" data-target="#residenceSummerIncrease"> الزيادة الصيفية للسكن</button>
+                                                <!-- Button trigger modal -->
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="residenceSummerIncrease" tabindex="-1" role="dialog" aria-labelledby="residenceSummerIncreaseTitle" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="residenceSummerIncreaseTitle">الزيادة الصيفية للسكن</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                @foreach ($institute->residence as $residence)
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <p>{{$residence->name_ar}}</p>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <input type="text" class="form-control" name="residence_summer_increase[{{$residence->id}}]" value="{{$residence->residence_summer_increase != null ? json_decode($residence->residence_summer_increase, true)['price'] : 0 }}" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <hr> 
+                                                                @endforeach
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>بداية الصيف</label>
+                                                    <input type="date" class="form-control"
+                                                        name="summer_start_date"
+                                                        value="{{ empty($institute->summer_start_date) ? null : date("Y").'-'.$institute->summer_start_date }}" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label>نهاية الصيف</label>
+                                                    <input type="date" class="form-control"
+                                                        name="summer_end_date"
+                                                        value="{{ empty($institute->summer_end_date) ? null : date("Y").'-'.$institute->summer_end_date }}" />
                                                 </div>
                                             </div>
                                             <div class="col-md-3">

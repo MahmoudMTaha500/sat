@@ -11,6 +11,7 @@ use App\Models\InstituteRate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Models\Course;
+use App\Models\residences;
 use App\Models\CoursePrice;
 use App\Models\Favourite;
 use App\Models\StudentRequest;
@@ -82,9 +83,12 @@ class InstituteController extends Controller
         $residence_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->residence_booking_fees);
         $residence_booking_fees_price_in_sar = $residence_booking_fees_price + $exchange_money*$request->residence_booking_fees;
 
+        
+
         $course_booking_fees = '{
             "price" : "'.$request->course_booking_fees.'",
             "price_in_sar" : "'.floor($course_booking_fees_price_in_sar).'"
+
         }';
 
         $residence_booking_fees = '{
@@ -114,6 +118,8 @@ class InstituteController extends Controller
                 "sat_rate" => 1,
                 "rate_switch" => 1,
                 "approvement" => 1,
+                "summer_start_date" => date('m-d', strtotime($request->summer_start_date)),
+                "summer_end_date" => date('m-d', strtotime($request->summer_end_date)),
                 "institute_currency" => $request->institute_currency,
                 "institute_class" => $request->institute_class,
                 "map" => $request->map,
@@ -160,6 +166,7 @@ class InstituteController extends Controller
     public function update(Request $request, Institute $institute)
     {
 
+        
          
         $validated = $request->validate([
             'institute_currency' => ['required']
@@ -173,17 +180,47 @@ class InstituteController extends Controller
         
         $course_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->course_booking_fees);
         $course_booking_fees_price_in_sar = $course_booking_fees_price + $exchange_money*$request->course_booking_fees;
+      
+
+        $residence_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->residence_booking_fees);
+        $residence_booking_fees_price_in_sar = $residence_booking_fees_price + $exchange_money*$request->residence_booking_fees;
+        
+
+
         $course_booking_fees = '{
             "price" : "'.$request->course_booking_fees.'",
             "price_in_sar" : "'.floor($course_booking_fees_price_in_sar).'"
         }';
 
-        $residence_booking_fees_price = currency_convertor($request->institute_currency, 'SAR' , $request->residence_booking_fees);
-        $residence_booking_fees_price_in_sar = $residence_booking_fees_price + $exchange_money*$request->residence_booking_fees;
         $residence_booking_fees = '{
             "price" : "'.$request->residence_booking_fees.'",
             "price_in_sar" : "'.floor($residence_booking_fees_price_in_sar).'"
         }';
+
+        foreach($request->course_summer_increase as $index=> $increase){
+            $currency_convert = currency_convertor($request->institute_currency, 'SAR' , $increase);
+            $increase_in_sar = $currency_convert + $exchange_money*$increase;
+
+            $course_summer_increase = '{
+                "price" : "'.$increase.'",
+                "price_in_sar" : "'.floor($increase_in_sar).'"
+            }';
+
+            Course::find($index)->update(['course_summer_increase' => $course_summer_increase]);
+        }
+
+        foreach($request->residence_summer_increase as $index=> $increase){
+            $currency_convert = currency_convertor($request->institute_currency, 'SAR' , $increase);
+            $increase_in_sar = $currency_convert + $exchange_money*$increase;
+
+            $residence_summer_increase = '{
+                "price" : "'.$increase.'",
+                "price_in_sar" : "'.floor($increase_in_sar).'"
+            }';
+
+            residences::find($index)->update(['residence_summer_increase' => $residence_summer_increase]);
+        }
+       
 
 
         $institute = Institute::find($institute->id);
@@ -201,6 +238,8 @@ class InstituteController extends Controller
         $institute->course_booking_fees= $course_booking_fees;
         $institute->residence_booking_fees= $residence_booking_fees;
         $institute->institute_currency = $request->institute_currency;
+        $institute->summer_start_date = empty($request->summer_start_date) ? null : date('m-d', strtotime($request->summer_start_date));
+        $institute->summer_end_date = empty($request->summer_end_date) ? null : date('m-d', strtotime($request->summer_end_date));
         $institute->institute_class = $request->institute_class;
         if ($request->logo) {
             $validate_images = $request->validate([

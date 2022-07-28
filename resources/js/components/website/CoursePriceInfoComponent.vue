@@ -15,6 +15,10 @@
                     <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.round(price_per_week*weeks*(1- course.discount))}} ر.س </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? ' اسبوع ' : ' اسابيع ')}})</span> </span>
                     <hr />
                 </div>
+                <div v-if="course_summer_increase_weeks !=0 && course_summer_increase !=0">
+                    <span class="d-block"><span class="font-weight-bold"> حجز خلال فترة الذروة: الرسوم الدراسية : زيادة بقيمة  : <br> <span class="text-main-color">{{course_summer_increase*course_summer_increase_weeks}} ر.س   </span> <span class="text-success">({{course_summer_increase_weeks + ( course_summer_increase_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}})</span>   </span> </span>
+                    <hr />
+                </div>
                 <div v-if="course_booking_fees !=0">
                     <span class="d-block"><span class="font-weight-bold"> حجز الدورة : </span> <span class="text-main-color">{{course_booking_fees}} ر.س   </span></span>
                     <hr />
@@ -24,7 +28,7 @@
                     <hr />
                 </div>
                 
-                <div v-if="chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
+                <div v-if="chosin_residence != null && chosin_residence.price !=0 && chosin_residence.price != '' && !isNaN(chosin_residence.price) ">
                     <span class="d-block"><span class="font-weight-bold"> السكن : </span> <span>{{chosin_residence.name_ar}}</span> </span>
                     <span class="text-main-color">{{chosin_residence.price*residence_weeks}} ر.س   <span class="h6 small text-success"> ({{residence_weeks + ( residence_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}}) </span> </span>
                     <hr />
@@ -34,7 +38,11 @@
                     
                     <hr />
                 </div>
-                <div v-if="chosin_airport.price !=0 && chosin_airport.price != '' && !isNaN(chosin_airport.price) ">
+                <div v-if="residence_summer_increase_weeks !=0 && residence_summer_increase !=0">
+                    <span class="d-block"><span class="font-weight-bold"> حجز خلال فترة الذروة: رسوم السكن : زيادة بقيمة  : <br> <span class="text-main-color">{{residence_summer_increase*residence_summer_increase_weeks}} ر.س   </span> <span class="text-success">({{residence_summer_increase_weeks + ( residence_summer_increase_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}})</span>   </span> </span>
+                    <hr />
+                </div>
+                <div v-if="chosin_airport != null && !isNaN(chosin_airport.price) && chosin_airport.price !=0 && chosin_airport.price != ''">
                     <span class="d-block"><span class="font-weight-bold"> خدمة الاستقبال : </span> <span>{{chosin_airport.name_ar}}</span> </span>
                     <span class="text-main-color">{{chosin_airport.price}} ر.س </span>
                     <hr />
@@ -97,7 +105,7 @@
                             <select v-model="chosin_airport" class="form-control selectpicker rounded-10 border" data-live-search="true">
                                 <option value="" disabled>الاستقبال من المطار</option>
                                 <option selected :value="0"> لا احتاج خدمة الاستقبال</option>
-                                <option v-bind:selected="airport.id == 3" v-for="airport in airports" :key="airport.id" :value="airport">{{airport.name_ar}} - {{airport.price}}</option>
+                                <option v-bind:selected="airport.id == 3" v-for="airport in airports" :key="airport.id" :value="airport">{{airport.name_ar}} - {{airport.price}} ر.س</option>
                             </select>
                             <input type="hidden" name="airport" :value="JSON.stringify(chosin_airport)">
                         </div>
@@ -142,11 +150,16 @@
                 weeks: 1,
                 residence_weeks: 1,
                 price_per_week: 0,
-                weeks_count: 100,
+                weeks_count: 48,
                 from_date: '',
                 course_booking_fees: (JSON.parse(this.course_obj).institute.course_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.course_booking_fees).price_in_sar) ,
                 residence_booking_fees: (JSON.parse(this.course_obj).institute.residence_booking_fees == null ? 0 : JSON.parse(JSON.parse(this.course_obj).institute.residence_booking_fees).price_in_sar) ,
                 course_textboox_fees: 0,
+                course_summer_increase_weeks :0,
+                course_summer_increase: (JSON.parse(this.course_obj).course_summer_increase == null ? 0 : JSON.parse(JSON.parse(this.course_obj).course_summer_increase).price_in_sar) ,
+                residence_summer_increase_weeks :0,
+                residence_summer_increase: 0 ,
+
             };
         },
         methods: {
@@ -159,10 +172,10 @@
             },
             total_price() {
                 var totalPrice = (this.price_per_week*(1- this.course.discount))*this.weeks
-                if(!isNaN(this.chosin_airport.price)){
+                if(this.chosin_airport != null && !isNaN(this.chosin_airport.price)){
                     totalPrice += this.chosin_airport.price
                 }
-                if(!isNaN(this.chosin_residence.price)){
+                if(this.chosin_residence != null &&!isNaN(this.chosin_residence.price)){
                     totalPrice += this.chosin_residence.price*this.residence_weeks
                 }
                 if(this.insurance_price_checker == '1'){
@@ -177,6 +190,12 @@
                 if(Number(this.residence_booking_fees) != 0 && !isNaN(this.chosin_residence.price)){
                     totalPrice += Number(this.residence_booking_fees)
                 }
+                if(this.course_summer_increase_weeks !=0 && this.course_summer_increase !=0){
+                    totalPrice += Number(this.course_summer_increase*this.course_summer_increase_weeks)
+                }
+                if(this.residence_summer_increase_weeks !=0 && this.residence_summer_increase !=0){
+                    totalPrice += Number(this.residence_summer_increase*this.residence_summer_increase_weeks)
+                }
                return totalPrice
             },
             change_from_date(){
@@ -185,24 +204,66 @@
             goToRelatedCourse(){
                 $('html, body').animate({ scrollTop: $("#related-courses").offset().top -100}, 500);
             },
+            calculate_summer_increase_weeks(weeks){
+                let summer_increase_weeks = 0
+                let currentYear = new Date().getFullYear()
+
+                let start_date = Date.parse(this.from_date)
+                let end_date = start_date + weeks*7*24*60*60*1000
+                let summer_start_date = Date.parse(currentYear+'-'+this.course.institute.summer_start_date)
+                let summer_end_date = Date.parse(currentYear+'-'+this.course.institute.summer_end_date)
+
+                if(end_date>=summer_end_date){
+                    if(start_date>=summer_end_date){summer_increase_weeks = 0}
+                    else if(start_date <= summer_end_date && start_date >=summer_start_date){
+                        summer_increase_weeks = Math.floor((summer_end_date -start_date)/7/24/60/60/1000)
+                    }
+                    else{
+                        summer_increase_weeks = Math.floor((summer_end_date -summer_start_date)/7/24/60/60/1000)
+                    }
+                }
+                else if(end_date <= summer_end_date && end_date>= summer_start_date){
+                    if(start_date >= summer_start_date){
+                        summer_increase_weeks = Math.floor((end_date -start_date)/7/24/60/60/1000)
+                    }
+                    else{
+                        summer_increase_weeks = Math.floor((end_date -summer_start_date)/7/24/60/60/1000)
+                    }
+                }
+                else{summer_increase_weeks = 0}
+                return summer_increase_weeks;
+                
+            },
             chose_course_textboox_fees(){
                 let textbooxFeesObj = JSON.parse(this.course.textbooks_fees);
-                textbooxFeesObj.sort((a, b) => a.weeks - b.weeks)
-                
-                textbooxFeesObj.every(ele => {
-                    this.course_textboox_fees = ele.fees_in_sar
-                    if(this.weeks <= ele.weeks){
-                        return false
-                    }
-                    return true;
-                });
+                if(textbooxFeesObj != null){
+                    textbooxFeesObj.sort((a, b) => a.weeks - b.weeks)
+                    let chosin = false
+                    textbooxFeesObj.forEach(ele => {
+                        if(Number(this.weeks) <= ele.weeks){
+                            if(chosin == false){this.course_textboox_fees = ele.fees_in_sar;}
+                            chosin = true;
+                        }
+                    });
+                }
                 return 0;
             }
         },
         watch:{
             weeks: function (){
                 this.chose_course_textboox_fees()
-             }
+                this.course_summer_increase_weeks = this.calculate_summer_increase_weeks(this.weeks)
+            },
+            residence_weeks: function (){
+                this.residence_summer_increase_weeks = this.calculate_summer_increase_weeks(this.residence_weeks)
+            },
+            from_date: function (){
+                this.course_summer_increase_weeks = this.calculate_summer_increase_weeks(this.weeks)
+                this.residence_summer_increase_weeks = this.calculate_summer_increase_weeks(this.residence_weeks)
+            },
+            chosin_residence: function (){
+                this.residence_summer_increase = (this.chosin_residence == null ? 0 : JSON.parse(this.chosin_residence.residence_summer_increase).price_in_sar)
+            }
         },
         beforeMount() {
             let queryString = window.location.search;
@@ -244,7 +305,7 @@
 
 
 
-
+            this.chose_course_textboox_fees()
 
 
             
