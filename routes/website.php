@@ -3,7 +3,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
-	
+
+
     
 /** Website Routes *************************************/
 Route::get('/', 'WebsiteController@home_page')->name('website.home');

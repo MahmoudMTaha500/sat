@@ -47,7 +47,7 @@
                             <a target="_blank" href="{{route('student_invoice' , ['request_id' => $request_id ])}}" class="btn w-100 bg-secondary-color text-white rounded-10 ml-3 px-3 mb-4">
                                 عرض السعر
                             </a>
-                            <button type="button" class="btn bg-main-color text-white w-100 rounded-10 pay-now-btn" data-toggle="modal" data-target="#office_numbers">
+                            <button type="button" class="btn bg-main-color text-white w-100 rounded-10 pay-now-btn">
                                 ادفع الان
                             </button>
                             <a href="https://wa.me/+966555484931"  target="_blank">
@@ -72,12 +72,27 @@
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
                                         <div class="modal-body py-5 px-4 text-center">
-                                            <div class="cheched-img mb-5">
-                                                <img src="{{asset('storage/icons/check.png')}}"  alt="" class="img-fluid" />
+                                            <div class="online-payment">
+                                                <div class="cheched-img mb-5">
+                                                    <h3 class="text-main-color font-weight-bold">للدفع الكترونيا</h3>
+                                                </div>
+
+                                                <div class="online-payment-form-container">
+                                                    <form action="{{route('payment_confirmation')}}" class="paymentWidgets" data-brands="VISA MASTER AMEX"></form>
+                                                    <script async src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$prepare_checkout['id']}}"></script>
+                                                    <script>
+                                                        var wpwlOptions = {style:"card"}
+                                                    </script>
+                                                </div>
                                             </div>
-                                            <div>
+
+
+
+                                            <div class="لاank-transfer">
+                                                <div class="cheched-img mt-5">
+                                                    <h3 class="text-main-color font-weight-bold">للتحويل البنكي</h3>
+                                                </div>
                                                 <div class="upload-payment-bill">
-                                                    
                                                     <div class="text-right">
                                                         <div class="cost-body px-3 pt-3">
                                                             <span class="font-weight-bold d-block text-main-color">يرجى ارسال الفاتورة الخاصة بالتحويل لاكمال عملية الدفع</span> 
@@ -88,7 +103,42 @@
                                                                 <button class="btn btn-primary w-100" type="submit">ارسل الفاتورة</button>
                                                             </form>
                                                         </div>
+                                                        
                                                     </div>
+                                                    
+
+                                                    <div>
+                                                        <div class="text-right">
+                                                            <div class="cost-body px-3 pt-3">
+                                                                <img class="mb-4" src="{{asset('storage/bank-logos/NBC.png')}}" width="150px" alt="">
+                                                                <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> مؤسسة سات للخدمات التجارية</span> </span> 
+                                                                <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 05800000176208</span> </span> 
+                                                                <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT for Trading Services</span> </span> 
+                                                                <span class="font-weight-bold d-block">SA0610000005800000176208</span> 
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="text-right">
+                                                            <div class="cost-body px-3 pt-3">
+                                                                <img class="mb-4" src="{{asset('storage/bank-logos/Rajhi.png')}}" width="150px" alt="">
+                                                                <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> وكالة سات للسياحة و السفر</span> </span> 
+                                                                <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 562608010266542</span> </span> 
+                                                                <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT Agency for Travel and Tourism</span> </span> 
+                                                                <span class="font-weight-bold d-block">SA2780000562608010266542</span> 
+                                                            </div>
+                                                        </div>
+                                                        <hr>
+                                                        <div class="text-right">
+                                                            <div class="cost-body px-3 pt-3">
+                                                                <img class="mb-4" src="{{asset('storage/bank-logos/riyad.png')}}" width="150px" alt="">
+                                                                <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> وكالة سات للسفر و السياحة</span> </span> 
+                                                                <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 05800000176208</span> </span> 
+                                                                <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT Agency</span> </span> 
+                                                                <span class="font-weight-bold d-block">SA2120000003184470469940</span> 
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div class="my-5 alert alert-warning text-center">
                                                         يُرجى العلم أن مبلغ التحويل هو دُفعة حجز الدورة، وسوف نوافيكم بالتكلفة الإجمالية للدورة في حال تواصلكم مع فريق عمل كلاسات عبر الأرقام المبينة أدناه 
                                                     </div>
@@ -116,39 +166,7 @@
                                                         </a>
                                                         <a dir="ltr" target="_blank" href="https://wa.me/+966555484931">+966 55 548 4931</a>
                                                     </div>
-                                                    <hr />
-                                                    <div class="cheched-heading">
-                                                        <p>او يمكنك التحويل مباشرة علي الحسابات الاتية</p>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <div class="cost-body px-3 pt-3"><div>
-                                                            <img class="mb-4" src="{{asset('storage/bank-logos/NBC.png')}}" width="150px" alt="">
-                                                            <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> مؤسسة سات للخدمات التجارية</span> </span> 
-                                                            <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 05800000176208</span> </span> 
-                                                            <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT for Trading Services</span> </span> 
-                                                            <span class="font-weight-bold d-block">SA0610000005800000176208</span> 
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="text-right">
-                                                        <div class="cost-body px-3 pt-3"><div>
-                                                            <img class="mb-4" src="{{asset('storage/bank-logos/Rajhi.png')}}" width="150px" alt="">
-                                                            <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> وكالة سات للسياحة و السفر</span> </span> 
-                                                            <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 562608010266542</span> </span> 
-                                                            <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT Agency for Travel and Tourism</span> </span> 
-                                                            <span class="font-weight-bold d-block">SA2780000562608010266542</span> 
-                                                        </div>
-                                                    </div>
-                                                    <hr>
-                                                    <div class="text-right">
-                                                        <div class="cost-body px-3 pt-3"><div>
-                                                            <img class="mb-4" src="{{asset('storage/bank-logos/riyad.png')}}" width="150px" alt="">
-                                                            <span class="font-weight-bold d-block text-main-color">الاسم :  <span class="text-dark"> وكالة سات للسفر و السياحة</span> </span> 
-                                                            <span class="font-weight-bold d-block text-main-color">رقم الحساب :  <span class="text-dark"> 05800000176208</span> </span> 
-                                                            <span class="font-weight-bold d-block text-main-color">رقم الآيبان  :  <span class="text-dark"> SAT Agency</span> </span> 
-                                                            <span class="font-weight-bold d-block">SA2120000003184470469940</span> 
-                                                        </div>
-                                                    </div>
+                                                   
                                                     
                                                 </li>
                                             </ul>
@@ -230,17 +248,16 @@
             $(".student_login_btn").trigger("click");
         </script>
     @enderror 
-    {{-- <script>
-        $('.pay-now-btn').click(function(){
-            $('.upload-payment-bill').show()
-        })
-        $('.refund-policy').change(function(){
-            if($(this).prop('checked') == true){
-                $('.pay-now-btn').prop('disabled', false)
-            }else{
-                $('.pay-now-btn').prop('disabled', true)
+    <script>
+        $('.pay-now-btn').click(function(event){
+            event.preventDefault()
+            if($('.refund-policy').prop('checked') == false){
+               alert('يرجي قبول  سياسة الاسترجاع')
+            }
+            else{
+                $("#office_numbers").modal('show');
             }
         })
-    </script> --}}
+    </script>
 @endsection
 

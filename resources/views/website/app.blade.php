@@ -6,7 +6,7 @@
         @include('website.includes.menu')
         <!-- ./Header -->
 
-        <div style="min-height: 52vh;" id="sat_app_vue">
+        <div id="sat_app_vue">
             @yield('website.content')
         </div>
 

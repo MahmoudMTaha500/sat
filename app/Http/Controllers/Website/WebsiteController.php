@@ -534,7 +534,8 @@ if($student_mail){
             'page_name' => '',
         ];
         $refund_policy = WebsiteSettings::find(1)->get()[0]->refund_policy_ar;
-        return view('website.payment.chose-payment-method', compact('course_details', 'request_id' , 'page_identity' , 'refund_policy'));
+        $prepare_checkout = prepare_checkout($course_details['total_price']);
+        return view('website.payment.chose-payment-method', compact('course_details', 'request_id' , 'page_identity' , 'refund_policy', 'prepare_checkout'));
     }
 
     public function pay_now($request_id)
@@ -653,6 +654,11 @@ if($student_mail){
             'meta_description' => '',
             'page_name' => '',
         ];
+
+        payment_status($request->id);
+       
+
+
         return view('website.payment.payment-confirmation' , compact('request_id' , 'student_id' , 'page_identity'));
     }
     public function student_profile()
