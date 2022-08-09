@@ -188,6 +188,59 @@ function send_whatsapp_message($to , $body) {
 
 }
 
+function chosin_course_textboox_fees($string_json_obj, $weeks){
+    $course_textboox_fees = 0;
+    $textbooks_fees_array = json_decode($string_json_obj, true);
+    if(is_array($textbooks_fees_array)){
+        usort($textbooks_fees_array, function($a, $b) { return $a['weeks'] > $b['weeks'] ? 1 : -1; });
+        $course_textboox_fees = 0;
+        foreach($textbooks_fees_array as $textbooks_fee){
+            if($weeks <= $textbooks_fee['weeks']){
+                $course_textboox_fees = $textbooks_fee['fees_in_sar'];
+                break;
+            }
+        }
+    }
+    
+    return $course_textboox_fees;
+}
+
+
+function calculate_summer_increase_weeks($weeks, $institute, $from_date){
+    $from_date = date("Y-m-d ", strtotime($from_date));
+    $summer_increase_weeks = 0;
+    $currentYear = date("Y");
+
+    $start_date = strtotime($from_date);
+    $end_date = $start_date + $weeks*7*24*60*60;
+    $summer_start_date = strtotime($currentYear.'-'.$institute->summer_start_date);
+    $summer_end_date = strtotime($currentYear.'-'.$institute->summer_end_date);
+
+    if($end_date>=$summer_end_date){
+        
+        if($start_date>=$summer_end_date){$summer_increase_weeks = 0;}
+        elseif($start_date <= $summer_end_date && $start_date >=$summer_start_date){
+            $summer_increase_weeks = floor(($summer_end_date - $start_date)/7/24/60/60);
+            
+        }
+        else{
+            $summer_increase_weeks = floor(($summer_end_date - $summer_start_date)/7/24/60/60);
+        }
+    }
+    elseif($end_date <= $summer_end_date && $end_date >= $summer_start_date){
+        if($start_date >= $summer_start_date){
+            $summer_increase_weeks = floor(($end_date - $start_date)/7/24/60/60);
+        }
+        else{
+            $summer_increase_weeks = floor(($end_date - $summer_start_date)/7/24/60/60);
+        }
+    }
+    else{$summer_increase_weeks = 0;}
+    return $summer_increase_weeks;
+    
+}
+
+
 function prepare_checkout($amount){
     $url = "https://test.oppwa.com/v1/checkouts";
 	$data = "entityId=8a8294174d0595bb014d05d82e5b01d2" .

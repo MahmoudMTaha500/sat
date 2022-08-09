@@ -23,13 +23,16 @@
             padding-left: 50px;
         }
         .haeder{
-            padding: 40px 50px 70px 50px ;
+            padding: 40px 50px 30px 50px ;
             background-color: #f2f2f2;
             position: absolute;
             width: 87.5%;
             top: 0;
             left: 0;
+            
         }
+
+       
         .left-section , .right-section{
             width: 45%;
             
@@ -43,7 +46,6 @@
             float: right;
         }
         .classta-logo{
-            width: 70%;
             margin-top: 25px;
         }
         p{
@@ -53,7 +55,7 @@
         }
         .intro{
             text-align: center;
-            padding: 30px 10px;
+            padding: 10px 10px;
         }
         .student-info{
             background-color: #f4c20d;
@@ -61,11 +63,12 @@
             border-radius: 10px;
             padding: 20px 50px;
             color: #000;
-            font-size: 16px
+            font-size: 16px;
+            margin-top: 20px;
         }
 
         th , td{
-            font-size: 18px;
+            font-size: 14px;
             padding: 15px 7px;
             text-align: center
         }
@@ -86,8 +89,11 @@
         tr:nth-child(odd){
             background-color: #f2f2f2
         }
+        .total-price-row{
+            background-color: #006fff
+        }
         .total-price-row td{
-            color: #f4c20d;
+            color: #fff;
             font-size: 25px;
         }
         .note{
@@ -135,41 +141,38 @@
     <header class="haeder">
         <div class="left-section">
             <a href="{{route('website.home')}}" target="_blank">
-                <img class="classta-logo" src="{{$data['base_url'].'/website/imgs/logo.png'}}" alt="">
+                <img width="50%" class="classta-logo" src="{{$data['base_url'].'/website/imgs/logo.png'}}" alt="">
             </a>
+            <br/>
+            @if ($data['institute_logo'] != "null")
+                <img width="50%" src="{{$data['base_url'].'/'.$data['institute_logo']}}" alt="">
+            @endif
         </div>
 
-        <div class="right-section">
-            <p class="pb-1"><span style="font-weight: bold">رقم العرض: </span> <span dir="ltr" >{{$data['request_id']}}</span></p>
-            <p class="pb-1"><span style="font-weight: bold">التاریخ: </span> <span dir="ltr" >{{ArabicDate($data['date'])}}</span></p>
-            <p class="pb-1"><span style="font-weight: bold">المعهد: </span>   <span dir="ltr">{{$data['institute_name']}} , {{$data['country']}}, {{$data['city']}}</span></p>
+        <div class="right-section header-p-container">
+            <p class="pb-1 header-p"><span style="font-weight: bold">رقم العرض: </span> <span dir="ltr" >{{$data['request_id']}}</span></p>
+            <p class="pb-1 header-p"><span style="font-weight: bold">التاریخ: </span> <span dir="ltr" >{{ArabicDate($data['date'])}}</span></p>
+            <p class="pb-1 header-p"><span style="font-weight: bold">المعهد: </span>   <span dir="ltr">{{$data['institute_name']}} , {{$data['country']}}, {{$data['city']}}</span></p>
         </div>
     </header>
+
+
 
     <section class="content">
         <div class="container">
             <p class="intro">
-
-                @if ($data['institute_logo'] != "null")
-                    <img width="30%" src="{{$data['base_url'].'/'.$data['institute_logo']}}" alt=""> <br><br><br>
-                @endif
-                شكراً لاستكمال إجراءات الحجز في معهد <br><br>
-                {{$data['institute_name']}}<br><br>
                 يُرجي التأكد من تفاصيل بيانات الحجز المرفقة بالفاتورة المبينة أدناه:
-                
-
             </p>
         </div>
-    
+
         <div class="student-info container">
-             <div class="left-section">
-                <strong>اسم الطالب : </strong> {{$data['student_name']}}
-             </div>
-             <div class="right-section">
-                <strong>رقم الطالب :</strong> {{$data['student_id']}}
-             </div>
-        </div>
-    
+            <div class="left-section">
+               <strong>اسم الطالب : </strong> {{$data['student_name']}}
+            </div>
+            <div class="right-section">
+               <strong>رقم الطالب :</strong> {{$data['student_id']}}
+            </div>
+       </div>
     
         <div>
             <div class="info-table-container">
@@ -296,6 +299,8 @@
             </div>
         </div>
 
+        
+
 
         @if (isset($data['show_paid_price']))
             <div class="student-info container" style="margin-top: 30px">
@@ -307,6 +312,8 @@
                 </div>
             </div>
         @endif
+
+        
 
         
     

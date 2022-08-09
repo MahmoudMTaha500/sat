@@ -33,7 +33,7 @@ class WebsiteController extends Controller
     public function home_page()
     {
         $useVue = true;
-        $best_offers = Course::orderBy('discount', 'DESC')->take(10)->where('discount' , '!=' , 0)->get();
+        $best_offers = Course::orderBy('discount', 'DESC')->where('courses.main_course_trigger' , 1)->take(10)->where('discount' , '!=' , 0)->get();
         $success_stories = StudentSuccessStory::where('approvement' , 1)->inRandomOrder()->take(10)->get();
         $two_blogs = Blog::inRandomOrder()->take(2)->get();
         $two_blogs_ids = [];
@@ -64,10 +64,13 @@ class WebsiteController extends Controller
 
 
     // institutes page method : show all institutes with filter
-    public function institutes_page(Request $request)
+    public function institutes_page(Request $request, $country_slug = null)
     {
         $useVue = true;
         $search = $request->all();
+        if($country_slug != null){
+            $search['country_slug'] = $country_slug;
+        }
         $page_identity = [
             'title_tag' => 'كلاسات جميع المعاهد الخاصة بدراسة اللغة حول العالم',
             'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج ،تكلفة دراسة اللغة الانجليزية بالخارج ،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',
@@ -351,20 +354,20 @@ if($student_mail){
     }
 
 
-    public function article($id)
+    public function article($slug)
     {
-        $blog = Blog::find($id);
+        $blog = Blog::where('slug',$slug)->get()[0];
         $category_id =$blog->category_id;
         $country_id= $blog->country_id;
         $city_id= $blog->city_id;
         $institute_id= $blog->institute_id;
         $course_id= $blog->course_id;
 
-        $categories_spiesific_blog= Blog::where('id','!=',$id)->where('category_id',$category_id)->orderBy('id', 'DESC')->take(5)->get();
-        $countries_spiesific_blog= Blog::where('id','!=',$id)->where('country_id',$country_id)->orderBy('id', 'DESC')->take(5)->get();
-        $cities_spiesific_blog= Blog::where('id','!=',$id)->where('city_id',$city_id)->orderBy('id', 'DESC')->take(5)->get();
-        $institutes_spiesific_blog= Blog::where('id','!=',$id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
-        $courses_spiesific_blog= Blog::where('id','!=',$id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
+        $categories_spiesific_blog= Blog::where('id','!=',$blog->id)->where('category_id',$category_id)->orderBy('id', 'DESC')->take(5)->get();
+        $countries_spiesific_blog= Blog::where('id','!=',$blog->id)->where('country_id',$country_id)->orderBy('id', 'DESC')->take(5)->get();
+        $cities_spiesific_blog= Blog::where('id','!=',$blog->id)->where('city_id',$city_id)->orderBy('id', 'DESC')->take(5)->get();
+        $institutes_spiesific_blog= Blog::where('id','!=',$blog->id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
+        $courses_spiesific_blog= Blog::where('id','!=',$blog->id)->where('institute_id',$institute_id)->orderBy('id', 'DESC')->take(5)->get();
 
         $categories = BlogCategory::orderBy('id', 'DESC')->take(5)->get();
         // dd($courses_spiesific_blog);
@@ -440,6 +443,7 @@ if($student_mail){
         
         $pdf = PDF::loadView('website.institute.student-price-offer-pdf', compact('data'));
         return $pdf->stream('student-id-'.$data['student_id'].'.pdf');
+        // return view('website.institute.student-price-offer-pdf', compact('data'));
     }
 
     // create student request and account if the student was new student
@@ -937,7 +941,7 @@ if($student_mail){
             }
             public function offers()
             {
-                $offers = Course::latest('id')->where('discount' , '!=' , 0)->paginate(12);
+                $offers = Course::latest('id')->where('discount' , '!=' , 0)->where('courses.main_course_trigger' , 1)->paginate(12);
                 $page_identity = [
                     'title_tag' => 'كلاسات | العروض',
                     'meta_keywords' => 'دراسة اللغة بالخارج،تعلم اللغة الانجليزية بالخارج،دراسة اللغة الانجليزية بالخارج،تكلفة دراسة،اللغة الانجليزية بالخارج،مكتب دراسة اللغة الانجليزية بالخارج،تعلم اللغة الانجليزية خارج المملكة',

@@ -6,12 +6,12 @@
             <div class="col-lg-6 align-self-center">
                 <!-- Section Heading -->
                 <h1 class="text-white font-weight-bold mb-4 intro-title">ابدأ رحلتك الآن، وتعلم اللغة في أكبر المعاهد الدولية</h1>
-                <p class="lead text-white mb-4 intro-desc">نوفر لك أفضل الجامعات والمعاهد للدراسة في الخارج, قم بتسجيل حسابك وأحصل على خصم 5% على الرسوم الدراسة</p>
+                <p class="lead text-white mb-4 intro-desc">نوفر لك أفضل الجامعات والمعاهد للدراسة في الخارج, قم بتسجيل حسابك وأحصل على خصم 5% على الرسوم الدراسية</p>
                 {{-- <p class="lead text-white mb-4 intro-desc">نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون، وخلق بيئة تنافسية</p> --}}
                 <!-- ./Section Heading -->
 
                 <!-- Search Form -->
-                <form class="my-4 row" method="GET" action="<?php echo e(route('website.institutes')); ?>">
+                <form class="my-4 row" method="GET" action="{{route('website.institutes')}}">
                     <div class="col-lg-6">
                         <!-- Country Field -->
                         <div class="form-group">
@@ -64,7 +64,7 @@
             <div class="col-12">
                 <div class="heading-best-offers text-center">
                     <h3 class="text-main-color font-weight-bold">أفضل العروض</h3>
-                    <p>نسعى من خلال عقودنا واتفاقياتنا مع المعاهد والجامعات والمؤسسات الأكاديمية</p>
+                    <p>نسعى - من خلال عقودنا واتفاقياتنا مع المعاهد، والجامعات، والمؤسسات الأكاديمية - إلى رفع مستوى التعاون وخلق بيئة تنافسية</p>
                 </div>
             </div>
         </div>
@@ -161,7 +161,7 @@
                     <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[0]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[0]->country->name_ar}}</button></a>
                 @endif
                 
-                <a href="{{route('website.article',$two_blogs[0]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
+                <a href="{{route('website.article',$two_blogs[0]->slug)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
                 </div>
@@ -177,7 +177,7 @@
                 @if(!empty($two_blogs[1]->country))
                     <a href="#" onclick="this.href = '{{route('website.institutes' , ['country' => $two_blogs[1]->country->id])}}' "><button class="btn rounded-10 bg-secondary-color text-white mb-4 ml-3">عرض معاهد {{$two_blogs[1]->country->name_ar}}</button></a>
                 @endif
-                <a href="{{route('website.article',$two_blogs[1]->id)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
+                <a href="{{route('website.article',$two_blogs[1]->slug)}}"><button class="btn rounded-10 border-secondary-color text-secondary-color mb-4">اقرأ المزيد</button></a>
                 <div class="overflow-hidden">
                     {{-- <a href="#" class="text-secondary-color float-left">دول أخـــــرى <i class="fas fa-angle-double-left"></i></a> --}}
                 </div>
@@ -248,14 +248,14 @@
                     @foreach ($blogs as $blog)
 
                     <div class="card mx-xl-4 mx-2 shadow-sm offer border-0 rounded-10">
-                        <a href="{{route('website.article',$blog->id)}}">
+                        <a href="{{route('website.article',$blog->slug)}}">
                             <img loading="lazy" src="{{empty($blog->getFirstMedia('blog_featured_image')) ? asset('/storage/default_images.png') : $blog->getFirstMedia('blog_featured_image')->getUrl('thumb')}}" alt="{{$blog->img_alt}}" class="card-img-top" />
                         </a>
                         
                         <div class="card-body rounded-10 bg-white">
-                            <a href="{{route('website.article',$blog->id)}}"><p class="card-title text-main-color h5">{{$blog->title_ar}}</p></a>
+                            <a href="{{route('website.article',$blog->slug)}}"><p class="card-title text-main-color h5">{{$blog->title_ar}}</p></a>
                             <p class="mb-0">
-                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <br> <a href="{{route('website.article',$blog->id)}}">اقرأ المزيد</a></span>
+                                <span>{!! mb_substr(strip_tags($blog->content_ar) ,0 , 150 , 'utf-8') !!} ... <br> <a href="{{route('website.article',$blog->slug)}}">اقرأ المزيد</a></span>
                             </p>
                             <p class="mb-0"><span class="text-muted">{{ArabicDate($blog->created_at)}}</span></p>
                         </div>

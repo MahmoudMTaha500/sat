@@ -35,7 +35,7 @@ class countryController extends Controller
         $get_country = country::where(['name_ar' => "$name_ar"])->first();
         if($get_country == array()){
 
-            $country = country::create(['name_ar' => $name_ar]);
+            $country = country::create(['name_ar' => $name_ar , 'slug' => str_replace(' ', '-', $name_ar)]);
             session()->flash('alert_message', ['message' => 'تم اضافة الدوله بنجاح', 'icon' => 'success']);
             return redirect()->route('countries.index');    
         } else{
@@ -69,17 +69,13 @@ class countryController extends Controller
 
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Country $country )
     {
-
         $countryname = $request->name_ar;
-        $id = $request->id;
-
-        $get_country = country::where(['name_ar' => "$countryname"])->first();
-        if($get_country == array()){
-            $country = Country::find($id);
-
+        $get_country = Country::where('id' , '!=' , $country->id)->where('name_ar' , $countryname)->get();
+        if(empty($get_country[0])){
             $country->name_ar = $countryname;
+            $country->slug = str_replace(' ', '-', $countryname);
             $country->save();
             session()->flash('alert_message', ['message' => 'تم تعديل الدوله بنجاح', 'icon' => 'success']);
             return redirect()->route('countries.index'); 

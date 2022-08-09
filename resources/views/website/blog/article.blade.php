@@ -84,7 +84,7 @@
                                 <li>
     
                                     @foreach($categories_spiesific_blog as $blog_1)
-                                    <li><a href="{{route('website.article',$blog_1->id)}}">  {{$blog_1->title_ar}} </a></li>
+                                    <li><a href="{{route('website.article',$blog_1->slug)}}">  {{$blog_1->title_ar}} </a></li>
                                     @endforeach
                                   
                                 </li>
@@ -95,8 +95,8 @@
                                 <h3 class="sidebar-row-title">مقالات مرتبطة بدولة {{$blog->country->name_ar}}</h3>
                                 <ul class="sidebar-row-ul">
                                     <li>
-                                        @foreach($countries_spiesific_blog as $country)
-                                        <li><a href="{{route('website.article',$country->id)}}">  {{$country->title_ar}} </a></li>
+                                        @foreach($countries_spiesific_blog as $blog)
+                                        <li><a href="{{route('website.article',$blog->slug)}}">  {{$blog->title_ar}} </a></li>
                                         @endforeach
                                     </li>
                                 </ul>
@@ -107,8 +107,8 @@
                                 <h3 class="sidebar-row-title">مقالات مرتبطة بمدينة {{$blog->city->name_ar}}</h3>
                                 <ul class="sidebar-row-ul">
                                     <li>
-                                        @foreach($cities_spiesific_blog as $city)
-                                        <li><a href="{{route('website.article',$city->id)}}">  {{$city->title_ar}} </a></li>
+                                        @foreach($cities_spiesific_blog as $blog)
+                                        <li><a href="{{route('website.article',$blog->slug)}}">  {{$blog->title_ar}} </a></li>
                                         @endforeach
                                     </li>
                                     </li>
@@ -134,8 +134,8 @@
                             </h3>
                             <ul class="sidebar-row-ul">
                                 <li>
-                                    @foreach($courses_spiesific_blog as $course)
-                                    <li><a href="{{route('website.article',$course->id)}}">  {{$course->title_ar}} </a></li>
+                                    @foreach($courses_spiesific_blog as $blog)
+                                    <li><a href="{{route('website.article',$blog->slug)}}">  {{$blog->title_ar}} </a></li>
                                     @endforeach
                                 </li>
                             </ul>

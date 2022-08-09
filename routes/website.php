@@ -19,13 +19,14 @@ Route::get('/refund-policy', 'WebsiteController@refund_policy')->name('website.r
 
 /** institute Routes *************************************/
 Route::get('/institutes', 'WebsiteController@institutes_page')->name('website.institutes');
+Route::get('/institutes/country/{country_slug}', 'WebsiteController@institutes_page')->name('website.institutes.country');
 Route::get('/institute/{institute_id?}/{institute_slug?}/{course_slug?}', 'WebsiteController@institute_page')->name('website.institute');
 // Route::post('institute/add-review', 'WebsiteController@add_review')->name('institutes.add.review');
 
 
 /** articles Routes *************************************/
 Route::get('/articles','WebsiteController@articles')->name('website.articles');
-Route::get('/article/{id}','WebsiteController@article')->name('website.article');
+Route::get('/article/{slug}','WebsiteController@article')->name('website.article');
 
 
 /** Student Routes *************************************/

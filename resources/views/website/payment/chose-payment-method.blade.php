@@ -86,9 +86,7 @@
                                                 </div>
                                             </div>
 
-
-
-                                            <div class="لاank-transfer">
+                                            <div class="bank-transfer">
                                                 <div class="cheched-img mt-5">
                                                     <h3 class="text-main-color font-weight-bold">للتحويل البنكي</h3>
                                                 </div>

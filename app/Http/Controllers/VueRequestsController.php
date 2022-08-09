@@ -112,9 +112,14 @@ class VueRequestsController extends Controller
                     'institutes.deleted_at' => NULL,
                 ]);
         
+        
         if(!empty($request->country_id)){
             $courses = $courses->where('countries.id' , $request->country_id);
         }
+        else if(!empty($request->country_slug)){
+            $courses = $courses->where('countries.slug' , $request->country_slug);
+        }
+        
         if(!empty($request->city_id)){
             $courses = $courses->where('cities.id' , $request->city_id);
         }

@@ -64,7 +64,7 @@
         @endforeach
         @foreach ($blogs as $blog_index => $blog)
             <url>
-                <loc>{{route('website.article',$blog->id)}}</loc>
+                <loc>{{route('website.article',$blog->slug)}}</loc>
                 <lastmod>{{$course->updated_at}}</lastmod>
                 <priority>{{$blog_index + $course_index + $institute_index + 12}}</priority>
             </url>

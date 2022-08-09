@@ -250,6 +250,7 @@
                 prev_page_url: "",
                 keyword: "",
                 country_id: "",
+                country_slug: "",
                 city_id: "",
                 weeks: 1,
                 best_offers: false,
@@ -372,6 +373,7 @@
                 var filter_params = {
                     keyword: this.keyword,
                     country_id: this.country_id,
+                    country_slug: this.country_slug,
                     city_id: this.city_id,
                     weeks: this.weeks,
                     best_offers: this.best_offers,
@@ -400,6 +402,9 @@
                 }
                 if (this.search.country != undefined) {
                     this.country_id = this.search.country;
+                }
+                if (this.search.country_slug != undefined) {
+                    this.country_slug = this.search.country_slug;
                 }
                 if (this.search.city != undefined) {
                     this.city_id = this.search.city;

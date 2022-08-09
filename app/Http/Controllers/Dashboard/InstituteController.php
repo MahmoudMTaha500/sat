@@ -196,30 +196,41 @@ class InstituteController extends Controller
             "price" : "'.$request->residence_booking_fees.'",
             "price_in_sar" : "'.floor($residence_booking_fees_price_in_sar).'"
         }';
-
-        foreach($request->course_summer_increase as $index=> $increase){
-            $currency_convert = currency_convertor($request->institute_currency, 'SAR' , $increase);
-            $increase_in_sar = $currency_convert + $exchange_money*$increase;
-
-            $course_summer_increase = '{
-                "price" : "'.$increase.'",
-                "price_in_sar" : "'.floor($increase_in_sar).'"
-            }';
-
-            Course::find($index)->update(['course_summer_increase' => $course_summer_increase]);
+        
+        if($request->course_summer_increase != null ) {
+            foreach($request->course_summer_increase as $index=> $increase){
+                $currency_convert = currency_convertor($request->institute_currency, 'SAR' , $increase);
+                $increase_in_sar = $currency_convert + $exchange_money*$increase;
+    
+                $course_summer_increase = '{
+                    "price" : "'.$increase.'",
+                    "price_in_sar" : "'.floor($increase_in_sar).'"
+                }';
+    
+                Course::find($index)->update(['course_summer_increase' => $course_summer_increase]);
+            }
+            
         }
 
-        foreach($request->residence_summer_increase as $index=> $increase){
-            $currency_convert = currency_convertor($request->institute_currency, 'SAR' , $increase);
-            $increase_in_sar = $currency_convert + $exchange_money*$increase;
+        
+        
+        if($request->residence_summer_increase != null ) {
+            foreach($request->residence_summer_increase as $index=> $increase){
 
-            $residence_summer_increase = '{
-                "price" : "'.$increase.'",
-                "price_in_sar" : "'.floor($increase_in_sar).'"
-            }';
-
-            residences::find($index)->update(['residence_summer_increase' => $residence_summer_increase]);
+                $currency_convert = currency_convertor($request->institute_currency, 'SAR' , $increase);
+    
+                $increase_in_sar = $currency_convert + $exchange_money*$increase;
+    
+                $residence_summer_increase = '{
+                    "price" : "'.$increase.'",
+                    "price_in_sar" : "'.floor($increase_in_sar).'"
+                }';
+    
+                residences::find($index)->update(['residence_summer_increase' => $residence_summer_increase]);
+            }
         }
+
+        
        
 
 
