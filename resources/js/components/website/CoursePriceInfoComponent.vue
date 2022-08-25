@@ -9,10 +9,10 @@
                 <div>
                     <span class="d-block">{{course.name_ar}} </span>
                     <span class="font-weight-bold d-block">
-                        <span  v-if="course.discount !=0" class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.round(course.discount*100)}} - </span>
+                        <span  v-if="course.discount !=0" class="float-left bg-main-color p-2 round text-white rounded-10">%{{Math.floor(course.discount*100)}} - </span>
                     </span>
-                    <span  v-if="course.discount != 0" class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.round(price_per_week*(1- course.discount))}} ر.س / الأسبوع </span>
-                    <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.round(price_per_week*weeks*(1- course.discount))}} ر.س </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? ' اسبوع ' : ' اسابيع ')}})</span> </span>
+                    <span  v-if="course.discount != 0" class="text-main-color"><del class="text-danger ml-2"> {{price_per_week}} </del>   {{Math.floor(price_per_week*(1- course.discount))}} ر.س / الأسبوع </span>
+                    <span  v-else class="text-main-color"> <span class="weight-bold">{{Math.floor(price_per_week*weeks*(1- course.discount))}} ر.س </span>  <span class="h6 small text-success">({{weeks + ( weeks == 1 ? ' اسبوع ' : ' اسابيع ')}})</span> </span>
                     <hr />
                 </div>
                 <div v-if="course_summer_increase_weeks !=0 && course_summer_increase !=0">
@@ -53,7 +53,7 @@
                     <hr />
                 </div>
                 <div>
-                    <span class="d-block"><span class="font-weight-bold"> إجمالي السعر : </span> <span class="text-main-color">{{Math.round(total_price())}} ر.س </span> </span>
+                    <span class="d-block"><span class="font-weight-bold"> إجمالي السعر : </span> <span class="text-main-color">{{Math.floor(total_price())}} ر.س </span> </span>
                     
                 </div>
             </div>

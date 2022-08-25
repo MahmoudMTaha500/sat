@@ -147,8 +147,9 @@ Route::get('/student-requests/getprice','StudentRequestsController@get_price_per
 Route::get('/student-requests/getinsurance','StudentRequestsController@get_price_insurance');   
 Route::get('/student-requests/calc_total','StudentRequestsController@calc_total');   
 Route::post('/student-requests/update-status','StudentRequestsController@updateStatus');   
-Route::post('/student-requests/update-classat-note','StudentRequestsController@update_classat_note')->name('update_classat_note');   
-Route::get('/student-requests/filterstudentsRequests','StudentRequestsController@filter');   
+Route::post('/student-requests/update-classat-note','StudentRequestsController@update_classat_note')->name('update_classat_note');  
+Route::get('/student-requests/filterstudentsRequests','StudentRequestsController@filter'); 
+Route::get('/student-requests/delete-student-file/{file_id?}/{model_id?}','StudentRequestsController@delete_student_file')->name('delete_student_file');
 
 Route::resource('student-requests', "StudentRequestsController");
 Route::resource('employees', "EmployeesController");

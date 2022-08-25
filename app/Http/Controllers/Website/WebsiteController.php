@@ -197,7 +197,6 @@ class WebsiteController extends Controller
         $course_details['course_summer_increase'] = $course_summer_increase;
         $course_details['residence_summer_increase_weeks'] = $residence_summer_increase_weeks;
         $course_details['residence_summer_increase'] = $residence_summer_increase;
-
         $page_identity = [
             'title_tag' => 'تاكيد الحجز',
             'meta_keywords' => '',
@@ -395,13 +394,7 @@ if($student_mail){
         $residence = residences::find($student_request->residence_id);
 
 
-        $course_summer_increase = 0;
-        $residence_summer_increase = 0;
-
-        $course_summer_increase_weeks = calculate_summer_increase_weeks($student_request->weeks, $institute, $student_request->from_date);
-        if($course->course_summer_increase != null){$course_summer_increase = $course_summer_increase_weeks*json_decode($course->course_summer_increase, true)['price_in_sar'];}
-        $residence_summer_increase_weeks = calculate_summer_increase_weeks($student_request->residence_weeks, $institute, $student_request->from_date);
-        if(isset($residence->name_ar) && $residence->residence_summer_increase != null){$residence_summer_increase = $residence_summer_increase_weeks*json_decode($residence->residence_summer_increase, true)['price_in_sar'];}
+       
 
         $data = [];
         $data['date'] = $student_request->created_at;
@@ -428,12 +421,12 @@ if($student_mail){
         $data['base_url'] = url('/');
         $data['refund_policy'] = WebsiteSettings::find(1)->refund_policy_ar;
         $data['course_booking_fees'] = $institute->course_booking_fees == null ? 0 : json_decode($institute->course_booking_fees, true)['price_in_sar'];
-        $data['residence_booking_fees'] = $institute->residence_booking_fees == null ? 0 : json_decode($institute->residence_booking_fees, true)['price_in_sar'];
-        $data['course_textboox_fees'] = chosin_course_textboox_fees($course->textbooks_fees,$student_request->weeks);
-        $data['course_summer_increase_weeks'] = $course_summer_increase_weeks;
-        $data['course_summer_increase'] = $course_summer_increase;
-        $data['residence_summer_increase_weeks'] = $residence_summer_increase_weeks;
-        $data['residence_summer_increase'] = $residence_summer_increase;
+        $data['residence_booking_fees'] = $student_request->residence_booking_fees;
+        $data['course_textboox_fees'] = $student_request->course_textboox_fees;
+        $data['course_summer_increase_weeks'] = $student_request->course_summer_increase_weeks;
+        $data['course_summer_increase'] = $student_request->course_summer_increase;
+        $data['residence_summer_increase_weeks'] = $student_request->residence_summer_increase_weeks;
+        $data['residence_summer_increase'] = $student_request->residence_summer_increase;
         
         if($request->has('student_id')){
             if($student_request->student_id == $request->student_id){
@@ -524,6 +517,13 @@ if($student_mail){
             $student_request_data['airport_price'] = $course_details['airport']['price'];
         }
         $student_request_data['insurance_price'] = $course_details['insurance_price'];
+        $student_request_data['course_booking_fees'] = $course_details['course_booking_fees'];
+        $student_request_data['residence_booking_fees'] = $course_details['residence_booking_fees'];
+        $student_request_data['course_summer_increase_weeks'] = $course_details['course_summer_increase_weeks'];
+        $student_request_data['course_summer_increase'] = $course_details['course_summer_increase'];
+        $student_request_data['residence_summer_increase_weeks'] = $course_details['residence_summer_increase_weeks'];
+        $student_request_data['residence_summer_increase'] = $course_details['residence_summer_increase'];
+        $student_request_data['course_textboox_fees'] = $course_details['course_textboox_fees'];
         $student_request_data['total_price'] = $course_details['total_price'];
         $student_request_data['paid_price'] = 0;
         $student_request_data['remaining_price'] = $course_details['total_price'];

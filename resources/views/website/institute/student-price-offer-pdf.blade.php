@@ -89,9 +89,7 @@
         tr:nth-child(odd){
             background-color: #f2f2f2
         }
-        .total-price-row{
-            background-color: #006fff
-        }
+        
         .total-price-row td{
             color: #fff;
             font-size: 25px;
@@ -134,6 +132,12 @@
 
         .refund-policy .refund-policy-content{
             padding-bottom: 60px;
+        }
+        .total-price-row{
+            background-color: #006fff!important;
+        }
+        .total-price-row td{
+            background-color: #006fff!important;
         }
     </style>
 
@@ -189,7 +193,7 @@
                         <td>{{ArabicDate($data['from_date'])}}</td>
                         <td>{{ArabicDate($data['to_date'])}}</td>
                         <td>{{$data['weeks']}} اسابيع</td>
-                        <td>{{$data['course_price']*$data['weeks']}}</td>
+                        <td>{{floor($data['course_price']*$data['weeks'])}}</td>
                     </tr>
                     @if (isset($data['airport']['name_ar']))
                         <tr>
@@ -199,7 +203,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{$data['airport']['price']}}</td>
+                            <td>{{floor($data['airport']['price'])}}</td>
                         </tr>
                     @endif
                     @if ( isset($data['residence']['name_ar']))
@@ -210,7 +214,7 @@
                             <td>{{ArabicDate(date("m/d/Y", strtotime("$data[from_date] -1 day")))}}</td>
                             <td>{{ArabicDate(date("m/d/Y", strtotime("$data[residence_to_date] +1 day")))}}</td>
                             <td>{{$data['residence_weeks']}} اسابيع</td>
-                            <td>{{$data['residence']['price']*$data['residence_weeks']}}</td>
+                            <td>{{floor($data['residence']['price']*$data['residence_weeks'])}}</td>
                         </tr>
                     @endif
 
@@ -222,7 +226,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{$data['residence_booking_fees']}}</td>
+                            <td>{{floor($data['residence_booking_fees'])}}</td>
                         </tr>
                     @endif
                     @if (isset($data['course_booking_fees']) && $data['course_booking_fees'] != 0)
@@ -233,7 +237,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{$data['course_booking_fees']}}</td>
+                            <td>{{floor($data['course_booking_fees'])}}</td>
                         </tr>
                     @endif
 
@@ -246,7 +250,7 @@
                             <td></td>
                             <td></td>
                             <td>{{$data['course_summer_increase_weeks']}} اسابيع</td>
-                            <td>{{$data['course_summer_increase']}}</td>
+                            <td>{{floor($data['course_summer_increase'])}}</td>
                         </tr>
                     @endif
                     @if ($data['residence_summer_increase_weeks'] != 0 && $data['residence_summer_increase'] != 0)
@@ -257,7 +261,7 @@
                             <td></td>
                             <td></td>
                             <td>{{$data['residence_summer_increase_weeks']}} اسابيع</td>
-                            <td>{{$data['residence_summer_increase']}}</td>
+                            <td>{{floor($data['residence_summer_increase'])}}</td>
                         </tr>
                     @endif
 
@@ -270,7 +274,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{$data['course_textboox_fees']}}</td>
+                            <td>{{floor($data['course_textboox_fees'])}}</td>
                         </tr>
                     @endif
     
@@ -283,7 +287,7 @@
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{{$data['insurance_price']*$data['weeks']}}</td>
+                            <td>{{floor($data['insurance_price']*$data['weeks'])}}</td>
                         </tr>
                     @endif
                     <tr class="total-price-row">
@@ -293,7 +297,7 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>{{$data['total_price']}}</td>
+                        <td>{{floor($data['total_price'])}}</td>
                     </tr>
                 </table>
             </div>

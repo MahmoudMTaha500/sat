@@ -8,7 +8,11 @@ use App\Models\Course;
 use App\Models\Institute;
 use App\Models\Insurances;
 use App\Models\StudentRequest;
+use App\Models\Student;
 use Illuminate\Http\Request;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Mail;
 
 class StudentRequestsController extends Controller
@@ -83,6 +87,7 @@ class StudentRequestsController extends Controller
     public function edit($id)
     {
         $student_request = StudentRequest::with('student', 'course.institute.residence' , 'course.institute.airport' , 'course.institute.city', 'course.institute.country' , 'course.institute.insurance')->find($id);
+        $student_request['student_files'] = DB::table('media')->where('collection_name', 'student_files')->where('model_id', $student_request->student->id)->get();
         $department_name = 'student-request';
         $page_name = 'student-request';
         $useVue = true;
@@ -117,7 +122,6 @@ class StudentRequestsController extends Controller
                 StudentRequest::where('id' , $request->request_id)->update(['payment_status' => $request->status]);
                 return response()->json(['status' => 'success']);
             }
-            
         }
         $validated = $request->validate([
             'weeks' => 'required|numeric',
@@ -149,13 +153,30 @@ class StudentRequestsController extends Controller
             $data['insurance_price'] = 0;
         }
         $data['insurance_price'] = $request->insurance_price;
+        $data['course_booking_fees'] = $request->course_booking_fees;
+        $data['residence_booking_fees'] = $request->residence_booking_fees;
+        $data['course_summer_increase_weeks'] = $request->course_summer_increase_weeks;
+        $data['course_summer_increase'] = $request->course_summer_increase;
+        $data['residence_summer_increase_weeks'] = $request->residence_summer_increase_weeks;
+        $data['residence_summer_increase'] = $request->residence_summer_increase;
+        $data['course_textboox_fees'] = $request->course_textboox_fees;
         $data['total_price'] = $request->total_price;
         $data['paid_price'] = $request->paid_price;
         $data['remaining_price'] = $request->total_price - $request->paid_price;
         $data['from_date'] = $request->from_date;
         $data['to_date'] = $request->to_date;
         $data['classat_note'] = $request->classat_note;
-        StudentRequest::where('id' , $id)->update($data);
+        $student_request = StudentRequest::where('id' , $id);
+        $student= $student_request->get()[0]->student;
+        $student_request->update($data);
+
+        foreach($request->student_files as $student_file){
+            if($student_file['student_file'] != null){
+                $student->addMedia($student_file['student_file'])
+                ->toMediaCollection('student_files');
+            }
+        }
+
         session()->flash('alert_message', ['message' => 'تم تعديل الطلب بنجاح', 'icon' => 'success']);
         return redirect()->back();
     }
@@ -163,6 +184,14 @@ class StudentRequestsController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function delete_student_file($file_id, $model_id)
+    {
+        $student = Student::find($model_id);
+        $student->deleteMedia($file_id);
+
+        session()->flash('alert_message', ['message' => 'تم حذف الملف بنجاح', 'icon' => 'success']);
+        return redirect()->back();
     }
 
     public function filter(Request $request){

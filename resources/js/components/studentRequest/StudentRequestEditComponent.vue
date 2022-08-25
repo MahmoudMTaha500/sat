@@ -27,25 +27,88 @@
                         <strong>اسم الدورة :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{course_name}} <span class="text-primary">({{Math.round(course_price*weeks*(1-course_discount))}} ر.س)</span></span>
+                        <span>{{course_name}} <span class="text-primary">({{Math.floor(course_price*weeks*(1-course_discount))}} ر.س)</span></span>
                     </div>
                 </div>
+
+                <hr v-if="course_booking_fees != 0">
+                <div class="row" v-if="course_booking_fees != 0">
+                    <div class="col-5">
+                        <strong>حجز الدورة :</strong>
+                    </div>
+                    <div class="col-7">
+                         <span class="text-primary">{{course_booking_fees}} ر.س</span>
+                    </div>
+                </div>
+
+                <hr v-if="course_summer_increase != 0">
+                <div class="row" v-if="course_summer_increase != 0">
+                    <div class="col-5">
+                        <strong>حجز خلال فترة الذروة: الرسوم الدراسية : زيادة بقيمة :</strong>
+                    </div>
+                    <div class="col-7">
+                         <span class="text-primary">
+                            {{course_summer_increase}} ر.س   
+                            <span class="text-success">({{course_summer_increase_weeks + ( course_summer_increase_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}})</span>   
+                        </span>
+                    </div>
+                </div>
+
+                
+
                 <hr v-if="chosin_residence != ''">
                 <div class="row" v-if="chosin_residence != ''">
                     <div class="col-5">
                         <strong>السكن :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{chosin_residence.name_ar}} <span class="text-primary">({{Math.round(chosin_residence.price*residence_weeks)}} ر.س)</span></span>
+                        <span>{{chosin_residence.name_ar}} <span class="text-primary">({{Math.floor(chosin_residence.price*residence_weeks)}} ر.س)</span></span>
                     </div>
                 </div>
+
+                <hr v-if="residence_booking_fees != 0">
+                <div class="row" v-if="residence_booking_fees != 0">
+                    <div class="col-5">
+                        <strong>حجز السكن :</strong>
+                    </div>
+                    <div class="col-7">
+                         <span class="text-primary">{{residence_booking_fees}} ر.س</span>
+                    </div>
+                </div>
+
+                
+                <hr v-if="residence_summer_increase != 0">
+                <div class="row" v-if="residence_summer_increase != 0">
+                    <div class="col-5">
+                        <strong>حجز خلال فترة الذروة: رسوم السكن : زيادة بقيمة :</strong>
+                    </div>
+                    <div class="col-7">
+                         <span class="text-primary">
+                            {{residence_summer_increase}} ر.س   
+                            <span class="text-success">({{residence_summer_increase_weeks + ( residence_summer_increase_weeks == 1 ? ' اسبوع ' : ' اسابيع  ')}})</span>   
+                        </span>
+                    </div>
+                </div>
+
+                <hr v-if="course_textboox_fees != 0">
+                <div class="row" v-if="course_textboox_fees != 0">
+                    <div class="col-5">
+                        <strong>رسوم الكتب الدراسية :</strong>
+                    </div>
+                    <div class="col-7">
+                         <span class="text-primary">{{course_textboox_fees}} ر.س</span>
+                    </div>
+                </div>
+
+
+
                 <hr v-if="chosin_airport != ''">
                 <div class="row" v-if="chosin_airport != ''">
                     <div class="col-5">
                         <strong>المطار :</strong>
                     </div>
                     <div class="col-7">
-                        <span>{{chosin_airport.name_ar}} <span class="text-primary">({{Math.round(chosin_airport.price)}} ر.س)</span></span>
+                        <span>{{chosin_airport.name_ar}} <span class="text-primary">({{Math.floor(chosin_airport.price)}} ر.س)</span></span>
                     </div>
                 </div>
                 <hr v-if="insurance_price_checker != 0">
@@ -54,7 +117,7 @@
                         <strong>التامين :</strong>
                     </div>
                     <div class="col-7">
-                        <span><span class="text-primary">{{Math.round(insurance_price*weeks)}} ر.س</span></span>
+                        <span><span class="text-primary">{{Math.floor(insurance_price*weeks)}} ر.س</span></span>
                     </div>
                 </div>
                 <hr v-if="student_note != null">
@@ -72,7 +135,7 @@
                         <strong>السعر الكلي :</strong>
                     </div>
                     <div class="col-7">
-                        <span><span class="text-success h4">{{totalPrice().toFixed(2) }}</span> ر.س</span>
+                        <span><span class="text-success h4">{{Math.floor(totalPrice()) }}</span> ر.س</span>
                     </div>
                 </div>
                 <hr>
@@ -85,15 +148,79 @@
                         <span v-else >لم يتم رفع ملف لايصال الحوالة</span>
                     </div>
                 </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-primary w-100 mb-3" data-toggle="modal" data-target="#studentFiles"> ملفات الطالب</button>
+                        <!-- Button trigger modal -->
+
+                        
+                    </div>
+
+                </div>
             </div>
             <div class="col-md-8">
-                <form class="form" method="post" :action="student_requests_url+'/'+student_request.id">
+                <form class="form" method="post" :action="student_requests_url+'/'+student_request.id" enctype="multipart/form-data">
                     <input type="hidden" name="_token" :value="csrf_token">
                     <input type="hidden" name="_method" value="put">
                     <input type="hidden" name="price_per_week" :value="course_price*(1-course_discount)">
-                    <input type="hidden" name="insurance_price" :value="insurance_price">
                     <input type="hidden" name="course_discount" :value="course_discount">
                     <input type="hidden" name="total_price" :value="totalPrice()">
+
+                    <input type="hidden" name="course_booking_fees" :value="course_booking_fees">
+                    <input type="hidden" name="residence_booking_fees" :value="residence_booking_fees">
+                    <input type="hidden" name="course_summer_increase_weeks" :value="course_summer_increase_weeks">
+                    <input type="hidden" name="course_summer_increase" :value="course_summer_increase">
+                    <input type="hidden" name="residence_summer_increase_weeks" :value="residence_summer_increase_weeks">
+                    <input type="hidden" name="residence_summer_increase" :value="residence_summer_increase">
+                    <input type="hidden" name="course_textboox_fees" :value="course_textboox_fees">
+
+
+                    <!-- Student Files Modal -->
+                    <div class="modal fade" id="studentFiles" tabindex="-1" role="dialog" aria-labelledby="studentFilesTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="studentFilesTitle">ملفات الطالب</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group mb-2 contact-repeater">
+                                        <div data-repeater-list="student_files">
+                                            <div class="input-group mb-1" data-repeater-item>
+                                                <div class="form-control p-0">
+                                                    <input type="file" class="form-control vaildate" name="student_file"/>
+                                                </div>
+                                                <span class="input-group-append" id="button-addon2">
+                                                    <button class="btn btn-danger" type="button" data-repeater-delete><i class="ft-x"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <button type="button" data-repeater-create class="btn btn-primary"><i class="ft-plus"></i> اضافة ملف جديد</button>
+                                        <hr>
+                                        <div v-for="student_file in student_request.student_files" :key="student_file.id" class="row mb-2">
+                                            <div class="col-6">
+                                                {{student_file.file_name}}
+                                            </div>
+                                            <div class="col-6 text-right">
+                                                <a target="_blank" :href="'/storage/uploaded_media/'+student_file.id+'/'+student_file.file_name" class="btn btn-info btn-sm">  <i class="ft-eye"></i> فتح</a>
+                                                <a :href="delete_student_file_url+'/'+student_file.id+'/'+student_file.model_id" class="btn btn-danger btn-sm">  <i class="ft-trash"></i> حذف</a>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn w-100 btn-success">حفظ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="form-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -233,7 +360,7 @@
 
 <script>
     export default {
-        props: ["csrf_token" , "get_course_price_url" , "get_insurance_price_url" , "student_request" , "student_requests_url" , "bill_file"],
+        props: ["csrf_token" , "delete_student_file_url" , "get_course_price_url" , "get_insurance_price_url" , "student_request" , "student_requests_url" , "bill_file"],
         data() {
             return {
                 student_name : this.student_request.student.name,
@@ -260,6 +387,14 @@
                 chosin_airport :'',
                 insurance_price_checker : this.student_request.insurance_price == 0 ? false : true,
                 insurance_price : (this.student_request.course.institute.insurance == null ? 0 : this.student_request.course.institute.insurance.price),
+                course_booking_fees : Math.floor(this.student_request.course_booking_fees),
+                residence_booking_fees : Math.floor(this.student_request.residence_booking_fees),
+                course_summer_increase_weeks : Math.floor(this.student_request.course_summer_increase_weeks),
+                course_summer_increase : Math.floor(this.student_request.course_summer_increase),
+                residence_summer_increase_weeks : Math.floor(this.student_request.residence_summer_increase_weeks),
+                residence_summer_increase : Math.floor(this.student_request.residence_summer_increase),
+                course_textboox_fees : Math.floor(this.student_request.course_textboox_fees),
+                total_price : Math.floor(this.student_request.total_price),
                 course_price :'',
                 residence_from_date :'',
                 residence_to_date :'',
@@ -298,17 +433,33 @@
            
          
             totalPrice() {
-                var total_price = this.course_price*(1- this.course_discount)*this.weeks
-                if(this.insurance_price_checker){
-                    total_price += this.insurance_price*this.weeks
+
+                var totalPrice = (this.course_price*(1- this.course_discount))*this.weeks
+                if(this.chosin_airport != null && !isNaN(this.chosin_airport.price)){
+                    totalPrice += this.chosin_airport.price
                 }
-                if(!isNaN(this.chosin_airport.price)){
-                    total_price += this.chosin_airport.price
+                if(this.chosin_residence != null &&!isNaN(this.chosin_residence.price)){
+                    totalPrice += this.chosin_residence.price*this.residence_weeks
                 }
-                if(!isNaN(this.chosin_residence.price)){
-                    total_price += this.chosin_residence.price*this.residence_weeks
+                if(this.insurance_price_checker == '1'){
+                    totalPrice += this.insurance_price*this.weeks
                 }
-               return total_price
+                if(Number(this.course_booking_fees) != 0){
+                    totalPrice += Number(this.course_booking_fees)
+                }
+                if(Number(this.course_textboox_fees) != 0){
+                    totalPrice += Number(this.course_textboox_fees)
+                }
+                if(Number(this.residence_booking_fees) != 0 && !isNaN(this.chosin_residence.price)){
+                    totalPrice += Number(this.residence_booking_fees)
+                }
+                if(this.course_summer_increase_weeks !=0 && this.course_summer_increase !=0){
+                    totalPrice += Number(this.course_summer_increase)
+                }
+                if(this.residence_summer_increase_weeks !=0 && this.residence_summer_increase !=0){
+                    totalPrice += Number(this.residence_summer_increase)
+                }
+                return totalPrice
             },
             change_from_date(){
                 let modified_date = (data, days) => {return new Intl.DateTimeFormat('en-US').format(new Date(new Date(data).getTime() + days*86400000))};
@@ -316,8 +467,67 @@
                 this.to_date =  modified_date(this.from_date, this.weeks*7);
                 this.residence_from_date =  modified_date(this.from_date, -1);
                 this.residence_to_date =  modified_date(this.residence_from_date, this.residence_weeks*7);
-            }
-        },
+            },
+            calculate_summer_increase_weeks(weeks){
+                    let summer_increase_weeks = 0
+                    let currentYear = new Date().getFullYear()
+
+                    let start_date = Date.parse(this.from_date)
+                    let end_date = start_date + weeks*7*24*60*60*1000
+                    let summer_start_date = Date.parse(currentYear+'-'+this.student_request.course.institute.summer_start_date)
+                    let summer_end_date = Date.parse(currentYear+'-'+this.student_request.course.institute.summer_end_date)
+
+                    if(end_date>=summer_end_date){
+                        if(start_date>=summer_end_date){summer_increase_weeks = 0}
+                        else if(start_date <= summer_end_date && start_date >=summer_start_date){
+                            summer_increase_weeks = Math.floor((summer_end_date -start_date)/7/24/60/60/1000)
+                        }
+                        else{
+                            summer_increase_weeks = Math.floor((summer_end_date -summer_start_date)/7/24/60/60/1000)
+                        }
+                    }
+                    else if(end_date <= summer_end_date && end_date>= summer_start_date){
+                        if(start_date >= summer_start_date){
+                            summer_increase_weeks = Math.floor((end_date -start_date)/7/24/60/60/1000)
+                        }
+                        else{
+                            summer_increase_weeks = Math.floor((end_date -summer_start_date)/7/24/60/60/1000)
+                        }
+                    }
+                    else{summer_increase_weeks = 0}
+                    return summer_increase_weeks;
+                    
+                },
+                chose_course_textboox_fees(){
+                    let textbooxFeesObj = JSON.parse(this.student_request.course.textbooks_fees);
+                    if(textbooxFeesObj != null){
+                        textbooxFeesObj.sort((a, b) => a.weeks - b.weeks)
+                        let chosin = false
+                        textbooxFeesObj.forEach(ele => {
+                            if(Number(this.weeks) <= ele.weeks){
+                                if(chosin == false){this.course_textboox_fees = ele.fees_in_sar;}
+                                chosin = true;
+                            }
+                        });
+                    }
+                    return 0;
+                }
+            },
+            watch:{
+                weeks: function (){
+                    this.chose_course_textboox_fees()
+                    this.course_summer_increase_weeks = this.calculate_summer_increase_weeks(this.weeks)
+                    this.course_summer_increase = (this.student_request.course.course_summer_increase == null ? 0 : JSON.parse(this.student_request.course.course_summer_increase).price_in_sar)*this.course_summer_increase_weeks
+                },
+                residence_weeks: function (){
+                    this.residence_summer_increase_weeks = this.calculate_summer_increase_weeks(this.residence_weeks)
+                    this.residence_summer_increase = (this.chosin_residence == null ? 0 : JSON.parse(this.chosin_residence.residence_summer_increase).price_in_sar)*this.residence_summer_increase_weeks
+                },
+                chosin_residence: function (){
+                    this.residence_summer_increase = (this.chosin_residence == null ? 0 : JSON.parse(this.chosin_residence.residence_summer_increase).price_in_sar)*this.residence_summer_increase_weeks
+                }
+            },
+
 
         
         

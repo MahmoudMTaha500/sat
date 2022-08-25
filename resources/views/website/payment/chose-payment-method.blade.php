@@ -79,7 +79,7 @@
 
                                                 <div class="online-payment-form-container">
                                                     <form action="{{route('payment_confirmation')}}" class="paymentWidgets" data-brands="VISA MASTER AMEX"></form>
-                                                    <script async src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$prepare_checkout['id']}}"></script>
+                                                    {{-- <script async src="https://test.oppwa.com/v1/paymentWidgets.js?checkoutId={{$prepare_checkout['id']}}"></script> --}}
                                                     <script>
                                                         var wpwlOptions = {style:"card"}
                                                     </script>

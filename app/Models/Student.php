@@ -5,12 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 
-class Student extends Authenticatable
+class Student extends Authenticatable implements HasMedia
 {
     use Notifiable;
-
+    use InteractsWithMedia;
+    
     protected $guarded = []; 
 
     protected $hidden = [

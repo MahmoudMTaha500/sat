@@ -30,6 +30,7 @@
                                     <student-request-edit-component
                                          :student_requests_url="{{json_encode( url('/dashboard/student-requests'))}}"
                                          :student_request="{{json_encode($student_request)}}"
+                                         delete_student_file_url = {{route('delete_student_file')}}
                                          get_insurance_price_url = {{route('vue.get.insurance.price.per.week')}}
                                          get_course_price_url = {{route('vue.get.course.price.per.week')}}
                                          bill_file = {{empty($student_request->getFirstMedia('student_request_payment_bill_file')) ? '0' : $student_request->getFirstMedia('student_request_payment_bill_file')->getUrl()}}
